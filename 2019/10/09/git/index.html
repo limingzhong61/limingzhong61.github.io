@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon128.ico?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon32.ico?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon16.ico?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+  <link rel="manifest" href="/images/manifest.json">
+  <link rel="alternate" href="/atom.xml" title="nicolas" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="[TOC]特点：分布式版本控制系统优势：    SVN在开发过程中必须保证需要与SVN服务器连接才能使用，需要联网基础操作1、设置全局信息1234567设置开发者的用户名	git config --global user.name nicolas设置开发者邮箱	git config --global user.email 1162314270@qq.com取得全部的全局信息	git config">
+<meta name="keywords" content="git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git">
+<meta property="og:url" content="http://yoursite.com/2019/10/09/git/index.html">
+<meta property="og:site_name" content="nicolas">
+<meta property="og:description" content="[TOC]特点：分布式版本控制系统优势：    SVN在开发过程中必须保证需要与SVN服务器连接才能使用，需要联网基础操作1、设置全局信息1234567设置开发者的用户名	git config --global user.name nicolas设置开发者邮箱	git config --global user.email 1162314270@qq.com取得全部的全局信息	git config">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-09T07:00:55.471Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git">
+<meta name="twitter:description" content="[TOC]特点：分布式版本控制系统优势：    SVN在开发过程中必须保证需要与SVN服务器连接才能使用，需要联网基础操作1、设置全局信息1234567设置开发者的用户名	git config --global user.name nicolas设置开发者邮箱	git config --global user.email 1162314270@qq.com取得全部的全局信息	git config">
+  <link rel="canonical" href="http://yoursite.com/2019/10/09/git/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>git | nicolas</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">nicolas</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Yesterday you said tomorow.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">17</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">5</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">16</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/Li-MingZhong" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/09/git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">git
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-09 14:56:09 / 修改时间：15:00:55" itemprop="dateCreated datePublished" datetime="2019-10-09T14:56:09+08:00">2019-10-09</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>[TOC]</p><p>特点：</p><p>分布式版本控制系统<br>优势：<br>    SVN在开发过程中必须保证需要与SVN服务器连接才能使用，需要联网</p><h1 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h1><h2 id="1、设置全局信息"><a href="#1、设置全局信息" class="headerlink" title="1、设置全局信息"></a>1、设置全局信息</h2><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">设置开发者的用户名</span><br><span class="line">	git<span class="built_in"> config </span>--global user.name nicolas</span><br><span class="line">设置开发者邮箱</span><br><span class="line">	git<span class="built_in"> config </span>--global user.email 1162314270@qq.com</span><br><span class="line">取得全部的全局信息</span><br><span class="line">	git<span class="built_in"> config </span>--list</span><br><span class="line">	git<span class="built_in"> config </span>-l</span><br></pre></td></tr></table></figure><a id="more"></a>
+
+
+
+
+<h2 id="2、创建仓库"><a href="#2、创建仓库" class="headerlink" title="2、创建仓库"></a>2、创建仓库</h2><p>1、创建目录当做仓库目录<br>2、进入目录中配置<br>将目录变为仓库目录，需要进入目录中配置<br>3、初始化仓库<br>方法一：创建一个包含有配置信息目录的仓库文件夹</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">Initialized empty Git repository in E:/gitpro/.git/</span><br></pre></td></tr></table></figure>
+
+<h2 id="3、仓库基本操作"><a href="#3、仓库基本操作" class="headerlink" title="3、仓库基本操作"></a>3、仓库基本操作</h2><p>1、观察仓库的状态<br>git status<br>2、将文件添加到git暂存区<br>git add 文件名称<br>4、批量添加新文件到暂存区<br>git add .<br>添加所有在仓库目录中创建的新文件到暂存区<br>3、将文件提交到版本库中<br>git commit -m “注释信息Comment”<br>现在才表示将新的文件提交到了GIT之中进行管理（这个代码才能被项目使用）<br>自动增加并提交修改到版本库中<br>git commit -a -m “注释Comment”<br>4、修改仓库文件<br>    比较同一文件<br>        git diff<br>        git diff 文件名<br>    查看修改历史<br>        git log 文件名<br>        git log<br>        每次提交时都会自动生成一个Commit ID（在日后版本恢复中使用）<br>文件区域<br>    工作区<br>        用户编写代码的文件夹<br>        所有的文件操作以工作区为主<br>    GIT仓库<br>        暂存库<br>            只是将工作中的未保存文件保存到暂存区中，有GIT维护；<br>            保存的内容是暂时需要的<br>        版本库Master<br>            真正发布的代码</p>
+<h3 id="版本穿越"><a href="#版本穿越" class="headerlink" title="版本穿越"></a>版本穿越</h3><p>​    查看日志信息<br>​    </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git log</span><br><span class="line">git log --pretty=oneline</span><br></pre></td></tr></table></figure>
+
+<p>​            简化查看<br>​        可以按q结束查看<br>​    整个日志记录是用栈来记录的<br>​        master库存在head指针<br>​    回退到上一个版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard head~1</span><br></pre></td></tr></table></figure>
+
+<p>​    查看所有删除的日志</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure>
+
+<p>​    到指定版本<br>​        git reset –hard 1fc9d3f（Commit id）</p>
+<h3 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a>撤销修改</h3><p><strong>撤销工作区修改</strong></p>
+<p>显示那些文件发生了改变</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout</span><br></pre></td></tr></table></figure>
+
+<p>恢复单个文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 文件名</span><br></pre></td></tr></table></figure>
+
+<p>恢复多个文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout .</span><br></pre></td></tr></table></figure>
+
+<p>​    修改已在暂存区<br>​        git reset HEAD <file>…<br>​            将暂存区的文件撤回到工作区<br>文件删除<br>​    del 文件名<br>​        删除工作区中的文件<br>​        恢复<br>​            git checkout – 文件名<br>​            因为版本库中任存在，可以直接删除<br>​    git commit -a -m “Commet”<br>​        提交之后，库中相应的文件也没有了<br>​        只能通过版本穿越恢复</file></p>
+<h1 id="GITHUB"><a href="#GITHUB" class="headerlink" title="GITHUB"></a>GITHUB</h1><h2 id="配置远程仓库"><a href="#配置远程仓库" class="headerlink" title="配置远程仓库"></a>配置远程仓库</h2><p>ssh通信模式<br>1.启动git bash<br>  在此之中可以使用linux命令<br>2、生成ssh key密钥</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;1162314270@qq.com&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">命令输入后，首先询问用户密钥的保存位置</span><br><span class="line">	<span class="regexp">/c/</span>Users<span class="regexp">/11623/</span>.ssh/id_rsa</span><br><span class="line">	默认为公钥和私钥保存在：用户<span class="regexp">/.ssh/</span>id_rsa</span><br><span class="line">瑞后询问是否设置保护密码</span><br></pre></td></tr></table></figure>
+
+<p>3、将公钥内容保存到GITHUB<br>    公钥文件，保存在外部使用(保存到github的ssh密匙中)<br>        id_rsa.pub<br>    私钥文件，做本机标识<br>        id_rsa<br>    打卡github的setting页面添加ssh key<br>        将公钥内容复制到key内容中</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\11623&gt;ssh-keygen -t rsa -C <span class="string">"lmz"</span></span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (C:\Users\11623/.ssh/id_rsa):</span><br><span class="line">C:\Users\11623/.ssh/id_rsa already exists.</span><br><span class="line">Overwrite (y/n)? y</span><br><span class="line">Enter passphrase (empty for no passphrase):</span><br><span class="line">Enter same passphrase again:</span><br><span class="line">Your identification has been saved in C:\Users\11623/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in C:\Users\11623/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">SHA256:722mRw92N2R2fb71Yr3tBEgSQORYxzzzF6n4xRkh7Mk lmz</span><br><span class="line">The key's randomart image is:</span><br><span class="line">+---[RSA 2048]----+</span><br><span class="line">|<span class="string">       o=+o.. .o </span>|</span><br><span class="line">|<span class="string">       + .=...+  </span>|</span><br><span class="line">|<span class="string">      . . .B.+ +.</span>|</span><br><span class="line">|<span class="string">          .oE.=++</span>|</span><br><span class="line">|<span class="string">        S  ..o=.o</span>|</span><br><span class="line">|<span class="string">         .  = .o+</span>|</span><br><span class="line">|<span class="string">          .o + o*</span>|</span><br><span class="line">|<span class="string">         . .+ +o+</span>|</span><br><span class="line">|<span class="string">          o=.. ++</span>|</span><br><span class="line">+----[SHA256]-----+</span><br></pre></td></tr></table></figure>
+
+<p>4、在github上建立远程仓库信息<br>    不选择：Initialize this repository with a README<br>    创建仓库后界面上就给出了仓库的访问地址<br>    SSH，有了SSH key直接连接<br>        <a href="https://github.com/NicolasCoder/rep.git" target="_blank" rel="noopener">https://github.com/NicolasCoder/rep.git</a><br>    HRRPS,所有人都可以连接<br>        <a href="https://github.com/NicolasCoder/rep.git" target="_blank" rel="noopener">https://github.com/NicolasCoder/rep.git</a><br>删除github仓库<br>    仓库的setting</p>
+<h2 id="客服端访问"><a href="#客服端访问" class="headerlink" title="客服端访问"></a>客服端访问</h2><p>本地代码同步到远程仓库中<br>1、建立客服端与服务端的连接地址信息</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin （SSH链接）https://github.com/NicolasCoder/rep.git</span><br></pre></td></tr></table></figure>
+
+<p>2、连接成功后将本地仓库全部代码推送到服务器端</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+
+<p>强推，即利用强覆盖方式用你本地的代码替代git仓库内的内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push -f</span><br><span class="line">git push -u origin master -f</span><br></pre></td></tr></table></figure>
+
+<p>：<strong>使用这个强制的方法</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin master --allow-unrelated-histories</span><br></pre></td></tr></table></figure>
+
+<p>后面加上 <code>--allow-unrelated-histories</code> ， 把两段不相干的 分支进行强行合并</p>
+<p>提高本地修改<br>    首先将修改提高到master分支上，然后推送代码到服务器</p>
+<p><strong>3、git pull</strong>的作用是从一个仓库或者本地的分支拉取并且整合代码。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull [&lt;options&gt;] [&lt;repository&gt; [&lt;refspec&gt;…]]</span><br></pre></td></tr></table></figure>
+
+<p><strong>实例：</strong>默认使用方式</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git pull</span></span><br></pre></td></tr></table></figure>
+
+<p>按照<code>git branch</code> 设置的默认跟踪的服务器和分支来拉取。</p>
+<p><strong>实例：</strong> 拉取远程服务器<code>origin</code>的<code>master</code>分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin master</span><br></pre></td></tr></table></figure>
+
+<h2 id="克隆远程仓库"><a href="#克隆远程仓库" class="headerlink" title="克隆远程仓库"></a>克隆远程仓库</h2><p>已经初始化完成的仓库<br>        已执行<br>            Initialize this repository with a README<br><strong>克隆远程仓库：</strong>（直接在当前目录新建远程仓库的项目文件）<br>        git clone （HTTPS）<a href="https://github.com/NicolasCoder/crm.git" target="_blank" rel="noopener">https://github.com/NicolasCoder/crm.git</a></p>
+<h1 id="GIT的分支管理策略"><a href="#GIT的分支管理策略" class="headerlink" title="GIT的分支管理策略"></a>GIT的分支管理策略</h1><h2 id="1-基础操作"><a href="#1-基础操作" class="headerlink" title="1).基础操作"></a>1).基础操作</h2><p>1、查看当前仓库中可用的分支</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+
+<p>2、创建新的分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch 分支名</span><br></pre></td></tr></table></figure>
+
+<p>3、切换分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout 分支名</span><br></pre></td></tr></table></figure>
+
+<p>要想进行开发，一定不能再master中开发，必须在子分支开发<br>回到master进行合并分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge dev</span><br></pre></td></tr></table></figure>
+
+<p>​    合并后提示Fast-forward<br>​        快速合并方式<br>一般开发分支和master分支都在服务器上</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin 分支名</span><br></pre></td></tr></table></figure>
+
+<p>删除分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d 分支名</span><br></pre></td></tr></table></figure>
+
+<p>删除远程分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete 分支名</span><br></pre></td></tr></table></figure>
+
+<p>推送空的分支</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin:dev</span><br></pre></td></tr></table></figure>
+
+<h2 id="2）合并操作"><a href="#2）合并操作" class="headerlink" title="2）合并操作"></a>2）合并操作</h2><p>冲突解决<br>    创建并切换到dev分支</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -<span class="selector-tag">b</span> dev</span><br></pre></td></tr></table></figure>
+
+<p>两个分支修改了同一文件<br>        提交到master后会提示conflict和文件名<br>            打开文件会发现相应的冲突都写在了里面<br>            修改后再次提交即可<br><strong>分支合并模式</strong><br>    通过图形化的方式查看所有分支合并记录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph --pretty=oneline</span><br></pre></td></tr></table></figure>
+
+<p>Fast forwaed(默认)合并<br>        不会产生新的提交点<br>添加参数 -no-ff(Not Fast Forward)<br>        git merge –no-ff -m “use no-ff merge” dev<br>    master不予许修改，dev分支如果有多人共享，需要在创建自己的分支在进行开发，合并时使用no-ff方式<br>bug分支,暂挂工作区<br>    有错误的代码不能保存在暂存区<br>    保存当前工作区的状态<br>        git stash<br>    查看所有暂时挂起的工作区<br>        git stash list<br>    两步<br>        恢复挂起的工作区<br>            git stash apply<br>        清除保存的工作区<br>            git stash drop<br>    一步<br>        恢复并清除保存区<br>            git stash pop<br>feature,扩展分支<br>    已经开发，但不准备使用的功能等<br>    强制删除有不同修改的分支<br>        git branch -D feature<br>补丁<br>    比较分支区别<br>        git diff master &gt; patch<br>        通过命令行的管道流，将diff保存再来patch文件里<br>    通过补丁合并分支<br>        git apply patch<br>        当项目很大的时候，效率更高<br>        不便于开发者沟通<br>    git format-patch -M master<br>        通知master<br>    应用分支补丁<br>        git am （补丁路劲）”E:\gitpro\0001-git-apply-patch.patch”</p>
+<h1 id="gitignore的操作"><a href="#gitignore的操作" class="headerlink" title=".gitignore的操作"></a>.gitignore的操作</h1><p>目的是忽略指定类型的文件或者某个文件夹</p>
+<ol>
+<li>a、新建.gitignore文件：</li>
+<li>b、输入要忽略的文件（可用通配符）</li>
+<li>利用<code>git status</code> 查看，可以看出排除了写入的文件，避免了其提交</li>
+</ol>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">HELP.md</span><br><span class="line">target/</span><br><span class="line">!.mvn/<span class="keyword">wrapper</span>/maven-<span class="keyword">wrapper</span>.jar</span><br><span class="line">!**/src/main<span class="comment">/**</span></span><br><span class="line"><span class="comment">!**/</span>src/test<span class="comment">/**</span></span><br><span class="line"><span class="comment">###忽略配置文件###</span></span><br><span class="line"><span class="comment">judge.properties</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">### IntelliJ IDEA ###</span></span><br><span class="line"><span class="comment">.idea</span></span><br><span class="line"><span class="comment">*.iws</span></span><br><span class="line"><span class="comment">*.iml</span></span><br><span class="line"><span class="comment">*.ipr</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">### NetBeans ###</span></span><br><span class="line"><span class="comment">/nbproject/private/</span></span><br><span class="line"><span class="comment">/nbbuild/</span></span><br><span class="line"><span class="comment">/dist/</span></span><br><span class="line"><span class="comment">/nbdist/</span></span><br><span class="line"><span class="comment">/.nb-gradle/</span></span><br><span class="line"><span class="comment">build/</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">### VS Code ###</span></span><br><span class="line"><span class="comment">.vscode/</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+    
+    <div>
+     
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+     
+    </div>
+    
+        
+      
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>nicolas lee</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2019/10/09/git/" title="git">http://yoursite.com/2019/10/09/git/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/git/" rel="tag"># git</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/09/html-css/" rel="next" title="html+css">
+                  <i class="fa fa-chevron-left"></i> html+css
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/10/09/javaScript/" rel="prev" title="javaScript">
+                  javaScript <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础操作"><span class="nav-number">1.</span> <span class="nav-text">基础操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、设置全局信息"><span class="nav-number">1.1.</span> <span class="nav-text">1、设置全局信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、创建仓库"><span class="nav-number">1.2.</span> <span class="nav-text">2、创建仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、仓库基本操作"><span class="nav-number">1.3.</span> <span class="nav-text">3、仓库基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#版本穿越"><span class="nav-number">1.3.1.</span> <span class="nav-text">版本穿越</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#撤销修改"><span class="nav-number">1.3.2.</span> <span class="nav-text">撤销修改</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GITHUB"><span class="nav-number">2.</span> <span class="nav-text">GITHUB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置远程仓库"><span class="nav-number">2.1.</span> <span class="nav-text">配置远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#客服端访问"><span class="nav-number">2.2.</span> <span class="nav-text">客服端访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#克隆远程仓库"><span class="nav-number">2.3.</span> <span class="nav-text">克隆远程仓库</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#GIT的分支管理策略"><span class="nav-number">3.</span> <span class="nav-text">GIT的分支管理策略</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-基础操作"><span class="nav-number">3.1.</span> <span class="nav-text">1).基础操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2）合并操作"><span class="nav-number">3.2.</span> <span class="nav-text">2）合并操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gitignore的操作"><span class="nav-number">4.</span> <span class="nav-text">.gitignore的操作</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/assets/img/avatar.jpg"
+      alt="nicolas lee">
+  <p class="site-author-name" itemprop="name">nicolas lee</p>
+  <div class="site-description" itemprop="description">Yesterday you said tomorow.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/Li-MingZhong" title="GitHub &rarr; https://github.com/Li-MingZhong" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://blog.csdn.net/qq_42835910" title="CSDN &rarr; https://blog.csdn.net/qq_42835910" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nicolas lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数"></span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
