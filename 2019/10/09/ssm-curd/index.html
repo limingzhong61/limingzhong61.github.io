@@ -60,17 +60,17 @@
 <meta name="keywords" content="java,ssm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ssm-curd">
-<meta property="og:url" content="http://yoursite.com/2019/10/09/ssm-curd/index.html">
+<meta property="og:url" content="https://codeofli.github.io/2019/10/09/ssm-curd/index.html">
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="[TOC]#web路径 web路径：    1.不以/开始的相对路径，找资源，以当前资源的路径为基准，经常容易出问题    2.以/开始的开始的相对路径，找资源，以服务器为标准（http//localhost/端口号)需要加项目名;    就是http//localhost/端口号/crud/…12345&amp;lt;%	pageContext.setAttribute(&quot;APP_PATH&quot;, requ">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/10/09/ssm-curd/ssm%E6%80%BB%E7%BB%93.png">
-<meta property="og:updated_time" content="2019-10-09T07:26:57.974Z">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/09/ssm-curd/ssm-curd%5Cssm%E6%80%BB%E7%BB%93.png">
+<meta property="og:updated_time" content="2019-11-11T14:49:15.451Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ssm-curd">
 <meta name="twitter:description" content="[TOC]#web路径 web路径：    1.不以/开始的相对路径，找资源，以当前资源的路径为基准，经常容易出问题    2.以/开始的开始的相对路径，找资源，以服务器为标准（http//localhost/端口号)需要加项目名;    就是http//localhost/端口号/crud/…12345&amp;lt;%	pageContext.setAttribute(&quot;APP_PATH&quot;, requ">
-<meta name="twitter:image" content="http://yoursite.com/2019/10/09/ssm-curd/ssm%E6%80%BB%E7%BB%93.png">
-  <link rel="canonical" href="http://yoursite.com/2019/10/09/ssm-curd/">
+<meta name="twitter:image" content="https://codeofli.github.io/2019/10/09/ssm-curd/ssm-curd%5Cssm%E6%80%BB%E7%BB%93.png">
+  <link rel="canonical" href="https://codeofli.github.io/2019/10/09/ssm-curd/">
 
 
 <script id="page-configurations">
@@ -211,7 +211,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">16</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">17</span></a>
 
   </li>
       
@@ -255,7 +255,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">16</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">17</span></a>
 
   </li>
   </ul>
@@ -286,7 +286,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/09/ssm-curd/">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/10/09/ssm-curd/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nicolas lee">
@@ -314,11 +314,19 @@
                 
               
 
-              <time title="创建时间：2019-10-09 15:25:49 / 修改时间：15:26:57" itemprop="dateCreated datePublished" datetime="2019-10-09T15:25:49+08:00">2019-10-09</time>
+              <time title="创建时间：2019-10-09 15:25:49" itemprop="dateCreated datePublished" datetime="2019-10-09T15:25:49+08:00">2019-10-09</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-11 22:49:15" itemprop="dateModified" datetime="2019-11-11T22:49:15+08:00">2019-11-11</time>
+              </span>
             
           
             <span class="post-meta-item">
@@ -497,7 +505,7 @@
 
 <h1 id="sprigMVC自带HttpputFormContentFilter"><a href="#sprigMVC自带HttpputFormContentFilter" class="headerlink" title="sprigMVC自带HttpputFormContentFilter"></a>sprigMVC自带HttpputFormContentFilter</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">           * 解决方案</span></span><br><span class="line"><span class="comment">           * 要能支持直接发送PUT之类的请求，还要封装请求体中的数据</span></span><br><span class="line"><span class="comment">     * 1、配置上HttpputFormContentFilter；</span></span><br><span class="line"><span class="comment">     * 2、作用：将请求体中的数据解析包装成一个map。</span></span><br><span class="line"><span class="comment">     * 3、request被重新包装，request.getParameter()被重写，就会从自己封装的map中取数据</span></span><br><span class="line"><span class="comment">     * 员工更新方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> employee</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="meta">@PutMapping</span>(<span class="string">"/emp/&#123;empId&#125;"</span>)</span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Msg <span class="title">saveEmp</span><span class="params">(Employee employee,HttpServletRequest request)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"requestScope中的值："</span>+request.getParameter(<span class="string">"email"</span>));</span><br><span class="line">    System.out.println(employee);</span><br><span class="line">    employeeService.updateEmp(employee);</span><br><span class="line">    <span class="keyword">return</span> Msg.success();</span><br><span class="line">&#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/10/09/ssm-curd/ssm%E6%80%BB%E7%BB%93.png" alt></p>
+<p><img src="/2019/10/09/ssm-curd/ssm-curd%5Cssm%E6%80%BB%E7%BB%93.png" alt></p>
 
     </div>
 
@@ -537,7 +545,7 @@
     <strong>本文作者： </strong>nicolas lee</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://yoursite.com/2019/10/09/ssm-curd/" title="ssm-curd">http://yoursite.com/2019/10/09/ssm-curd/</a>
+    <a href="https://codeofli.github.io/2019/10/09/ssm-curd/" title="ssm-curd">https://codeofli.github.io/2019/10/09/ssm-curd/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -641,7 +649,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">17</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -667,7 +675,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
