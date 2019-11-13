@@ -67,9 +67,8 @@
 <meta property="og:image" content="https://codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145450.png">
 <meta property="og:image" content="https://codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145531.png">
 <meta property="og:image" content="https://codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303165113.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/docker/docker/docker%5Cdocker%E5%AE%B9%E5%99%A8%E5%91%BD%E4%BB%A4.png">
 <meta property="og:image" content="https://codeofli.github.io/2019/11/docker/docker/docker%5C%E5%85%B3%E9%97%ADfirewall%E7%9A%84%E5%8F%82%E6%95%B0.png">
-<meta property="og:updated_time" content="2019-11-12T02:56:12.100Z">
+<meta property="og:updated_time" content="2019-11-12T15:25:37.111Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker">
 <meta name="twitter:description" content="[TOC]1.简介Docker是一个开源的应用容器引擎；是一个轻量级容器技术；Docker支持将软件编译成一个镜像；然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像；运行中的这个镜像称为容器，容器启动是非常快速的。2、核心概念docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；">
@@ -259,7 +258,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">27</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">18</span></a>
 
   </li>
   </ul>
@@ -318,7 +317,7 @@
                 
               
 
-              <time title="创建时间：2019-11-12 15:39:56 / 修改时间：10:56:12" itemprop="dateCreated datePublished" datetime="2019-11-12T15:39:56+08:00">2019-11-12</time>
+              <time title="创建时间：2019-11-12 15:39:56 / 修改时间：23:25:37" itemprop="dateCreated datePublished" datetime="2019-11-12T15:39:56+08:00">2019-11-12</time>
             </span>
           
             
@@ -438,7 +437,55 @@
 </tbody></table>
 <p><a href="https://hub.docker.com/" target="_blank" rel="noopener">https://hub.docker.com/</a></p>
 <h3 id="2）、容器操作"><a href="#2）、容器操作" class="headerlink" title="2）、容器操作"></a>2）、容器操作</h3><p>软件镜像（QQ安装程序）—-运行镜像—-产生一个容器（正在运行的软件，运行的QQ）；</p>
-<p><img src="/2019/11/docker/docker/docker%5Cdocker%E5%AE%B9%E5%99%A8%E5%91%BD%E4%BB%A4.png" alt></p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>运行</td>
+<td>docker run –name container-name -d image-name<br>eg:docker run –name myredis –d redis<br>–</td>
+<td>–name：自定义容器名<br>-d：后台运行<br>image-name:指定镜像模板</td>
+</tr>
+<tr>
+<td>列表</td>
+<td>docker ps（查看运行中的容器）；</td>
+<td>加上-a；可以查看所有容器</td>
+</tr>
+<tr>
+<td>启动</td>
+<td>docker stop container-name/container-id</td>
+<td>启动容器</td>
+</tr>
+<tr>
+<td>停止</td>
+<td>docker stop container-name/container-id</td>
+<td>停止当前你运行的容器</td>
+</tr>
+<tr>
+<td>删除</td>
+<td>docker rm container-id</td>
+<td>删除指定容器</td>
+</tr>
+<tr>
+<td>端口映射</td>
+<td>-p 6379:6379<br>eg:docker run -d -p 6379:6379 –name myredisdocker.io/redis</td>
+<td>-p:主机端口(映射到)容器内部的端口</td>
+</tr>
+<tr>
+<td>容器日志</td>
+<td>docker logs container-name/container-id</td>
+<td></td>
+</tr>
+<tr>
+<td>更多命令</td>
+<td><a href="https://docs.docker.com/engine/reference/commandline/docker/" target="_blank" rel="noopener">https://docs.docker.com/engine/reference/commandline/docker/</a></td>
+<td></td>
+</tr>
+</tbody></table>
 <p>步骤：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">1、搜索镜像</span><br><span class="line">[root@localhost ~]# docker search tomcat</span><br><span class="line">2、拉取镜像</span><br><span class="line">[root@localhost ~]# docker pull tomcat</span><br><span class="line">3、根据镜像启动容器</span><br><span class="line">docker run --name mytomcat -d tomcat:latest</span><br><span class="line">4、docker ps  </span><br><span class="line">查看运行中的容器</span><br><span class="line">5、 停止运行中的容器</span><br><span class="line">docker stop  容器的id</span><br><span class="line">6、查看所有的容器</span><br><span class="line">docker ps -a</span><br><span class="line">7、启动容器</span><br><span class="line">docker start 容器id</span><br><span class="line">8、删除一个容器</span><br><span class="line"> docker rm 容器id</span><br><span class="line">9、启动一个做了端口映射的tomcat</span><br><span class="line">[root@localhost ~]# docker run -d -p 8888:8080 tomcat</span><br><span class="line">-d：后台运行</span><br><span class="line">-p: 将主机的端口映射到容器的一个端口    主机端口:容器内部的端口</span><br><span class="line"></span><br><span class="line">10、为了演示简单关闭了linux的防火墙</span><br><span class="line">service firewalld status ；查看防火墙状态</span><br><span class="line">service firewalld stop：关闭防火墙</span><br><span class="line">11、查看容器的日志</span><br><span class="line">docker logs container-name/container-id</span><br><span class="line"></span><br><span class="line">更多命令参看</span><br><span class="line">https://docs.docker.com/engine/reference/commandline/docker/</span><br><span class="line">可以参考每一个镜像的文档</span><br></pre></td></tr></table></figure>
 
@@ -566,8 +613,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/11/front-end/other/html+CSS/reset/" rel="prev" title="">
-                   <i class="fa fa-chevron-right"></i>
+                <a href="/2019/11/java-note/maven/maven/" rel="prev" title="maven">
+                  maven <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -633,7 +680,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
