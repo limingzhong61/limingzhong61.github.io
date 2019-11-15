@@ -832,102 +832,124 @@ CSS中将每一个元素都设置为了一个矩形的盒子
 
 ### 内容区： content
 
-	内容区相当于盒子存放东西的空间
-	内容区在盒子的最里边
-	元素的所有的子元素都是放在父元素的内容区
-	内容区设置
-		width
-			内容区的宽度
-		height
-			内容区的高度
+内容区相当于盒子存放东西的空间
+内容区在盒子的最里边
+元素的所有的子元素都是放在父元素的内容区
+内容区设置
+
+```
+width
+内容区的宽度
+height
+内容区的高度
+```
 
 ### 边框 border
 
-	边框盒子可见框最外侧，边框是盒子的边缘
-	设置边框
-		**设置边框需要同时设置三个样式，缺一不可**
-		border-width
-			边框的宽度
-			可以同时指定四个边框的宽度，也可以分别指定
-			规则
-				四个值
-					border-width : 10px 20px 30px 40px;
-					border-width : 上 右 下 左;(顺时针)
-				三个值
-					border-width : 10px 20px 30px;
-					border-width : 上  左右  下 ;
-				两个值
-					border-width : 10px 20px;
-					border-width : 上下  左右   ;
-				一个值
-					border-width : 10px;
-					border-width : 上下左右   ;
-		border-color
-			边框的颜色
-		border-style
-			边框的样式
-		除了这三个样式，CSS中还提供了
-			border-xxx-width
-			border-xxx-color
-			border-xxx-style
-			xxx可以是
-				top
-				right
-				bottom
-				left
-			通过这些样式可以单独指定四个边的颜色，宽度和样式
-	边框的简写属性
-		border
-		border-left
-		border-top
-		border-right
-		border-bottom
+边框盒子可见框最外侧，边框是盒子的边缘
+设置边框
+**设置边框需要同时设置三个样式，缺一不可**
+border-width
+	边框的宽度
+	可以同时指定四个边框的宽度，也可以分别指定
+	规则
+
+```css
+四个值
+border-width : 10px 20px 30px 40px;
+border-width : 上 右 下 左;(顺时针)
+三个值
+border-width : 10px 20px 30px;
+border-width : 上  左右  下;
+两个值
+border-width : 10px 20px;
+border-width : 上下  左右;
+一个值
+border-width : 10px;
+border-width : 上下左右;
+```
+border-color
+	边框的颜色
+border-style
+	边框的样式
+除了这三个样式，CSS中还提供了
+	border-xxx-width
+	border-xxx-color
+	border-xxx-style
+	xxx可以是
+		top
+		right
+		bottom
+		left
+	通过这些样式可以单独指定四个边的颜色，宽度和样式
+边框的简写属性
+
+```css
+border
+border-left
+border-top
+border-right
+border-bottom
+```
 
 ```css
 border: red solid 10px   ;
 border-left: red solid 10px   ;
 ```
 
-		这个几个属性可以同时设置边框相关的的样式
-			**border可以同时设置四个边的颜色，宽度，样式**
-			**border-xxx可以单独设置某一个边**
-			规则
-				使用这些样式可以同时设置border-width border-style border-color，不同的属性使用空格隔开，并且**没有顺序要求**
+这个几个属性可以同时设置边框相关的的样式
+**border可以同时设置四个边的颜色，宽度，样式**
+**border-xxx可以单独设置某一个边**
+规则
+	使用这些样式可以同时设置border-width border-style border-color，不同的属性使用空格隔开，并且**没有顺序要求**
 
 ### 内边距： padding
 
-	内边距指的是内容区和边框之间的距离，内边距会影响盒子的大小
-	盒子中一共有四个方向的内边距
-		padding-top
-		padding-right
-		padding-bottom
-		padding-left
-	padding
-		可以同时设置四个方向的内边距，规则和border-width一致
-		padding:上 右 下 左
-		padding:上 左右 下 
-		padding:上下  左右 
-		padding:上下左右 
-	**盒子的可见框大小由内容区、内边距和边框共同决定**
+内边距指的是内容区和边框之间的距离，内边距会影响盒子的大小
+盒子中一共有四个方向的内边距
+
+```css
+padding-top
+padding-right
+padding-bottom
+padding-left
+```
+
+padding
+	可以同时设置四个方向的内边距，规则和border-width一致
+
+```css
+padding:上 右 下 左
+padding:上 左右 下 
+padding:上下  左右 
+padding:上下左右 
+```
+
+**盒子的可见框大小由内容区、内边距和边框共同决定**
 
 ### 外边距 margin
 
-	外边距盒子和其他盒子之间的距离，外边距不会影响可见框的大小，但是会影响盒子的位置
-	也是具有四个方向的外边距
-		margin-top
-		margin-right
-		margin-bottom
-		margin-left
-	简写属性
-		margin
-		规则和padding一致
-	margin值
-		可以设置为auto
-			**如果单独将左右外边距设置为auto**，则会将左或右外边距设置为最大值
-			如果同时将**左右外边距设置为auto，则会将左右外边距设置为一个相等的值**，通过这种方式使一个子元素在它的父元素中水平居中
-			**margin:0 auto**
-		**可以设置为负值**
-			如果将margin设置为负值，则元素会向相反的方向移动
+外边距盒子和其他盒子之间的距离，外边距不会影响可见框的大小，但是会影响盒子的位置
+也是具有四个方向的外边距
+
+```css
+margin-top
+margin-right
+margin-bottom
+margin-left
+```
+
+简写属性
+margin
+规则和padding一致
+margin值
+可以设置为auto
+	**如果单独将左右外边距设置为auto**，则会将左或右外边距设置为最大值
+	如果同时将**左右外边距设置为auto，则会将左右外边距设置为一个相等的值**，通过这种方式使一个子元素在它的父元素中水平居中
+	**margin:0 auto**
+**可以设置为负值**
+	如果将margin设置为负值，则元素会向相反的方向移动
+
 **外边距的重叠**
 		**相邻的垂直外边距**会发生重叠现象
 			**相邻元素的外边距会取最大值**

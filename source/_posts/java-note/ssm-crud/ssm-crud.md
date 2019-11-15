@@ -237,6 +237,23 @@ public String testDateTimeFormat(@Valid Student student, BindingResult result ,M
 	}
 ```
 
+在mybatis中配置合理化参数，超过页数，返回最后一页
+
+```xml
+<configuration>
+	<plugins>
+		<!-- com.github.pagehelper为PageHelper类所在包名 -->
+		<plugin interceptor="com.github.pagehelper.PageInterceptor">
+	<!-- 使用下面的方式配置参数，后面会有所有的参数介绍 -->
+			<!-- 分页参数合理化 -->
+			<property name="reasonable" value="true" />
+		</plugin>
+	</plugins>
+</configuration>
+```
+
+
+
 # sprigMVC自带HttpputFormContentFilter
 
 ```java
