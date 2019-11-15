@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon128.ico?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon32.ico?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon16.ico?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+  <link rel="alternate" href="/atom.xml" title="nicolas" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="简介OnJava8，thinkingInJava源作者作，被称为thinking in java 5. “我的语言极限，即是我的世界的极限。” ——路德维希·维特根斯坦（Wittgenstein） 就我个人而言，把一切事物都抽象成对象不仅是一项不必要的负担，同时还会招致许多设计朝着不好的方向发展。尽管如此，“对象”的概念依然有其闪光点。固执地要求所有东西都是一个对象（特别是一直到最底层级别）是一种">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OnJava8">
+<meta property="og:url" content="https://codeofli.github.io/2019/11/java-note/OnJava8/OnJava8/index.html">
+<meta property="og:site_name" content="nicolas">
+<meta property="og:description" content="简介OnJava8，thinkingInJava源作者作，被称为thinking in java 5. “我的语言极限，即是我的世界的极限。” ——路德维希·维特根斯坦（Wittgenstein） 就我个人而言，把一切事物都抽象成对象不仅是一项不必要的负担，同时还会招致许多设计朝着不好的方向发展。尽管如此，“对象”的概念依然有其闪光点。固执地要求所有东西都是一个对象（特别是一直到最底层级别）是一种">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-15T08:19:20.090Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OnJava8">
+<meta name="twitter:description" content="简介OnJava8，thinkingInJava源作者作，被称为thinking in java 5. “我的语言极限，即是我的世界的极限。” ——路德维希·维特根斯坦（Wittgenstein） 就我个人而言，把一切事物都抽象成对象不仅是一项不必要的负担，同时还会招致许多设计朝着不好的方向发展。尽管如此，“对象”的概念依然有其闪光点。固执地要求所有东西都是一个对象（特别是一直到最底层级别）是一种">
+  <link rel="canonical" href="https://codeofli.github.io/2019/11/java-note/OnJava8/OnJava8/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>OnJava8 | nicolas</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">nicolas</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Yesterday you said tomorow.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">18</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">9</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">19</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/codeOflI/codeOflI.github.io/tree/dev" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/11/java-note/OnJava8/OnJava8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">OnJava8
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-15 15:43:44 / 修改时间：16:19:20" itemprop="dateCreated datePublished" datetime="2019-11-15T15:43:44+08:00">2019-11-15</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>OnJava8，thinkingInJava源作者作，被称为thinking in java 5.</p><blockquote>
+<p>“我的语言极限，即是我的世界的极限。” ——路德维希·维特根斯坦（<em>Wittgenstein</em>）</p>
+</blockquote><p>就我个人而言，把一切事物都抽象成对象不仅是一项不必要的负担，同时还会招致许多设计朝着不好的方向发展。尽管如此，“对象”的概念依然有其闪光点。<strong>固执地要求所有东西都是一个对象（特别是一直到最底层级别）是一种设计错误；</strong>相反，完全逃避“对象”的概念似乎同样太过苛刻。</p><a id="more"></a>
+
+
+<p>Java 语言曾规划设计的许多功能并未按照承诺兑现。本书中，我将尝试解释这些原因，力争让读者知晓这些功能，并明白为什么这些功能最终并不适用。这无关 Java 是一种好语言或者坏语言，一旦你了解了该语言的缺陷和局限性，你就能够：</p>
+<ol>
+<li><strong>明白有些功能特性为什么会被“废弃”。</strong></li>
+<li><strong>熟悉语言边界，更好地设计和编码。</strong></li>
+</ol>
+<p>编程的过程就是复杂性管理的过程：<strong>业务问题的复杂性，以及依赖的计算机的复杂性。</strong></p>
+<h1 id="第一章-对象的概念"><a href="#第一章-对象的概念" class="headerlink" title="第一章 对象的概念"></a>第一章 对象的概念</h1><blockquote>
+<p>“我们没有意识到惯用语言的结构有多大的力量。可以毫不夸张地说，它通过语义反应机制奴役我们。语言表现出来并在无意识中给我们留下深刻印象的结构会自动投射到我们周围的世界。” – Alfred Korzybski (1930)</p>
+</blockquote>
+<h2 id="抽象"><a href="#抽象" class="headerlink" title="抽象"></a>抽象</h2><p>面向对象编程（Object-Oriented Programming OOP）是一种编程思维方式和编码架构。</p>
+<p>OOP 允许我们<strong>根据问题来描述问题</strong>，而不是根据运行解决方案的计算机</p>
+<p>我们可理解“纯粹”的面向对象程序设计方法是什么样的：</p>
+<blockquote>
+<ol>
+<li><strong>万物皆对象</strong>。你可以将对象想象成一种特殊的变量。它存储数据，但可以在你对其“发出请求”时执行本身的操作。理论上讲，你总是可以从要解决的问题身上抽象出概念性的组件，然后在程序中将其表示为一个对象。</li>
+<li><strong>程序是一组对象，通过消息传递来告知彼此该做什么</strong>。要请求调用一个对象的方法，你需要向该对象发送消息。</li>
+<li><strong>每个对象都有自己的存储空间，可容纳其他对象</strong>。或者说，通过封装现有对象，可制作出新型对象。所以，尽管对象的概念非常简单，但在程序中却可达到任意高的复杂程度。</li>
+<li><strong>每个对象都有一种类型</strong>。根据语法，每个对象都是某个“类”的一个“实例”。其中，“类”（Class）是“类型”（Type）的同义词。一个类最重要的特征就是“能将什么消息发给它？”。</li>
+<li><strong>同一类所有对象都能接收相同的消息</strong>。这实际是别有含义的一种说法，大家不久便能理解。由于类型为“圆”（Circle）的一个对象也属于类型为“形状”（Shape）的一个对象，所以一个圆完全能接收发送给”形状”的消息。这意味着可让程序代码统一指挥“形状”，令其自动控制所有符合“形状”描述的对象，其中自然包括“圆”。这一特性称为对象的“可替换性”，是OOP最重要的概念之一。</li>
+</ol>
+</blockquote>
+<p>对对象更简洁的描述：：<strong>一个对象具有自己的状态，行为和标识。这意味着对象有自己的内部数据(提供状态)、方法 (产生行为)，并彼此区分（每个对象在内存中都有唯一的地址）。</strong></p>
+<p>当我们进行<strong>面向对象的程序设计时，面临的最大一项挑战性就是</strong>：如何<strong>在“问题空间”（问题实际存在的地方）的元素与“方案空间”（对实际问题进行建模的地方，如计算机）的元素之间建立理想的“一对一”的映射关系。</strong></p>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>每个对象仅能接受特定的请求。我们向对象发出的请求是通过它的“接口”（Interface）定义的</p>
+<h2 id="提供服务"><a href="#提供服务" class="headerlink" title="提供服务"></a>提供服务</h2><p>软件设计的基本原则是高内聚：<strong>每个组件的内部作用明确，功能紧密相关。然而经常有人将太多功能塞进一个对象中。</strong>在良好的面向对象设计中，每个对象功能单一且高效。这样的程序设计可以提高我们代码的复用性，同时也方便别人阅读和理解我们的代码。</p>
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p><strong>使用访问控制的原因有以下两点：</strong></p>
+<ol>
+<li>让<strong>应用程序员不要触摸他们不应该触摸的部分。</strong>（请注意，这也是一个哲学决策。部分编程语言认为如果程序员有需要，则应该让他们访问细节部分。）；</li>
+<li>使<strong>类库的创建者（研发程序员）在不影响后者使用的情况下完善更新工具库。</strong>例如，我们开发了一个功能简单的工具类，后来发现可以通过优化代码来提高执行速度。假如工具类的接口和实现部分明确分开并受到保护，那我们就可以轻松地完成改造。</li>
+</ol>
+<p>Java 有三个显式关键字来设置类中的访问权限：<code>public</code>（公开），<code>private</code>(私有)和<code>protected</code>（受保护）。这些访问修饰符决定了谁能使用它们修饰的方法、变量或类。</p>
+<ol>
+<li><code>public</code>（公开）表示任何人都可以访问和使用该元素；</li>
+<li><code>private</code>（私有）除了类本身和类内部的方法，外界无法直接访问该元素。<code>private</code> 是类和调用者之间的屏障。任何试图访问私有成员的行为都会报编译时错误；</li>
+<li><code>protected</code>（受保护）类似于 <code>private</code>，区别是子类（下一节就会引入继承的概念）可以访问 <code>protected</code> 的成员，但不能访问 <code>private</code> 成员；</li>
+<li><code>default</code>（默认）如果你不使用前面的三者，默认就是 <code>default</code> 访问权限。<code>default</code> 被称为包访问，因为该权限下的资源可以被同一包（库组件）中其他类的成员访问。</li>
+</ol>
+<h2 id="复用"><a href="#复用" class="headerlink" title="复用"></a>复用</h2><p>代码和设计方案的复用性是面向对象程序设计的优点之一。我们可以将一个类的对象作为另一个类的成员变量使用。</p>
+<p>这里涉及到“组合”和“聚合”的概念：</p>
+<ul>
+<li><strong>组合</strong>（Composition）经常用来表示“拥有”关系（has-a relationship）。例如，“汽车拥有引擎”。</li>
+<li><strong>聚合</strong>（Aggregation）动态的<strong>组合</strong>。</li>
+</ul>
+<p>组合和聚合都属于关联关系的一种，只是额外具有整体-部分的意义。聚合关系中，整件不会拥有部件的生命周期，所以整件删除时，部件不会被删除。再者，多个整件可以共享同一个部件。<strong>组合关系中，整件拥有部件的生命周期，所以整件删除时，部件一定会跟着删除。</strong>而且，多个整件不可以同时共享同一个部件。这个区别可以用来区分某个关联关系到底是组合还是聚合。<strong>两个类生命周期不同步，则是聚合关系，生命周期同步就是组合关系。</strong></p>
+<h2 id="继承inheritance"><a href="#继承inheritance" class="headerlink" title="继承inheritance"></a>继承inheritance</h2><p>基类包含派生自它的类型之间共享的所有特征和行为。</p>
+<h3 id="单继承结构"><a href="#单继承结构" class="headerlink" title="单继承结构"></a>单继承结构</h3><p>所有的类都默认从一个基类继承,在 Java 中，这个最终基类的名字就是 <code>Object</code>。</p>
+<p>由于所有对象都具有一个公共接口，因此它们最终都属于同一个基类。</p>
+<p><strong>单继承的结构使得垃圾收集器的实现更为容易。</strong>这也是 Java 在 C++ 基础上的根本改进之一。</p>
+<p>由于运行期的类型信息会存在于所有对象中，所以我们永远不会遇到判断不了对象类型的情况。这对于系统级操作尤其重要，例如<a href="#异常处理">异常处理</a>。同时，这也让我们的编程具有更大的灵活性。</p>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>面向对象语言使用<strong>后期绑定</strong>的概念。当向对象发送信息时，被调用的代码直到运行时才确定。编译器确保方法存在，并对参数和返回值执行类型检查，但是它不知道要执行的确切代码。</p>
+<p><strong>为了执行后期绑定，Java 使用一个特殊的代码位来代替绝对调用。</strong>这段代码<strong>使用对象中存储的信息来计算方法主体的地址</strong>（此过程在多态性章节中有详细介绍）。因此，每个对象的行为根据特定代码位的内容而不同。当你向对象发送消息时，对象知道该如何处理这条消息。在某些语言中，必须显式地授予方法后期绑定属性的灵活性。例如，C++ 使用 <strong>virtual</strong> 关键字。在这些语言中，默认情况下方法不是动态绑定的。</p>
+<p><strong>在 Java 中，动态绑定是默认行为，不需要额外的关键字来实现多态性。</strong></p>
+<p>把子类当成其基类来处理的过程叫做“向上转型”（<strong>upcasting</strong>）。</p>
+<p>面向对象的程序设计语言是<strong>通过“动态绑定”的方式来实现对象的多态性的。</strong></p>
+<h2 id="集合collection"><a href="#集合collection" class="headerlink" title="集合collection"></a>集合collection</h2><p>“集合”这种类型的对象可以存储任意类型、数量的其他对象。它能根据需要自动扩容，我们不用关心过程是如何实现的。</p>
+<p>Java 5 版本前的集合只保存 <code>Object</code>,每次取出元素都要做<strong>额外的“向下转型”对程序和程序员都是一种开销。</strong></p>
+<p><strong>参数化类型机制（Parameterized Type Mechanism）。</strong></p>
+<p>参数化类型机制可以使得编译器能够自动识别某个 <code>class</code> 的具体类型并正确地执行。</p>
+<p><strong>Java 5 版本支持了参数化类型机制，称之为“泛型”（Generic）。</strong></p>
+<h2 id="对象创建与生命周期"><a href="#对象创建与生命周期" class="headerlink" title="对象创建与生命周期"></a>对象创建与生命周期</h2><p>在 C++ 程序设计中，当使用完一个对象后，必须明确将其删除。</p>
+<p> <strong>在 C++ 设计中采用的观点是效率第一，因此它将选择权交给了程序员。</strong>为了获得最大的运行时速度，程序员可以在编写程序时，<strong>通过将对象放在栈（Stack，有时称为自动变量或作用域变量）或静态存储区域（static storage area）中来确定内存占用和生存时间。</strong>这些区域的对象会被优先分配内存和释放。</p>
+<p>第二种方法是在<strong>堆内存（Heap）中动态地创建对象。在这种方式下，直到程序运行我们才能确定需要创建的对象数量、生存时间和类型。</strong>什么时候需要，什么时候在堆内存中创建。 因为内存的占用是动态管理的，所以在运行时，在堆内存上开辟空间所需的时间可能比在栈内存上要长（但也不一定）。在栈内存开辟和释放空间通常是一条将栈指针向下移动和一条将栈指针向上移动的汇编指令。开辟堆内存空间的时间取决于内存机制的设计。</p>
+<p>动态方法有这样一个一般性的逻辑假设：对象趋向于变得复杂，因此额外的内存查找和释放对对象的创建影响不大。（原文：<em>The dynamic approach makes the generally logical assumption that objects tend to be  complicated, so the extra overhead of finding storage and releasing that storage will not have an important impact on the creation of an object.</em>）此外，更好的灵活性对于问题的解决至关重要。</p>
+<p><strong>Java 使用动态内存分配。</strong>每次创建对象时，使用 <code>new</code> 关键字构建该对象的动态实例。这又带来另一个问题：对象的生命周期。<strong>较之堆内存，在栈内存中创建对象，编译器能够确定该对象的生命周期并自动销毁它；然而如果你在堆内存创建对象的话，编译器是不知道它的生命周期的。</strong>在 C++ 中你必须以编程方式确定何时销毁对象，否则可能导致内存泄漏。<strong>Java 的内存管理是建立在垃圾收集器上的，它能自动发现对象不再被使用并释放内存。</strong>垃圾收集器的存在带来了极大的便利，它减少了我们之前必须要跟踪的问题和编写相关代码的数量。</p>
+<h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p><strong>异常处理机制将程序错误直接交给编程语言甚至是操作系统。“异常”（Exception）是一个从出错点“抛出”（thrown）后能被特定类型的异常处理程序捕获(catch)的一个对象。</strong>它不会干扰程序的正常运行，仅当程序出错的时候才被执行。</p>
+<h1 id="第二章-安装Java和本书用例"><a href="#第二章-安装Java和本书用例" class="headerlink" title="第二章 安装Java和本书用例"></a>第二章 安装Java和本书用例</h1><h2 id="Shell"><a href="#Shell" class="headerlink" title="Shell"></a>Shell</h2><p>如果你之前没有接触过编程，那么有可能对 Shell（命令行窗口） 不太熟悉。shell 的历史可以追溯到早期的计算时代，当时在计算机上的操作是都通过输入命令进行的，计算机通过回显响应。所有的操作都是基于文本的。</p>
+<p>尽管和现在的图形用户界面相比，Shell 操作方式很原始。但是同时 shell 也为我们提供了许多有用的功能特性。在学习本书的过程中，我们会经常使用到 Shell，包括现在这部分的安装，还有运行 Java 程序。</p>
+<p>Mac：单击聚光灯（屏幕右上角的放大镜图标），然后键入 <code>terminal</code>。单击看起来像小电视屏幕的应用程序（你也可以单击“return”）。这就启动了你的用户下的 shell 窗口。</p>
+<p>windows：首先，通过目录打开 windows 资源管理器：</p>
+<ul>
+<li>Windows 7: 单击屏幕左下角的“开始”图标，输入“explorer”后按回车键。</li>
+<li>Windows 8: 按 Windows+Q，输入 “explorer” 后按回车键。</li>
+<li>Windows 10: 按 Windows+E 打开资源管理器，导航到所需目录，单击窗口左上角的“文件“选项卡，选择“打开 Window PowerShell”启动 Shell。</li>
+</ul>
+<p>Linux: 在 home 目录打开 Shell。</p>
+<ul>
+<li>Debian: 按 Alt+F2， 在弹出的对话框中输入“gnome-terminal”</li>
+<li>Ubuntu: 在屏幕中鼠标右击，选择 “打开终端”，或者按住 Ctrl+Alt+T</li>
+<li>Redhat: 在屏幕中鼠标右击，选择 “打开终端”</li>
+<li>Fedora: 按 Alt+F2，在弹出的对话框中输入“gnome-terminal”</li>
+</ul>
+<p><strong>目录</strong></p>
+<p>目录是 Shell 的基础元素之一。目录用来保存文件和其他目录。目录就好比树的分支。如果书籍是你系统上的一个目录，并且它有两个其他目录作为分支，例如数学和艺术，那么我们就可以说你有一个书籍目录，它包含数学和艺术两个子目录。注意：Windows 使用 <code>\</code> 而不是 <code>/</code> 来分隔路径。</p>
+<p><strong>Shell基本操作</strong></p>
+<p>我在这展示的 Shell 操作和系统中大体相同。出于本书的原因，下面列举一些在 Shell 中的基本操作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">更改目录： <span class="built_in">cd</span> &lt;路径&gt; </span><br><span class="line">          <span class="built_in">cd</span> .. 移动到上级目录 </span><br><span class="line">          <span class="built_in">pushd</span> &lt;路径&gt; 记住来源的同时移动到其他目录，<span class="built_in">popd</span> 返回来源</span><br><span class="line"></span><br><span class="line">目录列举： ls 列举出当前目录下所有的文件和子目录名（不包含隐藏文件），</span><br><span class="line">             可以选择使用通配符 * 来缩小搜索范围。</span><br><span class="line">             示例(1)： 列举所有以“.java”结尾的文件，输入 ls *.java (Windows: dir *.java)</span><br><span class="line">             示例(2)： 列举所有以“F”开头，“.java”结尾的文件，输入ls F*.java (Windows: dir F*.java)</span><br><span class="line"></span><br><span class="line">创建目录： </span><br><span class="line">    Mac/Linux 系统：mkdir  </span><br><span class="line">              示例：mkdir books </span><br><span class="line">    Windows   系统：md </span><br><span class="line">              示例：md books</span><br><span class="line"></span><br><span class="line">移除文件： </span><br><span class="line">    Mac/Linux 系统：rm</span><br><span class="line">              示例：rm somefile.java</span><br><span class="line">    Windows   系统：del </span><br><span class="line">              示例：del somefile.java</span><br><span class="line"></span><br><span class="line">移除目录： </span><br><span class="line">    Mac/Linux 系统：rm -r</span><br><span class="line">              示例：rm -r books</span><br><span class="line">    Windows   系统：deltree </span><br><span class="line">              示例：deltree books</span><br><span class="line"></span><br><span class="line">重复命令： !!  重复上条命令</span><br><span class="line">              示例：!n 重复倒数第n条命令</span><br><span class="line"></span><br><span class="line">命令历史：     </span><br><span class="line">    Mac/Linux 系统：<span class="built_in">history</span></span><br><span class="line">    Windows   系统：按 F7 键</span><br><span class="line"></span><br><span class="line">文件解压：</span><br><span class="line">    Linux/Mac 都有命令行解压程序 unzip，你可以通过互联网为 Windows 安装命令行解压程序 unzip。</span><br><span class="line">    图形界面下（Windows 资源管理器，Mac Finder，Linux Nautilus 或其他等效软件）右键单击该文件，</span><br><span class="line">    在 Mac 上选择“open”，在 Linux 上选择“extract here”，或在 Windows 上选择“extract all…”。</span><br><span class="line">    要了解关于 shell 的更多信息，请在维基百科中搜索 Windows shell，Mac/Linux用户可搜索 bash shell。</span><br></pre></td></tr></table></figure>
+
+<h1 id="第三章-万物皆对象"><a href="#第三章-万物皆对象" class="headerlink" title="第三章 万物皆对象"></a>第三章 万物皆对象</h1><blockquote>
+<p>如果我们说另外一种不同的语言，我们会发觉一个不同的世界！— Ludwig Wittgenstein (1889-1951)</p>
+</blockquote>
+<p>对象操纵:You Manipulate Objects with References</p>
+<h2 id="对象创建"><a href="#对象创建" class="headerlink" title="对象创建:"></a>对象创建:</h2><p>在 Java 中，通常我们使用<code>new</code>操作符来创建一个新对象。Java 语法允许我们使用带双引号的文本内容来初始化字符串。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String s = <span class="string">"asdf"</span>;</span><br></pre></td></tr></table></figure>
+
+<!-- Where Storage Lives -->
+
+<h3 id="数据存储"><a href="#数据存储" class="headerlink" title="数据存储"></a>数据存储</h3><p>那么，程序在运行时是如何存储的呢？尤其是内存是怎么分配的。有5个不同的地方可以存储数据：</p>
+<ol>
+<li><strong>寄存器</strong>（Registers）最快的存储区域，位于 CPU 内部 。然而，寄存器的数量十分有限，所以寄存器根据需求进行分配。我们对其没有直接的控制权，也无法在自己的程序里找到寄存器存在的踪迹（另一方面，C/C++ 允许开发者向编译器建议寄存器的分配）。</li>
+<li><strong>栈内存</strong>（Stack）存在于常规内存 RAM（随机访问存储器，Random Access Memory）区域中，可通过栈指针获得处理器的直接支持。栈指针下移分配内存，上移释放内存，这是一种快速有效的内存分配方法，速度仅次于寄存器。创建程序时，Java 系统必须准确地知道栈内保存的所有项的生命周期。这种约束限制了程序的灵活性。因此，虽然在栈内存上存在一些 Java 数据，特别是对象引用，但 Java 对象却是保存在堆内存的。</li>
+<li><strong>堆内存</strong>（Heap）这是一种通用的内存池（也在 RAM 区域），所有 Java 对象都存在于其中。与栈内存不同，编译器不需要知道对象必须在堆内存上停留多长时间。因此，用堆内存保存数据更具灵活性。创建一个对象时，只需用 <code>new</code> 命令实例化对象即可，当执行代码时，会自动在堆中进行内存分配。这种灵活性是有代价的：分配和清理堆内存要比栈内存需要更多的时间（如果可以用 Java 在栈内存上创建对象，就像在 C++ 中那样的话）。随着时间的推移，Java 的堆内存分配机制现在已经非常快，因此这不是一个值得关心的问题了。</li>
+<li><strong>常量存储</strong>（Constant storage）常量值通常直接放在程序代码中，因为它们永远不会改变。如需严格保护，可考虑将它们置于只读存储器 ROM （只读存储器，Read Only Memory）中 。</li>
+<li><strong>非 RAM 存储</strong>（Non-RAM storage）数据完全存在于程序之外，在程序未运行以及脱离程序控制后依然存在。两个主要的例子：（1）序列化对象：对象被转换为字节流，通常被发送到另一台机器；（2）持久化对象：对象被放置在磁盘上，即使程序终止，数据依然存在。这些存储的方式都是将对象转存于另一个介质中，并在需要时恢复成常规的、基于 RAM 的对象。Java 为轻量级持久化提供了支持。而诸如 JDBC 和 Hibernate 这些类库为使用数据库存储和检索对象信息提供了更复杂的支持。</li>
+</ol>
+<h3 id="基本类型的存储"><a href="#基本类型的存储" class="headerlink" title="基本类型的存储"></a>基本类型的存储</h3><h3 id="基本类型的存储-1"><a href="#基本类型的存储-1" class="headerlink" title="基本类型的存储"></a>基本类型的存储</h3><p>有一组类型在 Java 中使用频率很高，它们需要特殊对待，这就是 Java 的基本类型。之所以这么说，是因为它们的创建并不是通过 <code>new</code> 关键字来产生。通常 <code>new</code> 出来的对象都是保存在堆内存中的，以此方式<strong>创建小而简单的变量</strong>往往是不划算的。所以对于这些基本类型的创建方法，Java 使用了和 C/C++ 一样的策略。也就是说，不是使用 <code>new</code> 创建变量，而是使用一个“自动”变量。 这个<strong>变量直接存储”值”，并置于栈内存中，因此更加高效。</strong></p>
+<p>Java 确定了每种基本类型的内存占用大小。 <strong>这些大小不会像其他一些语言那样随着机器环境的变化而变化。</strong>这种不变性也是 Java 更具可移植性的一个原因。</p>
+<table>
+<thead>
+<tr>
+<th align="center">基本类型</th>
+<th align="center">大小</th>
+<th align="center">最小值</th>
+<th align="center">最大值</th>
+<th align="center">包装类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">boolean</td>
+<td align="center">—</td>
+<td align="center">—</td>
+<td align="center">—</td>
+<td align="center">Boolean</td>
+</tr>
+<tr>
+<td align="center">char</td>
+<td align="center">16 bits</td>
+<td align="center">Unicode 0</td>
+<td align="center">Unicode 2<sup>16</sup> -1</td>
+<td align="center">Character</td>
+</tr>
+<tr>
+<td align="center">byte</td>
+<td align="center">8 bits</td>
+<td align="center">-128</td>
+<td align="center">+127</td>
+<td align="center">Byte</td>
+</tr>
+<tr>
+<td align="center">short</td>
+<td align="center">16 bits</td>
+<td align="center">- 2<sup>15</sup></td>
+<td align="center">+ 2<sup>15</sup> -1</td>
+<td align="center">Short</td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td align="center">32 bits</td>
+<td align="center">- 2<sup>31</sup></td>
+<td align="center">+ 2<sup>31</sup> -1</td>
+<td align="center">Integer</td>
+</tr>
+<tr>
+<td align="center">long</td>
+<td align="center">64 bits</td>
+<td align="center">- 2<sup>63</sup></td>
+<td align="center">+ 2<sup>63</sup> -1</td>
+<td align="center">Long</td>
+</tr>
+<tr>
+<td align="center">float</td>
+<td align="center">32 bits</td>
+<td align="center">IEEE754</td>
+<td align="center">IEEE754</td>
+<td align="center">Float</td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td align="center">64 bits</td>
+<td align="center">IEEE754</td>
+<td align="center">IEEE754</td>
+<td align="center">Double</td>
+</tr>
+<tr>
+<td align="center">void</td>
+<td align="center">—</td>
+<td align="center">—</td>
+<td align="center">—</td>
+<td align="center">Void</td>
+</tr>
+</tbody></table>
+<p>所有的数值类型都是有正/负符号的。布尔（boolean）类型的大小没有明确的规定，通常定义为取字面值 “true” 或 “false” 。基本类型有自己对应的包装类型，如果你希望在堆内存里表示基本类型的数据，就需要用到它们的包装类。代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> c = <span class="string">'x'</span>;</span><br><span class="line">Character ch = <span class="keyword">new</span> Character(c);</span><br></pre></td></tr></table></figure>
+
+<p>或者你也可以使用下面的形式，基本类型自动转换成包装类型（自动装箱）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Character ch = <span class="keyword">new</span> Character(<span class="string">'x'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>相对的，包装类型转化为基本类型（自动拆箱）：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> c = ch;</span><br></pre></td></tr></table></figure>
+
+<!-- High-Precision Numbers -->
+
+<h3 id="高精度数值"><a href="#高精度数值" class="headerlink" title="高精度数值"></a>高精度数值</h3><p>在 Java 中有两种类型的数据可用于高精度的计算。它们是 <code>BigInteger</code> 和 <code>BigDecimal</code>。尽管它们大致可以划归为“包装类型”，但是它们并没有对应的基本类型。</p>
+<p>这两个类包含的方法提供的操作，与对基本类型执行的操作相似。也就是说，能对 int 或 float 做的运算，在 BigInteger 和 BigDecimal 这里也同样可以，只不过必须要通过调用它们的方法来实现而非运算符。此外，由于涉及到的计算量更多，所以运算速度会慢一些。诚然，我们牺牲了速度，但换来了精度。</p>
+<p>BigInteger 支持任意精度的整数。可用于精确表示任意大小的整数值，同时在运算过程中不会丢失精度。<br>BigDecimal 支持任意精度的定点数字。例如，可用它进行精确的货币计算。</p>
+<p>关于这两个类的详细信息，请参考 JDK 官方文档。</p>
+<!-- Arrays in Java -->
+
+<h3 id="数组的存储"><a href="#数组的存储" class="headerlink" title="数组的存储"></a>数组的存储</h3><p>在 C 和 C++ 中使用数组是危险的，因为那些数组只是内存块。如果程序访问了内存块之外的数组或在初始化之前使用该段内存（常见编程错误），则结果是不可预测的。</p>
+<p>Java 的设计主要目标之一是安全性，因此许多困扰 C 和 C++ 程序员的问题不会在 Java 中再现。<strong>在 Java 中，数组使用前需要被初始化，并且不能访问数组长度以外的数据。这种范围检查，是以每个数组上少量的内存开销及运行时检查下标的额外时间为代价的，但由此换来的安全性和效率的提高是值得的。</strong>（并且 Java 经常可以优化这些操作）。</p>
+<p>当我们创建对象数组时，实际上是创建了一个引用数组，并且每个引用的初始值都为 <strong>null</strong> 。在使用该数组之前，我们必须为每个引用指定一个对象 。如果我们尝试使用为 <strong>null</strong> 的引用，则会在运行时报错。因此，在 Java 中就防止了数组操作的常规错误。</p>
+<p>我们还可创建基本类型的数组。<strong>编译器通过将该数组的内存全部置零来保证初始化。</strong></p>
+<!-- Comments -->
+
+<h2 id="代码注释"><a href="#代码注释" class="headerlink" title="代码注释"></a>代码注释</h2><p>Java 中有两种类型的注释。第一种是传统的 C 风格的注释，以 <code>/*</code> 开头，可以跨越多行，到 <code>*/</code> 结束。注意，许多程序员在多行注释的每一行开头添加 <code>*</code>，所以你经常会看到：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 这是</span></span><br><span class="line"><span class="comment">* 跨越多行的</span></span><br><span class="line"><span class="comment">* 注释</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+<p>但请记住，<code>/*</code> 和 <code>*/</code> 之间的内容都是被忽略的。所以你将其改为下面这样也是没有区别的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 这是跨越多</span></span><br><span class="line"><span class="comment">行的注释 */</span></span><br></pre></td></tr></table></figure>
+
+<p>第二种注释形式来自 C++ 。它是单行注释，以 <code>//</code> 开头并一直持续到行结束。这种注释方便且常用，因为直观简单。所以你经常看到：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这是单行注释</span></span><br></pre></td></tr></table></figure>
+
+<!-- You Never Need to Destroy an Object -->
+
+<h2 id="对象不需要清理"><a href="#对象不需要清理" class="headerlink" title="对象不需要清理"></a>对象不需要清理</h2><!-- Scoping -->
+
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>大多数程序语言都有作用域的概念。作用域决定了在该范围内定义的变量名的可见性和生存周期。在 C、 C++ 和 Java 中，作用域是由大括号 <code>{}</code> 的位置决定的。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">12</span>;</span><br><span class="line">    <span class="comment">// 仅 x 变量可用</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> q = <span class="number">96</span>;</span><br><span class="line">        <span class="comment">// x 和 q 变量皆可用</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 仅 x 变量可用</span></span><br><span class="line">    <span class="comment">// 变量 q 不在作用域内</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Java 的变量只有在其作用域内才可用。缩进使得 Java 代码更易于阅读。由于 Java 是一种自由格式的语言，额外的空格、制表符和回车并不会影响程序的执行结果。在 Java 中，你不能执行以下操作，即使这在 C 和 C++ 中是合法的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> x = <span class="number">12</span>;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">96</span>; <span class="comment">// Illegal</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在上例中， Java 编译器会在提示变量 x 已经被定义过了。因此，在 C/C++ 中将一个较大作用域的变量”隐藏”起来的做法，在 Java 中是不被允许的。 因为 Java 的设计者认为这样做会导致程序混乱。</p>
+<!-- Scope of Objects -->
+
+<h3 id="对象作用域"><a href="#对象作用域" class="headerlink" title="对象作用域"></a>对象作用域</h3><p><strong>Java 对象与基本类型具有不同的生命周期。当我们使用 <code>new</code> 关键字来创建 Java 对象时，它的生命周期将会超出作用域。</strong>因此，下面这段代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    String s = <span class="keyword">new</span> String(<span class="string">"a string"</span>);</span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">// 作用域终点</span></span><br></pre></td></tr></table></figure>
+
+<p>上例中，引用 s 在作用域终点就结束了。但是，引用 s 指向的字符串对象依然还在占用内存。在这段代码中，我们无法在这个作用域之后访问这个对象，因为唯一对它的引用 s 已超出了作用域的范围。</p>
+<p><strong>只要你需要，<code>new</code> 出来的对象就会一直存活下去。</strong> 相比在 C++ 编码中操作内存可能会出现的诸多问题，这些困扰在 Java 中都不复存在了。在 C++ 中你不仅要确保对象的内存在你操作的范围内存在，还必须在使用完它们之后，将其销毁。</p>
+<p>那么问题来了：我们在 Java 中并没有主动清理这些对象，那么它是如何避免 C++ 中出现的内存被填满从而阻塞程序的问题呢？答案是<strong>：Java 的垃圾收集器会检查所有 <code>new</code> 出来的对象并判断哪些不再可达，继而释放那些被占用的内存，供其他新的对象使用。</strong>也就是说，我们不必担心内存回收的问题了。你只需简单创建对象即可。当其不再被需要时，能自行被垃圾收集器释放。垃圾回收机制有效防止了因程序员忘记释放内存而造成的“内存泄漏”问题。</p>
+<h2 id="类的创建"><a href="#类的创建" class="headerlink" title="类的创建"></a>类的创建</h2><p>当我们创建好一个类之后，我们可以往类里存放两种类型的元素：方法（method）和字段（field）。</p>
+<h3 id="字段"><a href="#字段" class="headerlink" title="字段"></a>字段</h3><h4 id="基本类型默认值"><a href="#基本类型默认值" class="headerlink" title="基本类型默认值"></a>基本类型默认值</h4><p>如果类的成员变量（字段）是基本类型，那么在类初始化时，这些类型将会被赋予一个初始值。</p>
+<table>
+<thead>
+<tr>
+<th align="center">基本类型</th>
+<th align="center">初始值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">boolean</td>
+<td align="center">false</td>
+</tr>
+<tr>
+<td align="center">char</td>
+<td align="center">\u0000 (null)</td>
+</tr>
+<tr>
+<td align="center">byte</td>
+<td align="center">(byte) 0</td>
+</tr>
+<tr>
+<td align="center">short</td>
+<td align="center">(short) 0</td>
+</tr>
+<tr>
+<td align="center">int</td>
+<td align="center">0</td>
+</tr>
+<tr>
+<td align="center">long</td>
+<td align="center">0L</td>
+</tr>
+<tr>
+<td align="center">float</td>
+<td align="center">0.0f</td>
+</tr>
+<tr>
+<td align="center">double</td>
+<td align="center">0.0d</td>
+</tr>
+</tbody></table>
+<p>这些<strong>默认值仅在 Java 初始化类的时候才会被赋予。</strong></p>
+<p>这种<strong>默认值的赋予并不适用于局部变量 —— 那些不属于类的字段的变量。</strong></p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p><strong>在 Java 中，方法决定对象能接收哪些消息。</strong>方法的基本组成部分包括名称、参数、返回类型、方法体。格式如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[返回类型] [方法名](<span class="comment">/*参数列表*/</span>)&#123;</span><br><span class="line">    <span class="comment">// 方法体</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>方法名和参数列表统称为<strong>方法签名</strong>（signature of the method）。<strong>签名作为方法的唯一标识。</strong></p>
+<!-- Writing a Java Program -->
+
+<h2 id="程序编写"><a href="#程序编写" class="headerlink" title="程序编写"></a>程序编写</h2><h3 id="命名可见性"><a href="#命名可见性" class="headerlink" title="命名可见性"></a>命名可见性</h3><p>命名控制在任何一门编程语言中都是一个问题。如果你在两个模块中使用相同的命名，那么如何区分这两个名称，并防止两个名称发生“冲突”呢？</p>
+<p>Java 采取了一种新的方法避免了以上这些问题：<strong>为一个类库生成一个明确的名称</strong>，Java 创建者希望我们<strong>反向使用自己的网络域名（URL)</strong>，因为域名通常是唯一的。因此我的域名是 MindviewInc.com，所以我将我的 foibles 类库命名为 com.mindviewinc.utility.foibles。反转域名后，<code>.</code> 用来代表子目录的划分。</p>
+<!-- The static Keyword -->
+
+<h3 id="static关键字"><a href="#static关键字" class="headerlink" title="static关键字"></a>static关键字</h3><p>当我们说某个事物是静态时，就意味着该字段或方法不依赖于任何特定的对象实例 。 即使我们从未创建过该类的对象，也可以调用其静态方法或访问其静态字段。</p>
+<h3 id="编译和运行"><a href="#编译和运行" class="headerlink" title="编译和运行"></a>编译和运行</h3><p>编译：</p>
+<p>移动到子目录 <strong>objects</strong> 下并键入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">javac HelloDate.java</span><br></pre></td></tr></table></figure>
+
+<p>此命令不应产生任何响应。如果我们收到任何类型的错误消息，则表示未正确安装 JDK，那就得检查这些问题。</p>
+<p>若执行不报错的话，此时可以键入：</p>
+<p>运行：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java HelloDate</span><br></pre></td></tr></table></figure>
+
+<!-- Operators -->
+
+<h1 id="第四章-运算符"><a href="#第四章-运算符" class="headerlink" title="第四章 运算符"></a>第四章 运算符</h1><p>几乎所有运算符都只能操作基本类型（Primitives）。<strong>唯一的例外是 <code>=</code>、<code>==</code> 和 <code>!=</code>，它们能操作所有对象（这也是令人混淆的一个地方）。除此以外，String 类支持 <code>+</code> 和 <code>+=</code>。</strong></p>
+<!-- Assignment -->
+
+<h2 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h2><p>基本类型的赋值都是直接的，而不像对象，赋予的只是其内存的引用。举个例子，a = b ，<strong>如果 b 是基本类型，那么赋值操作会将 b 的值复制一份给变量 a</strong>， 此后若 a 的值发生改变是不会影响到 b 的。</p>
+<p><strong>如果是为对象赋值，那么结果就不一样了。</strong>对一个对象进行操作时，我们实际上操作的是它的引用。所以我们将右边的对象赋予给左边时，赋予的只是该对象的引用。此时，<strong>两者指向的堆中的对象还是同一个。</strong></p>
+<p>为了生成随机数字，程序首先创建一个 <strong>Random</strong> 对象。不带参数的 <strong>Random</strong> 对象会利用当前的时间用作随机数生成器的“种子”（seed），从而为程序的每次执行生成不同的输出。在本书的示例中，重要的是每个示例末尾的输出尽可能一致，以便可以使用外部工具进行验证。所以我们通过在创建 <strong>Random</strong> 对象时提供种子（随机数生成器的初始化值，其始终为特定种子值产生相同的序列），让程序每次执行都生成相同的随机数，如此以来输出结果就是可验证的 [^1]</p>
+<h2 id="special"><a href="#special" class="headerlink" title="special"></a>special</h2><!-- Unary Minus and Plus Operators -->
+
+<h3 id="一元加减运算符"><a href="#一元加减运算符" class="headerlink" title="一元加减运算符"></a>一元加减运算符</h3><p>一元加 <code>+</code> 减 <code>-</code> 运算符的操作和二元是相同的。编译器可自动识别使用何种方式解析运算：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = -a;</span><br></pre></td></tr></table></figure>
+
+<p>上例的代码表意清晰，编译器可正确识别。下面再看一个示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = a * -b;</span><br></pre></td></tr></table></figure>
+
+<p>虽然编译器可以正确的识别，但是程序员可能会迷惑。为了避免混淆，推荐下面的写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x = a * (-b);</span><br></pre></td></tr></table></figure>
+
+<p>一元减号可以得到数据的负值。一元加号的作用相反，不过它唯一能影响的就是把较小的数值类型自动转换为 <strong>int</strong> 类型。</p>
+<h3 id="测试对象等价"><a href="#测试对象等价" class="headerlink" title="测试对象等价"></a>测试对象等价</h3><p>关系运算符 <code>==</code> 和 <code>!=</code> 同样适用于所有对象之间的比较运算</p>
+<p>因为 <strong>Integer 内部维护着一个 IntegerCache 的缓存，默认缓存范围是 [-128, 127]，</strong>所以 [-128, 127] 之间的值用 <code>==</code> 和 <code>!=</code> 比较也能能到正确的结果，但是不推荐用关系运算符比较，具体见 JDK 中的 Integer 类源码。</p>
+<p>比较两个对象的内容是否相同呢？你必须使用所有对象（不包括基本类型）中都存在的 <code>equals()</code> 方法。</p>
+<!-- Short-Circuiting -->
+
+<h3 id="短路"><a href="#短路" class="headerlink" title="短路"></a>短路</h3><p>逻辑运算符支持一种称为“短路”（short-circuiting）的现象。整个表达式会在运算到可以明确结果时就停止并返回结果，这意味着该逻辑表达式的后半部分不会被执行到。代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// operators / ShortCircuit.java </span></span><br><span class="line"><span class="comment">// 逻辑运算符的短路行为</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShortCircuit</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">test1</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"test1("</span> + val + <span class="string">")"</span>);</span><br><span class="line">        System.out.println(<span class="string">"result: "</span> + (val &lt; <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">return</span> val &lt; <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">test2</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"test2("</span> + val + <span class="string">")"</span>);</span><br><span class="line">        System.out.println(<span class="string">"result: "</span> + (val &lt; <span class="number">2</span>));</span><br><span class="line">        <span class="keyword">return</span> val &lt; <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">test3</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"test3("</span> + val + <span class="string">")"</span>);</span><br><span class="line">        System.out.println(<span class="string">"result: "</span> + (val &lt; <span class="number">3</span>));</span><br><span class="line">        <span class="keyword">return</span> val &lt; <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> b = test1(<span class="number">0</span>) &amp;&amp; test2(<span class="number">2</span>) &amp;&amp; test3(<span class="number">2</span>);</span><br><span class="line">        System.out.println(<span class="string">"expression is "</span> + b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">test1</span>(<span class="number">0</span>)</span></span><br><span class="line"><span class="variable"><span class="class">result</span></span>: <span class="variable"><span class="literal">true</span></span></span><br><span class="line"><span class="function"><span class="title">test2</span>(<span class="number">2</span>)</span></span><br><span class="line"><span class="variable"><span class="class">result</span></span>: <span class="variable"><span class="literal">false</span></span></span><br><span class="line"><span class="variable">expression</span> <span class="variable">is</span> <span class="variable"><span class="literal">false</span></span></span><br></pre></td></tr></table></figure>
+
+<p>每个测试都对参数执行比较并返回 <code>true</code> 或 <code>false</code>。同时控制台也会在方法执行时打印他们的执行状态。 下面的表达式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test1（<span class="number">0</span>）&amp;&amp; test2（<span class="number">2</span>）&amp;&amp; test3（<span class="number">2</span>）</span><br></pre></td></tr></table></figure>
+
+<p>可能你的预期是程序会执行 3 个 <strong>test</strong> 方法并返回。我们来分析一下：第一个方法的结果返回 <code>true</code>，因此表达式会继续走下去。紧接着，第二个方法的返回结果是 <code>false</code>。这就代表这整个表达式的结果肯定为 <code>false</code>，所以就没有必要再判断剩下的表达式部分了。</p>
+<p>所以，运用“短路”可以节省部分不必要的运算，从而提高程序潜在的性能。</p>
+<!-- Java-Has-No-sizeof -->
+
+<h2 id="Java没有sizeof"><a href="#Java没有sizeof" class="headerlink" title="Java没有sizeof"></a>Java没有sizeof</h2><p>在 C/C++ 中，经常需要用到 <code>sizeof()</code> 方法来获取数据项被分配的字节大小。C/C++ 中使用 <code>sizeof()</code> 最有说服力的原因是为了移植性，不同数据在不同机器上可能有不同的大小，所以在进行大小敏感的运算时，程序员必须对这些类型有多大做到心中有数。例如，一台计算机可用 32 位来保存整数，而另一台只用 16 位保存。显然，在第一台机器中，程序可保存更大的值。所以，移植是令 C/C++ 程序员颇为头痛的一个问题。</p>
+<p>Java 不需要 <code>sizeof()</code> 方法来满足这种需求，因<strong>为所有类型的大小在不同平台上是相同的。我们不必考虑这个层次的移植问题 —— Java 本身就是一种“与平台无关”的语言。</strong></p>
+<!-- Literals -->
+
+<h2 id="字面值常量"><a href="#字面值常量" class="headerlink" title="字面值常量"></a>字面值常量</h2><p>通常，当我们向程序中插入一个字面值常量（<strong>Literal</strong>）时，编译器会确切地识别它的类型。当类型不明确时，必须辅以字面值常量关联来帮助编译器识别。代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// operators/Literals.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Literals</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i1 = <span class="number">0x2f</span>; <span class="comment">// 16进制 (小写)</span></span><br><span class="line">        System.out.println(</span><br><span class="line">        <span class="string">"i1: "</span> + Integer.toBinaryString(i1));</span><br><span class="line">        <span class="keyword">int</span> i2 = <span class="number">0X2F</span>; <span class="comment">// 16进制 (大写)</span></span><br><span class="line">        System.out.println(</span><br><span class="line">        <span class="string">"i2: "</span> + Integer.toBinaryString(i2));</span><br><span class="line">        <span class="keyword">int</span> i3 = <span class="number">0177</span>; <span class="comment">// 8进制 (前导0)</span></span><br><span class="line">        System.out.println(</span><br><span class="line">        <span class="string">"i3: "</span> + Integer.toBinaryString(i3));</span><br><span class="line">        <span class="keyword">char</span> c = <span class="number">0xffff</span>; <span class="comment">// 最大 char 型16进制值</span></span><br><span class="line">        System.out.println(</span><br><span class="line">        <span class="string">"c: "</span> + Integer.toBinaryString(c));</span><br><span class="line">        <span class="keyword">byte</span> b = <span class="number">0x7f</span>; <span class="comment">// 最大 byte 型16进制值  10101111;</span></span><br><span class="line">        System.out.println(</span><br><span class="line">        <span class="string">"b: "</span> + Integer.toBinaryString(b));</span><br><span class="line">        <span class="keyword">short</span> s = <span class="number">0x7fff</span>; <span class="comment">// 最大 short 型16进制值</span></span><br><span class="line">        System.out.println(</span><br><span class="line">        <span class="string">"s: "</span> + Integer.toBinaryString(s));</span><br><span class="line">        <span class="keyword">long</span> n1 = <span class="number">200L</span>; <span class="comment">// long 型后缀</span></span><br><span class="line">        <span class="keyword">long</span> n2 = <span class="number">200l</span>; <span class="comment">// long 型后缀 (容易与数值1混淆)</span></span><br><span class="line">        <span class="keyword">long</span> n3 = <span class="number">200</span>;</span><br><span class="line">    </span><br><span class="line">        <span class="comment">// Java 7 二进制字面值常量:</span></span><br><span class="line">        <span class="keyword">byte</span> blb = (<span class="keyword">byte</span>)<span class="number">0b00110101</span>;</span><br><span class="line">        System.out.println(</span><br><span class="line">        <span class="string">"blb: "</span> + Integer.toBinaryString(blb));</span><br><span class="line">        <span class="keyword">short</span> bls = (<span class="keyword">short</span>)<span class="number">0B0010111110101111</span>;</span><br><span class="line">        System.out.println(</span><br><span class="line">        <span class="string">"bls: "</span> + Integer.toBinaryString(bls));</span><br><span class="line">        <span class="keyword">int</span> bli = <span class="number">0b00101111101011111010111110101111</span>;</span><br><span class="line">        System.out.println(</span><br><span class="line">        <span class="string">"bli: "</span> + Integer.toBinaryString(bli));</span><br><span class="line">        <span class="keyword">long</span> bll = <span class="number">0b00101111101011111010111110101111</span>;</span><br><span class="line">        System.out.println(</span><br><span class="line">        <span class="string">"bll: "</span> + Long.toBinaryString(bll));</span><br><span class="line">        <span class="keyword">float</span> f1 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">float</span> f2 = <span class="number">1F</span>; <span class="comment">// float 型后缀</span></span><br><span class="line">        <span class="keyword">float</span> f3 = <span class="number">1f</span>; <span class="comment">// float 型后缀</span></span><br><span class="line">        <span class="keyword">double</span> d1 = <span class="number">1</span>d; <span class="comment">// double 型后缀</span></span><br><span class="line">        <span class="keyword">double</span> d2 = <span class="number">1</span>D; <span class="comment">// double 型后缀</span></span><br><span class="line">        <span class="comment">// (long 型的字面值同样适用于十六进制和8进制 )</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果:</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">i1: <span class="number">101111</span></span><br><span class="line">i2: <span class="number">101111</span></span><br><span class="line">i3: <span class="number">1111111</span></span><br><span class="line">c: <span class="number">1111111111111111</span></span><br><span class="line">b: <span class="number">1111111</span></span><br><span class="line">s: <span class="number">111111111111111</span></span><br><span class="line">blb: <span class="number">110101</span></span><br><span class="line">bls: <span class="number">10111110101111</span></span><br><span class="line">bli: <span class="number">101111101011111010111110101111</span></span><br><span class="line">bll: <span class="number">101111101011111010111110101111</span></span><br></pre></td></tr></table></figure>
+
+<p>在文本值的后面添加字符可以让编译器识别该文本值的类型。对于 <strong>Long</strong> 型数值，结尾使用大写 <code>L</code> 或小写 <code>l</code> 皆可（不推荐使用 <code>l</code>，因为容易与阿拉伯数值 1 混淆）。大写 <code>F</code> 或小写 <code>f</code> 表示 <strong>float</strong> 浮点数。大写 <code>D</code> 或小写 <code>d</code> 表示 <strong>double</strong> 双精度。</p>
+<p>十六进制（以 16 为基数），适用于所有整型数据类型，由前导 <code>0x</code> 或 <code>0X</code> 表示，后跟 0-9 或 a-f （大写或小写）。如果我们在初始化某个类型的数值时，赋值超出其范围，那么编译器会报错（不管值的数字形式如何）。在上例的代码中，<strong>char</strong>、<strong>byte</strong> 和 <strong>short</strong> 的值已经是最大了。如果超过这些值，编译器将自动转型为 <strong>int</strong>，并且提示我们需要声明强制转换（强制转换将在本章后面定义），意味着我们已越过该类型的范围界限。</p>
+<p>八进制（以 8 为基数）由 0~7 之间的数字和前导零 <code>0</code> 表示。</p>
+<p>Java 7 引入了二进制的字面值常量，由前导 <code>0b</code> 或 <code>0B</code> 表示，它可以初始化所有的整数类型。</p>
+<p>使用整型数值类型时，显示其二进制形式会很有用。在 Long 型和 Integer 型中这很容易实现，调用其静态的 <code>toBinaryString()</code> 方法即可。 但是请注意，若将较小的类型传递给 <strong>Integer.</strong><code>tobinarystring()</code> 时，类型将自动转换为 <strong>int</strong>。</p>
+<!-- Underscores in Literals -->
+
+<h3 id="下划线"><a href="#下划线" class="headerlink" title="下划线"></a>下划线</h3><p>Java 7 中有一个深思熟虑的补充：我们可以在数字字面量中包含下划线 <code>_</code>，以使结果更清晰。这对于大数值的分组特别有用。代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// operators/Underscores.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Underscores</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> d = <span class="number">341_435_936.445_667</span>;</span><br><span class="line">        System.out.println(d);</span><br><span class="line">        <span class="keyword">int</span> bin = <span class="number">0b0010_1111_1010_1111_1010_1111_1010_1111</span>;</span><br><span class="line">        System.out.println(Integer.toBinaryString(bin));</span><br><span class="line">        System.out.printf(<span class="string">"%x%n"</span>, bin); <span class="comment">// [1]</span></span><br><span class="line">        <span class="keyword">long</span> hex = <span class="number">0x7f_e9_b7_aa</span>;</span><br><span class="line">        System.out.printf(<span class="string">"%x%n"</span>, hex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果:</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3.41435936445667E8</span></span><br><span class="line"><span class="number">101111101011111010111110101111</span></span><br><span class="line"><span class="number">2f</span>afafaf</span><br><span class="line"><span class="number">7fe9</span>b7aa</span><br></pre></td></tr></table></figure>
+
+<p>下面是合理使用的规则：</p>
+<ol>
+<li>仅限单 <code>_</code>，不能多条相连。</li>
+<li>数值开头和结尾不允许出现 <code>_</code>。</li>
+<li><code>F</code>、<code>D</code> 和 <code>L</code>的前后禁止出现 <code>_</code>。</li>
+<li>二进制前导 <code>b</code> 和 十六进制 <code>x</code> 前后禁止出现 <code>_</code>。</li>
+</ol>
+<p>[1] 注意 <code>％n</code>的使用。熟悉 C 风格的程序员可能习惯于看到 <code>\n</code> 来表示换行符。问题在于它给你的是一个“Unix风格”的换行符。此外，如果我们使用的是 Windows，则必须指定 <code>\r\n</code>。这种差异的包袱应该由编程语言来解决。这就是 Java 用 <code>％n</code> 实现的可以忽略平台间差异而生成适当的换行符，但只有当你使用 <code>System.out.printf()</code> 或 <code>System.out.format()</code> 时。对于 <code>System.out.println()</code>，我们仍然必须使用 <code>\n</code>；如果你使用 <code>％n</code>，<code>println()</code> 只会输出 <code>％n</code> 而不是换行符。</p>
+<!-- Exponential Notation -->
+
+<h3 id="指数计数法"><a href="#指数计数法" class="headerlink" title="指数计数法"></a>指数计数法</h3><p>指数总是采用一种我认为很不直观的记号方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// operators/Exponents.java</span></span><br><span class="line"><span class="comment">// "e" 表示 10 的几次幂</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Exponents</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 大写 E 和小写 e 的效果相同:</span></span><br><span class="line">        <span class="keyword">float</span> expFloat = <span class="number">1.39e-43f</span>;</span><br><span class="line">        expFloat = <span class="number">1.39E-43f</span>;</span><br><span class="line">        System.out.println(expFloat);</span><br><span class="line">        <span class="keyword">double</span> expDouble = <span class="number">47e47</span>d; <span class="comment">// 'd' 是可选的</span></span><br><span class="line">        <span class="keyword">double</span> expDouble2 = <span class="number">47e47</span>; <span class="comment">// 自动转换为 double</span></span><br><span class="line">        System.out.println(expDouble);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果:</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.39E-43</span></span><br><span class="line"><span class="number">4.7E48</span></span><br></pre></td></tr></table></figure>
+
+<p>在科学与工程学领域，<strong>e</strong> 代表自然对数的基数，约等于 2.718 （Java 里用一种更精确的 <strong>double</strong> 值 <strong>Math.E</strong> 来表示自然对数）。指数表达式 “1.39 x e-43”，意味着 “1.39 × 2.718 的 -43 次方”。然而，自 FORTRAN 语言发明后，人们自然而然地觉得e 代表 “10 的几次幂”。这种做法显得颇为古怪，因为 FORTRAN 最初是为科学与工程领域设计的。</p>
+<p>理所当然，它的设计者应对这样的混淆概念持谨慎态度 [^2]。但不管怎样，这种特别的表达方法在 C，C++ 以及现在的 Java 中顽固地保留下来了。所以倘若习惯 e 作为自然对数的基数使用，那么在 Java 中看到类似“1.39e-43f”这样的表达式时，请转换你的思维，从程序设计的角度思考它；它真正的含义是 “1.39 × 10 的 -43 次方”。</p>
+<p>注意如果编译器能够正确地识别类型，就不必使用后缀字符。对于下述语句：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">long</span> n3 = <span class="number">200</span>;</span><br></pre></td></tr></table></figure>
+
+<p>它并不存在含糊不清的地方，所以 200 后面的 L 大可省去。然而，对于下述语句：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> f4 = <span class="number">1e-43f</span>; <span class="comment">//10 的幂数</span></span><br></pre></td></tr></table></figure>
+
+<p>编译器通常会将指数作为 <strong>double</strong> 类型来处理，所以假若没有这个后缀字符 <code>f</code>，编译器就会报错，提示我们应该将 <strong>double</strong> 型转换成 <strong>float</strong> 型。</p>
+<h2 id="移位运算符"><a href="#移位运算符" class="headerlink" title="移位运算符"></a>移位运算符</h2><p>移位运算符面向的运算对象也是二进制的“位”。它们只能用于处理整数类型（基本类型的一种）。左移位运算符 <code>&lt;&lt;</code> 能将其左边的运算对象向左移动右侧指定的位数（在低位补 0）。右移位运算符 <code>&gt;&gt;</code> 则相反。右移位运算符有“正”、“负”值：若值为正，则在高位插入 0；若值为负，则在高位插入 1。Java 也添加了一种“不分正负”的右移位运算符（&gt;&gt;&gt;），它使用了“零扩展”（zero extension）：无论正负，都在高位插入 0。这一运算符是 C/C++ 没有的。</p>
+<p>如果移动 <strong>char</strong>、<strong>byte</strong> 或 <strong>short</strong>，则会在移动发生之前将其提升为 <strong>int</strong>，结果为 <strong>int</strong>。仅使用右侧的 5 个低阶位。这可以防止我们移动超过 <strong>int</strong> 范围的位数。若对一个 <strong>long</strong> 值进行处理，最后得到的结果也是 <strong>long</strong>。</p>
+<p>移位可以与等号 <code>&lt;&lt;=</code> 或 <code>&gt;&gt;=</code> 或 <code>&gt;&gt;&gt;=</code> 组合使用。左值被替换为其移位运算后的值。但是，问题来了，当无符号右移与赋值相结合时，若将其与 <strong>byte</strong> 或 <strong>short</strong> 一起使用的话，则结果错误。取而代之的是，它们被提升为 <strong>int</strong> 型并右移，但在重新赋值时被截断。在这种情况下，结果为 -1。</p>
+<p>“类型转换”（Casting）的作用是“与一个模型匹配”。<strong>在适当的时候，Java 会将一种数据类型自动转换成另一种。</strong>例如，假设我们为 <strong>float</strong> 变量赋值一个整数值，计算机会将 <strong>int</strong> 自动转换成 <strong>float</strong>。我们可以在程序未自动转换时显式、强制地使此类型发生转换。</p>
+<p>要执行强制转换，需要将所需的数据类型放在任何值左侧的括号内，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// operators/Casting.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Casting</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">200</span>;</span><br><span class="line">        <span class="keyword">long</span> lng = (<span class="keyword">long</span>)i;</span><br><span class="line">        lng = i; <span class="comment">// 没有必要的类型提升</span></span><br><span class="line">        <span class="keyword">long</span> lng2 = (<span class="keyword">long</span>)<span class="number">200</span>;</span><br><span class="line">        lng2 = <span class="number">200</span>;</span><br><span class="line">        <span class="comment">// 类型收缩</span></span><br><span class="line">        i = (<span class="keyword">int</span>)lng2; <span class="comment">// Cast required</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>诚然，你可以这样地去转换一个数值类型的变量。但是上例这种做法是多余的：因为<strong>编译器会在必要时自动</strong>提升 <strong>int</strong> 型数据为 <strong>long</strong> 型。</p>
+<p>当然，为了程序逻辑清晰或提醒自己留意，我们也可以显式地类型转换。在其他情况下，类型转换型只有在代码编译时才显出其重要性。在 C/C++ 中，类型转换有时会让人头痛。在 Java 里，类型转换则是一种比较安全的操作。但是，若将数据类型进行“向下转换”（<strong>Narrowing Conversion</strong>）的操作（<strong>将容量较大的数据类型转换成容量较小的类型），可能会发生信息丢失的危险。</strong>此时，编译器会强迫我们进行转型，好比在提醒我们：该操作可能危险，若你坚持让我这么做，那么对不起，请明确需要转换的类型。 对于“向上转换”（<strong>Widening conversion</strong>），则不必进行显式的类型转换，因为较大类型的数据肯定能容纳较小类型的数据，不会造成任何信息的丢失。</p>
+<p><strong>除了布尔类型的数据，Java 允许任何基本类型的数据转换为另一种基本类型的数据。</strong>此外，类是不能进行类型转换的。为了将一个类转换为另一个类型，需要使用特殊的方法（后面将会学习到如何在父子类之间进行向上/向下转型</p>
+<!-- Truncation and Rounding -->
+
+<h3 id="截断和舍入"><a href="#截断和舍入" class="headerlink" title="截断和舍入"></a>截断和舍入</h3><p>在执行“向下转换”时，必须注意数据的截断和舍入问题。若从浮点值转换为整型值，Java 会做什么呢？例如：浮点数 29.7 被转换为整型值，结果会是 29 还是 30 呢？下面是代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// operators/CastingNumbers.java</span></span><br><span class="line"><span class="comment">// 尝试转换 float 和 double 型数据为整型数据</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CastingNumbers</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">double</span> above = <span class="number">0.7</span>, below = <span class="number">0.4</span>;</span><br><span class="line">        <span class="keyword">float</span> fabove = <span class="number">0.7f</span>, fbelow = <span class="number">0.4f</span>;</span><br><span class="line">        System.out.println(<span class="string">"(int)above: "</span> + (<span class="keyword">int</span>)above);</span><br><span class="line">        System.out.println(<span class="string">"(int)below: "</span> + (<span class="keyword">int</span>)below);</span><br><span class="line">        System.out.println(<span class="string">"(int)fabove: "</span> + (<span class="keyword">int</span>)fabove);</span><br><span class="line">        System.out.println(<span class="string">"(int)fbelow: "</span> + (<span class="keyword">int</span>)fbelow);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="built_in">int</span>)above: <span class="number">0</span></span><br><span class="line">(<span class="built_in">int</span>)below: <span class="number">0</span></span><br><span class="line">(<span class="built_in">int</span>)fabove: <span class="number">0</span></span><br><span class="line">(<span class="built_in">int</span>)fbelow: <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>因此，答案是，从 <strong>float</strong> 和 <strong>double</strong> 转换为整数值时，<strong>小数位将被截断。</strong>若你<strong>想对结果进行四舍五入，可以使用 <code>java.lang.Math</code> 的 <code>round()</code> 方法</strong></p>
+<h3 id="类型提升"><a href="#类型提升" class="headerlink" title="类型提升"></a>类型提升</h3><p>你会发现，如果我们对小于 <strong>int</strong> 的基本数据类型（即 <strong>char</strong>、<strong>byte</strong> 或 <strong>short</strong>）执行任<strong>何算术或按位操作</strong>，这些值会在执行操作之前<strong>类型提升为</strong> <strong>int</strong>，并且结果值的类型为 <strong>int</strong>。若想重新使用较小的类型，必须使用强制转换（由于重新分配回一个较小的类型，结果可能会丢失精度）。通常，表达式中最大的数据类型是决定表达式结果的数据类型。<strong>float</strong> 型和 <strong>double</strong> 型相乘，结果是 <strong>double</strong> 型的；<strong>int</strong> 和 <strong>long</strong> 相加，结果是 <strong>long</strong> 型。</p>
+<h1 id="第五章-控制流"><a href="#第五章-控制流" class="headerlink" title="第五章 控制流"></a>第五章 控制流</h1><blockquote>
+<p>程序必须在执行过程中控制它的世界并做出选择。 在 Java 中，你需要执行控制语句来做出选择。</p>
+</blockquote>
+<!--The Infamous “Goto”-->
+
+<h2 id="臭名昭著的-goto"><a href="#臭名昭著的-goto" class="headerlink" title="臭名昭著的 goto"></a>臭名昭著的 goto</h2><p> <strong>goto</strong> 问题中一起讨论，是由于它们使用了相同的机制：标签。</p>
+<p>“标签”是后面跟一个冒号的标识符。代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">label1:</span><br></pre></td></tr></table></figure>
+
+<p><strong>对 Java 来说，唯一用到标签的地方是在循环语句之前。</strong>进一步说，它实际需要紧靠在循环语句的前方 —— <strong>在标签和循环之间置入任何语句都是不明智的。</strong>而在循环之前设置标签的唯一理由是：我们希望在其中嵌套另一个循环或者一个开关。这是由于 <strong>break</strong> 和 <strong>continue</strong> 关键字通常只中断当前循环，但若搭配标签一起使用，它们就会中断并跳转到标签所在的地方开始执行。代码示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">label1:</span><br><span class="line">outer-iteration &#123; </span><br><span class="line">  inner-iteration &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="keyword">break</span>; <span class="comment">// [1] </span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="keyword">continue</span>; <span class="comment">// [2] </span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="keyword">continue</span> label1; <span class="comment">// [3] </span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="keyword">break</span> label1; <span class="comment">// [4] </span></span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><sub><strong>[1]</strong> <strong>break</strong> 中断内部循环，并在外部循环结束。</sub><br><sub><strong>[2]</strong> <strong>continue</strong> 移回内部循环的起始处。但在条件 3 中，<strong>continue label1</strong> 却同时中断内部循环以及外部循环，并移至 <strong>label1</strong> 处。</sub><br><sub><strong>[3]</strong> 随后，它实际是继续循环，但却从外部循环开始。</sub><br><sub><strong>[4]</strong> <strong>break label1</strong> 也会中断所有循环，并回到 <strong>label1</strong> 处，但并不重新进入循环。也就是说，它实际是完全中止了两个循环。</sub></p>
+<p>下面是 <strong>for</strong> 循环的一个例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// control/LabeledFor.java</span></span><br><span class="line"><span class="comment">// 搭配“标签 break”的 for 循环中使用 break 和 continue</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LabeledFor</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    outer: <span class="comment">// 此处不允许存在执行语句</span></span><br><span class="line">    <span class="keyword">for</span>(; <span class="keyword">true</span> ;) &#123; <span class="comment">// 无限循环</span></span><br><span class="line">      inner: <span class="comment">// 此处不允许存在执行语句</span></span><br><span class="line">      <span class="keyword">for</span>(; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">        System.out.println(<span class="string">"i = "</span> + i);</span><br><span class="line">        <span class="keyword">if</span>(i == <span class="number">2</span>) &#123;</span><br><span class="line">          System.out.println(<span class="string">"continue"</span>);</span><br><span class="line">          <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i == <span class="number">3</span>) &#123;</span><br><span class="line">          System.out.println(<span class="string">"break"</span>);</span><br><span class="line">          i++; <span class="comment">// 否则 i 永远无法获得自增 </span></span><br><span class="line">               <span class="comment">// 获得自增 </span></span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i == <span class="number">7</span>) &#123;</span><br><span class="line">          System.out.println(<span class="string">"continue outer"</span>);</span><br><span class="line">          i++;  <span class="comment">// 否则 i 永远无法获得自增 </span></span><br><span class="line">                <span class="comment">// 获得自增 </span></span><br><span class="line">          <span class="keyword">continue</span> outer;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i == <span class="number">8</span>) &#123;</span><br><span class="line">          System.out.println(<span class="string">"break outer"</span>);</span><br><span class="line">          <span class="keyword">break</span> outer;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; <span class="number">5</span>; k++) &#123;</span><br><span class="line">          <span class="keyword">if</span>(k == <span class="number">3</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"continue inner"</span>);</span><br><span class="line">            <span class="keyword">continue</span> inner;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 在此处无法 break 或 continue 标签</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">continue</span> <span class="keyword">inner</span></span><br><span class="line">i = <span class="number">1</span></span><br><span class="line"><span class="keyword">continue</span> <span class="keyword">inner</span></span><br><span class="line">i = <span class="number">2</span></span><br><span class="line"><span class="keyword">continue</span></span><br><span class="line">i = <span class="number">3</span></span><br><span class="line"><span class="keyword">break</span></span><br><span class="line">i = <span class="number">4</span></span><br><span class="line"><span class="keyword">continue</span> <span class="keyword">inner</span></span><br><span class="line">i = <span class="number">5</span></span><br><span class="line"><span class="keyword">continue</span> <span class="keyword">inner</span></span><br><span class="line">i = <span class="number">6</span></span><br><span class="line"><span class="keyword">continue</span> <span class="keyword">inner</span></span><br><span class="line">i = <span class="number">7</span></span><br><span class="line"><span class="keyword">continue</span> outer</span><br><span class="line">i = <span class="number">8</span></span><br><span class="line"><span class="keyword">break</span> outer</span><br></pre></td></tr></table></figure>
+
+<p>注意 <strong>break</strong> 会中断 <strong>for</strong> 循环，而且在抵达 <strong>for</strong> 循环的末尾之前，递增表达式不会执行。由于 <strong>break</strong> 跳过了递增表达式，所以递增会在 <code>i==3</code> 的情况下直接执行。在 <code>i==7</code> 的情况下，<code>continue outer</code> 语句也会到达循环顶部，而且也会跳过递增，所以它也是直接递增的。</p>
+<p>如果没有 <strong>break outer</strong> 语句，就没有办法在一个内部循环里找到出外部循环的路径。这是由于 <strong>break</strong> 本身只能中断最内层的循环（对于 <strong>continue</strong> 同样如此）。 当然，若想在中断循环的同时退出方法，简单地用一个 <strong>return</strong> 即可。</p>
+<p>同样的规则亦适用于 <strong>while</strong>：</p>
+<ol>
+<li>简单的一个 <strong>continue</strong> 会退回最内层循环的开头（顶部），并继续执行。</li>
+<li>带有标签的 <strong>continue</strong> 会到达标签的位置，并重新进入紧接在那个标签后面的循环。</li>
+<li><strong>break</strong> 会中断当前循环，并移离当前标签的末尾。</li>
+<li>带标签的 <strong>break</strong> 会中断当前循环，并移离由那个标签指示的循环的末尾。</li>
+</ol>
+<p>大家要记住的重点是：在 Java 里需要使用标签的唯一理由就是因为有循环嵌套存在，而且想从多层嵌套中 <strong>break</strong> 或 <strong>continue</strong>。</p>
+<p><strong>break</strong> 和 <strong>continue</strong> 标签在编码中的使用频率相对较低 (此前的语言中很少使用或没有先例)，所以我们很少在代码里看到它们。</p>
+<!-- Switching on Strings -->
+
+<h2 id="switch-字符串"><a href="#switch-字符串" class="headerlink" title="switch 字符串"></a>switch 字符串</h2><p>Java 7 增加了在字符串上 <strong>switch</strong> 的用法。 下例展示了从一组 <strong>String</strong> 中选择可能值的传统方法，以及新式方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// control/StringSwitch.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">StringSwitch</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    String color = <span class="string">"red"</span>;</span><br><span class="line">    <span class="comment">// 新的方法: 字符串搭配 switch</span></span><br><span class="line">    <span class="keyword">switch</span>(color) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">"red"</span>:</span><br><span class="line">        System.out.println(<span class="string">"RED"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">"green"</span>:</span><br><span class="line">        System.out.println(<span class="string">"GREEN"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">"blue"</span>:</span><br><span class="line">        System.out.println(<span class="string">"BLUE"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> <span class="string">"yellow"</span>:</span><br><span class="line">        System.out.println(<span class="string">"YELLOW"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        System.out.println(<span class="string">"Unknown"</span>);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">RED</span></span><br><span class="line"><span class="attribute">RED</span></span><br></pre></td></tr></table></figure>
+
+<!-- Housekeeping -->
+
+<h1 id="第六章-初始化和清理"><a href="#第六章-初始化和清理" class="headerlink" title="第六章 初始化和清理"></a>第六章 初始化和清理</h1><h3 id="区分重载方法"><a href="#区分重载方法" class="headerlink" title="区分重载方法"></a>区分重载方法</h3><p>有一条简单的规则：每个被重载的方法必须有独一无二的参数列表。你甚至<strong>可以根据参数列表中的参数顺序来区分不同的方法</strong>，尽管这会造成代码难以维护。</p>
+<!-- Cleanup: Finalization and Garbage Collection -->
+
+<h2 id="垃圾回收器"><a href="#垃圾回收器" class="headerlink" title="垃圾回收器"></a>垃圾回收器</h2><p>程序员都了解初始化的重要性，但通常会忽略清理的重要性。毕竟，谁会去清理一个 <strong>int</strong> 呢？但是使用完一个对象就不管它并非总是安全的。<strong>Java 中有垃圾回收器回收无用对象占用的内存。</strong>但现在考虑一种特殊情况：你创建的对象不是通过 <strong>new</strong> 来分配内存的，而垃圾回收器只知道如何释放用 <strong>new</strong> 创建的对象的内存，所以它不知道如何回收不是 <strong>new</strong> 分配的内存。<strong>为了处理这种情况，Java 允许在类中定义一个名为 <code>finalize()</code> 的方法。</strong></p>
+<p>它的工作原理”假定”是这样的：当垃圾回收器准备回收对象的内存时，首先会调用其 <code>finalize()</code> 方法，并在下一轮的垃圾回收动作发生时，才会真正回收对象占用的内存。所以如果你打算使用 <code>finalize()</code> ，就能在垃圾回收时做一些重要的清理工作。<code>finalize()</code> 是一个潜在的编程陷阱，因为一些程序员（尤其是 C++ 程序员）会一开始把它误认为是 C++ 中的析构函数（C++ 在销毁对象时会调用这个函数）。所以有必要明确区分一下：在 C++ 中，对象总是被销毁的（在一个 bug-free 的程序中），而在 Java 中，对象并非总是被垃圾回收，或者换句话说：</p>
+<ol>
+<li>对象可能不被垃圾回收。</li>
+<li>垃圾回收不等同于析构。</li>
+</ol>
+<p>这意味着在你不再需要某个对象之前，如果必须执行某些动作，你得自己去做。Java 没有析构器或类似的概念，所以你必须得自己创建一个普通的方法完成这项清理工作。例如，对象在创建的过程中会将自己绘制到屏幕上。如果不是明确地从屏幕上将其擦除，它可能永远得不到清理。如果在 <code>finalize()</code> 方法中加入某种擦除功能，那么当垃圾回收发生时，<code>finalize()</code> 方法被调用（不保证一定会发生），图像就会被擦除，要是”垃圾回收”没有发生，图像则仍会保留下来。</p>
+<p>也许你会发现，只要程序没有濒临内存用完的那一刻，对象占用的空间就总也得不到释放。如果程序执行结束，而垃圾回收器一直没有释放你创建的任何对象的内存，则当程序退出时，那些资源会全部交还给操作系统。这个策略是恰当的，因为垃圾回收本身也有开销，要是不使用它，那就不用支付这部分开销了。</p>
+<h3 id="finalize-的用途"><a href="#finalize-的用途" class="headerlink" title="finalize() 的用途"></a><code>finalize()</code> 的用途</h3><p>如果你不能将 <code>finalize()</code> 作为通用的清理方法，那么这个方法有什么用呢？</p>
+<p>这引入了要记住的第3点：</p>
+<ol start="3">
+<li>垃圾回收只与内存有关。</li>
+</ol>
+<p>也就是说，使用垃圾回收的唯一原因就是为了回收程序不再使用的内存。所以对于与垃圾回收有关的任何行为来说（尤其是 <code>finalize()</code> 方法），它们也必须同内存及其回收有关。</p>
+<p>但这是否意味着如果对象中包括其他对象，<code>finalize()</code> 方法就应该明确释放那些对象呢？不是，无论对象是如何创建的，垃圾回收器都会负责释放对象所占用的所有内存。这就将对 <code>finalize()</code> 的需求限制到一种特殊情况，即通过某种创建对象方式之外的方式为对象分配了存储空间。不过，你可能会想，Java 中万物皆对象，这种情况怎么可能发生？</p>
+<p>看起来之所以有 <code>finalize()</code> 方法，是因为在分配内存时可能采用了类似 C 语言中的做法，而非 Java 中的通常做法。这种情况主要发生在使用”本地方法”的情况下，本地方法是一种用 Java 语言调用非 Java 语言代码的形式（关于本地方法的讨论，见本书电子版第2版的附录B）。本地方法目前只支持 C 和 C++，但是它们可以调用其他语言写的代码，所以实际上可以调用任何代码。在非 Java 代码中，也许会调用 C 的 <code>malloc()</code> 函数系列来分配存储空间，而且除非调用 <code>free()</code> 函数，不然存储空间永远得不到释放，造成内存泄露。但是，<code>free()</code> 是 C 和 C++ 中的函数，所以你需要在 <code>finalize()</code> 方法里用本地方法调用它。</p>
+<p>读到这里，你可能明白了不会过多使用 <code>finalize()</code> 方法。对，它确实不是进行普通的清理工作的合适场所。那么，普通的清理工作在哪里执行呢？</p>
+<h3 id="你必须实施清理"><a href="#你必须实施清理" class="headerlink" title="你必须实施清理"></a>你必须实施清理</h3><p>要清理一个对象，用户必须在需要清理的时候调用执行清理动作的方法。这听上去相当直接，但却与 C++ 中的”析构函数”的概念稍有抵触。在 C++ 中，所有对象都会被销毁，或者说应该被销毁。如果在 C++ 中创建了一个局部对象（在栈上创建，在 Java 中不行），此时的销毁动作发生在以”右花括号”为边界的、此对象作用域的末尾处。如果对象是用 <strong>new</strong> 创建的（类似于 Java 中），那么当程序员调用 C++ 的 <strong>delete</strong> 操作符时（Java 中不存在），就会调用相应的析构函数。如果程序员忘记调用 <strong>delete</strong>，那么永远不会调用析构函数，这样就会导致内存泄露，对象的其他部分也不会得到清理。这种 bug 很难跟踪，也是让 C++ 程序员转向 Java 的一个主要因素。相反，在 Java 中，没有用于释放对象的 <strong>delete</strong>，因为垃圾回收器会帮助你释放存储空间。甚至可以肤浅地认为，正是由于垃圾回收的存在，使得 Java 没有析构函数。然而，随着学习的深入，你会明白垃圾回收器的存在并不能完全替代析构函数（而且绝对不能直接调用 <code>finalize()</code>，所以这也不是一种解决方案）。如果希望进行除释放存储空间之外的清理工作，还是得明确调用某个恰当的 Java 方法：这就等同于使用析构函数了，只是没有它方便。</p>
+<p>记住，无论是”垃圾回收”还是”终结”，都不保证一定会发生。如果 Java 虚拟机（JVM）并未面临内存耗尽的情形，它可能不会浪费时间执行垃圾回收以恢复内存。</p>
+<h3 id="终结条件"><a href="#终结条件" class="headerlink" title="终结条件"></a>终结条件</h3><p>通常，不能指望 <code>finalize()</code> ，你必须创建其他的”清理”方法，并明确地调用它们。所以看起来，<code>finalize()</code> 只对大部分程序员很难用到的一些晦涩内存清理里有用了。但是，<code>finalize()</code> 还有一个有趣的用法，它不依赖于每次都要对 <code>finalize()</code> 进行调用，这就是对象终结条件的验证。</p>
+<p>当对某个对象不感兴趣时——也就是它将被清理了，这个对象应该处于某种状态，这种状态下它占用的内存可以被安全地释放掉。例如，如果对象代表了一个打开的文件，在对象被垃圾回收之前程序员应该关闭这个文件。只要对象中存在没有被适当清理的部分，程序就存在很隐晦的 bug。<code>finalize()</code> 可以用来最终发现这个情况，尽管它并不总是被调用。如果某次 <code>finalize()</code> 的动作使得 bug 被发现，那么就可以据此找出问题所在——这才是人们真正关心的。以下是个简单的例子，示范了 <code>finalize()</code> 的可能使用方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// housekeeping/TerminationCondition.java</span></span><br><span class="line"><span class="comment">// Using finalize() to detect a object that</span></span><br><span class="line"><span class="comment">// hasn't been properly cleaned up</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> onjava.*;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span> </span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> checkedOut = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    Book(<span class="keyword">boolean</span> checkOut) &#123;</span><br><span class="line">        checkedOut = checkOut;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">checkIn</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        checkedOut = <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (checkedOut) &#123;</span><br><span class="line">            System.out.println(<span class="string">"Error: checked out"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Normally, you'll also do this:</span></span><br><span class="line">        <span class="comment">// super.finalize(); // Call the base-class version</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TerminationCondition</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Book novel = <span class="keyword">new</span> Book(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">// Proper cleanup:</span></span><br><span class="line">        novel.checkIn();</span><br><span class="line">        <span class="comment">// Drop the reference, forget to clean up:</span></span><br><span class="line">        <span class="keyword">new</span> Book(<span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">// Force garbage collection &amp; finalization:</span></span><br><span class="line">        System.gc();</span><br><span class="line">        <span class="keyword">new</span> Nap(<span class="number">1</span>); <span class="comment">// One second delay</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Error: </span>checked out</span><br></pre></td></tr></table></figure>
+
+<p>本例的终结条件是：所有的 <strong>Book</strong> 对象在被垃圾回收之前必须被登记。但在 <code>main()</code> 方法中，有一本书没有登记。要是没有 <code>finalize()</code> 方法来验证终结条件，将会很难发现这个 bug。</p>
+<p>你可能注意到使用了 <code>@Override</code>。<code>@</code> 意味着这是一个注解，注解是关于代码的额外信息。在这里，该注解告诉编译器这不是偶然地重定义在每个对象中都存在的 <code>finalize()</code> 方法——程序员知道自己在做什么。编译器确保你没有拼错方法名，而且确保那个方法存在于基类中。注解也是对读者的提醒，<code>@Override</code> 在 Java 5 引入，在 Java 7 中改善，本书通篇会出现。</p>
+<p>注意，<strong><code>System.gc()</code> 用于强制进行终结动作</strong>。但是即使不这么做，只要重复地执行程序（假设程序将分配大量的存储空间而导致垃圾回收动作的执行），最终也能找出错误的 <strong>Book</strong> 对象。</p>
+<p>你应该总是假设基类版本的 <code>finalize()</code> 也要做一些重要的事情，使用 <strong>super</strong> 调用它，就像在 <code>Book.finalize()</code> 中看到的那样。本例中，它被注释掉了，因为它需要进行异常处理，而我们到现在还没有涉及到。</p>
+<h3 id="垃圾回收器如何工作"><a href="#垃圾回收器如何工作" class="headerlink" title="垃圾回收器如何工作"></a>垃圾回收器如何工作</h3><p>如果你以前用过的语言，在堆上分配对象的代价十分高昂，你可能自然会觉得 Java 中所有对象（基本类型除外）在堆上分配的方式也十分高昂。然而，垃圾回收器能很明显地提高对象的创建速度。这听起来很奇怪——存储空间的释放影响了存储空间的分配，但这确实是某些 Java 虚拟机的工作方式。这也意味着，Java 从堆空间分配的速度可以和其他语言在栈上分配空间的速度相媲美。</p>
+<p>例如，你可以把 C++ 里的堆想象成一个院子，里面每个对象都负责管理自己的地盘。一段时间后，对象可能被销毁，但地盘必须复用。在某些 Java 虚拟机中，堆的实现截然不同：它更像一个传送带，每分配一个新对象，它就向前移动一格。这意味着对象存储空间的分配速度特别快。Java 的”堆指针”只是简单地移动到尚未分配的区域，所以它的效率与 C++ 在栈上分配空间的效率相当。当然实际过程中，在簿记工作方面还有少量额外开销，但是这部分开销比不上查找可用空间开销大。</p>
+<p>你可能意识到了，Java 中的堆并非完全像传送带那样工作。要是那样的话，势必会导致频繁的内存页面调度——将其移进移出硬盘，因此会显得需要拥有比实际需要更多的内存。页面调度会显著影响性能。最终，在创建了足够多的对象后，内存资源被耗尽。其中的秘密在于垃圾回收器的介入。当它工作时，一边回收内存，一边使堆中的对象紧凑排列，这样”堆指针”就可以很容易地移动到更靠近传送带的开始处，也就尽量避免了页面错误。垃圾回收器通过重新排列对象，实现了一种高速的、有无限空间可分配的堆模型。</p>
+<p>要想理解 Java 中的垃圾回收，先了解其他系统中的垃圾回收机制将会很有帮助。一种简单但速度很慢的垃圾回收机制叫做<em>引用计数</em>。每个对象中含有一个引用计数器，每当有引用指向该对象时，引用计数加 1。当引用离开作用域或被置为 <strong>null</strong> 时，引用计数减 1。因此，管理引用计数是一个开销不大但是在程序的整个生命周期频繁发生的负担。垃圾回收器会遍历含有全部对象的列表，当发现某个对象的引用计数为 0 时，就释放其占用的空间（但是，引用计数模式经常会在计数为 0 时立即释放对象）。这个机制存在一个缺点：如果对象之间存在循环引用，那么它们的引用计数都不为 0，就会出现应该被回收但无法被回收的情况。对垃圾回收器而言，定位这样的循环引用所需的工作量极大。引用计数常用来说明垃圾回收的工作方式，但似乎从未被应用于任何一种 Java 虚拟机实现中。</p>
+<p>在更快的策略中，垃圾回收器并非基于引用计数。它们依据的是：对于任意”活”的对象，一定能最终追溯到其存活在栈或静态存储区中的引用。这个引用链条可能会穿过数个对象层次，由此，如果从栈或静态存储区出发，遍历所有的引用，你将会发现所有”活”的对象。对于发现的每个引用，必须追踪它所引用的对象，然后是该对象包含的所有引用，如此反复进行，直到访问完”根源于栈或静态存储区的引用”所形成的整个网络。你所访问过的对象一定是”活”的。注意，这解决了对象间循环引用的问题，这些对象不会被发现，因此也就被自动回收了。</p>
+<p>在这种方式下，Java 虚拟机采用了一种<em>自适应</em>的垃圾回收技术。至于如何处理找到的存活对象，取决于不同的 Java 虚拟机实现。其中有一种做法叫做停止-复制（stop-and-copy）。顾名思义，这需要先暂停程序的运行（不属于后台回收模式），然后将所有存活的对象从当前堆复制到另一个堆，没有复制的就是需要被垃圾回收的。另外，当对象被复制到新堆时，它们是一个挨着一个紧凑排列，然后就可以按照前面描述的那样简单、直接地分配新空间了。</p>
+<p>当对象从一处复制到另一处，所有指向它的引用都必须修正。位于栈或静态存储区的引用可以直接被修正，但可能还有其他指向这些对象的引用，它们在遍历的过程中才能被找到（可以想象成一个表格，将旧地址映射到新地址）。</p>
+<p>这种所谓的”复制回收器”效率低下主要因为两个原因。其一：得有两个堆，然后在这两个分离的堆之间来回折腾，得维护比实际需要多一倍的空间。某些 Java 虚拟机对此问题的处理方式是，按需从堆中分配几块较大的内存，复制动作发生在这些大块内存之间。</p>
+<p>其二在于复制本身。一旦程序进入稳定状态之后，可能只会产生少量垃圾，甚至没有垃圾。尽管如此，复制回收器仍然会将所有内存从一处复制到另一处，这很浪费。为了避免这种状况，一些 Java 虚拟机会进行检查：要是没有新垃圾产生，就会转换到另一种模式（即”自适应”）。这种模式称为标记-清扫（mark-and-sweep），Sun 公司早期版本的 Java 虚拟机一直使用这种技术。对一般用途而言，”标记-清扫”方式速度相当慢，但是当你知道程序只会产生少量垃圾甚至不产生垃圾时，它的速度就很快了。</p>
+<p>“标记-清扫”所依据的思路仍然是从栈和静态存储区出发，遍历所有的引用，找出所有存活的对象。但是，每当找到一个存活对象，就给对象设一个标记，并不回收它。只有当标记过程完成后，清理动作才开始。在清理过程中，没有标记的对象将被释放，不会发生任何复制动作。”标记-清扫”后剩下的堆空间是不连续的，垃圾回收器要是希望得到连续空间的话，就需要重新整理剩下的对象。</p>
+<p>“停止-复制”指的是这种垃圾回收动作不是在后台进行的；相反，垃圾回收动作发生的同时，程序将会暂停。在 Oracle 公司的文档中会发现，许多参考文献将垃圾回收视为低优先级的后台进程，但是早期版本的 Java 虚拟机并不是这么实现垃圾回收器的。当可用内存较低时，垃圾回收器会暂停程序。同样，”标记-清扫”工作也必须在程序暂停的情况下才能进行。</p>
+<p>如前文所述，这里讨论的 Java 虚拟机中，内存分配以较大的”块”为单位。如果对象较大，它会占用单独的块。严格来说，”停止-复制”要求在释放旧对象之前，必须先将所有存活对象从旧堆复制到新堆，这导致了大量的内存复制行为。有了块，垃圾回收器就可以把对象复制到废弃的块。每个块都有年代数来记录自己是否存活。通常，如果块在某处被引用，其年代数加 1，垃圾回收器会对上次回收动作之后新分配的块进行整理。这对处理大量短命的临时对象很有帮助。垃圾回收器会定期进行完整的清理动作——大型对象仍然不会复制（只是年代数会增加），含有小型对象的那些块则被复制并整理。Java 虚拟机会监视，如果所有对象都很稳定，垃圾回收的效率降低的话，就切换到”标记-清扫”方式。同样，Java 虚拟机会跟踪”标记-清扫”的效果，如果堆空间出现很多碎片，就会切换回”停止-复制”方式。这就是”自适应”的由来，你可以给它个啰嗦的称呼：”自适应的、分代的、停止-复制、标记-清扫”式的垃圾回收器。</p>
+<p>Java 虚拟机中有许多附加技术用来提升速度。尤其是与加载器操作有关的，被称为”即时”（Just-In-Time, JIT）编译器的技术。这种技术可以把程序全部或部分翻译成本地机器码，所以不需要 JVM 来进行翻译，因此运行得更快。当需要装载某个类（通常是创建该类的第一个对象）时，编译器会先找到其 <strong>.class</strong> 文件，然后将该类的字节码装入内存。你可以让即时编译器编译所有代码，但这种做法有两个缺点：一是这种加载动作贯穿整个程序生命周期内，累加起来需要花更多时间；二是会增加可执行代码的长度（字节码要比即时编译器展开后的本地机器码小很多），这会导致页面调度，从而一定降低程序速度。另一种做法称为<em>惰性评估</em>，意味着即时编译器只有在必要的时候才编译代码。这样，从未被执行的代码也许就压根不会被 JIT 编译。新版 JDK 中的 Java HotSpot 技术就采用了类似的做法，代码每被执行一次就优化一些，所以执行的次数越多，它的速度就越快。</p>
+<!-- Constructor Initialization -->
+
+<h2 id="构造器初始化"><a href="#构造器初始化" class="headerlink" title="构造器初始化"></a>构造器初始化</h2><h3 id="初始化的顺序"><a href="#初始化的顺序" class="headerlink" title="初始化的顺序"></a>初始化的顺序</h3><p><strong>在类中变量定义的顺序决定了它们初始化的顺序。即使变量定义散布在方法定义之间，它们仍会在任何方法（包括构造器）被调用之前得到初始化。</strong></p>
+<h3 id="静态数据的初始化"><a href="#静态数据的初始化" class="headerlink" title="静态数据的初始化"></a>静态数据的初始化</h3><p>无论创建多少个对象，静态数据都只占用一份存储区域。<strong>static</strong> 关键字不能应用于局部变量，所以只能作用于属性（字段、域）。如果一个字段是静态的基本类型，<strong>你没有初始化它，那么它就会获得基本类型的标准初值。</strong></p>
+<p><strong>如果在定义时进行初始化，那么静态变量看起来就跟非静态变量一样。</strong></p>
+<p><strong>初始化的顺序先是静态对象（如果它们之前没有被初始化的话），然后是非静态对象</strong>。要执行 <code>main()</code> 方法，必须加载 <strong>类，它的静态属性随后被初始化.</strong></p>
+<p>概括一下创建对象的过程，假设有个名为 <strong>Dog</strong> 的类：</p>
+<ol>
+<li>即使没有显式地使用 <strong>static</strong> 关键字，<strong>构造器实际上也是静态方法。</strong>所以，当首次创建 <strong>Dog</strong> 类型的对象或是首次访问 <strong>Dog</strong> 类的静态方法或属性时，Java 解释器必须在类路径中查找，以定位 <strong>Dog.class</strong>。</li>
+<li>当加载完 <strong>Dog.class</strong> 后（后面会学到，这将创建一个 <strong>Class</strong> 对象），有关静态初始化的所有动作都会执行。因此，静态初始化只会在首次加载 <strong>Class</strong> 对象时初始化一次。</li>
+<li>当用 <code>new Dog()</code> 创建对象时，首先会在堆上为 <strong>Dog</strong> 对象分配足够的存储空间。</li>
+<li>分配的存储空间首先会被清零，即会将 <strong>Dog</strong> 对象中的<strong>所有基本类型数据设置为默认值（数字会被置为 0，布尔型和字符型也相同）</strong>，引用被置为 <strong>null</strong>。</li>
+<li>执行所有出现在字段定义处的初始化动作。</li>
+<li>执行构造器。你将会在”复用”这一章看到，这可能会牵涉到很多动作，尤其当涉及继承的时候。</li>
+</ol>
+<h3 id="显式的静态初始化-静态代码块"><a href="#显式的静态初始化-静态代码块" class="headerlink" title="显式的静态初始化(静态代码块)"></a>显式的静态初始化(静态代码块)</h3><p>你可以将<strong>一组静态初始化动作放在类里面一个特殊的”静态子句”（有时叫做静态块）</strong>中。像下面这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// housekeeping/Spoon.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Spoon</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">int</span> i;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">static</span> &#123;</span><br><span class="line">        i = <span class="number">47</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这看起来像个方法，但实际上它只是一段跟在 <strong>static</strong> 关键字后面的代码块。与其他静态初始化动作一样，这段代码仅执行一次：当首次创建这个类的对象或首次访问这个类的静态成员（甚至不需要创建该类的对象）时。</p>
+<h3 id="非静态实例初始化-实例代码块"><a href="#非静态实例初始化-实例代码块" class="headerlink" title="非静态实例初始化(实例代码块)"></a>非静态实例初始化(实例代码块)</h3><p><strong>实例初始化子句是在两个构造器之前执行的。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mugs</span> </span>&#123;</span><br><span class="line">    Mug mug1;</span><br><span class="line">    Mug mug2;</span><br><span class="line">    &#123; <span class="comment">// [1]</span></span><br><span class="line">        mug1 = <span class="keyword">new</span> Mug(<span class="number">1</span>);</span><br><span class="line">        mug2 = <span class="keyword">new</span> Mug(<span class="number">2</span>);</span><br><span class="line">        System.out.println(<span class="string">"mug1 &amp; mug2 initialized"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Java 提供了被称为<em>实例初始化</em>的类似语法，用来初始化每个对象的非静态变量，</strong>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// housekeeping/Mugs.java</span></span><br><span class="line"><span class="comment">// Instance initialization</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Mug</span> </span>&#123;</span><br><span class="line">    Mug(<span class="keyword">int</span> marker) &#123;</span><br><span class="line">        System.out.println(<span class="string">"Mug("</span> + marker + <span class="string">")"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Mugs</span> </span>&#123;</span><br><span class="line">    Mug mug1;</span><br><span class="line">    Mug mug2;</span><br><span class="line">    &#123; <span class="comment">// [1]</span></span><br><span class="line">        mug1 = <span class="keyword">new</span> Mug(<span class="number">1</span>);</span><br><span class="line">        mug2 = <span class="keyword">new</span> Mug(<span class="number">2</span>);</span><br><span class="line">        System.out.println(<span class="string">"mug1 &amp; mug2 initialized"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    Mugs() &#123;</span><br><span class="line">        System.out.println(<span class="string">"Mugs()"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    Mugs(<span class="keyword">int</span> i) &#123;</span><br><span class="line">        System.out.println(<span class="string">"Mugs(int)"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Inside main()"</span>);</span><br><span class="line">        <span class="keyword">new</span> Mugs();</span><br><span class="line">        System.out.println(<span class="string">"new Mugs() completed"</span>);</span><br><span class="line">        <span class="keyword">new</span> Mugs(<span class="number">1</span>);</span><br><span class="line">        System.out.println(<span class="string">"new Mugs(1) completed"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Inside main</span><br><span class="line"><span class="function"><span class="title">Mug</span><span class="params">(<span class="number">1</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">Mug</span><span class="params">(<span class="number">2</span>)</span></span></span><br><span class="line">mug1 &amp; mug2 initialized</span><br><span class="line"><span class="function"><span class="title">Mugs</span><span class="params">()</span></span></span><br><span class="line">new Mugs() completed</span><br><span class="line"><span class="function"><span class="title">Mug</span><span class="params">(<span class="number">1</span>)</span></span></span><br><span class="line"><span class="function"><span class="title">Mug</span><span class="params">(<span class="number">2</span>)</span></span></span><br><span class="line">mug1 &amp; mug2 initialized</span><br><span class="line"><span class="function"><span class="title">Mugs</span><span class="params">(int)</span></span></span><br><span class="line">new Mugs(<span class="number">1</span>) completed</span><br></pre></td></tr></table></figure>
+
+<p>看起来它很像静态代码块，只不过少了 <strong>static</strong> 关键字。这种语法对于支持”匿名内部类”（参见”内部类”一章）的初始化是必须的，但是你也可以使用它保证某些操作一定会发生，而不管哪个构造器被调用。从输出看出，<strong>实例初始化子句是在两个构造器之前执行的。</strong></p>
+<!-- Array Initialization -->
+
+<h2 id="数组初始化"><a href="#数组初始化" class="headerlink" title="数组初始化"></a>数组初始化</h2><p><strong>数组是相同类型的、用一个标识符名称封装到一起的一个对象序列或基本类型数据序列。</strong>数组是通过方括号下标操作符 [] 来定义和使用的。要定义一个数组引用，只需要在类型名加上方括号：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] a1;</span><br></pre></td></tr></table></figure>
+
+<p>方括号也可放在标识符的后面，两者的含义是一样的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a1[];</span><br></pre></td></tr></table></figure>
+
+<p>这种格式符合 C 和 C++ 程序员的习惯。不过前一种格式或许更合理，毕竟它表明类型是”一个 <strong>int</strong> 型数组”。本书中采用这种格式。</p>
+<p><strong>编译器不允许指定数组的大小。</strong>这又把我们带回有关”引用”的问题上。你所拥有的只是对数组的一个引用（你已经为该引用分配了足够的存储空间），但是还没有给数组对象本身分配任何空间。<strong>为了给数组创建相应的存储空间，必须写初始化表达式。</strong>对于数组，初始化动作可以出现在代码的任何地方，但是也可以使用一种特殊的初始化表达式，它必须在创建数组的地方出现。这种特殊的初始化是由一对花括号括起来的值组成。这种情况下，存储空间的分配（相当于使用 <strong>new</strong>） 将由编译器负责。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] a1 = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>那么为什么在还没有数组的时候定义一个数组引用呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] a2;</span><br></pre></td></tr></table></figure>
+
+<p><strong>在 Java 中可以将一个数组赋值给另一个数组，</strong>所以可以这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a2 = a1;</span><br></pre></td></tr></table></figure>
+
+<p><strong>其实真正做的只是复制了一个引用</strong></p>
+<p>所有的数组（无论是对象数组还是基本类型数组）都有一个固定成员 <strong>length</strong>，告诉你这个数组有多少个元素，你不能对其修改。与 C 和 C++ 类似，Java 数组计数也是从 0 开始的，所能使用的最大下标数是 <strong>length - 1</strong>。超过这个边界，C 和 C++ 会默认接受，允许你访问所有内存，许多声名狼藉的 bug 都是由此而生。<strong>但是 Java 在你访问超出这个边界时，会报运行时错误（异常），从而避免此类问题。</strong></p>
+<h3 id="动态数组创建"><a href="#动态数组创建" class="headerlink" title="动态数组创建"></a>动态数组创建</h3><p>你可以直接使用 <strong>new</strong> 在数组中创建元素。数组元素中的基本数据类型值会自动初始化为空值（对于数字和字符是 0；对于布尔型是 <strong>false</strong>）。<strong><code>Arrays.toString()</code> 是 java.util 标准类库中的方法，会产生一维数组的可打印版本。</strong></p>
+<p><strong>也可以用花括号括起来的列表来初始化数组，有两种形式：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Integer[] a = &#123;</span><br><span class="line">    <span class="number">1</span>, <span class="number">2</span>,</span><br><span class="line">    <span class="number">3</span>, <span class="comment">// Autoboxing</span></span><br><span class="line">&#125;;</span><br><span class="line">Integer[] b = <span class="keyword">new</span> Integer[] &#123;</span><br><span class="line">    <span class="number">1</span>, <span class="number">2</span>,</span><br><span class="line">    <span class="number">3</span>, <span class="comment">// Autoboxing</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>在这两种形式中，初始化列表的最后一个逗号是可选的（这一特性使维护长列表变得更容易）</strong>。</p>
+<p>尽管第一种形式很有用，但是它更加受限，因为它只能用于数组定义处。第二种和第三种形式可以用在任何地方，甚至用在方法的内部。例如，你创建了一个 <strong>String</strong> 数组，将其传递给另一个类的 <code>main()</code> 方法，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// housekeeping/DynamicArray.java</span></span><br><span class="line"><span class="comment">// Array initialization</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DynamicArray</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Other.main(<span class="keyword">new</span> String[] &#123;<span class="string">"fiddle"</span>, <span class="string">"de"</span>, <span class="string">"dum"</span>&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Other</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (String s: args) &#123;</span><br><span class="line">            System.out.print(s + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">fiddle de dum</span></span><br></pre></td></tr></table></figure>
+
+<p><code>Other.main()</code> 的参数是在调用处创建的，因此你甚至可以在方法调用处提供可替换的参数。</p>
+<h3 id="可变参数列表"><a href="#可变参数列表" class="headerlink" title="可变参数列表"></a>可变参数列表</h3><p>你可以以一种类似 C 语言中的可变参数列表（C 通常把它称为”varargs”）来创建和调用方法。这可以应用在参数个数或类型未知的场合。在 Java 5 中，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// housekeeping/NewVarArgs.java</span></span><br><span class="line"><span class="comment">// Using array syntax to create variable argument lists</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NewVarArgs</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printArray</span><span class="params">(Object... args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (Object obj: args) &#123;</span><br><span class="line">            System.out.print(obj + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Can take individual elements:</span></span><br><span class="line">        printArray(<span class="number">47</span>, (<span class="keyword">float</span>) <span class="number">3.14</span>, <span class="number">11.11</span>);</span><br><span class="line">        printArray(<span class="number">47</span>, <span class="number">3.14F</span>, <span class="number">11.11</span>);</span><br><span class="line">        printArray(<span class="string">"one"</span>, <span class="string">"two"</span>, <span class="string">"three"</span>);</span><br><span class="line">        printArray(<span class="keyword">new</span> A(), <span class="keyword">new</span> A(), <span class="keyword">new</span> A());</span><br><span class="line">        <span class="comment">// Or an array:</span></span><br><span class="line">        printArray((Object[]) <span class="keyword">new</span> Integer[] &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;);</span><br><span class="line">        printArray(); <span class="comment">// Empty list is OK</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">47</span> <span class="number">3.14</span> <span class="number">11.11</span> </span><br><span class="line"><span class="number">47</span> <span class="number">3.14</span> <span class="number">11.11</span> </span><br><span class="line">one two three </span><br><span class="line"><span class="symbol">A@</span><span class="number">15</span>db9742 <span class="symbol">A@</span><span class="number">6</span>d06d69c <span class="symbol">A@</span><span class="number">7852e922</span> </span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>有了可变参数，你就再也不用显式地编写数组语法了，当你指定参数时，编译器实际上会为你填充数组。你获取的仍然是一个数组，这就是为什么 <code>printArray()</code> 可以使用 for-in 迭代数组的原因。</strong>但是，这不仅仅只是从元素列表到数组的自动转换。注意程序的倒数第二行，一个 <strong>Integer</strong> 数组（通过自动装箱创建）被转型为一个 <strong>Object</strong> 数组（为了移除编译器的警告），并且传递给了 <code>printArray()</code>。显然，编译器会发现这是一个数组，不会执行转换。因此，如果你有一组事物，可以把它们当作列表传递，而如果你已经有了一个数组，该方法会把它们当作可变参数列表来接受。</p>
+<p>程序的最后一行表明，<strong>可变参数的个数可以为 0。</strong>当具有可选的尾随参数时，这一特性会有帮助：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// housekeeping/OptionalTrailingArguments.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OptionalTrailingArguments</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> required, String... trailing)</span> </span>&#123;</span><br><span class="line">        System.out.print(<span class="string">"required: "</span> + required + <span class="string">" "</span>);</span><br><span class="line">        <span class="keyword">for</span> (String s: trailing) &#123;</span><br><span class="line">            System.out.print(s + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        f(<span class="number">1</span>, <span class="string">"one"</span>);</span><br><span class="line">        f(<span class="number">2</span>, <span class="string">"two"</span>, <span class="string">"three"</span>);</span><br><span class="line">        f(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">required: <span class="number">1</span> one </span><br><span class="line">required: <span class="number">2</span> two three </span><br><span class="line">required: <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>这段程序展示了如何使用除了 <strong>Object</strong> 类之外类型的可变参数列表。这里，所有的可变参数都是 <strong>String</strong> 对象。可变参数列表中可以使用任何类型的参数，包括基本类型。下面例子展示了可变参数列表变为数组的情形，并且如果列表中没有任何元素，那么转变为大小为 0 的数组：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// housekeeping/VarargType.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">VarargType</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(Character... args)</span> </span>&#123;</span><br><span class="line">        System.out.print(args.getClass());</span><br><span class="line">        System.out.println(<span class="string">" length "</span> + args.length);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">g</span><span class="params">(<span class="keyword">int</span>... args)</span> </span>&#123;</span><br><span class="line">        System.out.print(args.getClass());</span><br><span class="line">        System.out.println(<span class="string">" length "</span> + args.length)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        f(<span class="string">'a'</span>);</span><br><span class="line">        f();</span><br><span class="line">        g(<span class="number">1</span>);</span><br><span class="line">        g();</span><br><span class="line">        System.out.println(<span class="string">"int[]: "</span>+ <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">0</span>].getClass());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> [<span class="title">Ljava</span>.<span class="title">lang</span>.<span class="title">Character</span>;</span> length <span class="number">1</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> [<span class="title">Ljava</span>.<span class="title">lang</span>.<span class="title">Character</span>;</span> length <span class="number">0</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> [<span class="title">I</span> <span class="title">length</span> 1</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> [<span class="title">I</span> <span class="title">length</span> 0</span></span><br><span class="line">int[]: <span class="class"><span class="keyword">class</span> [<span class="title">I</span></span></span><br></pre></td></tr></table></figure>
+
+<p><code>getClass()</code> 方法属于 Object 类，将在”类型信息”一章中全面介绍。它会产生对象的类，并在打印该类时，看到表示该类类型的编码字符串。前导的 <strong>[</strong> 代表这是一个后面紧随的类型的数组，<strong>I</strong> 表示基本类型 <strong>int</strong>；为了进行双重检查，我在最后一行创建了一个 <strong>int</strong> 数组，打印了其类型。<strong>这样也验证了使用可变参数列表不依赖于自动装箱，而使用的是基本类型。</strong></p>
+<p>然而，可变参数列表与自动装箱可以和谐共处，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// housekeeping/AutoboxingVarargs.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AutoboxingVarargs</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(Integer... args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (Integer i: args) &#123;</span><br><span class="line">            System.out.print(i + <span class="string">" "</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        f(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line">        f(<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>);</span><br><span class="line">        f(<span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">1 </span><span class="number">2</span></span><br><span class="line"><span class="symbol">4 </span><span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span></span><br><span class="line"><span class="symbol">10 </span><span class="number">11</span> <span class="number">12</span></span><br></pre></td></tr></table></figure>
+
+<p>注意吗，你可以在单个参数列表中将类型混合在一起，自动装箱机制会有选择地把 <strong>int</strong> 类型的参数提升为 <strong>Integer</strong>。</p>
+<p>可变参数列表使得方法重载更加复杂了，尽管乍看之下似乎足够安全：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// housekeeping/OverloadingVarargs.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OverloadingVarargs</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(Character... args)</span> </span>&#123;</span><br><span class="line">        System.out.print(<span class="string">"first"</span>);</span><br><span class="line">        <span class="keyword">for</span> (Character c: args) &#123;</span><br><span class="line">            System.out.print(<span class="string">" "</span> + c);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(Integer... args)</span> </span>&#123;</span><br><span class="line">        System.out.print(<span class="string">"second"</span>);</span><br><span class="line">        <span class="keyword">for</span> (Integer i: args) &#123;</span><br><span class="line">            System.out.print(<span class="string">" "</span> + i);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(Long... args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"third"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        f(<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>);</span><br><span class="line">        f(<span class="number">1</span>);</span><br><span class="line">        f(<span class="number">2</span>, <span class="number">1</span>);</span><br><span class="line">        f(<span class="number">0</span>);</span><br><span class="line">        f(<span class="number">0L</span>);</span><br><span class="line">        <span class="comment">//- f(); // Won's compile -- ambiguous</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">first</span> <span class="keyword">a</span> b c</span><br><span class="line"><span class="keyword">second</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">second</span> <span class="number">2</span> <span class="number">1</span></span><br><span class="line"><span class="keyword">second</span> <span class="number">0</span></span><br><span class="line"><span class="keyword">third</span></span><br></pre></td></tr></table></figure>
+
+<p>在每种情况下，编译器都会使用自动装箱来匹配重载的方法，然后调用最明确匹配的方法。</p>
+<p>但是如果调用不含参数的 <code>f()</code>，编译器就无法知道应该调用哪个方法了。尽管这个错误可以弄清楚，但是它可能会使客户端程序员感到意外。</p>
+<p>你可能会通过在某个方法中增加一个非可变参数解决这个问题：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// housekeeping/OverloadingVarargs2.java</span></span><br><span class="line"><span class="comment">// &#123;WillNotCompile&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OverloadingVarargs2</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">float</span> i, Character... args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"first"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(Character... args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"second"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        f(<span class="number">1</span>, <span class="string">'a'</span>);</span><br><span class="line">        f(<span class="string">'a'</span>, <span class="string">'b'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>{WillNotCompile}</strong> 注释把该文件排除在了本书的 Gradle 构建之外。如果你手动编译它，会得到下面的错误信息：</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OverloadingVarargs2.java:<span class="number">14</span>:error:<span class="keyword">reference</span> <span class="keyword">to</span> f <span class="keyword">is</span> ambiguous f(<span class="string">'a'</span>, <span class="string">'b'</span>);</span><br><span class="line">\^</span><br><span class="line">both <span class="function"><span class="keyword">method</span> <span class="title">f</span><span class="params">(float, Character...)</span> <span class="title">in</span> <span class="title">OverloadingVarargs2</span> <span class="title">and</span> <span class="title">method</span> <span class="title">f</span><span class="params">(Character...)</span> <span class="title">in</span> <span class="title">OverloadingVarargs2</span> <span class="title">match</span> 1 <span class="title">error</span></span></span><br></pre></td></tr></table></figure>
+
+<p>如果你给这两个方法都添加一个非可变参数，就可以解决问题了：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// housekeeping/OverloadingVarargs3</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OverloadingVarargs3</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">float</span> i, Character... args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"first"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">f</span><span class="params">(<span class="keyword">char</span> c, Character... args)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"second"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        f(<span class="number">1</span>, <span class="string">'a'</span>);</span><br><span class="line">        f(<span class="string">'a'</span>, <span class="string">'b'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">first</span></span><br><span class="line"><span class="keyword">second</span></span><br></pre></td></tr></table></figure>
+
+<p>你应该总是在重载方法的一个版本上使用可变参数列表，或者压根不用它。</p>
+<!-- Enumerated Types -->
+
+<h2 id="枚举类型"><a href="#枚举类型" class="headerlink" title="枚举类型"></a>枚举类型</h2><p>Java 5 中添加了一个看似很小的特性 <strong>enum</strong> 关键字，它使得我们在需要群组并使用枚举类型集时，可以很方便地处理。以前，你需要创建一个整数常量集，但是这些值并不会将自身限制在这个常量集的范围内，因此使用它们更有风险，而且更难使用。枚举类型属于非常普遍的需求，C、C++ 和其他许多语言都已经拥有它了。现在 Java 也有了 <strong>enum</strong>，并且它的功能比 C/C++ 中的完备得多。下面是个简单的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// housekeeping/Spiciness.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> Spiciness &#123;</span><br><span class="line">    NOT, MILD, MEDIUM, HOT, FLAMING</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里创建了一个名为 <strong>Spiciness</strong> 的枚举类型，它有5个值。由于枚举类型的实例是常量，因此按照命名惯例，它们都用大写字母表示（如果名称中含有多个单词，使用下划线分隔）。</p>
+<p>要使用 <strong>enum</strong>，需要创建一个该类型的引用，然后将其赋值给某个实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// housekeeping/SimpleEnumUse.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleEnumUse</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Spiciness howHot = Spiciness.MEDIUM;</span><br><span class="line">        System.out.println(howHot);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">MEDIUM</span></span><br></pre></td></tr></table></figure>
+
+<p>在你创建 <strong>enum</strong> 时，编译器会自动添加一些有用的特性。例如，它会创建 <code>toString()</code> 方法，以便你方便地显示某个 <strong>enum</strong> 实例的名称，这从上面例子中的输出可以看出。编译器还会创建 <code>ordinal()</code> 方法表示某个特定 <strong>enum</strong> 常量的声明顺序，<code>static values()</code> 方法按照 enum 常量的声明顺序，生成这些常量值构成的数组：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// housekeeping/EnumOrder.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EnumOrder</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (Spiciness s: Spiciness.values()) &#123;</span><br><span class="line">            System.out.println(s + <span class="string">", ordinal "</span> + s.ordinal());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">NOT, ordinal <span class="number">0</span></span><br><span class="line">MILD, ordinal <span class="number">1</span></span><br><span class="line">MEDIUM, ordinal <span class="number">2</span></span><br><span class="line">HOT, ordinal <span class="number">3</span></span><br><span class="line">FLAMING, ordinal <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+<p>尽管 <strong>enum</strong> 看起来像是一种新的数据类型，但是这个关键字只是在生成 <strong>enum</strong> 的类时，<strong>产生了某些编译器行为</strong>，因此在很大程度上你可以将 <strong>enum</strong> 当作其他任何类。<strong>事实上，enum 确实是类，并且具有自己的方法。</strong></p>
+<p><strong>enum</strong> 有一个很实用的特性，就是在 <strong>switch</strong> 语句中使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// housekeeping/Burrito.java</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Burrito</span> </span>&#123;</span><br><span class="line">    Spiciness degree;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Burrito</span><span class="params">(Spiciness degree)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.degree = degree;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">describe</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.print(<span class="string">"This burrito is "</span>);</span><br><span class="line">        <span class="keyword">switch</span>(degree) &#123;</span><br><span class="line">            <span class="keyword">case</span> NOT:</span><br><span class="line">                System.out.println(<span class="string">"not spicy at all."</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> MILD:</span><br><span class="line">            <span class="keyword">case</span> MEDIUM:</span><br><span class="line">                System.out.println(<span class="string">"a little hot."</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> HOT:</span><br><span class="line">            <span class="keyword">case</span> FLAMING:</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                System.out.println(<span class="string">"maybe too hot"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Burrito plain = <span class="keyword">new</span> Burrito(Spiciness.NOT),</span><br><span class="line">        greenChile = <span class="keyword">new</span> Burrito(Spiciness.MEDIUM),</span><br><span class="line">        jalapeno = <span class="keyword">new</span> Burrito(Spiciness.HOT);</span><br><span class="line">        plain.describe();</span><br><span class="line">        greenChile.describe();</span><br><span class="line">        jalapeno.describe();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">This burrito <span class="keyword">is</span> <span class="keyword">not</span> spicy <span class="keyword">at</span> <span class="keyword">all</span>.</span><br><span class="line">This burrito <span class="keyword">is</span> a little hot.</span><br><span class="line">This burrito <span class="keyword">is</span> maybe too hot.</span><br></pre></td></tr></table></figure>
+
+<p>由于 <strong>switch</strong> 是在有限的可能值集合中选择，因此它与 <strong>enum</strong> 是绝佳的组合。注意，enum 的名称是如何能够倍加清楚地表明程序的目的的。</p>
+<p>通常，你可以将 <strong>enum</strong> 用作另一种创建数据类型的方式，然后使用所得到的类型。这正是关键所在，所以你不用过多地考虑它们。在 <strong>enum</strong> 被引入之前，你必须花费大量的精力去创建一个等同的枚举类型，并是安全可用的。</p>
+<!-- Implementation Hiding -->
+
+<h1 id="第七章-封装"><a href="#第七章-封装" class="headerlink" title="第七章 封装"></a>第七章 封装</h1><p>重构就是重写可工作的代码，使之更加可读，易懂，因而更易维护。</p>
+<p>通常，客户端程序员希望你的代码在某些方面保持不变。所以你想修改代码，但他们希望代码保持不变。由此<strong>引出了面向对象设计中的一个基本问题：”如何区分变动的事物和不变的事物”。</strong></p>
+<p><strong>Java 提供了访问修饰符供类库开发者指明哪些对于客户端程序员是可用的，哪些是不可用的。</strong>访问控制权限的等级，从”最大权限”到”最小权限”依次是：<strong>public</strong>，<strong>protected</strong>，包访问权限（没有关键字）和 <strong>private</strong>。</p>
+<!-- package: the Library Unit -->
+
+<h2 id="包的概念"><a href="#包的概念" class="headerlink" title="包的概念"></a>包的概念</h2><p>包内包含一组类，它们被组织在一个单独的命名空间下。</p>
+<p>一个 Java 源代码文件称为一个<em>编译单元</em>（有时也称<em>翻译单元</em>）。每个编译单元的文件名后缀必须是 <strong>.java</strong>。在编译单元中可以有一个 <strong>public</strong> 类，它的类名必须与文件名相同（包括大小写，但不包括后缀名 <strong>.java</strong>）。每个编译单元中只能有一个 <strong>public</strong> 类，否则编译器不接受。如果这个编译单元中还有其他类，那么在包之外是无法访问到这些类的，因为它们不是 <strong>public</strong> 类，此时它们支持主 <strong>public</strong> 类。</p>
+<!-- Class Access -->
+
+<h2 id="类访问权限"><a href="#类访问权限" class="headerlink" title="类访问权限"></a>类访问权限</h2><p>注意，类既不能是 <strong>private</strong> 的（这样除了该类自身，任何类都不能访问它），也不能是 <strong>protected</strong> 的。所以对于类的访问权限只有两种选择：包访问权限或者 <strong>public</strong>。为了防止类被外界访问，可以将所有的构造器声明为 <strong>private</strong>，这样只有你自己能创建对象（在类的 static 成员中）</p>
+<!-- Summary -->
+
+<h2 id="本章小结"><a href="#本章小结" class="headerlink" title="本章小结"></a>本章小结</h2><p><strong>控制成员访问权限有两个原因。</strong>第一个原因是使用户不要接触他们不该接触的部分，这部分对于类内部来说是必要的，但是不属于客户端程序员所需接口的一部分。因此将方法和属性声明为 <strong>private</strong> 对于客户端程序员来说是一种服务，可以让他们清楚地看到什么是重要的，什么可以忽略。这可以简化他们对类的理解。</p>
+<p>第二个也是最重要的原因是为了让类库设计者更改类内部的工作方式，而不用担心会影响到客户端程序员。</p>
+<!-- Reuse -->
+
+<h1 id="第八章-复用"><a href="#第八章-复用" class="headerlink" title="第八章 复用"></a>第八章 复用</h1><blockquote>
+<p>代码复用是面向对象编程（OOP）最具魅力的原因之一。</p>
+</blockquote>
+<p>在本章里，你将学习到两种方式来达到这个目的：</p>
+<ol>
+<li>第一种方式直接了当。在新类中创建现有类的对象。这种方式叫做“组合”（Composition），通过这种方式复用代码的功能，而非其形式。</li>
+<li>第二种方式更为微妙。创建现有类类型的新类。照字面理解：采用现有类形式，又无需在编码时改动其代码，这种方式就叫做“继承”（Inheritance），编译器会做大部分的工作。<strong>继承</strong>是面向对象编程（OOP）的重要基础之一。更多功能相关将在<a href="./09-Polymorphism.md">多态</a>（Polymorphism）章节中介绍。</li>
+</ol>
+<!-- Composition Syntax -->
+
+<h2 id="组合语法"><a href="#组合语法" class="headerlink" title="组合语法"></a>组合语法</h2><p>你仅需要把对象的引用（object references）放置在一个新的类里，这就使用了组合。例如，假设你需要一个对象，其中内置了几个 <strong>String</strong> 对象，两个基本类型（primitives）的属性字段，一个其他类的对象。对于非基本类型对象，将引用直接放置在新类中，对于基本类型属性字段则仅进行声明。</p>
+<p>编译器不会为每个引用创建一个默认对象，这是有意义的，因为在许多情况下，这会导致不必要的开销。<strong>初始化引用有四种方法:</strong></p>
+<ol>
+<li>当对象被定义时。这意味着它们总是在调用构造函数之前初始化。</li>
+<li>在该类的构造函数中。</li>
+<li>在实际使用对象之前。这通常称为<em>延迟初始化</em>。在对象创建开销大且不需要每次都创建对象的情况下，它可以减少开销。</li>
+<li>使用实例初始化。</li>
+</ol>
+<h1 id="第二十四章-并发编程"><a href="#第二十四章-并发编程" class="headerlink" title="第二十四章 并发编程"></a>第二十四章 并发编程</h1><p><a href="https://github.com/LingCoder/OnJava8/blob/master/docs/book/24-Concurrent-Programming.md" target="_blank" rel="noopener">并发编程</a></p>
+<p>对于更多凌乱，低级别的细节，请参阅附录：<a href="https://github.com/LingCoder/OnJava8/blob/master/docs/book/Appendix-Low-Level-Concurrency.md" target="_blank" rel="noopener">并发底层原理</a></p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>要进一步深入这个领域，你还必须阅读Brian Goetz等人的Java Concurrency in Practice。</p>
+<ul>
+<li>并发是关于正确有效地控制对共享资源的访问。</li>
+<li>并行是使用额外的资源来更快地产生结果。</li>
+</ul>
+<p><em>并发</em></p>
+<p><strong>同时完成多个任务。在开始处理其他任务之前，当前任务不需要完成。并发解决了阻塞发生的问题。</strong>当任务无法进一步执行，直到外部环境发生变化时才会继续执行。最常见的例子是I/O，其中任务必须等待一些input（在这种情况下会被阻止）。<strong>这个问题产生在I/O密集型。</strong></p>
+<p><em>并行</em></p>
+<p><strong>同时在多个地方完成多个任务。</strong>这<strong>解决了所谓的计算密集型问题</strong>，如果将程序分成多个部分并在不同的处理器上编辑不同的部分，程序可以运行得更快。</p>
+<blockquote>
+<p><strong>并发性是一系列性能技术，专注于减少等待</strong></p>
+</blockquote>
+<p><strong>在Java中，并发是非常棘手和困难的，所以绝对不要使用它，除非你有一个重大的性能问题</strong></p>
+<h1 id="issue"><a href="#issue" class="headerlink" title="issue"></a>issue</h1><h2 id="并行-并发：使用并行编程技术编写，如果只有一个处理器，结果程序仍然可以运行（-Java-8-Streams-就是一个很好的例子）。"><a href="#并行-并发：使用并行编程技术编写，如果只有一个处理器，结果程序仍然可以运行（-Java-8-Streams-就是一个很好的例子）。" class="headerlink" title="并行-并发：使用并行编程技术编写，如果只有一个处理器，结果程序仍然可以运行（==Java 8 Streams==就是一个很好的例子）。"></a>并行-并发：使用并行编程技术编写，如果只有一个处理器，结果程序仍然可以运行（==Java 8 Streams==就是一个很好的例子）。</h2><h2 id="对并发性的语言和库支持似乎-Leaky-Abstraction是完美候选者-。抽象的目标是“抽象出”那些对于手头想法不重要的东西，从不必要的细节中汲取灵感。如果抽象是漏洞，那些碎片和细节会不断重新声明自己是重要的，无论你试图隐藏它们多少"><a href="#对并发性的语言和库支持似乎-Leaky-Abstraction是完美候选者-。抽象的目标是“抽象出”那些对于手头想法不重要的东西，从不必要的细节中汲取灵感。如果抽象是漏洞，那些碎片和细节会不断重新声明自己是重要的，无论你试图隐藏它们多少" class="headerlink" title="对并发性的语言和库支持似乎==Leaky Abstraction是完美候选者==。抽象的目标是“抽象出”那些对于手头想法不重要的东西，从不必要的细节中汲取灵感。如果抽象是漏洞，那些碎片和细节会不断重新声明自己是重要的，无论你试图隐藏它们多少"></a>对并发性的语言和库支持似乎==<a href="https://en.wikipedia.org/wiki/Leaky_abstraction" target="_blank" rel="noopener">Leaky Abstraction</a>是完美候选者==。抽象的目标是“抽象出”那些对于手头想法不重要的东西，从不必要的细节中汲取灵感。如果抽象是漏洞，那些碎片和细节会不断重新声明自己是重要的，无论你试图隐藏它们多少</h2><p>直到 [附录:集合主题]</p>
+<p>在附录中有包含：<a href="./Appendix-Passing-and-Returning-Objects.md">对象传递和返回</a>。</p>
+<p>我们直接给出正确的结果：<code>Math.random()</code> 的结果集范围包含 0.0 ，不包含 1.0。 在数学术语中，可用 [0,1）来表示。</p>
+
+    </div>
+
+    
+    
+    
+    
+    <div>
+     
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+     
+    </div>
+    
+        
+      
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>nicolas lee</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://codeofli.github.io/2019/11/java-note/OnJava8/OnJava8/" title="OnJava8">https://codeofli.github.io/2019/11/java-note/OnJava8/OnJava8/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/java/" rel="tag"># java</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/11/java-note/maven/maven/" rel="next" title="maven">
+                  <i class="fa fa-chevron-left"></i> maven
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/11/js-note/javaScript/javaScript/" rel="prev" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章-对象的概念"><span class="nav-number">2.</span> <span class="nav-text">第一章 对象的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象"><span class="nav-number">2.1.</span> <span class="nav-text">抽象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口"><span class="nav-number">2.2.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提供服务"><span class="nav-number">2.3.</span> <span class="nav-text">提供服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封装"><span class="nav-number">2.4.</span> <span class="nav-text">封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复用"><span class="nav-number">2.5.</span> <span class="nav-text">复用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承inheritance"><span class="nav-number">2.6.</span> <span class="nav-text">继承inheritance</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单继承结构"><span class="nav-number">2.6.1.</span> <span class="nav-text">单继承结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多态"><span class="nav-number">2.7.</span> <span class="nav-text">多态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合collection"><span class="nav-number">2.8.</span> <span class="nav-text">集合collection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象创建与生命周期"><span class="nav-number">2.9.</span> <span class="nav-text">对象创建与生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理"><span class="nav-number">2.10.</span> <span class="nav-text">异常处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二章-安装Java和本书用例"><span class="nav-number">3.</span> <span class="nav-text">第二章 安装Java和本书用例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Shell"><span class="nav-number">3.1.</span> <span class="nav-text">Shell</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第三章-万物皆对象"><span class="nav-number">4.</span> <span class="nav-text">第三章 万物皆对象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象创建"><span class="nav-number">4.1.</span> <span class="nav-text">对象创建:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据存储"><span class="nav-number">4.1.1.</span> <span class="nav-text">数据存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型的存储"><span class="nav-number">4.1.2.</span> <span class="nav-text">基本类型的存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型的存储-1"><span class="nav-number">4.1.3.</span> <span class="nav-text">基本类型的存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高精度数值"><span class="nav-number">4.1.4.</span> <span class="nav-text">高精度数值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组的存储"><span class="nav-number">4.1.5.</span> <span class="nav-text">数组的存储</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码注释"><span class="nav-number">4.2.</span> <span class="nav-text">代码注释</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象不需要清理"><span class="nav-number">4.3.</span> <span class="nav-text">对象不需要清理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作用域"><span class="nav-number">4.3.1.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象作用域"><span class="nav-number">4.3.2.</span> <span class="nav-text">对象作用域</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类的创建"><span class="nav-number">4.4.</span> <span class="nav-text">类的创建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字段"><span class="nav-number">4.4.1.</span> <span class="nav-text">字段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本类型默认值"><span class="nav-number">4.4.1.1.</span> <span class="nav-text">基本类型默认值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">4.4.2.</span> <span class="nav-text">方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序编写"><span class="nav-number">4.5.</span> <span class="nav-text">程序编写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#命名可见性"><span class="nav-number">4.5.1.</span> <span class="nav-text">命名可见性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static关键字"><span class="nav-number">4.5.2.</span> <span class="nav-text">static关键字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译和运行"><span class="nav-number">4.5.3.</span> <span class="nav-text">编译和运行</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第四章-运算符"><span class="nav-number">5.</span> <span class="nav-text">第四章 运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#赋值"><span class="nav-number">5.1.</span> <span class="nav-text">赋值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#special"><span class="nav-number">5.2.</span> <span class="nav-text">special</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一元加减运算符"><span class="nav-number">5.2.1.</span> <span class="nav-text">一元加减运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试对象等价"><span class="nav-number">5.2.2.</span> <span class="nav-text">测试对象等价</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#短路"><span class="nav-number">5.2.3.</span> <span class="nav-text">短路</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java没有sizeof"><span class="nav-number">5.3.</span> <span class="nav-text">Java没有sizeof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字面值常量"><span class="nav-number">5.4.</span> <span class="nav-text">字面值常量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下划线"><span class="nav-number">5.4.1.</span> <span class="nav-text">下划线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指数计数法"><span class="nav-number">5.4.2.</span> <span class="nav-text">指数计数法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#移位运算符"><span class="nav-number">5.5.</span> <span class="nav-text">移位运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#截断和舍入"><span class="nav-number">5.5.1.</span> <span class="nav-text">截断和舍入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型提升"><span class="nav-number">5.5.2.</span> <span class="nav-text">类型提升</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第五章-控制流"><span class="nav-number">6.</span> <span class="nav-text">第五章 控制流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#臭名昭著的-goto"><span class="nav-number">6.1.</span> <span class="nav-text">臭名昭著的 goto</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#switch-字符串"><span class="nav-number">6.2.</span> <span class="nav-text">switch 字符串</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第六章-初始化和清理"><span class="nav-number">7.</span> <span class="nav-text">第六章 初始化和清理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#区分重载方法"><span class="nav-number">7.0.1.</span> <span class="nav-text">区分重载方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾回收器"><span class="nav-number">7.1.</span> <span class="nav-text">垃圾回收器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#finalize-的用途"><span class="nav-number">7.1.1.</span> <span class="nav-text">finalize() 的用途</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#你必须实施清理"><span class="nav-number">7.1.2.</span> <span class="nav-text">你必须实施清理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终结条件"><span class="nav-number">7.1.3.</span> <span class="nav-text">终结条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾回收器如何工作"><span class="nav-number">7.1.4.</span> <span class="nav-text">垃圾回收器如何工作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造器初始化"><span class="nav-number">7.2.</span> <span class="nav-text">构造器初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化的顺序"><span class="nav-number">7.2.1.</span> <span class="nav-text">初始化的顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态数据的初始化"><span class="nav-number">7.2.2.</span> <span class="nav-text">静态数据的初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#显式的静态初始化-静态代码块"><span class="nav-number">7.2.3.</span> <span class="nav-text">显式的静态初始化(静态代码块)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非静态实例初始化-实例代码块"><span class="nav-number">7.2.4.</span> <span class="nav-text">非静态实例初始化(实例代码块)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组初始化"><span class="nav-number">7.3.</span> <span class="nav-text">数组初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#动态数组创建"><span class="nav-number">7.3.1.</span> <span class="nav-text">动态数组创建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可变参数列表"><span class="nav-number">7.3.2.</span> <span class="nav-text">可变参数列表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#枚举类型"><span class="nav-number">7.4.</span> <span class="nav-text">枚举类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第七章-封装"><span class="nav-number">8.</span> <span class="nav-text">第七章 封装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#包的概念"><span class="nav-number">8.1.</span> <span class="nav-text">包的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类访问权限"><span class="nav-number">8.2.</span> <span class="nav-text">类访问权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本章小结"><span class="nav-number">8.3.</span> <span class="nav-text">本章小结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第八章-复用"><span class="nav-number">9.</span> <span class="nav-text">第八章 复用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#组合语法"><span class="nav-number">9.1.</span> <span class="nav-text">组合语法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第二十四章-并发编程"><span class="nav-number">10.</span> <span class="nav-text">第二十四章 并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">10.1.</span> <span class="nav-text">概念</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#issue"><span class="nav-number">11.</span> <span class="nav-text">issue</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#并行-并发：使用并行编程技术编写，如果只有一个处理器，结果程序仍然可以运行（-Java-8-Streams-就是一个很好的例子）。"><span class="nav-number">11.1.</span> <span class="nav-text">并行-并发：使用并行编程技术编写，如果只有一个处理器，结果程序仍然可以运行（==Java 8 Streams==就是一个很好的例子）。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对并发性的语言和库支持似乎-Leaky-Abstraction是完美候选者-。抽象的目标是“抽象出”那些对于手头想法不重要的东西，从不必要的细节中汲取灵感。如果抽象是漏洞，那些碎片和细节会不断重新声明自己是重要的，无论你试图隐藏它们多少"><span class="nav-number">11.2.</span> <span class="nav-text">对并发性的语言和库支持似乎==Leaky Abstraction是完美候选者==。抽象的目标是“抽象出”那些对于手头想法不重要的东西，从不必要的细节中汲取灵感。如果抽象是漏洞，那些碎片和细节会不断重新声明自己是重要的，无论你试图隐藏它们多少</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/assets/img/avatar.jpg"
+      alt="nicolas lee">
+  <p class="site-author-name" itemprop="name">nicolas lee</p>
+  <div class="site-description" itemprop="description">Yesterday you said tomorow.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/codeOflI" title="GitHub &rarr; https://github.com/codeOflI" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://blog.csdn.net/qq_42835910" title="CSDN &rarr; https://blog.csdn.net/qq_42835910" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nicolas lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数"></span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
