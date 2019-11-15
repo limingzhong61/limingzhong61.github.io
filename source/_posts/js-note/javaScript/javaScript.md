@@ -1629,8 +1629,6 @@ scrollLeft
 
 ## 事件对象
 
-
-
 当响应函数被调用时，浏览器每次都会将一个事件对象作为实参传递进响应函数中，这个事件对象中封装了当前事件的相关信息，比如：鼠标的坐标，键盘的按键，鼠标的按键，滚轮的方向。。
 
 可以在响应函数中定义一个形参，来使用事件对象，但是在IE8以下浏览器中事件对象没有做完实参传递，而是作为window对象的属性保存
@@ -1916,7 +1914,6 @@ function drag(obj){
 <img src="img/an.jpg" id="img1" style="position: absolute;"/>
     </body>
 </html>
-
 ```
 
 
@@ -2434,38 +2431,6 @@ eval()
 	</body>
 </html>
 
-```
-
-**<a> 取消默认行为**
-
-```javascript
-hrefs[i].onclick = function(){
-	hrefs[i].parentNode.removeChild(hrefs[i]);
-	/*
-	 * 点击超链接以后，超链接会跳转页面，这是超链接的默认行为
-	 * 如果我们不想出现默认行为，可以returnfalse，取消
-	  */
-return false;
-}
-```
-
-**响应函数只在响应时执行，而其他（for循环）早已在window.onload时执行完毕**
-
-```javascript
-//为每个超链接都绑定一个单击响应函数
-for(var i=0 ; i < allA.length ; i++){
-	/*
-	 * for循环会在页面加载完成之后立即执行，
-	 * 	而响应函数会在超链接被点击时才执行
-	 * 当响应函数执行时，for循环早已执行完毕
-	 */	
-	alert("for循环正在执行"+i);	
-	allA[i].onclick = function(){		
-		alert("响应函数正在执行"+i);		
-		//alert(allA[i]);		
-		return false;
-	};	
-}
 ```
 
 confirm()用于弹出一个带有确认和取消按钮的提示框
