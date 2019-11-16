@@ -112,7 +112,7 @@ systemctl stop docker
 | 检索 | docker  search 关键字  eg：docker  search redis | 我们经常去docker  hub上检索镜像的详细信息，如镜像的TAG。 |
 | 拉取 | docker pull 镜像名:tag                          | :tag是可选的，tag表示标签，多为软件的版本，默认是latest  |
 | 列表 | docker images                                   | 查看所有本地镜像                                         |
-| 删除 | docker rmi image-id                             | 删除指定的本地镜像                                       |
+| 删除 | docker rm image-id                              | 删除指定的本地镜像                                       |
 
 https://hub.docker.com/
 
@@ -124,7 +124,7 @@ https://hub.docker.com/
 | -------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | 运行     | docker run --name container-name -d image-name<br/>eg:docker run –name myredis –d redis<br/>-- | --name：自定义容器名<br/>-d：后台运行<br/>image-name:指定镜像模板 |
 | 列表     | docker ps（查看运行中的容器）；                              | 加上-a；可以查看所有容器                                     |
-| 启动     | docker stop container-name/container-id                      | 启动容器                                                     |
+| 启动     | docker start container-name/container-id                     | 启动容器                                                     |
 | 停止     | docker stop container-name/container-id                      | 停止当前你运行的容器                                         |
 | 删除     | docker rm container-id                                       | 删除指定容器                                                 |
 | 端口映射 | -p 6379:6379<br/>eg:docker run -d -p 6379:6379 --name myredisdocker.io/redis | -p:主机端口(映射到)容器内部的端口                            |

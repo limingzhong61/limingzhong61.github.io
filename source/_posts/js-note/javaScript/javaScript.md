@@ -1,10 +1,10 @@
----  
-title: javaScript  
-p: js-note/javaScript/javaScript  
+---
+title: javaScript
+p: js-note/javaScript/javaScript
 date: 2019-11-12 10:18:21  
-categories: js  
-tags: [js,前端]  
----  
+categories: js
+tags: [js,前端]
+---
   
 [TOC]  
   
