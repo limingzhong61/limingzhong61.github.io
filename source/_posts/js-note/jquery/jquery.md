@@ -2,7 +2,7 @@
 title: jquery
 p: js-note/jquery/jquery
 date: 2019-11-12 10:25:41
-categories: note-js
+categories: js
 tags: [js,前端]
 ---
 

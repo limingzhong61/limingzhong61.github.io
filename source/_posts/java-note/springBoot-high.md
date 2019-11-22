@@ -1,8 +1,8 @@
 ---
 title: springBoot高级
 date: 2019-10-09 15:43:44
-categories: 学习笔记-java 
-tags: [java,springBoot]
+categories: java 
+tags: [java,spring,springBoot]
 ---
 **spring boot高级**
 

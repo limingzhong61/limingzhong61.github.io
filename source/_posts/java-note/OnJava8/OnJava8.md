@@ -1724,7 +1724,114 @@ This burrito is maybe too hot.
 3. 在实际使用对象之前。这通常称为*延迟初始化*。在对象创建开销大且不需要每次都创建对象的情况下，它可以减少开销。
 4. 使用实例初始化。
 
+## 继承
 
+对基类构造函数的调用必须是派生类构造函数中的第一个操作。(如果你写错了，编译器会提醒你。)
+
+<!-- Delegation -->
+
+## 委托
+
+Java不直接支持的第三种重用关系称为委托。这介于继承和组合之间，因为你将一个成员对象放在正在构建的类中(比如组合)，但同时又在新类中公开来自成员对象的所有方法(比如继承)。例如，宇宙飞船需要一个控制模块:
+
+```java
+// reuse/SpaceShipControls.java
+// (c)2017 MindView LLC: see Copyright.txt
+// We make no guarantees that this code is fit for any purpose.
+// Visit http://OnJava8.com for more book information.
+
+public class SpaceShipControls {
+  void up(int velocity) {}
+  void down(int velocity) {}
+  void left(int velocity) {}
+  void right(int velocity) {}
+  void forward(int velocity) {}
+  void back(int velocity) {}
+  void turboBoost() {}
+}
+
+```
+
+建造宇宙飞船的一种方法是使用继承:
+
+```java
+// reuse/DerivedSpaceShip.java
+// (c)2017 MindView LLC: see Copyright.txt
+// We make no guarantees that this code is fit for any purpose.
+// Visit http://OnJava8.com for more book information.
+
+public class
+DerivedSpaceShip extends SpaceShipControls {
+  private String name;
+  public DerivedSpaceShip(String name) {
+    this.name = name;
+  }
+  @Override
+  public String toString() { return name; }
+  public static void main(String[] args) {
+    DerivedSpaceShip protector =
+        new DerivedSpaceShip("NSEA Protector");
+    protector.forward(100);
+  }
+}
+
+```
+
+然而， **DerivedSpaceShip** 并不是真正的“一种” **SpaceShipControls** ，即使你“告诉” **DerivedSpaceShip** 调用 `forward()`。更准确地说，一艘宇宙飞船包含了 **SpaceShipControls **，同时 **SpaceShipControls** 中的所有方法都暴露在宇宙飞船中。委托解决了这个难题:
+
+```java
+// reuse/SpaceShipDelegation.java
+// (c)2017 MindView LLC: see Copyright.txt
+// We make no guarantees that this code is fit for any purpose.
+// Visit http://OnJava8.com for more book information.
+
+public class SpaceShipDelegation {
+  private String name;
+  private SpaceShipControls controls =
+    new SpaceShipControls();
+  public SpaceShipDelegation(String name) {
+    this.name = name;
+  }
+  // Delegated methods:
+  public void back(int velocity) {
+    controls.back(velocity);
+  }
+  public void down(int velocity) {
+    controls.down(velocity);
+  }
+  public void forward(int velocity) {
+    controls.forward(velocity);
+  }
+  public void left(int velocity) {
+    controls.left(velocity);
+  }
+  public void right(int velocity) {
+    controls.right(velocity);
+  }
+  public void turboBoost() {
+    controls.turboBoost();
+  }
+  public void up(int velocity) {
+    controls.up(velocity);
+  }
+  public static void main(String[] args) {
+    SpaceShipDelegation protector =
+      new SpaceShipDelegation("NSEA Protector");
+    protector.forward(100);
+  }
+}
+
+```
+
+方法被转发到底层 **control** 对象，因此接口与继承的接口是相同的。但是，你对委托有更多的控制，因为你可以选择只在成员对象中提供方法的子集。
+
+虽然Java语言不支持委托，但是开发工具常常支持。例如，上面的例子是使用 JetBrains Idea IDE 自动生成的。
+
+## 组合与继承的选择
+
+当你想在新类中包含一个已有类的功能时，使用组合，而非继承。
+
+**“是一个”的关系是用继承来表达的，而“有一个“的关系则用组合来表达。**
 
 # 第二十四章 并发编程
 

@@ -1,7 +1,7 @@
 ---
 title: linux
 date: 2019-10-12 14:20:26
-categories: 学习笔记
+categories: note
 tags: linux
 ---
 [TOC]

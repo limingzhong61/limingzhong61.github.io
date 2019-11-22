@@ -7,7 +7,23 @@ tags: python
 ---
 [TOC]
 
-# python语法
+# 关于pyhton
+
+-	Python语言是通用语言
+-	Python语言是脚本语言
+-	Python语言是开源语言
+-	Python语言是跨平台语言
+-	Python语言是多模型语言
+
+Guido van Rossum 
+
+Python语言创立者
+
+2002年，Python 2.x 
+
+2008年，Python 3.x
+
+# python基础语法
 
 ## 程序的格式框架
 
@@ -150,6 +166,9 @@ for i in range(N) :
 ```python
 for c in s :
 <语句块> 
+```
+
+```python
 >>> for c in "Python123":
 print(c, end=",")
 P,y,t,h,o,n,1,2,3,
@@ -185,7 +204,7 @@ while <条件> :
 ```
 
 ### 循环控制保留字
-break 和 continue
+**break 和 continue**
 
 - break跳出并结束当前整个循环，执行循环后的语句
 - continue结束当次循环，继续执行后续次数循环
@@ -232,6 +251,13 @@ PY
 
 ## import库
 
+### import:使用库名调用
+
+```python
+import <libaryName>
+import <libaryName> as <alias>
+```
+
 ### form:能直接调用函数
 
 当我们使用from * 的时候，会取得模块顶层左右赋值的变量名的拷贝。
@@ -240,13 +266,6 @@ PY
 from 库 import 函数名
 from 库 import *
 <functionName>(argc)
-```
-
-### import:使用库名调用
-
-```python
-import <libaryName>
-import <libaryName> as <alias>
 ```
 
 ## 输入输出
@@ -269,6 +288,146 @@ input([prompt])
 
 ```python
 a, b, c, d = map(int, input().split())
+```
+
+## 函数的定义与使用
+
+### 函数的定义
+
+函数是一段代码的表示  
+
+- 函数是一段具有特定功能的、可重用的语句组
+- 函数是一种功能的抽象，一般函数表达特定功能
+- 两个作用：降低编程难度和代码复用
+
+```python
+def<函数名>(<参数(0个或多个)>):
+	<函数体>
+	return<返回值>
+```
+
+### 函数的调用
+
+调用是运行函数代码的方式
+
+调用时要给出实际参数
+
+- 实际参数替换定义中的参数
+- 函数调用后得到返回值
+
+### 可选参数传递
+
+函数定义时可以为某些参数指定默认值，构成可选参数
+
+```javascript
+def<函数名>(<非可选参数>,<可选参数>):
+	<函数体>
+	return<返回值>
+```
+
+例如：
+
+```python
+def fact(n,m=1) :
+    s = 1
+    foriinrange(1, n+1):
+    s *= i
+    return s//m
+```
+
+### 可变参数传递
+
+```python
+def <函数名> (<参数>, *b):
+    <函数体>
+    return <返回值>
+```
+
+例如  
+
+```python
+def fact(n, *b) :
+    s = 1
+    for i in range(1, n+1):
+    s *= i
+    for item in b:
+    s *= item
+    return s
+```
+
+### 函数的返回值
+
+函数可以返回0个或**多个结果**
+
+- return保留字用来传递返回值
+- 函数可以有返回值，也可以没有，可以有return，也可以没有
+- return可以传递0个返回值，也可以传递任意多个返回值
+
+### 局部变量和全局变量
+
+#### 规则1: 局部变量和全局变量是不同变量
+
+- 局部变量是函数内部的占位符，与全局变量可能重名但不同
+- 函数运算结束后，局部变量被释放
+- 可以使用global保留字在函数内部使用全局变量
+
+```python
+n, s = 10, 100
+def fact(n) :
+    global s #fact()函数中使用global保留字声明此处s是全局变量s
+    for i in range(1, n+1):
+    s *= i
+    return s
+print(fact(n), s)
+```
+
+```python
+运行结果
+>>>
+362880000 362880000
+```
+
+规则2: 局部变量为组合数据类型且未创建，等同于全局变量
+
+```python
+ls = ["F", "f"] #通过使用[]真实创建了一个全局变量列表ls
+def func(a) :
+    ls.append(a) #此处ls是列表类型，未真实创建则等同于全局变量
+    return
+func("C") #局部变量ls被修改
+print(ls)
+```
+
+```python
+运行结果
+>>>
+['F', 'f']
+```
+
+#### 使用规则
+
+- 基本数据类型，无论是否重名，局部变量与全局变量不同
+- 可以通过global保留字在函数内部声明全局变量
+- 组合数据类型，如果局部变量未真实创建，则是全局变量
+
+#### lambda函数
+
+lambda函数返回函数名作为结果
+
+- lambda函数是一种匿名函数，即没有名字的函数
+- 使用lambda保留字定义，函数名是返回结果
+- lambda函数用于定义简单的、能够在一行内表示的函数
+
+```python
+<函数名> = lambda<参数> : <表达式>
+```
+
+等价于
+
+```python
+def <函数名> (<参数>):
+    <函数体>
+    return <返回值>
 ```
 
 # 基本数据类型及其操作
@@ -410,7 +569,7 @@ z = 1.23e-4+5.6e+89j
 
 正向递增序号和反向递减序号
 
-![1573913135274](python/1573913135274.png)
+![string-serial](python/string-serial.png)
 
 ### 字符串的使用
 
@@ -507,7 +666,7 @@ z = 1.23e-4+5.6e+89j
   <模板字符串>.format(<逗号分隔的参数>)
   ```
 
-  ![1573914149821](python/groove.png)
+  ![format](python/groove.png)
 
 #### format()方法的格式控制
 
@@ -540,6 +699,8 @@ z = 1.23e-4+5.6e+89j
 
 Iterator Types
 
+**序列是一个基类类型**
+
 序列类型定义
 序列是具有先后关系的一组元素
 
@@ -547,11 +708,9 @@ Iterator Types
 - 类似数学元素序列：`s0, s1, … , sn-1`
 - 元素间由序号引导，通过下标访问序列的特定元素
 
-**序列是一个基类类型**
-
 ![1573915049023](python/Iterator Types.png)
 
-![1573915211722](python/1573915211722.png)
+![sequence-serial](python/sequence-serial.png)
 
 ### 序列处理函数及方法
 
@@ -627,49 +786,6 @@ def func():
 | ls.remove(x)    | 将列表ls中出现的第一个元素x删除        |
 | ls.reverse()    | 将列表ls中的元素反转                   |
 |                 |                                        |
-|                 |                                        |
-
-### 序列类型应用场景
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ## 集合类型
 
@@ -1024,7 +1140,6 @@ fo.close()
 
 - 写入一个字符串列表
 
-  > > > 中国法国美国
 ```python
 fo = open("output.txt","w+")
 ls = ["中国", "法国", "美国"]
@@ -1033,10 +1148,7 @@ fo.seek(0)
 for line in fo:
 print(line)
 fo.close()
-
 ```
-
-
 
 ## with open
 
@@ -1065,6 +1177,290 @@ with open('/path/to/file', 'r') as f:
 ```
 
 这和前面的`try ... finally`是一样的，但是代码更佳简洁，并且不必调用`f.close()`方法。
+
+# python常用标准库
+
+标准库
+Python
+计算生态 = 标准库 + 第三方库
+
+- 标准库：随解释器直接安装到操作系统中的功能模块
+- 第三方库：需要经过安装才能使用的功能模块
+-  库 Library 、包 Package 、模块 Module ，统称 模块
+
+
+
+## turtle库
+### 基本介绍
+
+turtle(海龟) 库是 turtle 绘图体系的 Python 实现
+
+- turtle 绘图体系： 1969 年诞生，主要用于程序设计入门
+- Python 语言的 标准库 之一
+- 入门级的图形绘制函数库
+
+### turtle绘图窗体布局
+
+![1574079315955](python/turtle-window.png)
+
+```python
+turtle.setup( width , height, startx , starty)
+```
+
+setup() 设置窗体大小及位置
+
+- 4 个参数中后两个可选
+- setup() 不是必须的
+
+### turtle空间坐标体系
+
+![1574079440215](python/turtle-absolute-location.png)
+
+```python
+turtle.goto( x, y)
+```
+
+![1574079529272](python/turtle-relate-location.png)
+
+![1574079619393](python/1574079619393.png)
+
+### turtle角度坐标体系
+
+![1574079649130](python/turtle-absolute-angle.png)
+
+```python
+turtle.seth(angle)
+```
+
+- seth()改变海龟行进方向
+- angle为绝对度数
+- seth()只改变方向但不行进
+
+![1574079747719](python/turtle-relate-angle.png)
+
+### RGB色彩体系
+
+#### RGB色彩模式由
+由三种颜色构成的万物色
+
+-	RGB指红蓝绿三个通道的颜色组合
+-	覆盖视力所能感知的所有颜色
+-	RGB每色取值范围0-255整数或0-1小数
+
+#### turtle的RGB色彩模式
+默认采用小数值 可切换为整数值
+
+```python
+turtle.colormode(mode)
+```
+
+-	1.0：RGB小数值模式
+-	255：RGB整数值模式
+
+## time库
+
+time库是Python中处理时间的标准库
+
+- 计算机时间的表达
+- 提供获取系统时间并格式化输出功能
+- 提供系统级精确计时功能，用于程序性能分析
+
+```python
+import time
+time.<b>()
+```
+
+### time库包括三类函数
+
+- 时间获取：time() ctime() gmtime()
+- 时间格式化：strftime() strptime()
+- 程序计时：sleep(), perf_counter()
+
+### 时间获取
+
+| 函数     | 描述                                                         |
+| -------- | ------------------------------------------------------------ |
+| time()   | 获取当前时间戳，即计算机内部时间值，浮点数>>>time.time()<br/>1516939876.6022282 |
+| ctime()  | 获取当前时间并以易读方式表示，返回字符串<br/>>>time.ctime()'Fri Jan 26 12:11:16 2018' |
+| gmtime() | 获取当前时间，表示为计算机可处理的时间格式>>>time.gmtime()<br/>time.struct_time(tm_year=2018, tm_mon=1,   tm_mday=26, tm_hour=4, tm_min=11, tm_sec=16,  tm_wday=4, tm_yday=26, tm_isdst=0) |
+
+### 时间格式化
+
+-	格式化：类似字符串格式化，需要有展示模板
+-	展示模板由特定的格式化控制符组成
+-	strftime()方法
+
+```python
+strftime(tpl, ts)
+```
+
+tpl是格式化模板字符串，用来定义输出效果
+ts是计算机内部时间类型变量
+
+```python
+>>>t = time.gmtime()
+>>>time.strftime("%Y-%m-%d %H:%M:%S",t) '2018-01-26 12:55:20'
+```
+
+#### 格式化控制符
+
+| 格式化字符串 | 日期/时间说明 | 值范围和实例                   |
+| ------------ | ------------- | ------------------------------ |
+| %Y           | 年份          | 0000~9999，例如：1900          |
+| %m           | 月份          | 01~12，例如：10                |
+| %B           | 月份名称      | January~December，例如：April  |
+| %b           | 月份名称缩写  | Jan~Dec，例如：Apr             |
+| %d           | 日期          | 01~31，例如：25                |
+| %A           | 星期          | Monday~Sunday，例如：Wednesday |
+| %a           | 星期缩写      | Mon~Sun，例如：Wed             |
+| %H           | 小时（24h制） | 00~23，例如：12                |
+| %I           | 小时（12h制） | 01~12，例如：7                 |
+| %p           | 上/下午       | AM, PM，例如：PM               |
+| %M           | 分钟          | 00~59，例如：26                |
+| %S           | 秒            | 00~59，例如：26                |
+
+```python
+>>>t = time.gmtime()
+>>>time.strftime("%Y-%m-%d %H:%M:%S",t)
+```
+
+```python
+>>>timeStr = '2018-01-26 12:55:20'
+>>>time.strptime(timeStr, “%Y-%m-%d %H:%M:%S”)
+```
+
+### 程序计时
+
+程序计时应用广泛
+
+-	程序计时指测量起止动作所经历时间的过程
+-	测量时间：perf_counter()
+-	产生时间：sleep()
+
+```python
+perf_counter()
+```
+
+返回一个CPU级别的精确时间计数值，单位为秒由于这个计数值起点不确定，连续调用差值才有意义
+```python
+>>>start = time.perf_counter() 318.66599499718114
+>>>end = time.perf_counter() 341.3905185375658
+>>>end - start
+>>>22.724523540384666
+```
+
+sleep(s)
+
+s拟休眠的时间，单位是秒，可以是浮点数
+
+```python
+>>>def wait():
+time.sleep(3.3)
+>>>wait() #程序将等待3.3秒后再退出
+```
+
+## random库
+
+random库是使用随机数的Python标准库
+
+- 伪随机数: 采用梅森旋转算法生成的(伪)随机序列中元素
+- random库主要用于生成随机数
+- 使用random库: `import random`
+
+### 常用函数
+
+random库包括两类函数，常用共8个
+
+- 基本随机数函数：seed(),random()
+- 扩展随机数函数：`randint(), getrandbits(), uniform(),
+  randrange(), choice(), shuffle()`
+
+### 基本随机数函数
+
+| 函数         | 描述                                                         |
+| ------------ | ------------------------------------------------------------ |
+| seed(a=None) | 初始化给定的随机数种子，默认为当前系统时间<br>>>>random.seed(10) #产生种子10对应的序列 |
+| random()     | 生成一个[0.0, 1.0)之间的随机小数<br/>>>>random.random()<br/>0.5714025946899135 |
+
+### 
+
+| 函数                 | 描述                                                         |
+| -------------------- | ------------------------------------------------------------ |
+| randint(a, b)        | 生成一个[a, b]之间的整数<br/>>>>random.randint(10, 100)<br/>64 |
+| randrange(m, n[, k]) | 生成一个[m, n)之间以k为步长的随机整数<br/>>>>random.randrange(10, 100, 10)<br/>80 |
+| getrandbits(k)       | 生成一个k比特长的随机整数<br/>>>>random.getrandbits(16)<br/>37885 |
+| uniform(a,b)         | 生成一个[a, b]之间的随机小数<br/>>>>random.uniform(10, 100)<br/>13.096321648808136 |
+| choice(seq)          | 从序列seq中随机选择一个元素<br/>>>>random.choice([1,2,3,4,5,6,7,8,9])<br/>8 |
+| shuffle(seq)         | 将序列seq中元素随机排列，返回打乱后的序列<br/>>>>s=[1,2,3,4,5,6,7,8,9];random.shuffle(s);print(s)<br/>[3, 5, 8, 9, 6, 1, 2, 7, 4] |
+
+
+## os库
+
+### os库基本介绍
+
+os库提供通用的、基本的操作系统交互功能
+
+-	os库是Python标准库，包含几百个函数
+-	常用路径操作、进程管理、环境参数等几类
+-	路径操作：os.path子库，处理文件路径及信息
+-	进程管理：启动系统中其他程序
+-	环境参数：获得系统软硬件信息等环境
+
+### os库之路径操作
+
+路径操作
+`os.path`子库以path为入口，用于操作和处理文件路径
+
+```python
+import os.path
+或
+import os.path as op
+```
+
+| 函数                       | 描述                                                         |
+| -------------------------- | ------------------------------------------------------------ |
+| os.path.abspath(path)      | 返回path在当前系统中的绝对路径<br/>>>>os.path.abspath("file.txt")<br/>'C:\\Users\\Tian Song\\Python36-32\\file.txt' |
+| os.path.normpath(path)     | 归一化path的表示形式，统一用\\分隔路径<br/>>>>os.path.normpath("D://PYE//file.txt")<br/>'D:\\PYE\\file.txt' |
+| os.path.relpath(path)      | 返回当前程序与文件之间的相对路径 (relative path)<br/>>>>os.path.relpath("C://PYE//file.txt")<br/>'..\\..\\..\\..\\..\\..\\..\\PYE\\file.txt' |
+| os.path.dirname(path)      | 返回path中的目录名称<br/>>>>os.path.dirname("D://PYE//file.txt")<br/>'D://PYE' |
+| os.path.basename(path)     | 返回path中最后的文件名称<br/>>>>os.path.basename("D://PYE//file.txt")<br/>'file.txt' |
+| os.path.join(path, *paths) | 组合path与paths，返回一个路径字符串<br/>>>>os.path.join("D:/", "PYE/file.txt")<br/>'D:/PYE/file.txt' |
+| os.path.exists(path)       | 判断path对应文件或目录是否存在，返回True或False<br/>>>>os.path.exists("D://PYE//file.txt")<br/>False |
+| os.path.isfile(path)       | 判断path所对应是否为已存在的文件，返回True或False<br/>>>>os.path.isfile("D://PYE//file.txt")<br/>True |
+| os.path.isdir(path)        | 判断path所对应是否为已存在的目录，返回True或False<br/>>>>os.path.isdir("D://PYE//file.txt")<br/>False |
+| os.path.getatime(path)     | 返回path对应文件或目录上一次的访问时间<br/>>>>os.path.getatime("D:/PYE/file.txt")<br/>1518356633.7551725 |
+| os.path.getmtime(path)     | 返回path对应文件或目录上一次的访问时间<br/>>>>os.path.getatime("D:/PYE/file.txt")<br/>1518356633.7551725 |
+| os.path.getmtime(path)     | 返回path对应文件或目录最近一次的修改时间<br/>>>>os.path.getmtime("D:/PYE/file.txt")<br/>1518356633.7551725 |
+| os.path.getctime(path)     | 返回path对应文件或目录的创建时间<br/>time.ctime(os.path.getctime("D:/PYE/file.txt"))<br/>'Sun Feb 11 21:43:53 2018' |
+| os.path.getsize(path)      | 返回path对应文件的大小，以字节为单位<br/>>>>os.path.getsize("D:/PYE/file.txt")<br/>180768 |
+
+### os库之进程管理
+
+```python
+os.system(command)
+```
+
+-	执行程序或命令command
+-	在Windows系统中，返回值为cmd的调用返回信息
+
+```python
+import os
+os.system("C:\\Windows\\System32\\calc.exe")
+>>>
+0
+```
+
+### os库之环境环境
+
+获取或改变系统环境信息
+
+| 函数           | 描述                                                         |
+| -------------- | ------------------------------------------------------------ |
+| os.chdir(path) | 修改当前程序操作的路径>>>os.chdir("D:")                      |
+| os.getcwd()    | 返回程序的当前路径<br/>>>>os.getcwd()<br/>'D:\\'             |
+| os.getlogin()  | 获得当前系统登录用户名称>>>os.getlogin() 'Tian Song'         |
+| os.cpu_count() | 获得当前系统的CPU数量>>>os.cpu_count() 8                     |
+| os.urandom(n)  | 获得n个字节长度的随机字符串，通常用于加解密运算<br/>>>>os.urandom(10)<br/>b'7\xbe\xf2!\xc1=\x01gL\xb3' |
 
 # 异常处理
 
@@ -1106,13 +1502,13 @@ print("输入不是整数")
 
 ```python
 try :
-<语句块1>
+	<语句块1>
 except :
-<语句块2>
+	<语句块2>
 else :
-<语句块3>
+	<语句块3>
 finally :
-<语句块4>
+	<语句块4>
 ```
 
 ```python
@@ -1239,9 +1635,6 @@ https://blog.csdn.net/dream_allday/article/details/80344511
 
 http://www.lfd.uci.edu/~gohlke/pythonlibs/ 
 
-实例：安装wordcloud库
-- 步骤1：在UCI页面上搜索wordcloud
-- 步骤2：下载对应版本的文件
-- 步骤3：使用pip install <文件名>安装 
+
 
 
