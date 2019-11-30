@@ -67,7 +67,7 @@
 <meta property="og:image" content="https://codeofli.github.io/2019/11/java-note/javaWeb/javaWeb/request-time.png">
 <meta property="og:image" content="https://codeofli.github.io/2019/11/java-note/javaWeb/javaWeb/Servlet-hierarchy.png">
 <meta property="og:image" content="https://codeofli.github.io/2019/11/java-note/javaWeb/javaWeb/Servlet-life-cycle.png">
-<meta property="og:updated_time" content="2019-11-30T06:09:54.444Z">
+<meta property="og:updated_time" content="2019-11-30T07:41:43.749Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javaWeb">
 <meta name="twitter:description" content="[TOC]基础知识JSP:动态网页静态、动态：1.不用 和 是否有“动感”混为一谈2.是否 随着 时间、地点、用户操作  的 改变而改变  动态网页 需要使用到 服务端脚本语言（JSP）  2架构CS：Client ServerCS不足：a.如果 软件升级， 那么全部软件都需要升级b.维护麻烦：需要维护每一台 客户端软件c.每一台客户端 都需要安装 客户端软件">
@@ -327,7 +327,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-30 14:09:54" itemprop="dateModified" datetime="2019-11-30T14:09:54+08:00">2019-11-30</time>
+                <time title="修改时间：2019-11-30 15:41:43" itemprop="dateModified" datetime="2019-11-30T15:41:43+08:00">2019-11-30</time>
               </span>
             
           
@@ -401,7 +401,47 @@
 <p>7.虚拟主机<br>通过<a href="http://www.test.com访问本机" target="_blank" rel="noopener">www.test.com访问本机</a><br>a. conf/server.xml    </p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Engine</span> <span class="attr">name</span>=<span class="string">"Catalina"</span> <span class="attr">defaultHost</span>=<span class="string">"www.test.com"</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">appBase</span>=<span class="string">"D:\study\JspProject"</span> <span class="attr">name</span>=<span class="string">"www.test.com"</span>&gt;</span>    </span><br><span class="line">	<span class="tag">&lt;<span class="name">Context</span> <span class="attr">docBase</span>=<span class="string">"D:\study\JspProject"</span>   <span class="attr">path</span>=<span class="string">"/"</span>/&gt;</span>    </span><br><span class="line"><span class="tag">&lt;/<span class="name">Host</span>&gt;</span>   </span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">b.C:\Windows\System32\drivers\etc\host    </span><br><span class="line">增加    </span><br><span class="line">127.0.0.1       www.test.com    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">流程：    </span><br><span class="line">www.test.com -&gt; host找映射关系 -&gt;server.xml找Engine的defaultHost -&gt;通过"/"映射到D:\study\JspProject    </span><br><span class="line">为了后续学习，将以上恢复成默认    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">7.JSP执行流程    </span><br><span class="line">jsp- java(Servlet文件) -class    </span><br><span class="line">D:\study\apache-tomcat-8.5.30\work\Catalina\localhost\JspProject\org\apache\jsp    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Jsp 和Servlet 可以相互转换      </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">因为第一请求服务端 会有翻译 和编译的过程，因此比较慢； 后续访问 可以直接访问class,因此速度较快。但是 如果 服务端修改了代码，则再次访问时  会重新的翻译、编译。    </span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line">## 使用Eclipse开发Web项目  </span><br><span class="line"></span><br><span class="line">(JSP项目)  tomcat  </span><br><span class="line"></span><br><span class="line">2. 在Eclipse中创建的Web项目：  </span><br><span class="line"> 浏览器可以直接访问 WebContent中的文件，  </span><br><span class="line">例如http://localhost:8888/MyJspProject/index1.jsp  </span><br><span class="line">其中的index1.jsp就在WebContent目录中；  </span><br><span class="line">但是WEB-INF中的文件  无法通过客户端（浏览器）直接访问，只能通过请求转发来访问  </span><br><span class="line"></span><br><span class="line">注意：</span><br><span class="line"></span><br><span class="line">&gt; 并不是 任何的内部跳转都能访问WEB-INF；原因是 跳转有2种方式：请求转发 、重定向  </span><br><span class="line"></span><br><span class="line">3.配置tomcat运行时环境  </span><br><span class="line">	JSP<span class="tag">&lt;<span class="name">=</span>&gt;</span>Servlet  </span><br><span class="line"></span><br><span class="line">a.将tomcat/lib中的servlet-api.jar加入项目的构建路径  </span><br><span class="line"></span><br><span class="line">b.右键项目-&gt;Build Path -&gt; Add library -&gt;Server Runtime  </span><br><span class="line"></span><br><span class="line">4.部署tomcat  </span><br><span class="line">在servers面板 新建一个 tomcat实例 ，  再在该实例中 部署项目（右键-add）  </span><br><span class="line">之后运行  </span><br><span class="line"></span><br><span class="line">注意：一般建议 将eclipse中的tomcat与 本地tomcat的配置信息保持一致： 将eclipse中的tomcat设置为托管模式：  </span><br><span class="line"></span><br><span class="line">【第一次】创建tomcat实例之后， 双击，选择Server Location的第二项  </span><br><span class="line"></span><br><span class="line">5.统一字符集编码  </span><br><span class="line"></span><br><span class="line">a.编码分类：  </span><br><span class="line">设置jsp文件的编码（jsp文件中的pageEncoding属性）：  jsp -&gt; java          </span><br><span class="line">设置浏览器读取jsp文件的编码（jsp文件中content属性）  </span><br><span class="line">一般将上述设置成 一致的编码，推荐使用UTF-8  </span><br><span class="line">文本编码：  </span><br><span class="line">	i.将整个eclipse中的文件 统一设置 （推荐）  </span><br><span class="line">	ii.设置 某一个项目  </span><br><span class="line">	iii.设置单独文件  </span><br><span class="line"></span><br><span class="line"># JSP</span><br><span class="line"></span><br><span class="line">JAVA serve pages</span><br><span class="line"></span><br><span class="line">## JSP的页面元素 </span><br><span class="line"></span><br><span class="line">1. HTML </span><br><span class="line">2. JAVA代码（脚本Scriptlet）</span><br><span class="line">3. 指令</span><br><span class="line">4. 注释  </span><br><span class="line"></span><br><span class="line">### 脚本Scriptlet  </span><br><span class="line"></span><br><span class="line">i.      </span><br><span class="line"></span><br><span class="line">```html  </span><br><span class="line"><span class="tag">&lt;<span class="name">%</span>     局部变量、<span class="attr">java</span>语句  %&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">appBase</span>=<span class="string">"D:\study\JspProject"</span> <span class="attr">name</span>=<span class="string">"www.test.com"</span>&gt;</span>    </span><br><span class="line">	<span class="tag">&lt;<span class="name">Context</span> <span class="attr">docBase</span>=<span class="string">"D:\study\JspProject"</span>   <span class="attr">path</span>=<span class="string">"/"</span>/&gt;</span>    </span><br><span class="line"><span class="tag">&lt;/<span class="name">Host</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>b.C:\Windows\System32\drivers\etc\host<br>增加    </p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span>       <span class="selector-tag">www</span><span class="selector-class">.test</span><span class="selector-class">.com</span></span><br></pre></td></tr></table></figure>
+
+<p>流程：  </p>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">www</span>.test.com -&gt;</span> <span class="function"><span class="title">host</span>找映射关系 -&gt;</span><span class="function"><span class="title">server</span>.xml找Engine的defaultHost -&gt;</span>通过<span class="string">"/"</span>映射到</span><br></pre></td></tr></table></figure>
+
+<p>D:\study\JspProject<br>为了后续学习，将以上恢复成默认  </p>
+<p>7.JSP执行流程<br>jsp- java(Servlet文件) -class<br>D:\study\apache-tomcat-8.5.30\work\Catalina\localhost\JspProject\org\apache\jsp  </p>
+<p>Jsp 和Servlet 可以相互转换    </p>
+<p>因为第一请求服务端 会有翻译 和编译的过程，因此比较慢； 后续访问 可以直接访问class,因此速度较快。但是 如果 服务端修改了代码，则再次访问时  会重新的翻译、编译。    </p>
+<h2 id="使用Eclipse开发Web项目"><a href="#使用Eclipse开发Web项目" class="headerlink" title="使用Eclipse开发Web项目"></a>使用Eclipse开发Web项目</h2><p>(JSP项目)  tomcat  </p>
+<ol start="2">
+<li>在Eclipse中创建的Web项目：<br>浏览器可以直接访问 WebContent中的文件，<br>例如<a href="http://localhost:8888/MyJspProject/index1.jsp" target="_blank" rel="noopener">http://localhost:8888/MyJspProject/index1.jsp</a><br>其中的index1.jsp就在WebContent目录中；<br>但是WEB-INF中的文件  无法通过客户端（浏览器）直接访问，只能通过请求转发来访问  </li>
+</ol>
+<p>注意：</p>
+<blockquote>
+<p>并不是 任何的内部跳转都能访问WEB-INF；原因是 跳转有2种方式：请求转发 、重定向  </p>
+</blockquote>
+<p>3.配置tomcat运行时环境<br>    JSP&lt;=&gt;Servlet  </p>
+<ul>
+<li><p>将tomcat/lib中的<code>servlet-api.jar</code>加入项目的构建路径  </p>
+</li>
+<li><p>右键项目-&gt;Build Path -&gt; Add library -&gt;Server Runtime  </p>
+</li>
+</ul>
+<p>4.部署tomcat<br>在servers面板 新建一个 tomcat实例 ，  再在该实例中 部署项目（右键-add）<br>之后运行  </p>
+<p>注意：一般建议 将eclipse中的tomcat与 本地tomcat的配置信息保持一致： 将eclipse中的tomcat设置为托管模式：  </p>
+<p>【第一次】创建tomcat实例之后， 双击，选择Server Location的第二项  </p>
+<p>5.统一字符集编码  </p>
+<p>a.编码分类：<br>设置jsp文件的编码（jsp文件中的pageEncoding属性）：  jsp -&gt; java<br>设置浏览器读取jsp文件的编码（jsp文件中content属性）<br>一般将上述设置成 一致的编码，推荐使用UTF-8<br>文本编码：<br>    i.将整个eclipse中的文件 统一设置 （推荐）<br>    ii.设置 某一个项目<br>    iii.设置单独文件  </p>
+<h1 id="JSP"><a href="#JSP" class="headerlink" title="JSP"></a>JSP</h1><p>JAVA serve pages</p>
+<h2 id="JSP的页面元素"><a href="#JSP的页面元素" class="headerlink" title="JSP的页面元素"></a>JSP的页面元素</h2><ol>
+<li>HTML </li>
+<li>JAVA代码（脚本Scriptlet）</li>
+<li>指令</li>
+<li>注释  </li>
+</ol>
+<h3 id="脚本Scriptlet"><a href="#脚本Scriptlet" class="headerlink" title="脚本Scriptlet"></a>脚本Scriptlet</h3><p>i.      </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%</span>     局部变量、<span class="attr">java</span>语句  %&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>ii.  </p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%!</span>  全局变量、定义方法  %&gt;</span></span><br></pre></td></tr></table></figure>
@@ -462,49 +502,168 @@
 <td></td>
 </tr>
 </tbody></table>
+<h3 id="response-响应对象"><a href="#response-响应对象" class="headerlink" title="response :响应对象"></a>response :响应对象</h3><p>提供的方法</p>
+<table>
+<thead>
+<tr>
+<th>function</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>void addCookie( Cookie cookie );</code></td>
+<td>服务端向客户端增加cookie对象</td>
+</tr>
+<tr>
+<td>void sendRedirect(String location ) throws IOException;</td>
+<td>页面跳转的一种方式（重定向）</td>
+</tr>
+<tr>
+<td>void setContetType(String type)</td>
+<td>设置服务端响应的编码（设置服务端的contentType类型）</td>
+</tr>
+</tbody></table>
 <h3 id="session-会话对象"><a href="#session-会话对象" class="headerlink" title="session 会话对象"></a>session 会话对象</h3><p> session(服务端)  , Cookie（客户端，不是内置对象）:Cookie是由 服务端生成的 ，再发送给客户端保存。<br>   相当于 本地缓存的作用： 客户端(hello.mp4,zs/abc)-&gt;服务端(hello.mp4；zs/abc)<br>   作用：提高访问服务端的效率，但是安全性较差。  </p>
 <p>Cookie：    name=value<br>javax.servlet.http.Cookie<br>public Cookie(String name,String value)<br>String getName()：获取name<br>String getValue():获取value<br>void setMaxAge(int expiry);最大有效期 （秒）  </p>
-<p>服务端准备Cookie：<br>    response.addCookie(Cookie cookie)<br>页面跳转（转发，重定向）<br>客户端获取cookie:  request.getCookies();  </p>
-<p>a.服务端增加cookie :response对象；客户端获取对象：request对象<br>b.不能直接获取某一个单独对象，只能一次性将 全部的cookie拿到  </p>
+<p>服务端准备Cookie：<br>    response.addCookie(Cookie cookie)<br>页面跳转（转发，重定向）  </p>
+<figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">客户端获取cookie:  request.getCookies();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>服务端增加cookie :response对象；客户端获取对象：request对象</li>
+<li>不能直接获取某一个单独对象，只能一次性将 全部的cookie拿到  </li>
+</ul>
 <p>通过F12可以发现  除了自己设置的Cookie对象外，还有一个name为 JSESSIONID的cookie  </p>
 <p>建议 cookie只保存  英文数字，否则需要进行编码、解码  </p>
 <ol start="3">
 <li>使用Cookie实现  记住用户名  功能  </li>
 </ol>
 <p>4.session :会话<br>a.浏览网站：开始-关闭<br>b.购物：  浏览、付款、退出<br>c.电子邮件：浏览、写邮件、退出<br>    开始-结束  </p>
-<p>session机制：  </p>
-<p>客户端第一次请求服务端时，（jsessionid-sessionid）服务端会产生一个session对象（用于保存该客户的信息）；<br>并且每个session对象 都会有一个唯一的 sessionId( 用于区分其他session);<br>服务端由会 产生一个cookie，并且 该cookie的name=JSESSIONID ,value=服务端sessionId的值；<br>然后 服务端会在 响应客户端的同时 将该cookie发送给客户端，至此 客户端就有了 一个cookie(JSESSIONID)；<br>因此，客户端的cookie就可以和服务端的session一一对应（JSESSIONID - sessionID）  </p>
+<h4 id="session机制"><a href="#session机制" class="headerlink" title="session机制"></a>session机制</h4><p>客户端第一次请求服务端时，（jsessionid-sessionid）服务端会产生一个session对象（用于保存该客户的信息）；<br>并且每个session对象 都会有一个唯一的 sessionId( 用于区分其他session);<br>服务端由会 产生一个cookie，并且 该cookie的name=JSESSIONID ,value=服务端sessionId的值；<br>然后 服务端会在 响应客户端的同时 将该cookie发送给客户端，至此 客户端就有了 一个cookie(JSESSIONID)；<br>因此，客户端的cookie就可以和服务端的session一一对应（JSESSIONID - sessionID）  </p>
 <p>客户端第二/n次请求服务端时:服务端会先用客户端cookie种的JSESSIONID  去服务端的session中匹配sessionid,如果匹配成功（cookie  jsessionid和sesion sessionid），说明此用户 不是第一次访问,无需登录；  </p>
 <p>例子：<br>客户端：            顾客（客户端）<br>服务端: 存包处   -  商场(服务端)  </p>
 <p>顾客第一次存包：商场 判断此人是 之前已经存过包（通过你手里是否有钥匙）。<br> 如果是新顾客（没钥匙） ，分配一个钥匙 给该顾客； 钥匙 会和 柜子 一一对应；  </p>
 <p> 第二/n次 存包：商场 判断此人是 之前已经存过包（通过你手里是否有钥匙）<br> 如果是老顾客（有钥匙），则不需要分配；该顾客手里的钥匙 会 和柜子 自动一一对应。  </p>
 <p>session:<br>a. session存储在服务端<br>b. session是在 同一个用户（客户）请求时 共享<br>c. 实现机制：第一次客户请求时 产生一个sessionid 并复制给 cookie的jsessionid 然后发给客户端。最终 通过session的sessionid-cookie的jsessionid  </p>
-<p>session方法：<br>String getId() :获取sessionId<br>boolean isNew() :判断是否是 新用户（第一次访问）<br>void invalidate():使session失效  （退出登录、注销）  </p>
-<p>void setAttribute()<br>Object getAttribute();  </p>
-<p>void setMaxInactiveInterval(秒) ：设置最大有效 非活动时间<br>int getMaxInactiveInterval():获取最大有效 非活动时间   </p>
+<h4 id="session方法"><a href="#session方法" class="headerlink" title="session方法"></a>session方法</h4><table>
+<thead>
+<tr>
+<th>function</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String getId()</td>
+<td>获取sessionId</td>
+</tr>
+<tr>
+<td>boolean isNew()</td>
+<td>判断是否是 新用户（第一次访问）</td>
+</tr>
+<tr>
+<td>void invalidate()</td>
+<td>使session失效  （退出登录、注销）</td>
+</tr>
+<tr>
+<td>void setAttribute()</td>
+<td></td>
+</tr>
+<tr>
+<td>Object getAttribute();</td>
+<td></td>
+</tr>
+<tr>
+<td>void setMaxInactiveInterval(秒)</td>
+<td>设置最大有效 非活动时间</td>
+</tr>
+<tr>
+<td>int getMaxInactiveInterval()</td>
+<td>获取最大有效 非活动时间</td>
+</tr>
+</tbody></table>
 <p>示例：<br>登录  </p>
 <p>客户端在第一次请求服务端时，如果服务端发现 此请求没有 JSESSIONID,则会创建一个 name=JSESIONID的cookie  并返回给客户端  </p>
-<p>Cookie：<br>a.不是内对对象，要使用必须new<br>b.但是，服务端会 自动生成一个(服务端自动new一个cookie) name=JSESIONID的cookie  并返回给客户端    </p>
-<p>cookie和session的区别：<br>        session        cookie<br>保存的位置    服务端        客户端<br>安全性        较安全        较不安全<br>保存的内容    Object        String          </p>
-<h3 id="appliation-全局对象"><a href="#appliation-全局对象" class="headerlink" title="appliation 全局对象"></a>appliation 全局对象</h3><p>String getContextPath()    虚拟路径<br>String getRealPath(String name): 绝对路径（虚拟路径 相对的绝对路径）  </p>
-<h3 id="其他五种不常用对象"><a href="#其他五种不常用对象" class="headerlink" title="其他五种不常用对象"></a>其他五种不常用对象</h3><p>pageContext  JSP页面容器   </p>
-<p>config  配置对象（服务器配置信息）</p>
-<p>page   当前JSP页面对象（相当于java中的this） </p>
-<p>exception 异常对象  </p>
-<p>out：输出对象，向客户端输出内容   </p>
-<h2 id="get与post请求方式的区别："><a href="#get与post请求方式的区别：" class="headerlink" title="get与post请求方式的区别："></a>get与post请求方式的区别：</h2><p>示例：<br>注册<br>register.jsp  ，show.jsp  </p>
-<p><a href="http://localhost:8888/MyJspProject/show.jsp?uname=aa&amp;upwd=123&amp;uage=22&amp;uhobbies=%E7%AF%AE%E7%90%83" target="_blank" rel="noopener">http://localhost:8888/MyJspProject/show.jsp?uname=aa&amp;upwd=123&amp;uage=22&amp;uhobbies=%E7%AF%AE%E7%90%83</a><br>        连接/文件？参数名1=参数值1 &amp; 参数名2=参数值2 &amp; 参数名1=参数值1   </p>
-<p>get提交方式:  method=”get” 和 地址栏 、超链接(<a href="xx">)请求方式 默认都属于get提交方式    </a></p>
-<p>a.   get方式 在地址栏显示 请求信息  (但是地址栏能够容纳的 信息有限，4-5KB；如果请求数据存在大文件，图片等  会出现地址栏无法容纳全部的数据而出错) ；post不会显示<br>b.   文件上传操作，必须是post<br>推荐使用post  </p>
-<p>8.统一请求的编码 request<br>get方式请求 如果出现乱码，解决：<br>a.统一每一个变量的 编码 （不推荐）<br>    new String(  旧编码，新编码);<br>    name = new String(name.getBytes(“iso-8859-1”),”utf-8”);  </p>
-<p>b. 修改server.xml ，一次性的 更改tomcat默认get提交方式的编码 （utf-8）<br>建议 使用tomcat时， 首先在server.xml中 统一get方式的编码.. URIEncoding=”UTF-8”  </p>
+<h4 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h4><p>a.不是内对对象，要使用必须new<br>b.但是，服务端会 自动生成一个(服务端自动new一个cookie) name=JSESIONID的cookie  并返回给客户端    </p>
+<p>cookie和session的区别： </p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>session</th>
+<th>cookie</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>保存的位置</td>
+<td>服务端</td>
+<td>客户端</td>
+</tr>
+<tr>
+<td>安全性</td>
+<td>较安全</td>
+<td>较不安全</td>
+</tr>
+<tr>
+<td>保存的内容</td>
+<td>Object</td>
+<td>String</td>
+</tr>
+</tbody></table>
+<h3 id="application全局对象"><a href="#application全局对象" class="headerlink" title="application全局对象"></a>application全局对象</h3><p>String getContextPath()    虚拟路径<br>String getRealPath(String name): 绝对路径（虚拟路径 相对的绝对路径）  </p>
+<h3 id="其他五种不常用对象"><a href="#其他五种不常用对象" class="headerlink" title="其他五种不常用对象"></a>其他五种不常用对象</h3><table>
+<thead>
+<tr>
+<th>Object</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pageContext</td>
+<td>JSP页面容器</td>
+</tr>
+<tr>
+<td>config</td>
+<td>配置对象（服务器配置信息）</td>
+</tr>
+<tr>
+<td>page</td>
+<td>当前JSP页面对象（相当于java中的this）</td>
+</tr>
+<tr>
+<td>exception</td>
+<td>异常对象</td>
+</tr>
+<tr>
+<td>out</td>
+<td>输出对象，向客户端输出内容</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="get与post请求方式的区别："><a href="#get与post请求方式的区别：" class="headerlink" title="get与post请求方式的区别："></a>get与post请求方式的区别：</h2><p>get提交方式   </p>
+<p><a href="http://localhost:8888/MyJspProject/show.jsp?uname=aa&amp;upwd=123&amp;uage=22&amp;uhobbies=%E7%AF%AE%E7%90%83" target="_blank" rel="noopener">http://localhost:8888/MyJspProject/show.jsp?uname=aa&amp;upwd=123&amp;uage=22&amp;uhobbies=%E7%AF%AE%E7%90%83</a> </p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">连接/文件?参数名<span class="number">1</span>=参数值<span class="number">1</span> &amp; 参数名<span class="number">2</span>=参数值<span class="number">2</span> &amp; 参数名<span class="number">1</span>=参数值<span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>method=”get” 和 地址栏 、超链接(<code>&lt;a href=&quot;xx&quot;&gt;</code>)请求方式 默认都属于get提交方式    </p>
+<ul>
+<li>get方式 在地址栏显示 请求信息  (但是地址栏能够容纳的 信息有限，4-5KB；如果请求数据存在大文件，图片等  会出现地址栏无法容纳全部的数据而出错) ；post不会显示  </li>
+<li>文件上传操作，必须是post<br>推荐使用post  </li>
+</ul>
+<p>8.统一请求的编码 request<br>get方式请求 如果出现乱码，解决：  </p>
+<ul>
+<li>统一每一个变量的 编码 （不推荐）  </li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> String(  旧编码，新编码);  </span><br><span class="line">name = <span class="keyword">new</span> String(name.getBytes(<span class="string">"iso-8859-1"</span>),<span class="string">"utf-8"</span>);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>修改server.xml ，一次性的 更改tomcat默认get提交方式的编码 （utf-8）<br>建议 使用tomcat时， 首先在server.xml中 统一get方式的编码.. <code>URIEncoding=&quot;UTF-8&quot;</code> </li>
+</ul>
 <p>tomcat7 (iso-8859-1)  </p>
 <p>tomcat8（utf-8）  </p>
-<p>post<br>request.setCharacterEncoding(“utf-8”) ;  </p>
-<h3 id="response-响应对象"><a href="#response-响应对象" class="headerlink" title="response :响应对象"></a>response :响应对象</h3><p>提供的方法：<br>void addCookie( Cookie cookie );<br>服务端向客户端增加cookie对象<br>void sendRedirect(String location ) throws IOException; :</p>
-<p>页面跳转的一种方式（重定向）<br>void setContetType(String type):  </p>
-<p>设置服务端响应的编码（设置服务端的contentType类型）  </p>
-<p>示例：登陆<br>login.jsp  -&gt; check.jsp  -&gt;success.jsp  </p>
+<p>post  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.setCharacterEncoding(<span class="string">"utf-8"</span>)</span><br></pre></td></tr></table></figure>
+
 <h2 id="请求转发和重定向"><a href="#请求转发和重定向" class="headerlink" title="请求转发和重定向"></a>请求转发和重定向</h2><p>请求转发</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.getRequestDispatcher(<span class="string">"b.jsp"</span>).forward(request,response)</span><br></pre></td></tr></table></figure>
 
@@ -551,15 +710,77 @@
 <p>重定向：<br>    张三（客户端）       -&gt;     服务窗口 A （服务端 ） -&gt;去找B  </p>
 <p>​    张三（客户端）    -&gt;     服务窗口 B （服务端 ） -&gt;结束  </p>
 <h2 id="四种范围对象"><a href="#四种范围对象" class="headerlink" title="四种范围对象"></a>四种范围对象</h2><p>（小-&gt;大）  </p>
-<p>pageContext  JSP页面容器   （page对象）； 当前页面有效<br>request   请求对象             同一次请求有效<br>session   会话对象            同一次会话有效<br>appliation 全局对象            全局有效（整个项目有效）  </p>
-<p>以上4个对象共有的方法：<br><code>Object getAttribute(String name)</code>:根据属性名，或者属性值<br><code>void setAttribute(String name,Object obj)</code>:设置属性值（新增，修改）<br>    setAttribute(“a”,”b”) ;//如果a对象之前不存在，则新建一个a对象 ；<br>                 如果a之前已经存在，则将a的值改为b<br><code>void removeAttribute(String name)</code>：根据属性名，删除对象  </p>
-<p>a.  pageContext 当前页面有效 (页面跳转后无效)  </p>
-<p>b.  request   同一次请求有效；其他请求无效 （请求转发后有效；重定向后无效）  </p>
-<p>c.  session  同一次会话有效  （无论怎么跳转，都有效；关闭/切换浏览器后无效 ； 从 登陆-&gt;退出 之间 全部有效）  </p>
-<p>d.  application  全局变量；整个项目运行期间 都有效 (切换浏览器 仍然有效)；关闭服务、其他项目 无效  </p>
+<table>
+<thead>
+<tr>
+<th>object</th>
+<th>description</th>
+<th>scope</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pageContext</td>
+<td>JSP页面容器   （page对象）；</td>
+<td>当前页面有效</td>
+</tr>
+<tr>
+<td>request</td>
+<td>请求对象</td>
+<td>同一次请求有效</td>
+</tr>
+<tr>
+<td>session</td>
+<td>会话对象</td>
+<td>同一次会话有效</td>
+</tr>
+<tr>
+<td>application</td>
+<td>全局对象</td>
+<td>全局有效（整个项目有效）</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>以上4个对象共有的方法：  </p>
+<table>
+<thead>
+<tr>
+<th>function</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>Object getAttribute(String name)</code></td>
+<td>根据属性名，获取属性值</td>
+</tr>
+<tr>
+<td><code>void setAttribute(String name,Object obj)</code></td>
+<td>设置属性值（新增，修改）</td>
+</tr>
+<tr>
+<td><code>void removeAttribute(String name)</code></td>
+<td>根据属性名，删除对象</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>pageContext 当前页面有效 (页面跳转后无效)  </p>
+</li>
+<li><p>request   同一次请求有效；其他请求无效 （请求转发后有效；重定向后无效）  </p>
+</li>
+<li><p>session  同一次会话有效  （无论怎么跳转，都有效；关闭/切换浏览器后无效 ； 从 登陆-&gt;退出 之间 全部有效）  </p>
+</li>
+<li><p>application  全局变量；整个项目运行期间 都有效 (切换浏览器 仍然有效)；关闭服务、其他项目 无效  </p>
+</li>
+</ul>
 <p>-&gt;多个项目共享、重启后仍然有效 ：JNDI  </p>
-<p>1.以上的4个范围对象，通过 setAttribute()复制，通过getAttribute()取值；<br>2.以上范围对象，尽量使用最小的范围。因为 对象的范围越大，造成的性能损耗越大。  </p>
-<h1 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h1><p>Java类必须符合一定的 规范：<br>    a.必须继承  javax.servlet.http.HttpServlet<br>    b.重写其中的service()方法  </p>
+<ol>
+<li>以上的4个范围对象，通过 setAttribute()复制，通过getAttribute()取值；  </li>
+<li>以上范围对象，尽量使用最小的范围。因为 对象的范围越大，造成的性能损耗越大。  </li>
+</ol>
+<h1 id="Servlet"><a href="#Servlet" class="headerlink" title="Servlet"></a>Servlet</h1><p>Java类必须符合一定的 规范：<br>    a.必须继承  javax.servlet.http.HttpServlet<br>    b.重写其中的service()之类的方法  </p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service(): 接受并识别和处理相应的所有提交的方法； </span><br><span class="line">doGet(): 接受并处理所有get提交方式的请求  </span><br><span class="line">doPost(): 接受并处理所有post提交方式的请求</span><br></pre></td></tr></table></figure>
 
 <p>Servlet要想使用，必须配置<br>Serlvet2.5：web.xml  </p>
@@ -1089,7 +1310,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP-动态网页"><span class="nav-number">1.1.</span> <span class="nav-text">JSP:动态网页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-tomcat解压后目录："><span class="nav-number">1.2.</span> <span class="nav-text">3.tomcat解压后目录：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-配置tomcat"><span class="nav-number">1.3.</span> <span class="nav-text">4.配置tomcat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-访问tomcat"><span class="nav-number">1.4.</span> <span class="nav-text">5.访问tomcat</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指令"><span class="nav-number">1.4.1.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-number">1.4.2.</span> <span class="nav-text">注释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP九大内置对象"><span class="nav-number">1.5.</span> <span class="nav-text">JSP九大内置对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#request：请求对象"><span class="nav-number">1.5.1.</span> <span class="nav-text">request：请求对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session-会话对象"><span class="nav-number">1.5.2.</span> <span class="nav-text">session 会话对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#appliation-全局对象"><span class="nav-number">1.5.3.</span> <span class="nav-text">appliation 全局对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他五种不常用对象"><span class="nav-number">1.5.4.</span> <span class="nav-text">其他五种不常用对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get与post请求方式的区别："><span class="nav-number">1.6.</span> <span class="nav-text">get与post请求方式的区别：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#response-响应对象"><span class="nav-number">1.6.1.</span> <span class="nav-text">response :响应对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请求转发和重定向"><span class="nav-number">1.7.</span> <span class="nav-text">请求转发和重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四种范围对象"><span class="nav-number">1.8.</span> <span class="nav-text">四种范围对象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Servlet"><span class="nav-number">2.</span> <span class="nav-text">Servlet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编写Servlet步骤："><span class="nav-number">2.1.</span> <span class="nav-text">编写Servlet步骤：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet生命周期"><span class="nav-number">2.2.</span> <span class="nav-text">Servlet生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加载、初始化："><span class="nav-number">2.2.1.</span> <span class="nav-text">加载、初始化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#销毁-：destroy"><span class="nav-number">2.2.2.</span> <span class="nav-text">销毁  ：destroy()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库连接"><span class="nav-number">3.</span> <span class="nav-text">数据库连接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JDBC"><span class="nav-number">3.1.</span> <span class="nav-text">JDBC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jdbc总结"><span class="nav-number">3.1.1.</span> <span class="nav-text">jdbc总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaBean"><span class="nav-number">3.1.2.</span> <span class="nav-text">JavaBean</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库连接池-DBCP"><span class="nav-number">3.2.</span> <span class="nav-text">数据库连接池(DBCP)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DBUtil-java"><span class="nav-number">3.3.</span> <span class="nav-text">DBUtil.java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EL和JSTL"><span class="nav-number">4.</span> <span class="nav-text">EL和JSTL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#EL"><span class="nav-number">4.1.</span> <span class="nav-text">EL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作符："><span class="nav-number">4.1.1.</span> <span class="nav-text">操作符：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSTL：比EL更加强大"><span class="nav-number">4.2.</span> <span class="nav-text">JSTL：比EL更加强大</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通用标签库"><span class="nav-number">4.2.1.</span> <span class="nav-text">通用标签库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lt-c-set-gt-赋值"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">&lt;c:set&gt;赋值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lt-c-out-gt-：显示"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">&lt;c:out&gt;：显示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lt-c-remove-gt-：删除属性"><span class="nav-number">4.2.1.3.</span> <span class="nav-text">&lt;c:remove &gt;：删除属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择"><span class="nav-number">4.2.1.4.</span> <span class="nav-text">选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#循环（迭代标签库）"><span class="nav-number">4.2.1.5.</span> <span class="nav-text">循环（迭代标签库）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设计和架构"><span class="nav-number">5.</span> <span class="nav-text">设计和架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC设计模式"><span class="nav-number">5.1.</span> <span class="nav-text">MVC设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三层优化"><span class="nav-number">5.2.</span> <span class="nav-text">三层优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#过滤器、上传文件、分页"><span class="nav-number">6.</span> <span class="nav-text">过滤器、上传文件、分页</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#过滤器"><span class="nav-number">6.1.</span> <span class="nav-text">过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传文件"><span class="nav-number">6.2.</span> <span class="nav-text">上传文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分页"><span class="nav-number">6.3.</span> <span class="nav-text">分页</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分页实现"><span class="nav-number">6.3.1.</span> <span class="nav-text">分页实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql分页"><span class="nav-number">6.3.1.1.</span> <span class="nav-text">mysql分页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#oracle分页"><span class="nav-number">6.3.1.2.</span> <span class="nav-text">oracle分页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQLServer分页"><span class="nav-number">6.3.1.3.</span> <span class="nav-text">SQLServer分页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分页实现-1"><span class="nav-number">6.3.1.4.</span> <span class="nav-text">分页实现</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web路径"><span class="nav-number">7.</span> <span class="nav-text">web路径</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基础知识"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP-动态网页"><span class="nav-number">1.1.</span> <span class="nav-text">JSP:动态网页</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-tomcat解压后目录："><span class="nav-number">1.2.</span> <span class="nav-text">3.tomcat解压后目录：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-配置tomcat"><span class="nav-number">1.3.</span> <span class="nav-text">4.配置tomcat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-访问tomcat"><span class="nav-number">1.4.</span> <span class="nav-text">5.访问tomcat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Eclipse开发Web项目"><span class="nav-number">1.5.</span> <span class="nav-text">使用Eclipse开发Web项目</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSP"><span class="nav-number">2.</span> <span class="nav-text">JSP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP的页面元素"><span class="nav-number">2.1.</span> <span class="nav-text">JSP的页面元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本Scriptlet"><span class="nav-number">2.1.1.</span> <span class="nav-text">脚本Scriptlet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令"><span class="nav-number">2.1.2.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-number">2.1.3.</span> <span class="nav-text">注释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSP九大内置对象"><span class="nav-number">2.2.</span> <span class="nav-text">JSP九大内置对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#request：请求对象"><span class="nav-number">2.2.1.</span> <span class="nav-text">request：请求对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#response-响应对象"><span class="nav-number">2.2.2.</span> <span class="nav-text">response :响应对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session-会话对象"><span class="nav-number">2.2.3.</span> <span class="nav-text">session 会话对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#session机制"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">session机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#session方法"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">session方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Cookie"><span class="nav-number">2.2.3.3.</span> <span class="nav-text">Cookie</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#application全局对象"><span class="nav-number">2.2.4.</span> <span class="nav-text">application全局对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他五种不常用对象"><span class="nav-number">2.2.5.</span> <span class="nav-text">其他五种不常用对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get与post请求方式的区别："><span class="nav-number">2.3.</span> <span class="nav-text">get与post请求方式的区别：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#请求转发和重定向"><span class="nav-number">2.4.</span> <span class="nav-text">请求转发和重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四种范围对象"><span class="nav-number">2.5.</span> <span class="nav-text">四种范围对象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Servlet"><span class="nav-number">3.</span> <span class="nav-text">Servlet</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编写Servlet步骤："><span class="nav-number">3.1.</span> <span class="nav-text">编写Servlet步骤：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Servlet生命周期"><span class="nav-number">3.2.</span> <span class="nav-text">Servlet生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加载、初始化："><span class="nav-number">3.2.1.</span> <span class="nav-text">加载、初始化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#销毁-：destroy"><span class="nav-number">3.2.2.</span> <span class="nav-text">销毁  ：destroy()</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库连接"><span class="nav-number">4.</span> <span class="nav-text">数据库连接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JDBC"><span class="nav-number">4.1.</span> <span class="nav-text">JDBC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jdbc总结"><span class="nav-number">4.1.1.</span> <span class="nav-text">jdbc总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaBean"><span class="nav-number">4.1.2.</span> <span class="nav-text">JavaBean</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库连接池-DBCP"><span class="nav-number">4.2.</span> <span class="nav-text">数据库连接池(DBCP)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DBUtil-java"><span class="nav-number">4.3.</span> <span class="nav-text">DBUtil.java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#EL和JSTL"><span class="nav-number">5.</span> <span class="nav-text">EL和JSTL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#EL"><span class="nav-number">5.1.</span> <span class="nav-text">EL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#操作符："><span class="nav-number">5.1.1.</span> <span class="nav-text">操作符：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JSTL：比EL更加强大"><span class="nav-number">5.2.</span> <span class="nav-text">JSTL：比EL更加强大</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#通用标签库"><span class="nav-number">5.2.1.</span> <span class="nav-text">通用标签库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lt-c-set-gt-赋值"><span class="nav-number">5.2.1.1.</span> <span class="nav-text">&lt;c:set&gt;赋值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lt-c-out-gt-：显示"><span class="nav-number">5.2.1.2.</span> <span class="nav-text">&lt;c:out&gt;：显示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lt-c-remove-gt-：删除属性"><span class="nav-number">5.2.1.3.</span> <span class="nav-text">&lt;c:remove &gt;：删除属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择"><span class="nav-number">5.2.1.4.</span> <span class="nav-text">选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#循环（迭代标签库）"><span class="nav-number">5.2.1.5.</span> <span class="nav-text">循环（迭代标签库）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设计和架构"><span class="nav-number">6.</span> <span class="nav-text">设计和架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC设计模式"><span class="nav-number">6.1.</span> <span class="nav-text">MVC设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三层优化"><span class="nav-number">6.2.</span> <span class="nav-text">三层优化</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#过滤器、上传文件、分页"><span class="nav-number">7.</span> <span class="nav-text">过滤器、上传文件、分页</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#过滤器"><span class="nav-number">7.1.</span> <span class="nav-text">过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上传文件"><span class="nav-number">7.2.</span> <span class="nav-text">上传文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分页"><span class="nav-number">7.3.</span> <span class="nav-text">分页</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分页实现"><span class="nav-number">7.3.1.</span> <span class="nav-text">分页实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql分页"><span class="nav-number">7.3.1.1.</span> <span class="nav-text">mysql分页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#oracle分页"><span class="nav-number">7.3.1.2.</span> <span class="nav-text">oracle分页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQLServer分页"><span class="nav-number">7.3.1.3.</span> <span class="nav-text">SQLServer分页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分页实现-1"><span class="nav-number">7.3.1.4.</span> <span class="nav-text">分页实现</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web路径"><span class="nav-number">8.</span> <span class="nav-text">web路径</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
