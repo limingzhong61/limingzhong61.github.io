@@ -169,15 +169,35 @@ https://docs.docker.com/engine/reference/commandline/docker/
 
 ![](docker\关闭firewall的参数.png)
 
-### 3）、安装MySQL示例
+# 使用
+
+## 进入容器Bash
+
+```shell
+docker exec -it containerID bash
+```
+
+### 将本地sql文件导入容器
+
+```shell
+sudo docker cp /home/ubuntu/yoj.sql(文件路径) mysql(容器名):/home/tmp(容器文件保存路径)
+```
+
+docker cp 第一个参数指定本地文件或者文件夹，第二个参数指定容器及容器内的目标文件夹 
+
+```shell
+sudo docker cp /home/ubuntu/yoj.sql mysql:/home
+```
+
+# Docker-Mysql
+
+## 安装MySQL示例
 
 ```shell
 docker pull mysql
 #mysql 版本最好在5.7左右，不然navicat连不上
 [root@MiWiFi-R3A-srv ~]# docker pull mysql:5.7.27
 ```
-
-
 
 错误的启动
 
@@ -261,8 +281,7 @@ docker run -d -p 3307:3306 -e MYSQL_ROOT_PASSWORD=db123456 --name mysql -e TZ=As
 **修改时区和字符集**
 
 ```shell
-
-docker run -p 3306:3306 --name ch-timezone-mysql -e MYSQL_ROOT_PASSWORD=123456 -e TZ=Asia/Shanghai -d mysql:5.7.27 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=123456 -e TZ=Asia/Shanghai -d mysql:5.7.27 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 ```
 
 
@@ -273,7 +292,6 @@ docker run -p 3306:3306 --name ch-timezone-mysql -e MYSQL_ROOT_PASSWORD=123456 -
 
 ```shell
 ubuntu@VM-0-5-ubuntu:/etc/apt$ sudo docker exec -it mysql02 bash
-
 ```
 
 Docker容器启动的时候，如果要挂载宿主机的一个目录，可以用-v参数指定。
@@ -285,6 +303,184 @@ docker run -it -v /test:/soft centos /bin/bash
 docker run -it -v /hmoe/ubuntu:/tmp mysql02 /bin/bash
 ```
 
+# mysql使用
+
+```shell
+sudo docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7.27 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+```
+
+## MySql 导入 *.sql文件
+
+### 1.将本地sql文件导入容器
+
+```shell
+sudo docker cp /home/ubuntu/yoj.sql(文件路径) mysql(容器名):/home/tmp(容器文件保存路径)
+```
+
+docker cp 第一个参数指定本地文件或者文件夹，第二个参数指定容器及容器内的目标文件夹 
+
+```shell
+sudo docker cp /home/ubuntu/yoj.sql mysql:/home
+```
+
+### 登入容器内MYSQL执行sql
+
+command format
+
+```shell
+docker exec -it (mysql-container-name)[xxx] (in mysql command)[mysql -uroot -p123456]
+```
+
+```shell
+docker exec -it bteye-mysql mysql -uroot -p123456
+```
+
+执行sql文件 
+
+```
+source /home/yoj.sql
+```
+
+
+
+### 2.进入数据库容器
+
+```shell
+docker exec -it containerID bash
+```
+
+数据库导入
+
+```shell
+mysql -h localhost -u root -p（进入mysql下面）
+create database abc;(创建数据库)
+show databases;(就可看到所有已经存在的数据库，以及刚刚创建的数据库abc)
+use abc;(进入abc数据库下面)
+show tables;(产看abc数据库下面的所有表,空的)
+source /var/test.sql（导入数据库表）
+show tables;(查看abc数据库下面的所有表,就可以看到表了)
+desc pollution;(查看表结构设计)
+select * from pollution;
+exit(或者ctrl + c)退出mysql
+```
+
+## 修改 Docker 中 MySQL 容器的编码
+
+https://blog.csdn.net/m0_37639542/article/details/72852875
+
+1.查看字符集
+
+```mysql
+SHOW VARIABLES LIKE 'character_set_%';//查看数据库字符集
+```
+
+更新之后记得重启mysql服务
+
+```shell
+service mysql restart
+```
+
+
+
+#### 1. 进入MySQL容器
+
+```sh
+docker exec -it my-space-mysql /bin/bash
+```
+
+#### 2. 备份当前 my.cnf 文件
+
+```sh
+mv /etc/mysql/my.cnf /etc/mysql/my.cnf.bak
+```
+
+#### 3. 退出容器
+
+```sh
+exit
+```
+
+#### 4. 在服务器创建配置文件(my.cnf)
+
+```text
+[client]
+default-character-set=utf8
+[mysqld]
+character-set-server=utf8
+collation-server=utf8_general_ci
+```
+
+#### 5. 查看容器长ID
+
+```sh
+docker inspect -f '{{.ID}}' my-space-mysql
+```
+
+- `my-space-mysql`是容器的名称
+
+#### 6. 上传文件到容器
+
+```sh
+docker cp my.cnf <容器长ID>:/etc/mysql
+```
+
+#### 7. 自行登录容器查看并提出容器
+
+#### 8. 重启docker
+
+```sh
+docker stop my-space-mysql
+docker start my-space-mysql
+```
+
+#### 9. 查看数据库编码
+
+- 进入数据库执行
+
+```sql
+status
+```
+
+## 备份数据库
+
+```shell
+sudo docker exec -it  mysql mysqldump -uroot -p123456 yoj > /home/ubuntu/sql_bak/yoj_db.sql
+```
+
+### mysql使用mysqldump定时备份数据库
+
+https://www.jianshu.com/p/be1e581acb8e
+
+3、数据库备份脚本
+功能：mysql 每天定时备份， 并删除7天以前的备份
+mysql_dumps.sh：
+
+```sh
+#!/bin/bash
+docker_name = mysql57
+data_dir="/path/to/save/data/"
+sudo docker exec -it ${docker_name} mysqldump -uroot -ppasswd --all-databases > "$data_dir/data_`date +%Y%m%d`.sql"
+#if [ $? -ne 0 ];then
+    # 任务失败，发送邮件
+#    echo -e "邮件正文" | mail -s '标题' 123456@gmail.com
+#    exit -1
+#fi
+find $data_dir -mtime +7 -name 'data_[1-9].sql' -exec rm -rf {} \;
+```
+
+4、通过linux cron设置定时任务
+crontab -e：
+
+```shell
+0 2 * * * sh /home/ubuntu/sql_bak/mysql_dumps.sh > /home/ubuntu/sql_bak/mysql_dumps.log 2>&1
+```
+
+
+
+```shell
+0 * * * * sh /home/ubuntu/sql_bak/mysql_dumps.sh > /home/ubuntu/sql_bak/mysql_dumps.log 2>&1
+```
+
 # 安装redis
 
 ```shell
@@ -293,7 +489,6 @@ runoob@runoob:~$ mkdir -p ~/redis ~/redis/data
 
 ```java
 sudo docker run -p 6379:6379 -v $PWD/data:/data  -d redis redis-server --appendonly yes
-
 ```
 
 命令说明：
@@ -356,3 +551,4 @@ docker run -d --privileged=true -p 6379:6379 --restart always -v /root/docker/re
 --appendonly yes                   -> 开启数据持久化
 ```
 
+ 

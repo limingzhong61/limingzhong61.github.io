@@ -18,6 +18,10 @@ Guido van Rossum
 2002年，Python 2.x   
 2008年，Python 3.x
 
+**注：**
+
+**变量命名主要采用下划线规则**
+
 # python基础语法
 
 ## 程序的格式框架
@@ -42,8 +46,8 @@ Guido van Rossum
 - 单行注释：以 开头，其后内容为注释
 
     ```python
-        #这里是单行注释
-    ``` 
+    #这里是单行注释
+    ```
 
 - 多行注释 ：以 开头和结尾
 
@@ -149,6 +153,7 @@ for <循环变量> in <遍历结构> :
 ### 计数循环(N次)
 
 - 遍历由range()函数产生的数字序列，产生循环
+- range(N) 产生的序列，左闭右开，即[0,N)
 
 ```python
 for i in range(N) :
@@ -235,10 +240,11 @@ else:
 print("正常退出")
 PYHON正常退出
 
->>> for c in "PYTHON" :
-if c == "T" :
-break
-print(c, end="")
+>>> 
+for c in "PYTHON" :
+    if c == "T" :
+    break
+    print(c, end="")
 else:
 print("正常退出")
 PY
@@ -271,6 +277,15 @@ from 库 import *
 
 ```python
 print({}.format()) {}表示槽，后续format()填入
+```
+
+
+
+```python
+title = "a+b"
+print('%s %d insert!!!!!!' % (title, 5))
+title = "a+b"
+print('%s  insert!!!!!!' % title)
 ```
 
 ### input()
@@ -425,11 +440,62 @@ def <函数名> (<参数>):
     return <返回值>
 ```
 
+## 定义文件编码
+
+Defining Python Source Code Encodings
+
+[Defining the Encoding](https://www.python.org/dev/peps/pep-0263/#id8)
+
+Python will default to ASCII as standard encoding if no other encoding hints are given.
+
+To define a source code encoding, a magic comment must be placed into the source files either as first or second line in the file, such as:
+
+```
+# coding=<encoding name>
+```
+
+or (using formats recognized by popular editors):
+
+```
+#!/usr/bin/python
+# -*- coding: <encoding name> -*-
+```
+
+or:
+
+```
+#!/usr/bin/python
+# vim: set fileencoding=<encoding name> :
+```
+
+```python
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+```
+
+
+
 # 基本数据类型及其操作
+
+## 判断变量类型
+
+```python
+import types
+if type(text) is types.StringType:
+    ....
+type(x) == types(1) # 判断是否int 类型
+type(x) == type('a') #是否string类型
+```
+
+
 
 ## 数字类型
 
 ### 整数类型
+
+#### 注：
+
+python 中不支持 a++ 和 ++a
 
 **与数学中整数的概念一致**
 
@@ -587,7 +653,7 @@ z = 1.23e-4+5.6e+89j
 "请输入带有符号的温度值: "[1:3]或者TempStr[0:-1]
 ```
 
-使用[M:N: K]根据步长对字符串切片
+使用[M:N: K]根据步长(K)对字符串切片
 
 - <字符串>[M: N]，M缺失表示至开头，N缺失表示至结尾
 
@@ -650,7 +716,7 @@ z = 1.23e-4+5.6e+89j
 | str.count(sub)               | 返回子串sub在str中出现的次数<br/>"an apple a day".count("a")结果为4 |
 | str.replace(old, new)        | 返回字符串str副本，所有old子串被替换为new<br/>"python".replace("n","n123.io")结果为<br/>"python123.io" |
 | str.center(width[,fillchar]) | 字符串str根据宽度width居中，fillchar可选<br/>` "python".center(20,"=")结果为<br/>'=======python======='` |
-| str.strip(chars)             | 从str中去掉在其左侧和右侧chars中列出的字符<br/>"= python= ".strip("=np")结果为<br/>"ytho"<br/> |
+| str.strip(chars)             | 从str中去掉在其左侧和右侧chars中列出的字符                   |
 | str.join(iter)               | 在iter变量除最后元素外每个元素后增加一个str<br/>",".join("12345")结果为<br/>"1,2,3,4,5"#主要用于字符串分隔等 |
 
 ### 字符串类型的格式化
@@ -893,14 +959,19 @@ False
 映射是一种键(索引)和值(数据)的对应
 - 键值对：键是数据索引的扩展
 - 字典是键值对的集合，键值对之间无序
-- 采用大括号{}和dict()创建，键值对用冒号: 表示
+- 采用大括号`{}`和dict()创建，键值对用冒号: 表示
 {<键1>:<值1>, <键2>:<值2>, … , <键n>:<值n>} 
 
 在字典变量中，通过键获得值
 <字典变量> = {<键1>:<值1>, … , <键n>:<值n>}
 <值> = <字典变量>[<键>]
 **[ ] 用来向字典变量中索引或增加元素**
+
+```python
 <字典变量>[<键>] = <值> 
+```
+
+
 
 ```python
 >>> d = {"中国":"北京", "美国":"华盛顿", "法国":"巴黎"}
@@ -984,15 +1055,11 @@ for k in d :
 - 一般存在二进制0和1的组织结构，即文件格式
 - 适用于例如： .png文件、 .avi文件等 
 
-
-
-## 文本文件vs二进制文件
+### 文本文件vs二进制文件
 
 **f.txt文件保存：“中国是一个伟大的国家！”；**
 
-
-
-### 文本形式打开文件
+#### 文本形式打开文件
 
 ```python
 #tf = open("f.txt", mode="rt",encoding='UTF-8') 能指定编码
@@ -1005,7 +1072,7 @@ tf.close()
 >>> 
 ```
 
-### 二进制形式打开文件
+#### 二进制形式打开文件
 
 ```python
 tf = open("f.txt", mode="rb")
@@ -1097,7 +1164,7 @@ bf.close()
 fname = input("请输入要打开的文件名称:")
 fo = open(fname,"r")
 for line in fo.readlines():
-print(line)
+	print(line)
 fo.close()
 ```
 
@@ -1105,13 +1172,12 @@ fo.close()
 
 - **分行读入，逐行处理**
 
-```
+```python
 fname = input("请输入要打开的文件名称:")
 fo = open(fname,"r")
 for line in fo:
 print(line)
 fo.close()
-
 ```
 
 ## 数据的文件写入 
@@ -1131,9 +1197,8 @@ fo = open("output.txt","w+")
 ls = ["中国", "法国", "美国"]
 fo.writelines(ls)
 for line in fo:
-print(line)
+ print(line)
 fo.close()
-
 ```
 
 - 写入一个字符串列表
@@ -1144,11 +1209,13 @@ ls = ["中国", "法国", "美国"]
 fo.writelines(ls)
 fo.seek(0)
 for line in fo:
-print(line)
+ print(line)
 fo.close()
 ```
 
 ## with open
+
+
 
 **文件使用完毕后必须关闭，因为文件对象会占用操作系统的资源，并且操作系统同一时间能打开的文件数量也是有限的**：
 
@@ -1175,6 +1242,46 @@ with open('/path/to/file', 'r') as f:
 ```
 
 这和前面的`try ... finally`是一样的，但是代码更佳简洁，并且不必调用`f.close()`方法。
+
+## 遍历文件夹下的所有文件
+
+```python
+for root, dirs, files in os.walk(file):
+
+        # root 表示当前正在访问的文件夹路径
+        # dirs 表示该文件夹下的子目录名list
+        # files 表示该文件夹下的文件list
+
+        # 遍历文件
+        for f in files:
+            print(os.path.join(root, f))
+
+        # 遍历所有的文件夹
+        for d in dirs:
+            print(os.path.join(root, d))
+```
+
+## 删除文件
+
+os.remove() 方法用于删除指定路径的文件。**如果指定的路径是一个目录，将抛出OSError**。
+
+在Unix, Windows中有效
+
+### 语法
+
+**remove()**方法语法格式如下：
+
+```
+`os.remove(path)`
+```
+
+### 参数
+
+- **path** -- 要移除的文件路径
+
+### 返回值
+
+该方法没有返回值
 
 # python常用标准库
 
@@ -1253,7 +1360,7 @@ turtle.colormode(mode)
 -	1.0：RGB小数值模式
 -	255：RGB整数值模式
 
-# time库
+## time库
 
 time库是Python中处理时间的标准库
 
@@ -1429,6 +1536,16 @@ import os.path as op
 | os.path.getctime(path)     | 返回path对应文件或目录的创建时间<br/>time.ctime(os.path.getctime("D:/PYE/file.txt"))<br/>'Sun Feb 11 21:43:53 2018' |
 | os.path.getsize(path)      | 返回path对应文件的大小，以字节为单位<br/>>>>os.path.getsize("D:/PYE/file.txt")<br/>180768 |
 
+### 获取当前文件路径
+
+```python
+print(os.getcwd())
+print(os.path.abspath('.'))
+print(os.path.abspath(os.curdir))
+```
+
+
+
 ### os库之进程管理
 
 ```python
@@ -1457,40 +1574,554 @@ os.system("C:\\Windows\\System32\\calc.exe")
 | os.cpu_count() | 获得当前系统的CPU数量>>>os.cpu_count() 8                     |
 | os.urandom(n)  | 获得n个字节长度的随机字符串，通常用于加解密运算<br/>>>>os.urandom(10)<br/>b'7\xbe\xf2!\xc1=\x01gL\xb3' |
 
+# 正则表达式
+
+**regular expression, regex, RE**   
+
+## 什么是正则表达式  
+
+正则表达式是对字符串串操作的一种逻辑公式，就是用事先定义好的一些特定  字符、及这些特定字符的组合，组成一个“规则字符串串”，这个“规则字符串”用  来表达对字符串的一种过滤逻辑。  
+非Python独有，re模块实现
+
+## 常见匹配模式
+
+| 模式     | 描述                                                         |
+| -------- | ------------------------------------------------------------ |
+| \w       | 匹配字母数字及下划线                                         |
+| \W       | 匹配非字母数字下划线                                         |
+| \s       | 匹配任意空白字符，等价于 [\t\n\r\f].                         |
+| \S       | 匹配任意非空字符                                             |
+| \d       | 匹配任意数字，等价于 [0-9]                                   |
+| \D       | 匹配任意非数字                                               |
+| \A       | 匹配字符串开始                                               |
+| \Z       | 匹配字符串结束，如果是存在换行，只匹配到换行前的结束字符串   |
+| \z       | 匹配字符串结束                                               |
+| \G       | 匹配最后匹配完成的位置                                       |
+| \n       | 匹配一个换行符                                               |
+| \t       | 匹配一个制表符                                               |
+| ^        | 匹配字符串的开头                                             |
+| $        | 匹配字符串的末尾。                                           |
+| .        | 匹配任意字符，除了换行符，当re.DOTALL标记被指定时，则可以匹配包括换行符的任意字符。 |
+| [...]    | 用来表示一组字符,单独列出：[amk] 匹配 'a'，'m'或'k'          |
+| [^...]   | 不在[]中的字符：[^abc] 匹配除了a,b,c之外的字符。             |
+| *        | 匹配0个或多个的表达式。                                      |
+| +        | 匹配1个或多个的表达式。                                      |
+| ?        | 匹配0个或1个由前面的正则表达式定义的片段，非贪婪方式         |
+| {n}      | 精确匹配n个前面表达式。                                      |
+| {n, m}   | 匹配 n 到 m 次由前面的正则表达式定义的片段，贪婪方式         |
+| a&#124;b | 匹配a或b                                                     |
+| ( )      | 匹配括号内的表达式，也表示一个组                             |
+
+## re.match
+
+re.match 尝试从字符串的起始位置匹配一个模式，如果不是起始位置匹配成功的话，match()就返回none。
+
+```python
+re.match(pattern, string, flags=0)
+```
+
+### 最常规的匹配
+
+```python
+import re
+
+content = 'Hello 123 4567 World_This is a Regex Demo'
+print(len(content))
+result = re.match('^Hello\s\d\d\d\s\d{4}\s\w{10}.*Demo$', content)
+print(result)
+print(result.group())
+print(result.span())
+```
+
+out:
+
+```
+41
+<re.Match object; span=(0, 41), match='Hello 123 4567 World_This is a Regex Demo'>
+Hello 123 4567 World_This is a Regex Demo
+(0, 41)
+```
+
+### 泛匹配
+
+.*来匹配任意字段
+
+```python
+import re
+
+content = 'Hello 123 4567 World_This is a Regex Demo'
+result = re.match('^Hello.*Demo$', content)
+print(result)
+print(result.group())
+print(result.span())
+```
+
+out:
+
+```
+<re.Match object; span=(0, 41), match='Hello 123 4567 World_This is a Regex Demo'>
+Hello 123 4567 World_This is a Regex Demo
+(0, 41)
+```
+
+### 匹配目标
+
+通过添加`()`进行分组，提取，指定数据
+
+```python
+import re
+
+content = 'Hello 1234567 World_This is a Regex Demo'
+result = re.match('^Hello\s(\d+)\sWorld.*Demo$', content)
+print(result)
+print(result.group(1))
+print(result.span())
+```
+
+out:
+
+```
+<re.Match object; span=(0, 40), match='Hello 1234567 World_This is a Regex Demo'>
+1234567
+(0, 40)
+```
+
+
+
+
+
+### 贪婪匹配
+
+Re库默认采用**贪婪匹配**
+
+```python
+import re
+
+content = 'Hello 1234567 World_This is a Regex Demo'
+result = re.match('^He.*(\d+).*Demo$', content)
+print(result)
+print(result.group(1))
+
+```
+
+out: `.*`匹配掉了尽可能多的字符
+
+```
+<re.Match object; span=(0, 40), match='Hello 1234567 World_This is a Regex Demo'>
+7
+```
+
+### 非贪婪匹配
+
+只要长度输出可能不同的，都可以通过在操作符后**增加?变成最小匹配**
+
+```python
+import re
+
+content = 'Hello 1234567 World_This is a Regex Demo'
+result = re.match('^He.*?(\d+).*Demo$', content)
+print(result)
+print(result.group(1))
+```
+
+out:
+
+```
+<re.Match object; span=(0, 40), match='Hello 1234567 World_This is a Regex Demo'>
+1234567
+```
+
+
+
+
+
+### 匹配模式
+
+通过设置匹配模式，将`.`能匹配换行符
+
+```python
+import re
+
+content = '''Hello 1234567 World_This
+is a Regex Demo
+'''
+result = re.match('^He.*?(\d+).*?Demo$', content, re.S)
+print(result.group(1))
+
+```
+
+out:
+
+```
+1234567
+
+```
+
+### 转义
+
+```python
+import re
+
+content = 'price is $5.00'
+result = re.match('price is $5.00', content)
+print(result)
+```
+
+```
+None
+```
+
+```python
+import re
+
+content = 'price is $5.00'
+result = re.match('price is \$5\.00', content)
+print(result)
+```
+
+out:
+
+```
+<re.Match object; span=(0, 14), match='price is $5.00'>
+```
+
+总结：尽量使用**泛匹配、使用括号得到匹配目标、尽量使用非贪婪模式、有换行符就用re.S**
+
+## re.search
+
+**re.search 扫描整个字符串并返回第一个成功的匹配。**
+
+```python
+import re
+
+content = 'Extra stings Hello 1234567 World_This is a Regex Demo Extra stings'
+result = re.match('Hello.*?(\d+).*?Demo', content)
+print(result)
+```
+
+```
+None
+```
+
+
+
+```python
+import re
+
+content = 'Extra stings Hello 1234567 World_This is a Regex Demo Extra stings'
+result = re.search('Hello.*?(\d+).*?Demo', content)
+print(result)
+print(result.group(1))
+
+```
+
+```
+<re.Match object; span=(13, 53), match='Hello 1234567 World_This is a Regex Demo'>
+1234567
+
+```
+
+总结：**为匹配方便，能用search就不用match**
+
+
+
+### 匹配演练
+
+```python
+import re
+
+html = '''<div id="songs-list">
+    <h2 class="title">经典老歌</h2>
+    <p class="introduction">
+        经典老歌列表
+    </p>
+    <ul id="list" class="list-group">
+        <li data-view="2">一路上有你</li>
+        <li data-view="7">
+            <a href="/2.mp3" singer="任贤齐">沧海一声笑</a>
+        </li>
+        <li data-view="4" class="active">
+            <a href="/3.mp3" singer="齐秦">往事随风</a>
+        </li>
+        <li data-view="6"><a href="/4.mp3" singer="beyond">光辉岁月</a></li>
+        <li data-view="5"><a href="/5.mp3" singer="陈慧琳">记事本</a></li>
+        <li data-view="5">
+            <a href="/6.mp3" singer="邓丽君"><i class="fa fa-user"></i>但愿人长久</a>
+        </li>
+    </ul>
+</div>'''
+result = re.search('<li.*?active.*?singer="(.*?)">(.*?)</a>', html, re.S)
+if result:
+    print(result.group(1), result.group(2))
+
+```
+
+
+
+
+
+import re
+
+html = '''<div id="songs-list">
+    <h2 class="title">经典老歌</h2>
+    <p class="introduction">
+        经典老歌列表
+    </p>
+    <ul id="list" class="list-group">
+        <li data-view="2">一路上有你</li>
+        <li data-view="7">
+            <a href="/2.mp3" singer="任贤齐">沧海一声笑</a>
+        </li>
+        <li data-view="4" class="active">
+            <a href="/3.mp3" singer="齐秦">往事随风</a>
+        </li>
+        <li data-view="6"><a href="/4.mp3" singer="beyond">光辉岁月</a></li>
+        <li data-view="5"><a href="/5.mp3" singer="陈慧琳">记事本</a></li>
+        <li data-view="5">
+            <a href="/6.mp3" singer="邓丽君">但愿人长久</a>
+        </li>
+    </ul>
+</div>'''
+result = re.search('<li.*?singer="(.*?)">(.*?)</a>', html, re.S)
+if result:
+    print(result.group(1), result.group(2))
+
+
+
+```python
+import re
+
+html = '''<div id="songs-list">
+    <h2 class="title">经典老歌</h2>
+    <p class="introduction">
+        经典老歌列表
+    </p>
+    <ul id="list" class="list-group">
+        <li data-view="2">一路上有你</li>
+        <li data-view="7">
+            <a href="/2.mp3" singer="任贤齐">沧海一声笑</a>
+        </li>
+        <li data-view="4" class="active">
+            <a href="/3.mp3" singer="齐秦">往事随风</a>
+        </li>
+        <li data-view="6"><a href="/4.mp3" singer="beyond">光辉岁月</a></li>
+        <li data-view="5"><a href="/5.mp3" singer="陈慧琳">记事本</a></li>
+        <li data-view="5">
+            <a href="/6.mp3" singer="邓丽君">但愿人长久</a>
+        </li>
+    </ul>
+</div>'''
+result = re.search('<li.*?singer="(.*?)">(.*?)</a>', html)
+if result:
+    print(result.group(1), result.group(2))
+```
+
+
+
+
+
+## re.findall
+
+搜索字符串，以列表形式返回全部能匹配的子串。
+
+```python
+import re
+
+html = '''<div id="songs-list">
+    <h2 class="title">经典老歌</h2>
+    <p class="introduction">
+        经典老歌列表
+    </p>
+    <ul id="list" class="list-group">
+        <li data-view="2">一路上有你</li>
+        <li data-view="7">
+            <a href="/2.mp3" singer="任贤齐">沧海一声笑</a>
+        </li>
+        <li data-view="4" class="active">
+            <a href="/3.mp3" singer="齐秦">往事随风</a>
+        </li>
+        <li data-view="6"><a href="/4.mp3" singer="beyond">光辉岁月</a></li>
+        <li data-view="5"><a href="/5.mp3" singer="陈慧琳">记事本</a></li>
+        <li data-view="5">
+            <a href="/6.mp3" singer="邓丽君">但愿人长久</a>
+        </li>
+    </ul>
+</div>'''
+results = re.findall('<li.*?href="(.*?)".*?singer="(.*?)">(.*?)</a>', html, re.S)
+print(results)
+print(type(results))
+for result in results:
+    print(result)
+    print(result[0], result[1], result[2])
+```
+
+
+
+```python
+import re
+
+html = '''<div id="songs-list">
+    <h2 class="title">经典老歌</h2>
+    <p class="introduction">
+        经典老歌列表
+    </p>
+    <ul id="list" class="list-group">
+        <li data-view="2">一路上有你</li>
+        <li data-view="7">
+            <a href="/2.mp3" singer="任贤齐">沧海一声笑</a>
+        </li>
+        <li data-view="4" class="active">
+            <a href="/3.mp3" singer="齐秦">往事随风</a>
+        </li>
+        <li data-view="6"><a href="/4.mp3" singer="beyond">光辉岁月</a></li>
+        <li data-view="5"><a href="/5.mp3" singer="陈慧琳">记事本</a></li>
+        <li data-view="5">
+            <a href="/6.mp3" singer="邓丽君">但愿人长久</a>
+        </li>
+    </ul>
+</div>'''
+results = re.findall('<li.*?>\s*?(<a.*?>)?(\w+)(</a>)?\s*?</li>', html, re.S)
+print(results)
+for result in results:
+    print(result[1])
+```
+
+## re.sub
+
+替换字符串中每一个匹配的子串后返回替换后的字符串。
+
+```python
+import re
+
+content = 'Extra stings Hello 1234567 World_This is a Regex Demo Extra stings'
+content = re.sub('\d+', 'Replacement', content)
+print(content)
+```
+
+```
+Extra stings Hello Replacement World_This is a Regex Demo Extra stings
+```
+
+
+
+```python
+import re
+
+content = 'Extra stings Hello 1234567 World_This is a Regex Demo Extra stings'
+content = re.sub('(\d+)', r'\1 8910', content)
+print(content)
+```
+
+`\1`指明分组中的第一个
+
+```
+Extra stings Hello 1234567 8910 World_This is a Regex Demo Extra stings
+```
+
+
+
+```python
+import re
+
+html = '''<div id="songs-list">
+    <h2 class="title">经典老歌</h2>
+    <p class="introduction">
+        经典老歌列表
+    </p>
+    <ul id="list" class="list-group">
+        <li data-view="2">一路上有你</li>
+        <li data-view="7">
+            <a href="/2.mp3" singer="任贤齐">沧海一声笑</a>
+        </li>
+        <li data-view="4" class="active">
+            <a href="/3.mp3" singer="齐秦">往事随风</a>
+        </li>
+        <li data-view="6"><a href="/4.mp3" singer="beyond">光辉岁月</a></li>
+        <li data-view="5"><a href="/5.mp3" singer="陈慧琳">记事本</a></li>
+        <li data-view="5">
+            <a href="/6.mp3" singer="邓丽君">但愿人长久</a>
+        </li>
+    </ul>
+</div>'''
+html = re.sub('<a.*?>|</a>', '', html)
+print(html)
+results = re.findall('<li.*?>(.*?)</li>', html, re.S)
+print(results)
+for result in results:
+    print(result.strip())
+```
+
+## re.compile
+
+将正则字符串编译成正则表达式对象
+
+将一个正则表达式串编译成正则对象，以便于复用该匹配模式
+
+```python
+import re
+
+content = '''Hello 1234567 World_This
+is a Regex Demo'''
+pattern = re.compile('Hello.*Demo', re.S)
+result = re.match(pattern, content)
+#result = re.match('Hello.*Demo', content, re.S)
+print(result)
+```
+
+```
+<re.Match object; span=(0, 40), match='Hello 1234567 World_This\nis a Regex Demo'>
+```
+
+## 豆瓣读书实战练习
+
+```python
+import requests
+import re
+content = requests.get('https://book.douban.com/').text
+pattern = re.compile('<li.*?cover.*?href="(.*?)".*?title="(.*?)".*?more-meta.*?author">(.*?)</span>.*?year">(.*?)</span>.*?</li>', re.S)
+results = re.findall(pattern, content)
+for result in results:
+    url, name, author, date = result
+    author = re.sub('\s', '', author)
+    date = re.sub('\s', '', date)
+    print(url, name, author, date)
+```
+
 # 异常处理
 
 **异常处理的基本使用** 
 
 ```python
 try :
-<语句块1>
+	<语句块1>
 except :
-<语句块2>
+	<语句块2>
 
 try :
-<语句块1>
+	<语句块1>
 except <异常类型> :
-<语句块2>
+	<语句块2>
 ```
 
 ```python
 try :
-num = eval(input("请输入一个整数: "))
-print(num**2)
+	num = eval(input("请输入一个整数: "))
+	print(num**2)
 except :
-print("输入不是整数")
+	print("输入不是整数")
 
 try :
-num = eval(input("请输入一个整数: "))
-print(num**2)
+	num = eval(input("请输入一个整数: "))
+	print(num**2)
 except NameError:
-print("输入不是整数")
+	print("输入不是整数")
+```
+
 示例
 标注异常类型后，仅响应此类异常
 异常类型名字等同于变量名
-```
 
-## **异常处理的高级使用** 
+## 异常处理的高级使用
 
 - finally对应语句块4一定执行
 - else对应语句块3在不发生异常时执行 
@@ -1510,19 +2141,51 @@ finally :
 try:
    ...
 except xxx as xx:
+    traceback.print_exc()
     ...
 ```
 
 ```python
 try:
-    response = urllib.request.urlopen('http://httpbin.org/get',timeout=1)
+    response = 		       urllib.request.urlopen('http://httpbin.org/get',timeout=1)    
 except urllib.error.URLError as e:
     if isinstance(e.strerror,socket.timeout):
         print('TIME OUT')
 ```
 
+## 主动抛出异常。
+
+格式：
+主动抛出异常终止程序
+
+```python
+raise 异常名称(‘异常描述’)
+```
 
 
+
+```python
+raise RuntimeError('testError')
+```
+
+## 打印异常信息
+
+我们可以使用 traceback这个内置模块来获取异常更加详细的信息：
+
+```python
+import traceback  
+try:  
+    ...  
+except Exception,e:  
+    traceback.print_exc()
+```
+
+traceback.print_exc() 直接打印异常  
+traceback.format_exc()返回字符串   
+还可以将信息写入到文件
+     
+
+   traceback.print_exc(file=open(‘error.txt’,’a+’))
 
 
 # python第三方库
@@ -1589,25 +2252,39 @@ pip install –U <第三方库名>
 
 卸载指定的第三方库 
 
+```shell
 D:\>pip uninstall <第三方库名>
+```
 
 下载但不安装指定的第三方库 
 
+```shell
 D:\>pip download <第三方库名>
+```
+
+
 
 列出某个指定第三方库的详细信息 
 
+```shell
 D:\>pip show <第三方库名>
+```
 
 根据关键词在名称和介绍中搜索第三方库 
 
+```shell
 D:\>pip search <关键词>
+```
+
+
 
 ```shell
 pip search blockchain
 ```
 
+```
 D:\>pip list
+```
 
 - 列出当前系统已经安装的第三方库 
 
@@ -1634,3 +2311,456 @@ https://blog.csdn.net/dream_allday/article/details/80344511
 
 http://www.lfd.uci.edu/~gohlke/pythonlibs/ 
 
+## 将pip源更换到国内镜像
+
+https://blog.csdn.net/sinat_21591675/article/details/82770360
+
+# Python命名规则
+
+https://www.jianshu.com/p/a793c0d960fe
+
+## 模块名,包名,文件名
+
+模块应该使用尽可能短的、全小写命名，可以在模块命名时使用下划线以增强可读性。同样包的命名也应该是这样的，虽然其并不鼓励下划线
+
+主要是考虑模块名是与文件夹相对应的，因此需要考虑文件系统的一些命名规则的，比如Unix系统对大小写敏感，而过长的文件名会影响其在  Windows\Mac\Dos 等系统中的正常使用。
+
+**通常是小写字母，单词之间用_分割**
+
+> **注意**：**文件名**混合大小写仅被允许用于这种风格已经占据优势的时候，以便保持向后兼容
+
+## 类名
+
+和java一样，类名都使用首字母大写开头(Pascal命名风格，驼峰)的规范。
+
+使用 `_`单下划线开头的类名为内部使用
+
+```python
+from module_name import *
+```
+
+> 默认不被导入的情况 `_InnerClass`
+
+## 变量
+
+### 全局变量名（类变量，在java中相当于static变量）
+
+大写字母，单词之间用 `_`分割
+
+```python
+NUMBER
+COLOR_WRITE
+```
+
+### 普通变量
+
+小写字母，单词之间用 `_`分割
+
+**注意**：
+
+1. 不论是类成员变量还是全局变量，均不使用 m 或 g 前缀(匈牙利标记法)。
+2. 私有类成员使用单一下划线前缀标识，多定义公开成员，少定义私有成员。
+3. 变量名不应带有类型信息，因为Python是动态类型语言。如 ~~iValue、names_list、dict_obj~~ 等都是不好的命名。
+
+### 实例变量：
+
+以 `_` 开头，其他和普通变量一样
+
+### 私有实例变量（外部访问会报错）
+
+以 `__`开头（2个下划线），其他和普通变量一样
+
+```python
+__private_var
+```
+
+### 专有变量
+
+`__`开头，`__`结尾，一般为python的自有变量，
+
+```
+不要以这种方式命名普通变量，这个是保留字，要满足防御性编程需求
+```
+
+
+
+```python
+__doc__
+__class__
+```
+
+## 函数
+
+### 普通函数
+
+和普通变量一样
+
+
+
+```python
+get_name()
+count_number()
+ad_stat()
+```
+
+### 私有函数（外部访问会报错）
+
+以 `__` 开头（2个下划线），其他和普通函数一样
+
+
+
+```python
+__get_name()
+```
+
+### 函数和方法的参数
+
+**总使用“self”作为实例方法的第一个参数。**
+ **总使用“cls”作为类方法的第一个参数。**
+
+如果一个函数的参数名称和保留的关键字冲突，通常使用一个后缀下划线好于使用缩写或奇怪的拼写
+
+## 常量
+
+常量名所有字母大写，由下划线连接各个单词如 `MAX_OVERFLOW`，`TOTAL`
+
+## 异常
+
+因为异常也是一个类，所以遵守类的命名规则
+
+> 此外，如果异常实际上指代一个错误的话，应该使用“Error”做后缀。
+
+## 缩写
+
+命名应当尽量使用全拼写的单词，缩写的情况有如下两种：
+
+1. 常用的缩写，如`XML`、`ID`等，在命名时也应只大写首字母，如`XmlParser` 
+2. 命名中含有长单词，对某个单词进行缩写。这时应使用约定成俗的缩写方式
+
+例如：
+
+| 名称     | 缩写 |
+| -------- | ---- |
+| function | fn   |
+| text     | txt  |
+| object   | obj  |
+| count    | cnt  |
+| number   | num  |
+
+## 前导后缀下划线总结
+
+- 一个前导下划线：表示非公有。
+- 一个后缀下划线：避免关键字冲突。
+- 两个前导下划线：当命名一个类属性引起名称冲突时使用。
+- 两个前导和后缀下划线：“魔术”（有特殊用途）对象或者属性，例如**init**或者**file**。绝对不要创造这样的名字，而只是使用它们。
+
+**注意**：关于下划线的使用存在一些争议
+
+Python 用下划线作为变量前缀和后缀指定特殊变量
+
+
+
+```python
+## 不能用'from module import *'导入（相当于 private）
+_xxx
+## 系统定义名字
+__xxx__
+## 类中的私有变量名(相当于protect)
+__xxx
+```
+
+### 下划线核心风格
+
+```
+避免用下划线作为变量名的开始
+
+```
+
+> 因为下划线对解释器有特殊的意义，而且是内建标识符所使用的符号，我们建议程序员避免用下划线作为变量名的开始。
+>
+> > 一般来讲，变量名`_xxx`被看作是“私有的”，在模块或类外不可以使用。当变量是私有的时候，用`_xxx` 来表示变量是很好的习惯。
+> > "单下划线" 开始的成员变量叫做保护变量，意思是只有类对象和子类对象自己能访问到这些变量；
+> > "双下划线" 开始的是私有成员，意思是只有类对象自己能访问，连子类对象也不能访问到这个数据
+
+以单下划线开头`_foo`的代表不能直接访问的类属性，需通过类提供的接口进行访问，不能用`“from xxx import *”`而导入；
+ 以双下划线开头的`__foo`代表类的私有成员；
+ 以双下划线开头和结尾的`__foo__`代表python里特殊方法专用的标识，如`__init__（）`代表类的构造函数。
+
+### 特定命名方式
+
+主要是指 `__xxx__` 形式的系统保留字命名法。
+
+项目中也可以使用这种命名，它的意义在于这种形式的变量是只读的，这种形式的类成员函数尽量不要重载
+
+如
+
+
+
+```python
+class Base(object):
+    def __init__(self, id, parent = None):
+    self.__id__ = id
+    self.__parent__ = parent
+    def __message__(self, msgid):
+    ## …
+
+```
+
+其中 `__id__`、`__parent__` 和 `__message__` 都采用了系统保留字命名法
+ `__`双下划线开头双下划线结尾`__`：指那些包含在用户无法控制的命名空间中的“魔术”对象或属性
+ 如类成员的`__name__`、`__doc__`、`__init__`、`__import__`、`__file__`、等
+
+**推荐永远不要将这样的命名方式应用于自己的变量或函数。**
+
+单下划线结尾`_`：只是为了避免与python关键字的命名冲突
+
+`_`单下划线开头：弱“内部使用”标识，如：`from M import *`，将不导入所有以下划线开头的对象，包括包、模块、成员
+
+# python 类
+
+## python动态添加属性(对象属性，类属性)
+
+```python
+class cltdy:    #定义类，并起一个名字
+    n = 1000    #类属性，类内的变量
+    def __init__(self,name,age,profession='IT民工'):    #构造函数，类接收外部传入参数全靠构造函数
+        self.name = name
+        self.age = age
+        self.profession = profession
+    def printing_name(self):    #类的方法
+        print('我的名字是：%s'%self.name)
+    def printing_age(self):
+        print("我的年龄：%s"%self.age)
+    def printing_pfsn(self):
+        print("我的职业：%s"%self.profession)
+
+test = cltdy('sober',25,'DevOps')    #类的实例化，将参数传入类中，传入参数可以多但不可以少于类构造函数的参数(self参数除外，self是将实例化的变量名传入类)
+print("这是类实例化后的内存地址：%s"%test)
+test.printing_name()    #调用实例化后类中的方法
+test.name = 'moon'    #可以修改构造函数中参数的值
+test.printing_name()
+test.printing_pfsn()
+print(test.n)
+test.n = 2000    #修改类属性，只针对test实例化生效
+print(test.n,'\n====================')
+
+t2 = cltdy('jack',22,'student')    #实例化类对象，命名t2
+print(t2.n)
+t2.printing_age()
+```
+
+
+
+# 使用
+
+## python定义类似常量
+
+const.py
+
+```python
+class PROBLEM:
+    MEMORY_LIMIT = "memory_limit"
+    TIME_LIMIT = "time_limit"
+    DESCRIPTION = 'description'
+    SAMPLE_INPUT = "sample_input"
+    SAMPLE_OUTPUT = "sample_output"
+    FORMAT_INPUT = "format_input"
+    FORMAT_OUTPUT = "format_output"
+    HINT = "hint"
+    STATE = "state"
+```
+
+使用：
+
+```python
+from const import *
+print(PROBLEM.DESCRIPTION)
+```
+
+## `__init__.py`文件
+
+init.py 文件的作用是将文件夹变为一个[Python](https://edu.csdn.net/course/detail/26755)模块,Python 中的每个模块的包中，都有__init__.py 文件.
+
+######### 批量引入
+
+init.py 文件的作用是将文件夹变为一个Python模块,Python 中的每个模块的包中，都有__init__.py 文件。
+
+通常__init__.py 文件为空，但是我们还可以为它增加其他的功能。我们在导入一个包时，实际上是导入了它的__init__.py文件。这样我们可以在__init__.py文件中批量导入我们所需要的模块，而不再需要一个一个的导入。
+
+### package
+
+### __init__.py
+
+import re
+import urllib
+import sys
+import os
+
+### a.py
+
+import package
+print(package.re, package.urllib, package.sys, package.os)
+init.py中还有一个重要的变量，all, 它用来将模块全部导入
+
+### __init__.py
+
+__all__ = ['os', 'sys', 're', 'urllib']
+
+### a.py
+
+from package import *
+可以被import语句导入的对象是以下类型：
+模块文件（.py文件）
+C或C++扩展（已编译为共享库或DLL文件）
+包（包含多个模块）
+内建模块（使用C编写并已链接到Python解释器中）
+当导入模块时，解释器按照sys.path列表中的目录顺序来查找导入文件。
+
+import sys
+
+> > > print(sys.path)
+
+### Linux:
+
+['', '/usr/local/lib/python3.4',
+'/usr/local/lib/python3.4/plat-sunos5',
+'/usr/local/lib/python3.4/lib-tk',
+'/usr/local/lib/python3.4/lib-dynload',
+'/usr/local/lib/python3.4/site-packages']
+其中list第一个元素空字符串代表当前目录。
+
+关于.pyc 文件 与 .pyo 文件
+py文件的汇编,只有在import语句执行时进行，当.py文件第一次被导入时，它会被汇编为字节代码，并将字节码写入同名的.pyc文件中。后来每次导入操作都会直接执行.pyc 文件（当.py文件的修改时间发生改变，这样会生成新的.pyc文件），在解释器使用-O选项时，将使用同名的.pyo文件，这个文件去掉了断言（assert）、断行号以及其他调试信息，体积更小，运行更快。（使用-OO选项，生成的.pyo文件会忽略文档信息）
+
+导入模块
+
+模块通常为单独的.py文件，可以用import直接引用，可以作为模块的文件类型有.py、.pyo、.pyc、.pyd、.so、.dll
+
+## **对象调用类中的变量和方法**
+
+　　__init__方法是一个特殊的方法,只要类名+() 产生一个对象,自动执行类中的__init__方法,并把类的地址传给方法里的第一个参数,约定把第一个参数定为'self', 再给对象封装相应的属性.
+
+(1) __dict__ 查询对象中的所有的内容
+
+(2)  万能的点： **.**
+
+```python
+class Person:
+    mind = '有思想'
+    belif = '有信仰'
+    animal = '高级动物'
+    def __init__(self, name,age,hobby):
+        self.name = name
+        self.age = age
+        self.hobby = hobby
+        print(name,age,hobby)
+    def work(self):
+        print('会工作')
+        return self
+    def money(self):
+        print('会消费')
+        print(self)
+```
+
+## 私有方法
+
+**如果要让内部属性不被外部访问，可以把属性的名称前加上两个下划线__**
+**在Python中，实例的变量名如果以__开头，就变成了一个私有变量（private），只有内部可以访问，外部不能访问**
+
+## yield关键字  
+
+yield 《=》生成器  
+
+**包含yield语句的函数是一个生成器**  
+
+**生成器每次产生一个值（ yield语句），函数被冻结，被唤醒后再产生一个值  
+生成器是一个不断产生值的函数**   
+
+  
+
+**生成器相比一次列出所有内容的优势：**  
+1)更节省存储空间  
+2)响应更迅速  
+3)使用更灵活   
+
+实例：  
+
+```python  
+def gen(n):  
+    for i in range(n):  
+        yield i ** 2  
+  
+for i in gen(5):  
+    print(i, " ", end="")  
+  
+```
+
+生成器每调用一次在yield位置产生一个值，直到函数执行结束   
+
+**一次返回所有值**  
+
+```python  
+def square(n):  
+    return [i **2 for i in range(n)]  
+  
+for i in square(5):  
+    print(i, " ", end="")  
+```
+
+## 函数传递问题
+
+python不允许程序员选择采用传值还是传引用。python参数传递采用的肯定是**“传对象引用”**的方式。这种方式相当于传值和传引用的一种综合。
+
+- 如果函数收到的是一个不可变对象（数字、字符或元组）的引用，就不能直接修改原始对象--相当于通过**‘值传递’**来传递对象。
+
+- 如果函数收到的是一个可变对象（字典、列表）的引用，就能修改对象的原始值--相当于**‘传引用’**来传递对象。
+
+# Python里面如何拷贝一个对象
+
+1.浅拷贝 ：
+
+    使用copy.copy,它可以进行对象的浅拷贝(shallow copy),它复制了对象,但对于对象中的元素,依然使用引用（换句话说修改拷贝对象元素，则被拷贝对象元素也被修改）
+
+2.深拷贝 ：
+
+    使用copy.deepcopy，它可以进行深拷贝，不仅拷贝了对象，同时也拷贝了对象中的元素，获得了全新的对象，与被拷贝对象完全独立，但这需要牺牲一定的时间和空间。
+
+
+
+3.特殊拷贝：
+
+    如要复制列表L,使用list(L),要复制一个字典d,使用dict(d),要复制一个集合s,使用set(s)。
+
+   总结一下的话：如果你要复制某个对象object, 它属于python内建的类型type,那么你可以使用type(object)来 获得一个拷贝。
+
+
+
+4 举例：
+
+import copy
+
+list = [1, 2, 3, 4, ['a', 'b']]  #原始对象
+
+b = list  #赋值，传对象的引用，依然指向list
+
+c = copy.copy(list)  #对象拷贝，浅拷贝（元素依然是共享的引用）
+
+d = copy.deepcopy(list)  #对象拷贝，深拷贝
+
+list.append(5)  #修改对象list
+
+list[4].append('c')  #修改对象list中的['a', 'b']数组对象
+
+print 'list = ', list
+
+print 'b = ', b
+
+print 'c = ', c
+
+print 'd = ', d
+
+输出结果：
+list =  [1, 2, 3, 4, ['a', 'b', 'c'], 5]
+b =  [1, 2, 3, 4, ['a', 'b', 'c'], 5]
+c =  [1, 2, 3, 4, ['a', 'b', 'c']]
+d =  [1, 2, 3, 4, ['a', 'b']]

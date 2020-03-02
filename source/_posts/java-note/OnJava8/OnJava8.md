@@ -2263,39 +2263,4371 @@ public interface Months {
 
 **恰当的原则是优先使用类而不是接口。从类开始，如果使用接口的必要性变得很明确，那么就重构。**接口是一个伟大的工具，但它们容易被滥用。
 
-# 并发编程
+<!-- Inner Classes -->
 
-[并发编程](https://github.com/LingCoder/OnJava8/blob/master/docs/book/24-Concurrent-Programming.md)
+# 第十一章 内部类
 
-对于更多凌乱，低级别的细节，请参阅附录：[并发底层原理](https://github.com/LingCoder/OnJava8/blob/master/docs/book/Appendix-Low-Level-Concurrency.md)
+> 一个定义在另一个类中的类，叫作内部类。
 
-## 概念
+内部类是一种非常有用的特性，因为它允许你把一些逻辑相关的类组织在一起，并控制位于内部的类的可见性。
 
-要进一步深入这个领域，你还必须阅读Brian Goetz等人的Java Concurrency in Practice。
+<!-- Creating Inner Classes -->
 
-- 并发是关于正确有效地控制对共享资源的访问。
-- 并行是使用额外的资源来更快地产生结果。
+## 创建内部类
 
-_并发_
+如果想从外部类的非静态方法之外的任意位置创建某个内部类的对象，那么必须像在 `main()` 方法中那样，具体地指明这个对象的类型：*OuterClassName.InnerClassName*。(译者注：在外部类的静态方法中也可以直接指明类型 *InnerClassName*，在其他类中需要指明 *OuterClassName.InnerClassName*。)
 
-**同时完成多个任务。在开始处理其他任务之前，当前任务不需要完成。并发解决了阻塞发生的问题。**当任务无法进一步执行，直到外部环境发生变化时才会继续执行。最常见的例子是I/O，其中任务必须等待一些input（在这种情况下会被阻止）。**这个问题产生在I/O密集型。**
+<!-- The Link to the Outer Class -->
 
-_并行_
+## 链接外部类
 
-**同时在多个地方完成多个任务。**这**解决了所谓的计算密集型问题**，如果将程序分成多个部分并在不同的处理器上编辑不同的部分，程序可以运行得更快。
+内部类似乎还只是一种名字隐藏和组织代码的模式。这些是很有用，但还不是最引人注目的，它还有其他的用途。当生成一个内部类的对象时，此对象与制造它的外围对象（enclosing object）之间就有了一种联系，所以它能访问其外围对象的所有成员，而不需要任何特殊条件。此外，**内部类还拥有其外围类的所有元素的访问权。**
 
-> **并发性是一系列性能技术，专注于减少等待**
+<!-- Using .this and .new -->
 
-**在Java中，并发是非常棘手和困难的，所以绝对不要使用它，除非你有一个重大的性能问题**
+## 使用 .this 和 .new
 
-# issue
+如果你需要生成对外部类对象的引用，可以使用外部类的名字后面紧跟圆点和 **this**。这样产生的引用自动地具有正确的类型，这一点在编译期就被知晓并受到检查，因此没有任何运行时开销。下面的示例展示了如何使用 **.this**：
 
-## 并行-并发：使用并行编程技术编写，如果只有一个处理器，结果程序仍然可以运行（==Java 8 Streams==就是一个很好的例子）。
+```java
+public class DotThis {  
+    public class Inner {
+        public DotThis outer() {
+            return DotThis.this;
+            // A plain "this" would be Inner's "this"
+        }
+    }
+}
+```
 
-## 对并发性的语言和库支持似乎==[Leaky Abstraction](https://en.wikipedia.org/wiki/Leaky_abstraction)是完美候选者==。抽象的目标是“抽象出”那些对于手头想法不重要的东西，从不必要的细节中汲取灵感。如果抽象是漏洞，那些碎片和细节会不断重新声明自己是重要的，无论你试图隐藏它们多少
+有时你可能想要告知某些其他对象，去创建其某个内部类的对象。要实现此目的，你必须在 **new** 表达式中提供对其他外部类对象的引用，这是需要使用 **.new** 语法，就像下面这样：
 
-直到 [附录:集合主题]
+```java
+// innerclasses/DotNew.java
+// Creating an inner class directly using .new syntax
+public class DotNew {
+    public class Inner {}
+    public static void main(String[] args) {
+        DotNew dn = new DotNew();
+        DotNew.Inner dni = dn.new Inner();
+    }
+}
+```
 
-在附录中有包含：[对象传递和返回](./Appendix-Passing-and-Returning-Objects.md)。
+在拥有外部类对象之前是不可能创建内部类对象的。这是因为内部类对象会暗暗地连接到建它的外部类对象上。但是，如果你创建的是嵌套类（静态内部类），那么它就不需要对外部类对象的引用。
 
-我们直接给出正确的结果：`Math.random()` 的结果集范围包含 0.0 ，不包含 1.0。 在数学术语中，可用 [0,1）来表示。
+<!-- Inner Classes and Upcasting -->
+
+## 内部类与向上转型
+
+普通（非内部）类的访问权限不能被设为 **private** 或者 **protected**；他们只能设置为 **public** 或 **package** 访问权限。
+
+**private** 内部类给类的设计者提供了一种途径，通过这种方式可以完全阻止任何依赖于类型的编码，并且完全隐藏了实现的细节。此外，从客户端程序员的角度来看，由于不能访问任何新增加的、原本不属于公共接口的方法，所以扩展接口是没有价值的。这也给 Java 编译器提供了生成高效代码的机会。
+
+<!-- Inner Classes in Methods and Scopes -->
+
+## 内部类方法和作用域
+
+可以在一个方法里面或者在任意的作用域内定义内部类。
+
+这么做有两个理由：
+
+1. 如前所示，你实现了某类型的接口，于是可以创建并返回对其的引用。
+2. 你要解决一个复杂的问题，想创建一个类来辅助你的解决方案，但是又不希望这个类是公共可用的。
+
+在后面的例子中，先前的代码将被修改，以用来实现：
+
+1. 一个定义在方法中的类。
+2. 一个定义在作用域内的类，此作用域在方法的内部。
+3. 一个实现了接口的匿名类。
+4. 一个匿名类，它扩展了没有默认构造器的类。
+5. 一个匿名类，它执行字段初始化。
+6. 一个匿名类，它通过实例初始化实现构造（匿名内部类不可能有构造器）。
+
+第一个例子展示了在方法的作用域内（而不是在其他类的作用域内）创建一个完整的类。这被称作**局部内部类**：
+
+```java
+public class Parcel5 {
+    public Destination destination(String s) {
+        final class PDestination implements Destination {
+            private String label;
+          
+            private PDestination(String whereTo) {
+                label = whereTo;
+            }
+          
+            @Override
+            public String readLabel() { return label; }
+        }
+        return new PDestination(s);
+    }
+}
+```
+
+<!-- Anonymous Inner Classes -->
+
+## 匿名内部类
+
+这种奇怪的语法指的是：“创建一个继承自 **Contents** 的匿名类的对象。”通过 **new** 表达式返回的引用被自动向上转型为对 **Contents** 的引用。
+
+```java
+public class Parcel7 {
+    public Contents contents() {
+        return new Contents() { // Insert class definition
+            private int i = 11;
+          
+            @Override
+            public int value() { return i; }
+        }; // Semicolon required
+    }
+}
+```
+
+<!-- Nested Classes -->
+
+## 嵌套类
+
+如果不需要内部类对象与其外围类对象之间有联系，那么可以将内部类声明为 **static**，这通常称为嵌套类。想要理解 **static** 应用于内部类时的含义，就必须记住，普通的内部类对象隐式地保存了一个引用，指向创建它的外围类对象。然而，当内部类是 **static** 的时，就不是这样了。嵌套类意味着：
+
+1. 要创建嵌套类的对象，并不需要其外围类的对象。
+2. 不能从嵌套类的对象中访问非静态的外围类对象。
+
+嵌套类与普通的内部类还有一个区别。普通内部类的字段与方法，只能放在类的外部层次上，所以**普通的内部类不能有 static 数据和 static 字段**，也不能包含嵌套类。
+
+### 接口内部的类
+
+嵌套类可以作为接口的一部分。你放到接口中的任何类都自动地是 **public** 和 **static** 的。因为类是 **static** 的，只是将嵌套类置于接口的命名空间内，这并不违反接口的规则。你甚至可以在内部类中实现其外围接口
+
+我曾在本书中建议过，在每个类中都写一个 `main()` 方法，用来测试这个类。这样做有一个缺点，那就是必须带着那些已编译过的额外代码。如果这对你是个麻烦，那就可以使用嵌套类来放置测试代码。
+
+```java
+// innerclasses/TestBed.java
+// Putting test code in a nested class
+// {java TestBed$Tester}
+public class TestBed {
+    public void f() { System.out.println("f()"); }
+    public static class Tester {
+        public static void main(String[] args) {
+            TestBed t = new TestBed();
+            t.f();
+        }
+    }
+}
+```
+
+输出为：
+
+```
+f()
+```
+
+这生成了一个独立的类 **TestBed$Tester**（要运行这个程序，执行 **java TestBed$Tester**，在 Unix/Linux 系统中需要转义 **$**）。你可以使用这个类测试，但是不必在发布的产品中包含它，可以在打包产品前删除 **TestBed$Tester.class**。
+
+<!-- Why Inner Classes? -->
+
+## 为什么需要内部类
+
+一般说来，内部类继承自某个类或实现某个接口，内部类的代码操作创建它的外围类的对象。所以可以认为内部类提供了某种进入其外围类的窗口。
+
+内部类必须要回答的一个问题是：如果只是需要一个对接口的引用，为什么不通过外围类实现那个接口呢？答案是：“如果这能满足需求，那么就应该这样做。”那么内部类实现一个接口与外围类实现这个接口有什么区别呢？答案是：后者不是总能享用到接口带来的方便，有时需要用到接口的实现。所以，使用内部类最吸引人的原因是：
+
+> 每个内部类都能独立地继承自一个（接口的）实现，所以无论外围类是否已经继承了某个（接口的）实现，对于内部类都没有影响。
+
+如果没有内部类提供的、可以继承多个具体的或抽象的类的能力，一些设计与编程问题就很难解决。从这个角度看，内部类使得多重继承的解决方案变得完整。接口解决了部分问题，而内部类有效地实现了“多重继承”。也就是说，内部类允许继承多个非接口类型（译注：类或抽象类）。
+
+使用内部类，还可以获得其他一些特性：
+
+1. 内部类可以有多个实例，每个实例都有自己的状态信息，并且与其外围类对象的信息相互独立。
+2. 在单个外围类中，可以让多个内部类以不同的方式实现同一个接口，或继承同一个类。
+   稍后就会展示一个这样的例子。
+3. 创建内部类对象的时刻并不依赖于外围类对象的创建
+4. 内部类并没有令人迷惑的"is-a”关系，它就是一个独立的实体。
+
+<!-- Closures & Callbacks -->
+
+### 闭包与回调
+
+闭包（**closure**）是一个**可调用的对象，它记录了一些信息，这些信息来自于创建它的作用域。**通过这个定义，可以看出**内部类是面向对象的闭包，因为它不仅包含外围类对象（创建内部类的作用域）的信息，还自动拥有一个指向此外围类对象的引用**，在此作用域内，内部类有权操作所有的成员，包括 **private** 成员。
+
+在 Java 8 之前，生成闭包行为的唯一方式就是内部类。在 Java 8 之后，我们可以使用 lambda  表达式来生成闭包行为，并且语法更加精细和简洁；你将会在 [函数式编程 ]() 这一章节中学习相关细节。即使应该优先使用 lambda 表达式用于内部类闭包，你依旧会看到那些 Java 8 以前的代码，即使用内部类来表示闭包的方式，所以非常有必要来理解这种形式。
+
+Java 最引人争议的问题之一就是，人们认为 Java 应该包含某种类似指针的机制，以允许回调（callback）。通过回调，对象能够携带一些信息，这些信息允许它在稍后的某个时刻调用初始的对象。稍后将会看到这是一个非常有用的概念。如果回调是通过指针实现的，那么就只能寄希望于程序员不会误用该指针。然而，读者应该已经了解到，Java 更小心仔细，所以没有在语言中包括指针。
+
+**通过内部类提供闭包的功能是优良的解决方案，它比指针更灵活、更安全。**
+
+```java
+// If your class must implement increment() in
+// some other way, you must use an inner class:
+class Callee2 extends MyIncrement {
+  private int i = 0;
+  @Override
+  public void increment() {
+    super.increment();
+    i++;
+    System.out.println(i);
+  }
+  private class Closure implements Incrementable {
+    @Override
+    public void increment() {
+      // Specify outer-class method, otherwise
+      // you'll get an infinite recursion:
+      Callee2.this.increment();
+    }
+  }
+  Incrementable getCallbackReference() {
+    return new Closure();
+  }
+}
+```
+
+回调的价值在于它的灵活性-可以在运行时动态地决定需要调用什么方法。
+
+### 内部类与控制框架
+
+应用程序框架（application framework）就是被设计用以解决某类特定问题的一个类或一组类。要运用某个应用程序框架，**通常是继承一个或多个类，并覆盖某些方法。在覆盖后的方法中，编写代码定制应用程序框架提供的通用解决方案，以解决你的特定问题。**这是设计模式中模板方法的一个例子，模板方法包含算法的基本结构，并且会调用一个或多个可覆盖的方法，以完成算法的动作。**设计模式总是将变化的事物与保持不变的事物分离开**，在这个模式中，模板方法是保持不变的事物，而可覆盖的方法就是变化的事物。
+
+控制框架是一类特殊的应用程序框架，它用来解决响应事件的需求。主要用来响应事件的系统被称作*事件驱动*系统。应用程序设计中常见的问题之一是图形用户接口（GUI），它几乎完全是事件驱动的系统。
+
+<!-- Inheriting from Inner Classes -->
+
+## 继承内部类
+
+因为内部类的构造器必须连接到指向其外围类对象的引用，所以在继承内部类的时候，事情会变得有点复杂。问题在干，那个指向外围类对象的“秘密的”引用必须被初始化，而在派生类中不再存在可连接的默认对象。要解决这个问题，必须使用特殊的语法来明确说清它们之间的关联：
+
+```java
+// innerclasses/InheritInner.java
+// Inheriting an inner class
+class WithInner {
+    class Inner {}
+}
+public class InheritInner extends WithInner.Inner {
+    //- InheritInner() {} // Won't compile
+    InheritInner(WithInner wi) {
+        wi.super();
+    }
+    public static void main(String[] args) {
+        WithInner wi = new WithInner();
+        InheritInner ii = new InheritInner(wi);
+    }
+}
+```
+
+可以看到，**InheritInner** 只继承自内部类，而不是外围类。但是当要生成一个构造器时，默认的构造器并不算好，而且不能只是传递一个指向外围类对象的引用。此外，必须在构造器内使用如下语法：
+
+```java
+enclosingClassReference.super();
+```
+
+这样才提供了必要的引用，然后程序才能编译通过。
+
+<!-- Can Inner Classes Be Overridden? -->
+
+## 内部类可以被覆盖么？
+
+如果创建了一个内部类，然后继承其外围类并重新定义此内部类时，会发生什么呢？也就是说，内部类可以被覆盖吗？这看起来似乎是个很有用的思想，但是“覆盖”内部类就好像它是外围类的一个方法，其实并不起什么作用.
+
+<!-- Local Inner Classes -->
+
+## 局部内部类
+
+前面提到过，可以在代码块里创建内部类，典型的方式是在一个方法体的里面创建。局部内部类不能有访问说明符，因为它不是外围类的一部分；但是它可以访问当前代码块内的常量，以及此外围类的所有成员。下面的例子对局部内部类与匿名内部类的创建进行了比较。
+
+` Anonymous inner class cannot have a named
+ constructor, only an instance initializer`
+
+局部内部类的名字在方法外是不可见的，那为什么我们仍然使用局部内部类而不是匿名内部类呢？唯一的理由是，我们需要一个已命名的构造器，或者需要重载构造器，而匿名内部类只能用于实例初始化。
+
+所以使用局部内部类而不使用匿名内部类的另一个理由就是，需要不止一个该内部类的对象。
+
+<!-- Inner-Class Identifiers -->
+
+## 内部类标识符
+
+由于编译后每个类都会产生一个**.class** 文件，其中包含了如何创建该类型的对象的全部信息（此信息产生一个"meta-class"，叫做 **Class** 对象）。
+
+你可能猜到了，内部类也必须生成一个**.class** 文件以包含它们的 **Class** 对象信息。这些类文件的命名有严格的规则：外围类的名字，加上“**$**"，再加上内部类的名字。例如，**LocalInnerClass.java** 生成的 **.class** 文件包括：
+
+```java
+Counter.class
+LocalInnerClass$1.class
+LocalInnerClass$1LocalCounter.class
+LocalInnerClass.class
+```
+
+如果内部类是匿名的，编译器会简单地产生一个数字作为其标识符。如果内部类是嵌套在别的内部类之中，只需直接将它们的名字加在其外围类标识符与“**$**”的后面。
+
+虽然这种命名格式简单而直接，但它还是很健壮的，足以应对绝大多数情况。因为这是 java 的标准命名方式，所以产生的文件自动都是平台无关的。（注意，为了保证你的内部类能起作用，Java 编译器会尽可能地转换它们。）
+
+<!-- Summary -->
+
+## 本章小结
+
+虽然这些特性本身是相当直观的，但是就像多态机制一样，这些特性的使用应该是设计阶段考虑的问题。随着时间的推移，读者将能够更好地识别什么情况下应该使用接口，什么情况使用内部类，或者两者同时使用。
+
+<!-- Collections -->
+
+# 第十二章 集合
+
+> 如果一个程序只包含固定数量的对象且对象的生命周期都是已知的，那么这是一个非常简单的程序。
+
+为了解决这个普遍的编程问题，需要在任意时刻和任意位置创建任意数量的对象。因此，不能依靠创建命名的引用来持有每一个对象：
+
+```java
+MyType aReference;
+```
+
+因为从来不会知道实际需要多少个这样的引用。
+
+Java有多种方式保存对象（确切地说，是对象的引用）。例如前边曾经学习过的数组，它是编译器支持的类型。数组是保存一组对象的最有效的方式，如果想要保存一组基本类型数据，也推荐使用数组。但是数组具有固定的大小尺寸，而且在更一般的情况下，在写程序的时候并不知道将需要多少个对象，或者是否需要更复杂的方式来存储对象，因此数组尺寸固定这一限制就显得太过受限了。
+
+**java.util** 库提供了一套相当完整的*集合类*（collection classes）来解决这个问题，其中基本的类型有 **List** 、 **Set** 、 **Queue** 和 **Map**。这些类型也被称作*容器类*（container classes），但我将使用Java类库使用的术语。集合提供了完善的方法来保存对象，可以使用这些工具来解决大量的问题。
+
+<!-- Generics and Type-Safe Collections -->
+
+## 泛型和类型安全的集合
+
+ `new ArrayList<>()` 。这有时被称为“菱形语法”（diamond syntax）。在 Java 7 之前，必须要在两端都进行类型声明，如下所示：
+
+```java
+ArrayList<Apple> apples = new ArrayList<Apple>();
+```
+
+随着类型变得越来越复杂，这种重复产生的代码非常混乱且难以阅读。程序员**发现所有类型信息都可以从左侧获得**，因此，编译器没有理由强迫右侧再重复这些。虽然*类型推断*（type inference）只是个很小的请求，Java 语言团队仍然欣然接受并进行了改进。
+
+使用泛型，从 **List** 中**获取元素不需要强制类型转换**。因为 **List** 知道它持有什么类型，因此当调用 `get()` 时，它会替你执行转型。因此，**使用泛型，你不仅知道编译器将检查放入集合的对象类型，而且在使用集合中的对象时也可以获得更清晰的语法。**
+
+ **Object** 默认的 `toString()` 方法产生的，该方法打印类名，后边跟着对象的散列码的无符号十六进制表示（这个散列码是通过 `hashCode()` 方法产生的）。将在[附录：理解equals和hashCode方法]()中了解有关散列码的内容。
+
+<!-- Basic Concepts -->
+
+## 基本概念
+
+**Java集合类库采用“持有对象”（holding objects）的思想**，并将其分为两个不同的概念，表示为类库的基本接口：
+
+1. **集合（Collection）** ：一个独立元素的序列，这些元素都服从一条或多条规则。**List** 必须以插入的顺序保存元素， **Set** 不能包含重复元素， **Queue** 按照*排队规则*来确定对象产生的顺序（通常与它们被插入的顺序相同）。
+2. **映射（Map）** ： 一组成对的“键值对”对象，允许使用键来查找值。 **ArrayList** 使用数字来查找对象，因此在某种意义上讲，它是将数字和对象关联在一起。  **map** 允许我们使用一个对象来查找另一个对象，它也被称作*关联数组*（associative array），因为它将对象和其它对象关联在一起；或者称作*字典*（dictionary），因为可以使用一个键对象来查找值对象，就像在字典中使用单词查找定义一样。 **Map** 是强大的编程工具。
+
+尽管并非总是可行，但在理想情况下，你编写的大部分代码都在与这些接口打交道，并且唯一需要指定所使用的精确类型的地方就是在创建的时候。因此，可以像下面这样创建一个 **List** ：
+
+```java
+List<Apple> apples = new ArrayList<>();
+```
+
+请注意， **ArrayList** 已经被向上转型为了 **List** ，这与之前示例中的处理方式正好相反。使用接口的目的是，如果想要改变具体实现，只需在创建时修改它就行了，就像下面这样：
+
+```java
+List<Apple> apples = new LinkedList<>();
+```
+
+**因此，应该创建一个具体类的对象，将其向上转型为对应的接口，然后在其余代码中都是用这个接口。**
+
+这种方式并非总是有效的，因为某些具体类有额外的功能。例如， **LinkedList** 具有 **List** 接口中未包含的额外方法，而 **TreeMap** 也具有在 **Map** 接口中未包含的方法。如果需要使用这些方法，就不能将它们向上转型为更通用的接口。
+
+------
+
+**Collection** 接口概括了*序列*的概念——一种存放一组对象的方式。
+
+<!-- Adding Groups of Elements -->
+
+## 添加元素组
+
+在 **java.util** 包中的 **Arrays** 和 **Collections** 类中都有很多实用的方法，可以在一个 **Collection** 中添加一组元素。
+
+`Arrays.asList()` 方法接受一个数组或是逗号分隔的元素列表（使用可变参数），并将其转换为 **List** 对象。 `Collections.addAll()` 方法接受一个 **Collection** 对象，以及一个数组或是一个逗号分隔的列表，将其中元素添加到 **Collection** 中。下边的示例展示了这两个方法，以及更通用的 `addAll()` 方法，所有 **Collection** 类型都包含该方法：
+
+```java
+// collections/AddingGroups.java
+// Adding groups of elements to Collection objects
+import java.util.*;
+
+public class AddingGroups {
+  public static void main(String[] args) {
+    Collection<Integer> collection =
+      new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));
+    Integer[] moreInts = { 6, 7, 8, 9, 10 };
+    collection.addAll(Arrays.asList(moreInts));
+    // Runs significantly faster, but you can't
+    // construct a Collection this way:
+    Collections.addAll(collection, 11, 12, 13, 14, 15);
+    Collections.addAll(collection, moreInts);
+    // Produces a list "backed by" an array:
+    List<Integer> list = Arrays.asList(16,17,18,19,20);
+    list.set(1, 99); // OK -- modify an element
+    // list.add(21); // Runtime error; the underlying
+                     // array cannot be resized.
+  }
+}
+```
+
+**Collection** 的构造器可以接受另一个 **Collection**，用它来将自身初始化。因此，可以使用 `Arrays.asList()` 来为这个构造器产生输入。但是，=== `Collections.addAll()` 运行得更快，而且很容易构建一个不包含元素的 **Collection** ，然后调用 `Collections.addAll()` ，因此这是首选方式。==
+
+`Collection.addAll()` 方法只能接受另一个 **Collection** 作为参数，因此它没有 `Arrays.asList()` 或 `Collections.addAll()` 灵活。这两个方法都使用可变参数列表。
+
+也可以直接使用 `Arrays.asList()` 的输出作为一个 **List** ，但是这里的底层实现是数组，没法调整大小。如果尝试在这个 **List** 上调用 `add()` 或 `remove()`，由于这两个方法会尝试修改数组大小，所以会在运行时得到“Unsupported Operation（不支持的操作）”错误：
+
+```java
+// collections/AsListInference.java
+import java.util.*;
+
+class Snow {}
+class Powder extends Snow {}
+class Light extends Powder {}
+class Heavy extends Powder {}
+class Crusty extends Snow {}
+class Slush extends Snow {}
+
+public class AsListInference {
+  public static void main(String[] args) {
+    List<Snow> snow1 = Arrays.asList(
+      new Crusty(), new Slush(), new Powder());
+    //- snow1.add(new Heavy()); // Exception
+
+    List<Snow> snow2 = Arrays.asList(
+      new Light(), new Heavy());
+    //- snow2.add(new Slush()); // Exception
+
+    List<Snow> snow3 = new ArrayList<>();
+    Collections.addAll(snow3,
+      new Light(), new Heavy(), new Powder());
+    snow3.add(new Crusty());
+
+    // Hint with explicit type argument specification:
+    List<Snow> snow4 = Arrays.<Snow>asList(
+       new Light(), new Heavy(), new Slush());
+    //- snow4.add(new Powder()); // Exception
+  }
+}
+```
+
+在 **snow4** 中，注意 `Arrays.asList()` 中间的“暗示”（即 `<Snow>` ），告诉编译器 `Arrays.asList()` 生成的结果 **List** 类型的实际目标类型是什么。这称为*显式类型参数说明*（explicit type argument specification）。
+
+<!-- Printing Collections -->
+
+## 集合的打印
+
+必须使用 `Arrays.toString()` 来生成数组的可打印形式。但是打印集合无需任何帮助。
+
+## 集合的分类
+
+Java集合库中的两个主要类型。它们的区别在于集合中的每个“槽”（slot）保存的元素个数。 **Collection** 类型在每个槽中只能保存一个元素。此类集合包括： **List** ，它以特定的顺序保存一组元素； **Set** ，其中元素不允许重复； **Queue** ，只能在集合一端插入对象，并从另一端移除对象（就本例而言，这只是查看序列的另一种方式，因此并没有显示它）。 **Map** 在每个槽中存放了两个元素，即*键*和与之关联的*值*。
+
+默认的打印行为，使用集合提供的 `toString()` 方法即可生成可读性很好的结果。 **Collection** 打印出的内容用方括号括住，每个元素由逗号分隔。 **Map** 则由大括号括住，每个键和值用等号连接（键在左侧，值在右侧）。
+
+**ArrayList** 和 **LinkedList** 都是 **List** 的类型，从输出中可以看出，它们都按插入顺序保存元素。两者之间的区别不仅在于执行某些类型的操作时的性能，而且 **LinkedList** 包含的操作多于 **ArrayList** 。本章后面将对这些内容进行更全面的探讨。
+
+**HashSet** ， **TreeSet** 和 **LinkedHashSet** 是 **Set** 的类型。从输出中可以看到， **Set** 仅保存每个相同项中的一个，并且不同的 **Set** 实现存储元素的方式也不同。 **HashSet** 使用相当复杂的方法存储元素，这在[附录：集合主题]()中进行了探讨。现在只需要知道，这种技术是检索元素的最快方法，因此，存储顺序看上去没有什么意义（通常只关心某事物是否是 **Set** 的成员，而存储顺序并不重要）。如果存储顺序很重要，则可以使用 **TreeSet** ，它将按比较结果的升序保存对象）或 **LinkedHashSet** ，它按照被添加的先后顺序保存对象。
+
+**Map** （也称为*关联数组*）使用*键*来查找对象，就像一个简单的数据库。所关联的对象称为*值*。 假设有一个 **Map** 将美国州名与它们的首府联系在一起，如果想要俄亥俄州（Ohio）的首府，可以用“Ohio”作为键来查找，几乎就像使用数组下标一样。正是由于这种行为，对于每个键， **Map** 只存储一次。
+
+`Map.put(key, value)` 添加一个所想要添加的值并将它与一个键（用来查找值）相关联。 `Map.get(key)` 生成与该键相关联的值。上面的示例仅添加键值对，并没有执行查找。这将在稍后展示。
+
+请注意，这里没有指定（或考虑） **Map** 的大小，因为它会自动调整大小。 此外， **Map** 还知道如何打印自己，它会显示相关联的键和值。
+
+**Map** 的三种基本风格： **HashMap** ， **TreeMap** 和 **LinkedHashMap** 。
+
+键和值保存在 **HashMap** 中的顺序不是插入顺序，因为 **HashMap** 实现使用了非常快速的算法来控制顺序。 **TreeMap** 通过比较结果的升序来保存键， **LinkedHashMap** 在保持 **HashMap** 查找速度的同时按键的插入顺序保存键。
+
+<!-- List -->
+
+## 列表List
+
+**List**s承诺将元素保存在特定的序列中。 **List** 接口在 **Collection** 的基础上添加了许多方法，允许在 **List** 的中间插入和删除元素。
+
+有两种类型的 **List** ：
+
+- 基本的 **ArrayList** ，擅长随机访问元素，但在 **List** 中间插入和删除元素时速度较慢。
+- **LinkedList** ，它通过代价较低的在 **List** 中间进行的插入和删除操作，提供了优化的顺序访问。 **LinkedList** 对于随机访问来说相对较慢，但它具有比 **ArrayList** 更大的特征集。
+
+可以使用 `contains()` 方法确定对象是否在列表中。如果要删除一个对象，可以将该对象的引用传递给 `remove()` 方法。同样，如果有一个对象的引用，可以使用 `indexOf()` 在 **List** 中找到该对象所在位置的下标号
+
+当确定元素是否是属于某个 **List** ，寻找某个元素的索引，以及通过引用从 **List** 中删除元素时，都会用到 `equals()` 方法（根类 **Object** 的一个方法）。
+
+| name | description | usage |
+| ---- | ----------- | ----- |
+|      |             |       |
+|      |             |       |
+|      |             |       |
+
+ 与数组不同， **List** 可以在创建后添加或删除元素，并自行调整大小。这正是它的重要价值：一种可修改的序列。在第 2 行输出中可以看到添加一个 **Hamster** 的结果，该对象将被追加到列表的末尾。
+
+可以使用 `contains()` 方法确定对象是否在列表中。如果要删除一个对象，可以将该对象的引用传递给 `remove()` 方法。同样，如果有一个对象的引用，可以使用 `indexOf()` 在 **List** 中找到该对象所在位置的下标号，如第 4 行输出所示中所示。
+
+当确定元素是否是属于某个 **List** ，寻找某个元素的索引，以及通过引用从 **List** 中删除元素时，都会用到 `equals()` 方法（根类 **Object** 的一个方法）。每个 **Pet** 被定义为一个唯一的对象，所以即使列表中已经有两个 **Cymrics** ，如果再创建一个新的 **Cymric** 对象并将其传递给 `indexOf()` 方法，结果仍为 **-1** （表示未找到），并且尝试调用 `remove()` 方法来删除这个对象将返回 **false** 。对于其他类， `equals()` 的定义可能有所不同。例如，如果两个 **String** 的内容相同，则这两个 **String** 相等。因此，为了防止出现意外，请务必注意 **List** 行为会**根据 `equals()` 行为而发生变化。**
+
+第 7、8 行输出展示了删除与 **List** 中的对象完全匹配的对象是成功的。
+
+可以在 **List** 的中间插入一个元素，就像在第 9 行输出和它之前的代码那样。但这会带来一个问题：对于 **LinkedList** ，在列表中间插入和删除都是廉价操作（在本例中，除了对列表中间进行的真正的随机访问），但对于 **ArrayList** ，这可是代价高昂的操作。这是否意味着永远不应该在 **ArrayList** 的中间插入元素，并最好是转换为 **LinkedList** ？不，它只是意味着你应该意识到这个问题，如果你开始在某个 **ArrayList** 中间执行很多插入操作，并且程序开始变慢，那么你应该看看你的 **List** 实现有可能就是罪魁祸首（发现此类瓶颈的最佳方式是使用分析器 profiler）。优化是一个很棘手的问题，最好的策略就是置之不顾，直到发现必须要去担心它了（尽管去理解这些问题总是一个很好的主意）。
+
+`subList()` 方法可以轻松地从更大的列表中创建切片，当将切片结果传递给原来这个较大的列表的 `containsAll()` 方法时，很自然地会得到 **true**。请注意，顺序并不重要，在第 11、12 行输出中可以看到，在 **sub** 上调用直观命名的 `Collections.sort()` 和 `Collections.shuffle()` 方法，不会影响 `containsAll()` 的结果。 **`subList()` 所产生的列表的幕后支持就是原始列表。因此，对所返回列表的更改都将会反映在原始列表中，反之亦然。**
+
+`retainAll()` 方法实际上是一个“集合交集”操作，在本例中，它保留了同时在 **copy** 和 **sub** 中的所有元素。请再次注意，所产生的结果行为依赖于 `equals()` 方法。
+
+第 14 行输出展示了使用索引号来删除元素的结果，与通过对象引用来删除元素相比，它显得更加直观，因为在使用索引时，不必担心 `equals()` 的行为。
+
+`removeAll()` 方法也是基于 `equals()` 方法运行的。 顾名思义，它会从 **List** 中删除在参数 **List** 中的所有元素。
+
+`set()` 方法的命名显得很不合时宜，因为它与 **Set** 类存在潜在的冲突。在这里使用“replace”可能更适合，因为它的功能是用第二个参数替换索引处的元素（第一个参数）。
+
+第 17 行输出表明，对于 **List** ，有一个重载的 `addAll()` 方法可以将新列表插入到原始列表的中间位置，而不是仅能用 **Collection** 的 `addAll()` 方法将其追加到列表的末尾。
+
+第 18 - 20 行输出展示了 `isEmpty()` 和 `clear()` 方法的效果。
+
+第 22、23 行输出展示了如何使用 `toArray()` 方法将任意的 **Collection** 转换为数组。这是一个重载方法，其无参版本返回一个 **Object** 数组，但是如果将目标类型的数组传递给这个重载版本，那么它会生成一个指定类型的数组（假设它通过了类型检查）。如果参数数组太小而无法容纳 **List** 中的所有元素（就像本例一样），则 `toArray()` 会创建一个具有合适尺寸的新数组。
+
+<!-- Iterators -->
+
+## 迭代器Iterators
+
+迭代器是一个对象，它在一个序列中移动并选择该序列中的每个对象，而客户端程序员不知道或不关心该序列的底层结构。另外，迭代器通常被称为*轻量级对象*（lightweight object）：创建它的代价小。因此，经常可以看到一些对迭代器有些奇怪的约束。例如，Java 的 **Iterator** 只能单向移动。这个 **Iterator** 只能用来：
+
+1. 使用 `iterator()` 方法要求集合返回一个 **Iterator**。 **Iterator** 将准备好返回序列中的第一个元素。
+2. 使用 `next()` 方法获得序列中的下一个元素。
+3. 使用 `hasNext()` 方法检查序列中是否还有元素。
+4. 使用 `remove()` 方法将迭代器最近返回的那个元素删除。
+
+有了 **Iterator** ，就不必再为集合中元素的数量操心了。这是由 `hasNext()` 和 `next()` 关心的事情。
+
+如果只是想向前遍历 **List** ，并不打算修改 **List** 对象本身，那么使用 *for-in* 语法更加简洁。
+
+==**Iterator** 还可以删除由 `next()` 生成的最后一个元素，这意味着在调用 `remove()` 之前必须先调用 `next()` 。==[^4]
+
+[^4]: `remove()` 是一个所谓的“可选”方法（还有一些其它的这种方法），这意味着并非所有的 **Iterator** 实现都必须实现该方法。这个问题将在[附录：集合主题]()中介绍。但是，标准 Java 库集合实现了 `remove()` ，因此在[附录：集合主题]()章节之前，都不必担心这个问题。
+
+`display()` 方法不包含任何有关它所遍历的序列的类型信息。这也展示了 **Iterator** 的真正威力：能够将遍历序列的操作与该序列的底层结构分离。出于这个原因，我们有时会说：迭代器统一了对集合的访问方式。
+
+我们可以使用 **Iterable** 接口生成上一个示例的更简洁版本，该接口描述了“可以产生 **Iterator** 的任何东西”：
+
+```java
+// collections/CrossCollectionIteration2.java
+import typeinfo.pets.*;
+import java.util.*;
+
+public class CrossCollectionIteration2 {
+  public static void display(Iterable<Pet> ip) {
+    Iterator<Pet> it = ip.iterator();
+    while(it.hasNext()) {
+      Pet p = it.next();
+      System.out.print(p.id() + ":" + p + " ");
+    }
+    System.out.println();
+  }
+  public static void main(String[] args) {
+    List<Pet> pets = Pets.list(8);
+    LinkedList<Pet> petsLL = new LinkedList<>(pets);
+    HashSet<Pet> petsHS = new HashSet<>(pets);
+    TreeSet<Pet> petsTS = new TreeSet<>(pets);
+    display(pets);
+    display(petsLL);
+    display(petsHS);
+    display(petsTS);
+  }
+}
+/* Output:
+0:Rat 1:Manx 2:Cymric 3:Mutt 4:Pug 5:Cymric 6:Pug
+7:Manx
+0:Rat 1:Manx 2:Cymric 3:Mutt 4:Pug 5:Cymric 6:Pug
+7:Manx
+0:Rat 1:Manx 2:Cymric 3:Mutt 4:Pug 5:Cymric 6:Pug
+7:Manx
+5:Cymric 2:Cymric 7:Manx 1:Manx 3:Mutt 6:Pug 4:Pug
+0:Rat
+*/
+```
+
+这里所有的类都是 **Iterable** ，所以现在对 `display()` 的调用显然更简单。
+
+<!-- ListIterator -->
+
+### ListIterator
+
+**ListIterator** 是一个更强大的 **Iterator** 子类型，它只能由各种 **List** 类生成。 **Iterator** 只能向前移动，而 ==**ListIterator** 可以双向移动==。它还可以生成相对于迭代器在列表中指向的当前位置的后一个和前一个元素的索引，并且可以使用 `set()` 方法替换它访问过的最近一个元素。可以通过调用 `listIterator()` 方法来生成指向 **List** 开头处的 **ListIterator** ，还==可以通过调用 `listIterator(n)` 创建一个一开始就指向列表索引号为 **n** 的元素处的 **ListIterator** 。==
+
+下面的示例演示了所有这些能力：
+
+```java
+// collections/ListIteration.java
+import typeinfo.pets.*;
+import java.util.*;
+
+public class ListIteration {
+  public static void main(String[] args) {
+    List<Pet> pets = Pets.list(8);
+    ListIterator<Pet> it = pets.listIterator();
+    while(it.hasNext())
+      System.out.print(it.next() +
+        ", " + it.nextIndex() +
+        ", " + it.previousIndex() + "; ");
+    System.out.println();
+    // Backwards:
+    while(it.hasPrevious())
+      System.out.print(it.previous().id() + " ");
+    System.out.println();
+    System.out.println(pets);
+    it = pets.listIterator(3);
+    while(it.hasNext()) {
+      it.next();
+      it.set(Pets.get());
+    }
+    System.out.println(pets);
+  }
+}
+/* Output:
+Rat, 1, 0; Manx, 2, 1; Cymric, 3, 2; Mutt, 4, 3; Pug,
+5, 4; Cymric, 6, 5; Pug, 7, 6; Manx, 8, 7;
+7 6 5 4 3 2 1 0
+[Rat, Manx, Cymric, Mutt, Pug, Cymric, Pug, Manx]
+[Rat, Manx, Cymric, Cymric, Rat, EgyptianMau, Hamster,
+EgyptianMau]
+*/
+```
+
+`Pets.get()` 方法用来从位置 3 开始替换 **List** 中的所有 Pet 对象。
+
+<!-- LinkedList -->
+
+## 链表LinkedList
+
+**LinkedList** 也像 **ArrayList** 一样实现了基本的 **List** 接口，但它在 **List** 中间执行插入和删除操作时比 **ArrayList** 更高效。然而,它在随机访问操作效率方面却要逊色一些。
+
+**LinkedList 还添加了一些方法，使其可以被用作栈、队列或双端队列（deque）** 。在这些方法中，有些彼此之间可能只是名称有些差异，或者只存在些许差异，以使得这些名字在特定用法的上下文环境中更加适用（特别是在 **Queue** 中）。例如：
+
+- `getFirst()` 和 `element()` 是相同的，它们都返回列表的头部（第一个元素）而并不删除它，如果 **List** 为空，则抛出 **NoSuchElementException** 异常。 `peek()` 方法与这两个方法只是稍有差异，它在列表为空时返回 **null** 。
+- `removeFirst()` 和 `remove()` 也是相同的，它们删除并返回列表的头部元素，并在列表为空时抛出 **NoSuchElementException** 异常。 `poll()` 稍有差异，它在列表为空时返回 **null** 。
+- `addFirst()` 在列表的开头插入一个元素。
+- `offer()` 与 `add()` 和 `addLast()` 相同。 它们都在列表的尾部（末尾）添加一个元素。
+- `removeLast()` 删除并返回列表的最后一个元素。
+
+<!-- Stack -->
+
+## 堆栈Stack
+
+堆栈是“后进先出”（LIFO）集合。它有时被称为*叠加栈*（pushdown stack），因为最后“压入”（push）栈的元素，第一个被“弹出”（pop）栈。
+
+Java 1.0 中附带了一个 **Stack** 类，结果设计得很糟糕（为了向后兼容，我们永远坚持 Java 中的旧设计错误）。**Java 6 添加了 ArrayDeque ，其中包含直接实现堆栈功能的方法：**
+
+基于 Vector 实现的栈 Stack。**底层实际上还是数组，所以还是存在需要扩容**。Vector 是由数组实现的集合类，他包含了大量集合处理的方法。而 Stack 之所以继承 Vector，是为了复用 Vector 中的方法，来实现进栈（push）、出栈(pop)等操作。这里就是 Stack 设计不好的地方，既然只是为了实现栈，不用链表来单独实现，而是为了复用简单的方法而迫使它继承 Vector，Stack 和 Vector 本来是毫无关系的。这使得 Stack 在基于数组实现上效率受影响，另外**因为继承 Vector 类，Stack 可以复用 Vector 大量方法，这使得 Stack 在设计上不严谨。**
+
+
+
+**当数组默认的容量发生改变时，pop、push的性能会有较大降低；**第二个：这个类是java.util.Vector的子类，由于是继承，stack就会将父类的方法继承过来
+如：add(int index,E element)等（具体见Vector的API说明）。这个破坏了stack约定的规则（只能从栈顶进，栈顶出）。所以SUN公司自己也给出的解释就是不要轻易用这个类。
+
+```java
+public
+class Stack<E> extends Vector<E> {
+```
+
+<!-- Set -->
+
+## 集合Set
+
+**Set** 不保存重复的元素。  **Set** 最常见的用途是测试归属性，可以很轻松地询问某个对象是否在一个 **Set** 中。因此，查找通常是 **Set** 最重要的操作，因此通常会选择 **HashSet** 实现，该实现针对快速查找进行了优化。
+
+早期 Java 版本中的 **HashSet** 产生的输出没有可辨别的顺序。这是因为出于对速度的追求， **HashSet** 使用了散列，请参阅[附录：集合主题]()一章。由 **HashSet** 维护的顺序与 **TreeSet** 或 **LinkedHashSet** 不同，因为它们的实现具有不同的元素存储方式。 **TreeSet** 将元素存储在红-黑树数据结构中，而 **HashSet** 使用散列函数。  **LinkedHashSet** 因为查询速度的原因也使用了散列，但是看起来使用了链表来维护元素的插入顺序。
+
+因为它是 **TreeSet** ，所以对结果进行排序。这里，排序是按*字典顺序*（lexicographically）完成的，因此大写和小写字母位于不同的组中。如果想按*字母顺序*（alphabetically）对其进行排序，可以向  **TreeSet** 构造器传入 **String.CASE_INSENSITIVE_ORDER** 比较器（比较器是一个建立排序顺序的对象）：
+
+<!-- Map -->
+
+## 映射Map
+
+将对象映射到其他对象的能力是解决编程问题的有效方法。
+
+通过使用 `containsKey()` 和 `containsValue()` 方法去测试一个 **Map** ，以查看它是否包含某个键或某个值：
+
+**Map** 可以返回由其键组成的 **Set** ，由其值组成的 **Collection** ，或者其键值对的 **Set** 。 它在 *for-in* 语句中被用来遍历该 **Map** 。
+
+<!-- Queue -->
+
+## 队列Queue
+
+队列是一个典型的“先进先出”（FIFO）集合。 即从集合的一端放入事物，再从另一端去获取它们，事物放入集合的顺序和被取出的顺序是相同的。队列通常被当做一种可靠的将对象从程序的某个区域传输到另一个区域的途径。**队列在[并发编程]()中尤为重要，因为它们可以安全地将对象从一个任务传输到另一个任务。**
+
+**LinkedList** 实现了 **Queue** 接口，并且提供了一些方法以支持队列行为，因此 **LinkedList** 可以用作 **Queue** 的一种实现。
+
+`offer()` 是与 **Queue** 相关的方法之一，它在允许的情况下，在队列的尾部插入一个元素，或者返回 **false** 。 `peek()` 和 `element()` 都返回队头元素而不删除它，但是如果队列为空，则 `element()` 抛出 **NoSuchElementException** ，而 `peek()` 返回 **null** 。 `poll()` 和 `remove()`都删除并返回队头元素，但如果队列为空，`poll()` 返回 **null** ，而 `remove()` 抛出 **NoSuchElementException** 。
+
+<!-- PriorityQueue -->
+
+### 优先级队列PriorityQueue
+
+先进先出（FIFO）描述了最典型的*队列规则*（queuing discipline）。队列规则是指在给定队列中的一组元素的情况下，确定下一个弹出队列的元素的规则。先进先出声明的是下一个弹出的元素应该是等待时间最长的元素。
+
+优先级队列声明下一个弹出的元素是最需要的元素（具有最高的优先级）。
+
+当在 **PriorityQueue** 上调用 `offer()` 方法来插入一个对象时，该对象会在队列中被排序。[^5]默认的排序使用队列中对象的*自然顺序*（natural order），但是可以通过提供自己的 **Comparator** 来修改这个顺序。 **PriorityQueue** 确保在调用 `peek()` ， `poll()` 或 `remove()` 方法时，获得的元素将是队列中优先级最高的元素。
+
+**PriorityQueue** 是允许重复的，最小的值具有最高的优先级（如果是 **String** ，空格也可以算作值，并且比字母的优先级高）。
+
+由 `Collections.reverseOrder()` （Java 5 中新添加的）产生的反序的 **Comparator** 。
+
+```java
+priorityQueue = new PriorityQueue<>(
+    ints.size(), Collections.reverseOrder());
+```
+
+**Integer** ， **String** 和 **Character** 可以与 **PriorityQueue** 一起使用，因为这些类已经内置了自然排序。如果想在 **PriorityQueue** 中使用自己的类，则必须包含额外的功能以产生自然排序，或者必须提供自己的 **Comparator** 。在[附录：集合主题]()中有一个更复杂的示例来演示这种情况。
+
+[^5]: 这实际上依赖于具体实现。优先级队列算法通常会按插入顺序排序（维护一个*堆*），但它们也可以在删除时选择最重要的元素。 如果对象的优先级在它在队列中等待时可以修改，那么算法的选择就显得很重要了。
+
+<!-- Collection vs. Iterator -->
+
+## 集合与迭代器
+
+**Collection** 是所有序列集合共有的根接口。它可能会被认为是一种“附属接口”（incidental interface），即因为要表示其他若干个接口的共性而出现的接口。此外，**java.util.AbstractCollection** 类提供了 **Collection** 的默认实现，使得你可以创建 **AbstractCollection** 的子类型，而其中没有不必要的代码重复。
+
+使用接口描述的一个理由是它可以使我们创建更通用的代码。通过针对接口而非具体实现来编写代码，我们的代码可以应用于更多类型的对象。[^6]
+
+[^6]: 有些人提倡这样一种自动创建机制，即对一个类中所有可能的方法组合都自动创建一个接口，有时候对于单个的类都是如此。 我相信接口的意义不应该仅限于方法组合的机械地复制，因此我在创建接口之前，总是要先看到增加接口带来的价值。
+
+ **Collection** 要更方便一点，因为它是 **Iterable** 类型，因此在 `display(Collection)` 的实现中可以使用 *for-in* 构造，这使得代码更加清晰。
+
+```java
+public interface Iterable<T> {
+    Iterator<T> iterator();
+    default void forEach(Consumer<? super T> action) {
+        Objects.requireNonNull(action);
+        for (T t : this) {
+            action.accept(t);
+        }
+    }
+```
+
+虽然这可以通过继承 **AbstractCollection** 而很容易地实现，但是无论如何还是要被强制去实现 `iterator()` 和 `size()` 方法，这些方法 **AbstractCollection** 没有实现，但是 **AbstractCollection** 中的其它方法会用到：
+
+`remove()` 方法是一个“可选操作”，在[附录：集合主题]()中详细介绍。 这里可以不必实现它，如果你调用它，它将抛出异常。
+
+<!-- for-in and Iterators -->
+
+## for-in和迭代器
+
+到目前为止，*for-in* 语法主要用于数组，但它也适用于任何 **Collection** 对象。
+
+Java 5 引入了一个名为 **Iterable** 的接口，该接口包含一个能够生成 **Iterator** 的 `iterator()` 方法。*for-in* 使用此 **Iterable** 接口来遍历序列。因此，如果创建了任何实现了 **Iterable** 的类，都可以将它用于 *for-in* 语句中.
+
+在 Java 5 中，许多类都是 **Iterable** ，主要包括所有的 **Collection** 类（但不包括各种 **Maps** ）。 例如，下面的代码可以显示所有的操作系统环境变量：
+
+```java
+// collections/EnvironmentVariables.java
+// {VisuallyInspectOutput}
+import java.util.*;
+
+public class EnvironmentVariables {
+  public static void main(String[] args) {
+    for(Map.Entry entry: System.getenv().entrySet()) {
+      System.out.println(entry.getKey() + ": " +
+        entry.getValue());
+    }
+  }
+}
+```
+
+`System.getenv()` [^7]返回一个 **Map** ， `entrySet()` 产生一个由 **Map.Entry** 的元素构成的 **Set** ，并且这个 **Set** 是一个 **Iterable** ，因此它可以用于 *for-in* 循环。
+
+*for-in* 语句适用于数组或其它任何 **Iterable** ，但这并不意味着数组肯定也是个 **Iterable** ，也不会发生任何自动装箱：
+
+
+
+```java
+// collections/ArrayIsNotIterable.java
+import java.util.*;
+
+public class ArrayIsNotIterable {
+  static <T> void test(Iterable<T> ib) {
+    for(T t : ib)
+      System.out.print(t + " ");
+  }
+  public static void main(String[] args) {
+    test(Arrays.asList(1, 2, 3));
+    String[] strings = { "A", "B", "C" };
+    // An array works in for-in, but it's not Iterable:
+    //- test(strings);
+    // You must explicitly convert it to an Iterable:
+    test(Arrays.asList(strings));
+  }
+}
+/* Output:
+1 2 3 A B C
+*/
+```
+
+尝试将数组作为一个 **Iterable** 参数传递会导致失败。这说明不存在任何从数组到 **Iterable** 的自动转换; 必须手工执行这种转换。
+
+<!-- The Adapter Method Idiom -->
+
+### 适配器方法惯用法
+
+如果现在有一个 **Iterable** 类，你想要添加一种或多种在 *for-in* 语句中使用这个类的方法，应该怎么做呢？例如，你希望可以选择正向还是反向遍历一个单词列表。如果直接继承这个类，并覆盖 `iterator()` 方法，则只能替换现有的方法，而不能实现遍历顺序的选择。
+
+一种解决方案是所谓*适配器方法*（Adapter Method）的惯用法。“适配器”部分来自于设计模式，因为必须要提供特定的接口来满足 *for-in* 语句。如果已经有一个接口并且需要另一个接口时，则编写适配器就可以解决这个问题。
+在这里，若希望在默认的正向迭代器的基础上，添加产生反向迭代器的能力，因此不能使用覆盖，相反，而是添加了一个能够生成 **Iterable** 对象的方法，该对象可以用于 *for-in* 语句。这使得我们可以提供多种使用 *for-in* 语句的方式：
+
+```java
+// collections/AdapterMethodIdiom.java
+// The "Adapter Method" idiom uses for-in
+// with additional kinds of Iterables
+import java.util.*;
+
+class ReversibleArrayList<T> extends ArrayList<T> {
+  ReversibleArrayList(Collection<T> c) {
+    super(c);
+  }
+  public Iterable<T> reversed() {
+    return new Iterable<T>() {
+      public Iterator<T> iterator() {
+        return new Iterator<T>() {
+          int current = size() - 1;
+          public boolean hasNext() {
+            return current > -1;
+          }
+          public T next() { return get(current--); }
+          public void remove() { // Not implemented
+            throw new UnsupportedOperationException();
+          }
+        };
+      }
+    };
+  }
+}
+
+public class AdapterMethodIdiom {
+  public static void main(String[] args) {
+    ReversibleArrayList<String> ral =
+      new ReversibleArrayList<String>(
+        Arrays.asList("To be or not to be".split(" ")));
+    // Grabs the ordinary iterator via iterator():
+    for(String s : ral)
+      System.out.print(s + " ");
+    System.out.println();
+    // Hand it the Iterable of your choice
+    for(String s : ral.reversed())
+      System.out.print(s + " ");
+  }
+}
+/* Output:
+To be or not to be
+be to not or be To
+*/
+```
+
+重要的是要注意 `Arrays.asList()` 生成一个 **List** 对象，该对象使用底层数组作为其物理实现。如果执行的操作会修改这个 **List** ，并且不希望修改原始数组，那么就应该在另一个集合中创建一个副本。
+
+<!-- Summary -->
+
+## 本章小结
+
+Java 提供了许多保存对象的方法：
+
+1. 数组将数字索引与对象相关联。它保存类型明确的对象，因此在查找对象时不必对结果做类型转换。它可以是多维的，可以保存基本类型的数据。虽然可以在运行时创建数组，但是一旦创建数组，就无法更改数组的大小。
+2. **Collection** 保存单一的元素，而 **Map** 包含相关联的键值对。使用 Java 泛型，可以指定集合中保存的对象的类型，因此不能将错误类型的对象放入集合中，并且在从集合中获取元素时，不必进行类型转换。各种 **Collection** 和各种 **Map** 都可以在你向其中添加更多的元素时，自动调整其尺寸大小。集合不能保存基本类型，但自动装箱机制会负责执行基本类型和集合中保存的包装类型之间的双向转换。
+3. 像数组一样， **List** 也将数字索引与对象相关联，因此，数组和 **List** 都是有序集合。
+4. 如果要执行大量的随机访问，则使用 **ArrayList** ，如果要经常从表中间插入或删除元素，则应该使用 **LinkedList** 。
+5. 队列和堆栈的行为是通过 **LinkedList** 提供的。
+6. **Map** 是一种将对象（而非数字）与对象相关联的设计。 **HashMap** 专为快速访问而设计，而 **TreeMap** 保持键始终处于排序状态，所以没有 **HashMap** 快。 **LinkedHashMap** 按插入顺序保存其元素，但使用散列提供快速访问的能力。
+7. **Set** 不接受重复元素。 **HashSet** 提供最快的查询速度，而 **TreeSet** 保持元素处于排序状态。 **LinkedHashSet** 按插入顺序保存其元素，但使用散列提供快速访问的能力。
+8. ==不要在新代码中使用遗留类 **Vector** ，**Hashtable** 和 **Stack** 。==
+
+浏览一下Java集合的简图（不包含抽象类或遗留组件）会很有帮助。这里仅包括在一般情况下会碰到的接口和类。（译者注：下图为原著PDF中的截图，可能由于未知原因存在问题。这里可参考译者绘制版[^8]）
+
+[^8]: 下面是译者绘制的 Java 集合框架简图，黄色为接口，绿色为抽象类，蓝色为具体类。虚线箭头表示实现关系，实线箭头表示继承关系。
+
+![simple collection taxonomy](Onjava8/simple-collection-taxonomy.png)
+
+### 简单集合分类
+
+可以看到，实际上只有四个基本的集合组件： **Map** ， **List** ， **Set** 和 **Queue** ，它们各有两到三个实现版本（**Queue** 的 **java.util.concurrent** 实现未包含在此图中）。最常使用的集合用黑色粗线线框表示。
+
+虚线框表示接口，实线框表示普通的（具体的）类。带有空心箭头的虚线表示特定的类实现了一个接口。实心箭头表示某个类可以生成箭头指向的类的对象。例如，任何 **Collection** 都可以生成 **Iterator** ， **List** 可以生成 **ListIterator** （也能生成普通的 **Iterator** ，因为 **List** 继承自 **Collection** ）。
+
+下面的示例展示了各种不同的类在方法上的差异。实际代码来自[泛型]()章节，在这里只是调用它来产生输出。程序的输出还展示了在每个类或接口中所实现的接口：
+
+```java
+// collections/CollectionDifferences.java
+import onjava.*;
+
+public class CollectionDifferences {
+  public static void main(String[] args) {
+    CollectionMethodDifferences.main(args);
+  }
+}
+/* Output:
+Collection: [add, addAll, clear, contains, containsAll,
+equals, forEach, hashCode, isEmpty, iterator,
+parallelStream, remove, removeAll, removeIf, retainAll,
+size, spliterator, stream, toArray]
+Interfaces in Collection: [Iterable]
+Set extends Collection, adds: []
+Interfaces in Set: [Collection]
+HashSet extends Set, adds: []
+Interfaces in HashSet: [Set, Cloneable, Serializable]
+LinkedHashSet extends HashSet, adds: []
+Interfaces in LinkedHashSet: [Set, Cloneable,
+Serializable]
+TreeSet extends Set, adds: [headSet,
+descendingIterator, descendingSet, pollLast, subSet,
+floor, tailSet, ceiling, last, lower, comparator,
+pollFirst, first, higher]
+Interfaces in TreeSet: [NavigableSet, Cloneable,
+Serializable]
+List extends Collection, adds: [replaceAll, get,
+indexOf, subList, set, sort, lastIndexOf, listIterator]
+Interfaces in List: [Collection]
+ArrayList extends List, adds: [trimToSize,
+ensureCapacity]
+Interfaces in ArrayList: [List, RandomAccess,
+Cloneable, Serializable]
+LinkedList extends List, adds: [offerFirst, poll,
+getLast, offer, getFirst, removeFirst, element,
+removeLastOccurrence, peekFirst, peekLast, push,
+pollFirst, removeFirstOccurrence, descendingIterator,
+pollLast, removeLast, pop, addLast, peek, offerLast,
+addFirst]
+Interfaces in LinkedList: [List, Deque, Cloneable,
+Serializable]
+Queue extends Collection, adds: [poll, peek, offer,
+element]
+Interfaces in Queue: [Collection]
+PriorityQueue extends Queue, adds: [comparator]
+Interfaces in PriorityQueue: [Serializable]
+Map: [clear, compute, computeIfAbsent,
+computeIfPresent, containsKey, containsValue, entrySet,
+equals, forEach, get, getOrDefault, hashCode, isEmpty,
+keySet, merge, put, putAll, putIfAbsent, remove,
+replace, replaceAll, size, values]
+HashMap extends Map, adds: []
+Interfaces in HashMap: [Map, Cloneable, Serializable]
+LinkedHashMap extends HashMap, adds: []
+Interfaces in LinkedHashMap: [Map]
+SortedMap extends Map, adds: [lastKey, subMap,
+comparator, firstKey, headMap, tailMap]
+Interfaces in SortedMap: [Map]
+TreeMap extends Map, adds: [descendingKeySet,
+navigableKeySet, higherEntry, higherKey, floorKey,
+subMap, ceilingKey, pollLastEntry, firstKey, lowerKey,
+headMap, tailMap, lowerEntry, ceilingEntry,
+descendingMap, pollFirstEntry, lastKey, firstEntry,
+floorEntry, comparator, lastEntry]
+Interfaces in TreeMap: [NavigableMap, Cloneable,
+Serializable]
+*/
+```
+
+除 **TreeSet** 之外的所有 **Set** 都具有与 **Collection** 完全相同的接口。**List** 和 **Collection** 存在着明显的不同，尽管 **List** 所要求的方法都在 **Collection** 中。另一方面，在 **Queue** 接口中的方法是独立的，在创建具有 **Queue** 功能的实现时，不需要使用 **Collection** 方法。最后， **Map** 和 **Collection** 之间唯一的交集是 **Map** 可以使用 `entrySet()` 和 `values()` 方法来产生 **Collection** 。
+
+请注意，标记接口 **java.util.RandomAccess** 附加到了 **ArrayList** 上，但不附加到 **LinkedList** 上。这为根据特定 **List** 动态改变其行为的算法提供了信息。
+
+从面向对象的继承层次结构来看，这种组织结构确实有些奇怪。但是，当了解了 **java.util** 中更多的有关集合的内容后（特别是在[附录：集合主题]()中的内容），就会发现出了继承结构有点奇怪外，还有更多的问题。集合类库一直以来都是设计难题——解决这些问题涉及到要去满足经常彼此之间互为牵制的各方面需求。所以要做好准备，在各处做出妥协。
+
+尽管存在这些问题，但 Java 集合仍是在日常工作中使用的基本工具，它可以使程序更简洁、更强大、更有效。你可能需要一段时间才能熟悉集合类库的某些方面，但我想你很快就会找到自己的路子，来获得和使用这个类库中的类。
+
+![collection](Onjava8/collection.png)
+![map](Onjava8/map.png)
+
+<!-- Functional Programming -->
+
+# 第十三章 函数式编程
+
+
+
+> 函数式编程语言操纵代码片段就像操作数据一样容易。 虽然 Java 不是函数式语言，但 Java 8 Lambda 表达式和方法引用 (Method References) 允许你以函数式编程。
+
+**函数式编程**（FP）的意义所在。通过合并现有代码来生成新功能而不是从头开始编写所有内容，我们可以更快地获得更可靠的代码。至少在某些情况下，这套理论似乎很有用。在这一过程中，一些非函数式语言已经习惯了使用函数式编程产生的优雅的语法。
+
+你也可以这样想：
+
+**OO（object oriented，面向对象）是抽象数据，FP（functional programming，函数式编程）是抽象行为。**
+
+**纯粹的函数式语言在安全性方面更进一步。**它强加了**额外的约束，即所有数据必须是不可变的：设置一次，永不改变**。**将值传递给函数，该函数然后生成新值但从不修改自身外部的任何东西（包括其参数或该函数范围之外的元素）。**当强制执行此操作时，你知道任何错误都不是由所谓的副作用引起的，因为该函数仅创建并返回结果，而不是其他任何错误。
+
+更好的是，“不可变对象和无副作用”范式解决了并发编程中最基本和最棘手的问题之一（当程序的某些部分同时在多个处理器上运行时）。这是可变共享状态的问题，这意味着代码的不同部分（在不同的处理器上运行）可以尝试同时修改同一块内存（谁赢了？没人知道）。如果函数永远不会修改现有值但只生成新值，则不会对内存产生争用，这是纯函数式语言的定义。 因此，经常提出纯函数式语言作为并行编程的解决方案（还有其他可行的解决方案）。
+
+需要提醒大家的是，函数式语言背后有很多动机，这意味着描述它们可能会有些混淆。它通常取决于各种观点：为“并行编程”，“代码可靠性”和“代码创建和库复用”。
+
+FP 思想值得融入非 FP 语言，如 Python。Java 8 也从中吸收并支持了 FP。
+
+ Java 8 的 Lambda 表达式。由箭头 `->` 分隔开参数和函数体，**箭头左边是参数，箭头右侧是从 Lambda 返回的表达式，即函数体。**
+
+Java 8 的**方法引用**，由 `::` 区分。**在 `::` 的左边是类或对象的名称，在 `::` 的右边是方法的名称，**但没有参数列表。
+
+方法引用和 Lambda 表达式的出现让我们可以在需要时**传递功能**，而不是仅在必要才这么做。
+
+<!-- Lambda Expressions -->
+
+## Lambda表达式
+
+Lambda 表达式是使用**最小可能**语法编写的函数定义：
+
+1. Lambda 表达式产生函数，而不是类。 在 JVM（Java Virtual Machine，Java 虚拟机）上，一切都是一个类，因此在幕后执行各种操作使 Lambda 看起来像函数 —— 但作为程序员，你可以高兴地假装它们“只是函数”。
+2. Lambda 语法尽可能少，这正是为了使 Lambda 易于编写和使用。
+
+我们在 **Strategize.java** 中看到了一个 Lambda 表达式，但还有其他语法变体：
+
+```java
+// functional/LambdaExpressions.java
+
+interface Description {
+  String brief();
+}
+
+interface Body {
+  String detailed(String head);
+}
+
+interface Multi {
+  String twoArg(String head, Double d);
+}
+
+public class LambdaExpressions {
+
+  static Body bod = h -> h + " No Parens!"; // [1]
+
+  static Body bod2 = (h) -> h + " More details"; // [2]
+
+  static Description desc = () -> "Short info"; // [3]
+
+  static Multi mult = (h, n) -> h + n; // [4]
+
+  static Description moreLines = () -> { // [5]
+    System.out.println("moreLines()");
+    return "from moreLines()";
+  };
+
+  public static void main(String[] args) {
+    System.out.println(bod.detailed("Oh!"));
+    System.out.println(bod2.detailed("Hi!"));
+    System.out.println(desc.brief());
+    System.out.println(mult.twoArg("Pi! ", 3.14159));
+    System.out.println(moreLines.brief());
+  }
+}
+```
+
+输出结果：
+
+```
+Oh! No Parens!
+Hi! More details
+Short info
+Pi! 3.14159
+moreLines()
+from moreLines()
+```
+
+我们从三个接口开始，每个接口都有一个单独的方法（很快就会理解它的重要性）。但是，每个方法都有不同数量的参数，以便演示 Lambda 表达式语法。
+
+任何 Lambda 表达式的基本语法是：
+
+1. 参数。
+2. 接着 `->`，可视为“产出”。
+3. `->` 之后的内容都是方法体。
+
+- **[1]** 当只用一个参数，可以不需要括号 `()`。 然而，这是一个特例。
+- **[2]** 正常情况使用括号 `()` 包裹参数。 为了保持一致性，也可以使用括号 `()` 包裹单个参数，虽然这种情况并不常见。
+- **[3]** 如果没有参数，则必须使用括号 `()` 表示空参数列表。
+- **[4]** 对于多个参数，将参数列表放在括号 `()` 中。
+
+到目前为止，所有 Lambda 表达式方法体都是单行。 该表达式的结果自动成为 Lambda 表达式的返回值，在此处使用 **return** 关键字是非法的。 这是 Lambda 表达式缩写用于描述功能的语法的另一种方式。
+
+**[5]** 如果在 Lambda 表达式中确实需要多行，则必须将这些行放在花括号中。 在这种情况下，就需要使用 **return**。
+
+Lambda 表达式通常比**匿名内部类**产生更易读的代码，因此我们将在本书中尽可能使用它们。
+
+### use-me
+
+==Lambda表达式常与**单一方法接口(函数式接口)**使用==,即常用来产生匿名内部类（因为java中一切皆是对象，没有JavaScript中的function），但是必须要声明类型。
+
+接口
+
+```java
+interface Body {
+    String detailed(String head);
+}
+```
+
+```java
+public class LambdaExpressions {
+
+  public static void main(String[] args) {
+      Body bod = h -> h + " No Parens!"; // [1]
+  }
+}
+```
+
+### Lambda传送匿名类参数
+
+**使用强制类型转换表明Lambda产生的类型。**
+
+```java
+public class LambdaExpressions {
+    public static void useBody(Body body){
+    }
+  public static void main(String[] args) {
+      useBody( (Body)str ->{
+          return str
+      })
+  }
+}
+```
+
+
+
+### 递归
+
+递归函数是一个自我调用的函数。可以编写递归的 Lambda 表达式，但需要注意：递归方法必须是实例变量或静态变量，否则会出现编译时错误。 我们将为每个案例创建一个示例。
+
+这两个示例都需要一个接受 **int** 型参数并生成 **int** 的接口：
+
+```java
+// functional/IntCall.java
+
+interface IntCall {
+  int call(int arg);
+}
+```
+
+整数 n 的阶乘将所有小于或等于 n 的正整数相乘。 阶乘函数是一个常见的递归示例：
+
+```java
+// functional/RecursiveFactorial.java
+
+public class RecursiveFactorial {
+  static IntCall fact;
+  public static void main(String[] args) {
+    fact = n -> n == 0 ? 1 : n * fact.call(n - 1);
+    for(int i = 0; i <= 10; i++)
+      System.out.println(fact.call(i));
+  }
+}
+```
+
+输出结果：
+
+```
+1
+1
+2
+6
+24
+120
+720
+5040
+40320
+362880
+3628800
+```
+
+这里，`fact` 是一个静态变量。 注意使用三元 **if-else**。 递归函数将一直调用自己，直到 `i == 0`。所有递归函数都有“停止条件”，否则将无限递归并产生异常。
+
+我们可以将 `Fibonacci` 序列改为使用递归 Lambda 表达式来实现，这次使用实例变量：
+
+```java
+// functional/RecursiveFibonacci.java
+
+public class RecursiveFibonacci {
+  IntCall fib;
+
+  RecursiveFibonacci() {
+    fib = n -> n == 0 ? 0 :
+               n == 1 ? 1 :
+               fib.call(n - 1) + fib.call(n - 2);
+  }
+  
+  int fibonacci(int n) { return fib.call(n); }
+
+  public static void main(String[] args) {
+    RecursiveFibonacci rf = new RecursiveFibonacci();
+    for(int i = 0; i <= 10; i++)
+      System.out.println(rf.fibonacci(i));
+  }
+}
+```
+
+输出结果：
+
+```
+0
+1
+1
+2
+3
+5
+8
+13
+21
+34
+55
+```
+
+将 `Fibonacci` 序列中的最后两个元素求和来产生下一个元素。
+
+<!-- method references-->
+
+## 方法引用
+
+Java 8 方法引用没有历史包袱。方法引用组成：类名或对象名，后面跟 `::` [^4]，然后跟方法名称。
+
+```java
+// functional/MethodReferences.java
+
+import java.util.*;
+
+interface Callable { // [1]
+  void call(String s);
+}
+
+class Describe {
+  void show(String msg) { // [2]
+    System.out.println(msg);
+  }
+}
+
+public class MethodReferences {
+  static void hello(String name) { // [3]
+    System.out.println("Hello, " + name);
+  }
+  static class Description {
+    String about;
+    Description(String desc) { about = desc; }
+    void help(String msg) { // [4]
+      System.out.println(about + " " + msg);
+    }
+  }
+  static class Helper {
+    static void assist(String msg) { // [5]
+      System.out.println(msg);
+    }
+  }
+  public static void main(String[] args) {
+    Describe d = new Describe();
+    Callable c = d::show; // [6]
+    c.call("call()"); // [7]
+
+    c = MethodReferences::hello; // [8]
+    c.call("Bob");
+
+    c = new Description("valuable")::help; // [9]
+    c.call("information");
+
+    c = Helper::assist; // [10]
+    c.call("Help!");
+  }
+}
+```
+
+输出结果：
+
+```
+call()
+Hello, Bob
+valuable information
+Help!
+```
+
+**[1]** 我们从单一方法接口开始（同样，你很快就会了解到这一点的重要性）。
+
+**[2]** `show()` 的签名（参数类型和返回类型）符合 **Callable** 的 `call()` 的签名。
+
+**[3]** `hello()` 也符合 `call()` 的签名。 
+
+**[4]**  `help()` 也符合，它是静态内部类中的非静态方法。
+
+**[5]** `assist()` 是静态内部类中的静态方法。
+
+**[6]** 我们将 **Describe** 对象的方法引用赋值给 **Callable** ，它没有 `show()` 方法，而是 `call()` 方法。 但是，Java 似乎接受用这个看似奇怪的赋值，因为方法引用符合 **Callable** 的 `call()` 方法的签名。
+
+**[7]** 我们现在可以通过调用 `call()` 来调用 `show()`，因为 Java 将 `call()` 映射到 `show()`。
+
+**[8]** 这是一个**静态**方法引用。
+
+**[9]** 这是 **[6]** 的另一个版本：对已实例化对象的方法的引用，有时称为*绑定方法引用*。
+
+**[10]** 最后，获取静态内部类的方法引用的操作与 **[8]** 中外部类方式一样。
+
+上例只是简短的介绍，我们很快就能看到方法引用的全部变化。
+
+### Runnable接口
+
+**Runnable** 接口自 1.0 版以来一直在 Java 中，因此不需要导入。它也符合特殊的单方法接口格式：它的方法 `run()` 不带参数，也没有返回值。因此，我们可以使用 Lambda 表达式和方法引用作为 **Runnable**：
+
+```java
+// functional/RunnableMethodReference.java
+
+// 方法引用与 Runnable 接口的结合使用
+
+class Go {
+  static void go() {
+    System.out.println("Go::go()");
+  }
+}
+
+public class RunnableMethodReference {
+  public static void main(String[] args) {
+
+    new Thread(new Runnable() {
+      public void run() {
+        System.out.println("Anonymous");
+      }
+    }).start();
+
+    new Thread(
+      () -> System.out.println("lambda")
+    ).start();
+
+    new Thread(Go::go).start();
+  }
+}
+```
+
+输出结果：
+
+```
+Anonymous
+lambda
+Go::go()
+```
+
+**Thread** 对象将 **Runnable** 作为其构造函数参数，并具有会调用 `run()` 的方法  `start()`。 **注意**，只有**匿名内部类**才需要具有名为 `run()` 的方法。
+
+<!-- Unbound Method References -->
+
+### 未绑定的方法引用
+
+未绑定的方法引用是指没有关联对象的普通（非静态）方法。 使用未绑定的引用之前，我们必须先提供对象：
+
+```java
+// functional/UnboundMethodReference.java
+
+// 没有方法引用的对象
+
+class X {
+  String f() { return "X::f()"; }
+}
+
+interface MakeString {
+  String make();
+}
+
+interface TransformX {
+  String transform(X x);
+}
+
+public class UnboundMethodReference {
+  public static void main(String[] args) {
+    // MakeString ms = X::f; // [1]
+    TransformX sp = X::f;
+    X x = new X();
+    System.out.println(sp.transform(x)); // [2]
+    System.out.println(x.f()); // 同等效果
+  }
+}
+```
+
+输出结果：
+
+```
+X::f()
+X::f()
+```
+
+截止目前，我们已经知道了与接口方法同名的方法引用。 在 **[1]**，我们尝试把 `X` 的 `f()` 方法引用赋值给 **MakeString**。结果：即使 `make()` 与 `f()` 具有相同的签名，编译也会报“invalid method reference”（无效方法引用）错误。 这是因为实际上还有另一个隐藏的参数：我们的老朋友 `this`。 你不能在没有 `X` 对象的前提下调用 `f()`。 因此，`X :: f` 表示未绑定的方法引用，因为它尚未“绑定”到对象。
+
+要解决这个问题，我们需要一个 `X` 对象，所以我们的接口实际上需要一个额外的参数的接口，如上例中的 **TransformX**。 如果将 `X :: f` 赋值给 **TransformX**，这在 Java 中是允许的。这次我们需要调整下心里预期——使用未绑定的引用时，函数方法的签名（接口中的单个方法）不再与方法引用的签名完全匹配。 理由是：你需要一个对象来调用方法。
+
+**[2]** 的结果有点像脑筋急转弯。 我接受未绑定的引用并对其调用 `transform()`，将其传递给 `X`，并以某种方式导致对 `x.f()` 的调用。 **Java 知道它必须采用第一个参数，这实际上就是 `this`，并在其上调用方法。**
+
+**
+
+```java
+// functional/MultiUnbound.java
+
+// 未绑定的方法与多参数的结合运用
+
+class This {
+  void two(int i, double d) {}
+  void three(int i, double d, String s) {}
+  void four(int i, double d, String s, char c) {}
+}
+
+interface TwoArgs {
+  void call2(This athis, int i, double d);
+}
+
+interface ThreeArgs {
+  void call3(This athis, int i, double d, String s);
+}
+
+interface FourArgs {
+  void call4(
+    This athis, int i, double d, String s, char c);
+}
+
+public class MultiUnbound {
+  public static void main(String[] args) {
+    TwoArgs twoargs = This::two;
+    ThreeArgs threeargs = This::three;
+    FourArgs fourargs = This::four;
+    This athis = new This();
+    twoargs.call2(athis, 11, 3.14);
+    threeargs.call3(athis, 11, 3.14, "Three");
+    fourargs.call4(athis, 11, 3.14, "Four", 'Z');
+  }
+}
+```
+
+为了说明这一点，我将类命名为 **This** ，函数方法的第一个参数则是 **athis**，但是你应该选择其他名称以防止生产代码混淆。
+
+### 构造函数引用
+
+你还可以捕获构造函数的引用，然后通过引用调用该构造函数。
+
+```java
+// functional/CtorReference.java
+
+class Dog {
+  String name;
+  int age = -1; // For "unknown"
+  Dog() { name = "stray"; }
+  Dog(String nm) { name = nm; }
+  Dog(String nm, int yrs) { name = nm; age = yrs; }
+}
+
+interface MakeNoArgs {
+  Dog make();
+}
+
+interface Make1Arg {
+  Dog make(String nm);
+}
+
+interface Make2Args {
+  Dog make(String nm, int age);
+}
+
+public class CtorReference {
+  public static void main(String[] args) {
+    MakeNoArgs mna = Dog::new; // [1]
+    Make1Arg m1a = Dog::new;   // [2]
+    Make2Args m2a = Dog::new;  // [3]
+
+    Dog dn = mna.make();
+    Dog d1 = m1a.make("Comet");
+    Dog d2 = m2a.make("Ralph", 4);
+  }
+}
+```
+
+**Dog** 有三个构造函数，函数接口内的 `make()` 方法反映了构造函数参数列表（ `make()` 方法名称可以不同）。
+
+**注意**我们如何对 **[1]**，**[2]** 和 **[3]** 中的每一个使用 `Dog :: new`。 这 3 个构造函数只有一个相同名称：`:: new`，但在每种情况下都赋值给不同的接口。编译器可以检测并知道从哪个构造函数引用。
+
+编译器能识别并调用你的构造函数（ 在本例中为 `make()`）。
+
+<!-- Functional Interfaces -->
+
+## 函数式接口
+
+方法引用和 Lambda 表达式必须被赋值，同时编译器需要识别类型信息以确保类型正确。 Lambda 表达式特别引入了新的要求。 代码示例：
+
+```java
+x -> x.toString()
+```
+
+我们清楚这里返回类型必须是 **String**，但 `x` 是什么类型呢？
+
+Lambda 表达式包含类型推导（编译器会自动推导出类型信息，避免了程序员显式地声明）。编译器必须能够以某种方式推导出 `x` 的类型。
+
+下面是第 2 个代码示例：
+
+```java
+(x, y) -> x + y
+```
+
+现在 `x` 和 `y` 可以是任何支持 `+` 运算符连接的数据类型，可以是两个不同的数值类型或者是 1 个 **String** 加任意一种可自动转换为 **String** 的数据类型（这包括了大多数类型）。 但是，当 Lambda 表达式被赋值时，编译器必须确定 `x` 和 `y` 的确切类型以生成正确的代码。
+
+该问题也适用于方法引用。 假设你要传递 `System.out :: println` 到你正在编写的方法 ，你怎么知道传递给方法的参数的类型？
+
+为了解决这个问题，Java 8 引入了 `java.util.function` 包。它包含一组接口，这些接口是 Lambda 表达式和方法引用的目标类型。 每个接口只包含一个抽象方法，称为函数式方法。
+
+在编写接口时，可以使用 `@FunctionalInterface` 注解强制执行此“函数式方法”模式：
+
+
+
+```java
+// functional/FunctionalAnnotation.java
+
+@FunctionalInterface
+interface Functional {
+  String goodbye(String arg);
+}
+
+interface FunctionalNoAnn {
+  String goodbye(String arg);
+}
+
+/*
+@FunctionalInterface
+interface NotFunctional {
+  String goodbye(String arg);
+  String hello(String arg);
+}
+产生错误信息:
+NotFunctional is not a functional interface
+multiple non-overriding abstract methods
+found in interface NotFunctional
+*/
+
+public class FunctionalAnnotation {
+  public String goodbye(String arg) {
+    return "Goodbye, " + arg;
+  }
+  public static void main(String[] args) {
+    FunctionalAnnotation fa =
+      new FunctionalAnnotation();
+    Functional f = fa::goodbye;
+    FunctionalNoAnn fna = fa::goodbye;
+    // Functional fac = fa; // Incompatible
+    Functional fl = a -> "Goodbye, " + a;
+    FunctionalNoAnn fnal = a -> "Goodbye, " + a;
+  }
+}
+```
+
+`@FunctionalInterface` 注解是可选的; Java 在 `main()` 中把 **Functional** 和 **FunctionalNoAnn** 都当作函数式接口。 `@FunctionalInterface` 的值在 `NotFunctional` 的定义中可见：接口中如果有多个方法则会产生编译时错误消息。
+
+仔细观察在定义 `f` 和 `fna` 时发生了什么。 `Functional` 和 `FunctionalNoAnn` 定义接口，然而被赋值的只是方法 `goodbye()`。首先，这只是一个方法而不是类；其次，它甚至都不是实现了该接口的类中的方法。Java 8 在这里添加了一点小魔法：如果将方法引用或 Lambda 表达式赋值给函数式接口（类型需要匹配），Java 会适配你的赋值到目标接口。 编译器会自动包装方法引用或 Lambda 表达式到实现目标接口的类的实例中。
+
+Java 8 允许我们以简便的语法为接口赋值函数。
+
+`java.util.function` 包旨在创建一组完整的目标接口，使得我们一般情况下不需再定义自己的接口。这主要是因为基本类型会产生一小部分接口。 如果你了解命名模式，顾名思义就能知道特定接口的作用。
+
+ 以下是基本命名准则：
+
+1. 如果**只处理对象而非基本类型**，名称则为 `Function`，`Consumer`，`Predicate` 等。参数类型通过泛型添加。
+2. 如果接收的参数是基本类型，则由名称的第一部分表示，如 `LongConsumer`，`DoubleFunction`，`IntPredicate` 等，但基本 `Supplier` 类型例外。
+3. 如果返回值为基本类型，则用 `To` 表示，如 `ToLongFunction <T>` 和 `IntToLongFunction`。
+4. 如果返回值类型与参数类型一致，则是一个运算符：单个参数使用 `UnaryOperator`，两个参数使用 `BinaryOperator`。
+5. 如果接收两个参数且返回值为布尔值，则是一个谓词（Predicate）。
+6. 如果接收的两个参数类型不同，则名称中有一个 `Bi`。
+
+下表描述了 `java.util.function` 中的目标类型（包括例外情况）：
+
+| **特征**                                            |                       **函数式方法名**                       |                           **示例**                           |
+| :-------------------------------------------------- | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| 无参数； <br> 无返回值                              |         **Runnable** <br> (java.lang)  <br>  `run()`         |                         **Runnable**                         |
+| 无参数； <br> 返回类型任意                          |         **Supplier** <br> `get()` <br> `getAs类型()`         | **Supplier`<T>`  <br> BooleanSupplier  <br> IntSupplier  <br> LongSupplier  <br> DoubleSupplier** |
+| 无参数； <br> 返回类型任意                          |   **Callable** <br> (java.util.concurrent)  <br> `call()`    |                      **Callable`<V>`**                       |
+| 1 参数； <br> 无返回值                              |                 **Consumer** <br> `accept()`                 | **`Consumer<T>` <br> IntConsumer <br> LongConsumer <br> DoubleConsumer** |
+| 2 参数 **Consumer**                                 |                **BiConsumer** <br> `accept()`                |                    **`BiConsumer<T,U>`**                     |
+| 2 参数 **Consumer**； <br> 1 引用； <br> 1 基本类型 |             **Obj类型Consumer** <br> `accept()`              | **`ObjIntConsumer<T>` <br> `ObjLongConsumer<T>` <br> `ObjDoubleConsumer<T>`** |
+| 1 参数； <br> 返回类型不同                          | **Function** <br> `apply()` <br> **To类型** 和 **类型To类型** <br> `applyAs类型()` | **Function`<T,R>` <br> IntFunction`<R>` <br> `LongFunction<R>` <br> DoubleFunction`<R>` <br> ToIntFunction`<T>` <br> `ToLongFunction<T>` <br> `ToDoubleFunction<T>` <br> IntToLongFunction <br> IntToDoubleFunction <br> LongToIntFunction <br> LongToDoubleFunction <br> DoubleToIntFunction <br> DoubleToLongFunction** |
+| 1 参数； <br> 返回类型相同                          |               **UnaryOperator** <br> `apply()`               | **`UnaryOperator<T>` <br> IntUnaryOperator <br> LongUnaryOperator <br> DoubleUnaryOperator** |
+| 2 参数类型相同； <br> 返回类型相同                  |              **BinaryOperator** <br> `apply()`               | **`BinaryOperator<T>` <br> IntBinaryOperator <br> LongBinaryOperator <br> DoubleBinaryOperator** |
+| 2 参数类型相同; <br> 返回整型                       |         Comparator <br> (java.util) <br> `compare()`         |                     **`Comparator<T>`**                      |
+| 2 参数； <br> 返回布尔型                            |                 **Predicate** <br> `test()`                  | **`Predicate<T>` <br> `BiPredicate<T,U>` <br> IntPredicate <br> LongPredicate <br> DoublePredicate** |
+| 参数基本类型； <br> 返回基本类型                    |         **类型To类型Function** <br> `applyAs类型()`          | **IntToLongFunction <br> IntToDoubleFunction <br> LongToIntFunction <br> LongToDoubleFunction <br> DoubleToIntFunction <br> DoubleToLongFunction** |
+| 2 参数类型不同                                      |                 **Bi操作** <br> (不同方法名)                 | **`BiFunction<T,U,R>` <br> `BiConsumer<T,U>` <br> `BiPredicate<T,U>` <br> `ToIntBiFunction<T,U>` <br> `ToLongBiFunction<T,U>` <br> `ToDoubleBiFunction<T>`** |
+
+此表仅提供些常规方案。通过上表，你应该或多或少能自行推导出更多行的函数式接口。
+
+可以看出，在创建 `java.util.function` 时，设计者们做出了一些选择。 
+
+例如，为什么没有 `IntComparator`，`LongComparator` 和 `DoubleComparator` 呢？有 `BooleanSupplier` 却没有其他表示 **Boolean** 的接口；有通用的 `BiConsumer` 却没有用于 **int**，**long** 和 **double** 的 `BiConsumers` 变体（我对他们放弃的原因表示同情）。这些选择是疏忽还是有人认为其他组合的使用情况出现得很少（他们是如何得出这个结论的）？
+
+<!-- Functional Interfaces with More Arguments -->
+
+### 多参数函数式接口
+
+`java.util.functional` 中的接口是有限的。比如有了 `BiFunction`，但它不能变化。 如果需要三参数函数的接口怎么办？ 其实这些接口非常简单，很容易查看 Java 库源代码并自行创建。代码示例：
+
+```java
+// functional/TriFunction.java
+
+@FunctionalInterface
+public interface TriFunction<T, U, V, R> {
+    R apply(T t, U u, V v);
+}
+```
+
+<!-- Higher-Order Functions-->
+
+## 高阶函数
+
+这个名字可能听起来令人生畏，但是：[高阶函数](https://en.wikipedia.org/wiki/Higher-order_function)（Higher-order Function）只是一个消费或产生函数的函数。
+
+我们先来看看如何产生一个函数：
+
+```java
+// functional/ProduceFunction.java
+
+import java.util.function.*;
+
+interface
+FuncSS extends Function<String, String> {} // [1]
+
+public class ProduceFunction {
+  static FuncSS produce() {
+    return s -> s.toLowerCase(); // [2]
+  }
+  public static void main(String[] args) {
+    FuncSS f = produce();
+    System.out.println(f.apply("YELLING"));
+  }
+}
+```
+
+输出结果：
+
+```
+yelling
+```
+
+这里，`produce()` 是高阶函数。
+
+**[1]** 使用继承，可以轻松地为专用接口创建别名。
+
+**[2]** 使用 Lambda 表达式，可以轻松地在方法中创建和返回一个函数。
+
+要消费一个函数，消费函数需要在参数列表正确地描述函数类型。代码示例：
+
+```java
+// functional/ConsumeFunction.java
+
+import java.util.function.*;
+
+class One {}
+class Two {}
+
+public class ConsumeFunction {
+  static Two consume(Function<One,Two> onetwo) {
+    return onetwo.apply(new One());
+  }
+  public static void main(String[] args) {
+    Two two = consume(one -> new Two());
+  }
+}
+```
+
+当基于消费函数生成新函数时，事情就变得相当有趣了。代码示例如下：
+
+```java
+// functional/TransformFunction.java
+
+import java.util.function.*;
+
+class I {
+  @Override
+  public String toString() { return "I"; }
+}
+
+class O {
+  @Override
+  public String toString() { return "O"; }
+}
+
+public class TransformFunction {
+  static Function<I,O> transform(Function<I,O> in) {
+    return in.andThen(o -> {
+      System.out.println(o);
+      return o;
+    });
+  }
+  public static void main(String[] args) {
+    Function<I,O> f2 = transform(i -> {
+      System.out.println(i);
+      return new O();
+    });
+    O o = f2.apply(new I());
+  }
+}
+```
+
+输出结果：
+
+```
+I
+O
+```
+
+在这里，`transform()` 生成一个与传入的函数具有相同签名的函数，但是你可以生成任何你想要的类型。
+
+这里使用到了 `Function` 接口中名为 `andThen()` 的默认方法，该方法专门用于操作函数。 **顾名思义，在调用 `in` 函数之后调用 `toThen()`（还有个 `compose()` 方法，它在 `in` 函数之前应用新函数）。** 要附加一个 `andThen()` 函数，我们只需将该函数作为参数传递。 `transform()` 产生的是一个新函数，它将 `in` 的动作与 `andThen()` 参数的动作结合起来。
+
+<!-- Closures -->
+
+## 闭包
+
+**闭包**（Closure）一词总结了这些问题。 它非常重要，利用闭包可以轻松生成函数。
+
+考虑一个更复杂的 Lambda，它使用函数作用域之外的变量。 返回该函数会发生什么？ 也就是说，当你调用函数时，它对那些 “外部 ”变量引用了什么?  如果语言不能自动解决这个问题，那将变得非常具有挑战性。 能够解决这个问题的语言被称为**支持闭包**，或者叫作在词法上限定范围( 也使用术语*变量捕获* )。Java 8 提供了有限但合理的闭包支持，我们将用一些简单的例子来研究它。
+
+从 Lambda 表达式引用的局部变量必须是 `final` 或者是等同 `final` 效果的。
+
+首先，下例函数中，方法返回访问对象字段和方法参数。代码示例：
+
+```java
+// functional/Closure1.java
+
+import java.util.function.*;
+
+public class Closure1 {
+  int i;
+  IntSupplier makeFun(int x) {
+    return () -> x + i++;
+  }
+}
+```
+
+但是，仔细考虑一下，`i` 的这种用法并非是个大难题，因为对象很可能在你调用 `makeFun()` 之后就存在了——实际上，垃圾收集器几乎肯定会保留一个对象，并将现有的函数以这种方式绑定到该对象上[^5]。当然，如果你对同一个对象多次调用 `makeFun()` ，你最终会得到多个函数，它们共享 `i` 的存储空间
+
+如果使用 `final` 修饰 `x`和 `i`，就不能再递增它们的值了。代码示例：
+
+```java
+// functional/Closure4.java
+
+import java.util.function.*;
+
+public class Closure4 {
+  IntSupplier makeFun(final int x) {
+    final int i = 0;
+    return () -> x + i;
+  }
+}
+```
+
+那么为什么在 `Closure2.java` 中， `x` 和 `i` 非 `final` 却可以运行呢？
+
+这就叫做**等同 final 效果**（Effectively Final）。这个术语是在 Java 8 才开始出现的，表示虽然没有明确地声明变量是 `final` 的，但是因变量值没被改变过而实际有了 `final` 同等的效果。 如果局部变量的初始值永远不会改变，那么它实际上就是 `final` 的。
+
+通过在闭包中使用 `final` 关键字提前修饰变量 `x` 和  `i` ， 我们解决了 `Closure5.java` 中的问题。代码示例：
+
+```java
+// functional/Closure6.java
+
+import java.util.function.*;
+
+public class Closure6 {
+  IntSupplier makeFun(int x) {
+    int i = 0;
+    i++;
+    x++;
+    final int iFinal = i;
+    final int xFinal = x;
+    return () -> xFinal + iFinal;
+  }
+}
+```
+
+上例中 `iFinal` 和 `xFinal` 的值在赋值后并没有改变过，因此在这里使用 `final` 是多余的。
+
+如果这里是引用的话，需要把 **int** 型更改为 **Integer** 型。代码示例：
+
+```java
+// functional/Closure7.java
+
+// {无法编译成功}
+import java.util.function.*;
+
+public class Closure7 {
+  IntSupplier makeFun(int x) {
+    Integer i = 0;
+    i = i + 1;
+    return () -> x + i;
+  }
+}
+```
+
+编译器非常智能，它能识别变量 `i` 的值被更改过了。 对于包装类型的处理可能比较特殊，因此我们尝试下 **List**：
+
+```java
+// functional/Closure8.java
+
+import java.util.*;
+import java.util.function.*;
+
+public class Closure8 {
+  Supplier<List<Integer>> makeFun() {
+    final List<Integer> ai = new ArrayList<>();
+    ai.add(1);
+    return () -> ai;
+  }
+  public static void main(String[] args) {
+    Closure8 c7 = new Closure8();
+    List<Integer>
+      l1 = c7.makeFun().get(),
+      l2 = c7.makeFun().get();
+    System.out.println(l1);
+    System.out.println(l2);
+    l1.add(42);
+    l2.add(96);
+    System.out.println(l1);
+    System.out.println(l2);
+  }
+}
+```
+
+输出结果：
+
+```
+[1]
+[1]
+[1, 42]
+[1, 96]
+```
+
+可以看到，这次一切正常。我们改变了 **List** 的值却没产生编译时错误。通过观察本例的输出结果，我们发现这看起来非常安全。**这是因为每次调用 `makeFun()` 时，其实都会创建并返回一个全新的 `ArrayList`。** 也就是说，每个闭包都有自己独立的 `ArrayList`， 它们之间互不干扰。
+
+请**注意**我已经声明 `ai` 是 `final` 的了。尽管在这个例子中你可以去掉 `final` 并得到相同的结果（试试吧！）。 应用于**对象引用的 `final` 关键字仅表示不会重新赋值引用。 它并不代表你不能修改对象本身。**
+
+<!-- Inner Classes as Closures -->
+
+### 作为闭包的内部类
+
+我们可以使用匿名内部类重写之前的例子:
+
+```java
+// functional/AnonymousClosure.java
+
+import java.util.function.*;
+
+public class AnonymousClosure {
+  IntSupplier makeFun(int x) {
+    int i = 0;
+    // 同样规则的应用:
+    // i++; // 非等同 final 效果
+    // x++; // 同上
+    return new IntSupplier() {
+      public int getAsInt() { return x + i; }
+    };
+  }
+}
+```
+
+实际上只要有内部类，就会有闭包（Java 8 只是简化了闭包操作）。在 Java 8 之前，变量 `x` 和 `i` 必须被明确声明为 `final`。在 Java 8 中，内部类的规则放宽，包括**等同 final 效果**。
+
+<!-- Function Composition -->
+
+## 函数组合
+
+函数组合（Function Composition）意为“多个函数组合成新函数”。它通常是函数式编程的基本组成部分。在前面的 `TransformFunction.java` 类中，有一个使用 `andThen()` 的函数组合示例。一些 `java.util.function` 接口中包含支持函数组合的方法 [^7]。
+
+| 组合方法                                               | 支持接口                                                     |
+| :----------------------------------------------------- | :----------------------------------------------------------- |
+| `andThen(argument)` <br> 根据参数执行原始操作          | **Function <br> BiFunction <br> Consumer <br> BiConsumer <br> IntConsumer <br> LongConsumer <br> DoubleConsumer <br> UnaryOperator <br> IntUnaryOperator <br> LongUnaryOperator <br> DoubleUnaryOperator <br> BinaryOperator** |
+| `compose(argument)` <br> 根据参数执行原始操作          | **Function <br> UnaryOperator <br> IntUnaryOperator <br> LongUnaryOperator <br> DoubleUnaryOperator** |
+| `and(argument)`  <br> 短路**逻辑与**原始断言和参数断言 | **Predicate <br> BiPredicate <br> IntPredicate <br> LongPredicate <br> DoublePredicate** |
+| `or(argument)` <br> 短路**逻辑或**原始断言和参数断言   | **Predicate <br> BiPredicate <br> IntPredicate <br> LongPredicate <br> DoublePredicate** |
+| `negate()` <br> 该断言的**逻辑否**断言                 | **Predicate <br> BiPredicate <br> IntPredicate <br> LongPredicate <br> DoublePredicate** |
+
+下例使用了 `Function` 里的 `compose()`和 `andThen()`。代码示例：
+
+```java
+// functional/FunctionComposition.java
+
+import java.util.function.*;
+
+public class FunctionComposition {
+  static Function<String, String>
+    f1 = s -> {
+      System.out.println(s);
+      return s.replace('A', '_');
+    },
+    f2 = s -> s.substring(3),
+    f3 = s -> s.toLowerCase(),
+    f4 = f1.compose(f2).andThen(f3);
+  public static void main(String[] args) {
+    System.out.println(
+      f4.apply("GO AFTER ALL AMBULANCES"));
+  }
+}
+```
+
+输出结果：
+
+```
+AFTER ALL AMBULANCES
+_fter _ll _mbul_nces
+```
+
+这里我们重点看正在创建的新函数 `f4`。它调用 `apply()` 的方式与常规几乎无异[^8]。
+
+当 `f1` 获得字符串时，它已经被`f2` 剥离了前三个字符。这是因为 `compose（f2）` 表示 `f2` 的调用发生在 `f1` 之前。
+
+下例是 `Predicate` 的逻辑运算演示.代码示例：
+
+```java
+// functional/PredicateComposition.java
+
+import java.util.function.*;
+import java.util.stream.*;
+
+public class PredicateComposition {
+  static Predicate<String>
+    p1 = s -> s.contains("bar"),
+    p2 = s -> s.length() < 5,
+    p3 = s -> s.contains("foo"),
+    p4 = p1.negate().and(p2).or(p3);
+  public static void main(String[] args) {
+    Stream.of("bar", "foobar", "foobaz", "fongopuckey")
+      .filter(p4)
+      .forEach(System.out::println);
+  }
+}
+```
+
+输出结果：
+
+```
+foobar
+foobaz
+```
+
+`p4` 获取到了所有断言并组合成一个更复杂的断言。解读：如果字符串中不包含 `bar` 且长度小于 5，或者它包含 `foo` ，则结果为 `true`。
+
+正因它产生如此清晰的语法，我在主方法中采用了一些小技巧，并借用了下一章的内容。首先，我创建了一个字符串对象的流，然后将每个对象传递给 `filter()` 操作。 `filter()` 使用 `p4` 的断言来确定对象的去留。最后我们使用 `forEach()` 将 `println` 方法引用应用在每个留存的对象上。
+
+从输出结果我们可以看到 `p4` 的工作流程：任何带有 `foo` 的东西都会留下，即使它的长度大于 5。 `fongopuckey` 因长度超出和不包含 `bar` 而被丢弃。
+
+<!-- Currying and  Partial Evaluation -->
+
+## 柯里化和部分求值
+
+[柯里化](https://en.wikipedia.org/wiki/Currying)（Currying）的名称来自于其发明者之一 *Haskell Curry*。他可能是计算机领域唯一名字被命名重要概念的人（另外就是 Haskell 编程语言）。 柯里化意为：将一个多参数的函数，转换为一系列单参数函数。
+
+```java
+// functional/CurryingAndPartials.java
+
+import java.util.function.*;
+
+public class CurryingAndPartials {
+   // 未柯里化:
+   static String uncurried(String a, String b) {
+      return a + b;
+   }
+   public static void main(String[] args) {
+      // 柯里化的函数:
+      Function<String, Function<String, String>> sum =
+         a -> b -> a + b; // [1]
+
+      System.out.println(uncurried("Hi ", "Ho"));
+
+      Function<String, String>
+        hi = sum.apply("Hi "); // [2]
+      System.out.println(hi.apply("Ho"));
+
+      // 部分应用:
+      Function<String, String> sumHi =
+        sum.apply("Hup ");
+      System.out.println(sumHi.apply("Ho"));
+      System.out.println(sumHi.apply("Hey"));
+   }
+}
+```
+
+输出结果：
+
+```
+Hi Ho
+Hi Ho
+Hup Ho
+Hup Hey
+```
+
+**[1]** 这一连串的箭头很巧妙。*注意*，在函数接口声明中，第二个参数是另一个函数。
+
+**[2]** 柯里化的目的是能够通过提供一个参数来创建一个新函数，所以现在有了一个“带参函数”和剩下的 “无参函数” 。实际上，你从一个双参数函数开始，最后得到一个单参数函数。
+
+我们可以通过添加级别来柯里化一个三参数函数：
+
+```java
+// functional/Curry3Args.java
+
+import java.util.function.*;
+
+public class Curry3Args {
+   public static void main(String[] args) {
+      Function<String,
+        Function<String,
+          Function<String, String>>> sum =
+            a -> b -> c -> a + b + c;
+      Function<String,
+        Function<String, String>> hi =
+          sum.apply("Hi ");
+      Function<String, String> ho =
+        hi.apply("Ho ");
+      System.out.println(ho.apply("Hup"));
+   }
+}
+```
+
+输出结果：
+
+```
+Hi Ho Hup
+```
+
+对于每个级别的箭头级联（Arrow-cascading），你在类型声明中包裹了另一个 **Function**。
+
+处理基本类型和装箱时，请使用适当的 **Function** 接口：
+
+```java
+// functional/CurriedIntAdd.java
+
+import java.util.function.*;
+
+public class CurriedIntAdd {
+  public static void main(String[] args) {
+    IntFunction<IntUnaryOperator>
+      curriedIntAdd = a -> b -> a + b;
+    IntUnaryOperator add4 = curriedIntAdd.apply(4);
+    System.out.println(add4.applyAsInt(5));
+	  }
+}
+```
+
+输出结果：
+
+```
+9
+```
+
+可以在互联网上找到更多的柯里化示例。通常它们是用 Java 之外的语言实现的，但如果理解了柯里化的基本概念，你可以很轻松地用 Java 实现它们。
+
+<!-- Pure Functional Programming -->
+
+## 纯函数式编程
+
+即使没有函数式支持，像 C 这样的基础语言，也可以按照一定的原则编写纯函数式程序。Java 8 让函数式编程更简单，不过我们要确保一切是 `final` 的，同时你的所有方法和函数没有副作用。因为 Java 在本质上并非是不可变语言，我们无法通过编译器查错。
+
+这种情况下，我们可以借助第三方工具[^9]，但使用 Scala 或 Clojure 这样的语言可能更简单。因为它们从一开始就是为保持不变性而设计的。你可以采用这些语言来编写你的 Java 项目的一部分。如果必须要用纯函数式编写，则可以用 Scala（需要一些规则） 或 Clojure （需要的规则更少）。虽然 Java 支持[并发编程](./24-Concurrent-Programming.md)，但如果这是你项目的核心部分，你应该考虑在项目部分功能中使用 `Scala` 或 `Clojure` 之类的语言。
+
+<!-- Summary -->
+
+## 本章小结
+
+Lambda 表达式和方法引用并没有将 Java 转换成函数式语言，而是提供了对函数式编程的支持。这对 Java 来说是一个巨大的改进。因为这允许你编写更简洁明了，易于理解的代码。在下一章中，你会看到它们在流式编程中的应用。相信你会像我一样，喜欢上流式编程。
+
+这些特性满足大部分 Java 程序员的需求。他们开始羡慕嫉妒 Clojure、Scala 这类新语言的功能，并试图阻止 Java 程序员流失到其他阵营 （就算不能阻止，起码提供了更好的选择）。
+
+但是，Lambdas 和方法引用远非完美，我们永远要为 Java 设计者早期的草率决定付出代价。特别是没有泛型 Lambda，所以 Lambda 在 Java 中并非一等公民。虽然我不否认 Java 8 的巨大改进，但这意味着和许多 Java 特性一样，它的使用还是会让人感觉沮丧和鸡肋。
+
+# 第十四章 流式编程
+
+> 集合优化了对象的存储，而流和对象的处理有关。
+
+流是一系列与特定存储机制无关的元素——实际上，流并没有“存储”之说。
+
+利用流，我们无需迭代集合中的元素，就可以提取和操作它们。这些管道通常被组合在一起，在流上形成一条操作管道。
+
+在大多数情况下，将对象存储在集合中是为了处理他们，因此你将会发现你将把编程的主要焦点从集合转移到了流上。流的一个核心好处是，它使得程序更加短小并且更易理解。当 Lambda 表达式和方法引用（method references）和流一起使用的时候会让人感觉自成一体。流使得 Java 8 更具吸引力。
+
+举个例子，假如你要随机展示 5 至 20 之间不重复的整数并进行排序。实际上，你的关注点首先是创建一个有序集合。围绕这个集合进行后续的操作。但是使用流式编程，你就可以简单陈述你想做什么：
+
+```java
+// streams/Randoms.java
+import java.util.*;
+public class Randoms {
+    public static void main(String[] args) {
+        new Random(47)
+            .ints(5, 20)
+            .distinct()
+            .limit(7)
+            .sorted()
+            .forEach(System.out::println);
+    }
+}
+```
+
+首先，我们给 **Random** 对象一个种子（以便程序再次运行时产生相同的输出）。`ints()` 方法产生一个流并且 `ints()` 方法有多种方式的重载 — 两个参数限定了数值产生的边界。这将生成一个整数流。我们可以使用中间流操作（intermediate stream operation） `distinct()` 来获取它们的非重复值，然后使用 `limit()` 方法获取前 7 个元素。接下来，我们使用 `sorted()` 方法排序。最终使用 `forEach()` 方法遍历输出，它根据传递给它的函数对每个流对象执行操作。在这里，我们传递了一个可以在控制台显示每个元素的方法引用。`System.out::println` 。
+
+声明式编程（Declarative programming）是一种：声明要做什么，而非怎么做的编程风格。正如我们在函数式编程中所看到的。**注意**，命令式编程的形式更难以理解。代码示例： 
+
+```java
+// streams/ImperativeRandoms.java
+import java.util.*;
+public class ImperativeRandoms {
+    public static void main(String[] args) {
+        Random rand = new Random(47);
+        SortedSet<Integer> rints = new TreeSet<>();
+        while(rints.size() < 7) {
+            int r = rand.nextint(20);
+            if(r < 5) continue;
+            rints.add(r);
+        }
+        System.out.println(rints);
+    }
+}
+```
+
+在 `Randoms.java` 中，我们无需定义任何变量，但在这里我们定义了 3 个变量： `rand`，`rints` 和 `r`。由于 `nextInt()` 方法没有下限的原因（其内置的下限永远为 0），这段代码实现起来更复杂。所以我们要生成额外的值来过滤小于 5 的结果。
+
+**注意**，你必须要研究程序的真正意图，而在 `Randoms.java` 中，代码只是告诉了你它正在做什么。这种语义清晰性也是 Java 8 的流式编程更受推崇的重要原因。
+
+<!-- Java 8 Stream Support -->
+
+## 流支持
+
+Java 设计者面临着这样一个难题：现存的大量类库不仅为 Java 所用，同时也被应用在整个 Java 生态圈数百万行的代码中。如何将一个全新的流的概念融入到现有类库中呢？
+
+问题是，接口部分怎么改造呢？特别是涉及集合类接口的部分。如果你想把一个集合转换为流，直接向接口添加新方法会破坏所有老的接口实现类。
+
+Java 8 采用的解决方案是：**在[接口](10-Interfaces.md)中添加被 `default`（`默认`）修饰的方法。**通过这种方案，设计者们可以将流式（*stream*）方法平滑地嵌入到现有类中。流方法预置的操作几乎已满足了我们平常所有的需求。
+
+流操作的类型有三种：**创建流，修改流元素（中间操作， Intermediate Operations），消费流元素（终端操作， Terminal Operations）。**最后一种类型通常意味着收集流元素（通常是到集合中）。
+
+<!-- Stream Creation -->
+
+## 流创建
+
+你可以通过 `Stream.of()` 很容易地将一组元素转化成为流
+
+```java
+public class StreamOf {
+    public static void main(String[] args) {
+        Stream.of("It's ", "a ", "wonderful ", "day ", "for ", "pie!")
+            .forEach(System.out::print);
+    }
+}
+```
+
+除此之外，**每个集合都可以通过调用 `stream()` 方法来产生一个流。**
+
+```java
+Set<String> w = new HashSet<>(Arrays.asList("It's a wonderful day for pie!".split(" ")));
+        w.stream()
+         .map(x -> x + " ")
+         .forEach(System.out::print);
+```
+
+### 随机数流
+
+`Random` 类被一组生成流的方法增强了。
+
+
+
+```java
+// streams/RandomGenerators.java
+import java.util.*;
+import java.util.stream.*;
+public class RandomGenerators {
+    public static <T> void show(Stream<T> stream) {
+        stream
+        .limit(4)
+        .forEach(System.out::println);
+        System.out.println("++++++++");
+    }
+    
+    public static void main(String[] args) {
+        Random rand = new Random(47);
+        show(rand.ints().boxed());
+        show(rand.longs().boxed());
+        show(rand.doubles().boxed());
+        // 控制上限和下限：
+        show(rand.ints(10, 20).boxed());
+        // 控制流大小：
+        show(rand.ints(2).boxed());
+        // 控制流的大小和界限
+        show(rand.ints(3, 3, 9).boxed());
+    }
+}
+```
+
+ `boxed()` 流操作将会自动地把基本类型包装成为对应的装箱类型，从而使得 `show()` 能够接受流。
+
+ **Stream.**`generate()` 的用法，它可以把任意  `Supplier<T>` 用于生成 `T` 类型的流。
+
+我们可以使用 **Random** 为任意对象集合创建 **Supplier**。如下是一个文本文件提供字符串对象的例子。
+
+Cheese.dat 文件内容：
+
+```
+// streams/Cheese.dat
+Not much of a cheese shop really, is it?
+Finest in the district, sir.
+And what leads you to that conclusion?
+Well, it's so clean.
+It's certainly uncontaminated by cheese.
+```
+
+我们通过 **File** 类将 Cheese.dat 文件的所有行读取到 `List<String>` 中。代码示例：
+
+```java
+// streams/RandomWords.java
+import java.util.*;
+import java.util.stream.*;
+import java.util.function.*;
+import java.io.*;
+import java.nio.file.*;
+public class RandomWords implements Supplier<String> {
+    List<String> words = new ArrayList<>();
+    Random rand = new Random(47);
+    RandomWords(String fname) throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get(fname));
+        // 略过第一行
+        for (String line : lines.subList(1, lines.size())) {
+            for (String word : line.split("[ .?,]+"))
+                words.add(word.toLowerCase());
+        }
+    }
+    public String get() {
+        return words.get(rand.nextInt(words.size()));
+    }
+    @Override
+    public String toString() {
+        return words.stream()
+            .collect(Collectors.joining(" "));
+    }
+    public static void main(String[] args) throws Exception {
+        System.out.println(
+            Stream.generate(new RandomWords("Cheese.dat"))
+                .limit(10)
+                .collect(Collectors.joining(" ")));
+    }
+}
+```
+
+在这里你可以看到更为复杂的 `split()` 运用。在构造器中，每一行都被 `split()` 通过空格或者被方括号包裹的任意标点符号进行分割。在结束方括号后面的 `+` 代表 `+` 前面的东西可以出现一次或者多次。
+
+我们注意到在构造函数中循环体使用命令式编程（外部迭代）。在以后的例子中，你甚至会看到我们如何消除这一点。这种旧的形式虽不是特别糟糕，但使用流会让人感觉更好。
+
+ **`collect()` 收集操作，它根据参数来组合所有流中的元素。**
+
+当你使用 **Collectors.**`joining()`，你将会得到一个 `String` 类型的结果，每个元素都根据 `joining()` 的参数来进行分割。还有许多不同的 `Collectors` 用于产生不同的结果。
+
+### int 类型的范围
+
+`IntStream` 类提供了  `range()` 方法用于生成整型序列的流。编写循环时，这个方法会更加便利：
+
+```java
+// streams/Ranges.java
+import static java.util.stream.IntStream.*;
+public class Ranges {
+    public static void main(String[] args) {
+        // 传统方法:
+        int result = 0;
+        for (int i = 10; i < 20; i++)
+            result += i;
+        System.out.println(result);
+        // for-in 循环:
+        result = 0;
+        for (int i : range(10, 20).toArray())
+            result += i;
+        System.out.println(result);
+        // 使用流:
+        System.out.println(range(10, 20).sum());
+    }
+}
+```
+
+输出结果：
+
+```
+145
+145
+145
+```
+
+在主方法中的第一种方式是我们传统编写 `for` 循环的方式；第二种方式，我们使用 `range()` 创建了流并将其转化为数组，然后在 `for-in` 代码块中使用。但是，如果你能像第三种方法那样全程使用流是更好的。我们对范围中的数字进行求和。在流中可以很方便的使用 `sum()` 操作求和。
+
+注意 **IntStream.**`range()` 相比 `onjava.Range.range()` 拥有更多的限制。这是由于其可选的第三个参数，后者允许步长大于 1，并且可以从大到小来生成。
+
+实用小功能 `repeat()` 可以用来替换简单的 `for` 循环。代码示例：
+
+```java
+// onjava/Repeat.java
+package onjava;
+import static java.util.stream.IntStream.*;
+public class Repeat {
+    public static void repeat(int n, Runnable action) {
+        range(0, n).forEach(i -> action.run());
+    }
+}
+```
+
+其产生的循环更加清晰：
+
+```java
+// streams/Looping.java
+import static onjava.Repeat.*;
+public class Looping {
+    static void hi() {
+        System.out.println("Hi!");
+    }
+    public static void main(String[] args) {
+        repeat(3, () -> System.out.println("Looping!"));
+        repeat(2, Looping::hi);
+    }
+}
+```
+
+输出结果：
+
+```
+Looping!
+Looping!
+Looping!
+Hi!
+Hi!
+```
+
+原则上，在代码中包含并解释 `repeat()` 并不值得。诚然它是一个相当透明的工具，但结果取决于你的团队和公司的运作方式。
+
+### generate()
+
+```java
+public static<T> Stream<T> generate(Supplier<T> s) {
+    Objects.requireNonNull(s);
+    return StreamSupport.stream(
+        new StreamSpliterators.InfiniteSupplyingSpliterator.OfRef<>(Long.MAX_VALUE, s), false);
+}
+```
+
+```java
+@FunctionalInterface
+public interface Supplier<T> {
+    /**
+     * Gets a result.
+     *
+     * @return a result
+     */
+    T get();
+}
+```
+
+参照 `RandomWords.java` 中 **Stream.**`generate()` 搭配 `Supplier<T>` 使用的例子。代码示例：
+
+```java
+// streams/Generator.java
+import java.util.*;
+import java.util.function.*;
+import java.util.stream.*;
+
+public class Generator implements Supplier<String> {
+    Random rand = new Random(47);
+    char[] letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+    
+    public String get() {
+        return "" + letters[rand.nextInt(letters.length)];
+    }
+    
+    public static void main(String[] args) {
+        String word = Stream.generate(new Generator())
+                            .limit(30)
+                            .collect(Collectors.joining());
+        System.out.println(word);
+    }
+}
+```
+
+输出结果：
+
+```
+YNZBRNYGCFOWZNTCQRGSEGZMMJMROE
+```
+
+使用 `Random.nextInt()` 方法来挑选字母表中的大写字母。`Random.nextInt()` 的参数代表可以接受的最大的随机数范围，所以使用数组边界是经过深思熟虑的。
+
+**如果要创建包含相同对象的流，只需要传递一个生成那些对象的 `lambda` 到 `generate()` 中**：
+
+```java
+// streams/Duplicator.java
+import java.util.stream.*;
+public class Duplicator {
+    public static void main(String[] args) {
+        Stream.generate(() -> "duplicate")
+              .limit(3)
+              .forEach(System.out::println);
+    }
+}
+```
+
+输出结果：
+
+```
+duplicate
+duplicate
+duplicate
+```
+
+如下是在本章之前例子中使用过的 `Bubble` 类。**注意**它包含了自己的静态生成器（Static generator）方法。
+
+```java
+// streams/Bubble.java
+import java.util.function.*;
+public class Bubble {
+    public final int i;
+    
+    public Bubble(int n) {
+        i = n;
+    }
+    
+    @Override
+    public String toString() {
+        return "Bubble(" + i + ")";
+    }
+    
+    private static int count = 0;
+    public static Bubble bubbler() {
+        return new Bubble(count++);
+    }
+}
+```
+
+由于 `bubbler()` 与 `Supplier<Bubble>` 是接口兼容的，我们可以将其方法引用直接传递给 **Stream.**`generate()`：
+
+```java
+// streams/Bubbles.java
+import java.util.stream.*;
+public class Bubbles {
+    public static void main(String[] args) {
+        Stream.generate(Bubble::bubbler)
+              .limit(5)
+              .forEach(System.out::println);
+    }
+}
+```
+
+输出结果：
+
+```
+Bubble(0)
+Bubble(1)
+Bubble(2)
+Bubble(3)
+Bubble(4)
+```
+
+这是创建单独工厂类（Separate Factory class）的另一种方式。在很多方面它更加整洁，但是这是一个对于代码组织和品味的问题——你总是可以创建一个完全不同的工厂类。
+
+### iterate()
+
+```java
+public static<T> Stream<T> iterate(final T seed, final UnaryOperator<T> f) {
+    Objects.requireNonNull(f);
+    final Iterator<T> iterator = new Iterator<T>() {
+        @SuppressWarnings("unchecked")
+        T t = (T) Streams.NONE;
+
+        @Override
+        public boolean hasNext() {
+            return true;
+        }
+
+        @Override
+        public T next() {
+            return t = (t == Streams.NONE) ? seed : f.apply(t);
+        }
+    };
+    return StreamSupport.stream(Spliterators.spliteratorUnknownSize(
+        iterator,
+        Spliterator.ORDERED | Spliterator.IMMUTABLE), false);
+}
+```
+
+**Stream.**`iterate()` 以种子（第一个参数）开头，并将其传给方法（第二个参数）。方法的结果将添加到流，并存储作为第一个参数用于下次调用 `iterate()`，依次类推。我们可以利用 `iterate()` 生成一个斐波那契数列。代码示例：
+
+```java
+// streams/Fibonacci.java
+import java.util.stream.*;
+public class Fibonacci {
+    int x = 1;
+    
+    Stream<Integer> numbers() {
+        return Stream.iterate(0, i -> {
+            int result = x + i;
+            x = i;
+            return result;
+        });
+    }
+    
+    public static void main(String[] args) {
+        new Fibonacci().numbers()
+                       .skip(20) // 过滤前 20 个
+                       .limit(10) // 然后取 10 个
+                       .forEach(System.out::println);
+    }
+}
+```
+
+输出结果：
+
+```
+6765
+10946
+17711
+28657
+46368
+75025
+121393
+196418
+317811
+514229
+```
+
+斐波那契数列将数列中最后两个元素进行求和以产生下一个元素。`iterate()` 只能记忆结果，因此我们需要利用一个变量 `x` 追踪另外一个元素。
+
+在主方法中，我们使用了一个之前没有见过的 `skip()` 操作。它根据参数丢弃指定数量的流元素。在这里，我们丢弃了前 20 个元素。
+
+### 流的建造者模式
+
+在建造者设计模式（也称构造器模式）中，首先创建一个 `builder` 对象，传递给它多个构造器信息，最后执行“构造”。**Stream** 库提供了这样的 `Builder`。在这里，我们重新审视文件读取并将其转换成为单词流的过程。代码示例：
+
+```java
+// streams/FileToWordsBuilder.java
+import java.io.*;
+import java.nio.file.*;
+import java.util.stream.*;
+
+public class FileToWordsBuilder {
+    Stream.Builder<String> builder = Stream.builder();
+    
+    public FileToWordsBuilder(String filePath) throws Exception {
+        Files.lines(Paths.get(filePath))
+             .skip(1) // 略过开头的注释行
+             .forEach(line -> {
+                  for (String w : line.split("[ .?,]+"))
+                      builder.add(w);
+              });
+    }
+    
+    Stream<String> stream() {
+        return builder.build();
+    }
+    
+    public static void main(String[] args) throws Exception {
+        new FileToWordsBuilder("Cheese.dat")
+            .stream()
+            .limit(7)
+            .map(w -> w + " ")
+            .forEach(System.out::print);
+    }
+}
+```
+
+输出结果：
+
+```
+Not much of a cheese shop really
+```
+
+**注意**，构造器会添加文件中的所有单词（除了第一行，它是包含文件路径信息的注释），但是其并没有调用 `build()`。只要你不调用 `stream()` 方法，就可以继续向 `builder` 对象中添加单词。
+
+在该类的更完整形式中，你可以添加一个标志位用于查看 `build()` 是否被调用，并且可能的话增加一个可以添加更多单词的方法。在 `Stream.Builder` 调用 `build()` 方法后继续尝试添加单词会产生一个异常。
+
+### Arrays
+
+`Arrays` 类中含有一个名为 `stream()` 的静态方法用于把数组转换成为流。我们可以重写 `interfaces/Machine.java` 中的主方法用于创建一个流，并将 `execute()` 应用于每一个元素。代码示例：
+
+```java
+// streams/Machine2.java
+import java.util.*;
+import onjava.Operations;
+public class Machine2 {
+    public static void main(String[] args) {
+        Arrays.stream(new Operations[] {
+            () -> Operations.show("Bing"),
+            () -> Operations.show("Crack"),
+            () -> Operations.show("Twist"),
+            () -> Operations.show("Pop")
+        }).forEach(Operations::execute);
+    }
+}
+```
+
+输出结果：
+
+```
+Bing
+Crack
+Twist
+Pop
+```
+
+`new Operations[]` 表达式动态创建了 `Operations` 对象的数组。
+
+`stream()` 同样可以产生 **IntStream**，**LongStream** 和 **DoubleStream**。
+
+```java
+// streams/ArrayStreams.java
+import java.util.*;
+import java.util.stream.*;
+
+public class ArrayStreams {
+    public static void main(String[] args) {
+        Arrays.stream(new double[] { 3.14159, 2.718, 1.618 })
+            .forEach(n -> System.out.format("%f ", n));
+        System.out.println();
+        
+        Arrays.stream(new int[] { 1, 3, 5 })
+            .forEach(n -> System.out.format("%d ", n));
+        System.out.println();
+        
+        Arrays.stream(new long[] { 11, 22, 44, 66 })
+            .forEach(n -> System.out.format("%d ", n));
+        System.out.println();
+        
+        // 选择一个子域:
+        Arrays.stream(new int[] { 1, 3, 5, 7, 15, 28, 37 }, 3, 6)
+            .forEach(n -> System.out.format("%d ", n));
+    }
+}
+```
+
+输出结果：
+
+```
+3.141590 2.718000 1.618000
+1 3 5
+11 22 44 66
+7 15 28
+```
+
+最后一次 `stream()` 的调用有两个额外的参数。第一个参数告诉 `stream()` 从数组的哪个位置开始选择元素，第二个参数用于告知在哪里停止。每种不同类型的 `stream()` 都有类似的操作。
+
+### 正则表达式
+
+Java 的正则表达式将在[字符串](18-Strings.md)这一章节详细介绍。Java 8 在 `java.util.regex.Pattern` 中增加了一个新的方法 `splitAsStream()`。这个方法可以根据传入的公式将字符序列转化为流。但是有一个限制，输入只能是 **CharSequence**，因此不能将流作为 `splitAsStream()` 的参数。
+
+我们再一次查看将文件处理为单词流的过程。这一次，我们使用流将文件分割为单独的字符串，接着使用正则表达式将字符串转化为单词流。
+
+```java
+// streams/FileToWordsRegexp.java
+import java.io.*;
+import java.nio.file.*;
+import java.util.stream.*;
+import java.util.regex.Pattern;
+public class FileToWordsRegexp {
+    private String all;
+    public FileToWordsRegexp(String filePath) throws Exception {
+        all = Files.lines(Paths.get(filePath))
+        .skip(1) // First (comment) line
+        .collect(Collectors.joining(" "));
+    }
+    public Stream<String> stream() {
+        return Pattern
+        .compile("[ .,?]+").splitAsStream(all);
+    }
+    public static void
+    main(String[] args) throws Exception {
+        FileToWordsRegexp fw = new FileToWordsRegexp("Cheese.dat");
+        fw.stream()
+          .limit(7)
+          .map(w -> w + " ")
+          .forEach(System.out::print);
+        fw.stream()
+          .skip(7)
+          .limit(2)
+          .map(w -> w + " ")
+          .forEach(System.out::print);
+    }
+}
+```
+
+输出结果：
+
+```
+Not much of a cheese shop really is it
+```
+
+在构造器中我们读取了文件中的所有内容（跳过第一行注释，并将其转化成为单行字符串）。现在，当你调用 `stream()` 的时候，可以像往常一样获取一个流，但这次你可以多次调用 `stream()` 在已存储的字符串中创建一个新的流。这里有个限制，整个文件必须存储在内存中；在大多数情况下这并不是什么问题，但是这损失了流操作非常重要的优势：
+
+1. 流“不需要存储”。当然它们需要一些内部存储，但是这只是序列的一小部分，和持有整个序列并不相同。
+2. 它们是懒加载计算的。
+
+幸运的是，我们稍后就会知道如何解决这个问题。
+
+<!-- Intermediate Operations -->
+
+## 中间操作
+
+中间操作用于从一个流中获取对象，并将对象作为另一个流从后端输出，以连接到其他操作。
+
+### 跟踪和调试
+
+```java
+Stream<T> peek(Consumer<? super T> action);
+```
+
+`peek()` 操作的目的是帮助调试。它允许你无修改地查看流中的元素。代码示例：
+
+```java
+// streams/Peeking.java
+class Peeking {
+    public static void main(String[] args) throws Exception {
+        FileToWords.stream("Cheese.dat")
+        .skip(21)
+        .limit(4)
+        .map(w -> w + " ")
+        .peek(System.out::print)
+        .map(String::toUpperCase)
+        .peek(System.out::print)
+        .map(String::toLowerCase)
+        .forEach(System.out::print);
+    }
+}
+```
+
+输出结果：
+
+```
+Well WELL well it IT it s S s so SO so
+```
+
+`FileToWords` 稍后定义，但它的功能实现貌似和之前我们看到的差不多：产生字符串对象的流。之后在其通过管道时调用 `peek()` 进行处理。
+
+因为 `peek()` 符合无返回值的 **Consumer** 函数式接口，所以我们只能观察，无法使用不同的元素来替换流中的对象。
+
+### 流元素排序
+
+ `sorted()` 的默认比较器实现。其实它还有另一种形式的实现：传入一个 **Comparator** 参数。
+
+```java
+Stream.sorted(Comparator.reverseOrder())
+```
+
+`sorted()` 预设了一些默认的比较器。这里我们使用的是反转“自然排序”。当然你也可以把 Lambda 函数作为参数传递给 `sorted()`。
+
+### 移除元素
+
+- `distinct()`：在 `Randoms.java` 类中的 `distinct()` 可用于消除流中的重复元素。相比创建一个 **Set** 集合，该方法的工作量要少得多。
+- `filter(Predicate)`：过滤操作会保留与传递进去的过滤器函数计算结果为 `true` 元素。
+
+在下例中，`isPrime()` 作为过滤器函数，用于检测质数。
+
+```java
+// streams/Prime.java
+import java.util.stream.*;
+import static java.util.stream.LongStream.*;
+public class Prime {
+    public static Boolean isPrime(long n) {
+        return rangeClosed(2, (long)Math.sqrt(n))
+        .noneMatch(i -> n % i == 0);
+    }
+    public LongStream numbers() {
+        return iterate(2, i -> i + 1)
+        .filter(Prime::isPrime);
+    }
+    public static void main(String[] args) {
+        new Prime().numbers()
+        .limit(10)
+        .forEach(n -> System.out.format("%d ", n));
+        System.out.println();
+        new Prime().numbers()
+        .skip(90)
+        .limit(10)
+        .forEach(n -> System.out.format("%d ", n));
+    }
+}
+```
+
+输出结果：
+
+```
+2 3 5 7 11 13 17 19 23 29
+467 479 487 491 499 503 509 521 523 541
+```
+
+`rangeClosed()` 包含了上限值。如果不能整除，即余数不等于 0，则 `noneMatch()` 操作返回 `true`，如果出现任何等于 0 的结果则返回 `false`。 `noneMatch()` 操作一旦有失败就会退出。
+
+### 应用函数到元素
+
+- `map(Function)`：将函数操作应用在输入流的元素中，并将返回值传递到输出流中。
+- `mapToInt(ToIntFunction)`：操作同上，但结果是 **IntStream**。
+- `mapToLong(ToLongFunction)`：操作同上，但结果是 **LongStream**。
+- `mapToDouble(ToDoubleFunction)`：操作同上，但结果是 **DoubleStream**。
+
+在这里，我们使用 `map()` 映射多种函数到一个字符串流中。代码示例：
+
+```java
+// streams/FunctionMap.java
+import java.util.*;
+import java.util.stream.*;
+import java.util.function.*;
+class FunctionMap {
+    static String[] elements = { "12", "", "23", "45" };
+    static Stream<String>
+    testStream() {
+        return Arrays.stream(elements);
+    }
+    static void test(String descr, Function<String, String> func) {
+        System.out.println(" ---( " + descr + " )---");
+        testStream()
+        .map(func)
+        .forEach(System.out::println);
+    }
+    public static void main(String[] args) {
+        test("add brackets", s -> "[" + s + "]");
+        test("Increment", s -> {
+            try {
+                return Integer.parseInt(s) + 1 + "";
+            }
+            catch(NumberFormatException e) {
+                return s;
+            }
+        }
+        );
+        test("Replace", s -> s.replace("2", "9"));
+        test("Take last digit", s -> s.length() > 0 ?
+        s.charAt(s.length() - 1) + "" : s);
+    }
+}
+```
+
+输出结果：
+
+```
+---( add brackets )---
+[12]
+[]
+[23]
+[45]
+---( Increment )---
+13
+24
+46
+---( Replace )---
+19
+93
+45
+---( Take last digit )---
+2
+3
+5
+```
+
+在上面的自增示例中，我们使用 `Integer.parseInt()` 尝试将一个字符串转化为整数。如果字符串不能转化成为整数就会抛出 **NumberFormatException** 异常，我们只须回过头来将原始字符串放回到输出流中。
+
+在以上例子中，`map()` 将一个字符串映射为另一个字符串，但是我们完全可以产生和接收类型完全不同的类型，从而改变流的数据类型。下面代码示例：
+
+```java
+// streams/FunctionMap2.java
+// Different input and output types （不同的输入输出类型）
+import java.util.*;
+import java.util.stream.*;
+class Numbered {
+    final int n;
+    Numbered(int n) {
+        this.n = n;
+    }
+    @Override
+    public String toString() {
+        return "Numbered(" + n + ")";
+    }
+}
+class FunctionMap2 {
+    public static void main(String[] args) {
+        Stream.of(1, 5, 7, 9, 11, 13)
+        .map(Numbered::new)
+        .forEach(System.out::println);
+    }
+}
+```
+
+输出结果：
+
+```
+Numbered(1)
+Numbered(5)
+Numbered(7)
+Numbered(9)
+Numbered(11)
+Numbered(13)
+```
+
+我们将获取到的整数通过构造器 `Numbered::new` 转化成为 `Numbered` 类型。
+
+如果使用 **Function** 返回的结果是数值类型的一种，我们必须使用合适的 `mapTo数值类型` 进行替代。代码示例：
+
+```java
+// streams/FunctionMap3.java
+// Producing numeric output streams（ 产生数值输出流）
+import java.util.*;
+import java.util.stream.*;
+class FunctionMap3 {
+    public static void main(String[] args) {
+        Stream.of("5", "7", "9")
+        .mapToInt(Integer::parseInt)
+        .forEach(n -> System.out.format("%d ", n));
+        System.out.println();
+        Stream.of("17", "19", "23")
+        .mapToLong(Long::parseLong)
+        .forEach(n -> System.out.format("%d ", n));
+        System.out.println();
+        Stream.of("17", "1.9", ".23")
+        .mapToDouble(Double::parseDouble)
+        .forEach(n -> System.out.format("%f ", n));
+    }
+}
+```
+
+输出结果：
+
+```
+5 7 9
+17 19 23
+17.000000 1.900000 0.230000
+```
+
+遗憾的是，Java 设计者并没有尽最大努力去消除基本类型。
+
+### 在 `map()` 中组合流
+
+假设我们现在有了一个传入的元素流，并且打算对流元素使用 `map()` 函数。现在你已经找到了一些可爱并独一无二的函数功能，但是问题来了：这个函数功能是产生一个流。我们想要产生一个元素流，而实际却产生了一个元素流的流。
+
+`flatMap()` 做了两件事：将产生流的函数应用在每个元素上（与 `map()` 所做的相同），然后将每个流都扁平化为元素，因而最终产生的仅仅是元素。
+
+`flatMap(Function)`：当 `Function` 产生流时使用。
+
+`flatMapToInt(Function)`：当 `Function` 产生 `IntStream` 时使用。
+
+`flatMapToLong(Function)`：当 `Function` 产生 `LongStream` 时使用。
+
+`flatMapToDouble(Function)`：当 `Function` 产生 `DoubleStream` 时使用。
+
+为了弄清它的工作原理，我们从传入一个刻意设计的函数给  `map()` 开始。该函数接受一个整数并产生一个字符串流：
+
+```java
+// streams/StreamOfStreams.java
+import java.util.stream.*;
+public class StreamOfStreams {
+    public static void main(String[] args) {
+        Stream.of(1, 2, 3)
+        .map(i -> Stream.of("Gonzo", "Kermit", "Beaker"))
+        .map(e-> e.getClass().getName())
+        .forEach(System.out::println);
+    }
+}
+```
+
+输出结果：
+
+```
+java.util.stream.ReferencePipeline$Head
+java.util.stream.ReferencePipeline$Head
+java.util.stream.ReferencePipeline$Head
+```
+
+我们天真地希望能够得到字符串流，但实际得到的却是“Head”流的流。我们可以使用 `flatMap()` 解决这个问题：
+
+```java
+// streams/FlatMap.java
+import java.util.stream.*;
+public class FlatMap {
+    public static void main(String[] args) {
+        Stream.of(1, 2, 3)
+        .flatMap(i -> Stream.of("Gonzo", "Fozzie", "Beaker"))
+        .forEach(System.out::println);
+    }
+}
+```
+
+输出结果：
+
+```
+Gonzo
+Fozzie
+Beaker
+Gonzo
+Fozzie
+Beaker
+Gonzo
+Fozzie
+Beaker
+```
+
+从映射返回的每个流都会自动扁平为组成它的字符串。
+
+下面是另一个演示，我们从一个整数流开始，然后使用每一个整数去创建更多的随机数。
+
+```java
+// streams/StreamOfRandoms.java
+import java.util.*;
+import java.util.stream.*;
+public class StreamOfRandoms {
+    static Random rand = new Random(47);
+    public static void main(String[] args) {
+        Stream.of(1, 2, 3, 4, 5)
+            .flatMapToInt(i -> IntStream.concat(
+        rand.ints(0, 100).limit(i), IntStream.of(-1)))
+            .forEach(n -> System.out.format("%d ", n));
+    }
+}
+```
+
+输出结果：
+
+```
+58 -1 55 93 -1 61 61 29 -1 68 0 22 7 -1 88 28 51 89 9 -1
+```
+
+在这里我们引入了 `concat()`，它以参数顺序组合两个流。 如此，我们在每个随机 `Integer` 流的末尾添加一个 -1 作为标记。你可以看到最终流确实是从一组扁平流中创建的。
+
+因为 `rand.ints()` 产生的是一个 `IntStream`，所以我必须使用 `flatMap()`、`concat()` 和 `of()` 的特定整数形式。
+
+让我们再看一下将文件划分为单词流的任务。我们最后使用到的是 **FileToWordsRegexp.java**，它的问题是需要将整个文件读入行列表中 —— 显然需要存储该列表。而我们真正想要的是创建一个不需要中间存储层的单词流。
+
+下面，我们再使用 ` flatMap()` 来解决这个问题：
+
+```java
+// streams/FileToWords.java
+import java.nio.file.*;
+import java.util.stream.*;
+import java.util.regex.Pattern;
+public class FileToWords {
+    public static Stream<String> stream(String filePath) throws Exception {
+        return Files.lines(Paths.get(filePath))
+        .skip(1) // First (comment) line
+        .flatMap(line ->
+        Pattern.compile("\\W+").splitAsStream(line));
+    }
+}
+```
+
+`stream()` 现在是一个静态方法，因为它可以自己完成整个流创建过程。
+
+**注意**：`\\W+` 是一个正则表达式。他表示“非单词字符”，`+` 表示“可以出现一次或者多次”。小写形式的 `\\w` 表示“单词字符”。
+
+我们之前遇到的问题是 `Pattern.compile().splitAsStream()` 产生的结果为流，这意味着当我们只是想要一个简单的单词流时，在传入的行流（stream of lines）上调用 `map()` 会产生一个单词流的流。幸运的是，`flatMap()`  可以将元素流的流扁平化为一个简单的元素流。或者，我们可以使用 `String.split()` 生成一个数组，其可以被 `Arrays.stream()` 转化成为流：
+
+```java
+.flatMap(line -> Arrays.stream(line.split("\\W+"))))
+```
+
+有了真正的、而非 `FileToWordsRegexp.java` 中基于集合存储的流，我们每次使用都必须从头创建，因为流并不能被复用：
+
+```java
+// streams/FileToWordsTest.java
+import java.util.stream.*;
+public class FileToWordsTest {
+    public static void main(String[] args) throws Exception {
+        FileToWords.stream("Cheese.dat")
+        .limit(7)
+        .forEach(s -> System.out.format("%s ", s));
+        System.out.println();
+        FileToWords.stream("Cheese.dat")
+        .skip(7)
+        .limit(2)
+        .forEach(s -> System.out.format("%s ", s));
+    }
+}
+```
+
+输出结果：
+
+```
+Not much of a cheese shop really
+```
+
+在 `System.out.format()` 中的 `%s` 表明参数为 **String** 类型。
+
+<!-- Optional -->
+
+## Optional类
+
+在流中放置 `null` 是很好的中断方法。那么是否有某种对象，可作为流元素的持有者，即使查看的元素不存在也能友好地提示我们（也就是说，不会发生异常）？
+
+**Optional** 可以实现这样的功能。一些标准流操作返回 **Optional** 对象，因为它们并不能保证预期结果一定存在。包括：
+
+- `findFirst()` 返回一个包含第一个元素的 **Optional** 对象，如果流为空则返回 **Optional.empty**
+- `findAny()` 返回包含任意元素的 **Optional** 对象，如果流为空则返回 **Optional.empty**
+- `max()` 和 `min()` 返回一个包含最大值或者最小值的 **Optional** 对象，如果流为空则返回 **Optional.empty**
+
+ `reduce()` 不再以 `identity` 形式开头，而是将其返回值包装在 **Optional** 中。（`identity` 对象成为其他形式的 `reduce()` 的默认结果，因此不存在空结果的风险）
+
+对于数字流 **IntStream**、**LongStream** 和 **DoubleStream**，`average()` 会将结果包装在 **Optional** 以防止流为空。
+
+当流为空的时候你会获得一个 **Optional.empty** 对象，而不是抛出异常。**Optional** 拥有 `toString()` 方法可以用于展示有用信息。
+
+注意，**空流是通过 `Stream.<String>empty()` 创建的。**
+
+这个示例展示了 **Optional** 的两个基本用法：
+
+```java
+// streams/OptionalBasics.java
+import java.util.*;
+import java.util.stream.*;
+class OptionalBasics {
+    static void test(Optional<String> optString) {
+        if(optString.isPresent())
+            System.out.println(optString.get()); 
+        else
+            System.out.println("Nothing inside!");
+    }
+    public static void main(String[] args) {
+        test(Stream.of("Epithets").findFirst());
+        test(Stream.<String>empty().findFirst());
+    }
+}
+```
+
+输出结果：
+
+```
+Epithets
+Nothing inside!
+```
+
+当你接收到 **Optional** 对象时，应首先调用 `isPresent()` 检查其中是否包含元素。如果存在，可使用 `get()` 获取。
+
+<!-- Convenience Functions -->
+
+### 便利函数
+
+有许多便利函数可以解包 **Optional** ，这简化了上述“对所包含的对象的检查和执行操作”的过程：
+
+- `ifPresent(Consumer)`：当值存在时调用 **Consumer**，否则什么也不做。
+- `orElse(otherObject)`：如果值存在则直接返回，否则生成 **otherObject**。
+- `orElseGet(Supplier)`：如果值存在则直接返回，否则使用 **Supplier** 函数生成一个可替代对象。
+- `orElseThrow(Supplier)`：如果值存在直接返回，否则使用 **Supplier** 函数生成一个异常。
+
+<!-- Creating Optionals -->
+
+### 创建 Optional
+
+当我们在自己的代码中加入 **Optional** 时，可以使用下面 3 个静态方法：
+
+- `empty()`：生成一个空 **Optional**。
+- `of(value)`：将一个非空值包装到 **Optional** 里。
+- `ofNullable(value)`：针对一个可能为空的值，为空时自动生成 **Optional.empty**，否则将值包装在 **Optional** 中。
+- 我们不能通过传递 `null` 到 `of()` 来创建 `Optional` 对象。最安全的方法是， 使用 `ofNullable()` 来优雅地处理 `null`。
+
+### Optional 对象操作
+
+当我们的流管道生成了 **Optional** 对象，下面 3 个方法可使得 **Optional** 的后续能做更多的操作：
+
+- `filter(Predicate)`：将 **Predicate** 应用于 **Optional** 中的内容并返回结果。当 **Optional** 不满足 **Predicate** 时返回空。如果 **Optional** 为空，则直接返回。
+- `map(Function)`：如果 **Optional** 不为空，应用 **Function**  于 **Optional** 中的内容，并返回结果。否则直接返回 **Optional.empty**。
+- `flatMap(Function)`：同 `map()`，但是提供的映射函数将结果包装在 **Optional** 对象中，因此 `flatMap()` 不会在最后进行任何包装。
+
+以上方法都不适用于数值型 **Optional**。一般来说，流的 `filter()` 会在 **Predicate** 返回 `false` 时移除流元素。而 `Optional.filter()` 在失败时不会删除 **Optional**，而是将其保留下来，并转化为空。
+
+同 `map()` 一样 ， `Optional.map()` 应用于函数。它仅在 **Optional** 不为空时才应用映射函数，并将 **Optional** 的内容提取到映射函数。
+
+**Optional** 的 `flatMap()` 应用于已生成 **Optional** 的映射函数，所以 `flatMap()` 不会像 `map()` 那样将结果封装在 **Optional** 中。
+
+<!-- Streams of Optionals -->
+
+### Optional 流
+
+假设你的生成器可能产生 `null` 值，那么当用它来创建流时，你会自然地想到用  **Optional** 来包装元素。
+
+```java
+class Signal{
+    public static Signal morse() {
+        switch(rand.nextInt(4)) {
+            case 1: return new Signal("dot");
+            case 2: return new Signal("dash");
+            default: return null;
+        }
+    }
+    public static Stream<Optional<Signal>> stream() {
+        return Stream.generate(Signal::morse)
+            .map(signal -> Optional.ofNullable(signal));
+    }
+}
+```
+
+```java
+// streams/StreamOfOptionals.java
+import java.util.*;
+import java.util.stream.*;
+public class StreamOfOptionals {
+    public static void main(String[] args) {
+        Signal.stream()
+                .limit(10)
+                .forEach(System.out::println);
+        System.out.println(" ---");
+        Signal.stream()
+                .limit(10)
+                .filter(Optional::isPresent)
+                .map(Optional::get)
+                .forEach(System.out::println);
+    }
+}
+```
+
+在这里，我们使用 `filter()` 来保留那些非空 **Optional**，然后在 `map()` 中使用 `get()` 获取元素。由于每种情况都需要定义“空值”的含义，所以通常我们要为每个应用程序采用不同的方法。
+
+<!-- Terminal Operations -->
+
+## 终端操作
+
+这些操作接收一个流并产生一个最终结果；它们不会向后端流提供任何东西。因此，终端操作总是你在管道中做的最后一件事情。
+
+<!-- Convert to an Array -->
+
+### 转化为数组
+
+- `toArray()`：将流转换成适当类型的数组。
+- `toArray(generator)`：在特殊情况下，生成器用于分配自定义的数组存储。
+
+```java
+private static int[] rints = new Random(47).ints(0, 1000).limit(100).toArray();
+```
+
+<!-- Apply a Final Operation to Every Element -->
+
+### 应用最终操作
+
+- `forEach(Consumer)`：你已经看到过很多次 `System.out::println` 作为 **Consumer** 函数。
+- `forEachOrdered(Consumer)`： 保证 `forEach` 按照原始流顺序操作。
+
+第一种形式：显式设计为任意顺序操作元素，仅在引入 `parallel()` 操作时才有意义。在 [并发编程](24-Concurrent-Programming.md) 章节之前我们不会深入研究这个问题。这里简单介绍下 `parallel()`：可实现多处理器并行操作。实现原理为将流分割为多个（通常数目为 CPU 核心数）并在不同处理器上分别执行操作。因为我们采用的是内部迭代，而不是外部迭代，所以这是可能实现的。
+
+`parallel()` 看似简单，实则棘手。更多内容将在稍后的 [并发编程](24-Concurrent-Programming.md) 章节中学习。
+
+下例引入了 `parallel()` 来帮助理解 `forEachOrdered(Consumer)` 的作用和使用场景。代码示例：
+
+```java
+// streams/ForEach.java
+import java.util.*;
+import java.util.stream.*;
+import static streams.RandInts.*;
+public class ForEach {
+    static final int SZ = 14;
+    public static void main(String[] args) {
+        rands().limit(SZ)
+                .forEach(n -> System.out.format("%d ", n));
+        System.out.println();
+        rands().limit(SZ)
+                .parallel()
+                .forEach(n -> System.out.format("%d ", n));
+        System.out.println();
+        rands().limit(SZ)
+                .parallel()
+                .forEachOrdered(n -> System.out.format("%d ", n));
+    }
+}
+```
+
+输出结果：
+
+```
+258 555 693 861 961 429 868 200 522 207 288 128 551 589
+551 861 429 589 200 522 555 693 258 128 868 288 961 207
+258 555 693 861 961 429 868 200 522 207 288 128 551 589
+```
+
+为了方便测试不同大小的数组，我们抽离出了 `SZ` 变量。结果很有趣：在第一个流中，未使用 `parallel()` ，所以 `rands()` 按照元素迭代出现的顺序显示结果；在第二个流中，引入`parallel()` ，即便流很小，输出的结果顺序也和前面不一样。这是由于多处理器并行操作的原因。多次运行测试，结果均不同。多处理器并行操作带来的非确定性因素造成了这样的结果。
+
+在最后一个流中，同时使用了 `parallel()` 和 `forEachOrdered()` 来强制保持原始流顺序。因此，对非并行流使用 `forEachOrdered()` 是没有任何影响的。
+
+<!-- Collecting -->
+
+### 收集
+
+- `collect(Collector)`：使用 **Collector** 收集流元素到结果集合中。
+- `collect(Supplier, BiConsumer, BiConsumer)`：同上，第一个参数 **Supplier** 创建了一个新结果集合，第二个参数 **BiConsumer** 将下一个元素包含到结果中，第三个参数 **BiConsumer** 用于将两个值组合起来。
+
+在这里我们只是简单介绍了几个 **Collectors** 的运用示例。实际上，它还有一些非常复杂的操作实现，可通过查看 `java.util.stream.Collectors` 的 API 文档了解。
+
+```java
+Set<String> words2 =
+    Files.lines(Paths.get("TreeSetOfWords.java"))
+    .flatMap(s -> Arrays.stream(s.split("\\W+")))
+    .filter(s -> !s.matches("\\d+")) // No numbers
+    .map(String::trim)
+    .filter(s -> s.length() > 2)
+    .limit(100)
+    .collect(Collectors.toCollection(TreeSet::new));
+```
+
+我们也可以在流中生成 **Map**。代码示例：
+
+```java
+// streams/MapCollector.java
+import java.util.*;
+import java.util.stream.*;
+class Pair {
+    public final Character c;
+    public final Integer i;
+    Pair(Character c, Integer i) {
+        this.c = c;
+        this.i = i;
+    }
+    public Character getC() { return c; }
+    public Integer getI() { return i; }
+    @Override
+    public String toString() {
+        return "Pair(" + c + ", " + i + ")";
+    }
+}
+class RandomPair {
+    Random rand = new Random(47);
+    // An infinite iterator of random capital letters:
+    Iterator<Character> capChars = rand.ints(65,91)
+            .mapToObj(i -> (char)i)
+            .iterator();
+    public Stream<Pair> stream() {
+        return rand.ints(100, 1000).distinct()
+                .mapToObj(i -> new Pair(capChars.next(), i));
+    }
+}
+public class MapCollector {
+    public static void main(String[] args) {
+        Map<Integer, Character> map =
+                new RandomPair().stream()
+                        .limit(8)
+                        .collect(
+                                Collectors.toMap(Pair::getI, Pair::getC));
+        System.out.println(map);
+    }
+}
+```
+
+输出结果：
+
+```
+{688=W, 309=C, 293=B, 761=N, 858=N, 668=G, 622=F, 751=N}
+```
+
+**Pair** 只是一个基础的数据对象。**RandomPair** 创建了随机生成的 **Pair** 对象流。在 Java 中，我们不能直接以某种方式组合两个流。所以这里创建了一个整数流，并且使用 `mapToObj()` 将其转化成为 **Pair** 流。 **capChars** 随机生成的大写字母迭代器从流开始，然后 `iterator()` 允许我们在 `stream()` 中使用它。就我所知，这是组合多个流以生成新的对象流的唯一方法。
+
+在这里，我们只使用最简单形式的 `Collectors.toMap()`，这个方法值需要一个可以从流中获取键值对的函数。还有其他重载形式，其中一种形式是在遇到键值冲突时，需要一个函数来处理这种情况。
+
+在大多数情况下，你可以在 `java.util.stream.Collectors`寻找到你想要的预先定义好的 **Collector**。在少数情况下当你找不到想要的时候，你可以使用第二种形式的 ` collect()`。 我基本上把它留作更高级的练习，但是这里有一个例子给出了基本想法：
+
+<!-- 
+The capChars randomly-generated Iterator of capitalletters starts as a stream, then the iterator() method allows us touse it in the stream() method
+ -->
+
+```java
+// streams/SpecialCollector.java
+import java.util.*;
+import java.util.stream.*;
+public class SpecialCollector {
+    public static void main(String[] args) throws Exception {
+        ArrayList<String> words =
+                FileToWords.stream("Cheese.dat")
+                        .collect(ArrayList::new,
+                                ArrayList::add,
+                                ArrayList::addAll);
+        words.stream()
+                .filter(s -> s.equals("cheese"))
+                .forEach(System.out::println);
+    }
+}
+```
+
+输出结果：
+
+```
+cheese
+cheese
+```
+
+在这里， **ArrayList** 的方法已经执行了你所需要的操作，但是似乎更有可能的是，如果你必须使用这种形式的 `collect()`，则必须自己创建特殊的定义。
+
+<!-- Combining All Stream Elements -->
+
+### 组合所有流元素
+
+- `reduce(BinaryOperator)`：使用 **BinaryOperator** 来组合所有流中的元素。因为流可能为空，其返回值为 **Optional**。
+- `reduce(identity, BinaryOperator)`：功能同上，但是使用 **identity** 作为其组合的初始值。因此如果流为空，**identity** 就是结果。
+- `reduce(identity, BiFunction, BinaryOperator)`：这个形式更为复杂（所以我们不会介绍它），在这里被提到是因为它使用起来会更有效。通常，你可以显式地组合 `map()` 和 `reduce()` 来更简单的表达它。
+
+如下是一个用于演示 `reduce()` 的示例：
+
+```java
+// streams/Reduce.java
+import java.util.*;
+import java.util.stream.*;
+class Frobnitz {
+    int size;
+    Frobnitz(int sz) { size = sz; }
+    @Override
+    public String toString() {
+        return "Frobnitz(" + size + ")";
+    }
+    // Generator:
+    static Random rand = new Random(47);
+    static final int BOUND = 100;
+    static Frobnitz supply() {
+        return new Frobnitz(rand.nextInt(BOUND));
+    }
+}
+public class Reduce {
+    public static void main(String[] args) {
+        Stream.generate(Frobnitz::supply)
+                .limit(10)
+                .peek(System.out::println)
+                .reduce((fr0, fr1) -> fr0.size < 50 ? fr0 : fr1)
+                .ifPresent(System.out::println);
+    }
+}
+```
+
+输出结果：
+
+```
+Frobnitz(58)
+Frobnitz(55)
+Frobnitz(93)
+Frobnitz(61)
+Frobnitz(61)
+Frobnitz(29)
+Frobnitz(68)
+Frobnitz(0)
+Frobnitz(22)
+Frobnitz(7)
+Frobnitz(29)
+```
+
+**Frobnitz** 包含了一个名为 `supply()` 的生成器；因为这个方法对于 `Supplier<Frobnitz>` 是签名兼容的，我们可以将其方法引用传递给 `Stream.generate()`（这种签名兼容性被称作结构一致性）。我们使用没有给“起始值”的 `reduce()`方法，这意味着它的返回值是 **Optional** 类型的。`Optional.ifPresent()` 只有在结果非空的时候才会调用 `Consumer<Frobnitz>` （`println` 方法可以被调用是因为 **Frobnitz** 可以通过 `toString()` 方法转换成 **String**）。
+
+Lambda 表达式中的第一个参数 `fr0` 是上一次调用 `reduce()` 的结果。而第二个参数 `fr1` 是从流传递过来的值。
+
+`reduce()` 中的 Lambda 表达式使用了三元表达式来获取结果，当其 size 小于 50 的时候获取 `fr0` 否则获取序列中的下一个值 `fr1`。因此你会取得第一个 size 小于 50 的 `Frobnitz`，只要找到了就这个结果就会紧紧地攥住它，即使有其他候选者出现。虽然这是一个非常奇怪的约束，但是它确实让你对 `reduce()` 有了更多的了解。
+
+<!-- Matching -->
+
+### 匹配
+
+- `allMatch(Predicate)` ：如果流的每个元素根据提供的 **Predicate** 都返回 true 时，结果返回为 true。这个操作将会在第一个 false 之后短路；也就是不会在发生 false 之后继续执行计算。
+- `anyMatch(Predicate)`：如果流中的任意一个元素根据提供的 **Predicate** 返回 true 时，结果返回为 true。这个操作将会在第一个 true 之后短路；也就是不会在发生 true 之后继续执行计算。
+- `noneMatch(Predicate)`：如果流的每个元素根据提供的 **Predicate** 都返回 false 时，结果返回为 true。这个操作将会在第一个 true 之后短路；也就是不会在发生 true 之后继续执行计算。
+
+```java
+boolean allMatch(Predicate<? super T> predicate);
+```
+
+### 元素查找
+
+- `findFirst()`：返回一个含有第一个流元素的 **Optional**，如果流为空返回 **Optional.empty**。
+
+```java
+Optional<T> findFirst();
+```
+
+- `findAny()`：返回含有任意流元素的 **Optional**，如果流为空返回 **Optional.empty**。
+
+
+```java
+// streams/SelectElement.java
+import java.util.*;
+import java.util.stream.*;
+import static streams.RandInts.*;
+public class SelectElement {
+    public static void main(String[] args) {
+        System.out.println(rands().findFirst().getAsInt());
+        System.out.println(
+                rands().parallel().findFirst().getAsInt());
+        System.out.println(rands().findAny().getAsInt());
+        System.out.println(
+                rands().parallel().findAny().getAsInt());
+    }
+}
+```
+
+输出结果：
+
+```
+258
+258
+258
+242
+```
+
+**`findFirst()` 无论流是否为并行化的，总是会选择流中的第一个元素。**对于非并行流，`findAny()`会选择流中的第一个元素（即使从定义上来看是选择任意元素）。在这个例子中，我们使用 `parallel()` 来并行流从而引入 `findAny()` 选择非第一个流元素的可能性。
+
+如果必须选择流中最后一个元素，那就使用 ` reduce()`：
+
+```java
+// streams/LastElement.java
+import java.util.*;
+import java.util.stream.*;
+public class LastElement {
+    public static void main(String[] args) {
+        OptionalInt last = IntStream.range(10, 20)
+                .reduce((n1, n2) -> n2);
+        System.out.println(last.orElse(-1));
+        // Non-numeric object:
+        Optional<String> lastobj =
+                Stream.of("one", "two", "three")
+                        .reduce((n1, n2) -> n2);
+        System.out.println(
+                lastobj.orElse("Nothing there!"));
+    }
+}
+```
+
+输出结果：
+
+```
+19
+three
+```
+
+`reduce()`  的参数只是用最后一个元素替换了最后两个元素，最终只生成最后一个元素。如果为数字流，你必须使用相近的数字 **Optional** 类型（ numeric optional type），否则使用 **Optional** 类型，就像上例中的 `Optional<String>`。
+
+<!-- Informational -->
+
+### 信息
+
+- `count()`：流中的元素个数。
+- `max(Comparator)`：根据所传入的 **Comparator** 所决定的“最大”元素。
+- `min(Comparator)`：根据所传入的 **Comparator** 所决定的“最小”元素。
+
+字符串类型有预先定义好的 **Comparator**，这简化了我们的示例：
+
+```java
+// streams/Informational.java
+import java.util.stream.*;
+import java.util.function.*;
+public class Informational {
+    public static void
+    main(String[] args) throws Exception {
+        System.out.println(
+                FileToWords.stream("Cheese.dat").count());
+        System.out.println(
+                FileToWords.stream("Cheese.dat")
+                        .min(String.CASE_INSENSITIVE_ORDER)
+                        .orElse("NONE"));
+        System.out.println(
+                FileToWords.stream("Cheese.dat")
+                        .max(String.CASE_INSENSITIVE_ORDER)
+                        .orElse("NONE"));
+    }
+}
+```
+
+输出结果：
+
+```
+32
+a
+you
+```
+
+`min()` 和 `max()` 的返回类型为 **Optional**，这需要我们使用 `orElse()`来解包。
+
+<!-- Information for Numeric Streams -->
+
+### 数字流信息
+
+- `average()` ：求取流元素平均值。
+- `max()` 和 `min()`：因为这些操作在数字流上面，所以不需要 **Comparator**。
+- `sum()`：对所有流元素进行求和。
+- `summaryStatistics()`：生成可能有用的数据。目前还不太清楚他们为什么觉得有必要这样做，因为你可以使用直接的方法产生所有的数据。
+
+- 
+
+```java
+// streams/NumericStreamInfo.java
+import java.util.stream.*;
+import static streams.RandInts.*;
+public class NumericStreamInfo {
+    public static void main(String[] args) {
+        System.out.println(rands().average().getAsDouble());
+        System.out.println(rands().max().getAsInt());
+        System.out.println(rands().min().getAsInt());
+        System.out.println(rands().sum());
+        System.out.println(rands().summaryStatistics());
+    }
+}
+```
+
+输出结果：
+
+```
+507.94
+998
+8
+50794
+IntSummaryStatistics{count=100, sum=50794, min=8, average=507.940000, max=998}
+```
+
+这些操作对于 **LongStream** 和 **DoubleStream** 也同样适用。
+
+## 本章小结
+
+流改变并极大地提升了 Java 编程的性质，并可能极大地阻止了 Java 编程人员向诸如 Scala 这种函数式语言的流动。在本书的剩余部分，我们将尽可能地使用流。
+
+<!-- Exceptions -->
+
+# 第十五章 异常
+
+> Java 的基本理念是“结构不佳的代码不能运行”。
+
+改进的错误恢复机制是提高代码健壮性的最强有力的方式。错误恢复在我们所编写的每一个程序中都是基本的要素，但是在 Java 中它显得格外重要，因为 Java 的主要目标之一就是创建供他人使用的程序构件。
+
+发现错误的理想时机是在编译阶段，也就是在你试图运行程序之前。然而，编译期间并不能找出所有的错误，余下的问题必须在运行期间解决。这就需要错误源能通过某种方式，把适当的信息传递给某个接收者——该接收者将知道如何正确处理这个问题。
+
+> 要想创建健壮的系统，它的每一个构件都必须是健壮的。
+
+Java 使用异常来提供一致的错误报告模型，使得构件能够与客户端代码可靠地沟通问题。
+
+Java 中的异常处理的目的在于通过使用少于目前数量的代码来简化大型、可靠的程序的生成，并且通过这种方式可以使你更加确信：你的应用中没有未处理的错误。异常的相关知识学起来并非艰涩难懂，并且它属于那种可以使你的项目受益明显、立竿见影的特性之一。
+
+<!-- Basic Exceptions -->
+
+## 基本异常
+
+可以创建一个代表错误信息的对象，并且将它从当前环境中“抛出”，这样就把错误信息传播到了“更大”的环境中。这被称为*抛出一个异常*，看起来像这样：
+
+```java
+if(t == null)
+    throw new NullPointerException();
+```
+
+<!-- Exception Arguments -->
+
+### 异常参数
+
+与使用 Java 中的其他对象一样，我们总是用 new 在堆上创建异常对象，这也伴随着存储空间的分配和构造器的调用。所有标准异常类都有两个构造器：一个是无参构造器；另一个是接受字符串作为参数，以便能把相关信息放入异常对象的构造器：
+
+```java
+throw new NullPointerException("t = null");
+```
+
+关键字 **throw** 将产生许多有趣的结果。在使用 **new** 创建了异常对象之后，此对象的引用将传给 **throw**。
+
+能够抛出任意类型的 **Throwable** 对象，它是异常类型的根类。
+
+## 异常捕获
+
+要明白异常是如何被捕获的，必须首先理解监控区域（guarded region）的概念。它是一段可能产生异常的代码，并且后面跟着处理这些异常的代码。
+
+### try 语句块
+
+如果在方法内部抛出了异常（或者在方法内部调用的其他方法抛出了异常），这个方法将在抛出异常的过程中结束。要是不希望方法就此结束，可以在方法内设置一个特殊的块来捕获异常。因为在这个块里“尝试”各种（可能产生异常的）方法调用，所以称为 try 块。它是跟在 try 关键字之后的普通程序块：
+
+```java
+try {
+    // Code that might generate exceptions
+}
+```
+
+对于不支持异常处理的程序语言，要想仔细检查错误，就得在每个方法调用的前后加上设置和错误检查的代码，甚至在每次调用同一方法时也得这么做。有了异常处理机制，可以把所有动作都放在 try 块里，然后只需在一个地方就可以捕获所有异常。这意味着你的代码将更容易编写和阅读，因为代码的意图和错误检查不是混淆在一起的。
+
+### 异常处理程序
+
+异常处理程序紧跟在 try 块之后，以关键字 catch 表示：
+
+```java
+try {
+    // Code that might generate exceptions
+} catch(Type1 id1) {
+    // Handle exceptions of Type1
+} catch(Type2 id2) {
+    // Handle exceptions of Type2
+} catch(Type3 id3) {
+    // Handle exceptions of Type3
+}
+// etc.
+```
+
+当异常被抛出时，异常处理机制将负责搜寻参数与异常类型相匹配的第一个处理程序。然后进入 catch 子句执行，此时认为异常得到了处理。一旦 catch 子句结束，则处理程序的查找过程结束。注意，只有匹配的 catch 子句才能得到执行；这与 switch 语句不同，switch 语句需要在每一个 case 后面跟一个 break，以避免执行后续的 case 子句。
+
+### 终止与恢复
+
+异常处理理论上有两种基本模型。Java 支持终止模型（它是 Java 和 C++所支持的模型）。在这种模型中，将假设错误非常严重，以至于程序无法返回到异常发生的地方继续执行。一旦异常被抛出，就表明错误已无法挽回，也不能回来继续执行。
+
+另一种称为恢复模型。意思是异常处理程序的工作是修正错误，然后重新尝试调用出问题的方法，并认为第二次能成功。对于恢复模型，通常希望异常被处理之后能继续执行程序。如果想要用 Java 实现类似恢复的行为，那么在遇见错误时就不能抛出异常，而是调用方法来修正该错误。或者，把 try 块放在 while 循环里，这样就不断地进入 try 块，直到得到满意的结果。
+
+在过去，使用支持恢复模型异常处理的操作系统的程序员们最终还是转向使用类似“终止模型”的代码，并且忽略恢复行为。所以虽然恢复模型开始显得很吸引人，但不是很实用。其中的主要原因可能是它所导致的耦合：恢复性的处理程序需要了解异常抛出的地点，这势必要包含依赖于抛出位置的非通用性代码。这增加了代码编写和维护的困难，对于异常可能会从许多地方抛出的大型程序来说，更是如此。
+
+<!-- Creating Your Own Exceptions -->
+
+## 自定义异常
+
+要自己定义异常类，必须从已有的异常类继承，最好是选择意思相近的异常类继承（不过这样的异常并不容易找）。**对异常来说，最重要的部分就是类名**
+
+你也许想通过写入 System.err 而将错误发送给标准错误流。通常这比把错误信息输出到 System.out 要好，因为 System.out 也许会被重定向。如果把结果送到 System.err，它就不会随 System.out 一起被重定向，这样更容易被用户注意。
+
+既然异常也是对象的一种，所以可以继续修改这个异常类，以得到更强的功能。但要记住，使用程序包的客户端程序员可能仅仅只是查看一下抛出的异常类型，其他的就不管了（大多数 Java 库里的异常都是这么用的），所以**对异常所添加的其他功能也许根本用不上。**
+
+## 异常声明
+
+Java 鼓励人们把方法可能会抛出的异常告知使用此方法的客户端程序员。这是种优雅的做法，它使得调用者能确切知道写什么样的代码可以捕获所有潜在的异常。当然，如果提供了源代码，客户端程序员可以在源代码中查找 throw 语句来获知相关信息，然而程序库通常并不与源代码一起发布。
+
+异常说明，它属于方法声明的一部分，紧跟在形式参数列表之后。
+
+异常说明使用了附加的关键字 throws，后面接一个所有潜在异常类型的列表，所以方法定义可能看起来像这样：
+
+```java
+void f() throws TooBig, TooSmall, DivZero { // ...
+```
+
+但是，要是这样写：
+
+```java
+void f() { // ...
+```
+
+就表示此方法不会抛出任何异常（除了从 RuntimeException 继承的异常，它们可以在没有异常说明的情况下被抛出，这些将在后面进行讨论）。
+
+**这种在编译时被强制检查的异常称为被检查的异常。**
+
+## 捕获所有异常
+
+可以只写一个异常处理程序来捕获所有类型的异常。通过捕获异常类型的基类 Exception，就可以做到这一点（事实上还有其他的基类，但 Exception 是所有编程行为相关的基类）：
+
+```java
+catch(Exception e) {
+    System.out.println("Caught an exception");
+}
+```
+
+这将捕获所有异常，所以最好把它放在处理程序列表的末尾，以防它抢在其他处理程序之前先把异常捕获了。
+
+因为 Exception 是与编程有关的所有异常类的基类，所以它不会含有太多具体的信息，不过可以调用它从其基类 Throwable 继承的方法：
+
+```java
+String getMessage()
+String getLocalizedMessage()
+```
+
+用来获取详细信息，或用本地语言表示的详细信息。
+
+```java
+String toString()
+```
+
+返回对 Throwable 的简单描述，要是有详细信息的话，也会把它包含在内。
+
+```java
+void printStackTrace()
+void printStackTrace(PrintStream)
+void printStackTrace(java.io.PrintWriter)
+```
+
+打印 Throwable 和 Throwable 的调用栈轨迹。调用栈显示了“把你带到异常抛出地点”的方法调用序列。其中第一个版本输出到标准错误，后两个版本允许选择要输出的流（在[附录 I/O 流 ]() 中，你将会理解为什么有两种不同的流）。
+
+```java
+Throwable fillInStackTrace()
+```
+
+用于在 Throwable 对象的内部记录栈帧的当前状态。这在程序重新抛出错误或异常（很快就会讲到）时很有用。
+
+此外，也可以使用 Throwable 从其基类 Object（也是所有类的基类）继承的方法。对于异常来说，getClass）也许是个很好用的方法，它将返回一个表示此对象类型的对象。然后可以使用 getName）方法查询这个 Class 对象包含包信息的名称，或者使用只产生类名称的 getSimpleName() 方法。
+
+下面的例子演示了如何使用 Exception 类型的方法：
+
+```java
+// exceptions/ExceptionMethods.java
+// Demonstrating the Exception Methods
+public class ExceptionMethods {
+    public static void main(String[] args) {
+        try {
+            throw new Exception("My Exception");
+        } catch(Exception e) {
+            System.out.println("Caught Exception");
+            System.out.println(
+                    "getMessage():" + e.getMessage());
+            System.out.println("getLocalizedMessage():" +
+                    e.getLocalizedMessage());
+            System.out.println("toString():" + e);
+            System.out.println("printStackTrace():");
+            e.printStackTrace(System.out);
+        }
+    }
+}
+```
+
+输出为：
+
+```java
+Caught Exception
+getMessage():My Exception
+getLocalizedMessage():My Exception
+toString():java.lang.Exception: My Exception
+printStackTrace():
+java.lang.Exception: My Exception
+at
+ExceptionMethods.main(ExceptionMethods.java:7)
+```
+
+可以发现每个方法都比前一个提供了更多的信息一一实际上它们每一个都是前一个的超集。
+
+### 多重捕获
+
+如果有一组具有相同基类的异常，你想使用同一方式进行捕获，那你直接 catch 它们的基类型。但是，如果这些异常没有共同的基类型，在 Java 7 之前，你必须为每一个类型编写一个 catch：
+
+```java
+// exceptions/SameHandler.java
+class EBase1 extends Exception {}
+class Except1 extends EBase1 {}
+class EBase2 extends Exception {}
+class Except2 extends EBase2 {}
+class EBase3 extends Exception {}
+class Except3 extends EBase3 {}
+class EBase4 extends Exception {}
+class Except4 extends EBase4 {}
+
+public class SameHandler {
+    void x() throws Except1, Except2, Except3, Except4 {}
+    void process() {}
+    void f() {
+        try {
+            x();
+        } catch(Except1 e) {
+            process();
+        } catch(Except2 e) {
+            process();
+        } catch(Except3 e) {
+            process();
+        } catch(Except4 e) {
+            process();
+        }
+    }
+}
+```
+
+通过 Java 7 的多重捕获机制，你可以使用“或”将不同类型的异常组合起来，只需要一行 catch 语句：
+
+```java
+// exceptions/MultiCatch.java
+public class MultiCatch {
+    void x() throws Except1, Except2, Except3, Except4 {}
+    void f() {
+        try {
+            x();
+            
+        } catch(Except1 | Except2 | Except3 | Except4 e) {
+            process();
+        }
+    }
+}
+```
+
+或者以其他的组合方式：
+
+```java
+// exceptions/MultiCatch2.java
+public class MultiCatch2 {
+    void x() throws Except1, Except2, Except3, Except4 {}
+    void f() {
+        try {
+            x();
+        } catch(Except1 | Except2 e) {
+            process1();
+        } catch(Except3 | Except4 e) {
+            process2();
+        }
+    }
+}
+```
+
+这对书写更整洁的代码很有帮助。
+
+### 重新抛出异常
+
+有时希望把刚捕获的异常重新抛出，尤其是在使用 Exception 捕获所有异常的时候。既然已经得到了对当前异常对象的引用，可以直接把它重新抛出：
+
+```java
+catch(Exception e) {
+    System.out.println("An exception was thrown");
+    throw e;
+}
+```
+
+重抛异常会把异常抛给上一级环境中的异常处理程序，同一个 try 块的后续 catch 子句将被忽略。此外，异常对象的所有信息都得以保持，所以高一级环境中捕获此异常的处理程序可以从这个异常对象中得到所有信息。
+
+如果只是把当前异常对象重新抛出，那么 printStackTrace() 方法显示的将是原来异常抛出点的调用栈信息，而并非重新抛出点的信息。要想更新这个信息，可以调用 filInStackTrace() 方法，这将返回一个 Throwable 对象，它是通过把当前调用栈信息填入原来那个异常对象而建立的
+
+调用 fillInStackTrace() 的那一行就成了异常的新发生地了。
+
+### 精准的重新抛出异常
+
+在 Java 7 之前，如果遇到异常，则只能重新抛出该类型的异常。这导致在 Java 7 中修复的代码不精确。所以在 Java 7 之前，这无法编译：
+
+```java
+class BaseException extends Exception {}
+class DerivedException extends BaseException {}
+
+public class PreciseRethrow {
+    void catcher() throws DerivedException {
+        try {
+            throw new DerivedException();
+        } catch(BaseException e) {
+            throw e;
+        }
+    }
+}
+```
+
+因为 catch 捕获了一个 BaseException，编译器强迫你声明 catcher() 抛出 BaseException，即使它实际上抛出了更具体的 DerivedException。从 Java 7 开始，这段代码就可以编译，这是一个很小但很有用的修复。
+
+### 异常链
+
+常常会想要在捕获一个异常后抛出另一个异常，并且希望把原始异常的信息保存下来，这被称为异常链。在 JDK1.4 以前，程序员必须自己编写代码来保存原始异常的信息。现在所有 Throwable 的子类在构造器中都可以接受一个 cause（因由）对象作为参数。这个 cause 就用来表示原始异常，这样通过把原始异常传递给新的异常，使得即使在当前位置创建并抛出了新的异常，也能通过这个异常链追踪到异常最初发生的位置。
+
+有趣的是，在 Throwable 的子类中，只有三种基本的异常类提供了带 cause 参数的构造器。它们是 Error（用于 Java 虚拟机报告系统错误）、Exception 以及 RuntimeException。如果要把其他类型的异常链接起来，应该使用 initCause()方法而不是构造器。
+
+<!-- Standard Java Exceptions -->
+
+## Java 标准异常
+
+Throwable 这个 Java 类被用来表示任何可以作为异常被抛出的类。Throwable 对象可分为两种类型（指从 Throwable 继承而得到的类型）：Error 用来表示编译时和系统错误（除特殊情况外，一般不用你关心）；Exception 是可以被抛出的基本类型，在 Java 类库、用户方法以及运行时故障中都可能抛出 Exception 型异常。所以 Java 程序员关心的基类型通常是 Exception。要想对异常有全面的了解，最好去浏览一下 HTML 格式的 Java 文档（可以从 java.sun.com 下载）。为了对不同的异常有个感性的认识，这么做是值得的。但很快你就会发现，这些异常除了名称外其实都差不多。
+
+异常的基本的概念是用名称代表发生的问题，并且异常的名称应该可以望文知意。
+
+### 特例：RuntimeException
+
+在本章的第一个例子中：
+
+```java
+if(t == null)
+    throw new NullPointerException();
+```
+
+如果必须对传递给方法的每个引用都检查其是否为 null（因为无法确定调用者是否传入了非法引用），这听起来着实吓人。幸运的是，这不必由你亲自来做，它属于 Java 的标准运行时检测的一部分。如果对 null 引用进行调用，Java 会自动抛出 NullPointerException 异常，所以上述代码是多余的，尽管你也许想要执行其他的检查以确保 NullPointerException 不会出现。
+
+**属于运行时异常的类型有很多，它们会自动被 java 虚拟机抛出，所以不必在异常说明中把它们列出来。**这些异常都是从 RuntimeException 类继承而来，所以既体现了继承的优点，使用起来也很方便。这构成了一组具有相同特征和行为的异常类型。并且，也不再需要在异常说明中声明方法将抛出 RuntimeException 类型的异常（或者任何从 RuntimeException 继承的异常），它们也被称为“不受检查异常”。这种异常属于错误，将被自动捕获，就不用你亲自动手了。要是自己去检查 RuntimeException 的话，代码就显得太混乱了。不过尽管通常不用捕获 RuntimeException 异常，但还是可以在代码中抛出 RuntimeException 类型的异常。
+
+RuntimeException 代表的是编程错误：
+
+1. 无法预料的错误。比如从你控制范围之外传递进来的 null 引用。
+2. 作为程序员，应该在代码中进行检查的错误。（比如对于 ArrayIndexOutOfBoundsException，就得注意一下数组的大小了。）在一个地方发生的异常，常常会在另一个地方导致错误。
+
+在这些情况下使用异常很有好处，它们能给调试带来便利。
+
+<!-- Performing Cleanup with finally -->
+
+## 使用 finally 进行清理
+
+有一些代码片段，可能会希望无论 try 块中的异常是否抛出，它们都能得到执行。这通常适用于内存回收之外的情况（因为回收由垃圾回收器完成），为了达到这个效果，可以在异常处理程序后面加上 finally 子句。完整的异常处理程序看起来像这样：
+
+```java
+try {
+// The guarded region: Dangerous activities
+// that might throw A, B, or C
+} catch(A a1) {
+// Handler for situation A
+} catch(B b1) {
+// Handler for situation B
+} catch(C c1) {
+// Handler for situation C
+} finally {
+// Activities that happen every time
+}
+```
+
+为了证明 finally 子句总能运行，可以试试下面这个程序：
+
+```java
+// exceptions/FinallyWorks.java
+// The finally clause is always executed
+class ThreeException extends Exception {}
+public class FinallyWorks {
+    static int count = 0;
+    public static void main(String[] args) {
+        while(true) {
+            try {
+				// Post-increment is zero first time:
+                if(count++ == 0)
+                    throw new ThreeException();
+                System.out.println("No exception");
+            } catch(ThreeException e) {
+                System.out.println("ThreeException");
+            } finally {
+                System.out.println("In finally clause");
+                if(count == 2) break; // out of "while"
+            }
+        }
+    }
+}
+```
+
+输出为：
+
+```
+ThreeException
+In finally clause
+No exception
+In finally clause
+```
+
+可以从输出中发现，无论异常是否被抛出，finally 子句总能被执行。这个程序也给了我们一些思路，当 Java 中的异常不允许我们回到异常抛出的地点时，那么该如何应对呢？如果把 try 块放在循环里，就建立了一个“程序继续执行之前必须要达到”的条件。还可以**加入一个 static 类型的计数器或者别的装置，使循环在放弃以前能尝试一定的次数。**这将使程序的健壮性更上一个台阶。
+
+### finally 用来做什么？
+
+对于没有垃圾回收和析构函数自动调用机制的语言来说，finally 非常重要。它能使程序员保证：无论 try 块里发生了什么，内存总能得到释放。但 Java 有垃圾回收机制，所以内存释放不再是问题。而且，Java 也没有析构函数可供调用。那么，Java 在什么情况下才能用到 finally 呢？
+
+当要把除内存之外的资源恢复到它们的初始状态时，就要用到 finally 子句。这种需要清理的资源包括：已经打开的文件或网络连接，在屏幕上画的图形，甚至可以是外部世界的某个开关
+
+**涉及 break 和 continue 语句的时候，finally 子句也会得到执行。**请注意，如果把 finally 子句和带标签的 break 及 continue 配合使用，在 Java 里就没必要使用 goto 语句了。
+
+### 在 return 中使用 finally
+
+**因为 finally 子句总是会执行，所以可以从一个方法内的多个点返回，仍然能保证重要的清理工作会执行**：
+
+```java
+// exceptions/MultipleReturns.java
+public class MultipleReturns {
+    public static void f(int i) {
+        System.out.println(
+                "Initialization that requires cleanup");
+        try {
+            System.out.println("Point 1");
+            if(i == 1) return;
+            System.out.println("Point 2");
+            if(i == 2) return;
+            System.out.println("Point 3");
+            if(i == 3) return;
+            System.out.println("End");
+            return;
+        } finally {
+            System.out.println("Performing cleanup");
+        }
+    }
+    public static void main(String[] args) {
+        for(int i = 1; i <= 4; i++)
+            f(i);
+    }
+}
+```
+
+输出为：
+
+```java
+Initialization that requires cleanup
+Point 1
+Performing cleanup
+Initialization that requires cleanup
+Point 1
+Point 2
+Performing cleanup
+Initialization that requires cleanup
+Point 1
+Point 2
+Point 3
+Performing cleanup
+Initialization that requires cleanup
+Point 1
+Point 2
+Point 3
+End
+Performing cleanup
+```
+
+从输出中可以看出，**从何处返回无关紧要，finally 子句永远会执行。**
+
+### 缺憾：异常丢失
+
+遗憾的是，Java 的异常实现也有瑕疵。异常作为程序出错的标志，决不应该被忽略，但它还是有可能被轻易地忽略。用某些特殊的方式使用 finally 子句，就会发生这种情况：
+
+```java
+// exceptions/LostMessage.java
+// How an exception can be lost
+class VeryImportantException extends Exception {
+    @Override
+    public String toString() {
+        return "A very important exception!";
+    }
+}
+class HoHumException extends Exception {
+    @Override
+    public String toString() {
+        return "A trivial exception";
+    }
+}
+public class LostMessage {
+    void f() throws VeryImportantException {
+        throw new VeryImportantException();
+    }
+    void dispose() throws HoHumException {
+        throw new HoHumException();
+    }
+    public static void main(String[] args) {
+        try {
+            LostMessage lm = new LostMessage();
+            try {
+                lm.f();
+            } finally {
+                lm.dispose();
+            }
+        } catch(VeryImportantException | HoHumException e) {
+            System.out.println(e);
+        }
+    }
+}
+```
+
+输出为：
+
+```
+A trivial exception
+```
+
+从输出中可以看到，VeryImportantException 不见了，它被 finally 子句里的 HoHumException 所取代。这是相当严重的缺陷，因为异常可能会以一种比前面例子所示更微妙和难以察党的方式完全丢失。相比之下，C++把“前一个异常还没处理就抛出下一个异常”的情形看成是糟糕的编程错误。也许在 Java 的未来版本中会修正这个问题（另一方面，要把所有抛出异常的方法，如上例中的 dispose() 方法，全部打包放到 try-catch 子句里面）。
+
+一种更加简单的丢失异常的方式是从 finally 子句中返回：
+
+```java
+// exceptions/ExceptionSilencer.java
+public class ExceptionSilencer {
+    public static void main(String[] args) {
+        try {
+            throw new RuntimeException();
+        } finally {
+            // Using 'return' inside the finally block
+            // will silence any thrown exception.
+            return;
+        }
+    }
+}
+```
+
+如果运行这个程序，就会看到即使方法里抛出了异常，它也不会产生任何输出。
+
+<!-- Exception Restrictions -->
+
+## 异常限制
+
+**当覆盖方法的时候，只能抛出在基类方法的异常说明里列出的那些异常。（<= 基类）**
+
+**派生类构造器不能捕获基类构造器抛出的异常。**
+
+尽管在继承过程中，编译器会对异常说明做强制要求，但异常说明本身并不属于方法类型的一部分，方法类型是由方法的名字与参数的类型组成的。因此，**不能基于异常说明来重载方法。**此外，**一个出现在基类方法的异常说明中的异常，不一定会出现在派生类方法的异常说明里。**这点同继承的规则明显不同，在继承中，基类的方法必须出现在派生类里，换句话说，在继承和覆盖的过程中，某个特定方法的“异常说明的接口”不是变大了而是变小了——这恰好和类接口在继承时的情形相反。
+
+<!-- Constructors -->
+
+## 构造器
+
+构造器会把对象设置成安全的初始状态，但还会有别的动作，比如打开一个文件，这样的动作只有在对象使用完毕并且用户调用了特殊的清理方法之后才能得以清理。如果在构造器内抛出了异常，这些清理行为也许就不能正常工作了。这意味着在编写构造器时要格外细心。
+
+你也许会认为使用 finally 就可以解决问题。但问题并非如此简单，因为 finally 会每次都执行清理代码。如果构造器在其执行过程中半途而废，也许该对象的某些部分还没有被成功创建，而这些部分在 finaly 子句中却是要被清理的。
+
+ Java 的缺陷：除了内存的清理之外，所有的清理都不会自动发生。所以必须告诉客户端程序员，这是他们的责任。
+
+<!-- Try-With-Resources -->
+
+## Try-With-Resources 用法
+
+```java
+It is a compile-time error if final appears more than once as a modifier for each variable declared in a resource specification.
+A variable declared in a resource specification is implicitly declared final (§4.12.4) if it is not explicitly declared final. 
+
+意思就是，try-with-resource中声明的变量会隐式的加上final 关键字，所以无法再进行赋值。但是至于为什么这么设计，我暂时没找到答案。
+```
+
+
+
+Java 7 引入了 try-with-resources 语法
+
+```java
+// exceptions/TryWithResources.java
+import java.io.*;
+public class TryWithResources {
+    public static void main(String[] args) {
+        try(
+                InputStream in = new FileInputStream(
+                        new File("TryWithResources.java"))
+        ) {
+            int contents = in.read();
+            // Process contents
+        } catch(IOException e) {
+            // Handle the error
+        }
+    }
+}
+```
+
+在 Java 7 之前，try 总是后面跟着一个 {，但是现在可以跟一个带括号的定义 - 这里是我们创建的 FileInputStream 对象。括号内的部分称为资源规范头（resource specification header）。现在可用于整个 try 块的其余部分。更重要的是，**无论你如何退出 try 块（正常或异常），都会执行前一个 finally 子句的等价物**，但不会编写那些杂乱而棘手的代码。
+
+它是如何工作的？**在 try-with-resources 定义子句中创建的对象（在括号内）必须实现 java.lang.AutoCloseable 接口**，这个接口有一个方法：close()。当在 Java 7 中引入 AutoCloseable 时，许多接口和类被修改以实现它；查看 Javadocs 中的 AutoCloseable，可以找到所有实现该接口的类列表，其中包括 Stream 对象：
+
+```java
+// exceptions/StreamsAreAutoCloseable.java
+import java.io.*;
+import java.nio.file.*;
+import java.util.stream.*;
+public class StreamsAreAutoCloseable {
+    public static void
+    main(String[] args) throws IOException{
+        try(
+                Stream<String> in = Files.lines(
+                        Paths.get("StreamsAreAutoCloseable.java"));
+                PrintWriter outfile = new PrintWriter(
+                        "Results.txt"); // [1]
+        ) {
+            in.skip(5)
+                    .limit(1)
+                    .map(String::toLowerCase)
+                    .forEachOrdered(outfile::println);
+        } // [2]
+    }
+}
+```
+
+- [1] 你在这里可以看到其他的特性：**资源规范头中可以包含多个定义，并且通过分号进行分割（最后一个分号是可选的）。规范头中定义的每个对象都会在 try 语句块运行结束之后调用 close() 方法。**
+- [2] try-with-resources 里面的 try 语句块可以不包含 catch 或者 finally 语句而独立存在。在这里，IOException 被 main() 方法抛出，所以这里并不需要在 try 后面跟着一个 catch 语句块。
+
+Java 5 中的 Closeable 已经被修改，修改之后的接口继承了 AutoCloseable 接口。所以所有实现了 Closeable 接口的对象，都支持了  try-with-resources 特性。
+
+<!-- Exception Matching -->
+
+## 异常匹配
+
+抛出异常的时候，异常处理系统会按照代码的书写顺序找出“最近”的处理程序。找到匹配的处理程序之后，它就认为异常将得到处理，然后就不再继续查找。
+
+查找的时候并不要求抛出的异常同处理程序所声明的异常完全匹配。派生类的对象也可以匹配其基类的处理程序
+
+<!-- Alternative Approaches -->
+
+## 其他可选方式
+
+**异常处理的一个重要原则是“只有在你知道如何处理的情况下才捕获异常"。实际上，异常处理的一个重要目标就是把错误处理的代码同错误发生的地点相分离。**
+
+“被检查的异常”使这个问题变得有些复杂，因为它们强制你在可能还没准备好处理错误的时候被迫加上 catch 子句，这就导致了**吞食则有害（harmful if swallowed）的问题**：
+
+```java
+try {
+    // ... to do something useful
+} catch(ObligatoryException e) {} // Gulp!
+```
+
+程序员们只做最简单的事情，常常是无意中"吞食”了异常，然而一旦这么做，虽然能通过编译，但除非你记得复查并改正代码，否则异常将会丢失。异常确实发生了，但“吞食”后它却完全消失了。因为编译器强迫你立刻写代码来处理异常，所以这种看起来最简单的方法，却可能是最糟糕的做法。
+
+是因为我们使用的工具已经不是 ANS1 标准出台前的像 C 那样的弱类型语言，而是像 C++ 和 Java 这样的“强静态类型语言”（也就是编译时就做类型检查的语言），这是前者所无法比拟的。当刚开始这种转变的时候（就像我一样），会觉得它带来的好处是那样明显，好像类型检查总能解决所有的问题。在此，我想结合我自己的认识过程，告诉读者我是怎样从对类型检查的绝对迷信变成持怀疑态度的，当然，很多时候它还是非常有用的，但是当它挡住我们的去路并成为障碍的时候，我们就得跨过去。只是这条界限往往并不是很清晰（我最喜欢的一句格言是：所有模型都是错误的，但有些是能用的）。
+
+### 观点
+
+首先，**Java 无谓地发明了“被检查的异常”**（很明显是受 C++ 异常说明的启发，以及受 C++ 程序员们一般对此无动于衷的事实的影响），但是，这还只是一次尝试，目前为止还没有别的语言采用这种做法。
+
+过去，我曾坚定地认为“被检查的异常”和强静态类型检查对开发健壮的程序是非常必要的。但是，我看到的以及我使用一些动态（类型检查）语言的亲身经历告诉我，这些好处实际上是来自于：
+
+1. 不在于编译器是否会强制程序员去处理错误，而是要有一致的、使用异常来报告错误的模型。
+2. 不在于什么时候进行检查，而是一定要有类型检查。也就是说，必须强制程序使用正确的类型，至于这种强制施加于编译时还是运行时，那倒没关系。
+
+此外，减少编译时施加的约束能显著提高程序员的编程效率。事实上，**反射和泛型就是用来补偿静态类型检查所带来的过多限制**，在本书很多例子中都会见到这种情形。
+
+### 把异常传递给控制台
+
+对于简单的程序，比如本书中的许多例子，最简单而又不用写多少代码就能保护异常信息的方法，就是把它们从 main() 传递到控制台。例如，为了读取信息而打开一个文件（在第 12 章将详细介绍），必须对 FilelnputStream 进行打开和关闭操作，这就可能会产生异常。对于简单的程序，可以像这样做（本书中很多地方采用了这种方法）：
+
+```java
+// exceptions/MainException.java
+import java.util.*;
+import java.nio.file.*;
+public class MainException {
+    // Pass exceptions to the console:
+    public static void main(String[] args) throws Exception {
+        // Open the file:
+        List<String> lines = Files.readAllLines(
+                Paths.get("MainException.java"));
+        // Use the file ...
+    }
+}
+```
+
+注意，main() 作为一个方法也可以有异常说明，这里异常的类型是 Exception，它也是所有“被检查的异常”的基类。通过把它传递到控制台，就不必在 main() 里写 try-catch 子句了。
+
+### 把“被检查的异常”转换为“不检查的异常”
+
+在编写你自己使用的简单程序时，从主方法中抛出异常是很方便的，但这不是通用的方法。
+
+问题的实质是，当在一个普通方法里调用别的方法时，要考虑到“我不知道该这样处理这个异常，但是也不想把它‘吞’了，或若打印一些无用的消息”。异常链提供了一种新的思路来解决这个问题。可以直接把“被检查的异常”包装进 RuntimeException 里面，就像这样：
+
+```java
+try {
+    // ... to do something useful
+} catch(IDontKnowWhatToDoWithThisCheckedException e) {
+    throw new RuntimeException(e);
+}
+```
+
+如果想把“被检查的异常”这种功能“屏蔽”掉的话，这看上去像是一个好办法。不用“吞下”异常，也不必把它放到方法的异常说明里面，而异常链还能保证你不会丢失任何原始异常的信息。
+
+这种技巧给了你一种选择，你可以不写 try-catch 子句和/或异常说明，直接忽路异常，让它自己沿着调用栈往上“冒泡”，同时，还可以用 getCause() 捕获并处理特定的异常，就像这样：
+
+```java
+// exceptions/TurnOffChecking.java
+// "Turning off" Checked exceptions
+import java.io.*;
+class WrapCheckedException {
+    void throwRuntimeException(int type) {
+        try {
+            switch(type) {
+                case 0: throw new FileNotFoundException();
+                case 1: throw new IOException();
+                case 2: throw new
+                        RuntimeException("Where am I?");
+                default: return;
+            }
+        } catch(IOException | RuntimeException e) {
+            // Adapt to unchecked:
+            throw new RuntimeException(e);
+        }
+    }
+}
+class SomeOtherException extends Exception {}
+public class TurnOffChecking {
+    public static void main(String[] args) {
+        WrapCheckedException wce =
+                new WrapCheckedException();
+        // You can call throwRuntimeException() without
+        // a try block, and let RuntimeExceptions
+        // leave the method:
+        wce.throwRuntimeException(3);
+        // Or you can choose to catch exceptions:
+        for(int i = 0; i < 4; i++)
+            try {
+                if(i < 3)
+                    wce.throwRuntimeException(i);
+                else
+                    throw new SomeOtherException();
+            } catch(SomeOtherException e) {
+                System.out.println(
+                        "SomeOtherException: " + e);
+            } catch(RuntimeException re) {
+                try {
+                    throw re.getCause();
+                } catch(FileNotFoundException e) {
+                    System.out.println(
+                            "FileNotFoundException: " + e);
+                } catch(IOException e) {
+                    System.out.println("IOException: " + e);
+                } catch(Throwable e) {
+                    System.out.println("Throwable: " + e);
+                }
+            }
+    }
+}
+```
+
+输出为：
+
+```
+FileNotFoundException: java.io.FileNotFoundException
+IOException: java.io.IOException
+Throwable: java.lang.RuntimeException: Where am I?
+SomeOtherException: SomeOtherException
+```
+
+WrapCheckedException.throwRuntimeException() 的代码可以生成不同类型的异常。这些异常被捕获并包装进了 RuntimeException 对象，所以它们成了这些运行时异常的"cause"了。
+
+在 TurnOfChecking 里，可以不用 try 块就调用 throwRuntimeException()，因为它没有抛出“被检查的异常”。但是，当你准备好去捕获异常的时候，还是可以用 try 块来捕获任何你想捕获的异常的。应该捕获 try 块肯定会抛出的异常，这里就是 SomeOtherException，RuntimeException 要放到最后去捕获。然后把 getCause() 的结果（也就是被包装的那个原始异常）抛出来。这样就把原先的那个异常给提取出来了，然后就可以用它们自己的 catch 子句进行处理。
+
+本书余下部分将会在合适的时候使用这种“用 RuntimeException 来包装，被检查的异常”的技术。另一种解决方案是创建自己的 RuntimeException 的子类。在这种方式中，不必捕获它，但是希望得到它的其他代码都可以捕获它。
+
+<!-- Exception Guidelines -->
+
+## 异常指南
+
+应该在下列情况下使用异常：
+
+1. **尽可能使用 try-with-resource。**
+2. **在恰当的级别处理问题。（在知道该如何处理的情况下才捕获异常。）**
+3. 解决问题并且重新调用产生异常的方法。
+4. 进行少许修补，然后绕过异常发生的地方继续执行。
+5. 用别的数据进行计算，以代替方法预计会返回的值。
+6. 把当前运行环境下能做的事情尽量做完，然后把相同的异常重抛到更高层。
+7. 把当前运行环境下能做的事情尽量做完，然后把不同的异常抛到更高层。
+8. 终止程序。
+9. **进行简化。（如果你的异常模式使问题变得太复杂，那用起来会非常痛苦也很烦人。）**
+10. 让类库和程序更安全。（这既是在为调试做短期投资，也是在为程序的健壮性做长期投资。）
+
+<!-- Summary -->
+
+## 本章小结
+
+异常是 Java 程序设计不可分割的一部分，如果不了解如何使用它们，那你只能完成很有限的工作。正因为如此，本书专门在此介绍了异常——对于许多类库（例如提到过的 I/O 库），如果不处理异常，你就无法使用它们。
+
+**异常处理的优点之一就是它使得你可以在某处集中精力处理你要解决的问题，而在另一处处理你编写的这段代码中产生的错误。**尽管异常通常被认为是一种工具，使得你可以在运行时报告错误并从错误中恢复，但是我一直怀疑到底有多少时候“恢复”真正得以实现了，或者能够得以实现。我认为这种情况少于 10%，并且即便是这 10%，也只是将栈展开到某个已知的稳定状态，而并没有实际执行任何种类的恢复性行为。无论这是否正确，我一直相信“**报告”功能是异常的精髓所在.** Java 坚定地强调将所有的错误都以异常形式报告的这一事实，正是它远远超过语如 C++ 这类语言的长处之一，因为在 C++ 这类语言中，需要以大量不同的方式来报告错误，或者根本就没有提供错误报告功能。**一致的错误报告系统意味着，你再也不必对所写的每一段代码，都质问自己“错误是否正在成为漏网之鱼？”（只要你没有“吞咽”异常，这是关键所在！）。**
+
+
+
+
+

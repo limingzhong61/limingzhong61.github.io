@@ -669,6 +669,7 @@ font-size:20px;
 
 
 
+
 ## 子元素的伪类  
 
 	:first-child  
@@ -739,6 +740,7 @@ Selects the only element of its type within another element.
 		.abc:not(div)  
 
   
+
 
 
 
@@ -1132,6 +1134,10 @@ IE6不支持固定定位
 **1.z-index值越高元素越优先显示**  
 2.如果z-index值一样，或者都没有z-index则优先显示下边的元素  
 **3.父元素永远不会盖住子元素**  
+
+## 弹性(Flex)布局
+
+详见Flex笔记
 
 # 其他 css属性  
 

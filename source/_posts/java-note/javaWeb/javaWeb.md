@@ -276,19 +276,42 @@ request对象的常见方法：
 
 ### session 会话对象
 
+```java
+import javax.servlet.http.HttpSession;
+```
+
  session(服务端)  , Cookie（客户端，不是内置对象）:Cookie是由 服务端生成的 ，再发送给客户端保存。  
    相当于 本地缓存的作用： 客户端(hello.mp4,zs/abc)->服务端(hello.mp4；zs/abc)  
    作用：提高访问服务端的效率，但是安全性较差。  
 
+#### Cookie
+
+- 不是内置对象，要使用必须new  
+- 但是，服务端会 自动生成一个(服务端自动new一个cookie) `name=JSESIONID`的cookie  并返回给客户端    
+
 Cookie：	name=value     
+
+```java
 javax.servlet.http.Cookie  
-public Cookie(String name,String value)  
-String getName()：获取name  
-String getValue():获取value  
-void setMaxAge(int expiry);最大有效期 （秒）  
+```
+
+------
+
+| function                                | description       |
+| --------------------------------------- | ----------------- |
+| public Cookie(String name,String value) |                   |
+| String getName()                        | 获取name          |
+| String getValue()                       | 获取value         |
+| void setMaxAge(int expiry)              | 最大有效期 （秒） |
+|                                         |                   |
 
 服务端准备Cookie：  
-	response.addCookie(Cookie cookie)  
+
+```java
+response.addCookie(Cookie cookie) 
+```
+
+
 页面跳转（转发，重定向）  
 
 ```jsp
@@ -298,7 +321,7 @@ void setMaxAge(int expiry);最大有效期 （秒）
 - 服务端增加cookie :response对象；客户端获取对象：request对象
 - 不能直接获取某一个单独对象，只能一次性将 全部的cookie拿到  
 
-通过F12可以发现  除了自己设置的Cookie对象外，还有一个name为 JSESSIONID的cookie  
+通过F12可以发现  除了自己设置的Cookie对象外，还有一个name为 J`sessionId`的cookie  
 
 建议 cookie只保存  英文数字，否则需要进行编码、解码  
 
@@ -312,13 +335,13 @@ c.电子邮件：浏览、写邮件、退出
 
 #### session机制  
 
-客户端第一次请求服务端时，（jsessionid-sessionid）服务端会产生一个session对象（用于保存该客户的信息）；   
-并且每个session对象 都会有一个唯一的 sessionId( 用于区分其他session);  
-服务端由会 产生一个cookie，并且 该cookie的name=JSESSIONID ,value=服务端sessionId的值；  
-然后 服务端会在 响应客户端的同时 将该cookie发送给客户端，至此 客户端就有了 一个cookie(JSESSIONID)；  
-因此，客户端的cookie就可以和服务端的session一一对应（JSESSIONID - sessionID）  
+客户端第一次请求服务端时，`（j`sessionId`-`sessionId`）`服务端会产生一个session对象（用于保存该客户的信息）；   
+并且每个session对象 都会有一个唯一的 `sessionId`( 用于区分其他session);  
+服务端由会 产生一个cookie，并且 该cookie的name=`JsessionId`,value=服务端`sessionId`的值；  
+然后 服务端会在 响应客户端的同时 将该cookie发送给客户端，至此 客户端就有了 一个cookie(`JsessionId`)；  
+因此，客户端的cookie就可以和服务端的session一一对应（`JsessionId`- `sessionId`）  
 
-客户端第二/n次请求服务端时:服务端会先用客户端cookie种的JSESSIONID  去服务端的session中匹配sessionid,如果匹配成功（cookie  jsessionid和sesion sessionid），说明此用户 不是第一次访问,无需登录；  
+客户端第二/n次请求服务端时:服务端会先用客户端cookie种的`JsessionId` 去服务端的session中匹配`sessionId`,如果匹配成功（cookie ` jsessionId`和sesion `sessionId`），说明此用户 不是第一次访问,无需登录；  
 
 例子：  
 客户端：		    顾客（客户端）  
@@ -330,31 +353,28 @@ c.电子邮件：浏览、写邮件、退出
  第二/n次 存包：商场 判断此人是 之前已经存过包（通过你手里是否有钥匙）  
  如果是老顾客（有钥匙），则不需要分配；该顾客手里的钥匙 会 和柜子 自动一一对应。  
 
-session:  
-a. session存储在服务端  
-b. session是在 同一个用户（客户）请求时 共享  
-c. 实现机制：第一次客户请求时 产生一个sessionid 并复制给 cookie的jsessionid 然后发给客户端。最终 通过session的sessionid-cookie的jsessionid  
+#### session:  
+
+- session存储在服务端  
+-  session是在 同一个用户（客户）请求时 共享  
+- 实现机制：第一次客户请求时 产生一个`sessionId` 并复制给 cookie的`JsessionId`然后发给客户端。最终 通过session的`sessionId`-cookie的`JsessionId` 
 
 #### session方法
 
-| function                        | description                       |
-| ------------------------------- | --------------------------------- |
-| String getId()                  | 获取sessionId                     |
-| boolean isNew()                 | 判断是否是 新用户（第一次访问）   |
-| void invalidate()               | 使session失效  （退出登录、注销） |
-| void setAttribute()             |                                   |
-| Object getAttribute();          |                                   |
-| void setMaxInactiveInterval(秒) | 设置最大有效 非活动时间           |
-| int getMaxInactiveInterval()    | 获取最大有效 非活动时间           |
+| function                                     | description                       |
+| -------------------------------------------- | --------------------------------- |
+| String getId()                               | 获取`sessionId`                   |
+| boolean isNew()                              | 判断是否是 新用户（第一次访问）   |
+| void invalidate()                            | 使session失效  （退出登录、注销） |
+| void setAttribute(String name, Object value) |                                   |
+| Object getAttribute();                       |                                   |
+| void setMaxInactiveInterval(秒)              | 设置最大有效 非活动时间           |
+| int getMaxInactiveInterval()                 | 获取最大有效 非活动时间           |
 
 示例：  
 登录  
 
-客户端在第一次请求服务端时，如果服务端发现 此请求没有 JSESSIONID,则会创建一个 name=JSESIONID的cookie  并返回给客户端  
-
-#### Cookie
-a.不是内对对象，要使用必须new  
-b.但是，服务端会 自动生成一个(服务端自动new一个cookie) name=JSESIONID的cookie  并返回给客户端    
+客户端在第一次请求服务端时，如果服务端发现 此请求没有 J`sessionId`,则会创建一个 name=JSESIONID的cookie  并返回给客户端  
 
 cookie和session的区别： 
 
@@ -567,6 +587,8 @@ Servlet3.0不需要在web.xml中配置，但 需要在 Servlet类的定义处之
 匹配流程：  请求地址 与`@WebServlet`中的值 进行匹配，如果匹配成功 ，则说明 请求的就是该注解所对应的类  
 
 > 注解:@WebServlet("url-pattern的值")   
+>
+> 注意:url-pattern 要带斜杆
 
 2.借助于Eclipse快速生成Servlet  
 直接新建Servlet即可！（继承、重写、web.xml  可以借助Eclipse自动生成）  
@@ -599,11 +621,10 @@ http://localhost:8888/
 
 init():    
 
-a.默认第一次访问 Servlet时会被执行 （只执行这一次）  
-	  
+- 默认第一次访问 Servlet时会被执行 （只执行这一次） 	  
 
-b.可以修改为 Tomcat启动时自动执行  
-		  
+- 可以修改为 Tomcat启动时自动执行  
+  		  
 
 ### 销毁  ：destroy()  
 
@@ -1149,37 +1170,200 @@ public class MyDBUtil {
 
 ## DBUtil.java
 
-executeQuery
+executeQuery:中间插入解析函数
+
+定义：
+
+```java
+/**
+	 * @param 接口规定解析方法
+	 */
+public interface ParseResultSet {
+    Object parse(ResultSet rs);
+}
+
+/**
+	 * @param sql
+	 * @param parseResultSet 解析ResultSet的函数
+	 * @param args
+	 */
+public static Object executeQuery(String sql, ParseResultSet parseResultSet, Object... args) {
+    Connection conn = DBUtil.getConnection();
+    PreparedStatement pstmt = null;
+    ResultSet rs = null;
+    Object parse = null;
+    try {
+        pstmt = conn.prepareStatement(sql);
+        for (int i = 0; i < args.length; i++) {
+            pstmt.setObject(i + 1, args[i]);
+        }
+        rs = pstmt.executeQuery();
+        parse = parseResultSet.parse(rs);
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    DBUtil.closeAll(rs, pstmt, conn);
+    return parse;
+}
+```
+
+调用：
+
+```java
+public boolean queryByNameAndPwd(String username, String password) {
+    String sql = "SELECT COUNT(*) FROM user WHERE username=? AND `password` = ?";
+    Integer result = (Integer) DBUtil.executeQuery(sql, new DBUtil.ParseResultSet() {
+        @Override
+        public Object parse(ResultSet rs) {
+            int result = 0;
+            try {
+                if (rs.next()) {
+                    result = rs.getInt(1);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return result;
+        }
+    }, username, password);
+    return result > 0;
+}
+```
 
 executeUpdate
 
 ```java
-public static ResultSet executeQuery(Connection conn, String sql, String... args) {
-    ResultSet rs = null;
-    try {
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        for (int i = 0; i < args.length; i++) {
-            pstmt.setString(i + 1, args[i]);
-        }
-        rs = pstmt.executeQuery();
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    return rs;
-}
+package util;
 
-public static int executeUpdate(Connection conn, String sql, Object... args) {
-    int num = 0;
-    try {
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        for (int i = 0; i < args.length; i++) {
-            pstmt.setObject(i + 1, args[i]);
-        }
-        num = pstmt.executeUpdate();
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    return num;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Properties;
+
+import javax.sql.DataSource;
+
+import org.apache.commons.dbcp.BasicDataSourceFactory;
+
+/**
+ * @author 11623
+ *
+ */
+public class DBUtil {
+	private static DataSource dataSource;
+	private static Properties p = new Properties();
+	static {
+		// 加载配置文件
+		try {
+			p.load(DBUtil.class.getClassLoader().getResourceAsStream("db.properties"));
+			// 创建一个对象并返回
+			dataSource = BasicDataSourceFactory.createDataSource(p);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static Connection getConnection() {
+		try {
+			return dataSource.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static int executeUpdate(String sql, Object... args) {
+		Connection conn = DBUtil.getConnection();
+		PreparedStatement pstmt = null;
+		int num = 0;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			for (int i = 0; i < args.length; i++) {
+				pstmt.setObject(i + 1, args[i]);
+			}
+			num = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// exception: roll back
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		} finally {
+			close(pstmt, conn);
+		}
+		return num;
+	}
+
+	public static void close(PreparedStatement pstmt, Connection conn) {
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void closeAll(ResultSet rs, PreparedStatement pstmt, Connection conn) {
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		close(pstmt, conn);
+	}
+
+	/**
+	 * @param 接口规定解析方法
+	 */
+	public interface ParseResultSet {
+		Object parse(ResultSet rs);
+	}
+
+	/**
+	 * @param sql
+	 * @param parseResultSet 解析ResultSet的回调函数
+	 * @param args
+	 */
+	public static Object executeQuery(String sql, ParseResultSet parseResultSet, Object... args) {
+		Connection conn = DBUtil.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Object parse = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			for (int i = 0; i < args.length; i++) {
+				pstmt.setObject(i + 1, args[i]);
+			}
+			rs = pstmt.executeQuery();
+			parse = parseResultSet.parse(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		DBUtil.closeAll(rs, pstmt, conn);
+		return parse;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(dataSource);
+//		System.out.println(MyDBUtil.dataSource.getInitialSize());
+//		System.out.println(MyDBUtil.dataSource.getMaxActive());
+	}
+
 }
 ```
 
@@ -1653,33 +1837,27 @@ DBUtil是通用  数据库操作类
 mysql:从0开始计数  
 0		0		9  
 1		10		19  
-2		20		29  
-n		n*10	      (n+1)*10-1   
 
- 分页：  
-	第n页的数据：  第(n-1)*10+1条  -- 第n*10条  
+n		`n*10`	      (n+1)*10-1   
 
 MYSQL实现分页的sql  
 limit  开始,多少条  
-第0页  
+第1页  
 
 ```sql
 select * from student limit 0,10 ;  
 ```
 
-第1页  
+第2页  
 
 ```sql
 select * from student limit 10,10 ;  
 ```
 
- 第n页  
-select * from student limit n*10,10  
-
 mysql的分页语句：  
 
 ```sql
-select * from student limit 页数*页面大小,页面大小 
+select * from student limit （页数-1）*页面大小,页面大小 
 ```
 
 #### oracle分页
@@ -1824,8 +2002,7 @@ select count(*)..
 就是http//localhost/端口号/crud/...  
 
 ```html  
-<%  
-	pageContext.setAttribute("APP_PATH", request.getContextPath());  
+<%  pageContext.setAttribute("APP_PATH", request.getContextPath());  
 %>  
 	${APP_PATH}/static/bootstrap-3.3.7-dist/css/bootstrap.min.css  
   -->  

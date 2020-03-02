@@ -145,7 +145,9 @@ v-on:keyup.enter='xxx'
 ### 1.4.2. 计算属性
 
 1) 在 computed 属性对象中定义计算属性的方法
+
 2) 在页面中使用{{方法名}}来显示计算的结果
+
 ### 1.4.3. 监视属性
 1) 通过通过 vm 对象的$watch()或 watch 配置来监视指定的属性
 2) 当属性变化时, 回调函数自动调用, 在函数内部进行计算
@@ -231,11 +233,12 @@ v-on:keyup.enter='xxx'
 ### 1.4.4. 计算属性高级
 
 1) 通过 getter/setter 实现对属性数据的显示和监视
+
 2) **计算属性存在缓存, 多次读取只执行一次 getter 计算**
 
 ### `computed`计算属性的使用
 
-// 计算属性； 特点：当计算属性中所以来的任何一个 data 属性改变之后，都会重新触发 本计算属性 的重新计算，从而更新 fullName 的值
+计算属性； 特点：当计算属性中所以来的任何一个 data 属性改变之后，都会重新触发 本计算属性 的重新计算，从而更新 fullName 的值
           **注意1：** 计算属性，在引用的时候，一定不要加 () 去调用，直接把它 当作 普通 属性去使用就好了；
         **注意2：** 只要 计算属性，这个 f**unction 内部，所用到的 任何 data 中的数据发送了变化，就会 立即重新计算 这个 计算属性的值**
         **注意3：** 计算属性的求值结果，会被缓存起来，方便下次直接使用； 如果 计算属性方法中，所以来的任何数据，都没有发生过变化，则，不会重新对 计算属性求值；
@@ -1252,7 +1255,7 @@ v-my-directive='xxx'
 
 # 第 2 章： vue 组件化编码
 ## 2.1. 使用 vue-cli 创建模板项目
-### 2.1.1. 说明
+### 说明
 1) vue-cli 是 vue 官方提供的脚手架工具
 2) github: https://github.com/vuejs/vue-cli
 3) 作用: 从 https://github.com/vuejs-templates 下载模板项目 
@@ -2666,9 +2669,7 @@ module.exports = {
 VUE_APP_BASE_API=/api
 ```
 
-
-
-# vue项目使用.env文件配置全局环境变量
+## vue项目使用.env文件配置全局环境变量
 
 [官方文档](https://cli.vuejs.org/zh/guide/mode-and-env.html#模式)
 
@@ -2688,6 +2689,21 @@ VUE_APP_BASE_API=/api
 
 .env.production 生产环境下的配置文件
 
+## 更新package-lock.json
 
+如果要升级package-lock.json里面的库包，怎么操作呢？
 
-# 其他
+**npm install XXX@x.x.x**  
+
+## package.json和package-lock.json到底是什么
+
+npm官方文档：
+http://caibaojian.com/npm/files/package.json.html
+
+我们每次，去npm install xxx会把内容记录到package.json文件中，下载的包都会发生变化，为了系统的稳定性考虑，每次执行完npm install之后会对应生成package-lock文件，该文件记录了上一次安装的具体的版本号。
+
+根据官方文档，package-lock.json 是生成的系统当前安装的库的具体来源和版本号，锁定版本。
+
+当你执行npm install的时候， node会先从package.json文件中读取所有dependencies信息，然后根据dependencies中的信息与node_modules中的模块进行对比，没有的直接下载，node是从package.json文件读取模块名称，从package-lock.json文件中获取版本号，然后进行下载或者更新。
+
+当package.json与package-lock.json都不存在，执行"npm install"时，node会重新生成package-lock.json文件，然后把node_modules中的模块信息全部记入package-lock.json文件，但不会生成package.json文件。但是，你可以通过"npm init --yes"来生成package.json文件

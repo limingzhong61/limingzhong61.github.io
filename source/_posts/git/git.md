@@ -608,6 +608,8 @@ build/
 
 git commit之后git会保存此时所有文件，如果此时添加了不必要的大型文件，会不必要的增加文件大小。特别是master分支。
 
-
-
 [https://git-scm.com/docs/git-checkout]: 
+
+# github
+
+[Github 网页上 更新 Fork别人的 Repository](https://blog.csdn.net/huutu/article/details/51018317)

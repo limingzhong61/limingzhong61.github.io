@@ -5,9 +5,9 @@ categories: note
 tags: linux
 ---
 [TOC]
-# VM和Linux系统(CentOS)安装
+# linux入门
 
-
+## VM和Linux系统(CentOS)安装
 
 3.1安装vm和Centos
 
@@ -31,17 +31,15 @@ tags: linux
 
 ![虚拟机连接网络三种方式](linux/1565526076287.png)
 
-## 3.5CentOS的终端使用和联网
+### CentOS的终端使用和联网
 
 1)终端的使用，点击鼠标右键，即可选择打开终端
-
-
 
 2)配置网络，可以上网。点击上面右侧的；两个计算机图片，选择启用eth0,即可成功连接到网络，就可以上网。
 
 ![1565532090697](linux/centos联网)
 
-## 3.7vmtools的安装和使用
+### vmtools的安装和使用
 
 3.7.1安装vmtools的步骤说明
 
@@ -67,7 +65,7 @@ tags: linux
 
 3)在centos的/mnt/hgfs/下
 
-# Linux的目录结构
+## Linux的目录结构
 
 4.1基本介绍
 
@@ -155,7 +153,7 @@ linux的文件系统是采用级层式的树状目录结构，在此结构中的
 
 •SELinux是一种安全子系统,它能控制程序只能访问特定文件。
 
-## 4.3Linux目录总结
+### Linux目录总结
 
 1)linux的目录中有且只要一个根目录/
 2)linux的各个目录存放的内容是规划好，不用乱放文件。
@@ -164,7 +162,7 @@ linux的文件系统是采用级层式的树状目录结构，在此结构中的
 4)linux的各个文件目录下存放什么内容，大家必须有一个认识。
 5)学习后，你脑海中应该有一颗linux目录树
 
-# 远程登录Linux系统
+## 远程登录Linux系统
 
 5.1为什么需要远程登录Linux
 
@@ -192,7 +190,7 @@ Xshell可以在Windows界面下用来访问远端不同系统下的服务器，�
 
 **如果都有，还是不行，就重新建立连接**
 
-## 5.3安装XShell5并使用
+### 5.3安装XShell5并使用
 
 5.3.2XShell5的关键配置
 
@@ -200,7 +198,7 @@ Xshell可以在Windows界面下用来访问远端不同系统下的服务器，�
 
 5.3.3XShel5远程登录到Linux后，就可以使用指令来操作Linux系统
 
-## 5.4远程上传下载文件Xftp5
+### 5.4远程上传下载文件Xftp5
 
 5.4.1XFtp5软件介绍
 
@@ -209,24 +207,27 @@ Xshell可以在Windows界面下用来访问远端不同系统下的服务器，�
 5.4.2XFtp5软件的安装这个看老师的演示即可.
 5.4.3Xftp5的配置和使用
 
-# vi和vim编辑器
+# linux基本
+
+## vi和vim编辑器
+
 6.1vi和vim的基本介绍
 所有的Linux系统都会内建vi文本编辑器。
 Vim具有程序编辑的能力，可以看做是Vi的增强版本，可以主动的以字体颜色辨别语法的正确性，方便程序设计。代码补完、编译及错误跳转等方便编程的功能特别丰富，在程序员中被广泛使用。
 
-## 6.2vi和vim的三种常见模式
+### vi和vim的三种常见模式
 
-**6.2.1正常模式**
+**正常模式**
 
 在正常模式下，我们可以使用快捷键。以vim打开一个档案就直接进入一般模式了(这是默认的模式)。在这个模式中，你可以使用『上下左右』按键来移动光标，你可以使用『删除字符』或『删除整行』来处理档案内容，也可以使用『复制、贴上』来处理你的文件数据。**6.2.2插入模式/编辑模式**
 
 在模式下，程序员可以输入内容。按下i,I,o,O,a,A,r,R等任何一个字母之后才会进入编辑模式,一般来说按i即可
 
-**6.2.3命令行模式**
+**命令行模式**
 
 在这个模式当中，可以提供你相关指令，完成读取、存盘、替换、离开vim、显示行号等的动作则是在此模式中达成的！
 
-## 6.4vi和vim三种模式的相互转化图
+### vi和vim三种模式的相互转化图
 
 ![1565770723325](linux/vi和vim三种模式的相互转化图.png)
 
@@ -260,11 +261,11 @@ Vim具有程序编辑的能力，可以看做是Vi的增强版本，可以主动
 
 **uu回退**
 
-## 6.6vim和vi的快捷键键盘一览图
+### vim和vi的快捷键键盘一览图
 
 ![1565771568531](linux/vim和vi的快捷键键盘一览图.png)
 
-# 实操篇开机、重启和用户登录注销
+## 开机、重启和用户登录注销
 
 7.1关机&重启命令
 
@@ -304,7 +305,7 @@ sync：把内存的数据同步到磁盘
 
 2)运行级别这个概念，后面给大家介绍
 
-# 实操篇用户管理
+## 用户管理
 
 
 
@@ -320,11 +321,11 @@ sync：把内存的数据同步到磁盘
 
 2)Linux的用户需要至少要属于一个组。
 
-## 查看所有用户名
+### 查看所有用户名
 
 ```shell
-[root@hapdoop1 ~]# more /etc/passwd
-[root@hapdoop1 ~]# more /etc/passwd | cut -f 1 -d :
+[root@hapdoop1 ~]## more /etc/passwd
+[root@hapdoop1 ~]## more /etc/passwd | cut -f 1 -d :
 root
 bin
 daemon
@@ -379,34 +380,34 @@ useradd [选项] 用户名
 **==没有-m参数不会有缺省目录==**
 
 ```shell
-root@iZuf6i77uwsb2oiszspgvkZ:~# useradd -m nicolas
+root@iZuf6i77uwsb2oiszspgvkZ:~## useradd -m nicolas
 
 ```
 
 2)也可以通过useradd-d指定目录新的用户名，给新创建的用户指定家目录
 
 ```shell
-[root@hapdoop1 home]# useradd -d /home/dog xh
+[root@hapdoop1 home]## useradd -d /home/dog xh
 ```
 
 
 
-指定/修改密码基本语法
+指定/修改密码基本语法
 
 passwd    用户名
 
-删除用户基本语法userdel   用户名
+删除用户基本语法userdel   用户名
 
 应用案例1)删除用户xiaoming，但是要保留家目录
 
 ```shell
-[root@hapdoop1 ~]# userdel xm
+[root@hapdoop1 ~]## userdel xm
 ```
 
 2)删除用户以及用户主目录
 
 ```shell
-[root@hapdoop1 home]# userdel -r xh
+[root@hapdoop1 home]## userdel -r xh
 ```
 
 8.4.3思考题在删除用户时，我们一般不会将家目录删除。
@@ -425,7 +426,7 @@ id 用户名
 
 1)当用户不存在时，返回”无此用户”
 
-## 8.6切换用户
+### 8.6切换用户
 
 8.6.1介绍(substitute user)
 
@@ -448,7 +449,7 @@ su– 切换用户名
 2)当需要返回到原来用户时，使用exit指令
 
 ```shell
-[root@hapdoop1 ~]# whoami
+[root@hapdoop1 ~]## whoami
 root
 ```
 
@@ -463,7 +464,7 @@ groupadd 组名
 案例演示
 
 ```shell
-[root@hapdoop1 ~]# groupadd wudang
+[root@hapdoop1 ~]## groupadd wudang
 ```
 
 **8.7.4删除组指令**
@@ -473,10 +474,10 @@ groupadd 组名
 8.7.5案例演示
 
 ```shell
-[root@hapdoop1 ~]# groupdel wudang
+[root@hapdoop1 ~]## groupdel wudang
 ```
 
-## 8.8增加用户时直接加上组
+### 8.8增加用户时直接加上组
 
 8.8.1指令(基本语法)
 
@@ -520,9 +521,9 @@ usermod -g 用户组 用户名
 
 ![1565792160979](linux/1565792160979.png)
 
-# 实操篇实用指令
+## 实用指令
 
-## 9.1指定运行级别
+### 9.1指定运行级别
 
 **运行级别说明：**
 
@@ -576,7 +577,7 @@ init0
 
 运行级别vim/etc/inittab将id:5:initdefault:这一行中的数字,5这个数字改成对应的运行级别即可。
 
-## 9.3帮助指令
+### 9.3帮助指令
 
 9.3.1介绍
 
@@ -586,11 +587,10 @@ init0
 
 - 基本语法
 - man [命令或配置文件]（功能描述：获得帮助信息）
-
 - 应用实例案例：查看ls命令的帮助信息
 
 ```shell
-[root@hapdoop1 ~]# man ls
+[root@hapdoop1 ~]## man ls
 ```
 
 9.3.3help指令
@@ -602,10 +602,10 @@ help命令（功能描述：获得shell内置命令的帮助信息）
 应用实例案例：查看cd命令的帮助信息
 
 ```shell
-[root@hapdoop1 ~]# help cd
+[root@hapdoop1 ~]## help cd
 ```
 
-## 9.4文件目录类
+### 9.4文件目录类
 
 9.4.1pwd 指令(print name of current/working directory)
 
@@ -616,7 +616,7 @@ pwd (功能描述：显示当前工作目录的绝对路径)
 •应用实例案例：显示当前工作目录的绝对路径
 
 ```shell
-[root@hapdoop1 ~]# pwd
+[root@hapdoop1 ~]## pwd
 /root
 ```
 
@@ -634,7 +634,7 @@ ls \[选项] [目录或是文件]
 
 •应用实例案例:查看当前目录的所有内容信息
 
-### 9.4.3cd指令
+#### 9.4.3cd指令
 
 •基本语法
 
@@ -670,19 +670,19 @@ cd../../root
 
 cd cd~
 
-### 9.4.4 mkdir指令
+#### 9.4.4 mkdir指令
 
 mkdir指令用于创建目录(makedirectory)
 
-基本语法
+基本语法
 
 mkdir [选项] 要创建的目录
 
-•常用选项
+•常用选项
 
 -p(--parents)：创建多级目录
 
-•应用实例案例1:创建一个目录/home/dog
+•应用实例案例1:创建一个目录/home/dog
 
 ![1565837024122](linux/1565837024122.png)
 
@@ -690,17 +690,17 @@ mkdir [选项] 要创建的目录
 
 ![1565837051989](linux/1565837051989.png)
 
-### 9.4.5rmdir指令
+#### 9.4.5rmdir指令
 
-介绍
+介绍
 
 rmdir指令删除空目录
 
-基本语法
+基本语法
 
 rmdir [选项] 要删除的空目录
 
-应用实例案例1:删除一个目录/home/dog
+应用实例案例1:删除一个目录/home/dog
 
 ![1565837251812](linux/1565837251812.png)
 
@@ -712,7 +712,7 @@ rmdir删除的是空目录，如果目录下有内容时无法删除的。
 
 ![1565837276308](linux/1565837276308.png)
 
-### 9.4.6touch指令
+#### 9.4.6touch指令
 
 touch指令 创建空文件
 
@@ -725,12 +725,12 @@ touch 文件名称
 1:创建一个空文件hello.txt
 
 ```shell
-[root@hapdoop1 home]# touch ok1.txt ok2.txt
-[root@hapdoop1 home]# ls
+[root@hapdoop1 home]## touch ok1.txt ok2.txt
+[root@hapdoop1 home]## ls
 ok1.txt  ok2.txt  xm
 ```
 
-### **9.4.7cp指令[重要]**
+#### **9.4.7cp指令[重要]**
 
 cp指令 拷贝文件到指定目录
 
@@ -779,7 +779,7 @@ rm 指令移除
 案例2:递归删除整个文件夹/bb
 
 ```shell
-[root@hapdoop1 /]# rm -r bb/
+[root@hapdoop1 /]## rm -r bb/
 rm：是否删除目录 "bb"？y
 ```
 
@@ -789,13 +789,20 @@ rm：是否删除目录 "bb"？y
 
 ![1565838608072](linux/1565838608072.png)
 
-9.4.9mv指令
+
+
+### 
+mv指令
 
 mv 移动文件与目录或重命名
 
 •基本语法
 
-mv oldNameFile newNameFile (功能描述：重命名)
+```
+mv oldNameFile newNameFile
+```
+
+ (功能描述：重命名)
 
 mv /temp/movefile /targetFolder(功能描述：移动文件)
 
@@ -804,17 +811,17 @@ mv /temp/movefile /targetFolder(功能描述：移动文件)
 案例1:将/home/aaa.txt文件重新命名为pig.txt
 
 ```shell
-[root@hapdoop1 home]# mv aaa.txt pig.txt
-[root@hapdoop1 home]# ls
+[root@hapdoop1 home]## mv aaa.txt pig.txt
+[root@hapdoop1 home]## ls
 ok1.txt  ok2.txt  pig.txt  xm
 ```
 
 案例2:将/home/pig.txt文件移动到/root目录下
 
 ```shell
-[root@hapdoop1 home]# mv pig.txt /root
-[root@hapdoop1 home]# cd ~
-[root@hapdoop1 ~]# ls
+[root@hapdoop1 home]## mv pig.txt /root
+[root@hapdoop1 home]## cd ~
+[root@hapdoop1 ~]## ls
 anaconda-ks.cfg  install.log.syslog  公共的   视频  下载
 hello.java       ok.txt              红1.jpg  图片  音乐
 install.log      pig.txt             模板     文档  桌面
@@ -836,7 +843,7 @@ cat [选项] 要查看的文件
 案例1:/etc/profile文件内容，并显示行号
 
 ```shell
-[root@hapdoop1 ~]# cat -n /etc/profile | more
+[root@hapdoop1 ~]## cat -n /etc/profile | more
 ```
 
 
@@ -864,7 +871,7 @@ more 要查看的文件
 采用more查看文件/etc/profile
 
 ```shell
-[root@hapdoop1 ~]# more /etc/profile
+[root@hapdoop1 ~]## more /etc/profile
 ```
 
 ![1565839967183](C:\Users\11623\AppData\Roaming\Typora\typora-user-images\1565839967183.png)
@@ -884,12 +891,12 @@ less 要查看的文件
 案例:采用less查看一个大文件文件/opt/金庸-射雕英雄传txt精校版.txt
 
 ```shell
-[root@hapdoop1 opt]# less 金庸-射雕英雄传txt精校版.txt 
+[root@hapdoop1 opt]## less 金庸-射雕英雄传txt精校版.txt 
 ```
 
 ![1565840469904](linux/1565840469904.png)
 
-### 9.4.13>指令和>>指令
+#### 9.4.13>指令和>>指令
 
 介绍
 
@@ -903,7 +910,7 @@ less 要查看的文件
 1)ls-l>文件（功能描述：列表的内容写入文件a.txt中（覆盖写））
 
 ```shell
-[root@hapdoop1 home]# ls -l > a.txt
+[root@hapdoop1 home]## ls -l > a.txt
 ```
 
 说明：ls-l>a.txt,将ls-l的显示的内容覆盖写入到a.txt文件，如果该文件不存在，就创建该文件。
@@ -911,13 +918,13 @@ less 要查看的文件
 2)ls-al>>文件（功能描述：列表的内容追加到文件aa.txt的末尾）
 
 ```shell
-[root@hapdoop1 home]# ls -al >> a.txt
+[root@hapdoop1 home]## ls -al >> a.txt
 ```
 
 3)cat文件1>文件2（功能描述：将文件1的内容覆盖到文件2）**相当于复制文件**
 
 ```shell
-[root@hapdoop1 home]# cat /etc/profile > c.txt
+[root@hapdoop1 home]## cat /etc/profile > c.txt
 ```
 
 9.4.14echo指令
@@ -931,9 +938,9 @@ echo输出内容到控制台。
 案例:使用echo指令输出环境变量,输出当前的环境路径。
 
 ```SHELL
-[root@hapdoop1 ~]# echo $PATH
+[root@hapdoop1 ~]## echo $PATH
 
-[root@hapdoop1 ~]# echo "hello"
+[root@hapdoop1 ~]## echo "hello"
 ```
 
 9.4.15head指令
@@ -951,7 +958,7 @@ head -n 5 文件   (功能描述：查看文件头5行内容，5可以是任意�
 案例:查看/etc/profile的前面5行代码
 
 ```shell
-[root@hapdoop1 ~]# head -n 5 /etc/profile
+[root@hapdoop1 ~]## head -n 5 /etc/profile
 ```
 
 9.4.16tail指令
@@ -969,13 +976,13 @@ tail用于输出文件中尾部的内容，默认情况下tail指令显示文件
 案例1:查看/etc/profile最后5行的代码
 
 ```shell
-[root@hapdoop1 ~]# tail -n 5 /etc/profile
+[root@hapdoop1 ~]## tail -n 5 /etc/profile
 ```
 
 案例2:实时监控mydate.txt,看看到文件有变化时，是否看到，实时的追加日期
 
 ```shell
-[root@hapdoop1 home]# tail -f mydate.txt 
+[root@hapdoop1 home]## tail -f mydate.txt 
 ```
 
 9.4.17ln指令
@@ -991,13 +998,13 @@ ln -s \[原文件或目录] [软链接名]（功能描述：给原文件创建�
 案例1:在/home目录下创建一个软连接linkToRoot，连接到/root目录
 
 ```shell
-[root@hapdoop1 home]# ln -s /root linkToRoot
+[root@hapdoop1 home]## ln -s /root linkToRoot
 ```
 
 案例2:删除软连接linkToRoot
 
 ```shell
-[root@hapdoop1 home]# rm linkToRoot
+[root@hapdoop1 home]## rm linkToRoot
 ```
 
 •细节说明
@@ -1005,16 +1012,16 @@ ln -s \[原文件或目录] [软链接名]（功能描述：给原文件创建�
 当我们使用pwd指令查看目录时，仍然看到的是软链接所在目录。
 
 ```shell
-[root@hapdoop1 home]# cd linkToRoot/
-[root@hapdoop1 linkToRoot]# pwd
+[root@hapdoop1 home]## cd linkToRoot/
+[root@hapdoop1 linkToRoot]## pwd
 /home/linkToRoot
-[root@hapdoop1 linkToRoot]# ls
+[root@hapdoop1 linkToRoot]## ls
 anaconda-ks.cfg  install.log.syslog  公共的   视频  下载
 hello.java       ok.txt              红1.jpg  图片  音乐
 install.log      pig.txt             模板     文档
 ```
 
-### 9.4.18history指令
+#### 9.4.18history指令
 
 查看已经执行过历史命令,也可以执行历史指令
 
@@ -1023,22 +1030,22 @@ install.log      pig.txt             模板     文档
 •应用实例案例1:显示所有的历史命令
 
 ```shell
-[root@hapdoop1 home]# history
+[root@hapdoop1 home]## history
 ```
 
 案例2:显示最近使用过的10个指令。
 
 ```shell
-[root@hapdoop1 home]# history 10
+[root@hapdoop1 home]## history 10
 ```
 
 案例3：执行历史编号为5的指令
 
 ```shell
-[root@hapdoop1 home]# !111
+[root@hapdoop1 home]## !111
 ```
 
-## 9.5时间日期类
+### 9.5时间日期类
 
 9.5.1date指令
 
@@ -1059,21 +1066,21 @@ install.log      pig.txt             模板     文档
 •应用实例案例1:显示当前时间信息
 
 ```shell
-[root@hapdoop1 home]# date
+[root@hapdoop1 home]## date
 2019年 08月 15日 星期四 17:57:34 CST
 ```
 
 案例2:显示当前时间年月日
 
 ```shell
-[root@hapdoop1 home]# date "+%Y %m %d"
+[root@hapdoop1 home]## date "+%Y %m %d"
 2019 08 15
 ```
 
 案例3:显示当前时间年月日时分秒
 
 ```shell
-[root@hapdoop1 home]# date "+%Y %m %d %H:%M:%S"
+[root@hapdoop1 home]## date "+%Y %m %d %H:%M:%S"
 2019 08 15 18:04:05
 ```
 
@@ -1090,7 +1097,7 @@ date -s 字符串时间
 案例1:设置系统当前时间，比如设置成2018-10-1011:22:22
 
 ```shell
-[root@hapdoop1 home]# date -s "2019-9-9 11:11:11"
+[root@hapdoop1 home]## date -s "2019-9-9 11:11:11"
 2019年 09月 09日 星期一 11:11:11 CST
 ```
 
@@ -1103,16 +1110,16 @@ date -s 字符串时间
 •应用实例案例1:显示当前日历
 
 ```shell
-[root@hapdoop1 home]# cal
+[root@hapdoop1 home]## cal
 ```
 
 案例2:显示2020年日历
 
 ```shell
-[root@hapdoop1 ~]# cal 2020
+[root@hapdoop1 ~]## cal 2020
 ```
 
-## 9.6搜索查找类
+### 9.6搜索查找类
 
 9.6.1find指令
 
@@ -1131,25 +1138,25 @@ find \[搜索范围] [选项]
 案例1:按文件名：根据名称查找/home目录下的hello.txt文件
 
 ```shell
-[root@hapdoop1 ~]# find /home -name hello.txt
+[root@hapdoop1 ~]## find /home -name hello.txt
 ```
 
 案例2：按拥有者：查找/opt目录下，用户名称为root的文件
 
 ```shell
-[root@hapdoop1 ~]# find /opt -user root
+[root@hapdoop1 ~]## find /opt -user root
 ```
 
 案例3：查找整个linux系统下大于20m的文件（+n大于-n小于n等于）
 
 ```shell
-[root@hapdoop1 ~]# find /opt -size +20M
+[root@hapdoop1 ~]## find /opt -size +20M
 ```
 
 查询/目录下，所有.txt的文件
 
 ```shell
-[root@hapdoop1 ~]# find / -name \*.txt
+[root@hapdoop1 ~]## find / -name \*.txt
 ```
 
 9.6.2locate指令
@@ -1168,7 +1175,7 @@ locate 搜索文件
 
 ![1565861704260](linux/1565861704260.png)
 
-### 9.6.3grep指令和管道符号|
+#### 9.6.3grep指令和管道符号|
 
 **grep过滤查找**，管道符，“|”，表示将前一个命令的处理结果输出传递给后面的命令处理。
 
@@ -1185,12 +1192,12 @@ grep [选项] 查找内容源文件
 案例1:请在hello.txt文件中，查找"yes"所在行，并且显示行号
 
 ```shell
-[root@hapdoop1 home]# cat hello.txt | grep -n yes
+[root@hapdoop1 home]## cat hello.txt | grep -n yes
 #不区分大小写
-[root@hapdoop1 home]# cat hello.txt | grep -ni yes
+[root@hapdoop1 home]## cat hello.txt | grep -ni yes
 ```
 
-## 9.7压缩和解压类
+### 压缩和解压类
 
 9.7.1gzip/gunzip指令
 
@@ -1207,13 +1214,13 @@ gunzip 文件.gz（功能描述：解压缩文件命令）
 案例1:gzip压缩，将/home下的hello.txt文件进行压缩
 
 ```shell
-[root@hapdoop1 home]# gzip hello.txt
+[root@hapdoop1 home]## gzip hello.txt
 ```
 
 案例2:gunzip压缩，将/home下的hello.txt.gz文件进行解压缩
 
 ```shell
-[root@hapdoop1 home]# gunzip hello.txt.gz 
+[root@hapdoop1 home]## gunzip hello.txt.gz 
 ```
 
 细节说明
@@ -1241,16 +1248,16 @@ unzip的常用选项
 案例1:将/home下的所有文件进行压缩成mypackage.zip
 
 ```shell
-[root@hapdoop1 home]# zip -r mypackge.zip /home/
+[root@hapdoop1 home]## zip -r mypackge.zip /home/
 ```
 
 案例2:将mypackge.zip解压到/opt/tmp目录下
 
 ```shell
-[root@hapdoop1 home]# unzip -d /opt/tmp/ mypackge.zip 
+[root@hapdoop1 home]## unzip -d /opt/tmp/ mypackge.zip 
 ```
 
-### 9.7.3tar指令
+#### tar指令
 
 tar指令是打包指令，最后打包后的文件是.tar.gz的文件。
 
@@ -1259,8 +1266,6 @@ tar指令是打包指令，最后打包后的文件是.tar.gz的文件。
 tar [选项] XXX.tar.gz 打包的内容(功能描述：打包目录，压缩后的文件格式.tar.gz)
 
 •选项说明
-
-
 
 v(verbose)
 
@@ -1279,22 +1284,22 @@ x(extract)
 案例1:压缩多个文件，将/home/a1.txt和/home/a2.txt压缩成a.tar.gz
 
 ```shell
-[root@hapdoop1 home]# tar -zcvf a.tar.gz ok1.txt ok2.txt 
+[root@hapdoop1 home]## tar -zcvf a.tar.gz ok1.txt ok2.txt 
 ```
 
 案例3:将a.tar.gz解压到当前目录
 
 ```shell
-[root@hapdoop1 home]# tar -zxvf a.tar.gz 
+[root@hapdoop1 home]## tar -zxvf a.tar.gz 
 ```
 
 案例4:将myhome.tar.gz解压到/opt/目录下
 
 ```shell
-[root@hapdoop1 home]# tar -zxvf a.tar.gz -C /opt
+[root@hapdoop1 home]## tar -zxvf a.tar.gz -C /opt
 ```
 
-# 组管理和权限管理
+## 组管理和权限管理
 
 10.1Linux组
 
@@ -1324,9 +1329,9 @@ x(extract)
 
 ![1565875994021](linux/1565875994021.png)
 
-![1565876017558](imgs\1565876017558.png)
+![1565876017558](linux\1565876017558.png)
 
-## 10.3组的创建
+### 10.3组的创建
 
 10.3.1基本指令
 
@@ -1339,19 +1344,19 @@ groupadd 组名
 创建一个用户fox，并放入到monster组中
 
 ```shell
-[root@hapdoop1 ~]# groupadd monster
-[root@hapdoop1 ~]# useradd -g monster fox
+[root@hapdoop1 ~]## groupadd monster
+[root@hapdoop1 ~]## useradd -g monster fox
 ```
 
-## 10.4文件/目录所在组
+### 10.4文件/目录所在组
 
-当某个用户创建了一个文件后，默认这个文件的所在组就是该用户所在的组。### 10.4.1查看文件/目录所在组
+当某个用户创建了一个文件后，默认这个文件的所在组就是该用户所在的组。#### 10.4.1查看文件/目录所在组
 
 •基本指令
 
 ls –ahl
 
-### 10.4.2修改文件所在的组
+#### 10.4.2修改文件所在的组
 
 •基本指令
 
@@ -1362,8 +1367,8 @@ ls –ahl
 使用root用户创建文件orange.txt,看看当前这个文件属于哪个组，然后将这个文件所在组，修改到police组。
 
 ```shell
-[root@hapdoop1 ~]# chgrp police orange.txt 
-[root@hapdoop1 ~]# ls -ahl
+[root@hapdoop1 ~]## chgrp police orange.txt 
+[root@hapdoop1 ~]## ls -ahl
 -rw-r--r--.  1 root police   12 9月  16 02:17 orange.txt
 
 ```
@@ -1383,10 +1388,10 @@ ls –ahl
 2)usermod –d 目录名 用户名 改变该用户登陆的初始目录。
 
 ```shell
-[root@hapdoop1 ~]# usermod -g  bandit fox
+[root@hapdoop1 ~]## usermod -g  bandit fox
 ```
 
-## 10.7权限的基本介绍
+### 10.7权限的基本介绍
 
 ls -l中显示的内容如下：
 
@@ -1404,7 +1409,7 @@ ls -l中显示的内容如下：
 
 ![1565876081126](linux/1565876081126.png)
 
-## 10.8rwx权限详解
+### 10.8rwx权限详解
 
 **10.8.1rwx作用到文件**
 
@@ -1446,13 +1451,13 @@ Feb209:39		最后修改日期
 
 abc					文件名
 
-### 10.9文件及目录权限
+#### 10.9文件及目录权限
 
 ls-l中显示的内容如下：(记住)
 
 -rwxrw-r--1rootroot1213Feb209:39abc
 
-## 10.10修改权限-chmod
+### 10.10修改权限-chmod
 
 10.10.1基本说明：
 
@@ -1473,8 +1478,8 @@ u:所有者g:所有组o:其他人a:所有人(u、g、o的总和)
 1)给abc文件的所有者读写执行的权限，给所在组读执行权限，给其它组读执行权限
 
 ```shell
-[root@hapdoop1 ~]# chmod u=rwx,g=x,o=rx abc
-[root@hapdoop1 ~]# ls -l
+[root@hapdoop1 ~]## chmod u=rwx,g=x,o=rx abc
+[root@hapdoop1 ~]## ls -l
 总用量 136
 drwx--xr-x. 2 root root    4096 9月  16 02:34 abc
 ```
@@ -1482,7 +1487,7 @@ drwx--xr-x. 2 root root    4096 9月  16 02:34 abc
 2)给abc文件的所有用户添加读的权限
 
 ```shell
-[root@hapdoop1 ~]# chmod a+r abc
+[root@hapdoop1 ~]## chmod a+r abc
 ```
 
 10.10.3第二种方式：通过数字变更权限
@@ -1503,7 +1508,7 @@ r-x=4+1=5
 
 指令：chmod755/home/abc.txt
 
-## 10.11修改文件所有者-chown
+### 10.11修改文件所有者-chown
 
 (chmod - **change** file **mode** bits)
 
@@ -1522,18 +1527,18 @@ chown  [-R]  newowner:newgroupfile  改变用户的所有者和所有组 [-R] �
 1)请将/home/abc.txt文件的所有者修改成tom
 
 ```shell
-[root@hapdoop1 ~]# chown fox abc.txt
+[root@hapdoop1 ~]## chown fox abc.txt
 ```
 
 2)请将/home/kkk目录下所有的文件和目录的所有者都修改成tom
 
 ```shell
-[root@hapdoop1 ~]# chown -R tom kkk/
+[root@hapdoop1 ~]## chown -R tom kkk/
 ```
 
 
 
-## 10.13最佳实践-警察和土匪游戏
+### 10.13最佳实践-警察和土匪游戏
 
 police，bandit
 
@@ -1544,15 +1549,15 @@ xh,xq:土匪
 (1)创建组
 
 ```shell
-[root@hapdoop1 ~]# groupadd police
-[root@hapdoop1 ~]# groupadd bandit
+[root@hapdoop1 ~]## groupadd police
+[root@hapdoop1 ~]## groupadd bandit
 ```
 
 
 
 (2)创建用户
 
-# crond任务调度
+## crond任务调度
 
 11.1原理示意图
 
@@ -1595,7 +1600,7 @@ crontab [选项]
 1)
 
 ```shell
-[root@hapdoop1 ~]# crontab -e
+[root@hapdoop1 ~]## crontab -e
 ```
 
 2) */1 * * * * ls -l /etc >> /tmp/to.txt
@@ -1627,7 +1632,7 @@ date >> /tmp/mydate
 2)给mytask1.sh一个可以执行权限
 
 ```shell
-[root@hapdoop1 home]# chmod 774 mytask1.sh 
+[root@hapdoop1 home]## chmod 774 mytask1.sh 
 ```
 
 3)crontab-e
@@ -1652,7 +1657,7 @@ cal >> /tmp/mycal
 2)给mytask2.sh一个可以执行权限
 
 ```shell
-[root@hapdoop1 home]# chmod 774 mytask2.sh 
+[root@hapdoop1 home]## chmod 774 mytask2.sh 
 ```
 
 3)crontab -e
@@ -1676,7 +1681,7 @@ cal >> /tmp/mycal
 2)给mytask3.sh一个可以执行权限
 
 ```shell
-[root@hapdoop1 home]# chmod 774 mytask2.sh 
+[root@hapdoop1 home]## chmod 774 mytask2.sh 
 ```
 
 3)crontab -e
@@ -1695,9 +1700,9 @@ cal >> /tmp/mycal
 
 3)service crond restart [重启任务调度]
 
-# Linux磁盘分区、挂载
+## Linux磁盘分区、挂载
 
-## 分区基础知识
+### 分区基础知识
 
 12.1.1分区的方式：
 
@@ -1719,7 +1724,7 @@ cal >> /tmp/mycal
 
 ![1566455383816](linux/1566455383816.png)
 
-## 12.2Linux分区
+### 12.2Linux分区
 
 12.2.1原理介绍
 
@@ -1745,7 +1750,7 @@ cal >> /tmp/mycal
 
 ![1566455673574](linux/1566455673574.png)
 
-## 12.5磁盘情况查询
+### 12.5磁盘情况查询
 
 12.5.1查询系统整体磁盘使用情况
 
@@ -1758,7 +1763,7 @@ df -h
 查询系统整体磁盘使用情况
 
 ```shell
-[root@hapdoop1 ~]# df -lh
+[root@hapdoop1 ~]## df -lh
 Filesystem      Size  Used Avail Use% Mounted on
 /dev/sda3        18G  4.2G   13G  26% /
 tmpfs          1003M   80K 1003M   1% /dev/shm
@@ -1785,7 +1790,7 @@ du -h/目录查询指定目录的磁盘占用情况，默认为当前目录
 •应用实例查询/opt目录的磁盘占用情况，深度为1
 
 ```shell
-[root@hapdoop1 ~]# du -ach --max-depth=1 /opt
+[root@hapdoop1 ~]## du -ach --max-depth=1 /opt
 4.0K	/opt/Hello.java
 64K	/opt/tmp
 147M	/opt/jdk-7u79-linux-x64.gz
@@ -1805,12 +1810,12 @@ du -h/目录查询指定目录的磁盘占用情况，默认为当前目录
 1.1G	总用量
 ```
 
-## 12.6磁盘情况-工作实用指令
+### 12.6磁盘情况-工作实用指令
 
 1)统计/home文件夹下文件的个数
 
 ```shell
-[root@hapdoop1 home]# ll /home | grep "^-" | wc -l
+[root@hapdoop1 home]## ll /home | grep "^-" | wc -l
 11
 
 ```
@@ -1818,29 +1823,29 @@ du -h/目录查询指定目录的磁盘占用情况，默认为当前目录
 2)统计/home文件夹下目录的个数
 
 ```shell
-[root@hapdoop1 home]# ll /home | grep "^d" | wc -l
+[root@hapdoop1 home]## ll /home | grep "^d" | wc -l
 3
 ```
 
 3)统计/home文件夹下文件的个数，包括子文件夹里的
 
 ```shell
-[root@hapdoop1 home]# ls -lR /home | grep "^-" | wc -l
+[root@hapdoop1 home]## ls -lR /home | grep "^-" | wc -l
 11
 ```
 
 4)统计文件夹下目录的个数，包括子文件夹里的
 
 ```shell
-[root@hapdoop1 home]# ls -lR /home | grep "^d" | wc -l
+[root@hapdoop1 home]## ls -lR /home | grep "^d" | wc -l
 3
 ```
 
 5)以树状显示目录结构
 
 ```shell
-[root@hapdoop1 home]# yum install tree
-[root@hapdoop1 home]# tree
+[root@hapdoop1 home]## yum install tree
+[root@hapdoop1 home]## tree
 .
 ├── a.tar.gz
 ├── a.txt
@@ -1859,7 +1864,7 @@ du -h/目录查询指定目录的磁盘占用情况，默认为当前目录
 
 ```
 
-# 实操篇网络配置
+## 网络配置
 
 13.1Linux网络配置
 
@@ -1900,7 +1905,7 @@ du -h/目录查询指定目录的磁盘占用情况，默认为当前目录
 [root@hadoop100桌面]#pingwww.baidu.com
 
 ```shell
-[root@hapdoop1 home]# vim /etc/sysconfig/network-scripts/ifcfg-eth0 
+[root@hapdoop1 home]## vim /etc/sysconfig/network-scripts/ifcfg-eth0 
 ```
 
 13.4linux网络环境配置
@@ -1927,9 +1932,9 @@ du -h/目录查询指定目录的磁盘占用情况，默认为当前目录
 
 ![1566464369323](linux/1566464369323.png)
 
-# 实操篇进程管理
+## 进程管理
 
-## 14.1进程的基本介绍
+### 14.1进程的基本介绍
 
 1)在LINUX中，每个执行的程序（代码）都称为一个进程。每一个进程都分配一个ID号。
 
@@ -1939,7 +1944,7 @@ du -h/目录查询指定目录的磁盘占用情况，默认为当前目录
 
 4)一般系统的服务都是以后台进程的方式存在，而且都会常驻在系统中。直到关机才才结束。
 
-## 14.2显示系统执行的进程ps
+### 14.2显示系统执行的进程ps
 
 14.2.1说明：
 
@@ -1951,7 +1956,13 @@ du -h/目录查询指定目录的磁盘占用情况，默认为当前目录
 
 14.2.2ps指令详解
 
-1)指令：ps –aux| grep xxx，比如我看看有没有sshd服务
+1)指令：
+
+```shell
+ps -aux | grep xxx
+```
+
+，比如我看看有没有sshd服务
 
 2)指令说明
 
@@ -2006,13 +2017,13 @@ du -h/目录查询指定目录的磁盘占用情况，默认为当前目录
 思考题，如果我们希望查看sshd进程的父进程号是多少，应该怎样查询？
 
 ```shell
-[root@hapdoop1 ~]# ps -ef | grep sshd
+[root@hapdoop1 ~]## ps -ef | grep sshd
 root      14263      1  0 (ppid) 05:34 ?        00:00:00 /usr/sbin/sshd
 root      16269  14263  0 06:07 ?        00:00:00 sshd: root@pts/1 
 root      16321  16273  0 06:19 pts/1    00:00:00 grep sshd
 ```
 
-## 14.3终止进程kill和killall
+### 14.3终止进程kill和killall
 
 14.3.1介绍:
 
@@ -2020,7 +2031,13 @@ root      16321  16273  0 06:19 pts/1    00:00:00 grep sshd
 
 14.3.2基本语法：
 
-kill [选项] 进程号（功能描述：通过进程号杀死进程）
+```shell
+kill [选项] 进程号
+```
+
+
+
+（功能描述：通过进程号杀死进程）
 
 killall进程名称（功能描述：通过进程名称杀死进程，也支持通配符，这在系统因负载过大而变得很慢时很有用）
 
@@ -2033,49 +2050,49 @@ killall进程名称（功能描述：通过进程名称杀死进程，也支持�
 案例1：踢掉某个非法登录用户
 
 ```shell
-[root@hapdoop1 ~]# ps -aux | grep sshd
+[root@hapdoop1 ~]## ps -aux | grep sshd
 Warning: bad syntax, perhaps a bogus '-'? See /usr/share/doc/procps-3.2.8/FAQ
 root      14263  0.0  0.0  66236  1200 ?        Ss   05:34   0:00 /usr/sbin/sshd
 root      16269  0.0  0.2 102084  4156 ?        Ss   06:07   0:00 sshd: root@pts/1 
 root      16357  0.4  0.1 102084  4040 ?        Ss   06:28   0:00 sshd: fox [priv] 
 fox       16361  0.1  0.0 102084  1904 ?        S    06:28   0:00 sshd: fox@pts/2  
 root      16387  0.0  0.0 103332   860 pts/1    S+   06:29   0:00 grep sshd
-[root@hapdoop1 ~]# kill 16361
+[root@hapdoop1 ~]## kill 16361
 ```
 
 案例2:终止远程登录服务sshd,在适当时候再次重启sshd服
 
 ```shell
-[root@hapdoop1 ~]# ps -aux | grep sshd
+[root@hapdoop1 ~]## ps -aux | grep sshd
 Warning: bad syntax, perhaps a bogus '-'? See /usr/share/doc/procps-3.2.8/FAQ
 root      14263  0.0  0.0  66236  1200 ?        Ss   05:34   0:00 /usr/sbin/sshd
 root      16269  0.0  0.2 102084  4156 ?        Ss   06:07   0:00 sshd: root@pts/1 
 root      16357  0.4  0.1 102084  4040 ?        Ss   06:28   0:00 sshd: fox [priv] 
 fox       16361  0.1  0.0 102084  1904 ?        S    06:28   0:00 sshd: fox@pts/2  
 root      16387  0.0  0.0 103332   860 pts/1    S+   06:29   0:00 grep sshd
-[root@hapdoop1 ~]# kill 14263
+[root@hapdoop1 ~]## kill 14263
 ```
 
 案例3:终止多个gedit编辑器【killall,通过进程名称来终止进程】
 
 ```shell
-[root@hapdoop1 桌面]# killall gedit
+[root@hapdoop1 桌面]## killall gedit
 ```
 
 案例4：强制杀掉一个终端
 
 ```shell
-[root@hapdoop1 桌面]# ps -aux |grep bash
+[root@hapdoop1 桌面]## ps -aux |grep bash
 Warning: bad syntax, perhaps a bogus '-'? See /usr/share/doc/procps-3.2.8/FAQ
 root      15158  0.0  0.0 108348  1840 pts/0    Ss   05:37   0:00 /bin/bash
 root      16273  0.0  0.0 108348  1820 pts/1    Ss+  06:07   0:00 -bash
 root      16398  0.0  0.0 108428  1828 pts/2    Ss+  06:33   0:00 /bin/bash
 root      16411  0.0  0.0 108348  1788 pts/3    Ss   06:33   0:00 /bin/bash
 root      16438  0.0  0.0 103328   856 pts/3    S+   06:37   0:00 grep bash
-[root@hapdoop1 桌面]# kill -9 16398
+[root@hapdoop1 桌面]## kill -9 16398
 ```
 
-## 14.4查看进程树pstree
+### 14.4查看进程树pstree
 
 14.4.1基本语法：
 
@@ -2092,7 +2109,7 @@ pstree [选项] ,可以更加直观的来看进程信息
 案例1：请你树状的形式显示进程的pid
 
 ```shell
-[root@hapdoop1 ~]# pstree -p
+[root@hapdoop1 ~]## pstree -p
 init(1)─┬─ManagementAgent(13688)─┬─{ManagementAgen}(13706)
         │                        └─{ManagementAgen}(13707)
         ├─NetworkManager(14070)─┬─dhclient(16203)
@@ -2103,7 +2120,7 @@ init(1)─┬─ManagementAgent(13688)─┬─{ManagementAgen}(13706)
         ├─atd(14495)
 ```
 
-## 14.5服务(Service)管理
+### 服务(Service)管理
 
 4.5.1介绍:
 
@@ -2126,7 +2143,7 @@ service 服务名 [start|stop|restart|reload|status]
 1)查看当前防火墙的状况，关闭防火墙和重启防火墙。
 
 ```shell
-[root@hapdoop1 ~]# service iptables status
+[root@hapdoop1 ~]## service iptables status
 表格：filter
 Chain INPUT (policy ACCEPT)
 num  target     prot opt source               destination         
@@ -2146,15 +2163,15 @@ num  target     prot opt source               destination
 ```
 
 ```shell
-[root@hapdoop1 ~]# service iptables stop
+[root@hapdoop1 ~]## service iptables stop
 iptables：将链设置为政策 ACCEPT：filter                    [确定]
 iptables：清除防火墙规则：                                 [确定]
 iptables：正在卸载模块：                                   [确定]
-[root@hapdoop1 ~]# service iptables status
+[root@hapdoop1 ~]## service iptables status
 iptables：未运行防火墙。
-[root@hapdoop1 ~]# service iptables start
+[root@hapdoop1 ~]## service iptables start
 iptables：应用防火墙规则：                                 [确定]
-[root@hapdoop1 ~]# service iptables status
+[root@hapdoop1 ~]## service iptables status
 表格：filter
 Chain INPUT (policy ACCEPT)
 ```
@@ -2180,7 +2197,7 @@ C:\Users\11623>Telnet 192.168.163.129 22
 方式2:/etc/init.d/服务名称
 
 ```shell
-root@hapdoop1 ~]#  ll /etc/init.d/
+root@hapdoop1 ~]##  ll /etc/init.d/
 总用量 376
 -rwxr-xr-x. 1 root root  1288 5月  12 2016 abrt-ccpp
 -rwxr-xr-x. 1 root root  1628 5月  12 2016 abrtd
@@ -2223,29 +2240,29 @@ Linux系统有7种运行级别(runlevel)：常用的是级别3和5
 1)查看服务chkconfig --list| grep xxx
 
 ```shell
-[root@hapdoop1 ~]# chkconfig --list 
+[root@hapdoop1 ~]## chkconfig --list 
 NetworkManager 	0:关闭	1:关闭	2:启用	3:启用	4:启用	5:启用	6:关闭
 abrt-ccpp      	0:关闭	1:关闭	2:关闭	3:启用	4:关闭	5:启用	6:关闭
 abrtd          	0:关闭	1:关闭	2:关闭	3:启用	4:关闭	5:启用	6:关闭
 ....
-[root@hapdoop1 ~]# chkconfig --list | grep ssh
+[root@hapdoop1 ~]## chkconfig --list | grep ssh
 sshd           	0:关闭	1:关闭	2:启用	3:启用	4:启用	5:启用	6:关闭
 ```
 
 2)chkconfig 服务名 --list
 
 ```shell
-[root@hapdoop1 ~]# chkconfig iptables --list
+[root@hapdoop1 ~]## chkconfig iptables --list
 iptables       	0:关闭	1:关闭	2:启用	3:启用	4:启用	5:启用	6:关闭
 ```
 
 3)chkconfig --level 5 服务名 on/off
 
 ```shell
-[root@hapdoop1 ~]# chkconfig --list | grep ssh
+[root@hapdoop1 ~]## chkconfig --list | grep ssh
 sshd           	0:关闭	1:关闭	2:启用	3:启用	4:启用	5:启用	6:关闭
-[root@hapdoop1 ~]# chkconfig --level 5 sshd off
-[root@hapdoop1 ~]# chkconfig sshd --list
+[root@hapdoop1 ~]## chkconfig --level 5 sshd off
+[root@hapdoop1 ~]## chkconfig sshd --list
 sshd           	0:关闭	1:关闭	2:启用	3:启用	4:启用	5:关闭	6:关闭
 ```
 
@@ -2267,7 +2284,7 @@ sshd           	0:关闭	1:关闭	2:启用	3:启用	4:启用	5:关闭	6:关闭
 
 1)chkconfig重新设置服务后自启动或关闭，需要重启机器reboot才能生效.
 
-## 14.6动态监控进程
+### 14.6动态监控进程
 
 14.6.1介绍：
 
@@ -2322,7 +2339,7 @@ netstat -anp
 查看系统所有的网络服务
 
 ```shell
-[root@hapdoop1 ~]# netstat -anp | more
+[root@hapdoop1 ~]## netstat -anp | more
 Active Internet connections (servers and established)
 Proto Recv-Q Send-Q Local Address               Foreign Address             State       PID/Program na
 me   
@@ -2332,7 +2349,7 @@ tcp        0      0 0.0.0.0:22                  0.0.0.0:*                   LIST
 请查看服务名为sshd的服务的信息。
 
 ```shell
-[root@hapdoop1 ~]# netstat  -anp |grep sshd 
+[root@hapdoop1 ~]## netstat  -anp |grep sshd 
 tcp        0      0 0.0.0.0:22                  0.0.0.0:*                   LISTEN      14263/sshd          
 tcp        0      0 127.0.0.1:6010              0.0.0.0:*                   LISTEN      16552/sshd          
 tcp        0      0 192.168.163.129:22          192.168.163.1:61806         ESTABLISHED 16552/sshd          
@@ -2340,8 +2357,6 @@ tcp        0      0 :::22                       :::*                        LIST
 tcp        0      0 ::1:6010                    :::*                        LISTEN      16552/sshd          
 unix  2      [ ]         DGRAM                    48552  16552/sshd  
 ```
-
-
 
 # JavaEE篇搭建
 
@@ -2427,7 +2442,6 @@ vim /etc/sysconfig/iptables
 ```shell
 -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
 -A INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
-
 ```
 
 重启防火墙
@@ -2455,8 +2469,6 @@ num  target     prot opt source               destination
 
 Chain OUTPUT (policy ACCEPT)
 num  target     prot opt source               destination         
-
-
 ```
 
 ## 16.4Eclipse的安装
@@ -2482,9 +2494,11 @@ nicolas@ubuntu:/opt/sts-4.3.2.RELEASE$ sudo ln -s /opt/jvm/jdk1.8.0_221/bin/ /op
 
 3)编写jsp页面,并测试成功!
 
-# Python篇开发平台Ubuntu
+# Ubuntu
 
-## 18.1Ubuntu的介绍Ubuntu
+### Ubuntu的介绍Ubuntu
+
+Python：开发平台Ubuntu
 
 （友帮拓、优般图、乌班图）是一个以桌面应用为主的开源GNU/Linux操作系统，Ubuntu是基于GNU/Linux，支持x86、amd64（即x64）和ppc架构，由全球化的专业开发团队（CanonicalLtd）打造的。
 
@@ -2494,11 +2508,7 @@ nicolas@ubuntu:/opt/sts-4.3.2.RELEASE$ sudo ln -s /opt/jvm/jdk1.8.0_221/bin/ /op
 
 Ubuntu下载地址：http://cn.ubuntu.com/download/
 
-**ubuntu的root密码：abc123**
-
-
-
-## 18.2Ubuntu的安装
+### Ubuntu的安装
 
 18.2.1安装的步骤
 
@@ -2516,7 +2526,7 @@ Ubuntu下载地址：http://cn.ubuntu.com/download/
 
 **==如果中文包下载时间过长，可以给ubuntu换源（阿里源）；==**
 
-## 18.3Ubuntu的roo用户 
+### Ubuntu的root用户 
 
 18.3.1介绍
 
@@ -2568,45 +2578,61 @@ Type "help", "copyright", "credits" or "license" for more information.
 sudo apt install vim
 ```
 
-# Python篇apt软件管理和远程登录
+## apt软件管理和远程登录
 
-## 19.1apt介绍
+### apt介绍
 
 apt是Advanced Packaging Tool的简称，是一款安装包管理工具。在Ubuntu下，我们可以使用apt命令可用于软件包的安装、删除、清理等，类似于Windows中的软件管理工具。
 
 unbuntu软件管理的原理示意图：
 
-![1566129158215](imgs\1566129158215.png)
+![1566129158215](linux\1566129158215.png)
 
 19.2Ubuntu软件操作的相关命令
 
 sudo apt-get update更新源
 
+```shell
 sudo apt-get install package安装包
+```
 
+```shell
 sudo apt-get remove package删除包
 
 sudo apt-cache search  package搜索软件包
 
-sudo apt-cache show package 获取包的相关信息，如说明、大小、版本等sudo apt-get install package--reinstall重新安装包
+sudo apt-cache show package 获取包的相关信息，如说明、大小、版本等sudo apt-get install package -- reinstall重新安装包
 
-sudoapt-get-finstall修复安装
+sudo apt-get -finstall修复安装
 
-sudoapt-getremovepackage--purge删除包，包括配置文件等
+sudo apt-get remove package --purge删除包，包括配置文件等
 
-sudoapt-getbuild-deppackage安装相关的编译环境
+sudo apt-get build -deppackage安装相关的编译环境
 
-sudoapt-getupgrade更新已安装的包
+```
 
-sudoapt-getdist-upgrade升级系统
+```shell
+sudo apt-get upgrade 更新已安装的包
+```
 
-sudoapt-cachedependspackage了解使用该包依赖那些包
+```shell
+sudo apt-get dist-upgrade升级系统
+```
 
-sudoapt-cacherdependspackage查看该包被哪些包依赖
 
-sudoapt-getsourcepackage下载该包的源代码
 
-## 19.3更新Ubuntu软件下载地址
+```shell
+sudo apt-cache depends package了解使用该包依赖那些包
+
+sudo apt-cache rdepends package查看该包被哪些包依赖
+
+sudo apt-get source package下载该包的源代码
+
+```
+
+
+
+### 更新Ubuntu软件下载地址
 
 19.3.1原理示意图
 
@@ -2622,14 +2648,14 @@ https://mirrors.tuna.tsinghua.edu.cn/
 
 ```shell
 nicolas@ubuntu:/etc/apt$ sudo cp /etc/apt/sources.list /etc/apt/sources.list.backup #拷贝
-root@ubuntu:/etc/apt# echo '' > sources.list #清空
-root@ubuntu:/etc/apt# vim sources.list #拷贝清华镜像
-root@ubuntu:/etc/apt# exit
+root@ubuntu:/etc/apt## echo '' > sources.list #清空
+root@ubuntu:/etc/apt## vim sources.list #拷贝清华镜像
+root@ubuntu:/etc/apt## exit
 exit
 nicolas@ubuntu:~$ sudo apt-get update #更新ubuntu软件列表
 ```
 
-## 19.5使用ssh远程登录Ubuntu
+### 使用ssh远程登录Ubuntu
 
 19.5.1ssh介绍
 
@@ -2639,7 +2665,7 @@ SSH是目前较可靠，专为远程登录会话和其他网络服务提供安�
 
 使用SSH服务，需要安装相应的服务器和客户端。客户端和服务器的关系：如果，A机器想被B机器远程控制，那么，A机器需要安装SSH服务器，B机器需要安装SSH客户端。和CentOS不一样，Ubuntu默认没有安装SSHD服务，因此，我们不能进行远程登录。
 
-## 19.6使用ssh远程登录Ubuntu
+### 使用ssh远程登录Ubuntu
 
 19.6.1安装SSH和启用
 
@@ -2701,7 +2727,33 @@ udp6       0      0 :::5353                 :::*
 
 •登出登出命令：exit或者logout
 
-# nohup
+## 安装mysql
+
+
+
+# my
+
+## Linux下rz/sz安装及使用方法
+
+能直接通过xshell拖拽文件到shell的当前目录
+
+ubuntu
+
+```shell
+apt-get install lrzsz
+```
+
+## 常见问题
+
+## 每次进入命令都要重新source /etc/profile 才能生效
+
+如java命令
+
+### 1、也可以放在~/.bashrc里面。或者在~/.bashrc里面加一句source /etc/profile
+
+### 2、你可以把这几条命令写在 /etc/bash里面   就会自动执行了
+
+## nohup
 
 nohup 
 
@@ -2715,7 +2767,7 @@ nohup命令：
 
 在缺省情况下该作业的所有输出都被重定向到一个名为nohup.out的文件中。
 
-## 案例
+### 案例
 
 1. nohup command > myout.file 2>&1 &   
 
@@ -2727,13 +2779,19 @@ nohup命令：
 
 这是放在crontab中的定时任务，晚上22点时候怕这个任务，启动这个python的脚本，并把日志写在download_dfcf_pdf_to_oss.log文件中
 
-# 常见问题
+## ubuntu查看java安装路径和设置环境变量
 
-## 每次进入命令都要重新source /etc/profile 才能生效
+whereis java （java安装路径）
 
-如java命令
+which java （java执行路径）
 
-### 1、也可以放在~/.bashrc里面。或者在~/.bashrc里面加一句source /etc/profile
+echo $JAVA_HOME（java环境变量）
 
-###  2、你可以把这几条命令写在 /etc/bash里面   就会自动执行了
+环境变量路径
+
+```
+echo $PATH 
+```
+
+
 

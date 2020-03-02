@@ -133,8 +133,21 @@ JDBC在实现数据库驱动连接对象使用工厂设计设计模式，而Driv
 
 Pattern类  
 	获得此类对象必须通过Compile()方法，编译正则表达式  
-Matcher类  
-	Pattern类获得  
+## Matcher类  
+
+Pattern类获得  
+
+```java
+package java.util.regex;
+```
+
+| name               | description |      |
+| ------------------ | ----------- | ---- |
+| public int start() |             |      |
+|                    |             |      |
+|                    |             |      |
+
+
 
 ## 字符串的正则运用  
 
@@ -161,6 +174,10 @@ Matcher类
 	[a-z]所有小写字母**（也可以[e-i])**  
 
   
+
+
+
+
 
 
 [a-zA-Z]任意字母  
@@ -232,15 +249,99 @@ Cloneable接口
 
 “反”通过对象找到类的出处  
 java.lang.Class反射的源头  
-	三种实例化方式  
-		第一种：调用Object类中的getClass()  
-			需要对象实例化  
-		第二种：类.class属性  
-			不需要对象实例化，需要import  
-			Spring、Hibernate  
-		第三种：Class提供的forName()方法  
-			不需要import导入类，类用String描述  
-			public static Class<?> forName(String className)  
+## 三种实例化方式  
+第一种：调用Object类中的getClass()  
+	需要对象实例化  
+第二种：类.class属性  
+	不需要对象实例化，需要import  
+	Spring、Hibernate  
+第三种：Class提供的forName()方法  
+	不需要import导入类，类用String描述  
+
+```java
+public static Class<?> forName(String className)  
+```
+
+```java
+//		 通过Class.forName方式
+Class feeClass = null;
+try {
+    feeClass = Class.forName("pojo.Fee");
+} catch (ClassNotFoundException e) {
+    e.printStackTrace();
+```
+
+## 获取属性
+
+```java
+// 获取属性  
+Field[] field01 = clazz.getFields(); // 返回属性为public的字段  
+Field[] field02 = clazz.getDeclaredFields(); // 返回所有的属性  
+Field field03 = clazz.getDeclaredField("id"); // 获取属性为id的字段  
+```
+
+### Field方法:
+
+```java
+String name = field.getName();
+Class<?> type = field.getType();
+```
+```java
+// 获取对象属性
+Fields[] fields = clazz.getDeclaredFields();
+for(Field field: fields){
+    String name = field.getName();
+    field.setAccessible(true); // 私有属性必须设置访问权限
+    Object resultValue = field.get(obj); 
+    // 这里可以编写你的业务代码
+    System.out.println(name + ": " + resultValue);
+}
+```
+
+
+
+## 获取方法
+
+```java
+// 获取普通方法  
+Method[] Method01 = clazz.getDeclaredMethods(); // 返回public方法 
+Method method = clazz.getDeclaredMethod("getId", null); // 返回getId这个方法，如果没有参数，就默认为null   
+```
+
+Method使用
+
+```java
+method.invoke(obj, new Object[]{});
+
+```
+
+> obj: 调用方法的对象
+>
+> the object the underlying method is invoked from
+
+```java
+Method method = clazz.getMethod(methodName, new Class[]{});
+```
+
+> 方法名+参数列表找到指定方法
+
+```java
+Object obj = clazz.newInstance();
+// 获取对象属性
+Fields[] fields = clazz.getDeclaredFields();
+for(Field field: fields){
+    String fieldName = field.getName();
+    String upperChar = fieldName.substring(0,1).toUpperCase();
+    String anotherStr = fieldName.substring(1).;
+    String methodName = "get" + upperChar + anotherStr;
+    Method method = clazz.getMethod(methodName, new Class[]{});
+    method.setAccessiable(true);
+    Object resultValue = method.invoke(obj, new Object[]{});
+    // 这里可以编写你的业务代码
+    System.out.println(fieldName + ": " + resultValue);
+}
+```
+
 反射对象实例化  
 	Class类的无参构造方法：public T newInstance()  
 	new是耦合的主要元凶，当出现高耦合时大多数时能用反射降低  
@@ -252,8 +353,93 @@ java.lang.Class反射的源头
 			public类型构造方法  
 		public Constructor<T> getDeclaredConstructor(Class<?>... parameterTypes)  
 			所有构造方法  
-	取得一些构造方法  
-调用普通方法	  
+	取得一些构造方法    
+
+# 函数式编程（Lambda）、流式编程
+
+## 函数式接口
+
+`java.util.function` 包旨在创建一组完整的目标接口，使得我们一般情况下不需再定义自己的接口。这主要是因为基本类型会产生一小部分接口。 如果你了解命名模式，顾名思义就能知道特定接口的作用。
+
+ 以下是基本命名准则：
+
+1. 如果**只处理对象而非基本类型**，名称则为 `Function`，`Consumer`，`Predicate` 等。参数类型通过泛型添加。
+2. 如果接收的参数是基本类型，则由名称的第一部分表示，如 `LongConsumer`，`DoubleFunction`，`IntPredicate` 等，但基本 `Supplier` 类型例外。
+3. 如果返回值为基本类型，则用 `To` 表示，如 `ToLongFunction <T>` 和 `IntToLongFunction`。
+4. 如果返回值类型与参数类型一致，则是一个运算符：单个参数使用 `UnaryOperator`，两个参数使用 `BinaryOperator`。
+5. 如果接收两个参数且返回值为布尔值，则是一个谓词（Predicate）。
+6. 如果接收的两个参数类型不同，则名称中有一个 `Bi`。
+
+下表描述了 `java.util.function` 中的目标类型（包括例外情况）：
+
+| **特征**                                            |                       **函数式方法名**                       |                           **示例**                           |
+| :-------------------------------------------------- | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| 无参数； <br> 无返回值                              |         **Runnable** <br> (java.lang)  <br>  `run()`         |                         **Runnable**                         |
+| 无参数； <br> 返回类型任意                          |         **Supplier** <br> `get()` <br> `getAs类型()`         | **Supplier`<T>`  <br> BooleanSupplier  <br> IntSupplier  <br> LongSupplier  <br> DoubleSupplier** |
+| 无参数； <br> 返回类型任意                          |   **Callable** <br> (java.util.concurrent)  <br> `call()`    |                      **Callable`<V>`**                       |
+| 1 参数； <br> 无返回值                              |                 **Consumer** <br> `accept()`                 | **`Consumer<T>` <br> IntConsumer <br> LongConsumer <br> DoubleConsumer** |
+| 2 参数 **Consumer**                                 |                **BiConsumer** <br> `accept()`                |                    **`BiConsumer<T,U>`**                     |
+| 2 参数 **Consumer**； <br> 1 引用； <br> 1 基本类型 |             **Obj类型Consumer** <br> `accept()`              | **`ObjIntConsumer<T>` <br> `ObjLongConsumer<T>` <br> `ObjDoubleConsumer<T>`** |
+| 1 参数； <br> 返回类型不同                          | **Function** <br> `apply()` <br> **To类型** 和 **类型To类型** <br> `applyAs类型()` | **Function`<T,R>` <br> IntFunction`<R>` <br> `LongFunction<R>` <br> DoubleFunction`<R>` <br> ToIntFunction`<T>` <br> `ToLongFunction<T>` <br> `ToDoubleFunction<T>` <br> IntToLongFunction <br> IntToDoubleFunction <br> LongToIntFunction <br> LongToDoubleFunction <br> DoubleToIntFunction <br> DoubleToLongFunction** |
+| 1 参数； <br> 返回类型相同                          |               **UnaryOperator** <br> `apply()`               | **`UnaryOperator<T>` <br> IntUnaryOperator <br> LongUnaryOperator <br> DoubleUnaryOperator** |
+| 2 参数类型相同； <br> 返回类型相同                  |              **BinaryOperator** <br> `apply()`               | **`BinaryOperator<T>` <br> IntBinaryOperator <br> LongBinaryOperator <br> DoubleBinaryOperator** |
+| 2 参数类型相同; <br> 返回整型                       |         Comparator <br> (java.util) <br> `compare()`         |                     **`Comparator<T>`**                      |
+| 2 参数； <br> 返回布尔型                            |                 **Predicate** <br> `test()`                  | **`Predicate<T>` <br> `BiPredicate<T,U>` <br> IntPredicate <br> LongPredicate <br> DoublePredicate** |
+| 参数基本类型； <br> 返回基本类型                    |         **类型To类型Function** <br> `applyAs类型()`          | **IntToLongFunction <br> IntToDoubleFunction <br> LongToIntFunction <br> LongToDoubleFunction <br> DoubleToIntFunction <br> DoubleToLongFunction** |
+| 2 参数类型不同                                      |                 **Bi操作** <br> (不同方法名)                 | **`BiFunction<T,U,R>` <br> `BiConsumer<T,U>` <br> `BiPredicate<T,U>` <br> `ToIntBiFunction<T,U>` <br> `ToLongBiFunction<T,U>` <br> `ToDoubleBiFunction<T>`** |
+
+此表仅提供些常规方案。通过上表，你应该或多或少能自行推导出更多行的函数式接口。
+
+可以看出，在创建 `java.util.function` 时，设计者们做出了一些选择。 
+
+例如，为什么没有 `IntComparator`，`LongComparator` 和 `DoubleComparator` 呢？有 `BooleanSupplier` 却没有其他表示 **Boolean** 的接口；有通用的 `BiConsumer` 却没有用于 **int**，**long** 和 **double** 的 `BiConsumers` 变体（我对他们放弃的原因表示同情）。这些选择是疏忽还是有人认为其他组合的使用情况出现得很少（他们是如何得出这个结论的）？
+
+## 流常用处理方法
+
+匹配，遍历中遇到function返回true中断
+
+anyMatch
+
+`anyMatch(Predicate)`：如果流中的任意一个元素根据提供的 **Predicate** 返回 true 时，结果返回为 true。这个操作将会在第一个 true 之后短路；也就是不会在发生 true 之后继续执行计算。
+
+
+
+forEach 遍历，全部遍历，不能中断
+
+itearte 自定义序列
+
+根据第一的seed参数应用于第二个function**产生序列**
+
+```java
+public static<T> Stream<T> iterate(final T seed, final UnaryOperator<T> f) {
+```
+
+> Returns an infinite sequential ordered `Stream` produced by iterative 
+> application of a function `f` to an initial element 
+> `seed`, producing a `Stream` consisting of 
+> `seed`, `f(seed)`, `f(f(seed))`, etc. 
+
+```java
+List<String> list = java.util.Arrays.asList("a","b","c");
+Stream.iterate(0, i -> i + 1).limit(list.size()).forEach(i -> {
+    System.out.println(String.valueOf(i) + list.get(i));
+});
+```
+
+## 流元素排序
+
+sorted()的默认比较器
+
+```java
+Stream<T> sorted();
+Stream<T> sorted(Comparator<? super T> comparator);
+```
+
+```java
+sorted(Comparator.reverseOrder())
+```
+
+
 
 # 共享设计模式  
 
@@ -276,5 +462,14 @@ java.lang.Class反射的源头
 	多线程同步使用  
 尽量不要使用代码块
 
+
+
 # io流
 
+
+
+# transient
+
+java语言的关键字，[变量](https://baike.baidu.com/item/变量/3956968)[修饰符](https://baike.baidu.com/item/修饰符/4088564)，如果用transient声明一个[实例变量](https://baike.baidu.com/item/实例变量/3386159)，当对象存储时，它的值不需要维持。换句话来说就是，用transient关键字标记的成员变量不参与序列化过程。
+
+Java的[serialization](https://baike.baidu.com/item/serialization)提供了一种持久化对象实例的机制。当持久化对象时，可能有一个特殊的对象数据成员，我们不想用serialization机制来保存它。为了在一个特定对象的一个域上关闭serialization，可以在这个域前加上关键字transient。当一个对象被序列化的时候，transient型变量的值不包括在序列化的表示中，然而非transient型的变量是被包括进去的。

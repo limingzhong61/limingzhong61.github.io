@@ -111,7 +111,9 @@ src/main/java、 src/main/resource、src/test/java 、src/test/resource   四个
 
 所以在配置路径时需要注意文件名是否重名，导致加载文件失败
 
-# jsr303数据校验
+# 数据校验   
+
+## jsr303数据校验
 
 ```xml
 <!--jsr303数据检验支持 （Hibernate Validator Engine Relocation Artifact） -->
@@ -125,8 +127,6 @@ tomcat7以下的服务器：el表达式，不是最新的。额外给服务器�
 	<version>5.4.1.Final</version>
 </dependency>
 ```
-
-# 数据校验   
 
 JSR303  
 Hibernate Validator 
@@ -197,10 +197,6 @@ private Date birthday ;
 
 }
 ~~~
-
-
-
-​	
 
 在校验的Controller中 ，给**校验的对象前增加 @Valid**
 

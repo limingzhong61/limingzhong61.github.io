@@ -2330,12 +2330,22 @@ function toggleClass(obj , cn){
 
 # JSON  
 
- **JavaScript Object Notation** JS对象表示法  
+ **JavaScript Object Notation** JS对象表示法
+
+## JSON 格式
+
+1. 复合类型的值只能是数组或对象，不能是函数、正则表达式对象、日期对象。
+2. 原始类型的值只有四种：字符串、数值（必须以十进制表示）、布尔值和`null`（不能使用`NaN`, `Infinity`, `-Infinity`和`undefined`）。
+3. 字符串**必须使用双引号表示**，不能使用单引号。
+4. 对象的键名必须放在双引号里面。
+5. 数组或对象最后一个成员的后面，不能加逗号。
+
+  
 
 JS中的对象只有JS自己认识，其他的语言都不认识  
 **JSON就是一个特殊格式的字符串**，这个字符串可以被任意的语言所识别，  
 并且可以转换为任意语言中的对象，JSON在开发中主要用来数据的交互  
- JSON和JS对象的格式一样，只不过JSON字符串中的属性名必须加双引号  
+ JSON和JS对象的格式一样，只不过**JSON字符串中的属性名必须加双引号**  
 	其他的和JS语法一致  
 JSON分类：  
 	1.对象 {}  
@@ -2381,25 +2391,7 @@ console.log(str);
 
 JSON这个对象在IE7及以下的浏览器中不支持，所以在这些浏览器中调用时会报错  
 
-## # 原生js  
 
-## 原生js实现复制内容到剪切板  
-
-```js  
-copy() {  
-    const input = document.createElement("input");  
-    document.body.appendChild(input);  
-    input.setAttribute("value",this.solution.code);  
-    input.select();  
-    if (document.execCommand("copy")) {  
-        document.execCommand("copy");  
-        // console.log("复制成功");  
-    }  
-    document.body.removeChild(input);  
-}  
-```
-
-  
 
   
 
@@ -2467,5 +2459,24 @@ confirm()用于弹出一个带有确认和取消按钮的提示框
 需要一个字符串作为参数，该字符串将会作为提示文字显示出来  
 如果用户点击确认则会返回true，如果点击取消则返回false  
 var flag = confirm("确认删除"+name+"吗?");  
-**[github笔记下载地址](https://github.com/codeOflI/codeOflI.github.io/blob/dev/source/_posts/js-note/javaScript/javaScript.md)**
+
+## # 原生js  
+
+## 原生js实现复制内容到剪切板  
+
+```js  
+copy() {  
+    const input = document.createElement("input");  
+    document.body.appendChild(input);  
+    input.setAttribute("value",this.solution.code);  
+    input.select();  
+    if (document.execCommand("copy")) {  
+        document.execCommand("copy");  
+        // console.log("复制成功");  
+    }  
+    document.body.removeChild(input);  
+}  
+```
+
+  **[github笔记下载地址](https://github.com/codeOflI/codeOflI.github.io/blob/dev/source/_posts/js-note/javaScript/javaScript.md)**
 

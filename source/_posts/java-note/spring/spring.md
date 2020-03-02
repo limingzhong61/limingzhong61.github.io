@@ -349,8 +349,6 @@ public class Xxx
 **如果出现异常：类似java.lang.NoClassDefFoundError: org/apache/commons/pool/impl/GenericObjectPool**
 **则说明缺少jar**
 
-
-
 ## 后置通知：
 
 AfterReturningAdvice

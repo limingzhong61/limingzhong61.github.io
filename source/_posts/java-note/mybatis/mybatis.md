@@ -152,9 +152,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	约定的目标： 省略掉statement,即根据约定 直接可以定位出SQL语句
 
   a.接口，接口中的方法必须遵循以下约定：
-		 1.方法名和mapper.xml文件中标签的id值相同
-		 2 .方法的 输入参数 和mapper.xml文件中标签的 parameterType类型一致 (如果mapper.xml的标签中没有 parameterType，则说明方法没有输入参数)
-		 3.方法的返回值  和mapper.xml文件中标签的 resultType类型一致 （无论查询结果是一个 还是多个（student、List<Student>），在mapper.xml标签中的resultType中只写 一个（Student）；如果没有resultType，则说明方法的返回值为void）
+		
+
+ 1.方法名和mapper.xml文件中标签的id值相同
+		 
+
+2 .方法的 输入参数 和mapper.xml文件中标签的 parameterType类型一致 (如果mapper.xml的标签中没有 parameterType，则说明方法没有输入参数)
+		 
+
+3.方法的返回值  和mapper.xml文件中标签的 resultType类型一致 （无论查询结果是一个 还是多个（student、List<Student>），在mapper.xml标签中的resultType中只写 一个（Student）；如果没有resultType，则说明方法的返回值为void）
 
 除了以上约定，要实现 接口中的方法  和  Mapper.xml中SQL标签一一对应，还需要以下1点：
 	**namespace的值 ，就是  接口的全类名（ 接口 - mapper.xml 一一对应）**
@@ -688,6 +694,29 @@ b.resultMap
 
 （MyBatis:多对一，多对多的本质就是  一对多的变化）
 
+## 多对一
+
+可以传入多个参数**column="{prop1=col1,prop2=col2}"
+
+```xml
+<association property="userSolved" javaType="INTEGER"
+             select="com.yoj.web.dao.SolutionMapper.querySolved"
+             column="{userId = user_id,problemId = problem_id}">
+</association>
+<association property="userSubmitted" javaType="INTEGER"
+             select="com.yoj.web.dao.SolutionMapper.querySubmitted"
+             column="{userId = user_id,problemId = problem_id}">
+</association>
+</resultMap>
+```
+
+```java
+@Select("SELECT solution_id FROM solution WHERE problem_id = #{problemId} and user_id = #{userId} and result = 0 LIMIT 1")
+Integer querySolved(Map<String, Object> map);
+```
+
+
+
 ## 关联的嵌套 Select 查询
 
 可以传入多个参数**column="{prop1=col1,prop2=col2}"**
@@ -696,12 +725,12 @@ b.resultMap
 
 ```xml
 <association property="userSolved" javaType="INTEGER"
-select="com.yoj.web.dao.SolutionMapper.querySolved"
-column="{userId = user_id,problemId = problem_id}">
+             select="com.yoj.web.dao.SolutionMapper.querySolved"
+             column="{userId = user_id,problemId = problem_id}">
 </association>
 <association property="userSubmitted" javaType="INTEGER"
-select="com.yoj.web.dao.SolutionMapper.querySubmitted"
-column="{userId = user_id,problemId = problem_id}">
+             select="com.yoj.web.dao.SolutionMapper.querySubmitted"
+             column="{userId = user_id,problemId = problem_id}">
 </association>
 </resultMap>
 ```
@@ -757,7 +786,7 @@ Integer querySubmitted(Map<String,Object> map);
 
 ## 模糊查询
 
-使用#{}，￥{}容易sql注入
+使用#{}，${}容易sql注入
 
 使用concat函数拼接
 
@@ -1208,3 +1237,20 @@ List<Solution> getAllWithUserAndProblemName();
 当自动映射查询结果时，MyBatis 会获取结果中返回的列名并在 Java 类中查找相同名字的属性（忽略大小写）。 这意味着如果发现了 *ID* 列和 *id* 属性，MyBatis 会将列 *ID* 的值赋给 *id* 属性。
 
 通常数据库列使用大写字母组成的单词命名，单词间用下划线分隔；而 Java 属性一般遵循驼峰命名法约定。为了在这两种命名方式之间启用自动映射，需要将 `mapUnderscoreToCamelCase` 设置为 true。
+
+## 批量操作
+
+https://blog.csdn.net/mahoking/article/details/46811865
+
+批量增加操作
+
+```xml
+<!-- 批量增加操作 -->
+<insert id="batchInsertUsers" parameterType="java.util.List">
+    insert into mhc_user(userName,password) values
+    <foreach collection="list" item="item" index="index" separator=",">
+        (#{item.userName},#{item.password})
+    </foreach>
+</insert>
+```
+
