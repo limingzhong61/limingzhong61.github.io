@@ -65,7 +65,7 @@
 <meta property="og:description" content="[TOC]web路径 web路径：    1.不以/开始的相对路径，找资源，以当前资源的路径为基准，经常容易出问题    2.以/开始的开始的相对路径，找资源，以服务器为标准（http//localhost/端口号)需要加项目名;    就是http//localhost/端口号/crud/…12345&amp;lt;%	pageContext.setAttribute(&quot;APP_PATH&quot;, reque">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/ssm-crud/ssm-crud/E:%5Cpictures%5CLanguage%5Cssm%5Cssm%E6%95%B4%E5%90%88%5Cssm%E6%80%BB%E7%BB%93.png">
-<meta property="og:updated_time" content="2019-11-15T08:08:45.068Z">
+<meta property="og:updated_time" content="2019-12-08T01:26:42.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ssm-crud">
 <meta name="twitter:description" content="[TOC]web路径 web路径：    1.不以/开始的相对路径，找资源，以当前资源的路径为基准，经常容易出问题    2.以/开始的开始的相对路径，找资源，以服务器为标准（http//localhost/端口号)需要加项目名;    就是http//localhost/端口号/crud/…12345&amp;lt;%	pageContext.setAttribute(&quot;APP_PATH&quot;, reque">
@@ -211,7 +211,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">17</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">18</span></a>
 
   </li>
       
@@ -255,7 +255,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">19</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">28</span></a>
 
   </li>
   </ul>
@@ -325,7 +325,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-15 16:08:45" itemprop="dateModified" datetime="2019-11-15T16:08:45+08:00">2019-11-15</time>
+                <time title="修改时间：2019-12-08 09:26:42" itemprop="dateModified" datetime="2019-12-08T09:26:42+08:00">2019-12-08</time>
               </span>
             
           
@@ -395,9 +395,9 @@
 <h1 id="maven中classpath路径"><a href="#maven中classpath路径" class="headerlink" title="maven中classpath路径"></a>maven中classpath路径</h1><p>在Maven工程中，classpath的路径指java resources路径下的目录，即</p>
 <p>src/main/java、 src/main/resource、src/test/java 、src/test/resource   四个目录</p>
 <p>所以在配置路径时需要注意文件名是否重名，导致加载文件失败</p>
-<h1 id="jsr303数据校验"><a href="#jsr303数据校验" class="headerlink" title="jsr303数据校验"></a>jsr303数据校验</h1><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--jsr303数据检验支持 （Hibernate Validator Engine Relocation Artifact） --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- jrs303数据校验支持：tomcat7以上的服务器，</span></span><br><span class="line"><span class="comment">tomcat7以下的服务器：el表达式，不是最新的。额外给服务器的lib包中替换新的标准的el</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hibernate<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hibernate-validator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>5.4.1.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="数据校验"><a href="#数据校验" class="headerlink" title="数据校验"></a>数据校验</h1><h2 id="jsr303数据校验"><a href="#jsr303数据校验" class="headerlink" title="jsr303数据校验"></a>jsr303数据校验</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--jsr303数据检验支持 （Hibernate Validator Engine Relocation Artifact） --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- jrs303数据校验支持：tomcat7以上的服务器，</span></span><br><span class="line"><span class="comment">tomcat7以下的服务器：el表达式，不是最新的。额外给服务器的lib包中替换新的标准的el</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hibernate<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hibernate-validator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>5.4.1.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="数据校验"><a href="#数据校验" class="headerlink" title="数据校验"></a>数据校验</h1><p>JSR303<br>Hibernate Validator </p>
+<p>JSR303<br>Hibernate Validator </p>
 <p><strong>JSR 303提供的标准注解如表所示。</strong></p>
 <table>
 <thead>
@@ -496,7 +496,6 @@
 <p>c.直接使用注解</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">```</span><br><span class="line"><span class="meta">@Past</span><span class="comment">//当前时间以前</span></span><br><span class="line"><span class="keyword">private</span> Date birthday ;</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>​    </p>
 <p>在校验的Controller中 ，给<strong>校验的对象前增加 @Valid</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testDateTimeFormat</span><span class="params">(@Valid Student student, BindingResult result ,Map&lt;String,Object&gt; map)</span> </span>&#123;</span><br><span class="line">    &#123;...&#125;</span><br></pre></td></tr></table></figure>
 
@@ -632,7 +631,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#web路径"><span class="nav-number">1.</span> <span class="nav-text">web路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#maven配置文件"><span class="nav-number">2.</span> <span class="nav-text">maven配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#maven使用spring单元测试"><span class="nav-number">3.</span> <span class="nav-text">maven使用spring单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mybatis不在同一目录下"><span class="nav-number">3.1.</span> <span class="nav-text">mybatis不在同一目录下</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#maven中classpath路径"><span class="nav-number">4.</span> <span class="nav-text">maven中classpath路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jsr303数据校验"><span class="nav-number">5.</span> <span class="nav-text">jsr303数据校验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据校验"><span class="nav-number">6.</span> <span class="nav-text">数据校验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mybatis分页插件PageHleper"><span class="nav-number">7.</span> <span class="nav-text">mybatis分页插件PageHleper</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sprigMVC自带HttpputFormContentFilter"><span class="nav-number">8.</span> <span class="nav-text">sprigMVC自带HttpputFormContentFilter</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#web路径"><span class="nav-number">1.</span> <span class="nav-text">web路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#maven配置文件"><span class="nav-number">2.</span> <span class="nav-text">maven配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#maven使用spring单元测试"><span class="nav-number">3.</span> <span class="nav-text">maven使用spring单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mybatis不在同一目录下"><span class="nav-number">3.1.</span> <span class="nav-text">mybatis不在同一目录下</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#maven中classpath路径"><span class="nav-number">4.</span> <span class="nav-text">maven中classpath路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据校验"><span class="nav-number">5.</span> <span class="nav-text">数据校验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#jsr303数据校验"><span class="nav-number">5.1.</span> <span class="nav-text">jsr303数据校验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mybatis分页插件PageHleper"><span class="nav-number">6.</span> <span class="nav-text">mybatis分页插件PageHleper</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sprigMVC自带HttpputFormContentFilter"><span class="nav-number">7.</span> <span class="nav-text">sprigMVC自带HttpputFormContentFilter</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -651,7 +650,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -677,7 +676,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -733,7 +732,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-heart"></i>
   </span>
