@@ -804,3 +804,26 @@ MyInterface myInterface;
 
 ## 同一类中内部调用aop失效
 
+## Spring Bean初始化之后执行指定方法
+
+https://blog.csdn.net/forever7107/article/details/76446544/
+
+在运用Spring进行实际项目开发过程中，经常会有一种需求就是想要在Bean实例化完成后，自动执行指定方法，包括加载初始值，初始化缓存等。通过简单的XML配置或者使用注解即可实现。
+本文仅用于记录简单的使用介绍，不阐述详细的技术实现细节，达到抛砖引玉的效果。
+
+### Spring注解方式
+
+如果项目中bean是通过注解方式管理的，需要在初始化完成后，执行指定方法，仅仅需要在需要执行的方法上**添加@PostConstruct注解**即可，修改后的JAVA类如下：
+
+```java
+@Component
+public class InitMethodTest {
+
+    @PostConstruct
+    public void initMethod(){
+        System.out.println(">>>>>>>>>initMethod<<<<<<<<<<<");
+    }
+
+}
+```
+

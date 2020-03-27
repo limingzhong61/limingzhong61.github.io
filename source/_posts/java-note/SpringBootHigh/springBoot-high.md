@@ -280,7 +280,7 @@ public void put(Object key, @Nullable Object value) {
   	   ,condition = "#id>0"
    	   condition = "#a0>1"：第一个参数的值 >1的时候才进行缓存
 
-- unless:否定缓存；当unless指定的条件为true，方法的返回值就不会被缓存；可以获取到结果进行判断
+- **unless==:否定缓存==；当unless指定的条件为true，方法的返回值就不会被缓存；**可以获取到结果进行判断
   	   unless = "#result == null"
   	   unless = "#a0==2":如果第一个参数的值是2，结果不缓存；
 
@@ -337,8 +337,6 @@ public class EmployeeService {
 1、先调用目标方法
 2、将目标方法的结果缓存起来
 
-
-
 ```java
     /**
      * 测试步骤：
@@ -374,7 +372,7 @@ public class EmployeeService {
 - key：指定要清除的数据
 - -allEntries = true：指定清除这个缓存中所有的数据
 - beforeInvocation = false：缓存的清除是否在方法之前执行
-  默认代表缓存清除操作是在方法执行之后执行;如果出现异常缓存就不会清除
+  **默认代表缓存清除操作是在方法执行之后执行;如果出现异常缓存就不会清除**
 - beforeInvocation = true：
   代表清除缓存操作是在方法运行之前执行，无论方法是否出现异常，缓存都清除
 
@@ -490,9 +488,7 @@ public class EmployeeService {
      * ,condition = "#id>0"
      * condition = "#a0>1"：第一个参数的值》1的时候才进行缓存
      * <p>
-     * unless:否定缓存；当unless指定的条件为true，方法的返回值就不会被缓存；可以获取到结果进行判断
-     * unless = "#result == null"
-     * unless = "#a0==2":如果第一个参数的值是2，结果不缓存；
+
      * sync：是否使用异步模式
      */
     @Cacheable(value = {"emp"}/*,keyGenerator = "myKeyGenerator",condition = "#a0>1",unless = "#a0==2"*/)

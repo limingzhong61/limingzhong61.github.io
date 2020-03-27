@@ -1283,6 +1283,12 @@ os.remove() 方法用于删除指定路径的文件。**如果指定的路径是
 
 该方法没有返回值
 
+## 复制目录及文件
+
+```python
+shutil.copytree(source_dir, target_dir)
+```
+
 # python常用标准库
 
 标准库
@@ -1812,13 +1818,11 @@ content = 'Extra stings Hello 1234567 World_This is a Regex Demo Extra stings'
 result = re.search('Hello.*?(\d+).*?Demo', content)
 print(result)
 print(result.group(1))
-
 ```
 
 ```
 <re.Match object; span=(13, 53), match='Hello 1234567 World_This is a Regex Demo'>
 1234567
-
 ```
 
 总结：**为匹配方便，能用search就不用match**

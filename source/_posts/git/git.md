@@ -441,7 +441,6 @@ git branch -d 分支名
 
 ```shell
 git push origin --delete 分支名
-
 ```
 
 推送空的分支

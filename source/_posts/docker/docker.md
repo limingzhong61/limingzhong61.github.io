@@ -180,7 +180,7 @@ docker exec -it containerID bash
 ### 将本地sql文件导入容器
 
 ```shell
-sudo docker cp /home/ubuntu/yoj.sql(文件路径) mysql(容器名):/home/tmp(容器文件保存路径)
+sudo docker cp /home/ubuntu/yoj.sql(文件路径) mysql(容器名):/home/tmp/yoj.txt(容器文件保存路径+文件名)
 ```
 
 docker cp 第一个参数指定本地文件或者文件夹，第二个参数指定容器及容器内的目标文件夹 
@@ -314,7 +314,7 @@ sudo docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql
 ### 1.将本地sql文件导入容器
 
 ```shell
-sudo docker cp /home/ubuntu/yoj.sql(文件路径) mysql(容器名):/home/tmp(容器文件保存路径)
+sudo docker cp /home/ubuntu/yoj.sql(文件路径) mysql(容器名):/home/tmp/yoj.txt(容器文件保存路径+文件名)
 ```
 
 docker cp 第一个参数指定本地文件或者文件夹，第二个参数指定容器及容器内的目标文件夹 
@@ -451,6 +451,8 @@ sudo docker exec -it  mysql mysqldump -uroot -p123456 yoj > /home/ubuntu/sql_bak
 
 https://www.jianshu.com/p/be1e581acb8e
 
+
+
 3、数据库备份脚本
 功能：mysql 每天定时备份， 并删除7天以前的备份
 mysql_dumps.sh：
@@ -468,6 +470,15 @@ sudo docker exec -it ${docker_name} mysqldump -uroot -ppasswd --all-databases > 
 find $data_dir -mtime +7 -name 'data_[1-9].sql' -exec rm -rf {} \;
 ```
 
+my_version
+
+```sh
+#!/bin/bash
+data_dir="/path/to/save/data/"
+sudo docker exec mysql mysqldump -uroot -ppasswd --all-databases > "$data_dir/data_`date +%Y%m%d`.sql"
+find $data_dir -mtime +7 -name 'data_[1-9].sql' -exec rm -rf {} \;
+```
+
 4、通过linux cron设置定时任务
 crontab -e：
 
@@ -475,10 +486,10 @@ crontab -e：
 0 2 * * * sh /home/ubuntu/sql_bak/mysql_dumps.sh > /home/ubuntu/sql_bak/mysql_dumps.log 2>&1
 ```
 
-
+设置每分钟测试
 
 ```shell
-0 * * * * sh /home/ubuntu/sql_bak/mysql_dumps.sh > /home/ubuntu/sql_bak/mysql_dumps.log 2>&1
+* * * * * sh /home/ubuntu/sql_bak/mysql_dumps.sh > /home/ubuntu/sql_bak/mysql_dumps.log 2>&1
 ```
 
 # 安装redis

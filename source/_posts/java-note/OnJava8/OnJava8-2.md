@@ -3785,6 +3785,33 @@ interface CharSequence {
 
 ### `Pattern` 和 `Matcher`
 
+**==注意：==**获得的matcher的group()对象需要使用find()，即使是使用group(1)
+
+```java
+String fileName = "input10.txt";
+System.out.println(fileName);
+Pattern p = Pattern.compile("\\d+");
+Matcher m = p.matcher(fileName);
+Pattern p = Pattern.compile(arg);       
+Matcher m = p.matcher(args[0]);       
+while(m.find()) {         
+    System.out.println(           
+        "Match \"" + m.group() + "\" at positions " +           
+        m.start() + "-" + (m.end() - 1));       
+} 
+```
+
+```java
+String fileName = "input10.txt";
+        System.out.println(fileName);
+        Pattern p = Pattern.compile("input(\\d+).txt");
+        Matcher m = p.matcher(fileName);
+        if (m.find())
+            System.out.print(m.group(1) + " ");
+```
+
+
+
 通常，比起功能有限的 `String` 类，我们更愿意构造功能强大的正则表达式对象。只需导入 `java.util.regex`包，然后用 `static Pattern.compile()` 方法来编译你的正则表达式即可。它会根据你的 `String` 类型的正则表达式生成一个 `Pattern` 对象。接下来，把你想要检索的字符串传入 `Pattern` 对象的 `matcher()` 方法。`matcher()` 方法会生成一个 `Matcher` 对象，它有很多功能可用（可以参考 `java.util.regext.Matcher` 的 JDK 文档）。例如，它的 `replaceAll()` 方法能将所有匹配的部分都替换成你传入的参数。
 
 作为第一个示例，下面的类可以用来测试正则表达式，看看它们能否匹配一个输入字符串。第一个控制台参数是将要用来搜索匹配的输入字符串，后面的一个或多个参数都是正则表达式，它们将被用来在输入的第一个字符串中查找匹配。在Unix/Linux上，命令行中的正则表达式必须用引号括起来。这个程序在测试正则表达式时很有用，特别是当你想验证它们是否具备你所期待的匹配功能的时候。[^3]

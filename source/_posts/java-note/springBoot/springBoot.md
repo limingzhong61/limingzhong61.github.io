@@ -1125,7 +1125,7 @@ spring.mvc.view.suffix=.jsp
 
 
 
-## 使用@ConditionalOnProperty来控制Configuration是否生效
+## 使用@ConditionalOnProperty来控制是否生成一个bean
 
 ### 1. 简介
 
@@ -1383,7 +1383,7 @@ logging.level.com.atguigu=trace
 # 可以指定完整的路径；
 #logging.file=G:/springboot.log
 
-# 在当前磁盘的根路径下创建spring文件夹和里面的log文件夹；使用 spring.log 作为默认文件
+# 在当前磁盘的根路径下创建spring文件夹和里面的log文件夹；使用 spring.log 作为默认文件
 logging.path=/spring/log
 
 #  在控制台输出的日志的格式
@@ -4379,10 +4379,6 @@ public class HelloServiceAutoConfiguration {
 # 更多SpringBoot整合示例
 
 https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples
-
-
-
-
 
 # Springboot 部署
 

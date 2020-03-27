@@ -2707,3 +2707,59 @@ http://caibaojian.com/npm/files/package.json.html
 当你执行npm install的时候， node会先从package.json文件中读取所有dependencies信息，然后根据dependencies中的信息与node_modules中的模块进行对比，没有的直接下载，node是从package.json文件读取模块名称，从package-lock.json文件中获取版本号，然后进行下载或者更新。
 
 当package.json与package-lock.json都不存在，执行"npm install"时，node会重新生成package-lock.json文件，然后把node_modules中的模块信息全部记入package-lock.json文件，但不会生成package.json文件。但是，你可以通过"npm init --yes"来生成package.json文件
+
+## vue打包
+
+在官网有说，comments当设为 true 时，将会保留且渲染模板中的 HTML 注释。默认行为是舍弃它们。
+
+https://segmentfault.com/a/1190000019499007
+
+## 分析
+
+```
+vuecli 2.x`自带了分析工具
+只要运行`npm run build --report
+```
+
+如果是`vuecli 3`的话，先安装插件
+
+```shell
+npm install webpack-bundle-analyzer -save-dev
+```
+
+然后在`vue.config.js`中对`webpack`进行配置
+
+```
+chainWebpack: (config) => {
+    /* 添加分析工具*/
+    if (process.env.NODE_ENV === 'production') {
+        if (process.env.npm_config_report) {
+            config
+                .plugin('webpack-bundle-analyzer')
+                .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
+                .end();
+            config.plugins.delete('prefetch')
+        }
+    } }
+```
+
+再运行`npm run build --report`
+
+会在浏览器打开一个项目打包的情况图，便于直观地比较各个`bundle`文件的大小
+
+![1585272675929](assets/1585272675929.png)
+
+可以看到 项目中所有的依赖，所有的路由，都被打包进了同一个文件中
+
+另外，在浏览器中，也可以通过`converge`来查看代码的使用状况
+
+## 路由懒加载
+
+> 当打包构建应用时，JavaScript包会变得非常大，影响页面加载。
+> 如果我们能把不同路由对应的组件分割成不同的代码块，然后当路由被访问的时候才加载对应组件，这样就更加高效了。
+
+如果是在`vuecli 3`中，我们还需要多做一步工作
+因为`vuecli 3`默认开启`prefetch`(预先加载模块)，提前获取用户未来可能会访问的内容
+在首屏会把这十几个路由文件，都一口气下载了
+所以我们要关闭这个功能，在`vue.config.js`中设置
+参考官网的做法：
