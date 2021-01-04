@@ -1,3 +1,10 @@
+---
+title: nginx
+date: 2020-3-27 22:22:09
+tags: 学习笔记
+---
+[TOC]
+
 # nginx
 
 http://nginx.org/en/docs/http/ngx_http_proxy_module.html#example

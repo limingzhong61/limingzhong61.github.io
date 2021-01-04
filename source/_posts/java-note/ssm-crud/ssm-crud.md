@@ -103,8 +103,6 @@ public class MapperTest {
 
 # maven中classpath路径
 
-
-
 在Maven工程中，classpath的路径指java resources路径下的目录，即
 
 src/main/java、 src/main/resource、src/test/java 、src/test/resource   四个目录

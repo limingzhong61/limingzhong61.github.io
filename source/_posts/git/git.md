@@ -90,10 +90,11 @@ git commit -a -m "注释Comment"
 ```
 
 4、修改仓库文件
-	比较同一文件
-		git diff
-		git diff 文件名
-	查看修改历史
+	
+
+
+
+​	查看修改历史
 
 ```shell
 git log 文件名
@@ -101,6 +102,15 @@ git log
 ```
 
 ​		每次提交时都会自动生成一个Commit ID（在日后版本恢复中使用）
+
+### 比较同一文件
+
+```shell
+git diff
+git diff 文件名
+```
+
+比对暂存区和工作区中readme.txt文件的差异
 
 ### 版本穿越
 
@@ -392,7 +402,16 @@ git remote rm origin
 		已执行
 			Initialize this repository with a README
 **克隆远程仓库：**（直接在当前目录新建远程仓库的项目文件）
-		git clone （HTTPS）https://github.com/NicolasCoder/crm.git
+
+
+
+```
+git clone （HTTPS）https://github.com/codeOflI/ssm-crud
+```
+
+
+
+​		
 
 # GIT分支
 

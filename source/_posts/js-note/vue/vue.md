@@ -2693,7 +2693,11 @@ VUE_APP_BASE_API=/api
 
 如果要升级package-lock.json里面的库包，怎么操作呢？
 
-**npm install XXX@x.x.x**  
+```shell
+npm install XXX@x.x.x
+```
+
+
 
 ## package.json和package-lock.json到底是什么
 

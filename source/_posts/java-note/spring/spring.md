@@ -23,7 +23,21 @@ spring-framework-4.3.9.RELEASE-dist.zip
 开发spring至少需要使用的jar(5个+1个):
 spring-aop.jar		开发AOP特性时需要的JAR
 spring-beans.jar	处理Bean的jar			<bean>
-spring-context.jar	处理spring上下文的jar		<context>
+
+spring-context.jar	处理spring上下文的jar		
+
+```
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-context</artifactId>
+    <version>5.2.2.RELEASE</version>
+</dependency>
+```
+
+
+
+<context>
 spring-core.jar		spring核心jar
 spring-expression.jar	spring表达式 
 三方提供的日志jar
@@ -39,7 +53,7 @@ commons-logging.jar	日志
 方式二：
 	直接下载sts工具（相当于一个集合了Spring tool suite的Eclipse）: https://spring.io/tools/sts/
 
-新建：bean configuration .. - applicationContext.xml
+新建：bean configuration .. - **applicationContext.xml**
 
 ## 3.开发Spring程序(IOC)
 

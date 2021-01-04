@@ -1083,10 +1083,6 @@ spring配置文件 applicationContext.xml
 </listener>
 ```
 
-
-
- 
-
 现在整合的时候，需要通过Spring管理SqlSessionFacotry ，因此 产生qlSessionFacotry 所需要的数据库信息 不在放入conf.xml  而需要放入spring配置文件中
 
 配置Spring配置文件（applicationContext.xml）  （Web项目）：
