@@ -15,9 +15,9 @@ tags: [java,ssm]
 
 ```html
 <%
-	pageContext.setAttribute("APP_PATH", request.getContextPath());
+	pageContext.setAttribute("WEB_PATH", request.getContextPath());
 %>
-	${APP_PATH}/static/bootstrap-3.3.7-dist/css/bootstrap.min.css
+	${WEB_PATH}/static/bootstrap-3.3.7-dist/css/bootstrap.min.css
   -->
 ```
 

@@ -14,15 +14,29 @@
 
 ```
 lmz.mookeyes.tk
+
 ```
 
-linux 安装脚本
+
+
+```
+ping ow.yestojudge.cn
+```
+
+
+
+## linux 安装脚本
 
 ```shell
 bash <(curl -s -L https://git.io/v2ray.sh)
 ```
 
 自行配置
+
+```
+(默认协议: TCP):4
+ V2Ray 传输协议 = WebSocket + TLS
+```
 
 ```
 ---------- 安装信息 -------------
@@ -100,14 +114,17 @@ bash <(curl -s -L https://git.io/v2ray.sh)
 
 
 
-获取连接
+## 获取连接
 
 ```
 v2ray url
+
+
+http://127.0.0.1:10810/pac/?t=185402
 ```
 
 ```
-vmess://ewoidiI6ICIyIiwKInBzIjogIjIzM3YyLmNvbV9sbXoueWVzdG9qdWRnZS5jbiIsCiJhZGQiOiAibG16Lnllc3RvanVkZ2UuY24iLAoicG9ydCI6ICI0NDMiLAoiaWQiOiAiMzQ3YjZhZDMtOGUxNC00OTJhLWIwNWYtMjQxY2Y5Njc5NDAxIiwKImFpZCI6ICIyMzMiLAoibmV0IjogIndzIiwKInR5cGUiOiAibm9uZSIsCiJob3N0IjogImxtei55ZXN0b2p1ZGdlLmNuIiwKInBhdGgiOiAiLzIzM2Jsb2ciLAoidGxzIjogInRscyIKfQo=
+vmess://ewoidiI6ICIyIiwKInBzIjogIjIzM3YyLmNvbV9vdy55ZXN0b2p1ZGdlLmNuIiwKImFkZCI6ICJvdy55ZXN0b2p1ZGdlLmNuIiwKInBvcnQiOiAiNDQzIiwKImlkIjogIjg1ZjYyYTAwLTkyNTktNDcyMC1iYzM0LTI5Mjg3ZTFkZDZhZiIsCiJhaWQiOiAiMCIsCiJuZXQiOiAid3MiLAoidHlwZSI6ICJub25lIiwKImhvc3QiOiAib3cueWVzdG9qdWRnZS5jbiIsCiJwYXRoIjogIi8yMzNibG9nIiwKInRscyI6ICJ0bHMiCn0K
 ```
 
 
@@ -143,6 +160,14 @@ V2Ray 客户端使用教程: https://233v2.com/post/4/
 
 提示: 输入 v2ray url 可生成 vmess URL 链接 / 输入 v2ray qr 可生成二维码链接
 ```
+
+## v2ray局域网共享
+
+如果多个设备连接同一个wifi也在同一个局域网。但v2ray的局域网共享有独有的端口，故最好用设备（手机、电脑设置热点）。
+
+1首先在相应开启热点设备的v2ray的软件上**开启局域网代理选项**
+
+ipad在其连接wifi（无限局域网）中设置代理为手动并输入设备（设置热点的手机、电脑）的ip和v2ray监控的端口（通常默认为10809），
 
 # My
 

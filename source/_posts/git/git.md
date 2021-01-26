@@ -198,9 +198,24 @@ git checkout -- 文件名
 
 [git-book:github章节](https://git-scm.com/book/zh/v2/GitHub-账户的创建和配置)
 
-## 远程仓库的使用
+# 远程仓库的使用
 
 [git-book:Git-基础-远程仓库的使用](https://git-scm.com/book/zh/v2/Git-基础-远程仓库的使用)
+
+### problem
+
+**github每次push都要密码**
+
+原因是使用了https方式 push 
+这种方式产生的原因，一般是我们clone是一定是使用了http的方式 
+例如我们在github上创建了一个项目，然后我们clone到本地时使用了http而非git (ssh)
+
+```cmd
+git remote rm origin
+git remote add origin git@github.com:codeOflI/MyDouban.git
+```
+
+
 
 ### 查看远程仓库
 
@@ -290,12 +305,24 @@ ssh通信模式
 ```
 
 3、将公钥内容保存到GITHUB
-	公钥文件，保存在外部使用**==(保存到github的ssh密匙中)==**
+	
+
+公钥文件，保存在外部使用**==(保存到github的ssh密匙中)==**
 		id_rsa.pub
-	私钥文件，做本机标识
+	
+
+私钥文件，做本机标识
 		id_rsa
-	打卡github的setting页面添加ssh key
-		将公钥内容复制到key内容中
+	打开github的setting页面添加ssh key
+		
+
+将公钥内容复制到key内容中
+
+```
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDaUZOQterXD2TZWb9VMO/s4jaIBIp0GIlsBlMZ+fl50NWbua4R8EtudIPIiMDGxsE7UmE/HGBMedsCjo1nS6h5OLz9ZT0n5h4FYOqurQWsyfdm+tgZK5mK/t1e93WlF+cjja+KiCMbntMYq7o/FGPWnlFlfiz9KiVos+oRWgC3RUx4hDqZoKFmfTxAiXQMJy2/pVYmHqliZ9+6mOvRJoe2C1mmTClTU5y9KLw8AWF0jTykUAeAfZjX1lwub8xkJ34QSNZFaBiouWcA7sz/Qa8kDGdFbZwR41Ugc+P4KYli72pecsbj2eVTZoHuCkW5GxxupV9jSbj/MePZPHHhhdH lmz
+```
+
+
 
 ```
 C:\Users\11623>ssh-keygen -t rsa -C "lmz"
