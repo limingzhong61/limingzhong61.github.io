@@ -694,7 +694,11 @@ HttpServletResponse中的方法：同response
 
 Servlet使用层面：  
 
-Eclipse中在src创建一个Servlet，然后重写doGet()  doPost()就可以  （doGet() doPost()只需要编写一个）。 
+Eclipse中在src创建一个Servlet，然后重写doGet()  doPost()就可以  （doGet() doPost()只需要编写一个）。
+
+# 使用idea创建一个Maven java Web项目
+
+https://blog.csdn.net/qq_37856300/article/details/85776785 
 
 # 数据库连接 
 
@@ -1690,18 +1694,111 @@ apache: commons-fileupload.jar组件
 commons-fileupload.jar依赖 commons-io.jar  
 ```
 
-2. 代码：  
-   前台jsp：  
+pom.xml
+
+```xml
+<!--文件上传jar-->
+<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+<dependency>
+    <groupId>commons-fileupload</groupId>
+    <artifactId>commons-fileupload</artifactId>
+    <version>1.4</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+<dependency>
+    <groupId>commons-io</groupId>
+    <artifactId>commons-io</artifactId>
+    <version>2.8.0</version>
+</dependency>
+```
+
+
+
+2.文件上传一般是存在服务器的upload目录下,文件名陈存在数据库中,为了防止上传文件重名,一般我们用UUID,(绝不会重复)
+
+**3.index.jsp页面的代码如下:**  
+前台jsp：  
 
 ```jsp
-<input type="file"  name="spicture"/>  
+<div>
+    <form action="/UploadServlet" method="post" enctype="multipart/form-data">
+        选择文件：<input type="file" name="photo" value=""><br>
+        <input type="submit" name="修改" value="上传头像">
+    </form>
+</div>
 ```
 
 3. 表单提交方式必须为post  
    在表单中必须增加一个属性 `entype="multipart/form-data"`  
 
 后台servlet：  
-	  
+
+```java
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+@WebServlet("/pictureServlet")
+public class PictureServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("utf-8");
+        response.setContentType("text/plain;charset=utf-8");
+		
+		//此处将新建的文件直接保存到项目的绝对路径中。File没有读写能力。
+        File savePath = new File("E:\\javaEE\\Project\\Picture\\web\\images");
+        DiskFileItemFactory factory = new DiskFileItemFactory();//jar包的类
+        ServletFileUpload upload = new ServletFileUpload(factory);//jar包的类
+
+        try {
+            List<FileItem> items = upload.parseRequest(request);
+            //将前端的表单数据封装成list。
+            //form表单必须加enctype="multipart/form-data"，在使用包含文件上传控件的表单时，必须使用该值。
+            for (FileItem item:items){
+                if(item.isFormField()){
+					//说明普通表单项
+                }else {
+                	//说明上传文件项
+                	//获取上传文件的名称
+                    String name  = item.getName();
+                    //获取相对路径
+                    String path = request.getContextPath()+"/images/"+name;
+                    //将相对路径保存到数据库
+                    Test test = new Test();
+                    test.update(path);
+					//使用绝对路径完成文件上传
+                    item.write(new File(savePath,name));
+                    //删除临时文件
+                    item.delete();
+                }
+            }
+        } catch (FileUploadException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+}
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        this.doPost(request,response);
+    }
+}
+
+```
+
+​	  
 
 注意的问题：  
 	上传的目录  upload ：  
@@ -1748,6 +1845,8 @@ Base64.encode
 ```java
 response.addHeader("content-Disposition","attachment;filename==?UTF-8?B?"+   new String(  Base64.encodeBase64(fileName.getBytes("UTF-8"))  ) +"?=" );//fileName包含了文件后缀：abc.txt  
 ```
+
+
 
 ## 分页
 

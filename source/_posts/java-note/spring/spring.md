@@ -13,35 +13,54 @@ Spring data,spring boot,spring cloud,spring framework ,spring social
 
 # IOC :控制反转
 
-（DI：依赖注入）
+Inversion of Control
+
+（DI：，Dependency Injection，依赖注入）
 
 ## 1.搭建Spring环境
 
-下载jar
-http://maven.springframework.org/release/org/springframework/spring/
-spring-framework-4.3.9.RELEASE-dist.zip
+
+
 开发spring至少需要使用的jar(5个+1个):
+
 spring-aop.jar		开发AOP特性时需要的JAR
-spring-beans.jar	处理Bean的jar			<bean>
+
+spring-beans.jar	处理Bean的jar
 
 spring-context.jar	处理spring上下文的jar		
 
-```
+spring-core.jar		spring核心jar
+
+spring-expression.jar	spring表达式 
+
+第三方提供的日志jar commons-logging.jar	日志
+
+```xml
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-beans</artifactId>
+    <version>5.3.3</version>
+</dependency>
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-core</artifactId>
+    <version>5.3.3</version>
+</dependency>
 <!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-context</artifactId>
     <version>5.2.2.RELEASE</version>
 </dependency>
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-expression -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-expression</artifactId>
+    <version>5.3.3</version>
+</dependency>
 ```
-
-
-
-<context>
-spring-core.jar		spring核心jar
-spring-expression.jar	spring表达式 
-三方提供的日志jar
-commons-logging.jar	日志
 
 ## 2.编写配置文件
 
@@ -56,6 +75,8 @@ commons-logging.jar	日志
 新建：bean configuration .. - **applicationContext.xml**
 
 ## 3.开发Spring程序(IOC)
+
+### 通过ioc容器获取对象
 
 ```java
 ApplicationContext conext = new ClassPathXmlApplicationContext("applicationContext.xml") ;
@@ -101,17 +122,38 @@ conext.getBean(需要获取的bean的id值)
 
 
 ### 依赖注入3种方式：
-### 1.set注入：通过setXxx()赋值
+#### 1.set注入：通过setXxx()赋值
 
 赋值，默认使用的是 set方法();
 **依赖注入底层是通过反射实现的。**
-<property...>
 
-### 2.构造器注入：通过构造方法赋值
- <constructor-arg value="ls" type="String" index="0" name="name"></constructor-arg>
+```xml
+<bean id="cat" class="com.qst.pojo.Cat">
+    <property name="id" value="1"></property>
+    <property name="color" value="red"></property>
+    <property name="name" value="llmz"></property>
+</bean>
+```
+
+#### 2.构造器注入：通过构造方法赋值
+
 需要注意：如果  <constructor-arg>的顺序 与构造方法参数的顺序不一致，则需要通过type或者index或name指定。
 
-### 3.p命名空间注入
+```xml
+ <constructor-arg value="ls" type="String" index="0" name="name"></constructor-arg>
+```
+
+```xml
+<bean id="student" class="com.qst.pojo.Student">
+    <constructor-arg name="id" value="0"></constructor-arg>
+    <constructor-arg name="studentName" value="lmz"></constructor-arg>
+    <constructor-arg name="studentScore" value="100"></constructor-arg>
+</bean>
+```
+
+
+
+#### 3.p命名空间注入
 
 ```xml
 引入p命名空间
@@ -181,7 +223,7 @@ set、list、数组   各自都有自己的标签<set> <list> <array>，但是�
 
 
 
-### 4.**自动装配（只适用于 ref类型 ）**：
+#### 4.**自动装配（只适用于 ref类型 ）**：
 ​	约定优于配置
 
 自动装配：

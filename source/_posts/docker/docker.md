@@ -333,6 +333,7 @@ docker exec -it (mysql-container-name)[xxx] (in mysql command)[mysql -uroot -p12
 
 ```shell
 docker exec -it bteye-mysql mysql -uroot -p123456
+docker exec -it mysql mysql -uroot -proot
 ```
 
 执行sql文件 
