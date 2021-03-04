@@ -65,7 +65,7 @@
 <meta property="og:description" content="[TOC]springmvc:1.jarspring-aop.jarspring-bean.jarspring-context.jarspring-core.jarspring-web.jarspring-webmvc.jarcommons-logging.jar报错NoClassDefFoundError：缺少jar">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/springMvc/springMvc/E:%5Cpictures%5CLanguage%5Cspring%5C%E6%8F%90%E7%A4%BA%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90springMvc%E9%85%8D%E7%BD%AE.png">
-<meta property="og:updated_time" content="2019-11-16T15:08:54.966Z">
+<meta property="og:updated_time" content="2020-05-28T15:02:28.061Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springMvc">
 <meta name="twitter:description" content="[TOC]springmvc:1.jarspring-aop.jarspring-bean.jarspring-context.jarspring-core.jarspring-web.jarspring-webmvc.jarcommons-logging.jar报错NoClassDefFoundError：缺少jar">
@@ -255,7 +255,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">28</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
 
   </li>
   </ul>
@@ -325,7 +325,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-16 23:08:54" itemprop="dateModified" datetime="2019-11-16T23:08:54+08:00">2019-11-16</time>
+                <time title="修改时间：2020-05-28 23:02:28" itemprop="dateModified" datetime="2020-05-28T23:02:28+08:00">2020-05-28</time>
               </span>
             
           
@@ -753,8 +753,6 @@
 <p>5.<br>之前使用MyBatis:    conf.xml -&gt;SqlSessionFacotry</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- web项目中，spring介入项目 --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- needed for ContextLoaderListener --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:applicationContext.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Bootstraps the root web application context before servlet initialization --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>org.springframework.web.context.ContextLoaderListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-
-
 <p>现在整合的时候，需要通过Spring管理SqlSessionFacotry ，因此 产生qlSessionFacotry 所需要的数据库信息 不在放入conf.xml  而需要放入spring配置文件中</p>
 <p>配置Spring配置文件（applicationContext.xml）  （Web项目）：<br>web.xml</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">context-param</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>contextConfigLocation<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>classpath:applicationContext.xml<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">context-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">listener</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">listener-class</span>&gt;</span>org.springframework.web.context.ContextLoaderListener<span class="tag">&lt;/<span class="name">listener-class</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">listener</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -916,7 +914,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -998,7 +996,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-heart"></i>
   </span>

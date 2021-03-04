@@ -68,7 +68,7 @@
 <meta property="og:image" content="https://codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145531.png">
 <meta property="og:image" content="https://codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303165113.png">
 <meta property="og:image" content="https://codeofli.github.io/2019/11/docker/docker/docker%5C%E5%85%B3%E9%97%ADfirewall%E7%9A%84%E5%8F%82%E6%95%B0.png">
-<meta property="og:updated_time" content="2020-03-27T03:45:30.985Z">
+<meta property="og:updated_time" content="2021-02-18T13:19:22.538Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker">
 <meta name="twitter:description" content="[TOC]1.简介Docker是一个开源的应用容器引擎；是一个轻量级容器技术；Docker支持将软件编译成一个镜像；然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像；运行中的这个镜像称为容器，容器启动是非常快速的。2、核心概念docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；">
@@ -258,7 +258,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">28</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
 
   </li>
   </ul>
@@ -328,7 +328,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-27 11:45:30" itemprop="dateModified" datetime="2020-03-27T11:45:30+08:00">2020-03-27</time>
+                <time title="修改时间：2021-02-18 21:19:22" itemprop="dateModified" datetime="2021-02-18T21:19:22+08:00">2021-02-18</time>
               </span>
             
           
@@ -541,7 +541,7 @@
 <h3 id="登入容器内MYSQL执行sql"><a href="#登入容器内MYSQL执行sql" class="headerlink" title="登入容器内MYSQL执行sql"></a>登入容器内MYSQL执行sql</h3><p>command format</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it (mysql-container-name)[xxx] (in mysql command)[mysql -uroot -p123456]</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it bteye-mysql mysql -uroot -p123456</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it bteye-mysql mysql -uroot -p123456</span><br><span class="line">docker exec -it mysql mysql -uroot -proot</span><br></pre></td></tr></table></figure>
 
 <p>执行sql文件 </p>
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">source</span> <span class="regexp">/home/y</span>oj.sql</span><br></pre></td></tr></table></figure>
@@ -757,7 +757,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -839,7 +839,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-heart"></i>
   </span>

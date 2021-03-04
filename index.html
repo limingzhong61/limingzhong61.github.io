@@ -252,7 +252,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">28</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
 
   </li>
   </ul>
@@ -283,7 +283,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2020/03/nginx/nginx/">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/01/java-note/OnJava8/OnJava8-appendix/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nicolas lee">
@@ -297,7 +297,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2020/03/nginx/nginx/" class="post-title-link" itemprop="url">nginx</a>
+            <a href="/2021/01/java-note/OnJava8/OnJava8-appendix/" class="post-title-link" itemprop="url">未命名</a>
           
         </h1>
 
@@ -312,7 +312,7 @@
                 
               
 
-              <time title="创建时间：2020-03-27 22:22:09 / 修改时间：13:32:38" itemprop="dateCreated datePublished" datetime="2020-03-27T22:22:09+08:00">2020-03-27</time>
+              <time title="创建时间：2021-01-08 17:19:56 / 修改时间：17:24:08" itemprop="dateCreated datePublished" datetime="2021-01-08T17:19:56+08:00">2021-01-08</time>
             </span>
           
             
@@ -342,11 +342,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[TOC]</p><h1 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h1><p><a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#example" target="_blank" rel="noopener">http://nginx.org/en/docs/http/ngx_http_proxy_module.html#example</a></p><p>1、 nginx 简介</p><p>（1）  什么是 nginx 和可以做什么事情</p><p>（2）  正向代理</p><p>（3）  反向代理</p><p>（4）  动静分离</p><p>2、 Nginx 的安装</p><p>（1） 在 linux 系统中安装 nginx 3、 Nginx 的常用命令和配置文件</p>
+          <p>[TOC]</p><h1 id="附录-流式IO"><a href="#附录-流式IO" class="headerlink" title="附录:流式IO"></a>附录:流式IO</h1><blockquote>
+<p>Java 7 引入了一种简单明了的方式来读写文件和操作目录。大多情况下，<a href="./17-Files.md">文件</a>这一章所介绍的那些库和技术就足够你用了。但是，如果你必须面对一些特殊的需求和比较底层的操作，或者处理一些老版本的代码，那么你就必须了解本附录中的内容。</p>
+</blockquote><p>对于编程语言的设计者来说，实现良好的输入/输出（I/O）系统是一项比较艰难的任务，不同实现方案的数量就可以证明这点。其中的挑战似乎在于要涵盖所有的可能性，你不仅要覆盖到不同的 I/O 源和 I/O 接收器（如文件、控制台、网络连接等），还要实现多种与它们进行通信的方式（如顺序、随机访问、缓冲、二进制、字符、按行和按字等）。</p>
           <!--noindex-->
           
             <div class="post-button">
-              <a class="btn" href="/2020/03/nginx/nginx/#more" rel="contents">
+              <a class="btn" href="/2021/01/java-note/OnJava8/OnJava8-appendix/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -378,7 +380,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2020/03/hexo/hexo/">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/01/java-note/javaDev/javaDev/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nicolas lee">
@@ -392,7 +394,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2020/03/hexo/hexo/" class="post-title-link" itemprop="url">hexo</a>
+            <a href="/2021/01/java-note/javaDev/javaDev/" class="post-title-link" itemprop="url">未命名</a>
           
         </h1>
 
@@ -407,7 +409,7 @@
                 
               
 
-              <time title="创建时间：2020-03-27 22:19:09 / 修改时间：13:30:51" itemprop="dateCreated datePublished" datetime="2020-03-27T22:19:09+08:00">2020-03-27</time>
+              <time title="创建时间：2021-01-06 09:05:45 / 修改时间：09:06:45" itemprop="dateCreated datePublished" datetime="2021-01-06T09:05:45+08:00">2021-01-06</time>
             </span>
           
             
@@ -437,214 +439,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[TOC]</p><p><a href="https://hexo.io/zh-cn/docs/setup" target="_blank" rel="noopener">hexo官方文档</a></p><h2 id="开始构建"><a href="#开始构建" class="headerlink" title="开始构建"></a>开始构建</h2><p>条件 npm+git</p><p>配置Deployment，在其文件夹中，找到_config.yml文件，修改repo值（在末尾）</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repository:</span> <span class="string">git@github.com:Li-MingZhong/Li-MingZhong.github.io.git(自己仓库的ssh链接)</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+          <h1 id="CGLIB"><a href="#CGLIB" class="headerlink" title="CGLIB"></a>CGLIB</h1><h2 id="什么是CGLIB"><a href="#什么是CGLIB" class="headerlink" title="什么是CGLIB"></a>什么是CGLIB</h2><p>CGLIB是一个强大的、高性能的代码生成库。其被广泛应用于AOP框架（Spring、dynaop）中，用以提供方法拦截操作。Hibernate作为一个比较受欢迎的ORM框架，同样使用CGLIB来代理单端（多对一和一对一）关联（延迟提取集合使用的另一种机制）。CGLIB作为一个开源项目，其代码托管在github，地址为：<a href="https://github.com/cglib/cglib" target="_blank" rel="noopener">https://github.com/cglib/cglib</a></p>
           <!--noindex-->
           
             <div class="post-button">
-              <a class="btn" href="/2020/03/hexo/hexo/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    
-    <div>
-     
-    </div>
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </article>
-  
-  
-  
-
-    
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2020/03/mysql/mysql/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nicolas lee">
-      <meta itemprop="description" content="Yesterday you said tomorow.">
-      <meta itemprop="image" content="/assets/img/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="nicolas">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2020/03/mysql/mysql/" class="post-title-link" itemprop="url">mysql</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2020-03-27 22:19:09 / 修改时间：13:35:39" itemprop="dateCreated datePublished" datetime="2020-03-27T22:19:09+08:00">2020-03-27</time>
-            </span>
-          
-            
-
-            
-          
-
-          
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span></span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[TOC]</p><pre><code>六、DML语言的学习    ★             
-    插入语句                        
-    修改语句                        
-    删除语句                        
-七、DDL语言的学习  
-    库和表的管理     √                
-    常见数据类型介绍  √          
-    常见约束        √            
-八、TCL语言的学习
-    事务和事务处理                 
-九、视图的讲解           √
-十、变量                      
-十一、存储过程和函数   
-十二、流程控制结构       </code></pre>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2020/03/mysql/mysql/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    
-    <div>
-     
-    </div>
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </article>
-  
-  
-  
-
-    
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2020/03/python/PythonMongoDb/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nicolas lee">
-      <meta itemprop="description" content="Yesterday you said tomorow.">
-      <meta itemprop="image" content="/assets/img/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="nicolas">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2020/03/python/PythonMongoDb/" class="post-title-link" itemprop="url">pythonMongoDb</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2020-03-27 22:19:09 / 修改时间：13:31:47" itemprop="dateCreated datePublished" datetime="2020-03-27T22:19:09+08:00">2020-03-27</time>
-            </span>
-          
-            
-
-            
-          
-
-          
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span></span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[TOC]</p><p>python操作mongodb</p><p><a href="https://www.runoob.com/python3/python-mongodb.html" target="_blank" rel="noopener">菜鸟教程</a></p><p><a href="http://www.mongoing.com/docs/tutorial/query-documents.html#specify-query-filter-conditions" target="_blank" rel="noopener">官方中文文档</a></p><h2 id="连接mongodb"><a href="#连接mongodb" class="headerlink" title="连接mongodb"></a>连接mongodb</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pymongo <span class="keyword">import</span> MongoClient</span><br><span class="line"></span><br><span class="line">conn = MongoClient(<span class="string">'192.168.0.113'</span>, <span class="number">27017</span>)</span><br><span class="line">db = conn.mydb  <span class="comment">#连接mydb数据库，没有则自动创建</span></span><br><span class="line">my_set = db.test_set　　<span class="comment">#使用test_set集合，没有则自动创建</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2020/03/python/PythonMongoDb/#more" rel="contents">
+              <a class="btn" href="/2021/01/java-note/javaDev/javaDev/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -750,6 +549,109 @@
           
             <div class="post-button">
               <a class="btn" href="/2019/12/java-note/OnJava8/OnJava8-4/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    
+    <div>
+     
+    </div>
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/12/v2ray/v2ray/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/12/v2ray/v2ray/" class="post-title-link" itemprop="url">未命名</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-27 21:07:08" itemprop="dateCreated datePublished" datetime="2019-12-27T21:07:08+08:00">2019-12-27</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-01-26 20:25:56" itemprop="dateModified" datetime="2021-01-26T20:25:56+08:00">2021-01-26</time>
+              </span>
+            
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://github.com/v2ray/manual" target="_blank" rel="noopener">github仓库</a></p><p><a href="https://www.v2ray.com/" target="_blank" rel="noopener">v2ray.com</a></p><p><a href="[https://github.com/233boy/v2ray/wiki/V2Ray%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC](https://github.com/233boy/v2ray/wiki/V2Ray一键安装脚本)">V2Ray一键安装脚本</a></p><p>首先买个服务器</p><p>解析域名</p><p>能在国内ping到</p><p>当前服务器</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lmz<span class="selector-class">.mookeyes</span><span class="selector-class">.tk</span></span><br></pre></td></tr></table></figure><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping ow<span class="selector-class">.yestojudge</span><span class="selector-class">.cn</span></span><br></pre></td></tr></table></figure><h2 id="linux-安装脚本"><a href="#linux-安装脚本" class="headerlink" title="linux 安装脚本"></a>linux 安装脚本</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -s -L https://git.io/v2ray.sh)</span><br></pre></td></tr></table></figure><p>自行配置</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/12/v2ray/v2ray/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -926,7 +828,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-03-05 22:25:58" itemprop="dateModified" datetime="2020-03-05T22:25:58+08:00">2020-03-05</time>
+                <time title="修改时间：2021-01-08 17:16:14" itemprop="dateModified" datetime="2021-01-08T17:16:14+08:00">2021-01-08</time>
               </span>
             
           
@@ -962,6 +864,109 @@
           
             <div class="post-button">
               <a class="btn" href="/2019/12/java-note/OnJava8/OnJava8-2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    
+    <div>
+     
+    </div>
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/11/nginx/nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/nginx/nginx/" class="post-title-link" itemprop="url">nginx</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-25 22:22:09" itemprop="dateCreated datePublished" datetime="2019-11-25T22:22:09+08:00">2019-11-25</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-04 11:19:08" itemprop="dateModified" datetime="2021-03-04T11:19:08+08:00">2021-03-04</time>
+              </span>
+            
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[TOC]</p><h1 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h1><p><a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#example" target="_blank" rel="noopener">http://nginx.org/en/docs/http/ngx_http_proxy_module.html#example</a></p><p>1、 nginx 简介</p><p>（1）  什么是 nginx 和可以做什么事情</p><p>（2）  正向代理</p><p>（3）  反向代理</p><p>（4）  动静分离</p><p>2、 Nginx 的安装</p><p>（1） 在 linux 系统中安装 nginx 3、 Nginx 的常用命令和配置文件</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/11/nginx/nginx/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1155,7 +1160,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-16 15:11:11" itemprop="dateModified" datetime="2019-12-16T15:11:11+08:00">2019-12-16</time>
+                <time title="修改时间：2021-01-07 19:29:08" itemprop="dateModified" datetime="2021-01-07T19:29:08+08:00">2021-01-07</time>
               </span>
             
           
@@ -1233,7 +1238,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/11/java-note/maven/maven/">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/11/python/PythonMongoDb/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nicolas lee">
@@ -1247,7 +1252,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2019/11/java-note/maven/maven/" class="post-title-link" itemprop="url">maven</a>
+            <a href="/2019/11/python/PythonMongoDb/" class="post-title-link" itemprop="url">pythonMongoDb</a>
           
         </h1>
 
@@ -1262,7 +1267,7 @@
                 
               
 
-              <time title="创建时间：2019-11-13 15:09:35" itemprop="dateCreated datePublished" datetime="2019-11-13T15:09:35+08:00">2019-11-13</time>
+              <time title="创建时间：2019-11-14 22:19:09" itemprop="dateCreated datePublished" datetime="2019-11-14T22:19:09+08:00">2019-11-14</time>
             </span>
           
             
@@ -1273,22 +1278,9 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-11-20 11:34:17" itemprop="dateModified" datetime="2019-11-20T11:34:17+08:00">2019-11-20</time>
+                <time title="修改时间：2021-03-04 11:22:31" itemprop="dateModified" datetime="2021-03-04T11:22:31+08:00">2021-03-04</time>
               </span>
             
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1313,11 +1305,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[TOC]</p><h1 id="maven"><a href="#maven" class="headerlink" title="maven"></a>maven</h1><p>[菜鸟教程-maven][<a href="https://www.runoob.com/maven/maven-tutorial.html]" target="_blank" rel="noopener">https://www.runoob.com/maven/maven-tutorial.html]</a></p><p>Maven 翻译为”专家”、”内行”，是 Apache 下的一个纯 Java 开发的开源项目。基于项目对象模型（缩写：POM）概念，Maven利用一个中央信息片断能管理一个项目的构建、报告和文档等步骤。</p>
+          <p>[TOC]</p><p>python操作mongodb</p><p><a href="https://www.runoob.com/python3/python-mongodb.html" target="_blank" rel="noopener">菜鸟教程</a></p><p><a href="http://www.mongoing.com/docs/tutorial/query-documents.html#specify-query-filter-conditions" target="_blank" rel="noopener">官方中文文档</a></p><h2 id="连接mongodb"><a href="#连接mongodb" class="headerlink" title="连接mongodb"></a>连接mongodb</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> pymongo <span class="keyword">import</span> MongoClient</span><br><span class="line"></span><br><span class="line">conn = MongoClient(<span class="string">'192.168.0.113'</span>, <span class="number">27017</span>)</span><br><span class="line">db = conn.mydb  <span class="comment">#连接mydb数据库，没有则自动创建</span></span><br><span class="line">my_set = db.test_set　　<span class="comment">#使用test_set集合，没有则自动创建</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
             <div class="post-button">
-              <a class="btn" href="/2019/11/java-note/maven/maven/#more" rel="contents">
+              <a class="btn" href="/2019/11/python/PythonMongoDb/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1349,7 +1341,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1397,7 +1389,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1479,7 +1471,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-heart"></i>
   </span>
