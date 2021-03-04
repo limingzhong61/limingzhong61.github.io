@@ -9,7 +9,13 @@ tags: 学习笔记
 
 # 安装hexo
 
-npm安装，注意找到hexo.cmd的目录，构建环境变量
+npm安装hexo
+
+```undefined
+npm install -g hexo-cli
+```
+
+注意找到hexo.cmd的目录，构建环境变量
 
 如：E:\Program Files\nodejs\my_node\node_global\hexo.cmd
 
