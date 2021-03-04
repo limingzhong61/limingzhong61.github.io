@@ -21,6 +21,8 @@ tags: [java,ssm]
   -->
 ```
 
+注：pageContext.setAttribute需要jsp_api.jar
+
 # maven配置文件
 
 D:\apache-maven-3.6.1\conf\settings.xml

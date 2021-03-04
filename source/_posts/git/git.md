@@ -312,7 +312,7 @@ ssh通信模式
 	
 
 私钥文件，做本机标识
-		id_rsa
+	id_rsa
 	打开github的setting页面添加ssh key
 		
 
