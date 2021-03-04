@@ -60,79 +60,79 @@
 <meta name="keywords" content="linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux">
-<meta property="og:url" content="https://codeofli.github.io/2019/10/linux/linux/index.html">
+<meta property="og:url" content="https://codeofli.github.io/2019/11/linux/linux/index.html">
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="[TOC]linux入门VM和Linux系统(CentOS)安装3.1安装vm和Centos学习Linux需要一个环境，我们需要创建一个虚拟机，然后在虚拟机上安装一个Centos系统来学习。1)先安装virtualmachine,vm122)再安装Linux(CentOS6.8)3)原理示意图，这里我们画图说明一下VM和CentOS的关系。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565526076287.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/centos%E8%81%94%E7%BD%91">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/linux%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95linux%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/xshell%E6%96%B0%E5%BB%BA%E5%9B%9E%E8%AF%9D.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/vi%E5%92%8Cvim%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96%E5%9B%BE.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/vim%E5%92%8Cvi%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE%E9%94%AE%E7%9B%98%E4%B8%80%E8%A7%88%E5%9B%BE.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/su-%E5%88%87%E6%8D%A2%E7%94%A8%E6%88%B7">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565792119178.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565792160979.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565792596928.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565792796464.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565837024122.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565837051989.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565837251812.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565837276308.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565838042908.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565838068157.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565838103619.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565838446936.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565838608072.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/C:%5CUsers%5C11623%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1565839967183.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565840469904.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565860782439.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565861704260.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565862055457.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565873174567.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565875927535.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565875980700.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565875994021.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/linux%5C1565876017558.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565876081126.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566443136248.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566443160749.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566443233289.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566443808504.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566443825065.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566443838977.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566455383816.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566455612778.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566455656227.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566455673574.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566461905906.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566461935674.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566461976494.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566462004597.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566462037006.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566464269470.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566464329056.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566464369323.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566464950771.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566464975777.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566465056050.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566482705612.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566483352808.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566484075622.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566485165661.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566485234799.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566485265213.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1565878374722.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/linux%5C1566129158215.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/linux/linux/1566129449920.png">
-<meta property="og:updated_time" content="2021-01-05T06:03:40.123Z">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565526076287.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/centos%E8%81%94%E7%BD%91">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/linux%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95linux%E7%A4%BA%E6%84%8F%E5%9B%BE.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/xshell%E6%96%B0%E5%BB%BA%E5%9B%9E%E8%AF%9D.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/vi%E5%92%8Cvim%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96%E5%9B%BE.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/vim%E5%92%8Cvi%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE%E9%94%AE%E7%9B%98%E4%B8%80%E8%A7%88%E5%9B%BE.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/su-%E5%88%87%E6%8D%A2%E7%94%A8%E6%88%B7">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565792119178.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565792160979.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565792596928.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565792796464.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565837024122.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565837051989.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565837251812.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565837276308.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565838042908.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565838068157.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565838103619.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565838446936.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565838608072.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/C:%5CUsers%5C11623%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1565839967183.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565840469904.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565860782439.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565861704260.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565862055457.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565873174567.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565875927535.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565875980700.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565875994021.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/linux%5C1565876017558.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565876081126.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566443136248.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566443160749.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566443233289.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566443808504.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566443825065.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566443838977.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566455383816.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566455612778.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566455656227.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566455673574.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566461905906.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566461935674.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566461976494.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566462004597.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566462037006.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566464269470.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566464329056.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566464369323.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566464950771.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566464975777.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566465056050.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566482705612.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566483352808.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566484075622.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566485165661.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566485234799.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566485265213.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1565878374722.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/linux%5C1566129158215.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/linux/linux/1566129449920.png">
+<meta property="og:updated_time" content="2021-03-04T08:03:14.094Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux">
 <meta name="twitter:description" content="[TOC]linux入门VM和Linux系统(CentOS)安装3.1安装vm和Centos学习Linux需要一个环境，我们需要创建一个虚拟机，然后在虚拟机上安装一个Centos系统来学习。1)先安装virtualmachine,vm122)再安装Linux(CentOS6.8)3)原理示意图，这里我们画图说明一下VM和CentOS的关系。">
-<meta name="twitter:image" content="https://codeofli.github.io/2019/10/linux/linux/1565526076287.png">
-  <link rel="canonical" href="https://codeofli.github.io/2019/10/linux/linux/">
+<meta name="twitter:image" content="https://codeofli.github.io/2019/11/linux/linux/1565526076287.png">
+  <link rel="canonical" href="https://codeofli.github.io/2019/11/linux/linux/">
 
 
 <script id="page-configurations">
@@ -348,7 +348,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/10/linux/linux/">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/11/linux/linux/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nicolas lee">
@@ -376,7 +376,7 @@
                 
               
 
-              <time title="创建时间：2019-10-12 14:20:26" itemprop="dateCreated datePublished" datetime="2019-10-12T14:20:26+08:00">2019-10-12</time>
+              <time title="创建时间：2019-11-12 14:20:26" itemprop="dateCreated datePublished" datetime="2019-11-12T14:20:26+08:00">2019-11-12</time>
             </span>
           
             
@@ -387,7 +387,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-05 14:03:40" itemprop="dateModified" datetime="2021-01-05T14:03:40+08:00">2021-01-05</time>
+                <time title="修改时间：2021-03-04 16:03:14" itemprop="dateModified" datetime="2021-03-04T16:03:14+08:00">2021-03-04</time>
               </span>
             
           
@@ -446,10 +446,10 @@
 <p>2)安装虚拟机软件（vm12）看老师的具体演示：因为老师的电脑上已经安装了VM12，因此我先卸载然后再安装。</p>
 <p>3.4CentOS安装的步骤</p>
 <p>1)创建虚拟机(空间)这里在配置网络连接时，有三种形式，需要大家伙注意：</p>
-<p><img src="/2019/10/linux/linux/1565526076287.png" alt="虚拟机连接网络三种方式"></p>
+<p><img src="/2019/11/linux/linux/1565526076287.png" alt="虚拟机连接网络三种方式"></p>
 <h3 id="CentOS的终端使用和联网"><a href="#CentOS的终端使用和联网" class="headerlink" title="CentOS的终端使用和联网"></a>CentOS的终端使用和联网</h3><p>1)终端的使用，点击鼠标右键，即可选择打开终端</p>
 <p>2)配置网络，可以上网。点击上面右侧的；两个计算机图片，选择启用eth0,即可成功连接到网络，就可以上网。</p>
-<p><img src="/2019/10/linux/linux/centos%E8%81%94%E7%BD%91" alt="1565532090697"></p>
+<p><img src="/2019/11/linux/linux/centos%E8%81%94%E7%BD%91" alt="1565532090697"></p>
 <h3 id="vmtools的安装和使用"><a href="#vmtools的安装和使用" class="headerlink" title="vmtools的安装和使用"></a>vmtools的安装和使用</h3><p>3.7.1安装vmtools的步骤说明</p>
 <p>1.进入centos</p>
 <p>2.点击vm菜单的-&gt;installvmwaretools</p>
@@ -465,7 +465,7 @@
 <h2 id="Linux的目录结构"><a href="#Linux的目录结构" class="headerlink" title="Linux的目录结构"></a>Linux的目录结构</h2><p>4.1基本介绍</p>
 <p>linux的文件系统是采用级层式的树状目录结构，在此结构中的最上层是根目录“/”，然后在此目录下再创建其他的目录。深刻理解linux树状文件目录是非常重要的，这里我给大家说明一下。</p>
 <p>记住一句经典的话：==在Linux世界里，一切皆文件。==</p>
-<p><img src="/2019/10/linux/linux/linux%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png" alt="1565662869703"></p>
+<p><img src="/2019/11/linux/linux/linux%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84.png" alt="1565662869703"></p>
 <p>具体的目录结构:</p>
 <p><strong>/bin   [重点]   (/usr/bin、/usr/local/bin)</strong></p>
 <p>•是Binary的缩写, 这个目录存放着最经常使用的命令</p>
@@ -509,7 +509,7 @@
 <p>4)linux的各个文件目录下存放什么内容，大家必须有一个认识。<br>5)学习后，你脑海中应该有一颗linux目录树</p>
 <h2 id="远程登录Linux系统"><a href="#远程登录Linux系统" class="headerlink" title="远程登录Linux系统"></a>远程登录Linux系统</h2><p>5.1为什么需要远程登录Linux</p>
 <p>5.1.1示意图</p>
-<p><img src="/2019/10/linux/linux/%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95linux%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="1565664273564"></p>
+<p><img src="/2019/11/linux/linux/%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95linux%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="1565664273564"></p>
 <p>为什么需要远程登录Linux<br>说明: 公司开发时候，具体的情况是这样的</p>
 <p>1) linux服务器是开发小组共享的.<br>2) 正式上线的项目是运行在公网的.<br>3) 因此程序员需要远程登录到centos进行项目管理或者开发.<br>4) 画出简单的网络拓扑示意图(帮助理解)<br>5) 远程登录客户端有Xshell5，Xftp5 , 我们学习使用Xshell5 和Xftp , 其它的远程工具大同小异.</p>
 <p><strong>远程登录Linux-Xshell5介绍:</strong></p>
@@ -518,7 +518,7 @@
 <p><strong>==终端setup指令查看系统服务中ssh是否开启==</strong></p>
 <p><strong>如果都有，还是不行，就重新建立连接</strong></p>
 <h3 id="5-3安装XShell5并使用"><a href="#5-3安装XShell5并使用" class="headerlink" title="5.3安装XShell5并使用"></a>5.3安装XShell5并使用</h3><p>5.3.2XShell5的关键配置</p>
-<p><img src="/2019/10/linux/linux/xshell%E6%96%B0%E5%BB%BA%E5%9B%9E%E8%AF%9D.png" alt="1565666681964"></p>
+<p><img src="/2019/11/linux/linux/xshell%E6%96%B0%E5%BB%BA%E5%9B%9E%E8%AF%9D.png" alt="1565666681964"></p>
 <p>5.3.3XShel5远程登录到Linux后，就可以使用指令来操作Linux系统</p>
 <h3 id="5-4远程上传下载文件Xftp5"><a href="#5-4远程上传下载文件Xftp5" class="headerlink" title="5.4远程上传下载文件Xftp5"></a>5.4远程上传下载文件Xftp5</h3><p>5.4.1XFtp5软件介绍</p>
 <p>是一个基于windows平台的功能强大的SFTP、FTP文件传输软件。使用了Xftp以后，windows用户能安全地在UNIX/Linux和WindowsPC之间传输文件。</p>
@@ -533,7 +533,7 @@
 <p>命令行模式下，有<code>:</code>符号使用相关快捷键，如退出命令：</p>
 <figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">:q</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="vi和vim三种模式的相互转化图"><a href="#vi和vim三种模式的相互转化图" class="headerlink" title="vi和vim三种模式的相互转化图"></a>vi和vim三种模式的相互转化图</h3><p><img src="/2019/10/linux/linux/vi%E5%92%8Cvim%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96%E5%9B%BE.png" alt="1565770723325"></p>
+<h3 id="vi和vim三种模式的相互转化图"><a href="#vi和vim三种模式的相互转化图" class="headerlink" title="vi和vim三种模式的相互转化图"></a>vi和vim三种模式的相互转化图</h3><p><img src="/2019/11/linux/linux/vi%E5%92%8Cvim%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E5%8C%96%E5%9B%BE.png" alt="1565770723325"></p>
 <p><strong>快捷键使用练习:</strong></p>
 <p>1) 拷贝当前行yy , 拷贝当前行向下的5行5yy，并粘贴。</p>
 <p>2) 删除当前行dd  , 删除当前行向下的5行 5+dd</p>
@@ -548,7 +548,7 @@
 <p>第三步:输入（G）shift+g，</p>
 <p>：20在按gg</p>
 <p><strong>uu回退</strong></p>
-<h3 id="vim和vi的快捷键键盘一览图"><a href="#vim和vi的快捷键键盘一览图" class="headerlink" title="vim和vi的快捷键键盘一览图"></a>vim和vi的快捷键键盘一览图</h3><p><img src="/2019/10/linux/linux/vim%E5%92%8Cvi%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE%E9%94%AE%E7%9B%98%E4%B8%80%E8%A7%88%E5%9B%BE.png" alt="1565771568531"></p>
+<h3 id="vim和vi的快捷键键盘一览图"><a href="#vim和vi的快捷键键盘一览图" class="headerlink" title="vim和vi的快捷键键盘一览图"></a>vim和vi的快捷键键盘一览图</h3><p><img src="/2019/11/linux/linux/vim%E5%92%8Cvi%E7%9A%84%E5%BF%AB%E6%8D%B7%E9%94%AE%E9%94%AE%E7%9B%98%E4%B8%80%E8%A7%88%E5%9B%BE.png" alt="1565771568531"></p>
 <h2 id="开机、重启和用户登录注销"><a href="#开机、重启和用户登录注销" class="headerlink" title="开机、重启和用户登录注销"></a>开机、重启和用户登录注销</h2><p>7.1关机&amp;重启命令</p>
 <p>7.1.1基本介绍</p>
 <p><strong>shutdown</strong></p>
@@ -570,7 +570,7 @@
 <p>2)运行级别这个概念，后面给大家介绍</p>
 <h2 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h2><p>8.1基本介绍</p>
 <p>给大家画一个示意图，帮助大家理解用户管理的规则。</p>
-<p><img src="/2019/10/linux/linux/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86.png" alt="1565781941709"></p>
+<p><img src="/2019/11/linux/linux/%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86.png" alt="1565781941709"></p>
 <p>说明</p>
 <p>1)Linux系统是一个多用户多任务的操作系统，任何一个要使用系统资源的用户，都必须首先向系统管理员申请一个账号，然后以这个账号的身份进入系统。</p>
 <p>2)Linux的用户需要至少要属于一个组。</p>
@@ -612,7 +612,7 @@
 <p>su– 切换用户名</p>
 <p>8.6.3应用实例</p>
 <p>1)创建一个用户zf,，指定密码，然后切换到zf.</p>
-<p><img src="/2019/10/linux/linux/su-%E5%88%87%E6%8D%A2%E7%94%A8%E6%88%B7" alt="1565785356718"></p>
+<p><img src="/2019/11/linux/linux/su-%E5%88%87%E6%8D%A2%E7%94%A8%E6%88%B7" alt="1565785356718"></p>
 <p>细节说明</p>
 <p>1)从权限高的用户切换到权限低的用户，不需要输入密码，反之需要。</p>
 <p>2)当需要返回到原来用户时，使用exit指令</p>
@@ -643,14 +643,14 @@
 <p><strong>8.10/etc/passwd文件</strong></p>
 <p>用户（user）的配置文件，记录用户的各种信息</p>
 <p>每行的含义：用户名:口令:用户标识号:组标识号:注释性描述:主目录:登录Shell</p>
-<p><img src="/2019/10/linux/linux/1565792119178.png" alt="1565792119178"></p>
+<p><img src="/2019/11/linux/linux/1565792119178.png" alt="1565792119178"></p>
 <p>8.11/etc/shadow文件</p>
 <p>口令的配置文件</p>
 <p>每行的含义：登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志</p>
 <p>8.12/etc/group文件</p>
 <p>组(group)的配置文件，记录Linux包含的组的信息</p>
 <p>每行含义：组名:口令:组标识号:组内用户列表</p>
-<p><img src="/2019/10/linux/linux/1565792160979.png" alt="1565792160979"></p>
+<p><img src="/2019/11/linux/linux/1565792160979.png" alt="1565792160979"></p>
 <h2 id="实用指令"><a href="#实用指令" class="headerlink" title="实用指令"></a>实用指令</h2><h3 id="9-1指定运行级别"><a href="#9-1指定运行级别" class="headerlink" title="9.1指定运行级别"></a>9.1指定运行级别</h3><p><strong>运行级别说明：</strong></p>
 <p>0：关机</p>
 <p>1：单用户【找回丢失密码】</p>
@@ -659,11 +659,11 @@
 <p>5：图形界面</p>
 <p>6：系统重启</p>
 <p>常用运行级别是3和5，要修改默认的运行级别可改文件/etc/inittab的id:5:initdefault:这一行中的数字运行级别的示意图：</p>
-<p><img src="/2019/10/linux/linux/1565792596928.png" alt="1565792596928"></p>
+<p><img src="/2019/11/linux/linux/1565792596928.png" alt="1565792596928"></p>
 <p>9.2切换到指定运行级别的指令</p>
 <p>9.2.1基本语法</p>
 <p>init[012356]</p>
-<p><img src="/2019/10/linux/linux/1565792796464.png" alt="1565792796464"></p>
+<p><img src="/2019/11/linux/linux/1565792796464.png" alt="1565792796464"></p>
 <p>9.2.2应用实例案例</p>
 <p>1：通过init来切换不同的运行级别，比如动5-&gt;3，然后关机</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">init3</span><br><span class="line"></span><br><span class="line">init5</span><br><span class="line"></span><br><span class="line">init0</span><br></pre></td></tr></table></figure>
@@ -727,19 +727,19 @@
 <p>•常用选项</p>
 <p>-p(–parents)：创建多级目录</p>
 <p>•应用实例案例1:创建一个目录/home/dog</p>
-<p><img src="/2019/10/linux/linux/1565837024122.png" alt="1565837024122"></p>
+<p><img src="/2019/11/linux/linux/1565837024122.png" alt="1565837024122"></p>
 <p>案例2:创建多级目录/home/animal/tiger</p>
-<p><img src="/2019/10/linux/linux/1565837051989.png" alt="1565837051989"></p>
+<p><img src="/2019/11/linux/linux/1565837051989.png" alt="1565837051989"></p>
 <h4 id="9-4-5rmdir指令"><a href="#9-4-5rmdir指令" class="headerlink" title="9.4.5rmdir指令"></a>9.4.5rmdir指令</h4><p>介绍</p>
 <p>rmdir指令删除空目录</p>
 <p>基本语法</p>
 <p>rmdir [选项] 要删除的空目录</p>
 <p>应用实例案例1:删除一个目录/home/dog</p>
-<p><img src="/2019/10/linux/linux/1565837251812.png" alt="1565837251812"></p>
+<p><img src="/2019/11/linux/linux/1565837251812.png" alt="1565837251812"></p>
 <p>使用细节</p>
 <p>rmdir删除的是空目录，如果目录下有内容时无法删除的。</p>
 <p>提示：如果需要删除非空目录，需要使用rm-rf要删除的目录</p>
-<p><img src="/2019/10/linux/linux/1565837276308.png" alt="1565837276308"></p>
+<p><img src="/2019/11/linux/linux/1565837276308.png" alt="1565837276308"></p>
 <h4 id="9-4-6touch指令"><a href="#9-4-6touch指令" class="headerlink" title="9.4.6touch指令"></a>9.4.6touch指令</h4><p>touch指令 创建空文件</p>
 <p>•基本语法</p>
 <p>touch 文件名称</p>
@@ -754,12 +754,12 @@
 <p>•常用选项-r：递归复制整个文件夹</p>
 <p>•应用实例案例</p>
 <p>1:将/home/aaa.txt拷贝到/home/bbb目录下[拷贝单个文件</p>
-<p><img src="/2019/10/linux/linux/1565838042908.png" alt="1565838042908"></p>
+<p><img src="/2019/11/linux/linux/1565838042908.png" alt="1565838042908"></p>
 <p>案例2:递归复制整个文件夹，举例将/home/test整个目录拷贝到/home/zwj目录</p>
-<p><img src="/2019/10/linux/linux/1565838068157.png" alt="1565838068157"></p>
+<p><img src="/2019/11/linux/linux/1565838068157.png" alt="1565838068157"></p>
 <p>•使用细节</p>
 <p>强制覆盖不提示的方法：\cp</p>
-<p><img src="/2019/10/linux/linux/1565838103619.png" alt="1565838103619"></p>
+<p><img src="/2019/11/linux/linux/1565838103619.png" alt="1565838103619"></p>
 <p>9.4.8rm指令</p>
 <p>rm 指令移除</p>
 <p>【删除】文件或目录</p>
@@ -768,13 +768,13 @@
 <p>-r：递归删除整个文件夹</p>
 <p>-f：强制删除不提示</p>
 <p>•应用实例案例1:将/home/aaa.txt删除</p>
-<p><img src="/2019/10/linux/linux/1565838446936.png" alt="1565838446936"></p>
+<p><img src="/2019/11/linux/linux/1565838446936.png" alt="1565838446936"></p>
 <p>案例2:递归删除整个文件夹/bb</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@hapdoop1 /]## rm -r bb/</span><br><span class="line">rm：是否删除目录 "bb"？y</span><br></pre></td></tr></table></figure>
 
 <p>使用细节</p>
 <p>强制删除不提示的方法：带上-f参数即可</p>
-<p><img src="/2019/10/linux/linux/1565838608072.png" alt="1565838608072"></p>
+<p><img src="/2019/11/linux/linux/1565838608072.png" alt="1565838608072"></p>
 <h3 id="mv指令"><a href="#mv指令" class="headerlink" title="mv指令"></a>mv指令</h3><p>mv 移动文件与目录或重命名</p>
 <p>•基本语法</p>
 <figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mv</span> oldNameFile newNameFile</span><br></pre></td></tr></table></figure>
@@ -810,7 +810,7 @@
 <p>采用more查看文件/etc/profile</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@hapdoop1 ~]## more /etc/profile</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/10/linux/linux/C:%5CUsers%5C11623%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1565839967183.png" alt="1565839967183"></p>
+<p><img src="/2019/11/linux/linux/C:%5CUsers%5C11623%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5C1565839967183.png" alt="1565839967183"></p>
 <p>9.4.12less指令</p>
 <p>less指令用来<strong>分屏查看文件内容</strong>，它的功能与more指令类似，但是比more指令更加强大，支持各种显示终端。less指令在显示文件内容时，并不是一次将整个文件加载之后才显示，而是根据显示需要加载内容，对于<strong>显示大型文件具有较高的效率</strong>。</p>
 <p>•基本语法</p>
@@ -820,7 +820,7 @@
 <p>案例:采用less查看一个大文件文件/opt/金庸-射雕英雄传txt精校版.txt</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@hapdoop1 opt]## less 金庸-射雕英雄传txt精校版.txt</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/10/linux/linux/1565840469904.png" alt="1565840469904"></p>
+<p><img src="/2019/11/linux/linux/1565840469904.png" alt="1565840469904"></p>
 <h4 id="9-4-13-gt-指令和-gt-gt-指令"><a href="#9-4-13-gt-指令和-gt-gt-指令" class="headerlink" title="9.4.13&gt;指令和&gt;&gt;指令"></a>9.4.13&gt;指令和&gt;&gt;指令</h4><p>介绍</p>
 <p> 指令和&gt;&gt;指令<br> <strong>&gt; 输出重定向:会将原来的文件的内容覆盖</strong></p>
 <p> &gt;&gt;追加：不会覆盖原来文件的内容，而是追加到文件的尾部。•</p>
@@ -928,7 +928,7 @@
 <p>•基本语法</p>
 <p>find [搜索范围] [选项]</p>
 <p>•选项说明</p>
-<p><img src="/2019/10/linux/linux/1565860782439.png" alt="1565860782439"></p>
+<p><img src="/2019/11/linux/linux/1565860782439.png" alt="1565860782439"></p>
 <p>•应用实例</p>
 <p>案例1:按文件名：根据名称查找/home目录下的hello.txt文件</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@hapdoop1 ~]## find /home -name hello.txt</span><br></pre></td></tr></table></figure>
@@ -949,12 +949,12 @@
 <p>•特别说明由于locate指令基于数据库进行查询，所以<strong>第一次运行前，必须使用updatedb指令创建locate数据库。</strong></p>
 <p>•应用实例</p>
 <p>案例1:请使用locate指令快速定位hello.txt文件所在目录</p>
-<p><img src="/2019/10/linux/linux/1565861704260.png" alt="1565861704260"></p>
+<p><img src="/2019/11/linux/linux/1565861704260.png" alt="1565861704260"></p>
 <h4 id="9-6-3grep指令和管道符号"><a href="#9-6-3grep指令和管道符号" class="headerlink" title="9.6.3grep指令和管道符号|"></a>9.6.3grep指令和管道符号|</h4><p><strong>grep过滤查找</strong>，管道符，“|”，表示将前一个命令的处理结果输出传递给后面的命令处理。</p>
 <p>•基本语法</p>
 <p>grep [选项] 查找内容源文件</p>
 <p>•常用选项</p>
-<p><img src="/2019/10/linux/linux/1565862055457.png" alt="1565862055457"></p>
+<p><img src="/2019/11/linux/linux/1565862055457.png" alt="1565862055457"></p>
 <p>•应用实例</p>
 <p>案例1:请在hello.txt文件中，查找”yes”所在行，并且显示行号</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@hapdoop1 home]## cat hello.txt | grep -n yes</span><br><span class="line"><span class="meta">#</span><span class="bash">不区分大小写</span></span><br><span class="line">[root@hapdoop1 home]## cat hello.txt | grep -ni yes</span><br></pre></td></tr></table></figure>
@@ -997,7 +997,7 @@
 <p>f(file)</p>
 <p>c(file)</p>
 <p>x(extract)</p>
-<p><img src="/2019/10/linux/linux/1565873174567.png" alt="1565873174567"></p>
+<p><img src="/2019/11/linux/linux/1565873174567.png" alt="1565873174567"></p>
 <p>•应用实例</p>
 <p>案例1:压缩多个文件，将/home/a1.txt和/home/a2.txt压缩成a.tar.gz</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@hapdoop1 home]## tar -zcvf a.tar.gz ok1.txt ok2.txt</span><br></pre></td></tr></table></figure>
@@ -1015,14 +1015,14 @@
 <p>2)所在组</p>
 <p>3)其它组</p>
 <p>4)改变用户所在的组</p>
-<p><img src="/2019/10/linux/linux/1565875927535.png" alt="1565875927535"></p>
+<p><img src="/2019/11/linux/linux/1565875927535.png" alt="1565875927535"></p>
 <p>10.2文件/目录所有者</p>
 <p>一般为文件的创建者,谁创建了该文件，就自然的成为该文件的所有者。10.2.1查看文件的所有者</p>
 <p>1)指令：ls -ahl</p>
 <p>2)应用实例：创建一个组police,再创建一个用户tom,将tom放在police组,然后使用tom来创建一个文件ok.txt，看看情况如何</p>
-<p><img src="/2019/10/linux/linux/1565875980700.png" alt="1565875980700"></p>
-<p><img src="/2019/10/linux/linux/1565875994021.png" alt="1565875994021"></p>
-<p><img src="/2019/10/linux/linux/linux%5C1565876017558.png" alt="1565876017558"></p>
+<p><img src="/2019/11/linux/linux/1565875980700.png" alt="1565875980700"></p>
+<p><img src="/2019/11/linux/linux/1565875994021.png" alt="1565875994021"></p>
+<p><img src="/2019/11/linux/linux/linux%5C1565876017558.png" alt="1565876017558"></p>
 <h3 id="10-3组的创建"><a href="#10-3组的创建" class="headerlink" title="10.3组的创建"></a>10.3组的创建</h3><p>10.3.1基本指令</p>
 <p>groupadd 组名</p>
 <p>10.3.2应用实例:</p>
@@ -1055,7 +1055,7 @@
 <p>2)第1-3位确定所有者（该文件的所有者）拥有该文件的权限。—User</p>
 <p>3)第4-6位确定所属组（同用户组的）拥有该文件的权限，—Group</p>
 <p>4)第7-9位确定其他用户拥有该文件的权限—Other</p>
-<p><img src="/2019/10/linux/linux/1565876081126.png" alt="1565876081126"></p>
+<p><img src="/2019/11/linux/linux/1565876081126.png" alt="1565876081126"></p>
 <h3 id="10-8rwx权限详解"><a href="#10-8rwx权限详解" class="headerlink" title="10.8rwx权限详解"></a>10.8rwx权限详解</h3><p><strong>10.8.1rwx作用到文件</strong></p>
 <p>1)[r]代表可读(read):可以读取,查看 ： 数字4</p>
 <p>2)[w]代表可写(write):可以修改,但是不代表可以删除该文件,删除一个文件的前提条件是对该文件所在的目录有写权限，才能删除该文件. ：数字2</p>
@@ -1122,8 +1122,8 @@
 
 <p>(2)创建用户</p>
 <h2 id="crond任务调度"><a href="#crond任务调度" class="headerlink" title="crond任务调度"></a>crond任务调度</h2><p>11.1原理示意图</p>
-<p><img src="/2019/10/linux/linux/1566443136248.png" alt="1566443136248"></p>
-<p><img src="/2019/10/linux/linux/1566443160749.png" alt="1566443160749"></p>
+<p><img src="/2019/11/linux/linux/1566443136248.png" alt="1566443136248"></p>
+<p><img src="/2019/11/linux/linux/1566443160749.png" alt="1566443160749"></p>
 <p>crontab进行定时任务的设置。</p>
 <p>1.2概述</p>
 <p>任务调度：是指系统在某个时间执行的特定的命令或程序。</p>
@@ -1133,7 +1133,7 @@
 <p>11.3基本语法</p>
 <p>crontab [选项]</p>
 <p>11.3.1常用选项</p>
-<p><img src="/2019/10/linux/linux/1566443233289.png" alt="1566443233289"></p>
+<p><img src="/2019/11/linux/linux/1566443233289.png" alt="1566443233289"></p>
 <h3 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h3><p>11.4.1任务的要求</p>
 <p>设置任务调度文件：/etc/crontab</p>
 <p>设置个人任务调度。执行crontab–e命令。</p>
@@ -1147,9 +1147,9 @@
 <p>4)在每一分钟都会自动的调用</p>
 <p>ls -l /etc &gt;&gt; /tmp/to.txt</p>
 <p>11.4.3参数细节说明</p>
-<p><img src="/2019/10/linux/linux/1566443808504.png" alt="1566443808504"></p>
-<p><img src="/2019/10/linux/linux/1566443825065.png" alt="1566443825065"></p>
-<p><img src="/2019/10/linux/linux/1566443838977.png" alt="1566443838977"></p>
+<p><img src="/2019/11/linux/linux/1566443808504.png" alt="1566443808504"></p>
+<p><img src="/2019/11/linux/linux/1566443825065.png" alt="1566443825065"></p>
+<p><img src="/2019/11/linux/linux/1566443838977.png" alt="1566443838977"></p>
 <p>11.5.1</p>
 <p>案例1：每隔1分钟，就将当前的日期信息，追加到/tmp/mydate文件中</p>
 <p>1)先编写一个文件/home/mytask1.sh</p>
@@ -1199,19 +1199,19 @@
 <p>1.支持无限多个主分区（但操作系统可能限制，比如windows下最多128个分区）</p>
 <p>2.最大支持18EB的大容量（1EB=1024PB，1PB=1024TB）3.windows764位以后支持gpt</p>
 <p>12.1.2windows下的磁盘分区</p>
-<p><img src="/2019/10/linux/linux/1566455383816.png" alt="1566455383816"></p>
+<p><img src="/2019/11/linux/linux/1566455383816.png" alt="1566455383816"></p>
 <h3 id="12-2Linux分区"><a href="#12-2Linux分区" class="headerlink" title="12.2Linux分区"></a>12.2Linux分区</h3><p>12.2.1原理介绍</p>
 <p>1)Linux来说无论有几个分区，分给哪一目录使用，它归根结底就只有一个根目录，一个独立且唯一的文件结构,Linux中每个分区都是用来组成整个文件系统的一部分。</p>
 <p>2)Linux采用了一种叫“载入”的处理方法，它的整个文件系统中包含了一整套的文件和目录，且将一个分区和一个目录联系起来。这时要载入的一个分区将使它的存储空间在一个目录下获得。</p>
 <p>3)示意图</p>
-<p><img src="/2019/10/linux/linux/1566455612778.png" alt="1566455612778"></p>
+<p><img src="/2019/11/linux/linux/1566455612778.png" alt="1566455612778"></p>
 <p>12.2.2硬盘说明</p>
 <p>1)Linux硬盘分IDE硬盘和SCSI硬盘，目前基本上是SCSI硬盘</p>
 <p>2)对于IDE硬盘，驱动器标识符为“hdx<del>”,其中“hd”表明分区所在设备的类型，这里是指IDE硬盘了。“x”为盘号（a为基本盘，b为基本从属盘，c为辅助主盘，d为辅助从属盘）,“</del>”代表分区，前四个分区用数字1到4表示，它们是主分区或扩展分区，从5开始就是逻辑分区。例，hda3表示为第一个IDE硬盘上的第三个主分区或扩展分区,hdb2表示为第二个IDE硬盘上的第二个主分区或扩展分区。</p>
 <p>3)对于SCSI硬盘则标识为“sdx~”，SCSI硬盘是用“sd”来表示分区所在设备的类型的，其余则和IDE硬盘的表示方法一样</p>
 <p>12.2.3使用lsblk指令查看当前系统的分区情况</p>
-<p><img src="/2019/10/linux/linux/1566455656227.png" alt="1566455656227"></p>
-<p><img src="/2019/10/linux/linux/1566455673574.png" alt="1566455673574"></p>
+<p><img src="/2019/11/linux/linux/1566455656227.png" alt="1566455656227"></p>
+<p><img src="/2019/11/linux/linux/1566455673574.png" alt="1566455673574"></p>
 <h3 id="12-5磁盘情况查询"><a href="#12-5磁盘情况查询" class="headerlink" title="12.5磁盘情况查询"></a>12.5磁盘情况查询</h3><p>12.5.1查询系统整体磁盘使用情况</p>
 <p>基本语法</p>
 <p>df -h</p>
@@ -1248,18 +1248,18 @@
 <h2 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h2><p>13.1Linux网络配置</p>
 <p>原理图(含虚拟机)</p>
 <p>目前我们的网络配置采用的是NAT。</p>
-<p><img src="/2019/10/linux/linux/1566461905906.png" alt="1566461905906"></p>
+<p><img src="/2019/11/linux/linux/1566461905906.png" alt="1566461905906"></p>
 <p>13.2查看网络IP和网关</p>
 <p>13.2.1查看虚拟网络编辑器</p>
-<p><img src="/2019/10/linux/linux/1566461935674.png" alt="1566461935674"></p>
+<p><img src="/2019/11/linux/linux/1566461935674.png" alt="1566461935674"></p>
 <p>13.2.2修改ip地址(修改虚拟网络的ip)</p>
-<p><img src="/2019/10/linux/linux/1566461976494.png" alt="1566461976494"></p>
+<p><img src="/2019/11/linux/linux/1566461976494.png" alt="1566461976494"></p>
 <p>3.2.3查看网关</p>
-<p><img src="/2019/10/linux/linux/1566462004597.png" alt="1566462004597"></p>
+<p><img src="/2019/11/linux/linux/1566462004597.png" alt="1566462004597"></p>
 <p>13.2.4查看windows环境的中VMnet8网络配置(ipconfig指令)</p>
 <p>1)使用ipconfig查看</p>
 <p>2)界面查看</p>
-<p><img src="/2019/10/linux/linux/1566462037006.png" alt="1566462037006"></p>
+<p><img src="/2019/11/linux/linux/1566462037006.png" alt="1566462037006"></p>
 <p>13.3ping测试主机之间网络连通</p>
 <p>13.3.1基本语法ping目的主机（功能描述：测试当前服务器是否可以连接目的主机）</p>
 <p>13.3.2应用实例测试当前服务器是否可以连接百度</p>
@@ -1268,24 +1268,24 @@
 
 <p>13.4linux网络环境配置</p>
 <p>13.4.1第一种方法(自动获取)</p>
-<p><img src="/2019/10/linux/linux/1566464269470.png" alt="1566464269470"></p>
+<p><img src="/2019/11/linux/linux/1566464269470.png" alt="1566464269470"></p>
 <p>缺点:linux启动后会自动获取IP,缺点是每次自动获取的ip地址可能不一样。这个不适用于做服务器，因为我们的服务器的ip需要时固定的。</p>
 <p><strong>13.4.2第二种方法(指定固定的ip)</strong></p>
 <p>说明直接修改配置文件来指定IP,并可以连接到外网(程序员推荐)，编辑vi/etc/sysconfig/network-scripts/ifcfg-eth0</p>
 <p>要求：将ip地址配置的静态的，ip地址为192.168.184.130</p>
-<p><img src="/2019/10/linux/linux/1566464329056.png" alt="1566464329056"></p>
+<p><img src="/2019/11/linux/linux/1566464329056.png" alt="1566464329056"></p>
 <p>修改后，一定要重启服务</p>
 <p>1)service network restart</p>
 <p>2)reboot重启系统 不推荐</p>
-<p><img src="/2019/10/linux/linux/1566464369323.png" alt="1566464369323"></p>
+<p><img src="/2019/11/linux/linux/1566464369323.png" alt="1566464369323"></p>
 <h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><h3 id="14-1进程的基本介绍"><a href="#14-1进程的基本介绍" class="headerlink" title="14.1进程的基本介绍"></a>14.1进程的基本介绍</h3><p>1)在LINUX中，每个执行的程序（代码）都称为一个进程。每一个进程都分配一个ID号。</p>
 <p>2)每一个进程，都会对应一个父进程，而这个父进程可以复制多个子进程。例如www服务器。</p>
 <p>3)每个进程都可能以两种方式存在的。前台与后台，所谓前台进程就是用户目前的屏幕上可以进行操作的。后台进程则是实际在操作，但由于屏幕上无法看到的进程，通常使用后台方式执行。</p>
 <p>4)一般系统的服务都是以后台进程的方式存在，而且都会常驻在系统中。直到关机才才结束。</p>
 <h3 id="14-2显示系统执行的进程ps"><a href="#14-2显示系统执行的进程ps" class="headerlink" title="14.2显示系统执行的进程ps"></a>14.2显示系统执行的进程ps</h3><p>14.2.1说明：</p>
 <p>查看进行使用的指令是ps,一般来说使用的参数是ps-aux</p>
-<p><img src="/2019/10/linux/linux/1566464950771.png" alt="1566464950771"></p>
-<p><img src="/2019/10/linux/linux/1566464975777.png" alt="1566464975777"></p>
+<p><img src="/2019/11/linux/linux/1566464950771.png" alt="1566464950771"></p>
+<p><img src="/2019/11/linux/linux/1566464975777.png" alt="1566464975777"></p>
 <p>14.2.2ps指令详解</p>
 <p>1)指令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -aux | grep xxx</span><br></pre></td></tr></table></figure>
@@ -1303,7 +1303,7 @@
 <p>•TIME：CPU时间，即进程使用CPU的总时间•COMMAND：启动进程所用的命令和参数，如果过长会被截断显示</p>
 <p>14.2.3应用实例</p>
 <p>要求：以全格式显示当前所有的进程，查看进程的父进程。</p>
-<p><img src="/2019/10/linux/linux/1566465056050.png" alt="1566465056050"></p>
+<p><img src="/2019/11/linux/linux/1566465056050.png" alt="1566465056050"></p>
 <p>•ps -ef是以全格式显示当前所有的进程</p>
 <p> -e显示所有进程(every)。</p>
 <p> -f全格式(Do <strong>full-format</strong> listing)。</p>
@@ -1353,7 +1353,7 @@
 <h3 id="服务-Service-管理"><a href="#服务-Service-管理" class="headerlink" title="服务(Service)管理"></a>服务(Service)管理</h3><p>4.5.1介绍:</p>
 <p>服务(service)本质就是进程，但是是运行在后台的，通常都会监听某个端口，等待其它程序的请求，比如(mysql,sshd防火墙等)，因此我们又称为守护进程，是Linux中非常重要的知识点。</p>
 <p>【原理图】</p>
-<p><img src="/2019/10/linux/linux/1566482705612.png" alt="1566482705612"></p>
+<p><img src="/2019/11/linux/linux/1566482705612.png" alt="1566482705612"></p>
 <p>14.5.2service管理指令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service 服务名 [start|stop|restart|reload|status]</span><br></pre></td></tr></table></figure>
 
@@ -1371,7 +1371,7 @@
 <p>2)这种方式只是临时生效，当重启系统后，还是回归以前对服务的设置。如果希望设置某个服务自启动或关闭永久生效，要使用chkconfig指令，马上讲</p>
 <p>14.5.5查看服务名:</p>
 <p>方式1：使用setup-&gt;系统服务就可以看到。</p>
-<p><img src="/2019/10/linux/linux/1566483352808.png" alt="1566483352808"></p>
+<p><img src="/2019/11/linux/linux/1566483352808.png" alt="1566483352808"></p>
 <p>方式2:/etc/init.d/服务名称</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@hapdoop1 ~]##  ll /etc/init.d/</span><br><span class="line">总用量 376</span><br><span class="line">-rwxr-xr-x. 1 root root  1288 5月  12 2016 abrt-ccpp</span><br><span class="line">-rwxr-xr-x. 1 root root  1628 5月  12 2016 abrtd</span><br><span class="line">-rwxr-xr-x. 1 root root  1642 5月  12 2016 abrt-oops</span><br><span class="line">-rwxr-xr-x. 1 root root  1818 2月  17 2016 acpid</span><br></pre></td></tr></table></figure>
 
@@ -1386,7 +1386,7 @@
 <p>•运行级别5：X11控制台，登陆后进入图形GUI模式</p>
 <p>•运行级别6：系统正常关闭并重启，默认运行级别不能设为6，否则不能正常启动</p>
 <p>14.5.7开机的流程说明</p>
-<p><img src="/2019/10/linux/linux/1566484075622.png" alt="1566484075622"></p>
+<p><img src="/2019/11/linux/linux/1566484075622.png" alt="1566484075622"></p>
 <p>14.5.8chkconfig指令</p>
 <p>介绍</p>
 <p>通过chkconfig命令可以给每个服务的各个运行级别设置自启动/关闭</p>
@@ -1414,15 +1414,15 @@
 <p>14.6.2基本语法：</p>
 <p>top [选项]</p>
 <p>14.6.3 选项说明：</p>
-<p><img src="/2019/10/linux/linux/1566485165661.png" alt="1566485165661"></p>
+<p><img src="/2019/11/linux/linux/1566485165661.png" alt="1566485165661"></p>
 <p>14.6.4应用实例：</p>
 <p>案例1.监视特定用户top：输入此命令，按回车键，查看执行的进程。</p>
 <p>u：然后输入“u”回车，再输入用户名，即可</p>
-<p><img src="/2019/10/linux/linux/1566485234799.png" alt="1566485234799"></p>
+<p><img src="/2019/11/linux/linux/1566485234799.png" alt="1566485234799"></p>
 <p>案例2：终止指定的进程。</p>
 <p>top：输入此命令，按回车键，查看执行的进程。</p>
 <p>k：然后输入“k”回车，再输入要结束的进程ID号</p>
-<p><img src="/2019/10/linux/linux/1566485265213.png" alt="1566485265213"></p>
+<p><img src="/2019/11/linux/linux/1566485265213.png" alt="1566485265213"></p>
 <p>案例3:指定系统状态更新的时间(每隔10秒自动更新，默认是3秒)：</p>
 <p>bash&gt;top -d 10</p>
 <p>14.6.5查看系统网络情况netstat(重要)</p>
@@ -1442,7 +1442,7 @@
 
 <h1 id="JavaEE篇搭建"><a href="#JavaEE篇搭建" class="headerlink" title="JavaEE篇搭建"></a>JavaEE篇搭建</h1><p>JavaEE环境</p>
 <p>16.1概述16.1.1示意图：</p>
-<p><img src="/2019/10/linux/linux/1565878374722.png" alt="1565878374722"></p>
+<p><img src="/2019/11/linux/linux/1565878374722.png" alt="1565878374722"></p>
 <h2 id="16-2安装JDK"><a href="#16-2安装JDK" class="headerlink" title="16.2安装JDK"></a>16.2安装JDK</h2><p>16.2.1看老师演示，一会整理笔记：</p>
 <p>16.2.2安装步骤</p>
 <p>0)先将软件通过xftp5上传到/opt下</p>
@@ -1518,7 +1518,7 @@
 
 <h2 id="apt软件管理和远程登录"><a href="#apt软件管理和远程登录" class="headerlink" title="apt软件管理和远程登录"></a>apt软件管理和远程登录</h2><h3 id="apt介绍"><a href="#apt介绍" class="headerlink" title="apt介绍"></a>apt介绍</h3><p>apt是Advanced Packaging Tool的简称，是一款安装包管理工具。在Ubuntu下，我们可以使用apt命令可用于软件包的安装、删除、清理等，类似于Windows中的软件管理工具。</p>
 <p>unbuntu软件管理的原理示意图：</p>
-<p><img src="/2019/10/linux/linux/linux%5C1566129158215.png" alt="1566129158215"></p>
+<p><img src="/2019/11/linux/linux/linux%5C1566129158215.png" alt="1566129158215"></p>
 <p>19.2Ubuntu软件操作的相关命令</p>
 <p>sudo apt-get update更新源</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install package安装包</span><br></pre></td></tr></table></figure>
@@ -1532,7 +1532,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-cache depends package了解使用该包依赖那些包</span><br><span class="line"></span><br><span class="line">sudo apt-cache rdepends package查看该包被哪些包依赖</span><br><span class="line"></span><br><span class="line">sudo apt-get source package下载该包的源代码</span><br></pre></td></tr></table></figure>
 
 <h3 id="更新Ubuntu软件下载地址"><a href="#更新Ubuntu软件下载地址" class="headerlink" title="更新Ubuntu软件下载地址"></a>更新Ubuntu软件下载地址</h3><p>19.3.1原理示意图</p>
-<p><img src="/2019/10/linux/linux/1566129449920.png" alt="1566129449920"></p>
+<p><img src="/2019/11/linux/linux/1566129449920.png" alt="1566129449920"></p>
 <p>19.3.2寻找国内镜像源</p>
 <p><a href="https://mirrors.tuna.tsinghua.edu.cn/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/</a></p>
 <p>所谓的镜像源：可以理解为提供下载软件的地方，比如Android手机上可以下载软件的安卓市场；iOS手机上可以下载软件的AppStore</p>
@@ -1623,7 +1623,7 @@
     <strong>本文作者： </strong>nicolas lee</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://codeofli.github.io/2019/10/linux/linux/" title="linux">https://codeofli.github.io/2019/10/linux/linux/</a>
+    <a href="https://codeofli.github.io/2019/11/linux/linux/" title="linux">https://codeofli.github.io/2019/11/linux/linux/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -1648,8 +1648,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/10/java-note/SpringBootHigh/springBoot-high/" rel="next" title="springBoot高级">
-                  <i class="fa fa-chevron-left"></i> springBoot高级
+                <a href="/2019/11/js-note/javaScript/javaScript/" rel="next" title="javaScript">
+                  <i class="fa fa-chevron-left"></i> javaScript
                 </a>
               
             </div>
@@ -1658,8 +1658,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/10/java-note/OnJava8/OnJava8-2/" rel="prev" title="OnJava8-2">
-                  OnJava8-2 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/11/docker/docker/" rel="prev" title="docker">
+                  docker <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>

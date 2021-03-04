@@ -60,19 +60,19 @@
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="javaWeb">
-<meta property="og:url" content="https://codeofli.github.io/2019/11/java-note/javaWeb/javaWeb/index.html">
+<meta property="og:url" content="https://codeofli.github.io/2019/10/java-note/javaWeb/javaWeb/index.html">
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="[TOC]基础知识JSP:动态网页静态、动态：1.不用 和 是否有“动感”混为一谈2.是否 随着 时间、地点、用户操作  的 改变而改变  动态网页 需要使用到 服务端脚本语言（JSP）  2架构CS：Client ServerCS不足：a.如果 软件升级， 那么全部软件都需要升级b.维护麻烦：需要维护每一台 客户端软件c.每一台客户端 都需要安装 客户端软件">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/java-note/javaWeb/javaWeb/request-time.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/java-note/javaWeb/javaWeb/Servlet-hierarchy.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/java-note/javaWeb/javaWeb/Servlet-life-cycle.png">
-<meta property="og:updated_time" content="2021-01-27T05:38:59.181Z">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/javaWeb/javaWeb/request-time.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/javaWeb/javaWeb/Servlet-hierarchy.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/javaWeb/javaWeb/Servlet-life-cycle.png">
+<meta property="og:updated_time" content="2021-03-04T08:06:22.302Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javaWeb">
 <meta name="twitter:description" content="[TOC]基础知识JSP:动态网页静态、动态：1.不用 和 是否有“动感”混为一谈2.是否 随着 时间、地点、用户操作  的 改变而改变  动态网页 需要使用到 服务端脚本语言（JSP）  2架构CS：Client ServerCS不足：a.如果 软件升级， 那么全部软件都需要升级b.维护麻烦：需要维护每一台 客户端软件c.每一台客户端 都需要安装 客户端软件">
-<meta name="twitter:image" content="https://codeofli.github.io/2019/11/java-note/javaWeb/javaWeb/request-time.png">
-  <link rel="canonical" href="https://codeofli.github.io/2019/11/java-note/javaWeb/javaWeb/">
+<meta name="twitter:image" content="https://codeofli.github.io/2019/10/java-note/javaWeb/javaWeb/request-time.png">
+  <link rel="canonical" href="https://codeofli.github.io/2019/10/java-note/javaWeb/javaWeb/">
 
 
 <script id="page-configurations">
@@ -288,7 +288,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/11/java-note/javaWeb/javaWeb/">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/10/java-note/javaWeb/javaWeb/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nicolas lee">
@@ -316,7 +316,7 @@
                 
               
 
-              <time title="创建时间：2019-11-12 10:39:06" itemprop="dateCreated datePublished" datetime="2019-11-12T10:39:06+08:00">2019-11-12</time>
+              <time title="创建时间：2019-10-12 10:39:06" itemprop="dateCreated datePublished" datetime="2019-10-12T10:39:06+08:00">2019-10-12</time>
             </span>
           
             
@@ -327,7 +327,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-27 13:38:59" itemprop="dateModified" datetime="2021-01-27T13:38:59+08:00">2021-01-27</time>
+                <time title="修改时间：2021-03-04 16:06:22" itemprop="dateModified" datetime="2021-03-04T16:06:22+08:00">2021-03-04</time>
               </span>
             
           
@@ -747,7 +747,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<p><img src="/2019/11/java-note/javaWeb/javaWeb/request-time.png" alt></p>
+<p><img src="/2019/10/java-note/javaWeb/javaWeb/request-time.png" alt></p>
 <p>转发、重定向：  </p>
 <p>转发：<br>    张三（客户端）     -&gt;    【 服务窗口 A （服务端 ）    -&gt;  服务窗口B  】  </p>
 <p>重定向：<br>    张三（客户端）       -&gt;     服务窗口 A （服务端 ） -&gt;去找B  </p>
@@ -840,7 +840,7 @@
 <h2 id="编写Servlet步骤："><a href="#编写Servlet步骤：" class="headerlink" title="编写Servlet步骤："></a>编写Servlet步骤：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br></pre></td></tr></table></figure>
 
 <p>1.编写一个类继承HttpServlet  </p>
-<p><img src="/2019/11/java-note/javaWeb/javaWeb/Servlet-hierarchy.png" alt></p>
+<p><img src="/2019/10/java-note/javaWeb/javaWeb/Servlet-hierarchy.png" alt></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br></pre></td></tr></table></figure>
 
 <p>2.重写相应方法(doGet()、doPost())</p>
@@ -859,7 +859,7 @@
 <p>如果：index.jsp中请求<code>&lt;a href=&quot;a/abc&quot;&gt;&lt;/a&gt;</code>，寻找范围：先在src或WebContent中找a目录，然后再在a目录中找abc  </p>
 <p>web.xml中的 /:代表项目根路径<br><a href="http://localhost:8888/Servlet25Project/jsp中的/" target="_blank" rel="noopener">http://localhost:8888/Servlet25Project/jsp中的/</a>: 服务器根路径<br><a href="http://localhost:8888/" target="_blank" rel="noopener">http://localhost:8888/</a>  </p>
 <p>构建路径、WebContent:根目录  </p>
-<h2 id="Servlet生命周期"><a href="#Servlet生命周期" class="headerlink" title="Servlet生命周期"></a>Servlet生命周期</h2><p><img src="/2019/11/java-note/javaWeb/javaWeb/Servlet-life-cycle.png" alt></p>
+<h2 id="Servlet生命周期"><a href="#Servlet生命周期" class="headerlink" title="Servlet生命周期"></a>Servlet生命周期</h2><p><img src="/2019/10/java-note/javaWeb/javaWeb/Servlet-life-cycle.png" alt></p>
 <p><strong>5个阶段</strong>   </p>
 <h3 id="加载、初始化："><a href="#加载、初始化：" class="headerlink" title="加载、初始化："></a>加载、初始化：</h3><p> init()  ，该方法会在 Servlet被加载并实例化的以后 执行<br>服务  ：service() -&gt;doGet()  doPost  </p>
 <p>init():    </p>
@@ -1286,7 +1286,7 @@
     <strong>本文作者： </strong>nicolas lee</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://codeofli.github.io/2019/11/java-note/javaWeb/javaWeb/" title="javaWeb">https://codeofli.github.io/2019/11/java-note/javaWeb/javaWeb/</a>
+    <a href="https://codeofli.github.io/2019/10/java-note/javaWeb/javaWeb/" title="javaWeb">https://codeofli.github.io/2019/10/java-note/javaWeb/javaWeb/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -1311,7 +1311,7 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/11/java-note/javaSE/javaSE/" rel="next" title="javaSE">
+                <a href="/2019/10/java-note/javaSE/javaSE/" rel="next" title="javaSE">
                   <i class="fa fa-chevron-left"></i> javaSE
                 </a>
               
@@ -1321,7 +1321,7 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/11/java-note/mybatis/mybatis/" rel="prev" title="mybatis">
+                <a href="/2019/10/java-note/mybatis/mybatis/" rel="prev" title="mybatis">
                   mybatis <i class="fa fa-chevron-right"></i>
                 </a>
               

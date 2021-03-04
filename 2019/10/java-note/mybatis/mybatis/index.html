@@ -60,17 +60,17 @@
 <meta name="keywords" content="java,mybatis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mybatis">
-<meta property="og:url" content="https://codeofli.github.io/2019/11/java-note/mybatis/mybatis/index.html">
+<meta property="og:url" content="https://codeofli.github.io/2019/10/java-note/mybatis/mybatis/index.html">
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="[TOC]入门mybatis约定：输入参数parameterType 和 输出参数resultType ，在形式上都只能有一个如果输入参数 ：是简单类型（8个基本类型+String） 是可以使用任何占位符,#{xxxx}           如果是对象类型，则必须是对象的属性 #{属性名}输出参数：  如果返回值类型是一个 对象（如Student），则无论返回一个、还是多个，        再re">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/java-note/mybatis/mybatis/E:%5Cpictures%5CLanguage%5Cmybatis%5C%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%981.png">
-<meta property="og:updated_time" content="2020-01-13T10:16:14.419Z">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/mybatis/mybatis/E:%5Cpictures%5CLanguage%5Cmybatis%5C%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%981.png">
+<meta property="og:updated_time" content="2021-03-04T08:06:50.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis">
 <meta name="twitter:description" content="[TOC]入门mybatis约定：输入参数parameterType 和 输出参数resultType ，在形式上都只能有一个如果输入参数 ：是简单类型（8个基本类型+String） 是可以使用任何占位符,#{xxxx}           如果是对象类型，则必须是对象的属性 #{属性名}输出参数：  如果返回值类型是一个 对象（如Student），则无论返回一个、还是多个，        再re">
-<meta name="twitter:image" content="https://codeofli.github.io/2019/11/java-note/mybatis/mybatis/E:%5Cpictures%5CLanguage%5Cmybatis%5C%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%981.png">
-  <link rel="canonical" href="https://codeofli.github.io/2019/11/java-note/mybatis/mybatis/">
+<meta name="twitter:image" content="https://codeofli.github.io/2019/10/java-note/mybatis/mybatis/E:%5Cpictures%5CLanguage%5Cmybatis%5C%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%981.png">
+  <link rel="canonical" href="https://codeofli.github.io/2019/10/java-note/mybatis/mybatis/">
 
 
 <script id="page-configurations">
@@ -286,7 +286,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/11/java-note/mybatis/mybatis/">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/10/java-note/mybatis/mybatis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nicolas lee">
@@ -314,7 +314,7 @@
                 
               
 
-              <time title="创建时间：2019-11-12 10:40:06" itemprop="dateCreated datePublished" datetime="2019-11-12T10:40:06+08:00">2019-11-12</time>
+              <time title="创建时间：2019-10-12 10:40:06" itemprop="dateCreated datePublished" datetime="2019-10-12T10:40:06+08:00">2019-10-12</time>
             </span>
           
             
@@ -325,7 +325,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-13 18:16:14" itemprop="dateModified" datetime="2020-01-13T18:16:14+08:00">2020-01-13</time>
+                <time title="修改时间：2021-03-04 16:06:50" itemprop="dateModified" datetime="2021-03-04T16:06:50+08:00">2021-03-04</time>
               </span>
             
           
@@ -584,7 +584,7 @@
 <h1 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h1><h2 id="一级缓存-："><a href="#一级缓存-：" class="headerlink" title="一级缓存 ："></a>一级缓存 ：</h2><p>同一个SqlSession对象</p>
 <p>​      MyBatis默认开启一级缓存，如果用同样的SqlSession对象查询相同的数据，<br>​    则只会在第一次 查询时 向数据库发送SQL语句，并将查询的结果 放入到</p>
 <p>SQLSESSION中（作为缓存存在）；<br>    后续再次查询该同样的对象时，<br>    则直接从缓存中查询该对象即可（即省略了数据库的访问）    </p>
-<p><img src="/2019/11/java-note/mybatis/mybatis/E:%5Cpictures%5CLanguage%5Cmybatis%5C%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%981.png" alt="1561619500501"></p>
+<p><img src="/2019/10/java-note/mybatis/mybatis/E:%5Cpictures%5CLanguage%5Cmybatis%5C%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%981.png" alt="1561619500501"></p>
 <h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><p>​    MyBatis默认情况没有开启二级缓存，需要手工打开。<br>​    a.conf.xml</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 开启二级缓存 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"cacheEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -678,7 +678,7 @@
     <strong>本文作者： </strong>nicolas lee</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://codeofli.github.io/2019/11/java-note/mybatis/mybatis/" title="mybatis">https://codeofli.github.io/2019/11/java-note/mybatis/mybatis/</a>
+    <a href="https://codeofli.github.io/2019/10/java-note/mybatis/mybatis/" title="mybatis">https://codeofli.github.io/2019/10/java-note/mybatis/mybatis/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
@@ -705,7 +705,7 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/11/java-note/javaWeb/javaWeb/" rel="next" title="javaWeb">
+                <a href="/2019/10/java-note/javaWeb/javaWeb/" rel="next" title="javaWeb">
                   <i class="fa fa-chevron-left"></i> javaWeb
                 </a>
               
@@ -715,8 +715,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/11/docker/docker/" rel="prev" title="docker">
-                  docker <i class="fa fa-chevron-right"></i>
+                <a href="/2019/10/java-note/maven/maven/" rel="prev" title="maven">
+                  maven <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
