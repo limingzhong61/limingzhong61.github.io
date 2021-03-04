@@ -7,6 +7,12 @@ tags: 学习笔记
 
 [hexo官方文档](https://hexo.io/zh-cn/docs/setup)
 
+# 安装hexo
+
+npm安装，注意找到hexo.cmd的目录，构建环境变量
+
+如：E:\Program Files\nodejs\my_node\node_global\hexo.cmd
+
 ## 开始构建
 
 条件 npm+git
@@ -28,7 +34,7 @@ npm install hexo-deployer-git --save
 
 新建一篇博客，在cmd执行命令：hexo new post “博客名”
 
-使用编辑器编好文章，那么就可以使用命令：hexo d -g，生成以及部署(即自动提交）了
+使用编辑器编好文章，那么就可以使用命令**：hexo d -g，生成以及部署(即自动提交）了**
 
 ```shell
 hexo d -g
