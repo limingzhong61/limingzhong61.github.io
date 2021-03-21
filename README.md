@@ -1,2 +1,2 @@
 # 学习笔记
-https://li-mingzhong.github.io/
+https://codeOflI.github.io/
