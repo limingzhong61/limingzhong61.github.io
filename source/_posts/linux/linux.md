@@ -1,6 +1,6 @@
 ---
 title: linux
-date: 2019-10-12 14:20:26
+date: 2019-11-12 14:20:26
 categories: note
 tags: linux
 ---

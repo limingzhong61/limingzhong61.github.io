@@ -306,8 +306,11 @@ docker run -it -v /hmoe/ubuntu:/tmp mysql02 /bin/bash
 # mysql使用
 
 ```shell
-sudo docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7.27 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+sudo docker run -p 3306:3306 --name mysql8 -e MYSQL_ROOT_PASSWORD=root -d mysql:8.0.23 --character-set-server=utf8 --collation-server=utf8_unicode_ci
 ```
+
+--name: 容器名
 
 ## MySql 导入 *.sql文件
 
@@ -320,7 +323,7 @@ sudo docker cp /home/ubuntu/yoj.sql(文件路径) mysql(容器名):/home/tmp/yoj
 docker cp 第一个参数指定本地文件或者文件夹，第二个参数指定容器及容器内的目标文件夹 
 
 ```shell
-sudo docker cp /home/ubuntu/yoj.sql mysql:/home
+sudo docker cp /home/ubuntu/yoj.sql mysql8:/home
 ```
 
 ### 登入容器内MYSQL执行sql
@@ -333,7 +336,7 @@ docker exec -it (mysql-container-name)[xxx] (in mysql command)[mysql -uroot -p12
 
 ```shell
 docker exec -it bteye-mysql mysql -uroot -p123456
-docker exec -it mysql mysql -uroot -proot
+docker exec -it mysql8 mysql -uroot -p
 ```
 
 执行sql文件 

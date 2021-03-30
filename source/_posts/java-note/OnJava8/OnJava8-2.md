@@ -1,3 +1,10 @@
+---
+title: OnJava8-2
+date: 2019-10-13 22:19:09
+tags: 学习笔记
+---
+[TOC]
+
 <!-- Validating Your Code -->
 
 # 第十六章 代码校验

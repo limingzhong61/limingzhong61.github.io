@@ -1253,7 +1253,7 @@ v-my-directive='xxx'
 </script> 
 ```
 
-# 第 2 章： vue 组件化编码
+# 第 2 章： vue-cli 组件化编码
 ## 2.1. 使用 vue-cli 创建模板项目
 ### 说明
 1) vue-cli 是 vue 官方提供的脚手架工具
@@ -2084,6 +2084,10 @@ export default new VueRouter({
 
 ## 5.3. 嵌套路由
 
+嵌套路由，通常是在page里放component使用
+
+
+
 ### 5.3.2. 子路由组件
 News.vue
 Message.vue
@@ -2109,6 +2113,35 @@ path: '/home',
 <router-link to="/home/message">Message</router-link>
 <router-view></route-view 
 ```
+
+### 默认子路由
+
+redirect：重定向到默认子路由的路径
+
+```json
+{
+    path: "/contest/view/:id",
+    component: ContestView,
+    redirect: '/contest/view/:id/contestProblem',
+    name: 'contestView',
+    children: [
+        {
+            // 当 /contest/view/:id/contestProblem 匹配成功，
+            path: 'contestProblem',
+            component: ContestProblem
+        },
+        {
+            // 当 /contest/view/:id/contestProblem 匹配成功，
+            path: 'contestSolution',
+            component: SolutionSet
+        }
+    ]
+}
+```
+
+
+
+
 
 ## 5.4. 向路由组件传递数据 
 

@@ -1,3 +1,10 @@
+---
+title: varay
+date: 2019-10-13 22:19:09
+tags: 学习笔记
+---
+[TOC]
+
 [github仓库](https://github.com/v2ray/manual)
 
 [v2ray.com](https://www.v2ray.com/)
@@ -118,16 +125,7 @@ bash <(curl -s -L https://git.io/v2ray.sh)
 
 ```
 v2ray url
-
-
-http://127.0.0.1:10810/pac/?t=185402
 ```
-
-```
-vmess://ewoidiI6ICIyIiwKInBzIjogIjIzM3YyLmNvbV9vdy55ZXN0b2p1ZGdlLmNuIiwKImFkZCI6ICJvdy55ZXN0b2p1ZGdlLmNuIiwKInBvcnQiOiAiNDQzIiwKImlkIjogIjg1ZjYyYTAwLTkyNTktNDcyMC1iYzM0LTI5Mjg3ZTFkZDZhZiIsCiJhaWQiOiAiMCIsCiJuZXQiOiAid3MiLAoidHlwZSI6ICJub25lIiwKImhvc3QiOiAib3cueWVzdG9qdWRnZS5jbiIsCiJwYXRoIjogIi8yMzNibG9nIiwKInRscyI6ICJ0bHMiCn0K
-```
-
-
 
 ![1578966290726](v2ray/1578966290726.png)
 

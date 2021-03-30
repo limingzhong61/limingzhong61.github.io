@@ -68,7 +68,18 @@ mysql 【-h主机名 -P端口号 】-u用户名 -p密码
 exit或ctrl+C	
 ```
 
-###  MySQL的常见命令 
+#  MySQL的常见命令 
+
+创建数据库
+
+```mysql
+CREATE DATABASE IF NOT EXISTS yoj DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+```
+
+创建数据库，该命令的作用：
+
+-  \1. 如果数据库不存在则创建，存在则不创建。
+-  \2. 创建yoj数据库，并设定编码集为utf8
 
 ```
 1.查看当前所有的数据库
@@ -130,13 +141,16 @@ TCL（Transaction Control Language）：事务控制语言
 	commit、rollback
 ```
 
+
+
 # DQL语言的学习
 
 ## 进阶1：基础查询
 
-	语法：
-	SELECT 要查询的东西
-	【FROM 表名】;
+```sql
+语法：
+SELECT 要查询的东西【FROM 表名】;
+```
 
 ```sql
 类似于Java中 :System.out.println(要打印的东西);
@@ -351,19 +365,26 @@ max、min、count可以处理任何数据类型
 	from 表
 	group by 分组的字段
 
-```
 特点：
 1、可以按单个字段分组
+
 2、和分组函数一同查询的字段最好是分组后的字段
+
 3、分组筛选
 		针对的表	位置			关键字
 分组前筛选：	原始表		group by的前面		where
 分组后筛选：	分组后的结果集	group by的后面		having
 
 4、可以按多个字段分组，字段之间用逗号隔开
+
 5、可以支持排序
 6、having后可以支持别名
-```
+
+
+
+### 注意：
+
+group by的select语句中 的select**显示字段**一般**除了聚合函数就只能为group by后的字段**
 
 group by能用于多列去重
 
@@ -561,7 +582,7 @@ where 连接条件
 and 筛选条件
 ```
 
-###删除
+## 删除
 
 方式1：delete语句 
 
@@ -583,19 +604,19 @@ truncate table 表名
 两种方式的区别【面试题】
 	
 
-```
-#1.truncate不能加where条件，而delete可以加where条件
+1.truncate不能加where条件，而delete可以加where条件
 
-#2.truncate的效率高一丢丢
+2.truncate的效率高一丢丢
 
-#3.truncate 删除带自增长的列的表后，如果再插入数据，数据从1开始
+3.truncate 删除带自增长的列的表后，如果再插入数据，数据从1开始
 #delete 删除带自增长列的表后，如果再插入数据，数据从上一次的断点处开始
 
-#4.truncate删除不能回滚，delete删除可以回滚
-```
+4.truncate删除不能回滚，delete删除可以回滚
 
-##DDL语句
-###库和表的管理
+# DDL语句
+
+## ###库和表的管理
+
 库的管理：
 
 ```
@@ -621,22 +642,29 @@ CREATE TABLE IF NOT EXISTS stuinfo(
 	);
 	
 	DESC studentinfo;
-	#2.修改表 alter
-	语法：ALTER TABLE 表名 ADD|MODIFY|DROP|CHANGE COLUMN 字段名 【字段类型】;
-	
-	#①修改字段名
-	ALTER TABLE studentinfo CHANGE  COLUMN sex gender CHAR;
-	
-	#②修改表名
-	ALTER TABLE stuinfo RENAME [TO]  studentinfo;
-	#③修改字段类型和列级约束
-	ALTER TABLE studentinfo MODIFY COLUMN borndate DATE ;
-	
-	#④添加字段
-	
-	ALTER TABLE studentinfo ADD COLUMN email VARCHAR(20) first;
-	#⑤删除字段
-	ALTER TABLE studentinfo DROP COLUMN email;
+
+## 2.修改表 alter
+
+```
+
+语法：ALTER TABLE 表名 ADD|MODIFY|DROP|CHANGE COLUMN 字段名 【字段类型】;
+
+#①修改字段名
+ALTER TABLE studentinfo CHANGE  COLUMN sex gender CHAR;
+
+#②修改表名
+ALTER TABLE stuinfo RENAME [TO]  studentinfo;
+#③修改字段类型和列级约束
+ALTER TABLE studentinfo MODIFY COLUMN borndate DATE ;
+
+#④添加字段
+
+ALTER TABLE studentinfo ADD COLUMN email VARCHAR(20) first;
+#⑤删除字段
+ALTER TABLE studentinfo DROP COLUMN email;
+```
+
+
 
 
 ​	
@@ -647,7 +675,7 @@ CREATE TABLE IF NOT EXISTS stuinfo(
 
 ​	
 
-###常见类型
+### ###常见类型
 
 ```
 整型：
@@ -662,7 +690,7 @@ Blob类型：
 
 
 
-###常见约束
+### ###常见约束
 
 ```
 NOT NULL
@@ -692,7 +720,7 @@ FOREIGN KEY
 3、提交事务或回滚事务
 ```
 
-###事务的分类：
+### ###事务的分类：
 
 隐式事务，没有明显的开启和结束事务的标志
 
@@ -715,7 +743,7 @@ insert、update、delete语句本身就是一个事务
 	3、提交事务或回滚事务
 ```
 
-###使用到的关键字
+### ###使用到的关键字
 
 ```
 set autocommit=0;

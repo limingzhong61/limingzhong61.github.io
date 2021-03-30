@@ -173,6 +173,11 @@ git checkout .
 git reset HEAD <file>...
 ```
 
+将暂存区的文件撤回到工作区 :多个文件
+
+```
+git reset HEAD .
+```
 
 文件删除
 
@@ -610,6 +615,18 @@ $ git push origin dev
 
 # .gitignore的操作
 
+```
+下面是一些.gitignore文件忽略的匹配规则：
+
+*.a       # 忽略所有 .a 结尾的文件
+!lib.a    # 但 lib.a 除外
+/TODO     # 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO
+build/    # 忽略 build/ 目录下的所有文件
+doc/*.txt # 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt
+```
+
+
+
 目的是忽略指定类型的文件或者某个文件夹
 
 1. a、新建.gitignore文件：
@@ -622,14 +639,27 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
-###忽略配置文件###
-judge.properties
+
+### xxx ###
+application.properties
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
 ### IntelliJ IDEA ###
 .idea
 *.iws
 *.iml
 *.ipr
+.mvn/
+mvnw
+mvnw.cmd
 
 ### NetBeans ###
 /nbproject/private/
@@ -643,7 +673,46 @@ build/
 .vscode/
 ```
 
+# 删除git上已经提交的文件
+
+1.先查看有哪些文件可以删除,但是不真执行删除
+
+```
+git rm -r -n job-executor-common/target/*
+```
+
+-r 递归移除目录
+
+-n 加上这个参数，执行命令时，是不会删除任何文件，而是展示此命令要删除的文件列表预览，所以一般用这个参数先看看要删除哪些文件，防止误删，确认之后，就去掉此参数，真正的删除文件。
+
+上面这个命令就是先查看 job-executor-common/target/* 下有哪些可以删除的内容
+
+2.执行删除
+
+```
+git rm -r  job-executor-common/target/*
+```
+
+此时,就把指定目录下所有内容从本地版本库中删除了
+
+如果只想从版本库中删除,但是本地仍旧保留的话,加上 --cached 参数
+
+```
+git rm -r --cached job-executor-common/target/*
+```
+
+3.**删除远程版本库中的文件**
+
+再执行提交操作即可
+
+```
+git commit -m"移除target目录下所有文件"
+git push origin dev其中origin dev为分支名称
+```
+
 # git-me
+
+
 
 ## 开发时不使用master(保存)分支
 
