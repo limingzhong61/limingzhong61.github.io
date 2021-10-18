@@ -1577,6 +1577,8 @@ b. 兄弟组件间也不能直接 props 通信, 必须借助父组件才可以
 
 ## 使用 `this.$refs` 来获取元素和组件
 
+注：元素中的ref属性=`xx`与`this.$refs.xx`相对应。
+
 ```js
   <div id="app">
     <div>

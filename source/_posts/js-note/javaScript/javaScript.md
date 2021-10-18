@@ -1138,6 +1138,7 @@ var bool = new Boolean(true);
 | getMilliseconds() | 返回 Date 对象的毫秒(0 ~ 999)。                              |
 | getTime()         | 返回当前日期对象的时间戳<br/>	 时间戳，指的是从1970年月1日 0时0分0秒，**到现在时间的毫秒数**<br/>		计算机底层保存时间都是以时间戳的形式保存的。 |
 | Date.now()        | 可以获取当前代码执行时的时间戳                               |
+| setHours()        | 设置 Date 对象中的小时 (0 ~ 23)                              |
 
 ## Math			  
 

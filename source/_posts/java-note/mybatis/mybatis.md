@@ -1254,3 +1254,10 @@ https://blog.csdn.net/mahoking/article/details/46811865
 </insert>
 ```
 
+## 插入后取到最后生成的主键
+
+```xml
+<!--取到最后生成的主键--><insert id="insertSelective" useGeneratedKeys="true" keyColumn="problem_id" keyProperty="problemId"        parameterType="com.yoj.web.bean.Problem">
+```
+
+## 

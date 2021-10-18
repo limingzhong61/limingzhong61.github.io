@@ -54,6 +54,8 @@ Initialized empty Git repository in E:/gitpro/.git/
 3. **版本库Master**
 
    真正发布的代码
+   
+   git stage
 
 ## 3、仓库基本操作
 
@@ -558,7 +560,9 @@ feature,扩展分支
 ​	强制删除有不同修改的分支
 ​		git branch -D feature
 补丁
-​	比较分支区别
+
+### 比较分支区别
+
 ​		git diff master > patch
 ​		通过命令行的管道流，将diff保存再来patch文件里
 ​	通过补丁合并分支
@@ -727,3 +731,9 @@ git commit之后git会保存此时所有文件，如果此时添加了不必要�
 # github
 
 [Github 网页上 更新 Fork别人的 Repository](https://blog.csdn.net/huutu/article/details/51018317)
+
+github查看代码方式：
+
+**github.com改成github1s.com**
+
+/github1s.com/codeOflI/JudgeServer/blob/HEAD/src/main/java/com/yoj/judge_server/aspect/JudgePermitAspect.java

@@ -4528,5 +4528,164 @@ spring:
 # 常见问题
 
 ## test测试插入，数据并没有保存到数据库
-使用junit测试插入，测试显示成功，但是数据并没有保存到数据库。是因为在junit下，插入数据会自动回滚，所以测试显示成功但实际上不能插入。若要插入到数据库，只需在测试方法上添加@Rollback(false)注解即可。
+使用junit测试插入，测试显示成功，但是数据并没有保存到数据库。是**因为在junit下，插入数据会自动回滚，所以测试显示成功但实际上不能插入**。若要插入到数据库，只需在测试方法上添加@Rollback(false)注解即可。
 
+# 自己使用
+
+## 文件上传、下载
+
+[官方文档](https://spring.io/guides/gs/uploading-files/)
+
+自己例子：上传图片
+
+Application.java添加`@EnableConfigurationProperties(StorageProperties.class)`
+
+```java
+@EnableConfigurationProperties(StorageProperties.class)
+public class YojApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(YojApplication.class, args);
+    }
+}
+```
+
+```java
+@ConfigurationProperties("storage")
+public class StorageProperties {
+
+	/**
+	 * Folder location for storing files
+	 */
+	private String location = "upload-dir";
+
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+}
+```
+
+**注：项目名/upload-dir/avatar目录需存在**
+
+```java
+@Service
+@Slf4j
+public class StorageService {
+//    @Value("${spring.servlet.multipart.location}")
+    private final Path storeRootLocation;
+    @Autowired
+    private UserUtil currentUserUtil;
+
+    @Autowired
+    public StorageService(StorageProperties properties) {
+        this.storeRootLocation = Paths.get(properties.getLocation());
+    }
+
+    /**
+     * @param uploadFile
+     * @return is or not upload successfully
+     */
+    public boolean storeAvatar(MultipartFile uploadFile, HttpServletRequest req) {
+        // empty file data
+        if (uploadFile == null || uploadFile.isEmpty()) {
+            log.info("not have uploadFile data");
+            return false;
+        }
+        // 组成新的文件名
+        String oldName = uploadFile.getOriginalFilename();
+        //不是图片后缀名
+        if (!oldName.endsWith(".jpg") && !oldName.endsWith(".png") && !oldName.endsWith(".gif")) {
+            log.info("not have a image suffix");
+            return false;
+        }
+        //related path : static/uploadFile
+        // newFile is composed of saveDirectory + useId.originSuffix
+        String newFileName = currentUserUtil.getUserDetail().getUsername() + oldName.substring(oldName.lastIndexOf("."), oldName.length());
+        Path storePath = Paths.get(storeRootLocation.normalize().toAbsolutePath().toString(), "avatar", newFileName);
+        try (InputStream inputStream = uploadFile.getInputStream()) {
+            Files.copy(inputStream, storePath,
+                    StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // judge is or not a image file
+        File savedImage = new File(storePath.toString());
+        if (!isImage(savedImage)) {
+            log.info("is not a image file");
+            savedImage.delete();
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 通过读取文件并获取其width及height的方式，来判断判断当前文件是否图片，这是一种非常简单的方式。
+     * 这种方式较安全！
+     *
+     * @param imageFile
+     * @return
+     */
+    public static boolean isImage(File imageFile) {
+        if (!imageFile.exists()) {
+            return false;
+        }
+        Image img = null;
+        try {
+            img = ImageIO.read(imageFile);
+            if (img == null || img.getWidth(null) <= 0 || img.getHeight(null) <= 0) {
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        } finally {
+            img = null;
+        }
+    }
+}
+```
+
+```properties
+#文件传输配置
+spring.servlet.multipart.enabled=true
+spring.servlet.multipart.file-size-threshold=0
+#表示上传文件的临时保存位置，要保证其路径存在。可以省略配置
+#spring.servlet.multipart.location=D:\\OJ
+spring.servlet.multipart.max-file-size=1MB
+spring.servlet.multipart.max-request-size=10MB
+spring.servlet.multipart.resolve-lazily=false
+
+#代码解释：
+#第l 行表示是否开启文件上传支持，默认为true。
+#第2 行表示文件写入磁盘的闽值，默认为0 。
+#第4 行表示上传的羊个文件的最大大小，默认为11\侣。
+#第5 行表示多文件上传时文件的总大小，默认为10孔侣。
+#第6 行表示文件是否延迟解析，默认为false 。
+```
+
+### 通过url访问项目外的其他目录下的图片
+
+1.首先在application.properties文件中增加配置：
+
+```properties
+#资源绝对路径为file: D://Codes/Java/yoj/upload-dir，图片存放的真实路径
+#意思是springboot开放此资源路径供外部读取
+spring.resources.static-locations=file:D://Codes/Java/yoj/upload-dir
+
+#资源映射路径为/image/**，使用url访问的请求路径
+spring.mvc.static-path-pattern=/image/**
+```
+
+vue
+
+```vue
+<img class="user-img ml-auto" :src="appApi+'/image/avatar/1.jpg'"/>
+```
+
+2.如果项目使用了权限认证，则需要将/image/** 添加在免认证的配置中，才能直接访问。 
+
+如此便可以访问图片了：https://localhost:8050/image/avatar/1.jpg

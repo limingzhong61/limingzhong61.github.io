@@ -378,3 +378,9 @@ src/main/java、 src/main/resource、src/test/java 、src/test/resource   四个
 1、Snapshot 版本代表不稳定、尚处于开发中的版本。
 
 2、Release 版本则代表稳定的版本。
+
+# 安装maven注意点
+
+[maven配置文件](#maven配置文件)
+
+[maven本地仓库位置](##本地仓库)

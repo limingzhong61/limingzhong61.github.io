@@ -2557,6 +2557,17 @@ t2.printing_age()
 
 # 使用
 
+# pycharm导入python项目
+
+选择New environment 或者 Existing environment都可以，路径选择本地配置的python.exe路径即可；
+
+New Environment:
+New Environment部分是选择新建项目所依赖的python库，第一个选项会在项目中简历一个venv（virtualenv）目录，这里存放一个虚拟的python环境。这里所有的类库依赖都可以直接脱离系统安装的python独立运行。 
+
+Existing Interpreter:
+Existing Interpreter关联已经存在的python解释器，如果不想在项目中出现venv这个虚拟解释器就可以选择本地安装的python环境。 
+**通常选择Existing Interpreter即可**
+
 ## python定义类似常量
 
 const.py

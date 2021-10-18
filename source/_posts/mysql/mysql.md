@@ -1453,7 +1453,30 @@ set password for root@localhost = password('123');
 
 
 
+## 将表结构查询为表格
 
+```mysql
+SELECT
+  COLUMN_NAME 列名,
+  COLUMN_TYPE 数据类型,
+    DATA_TYPE 字段类型,
+  CHARACTER_MAXIMUM_LENGTH 长度,
+	IF(IS_NULLABLE = 'YES','是','否') AS '是否为空',
+  COLUMN_DEFAULT 默认值, 
+	IF(COLUMN_KEY='PRI','是','否') AS '主键',
+	IF(COLUMN_KEY='MUL','是','否') AS '外键',
+  COLUMN_COMMENT 备注,
+	COLUMN_KEY
+FROM
+ INFORMATION_SCHEMA.COLUMNS
+where
+-- yoj为数据库名称，到时候只需要修改成你要导出表结构的数据库即可
+table_schema ='yoj'
+AND
+-- user为表名，到时候换成你要导出的表的名称
+-- 如果不写的话，默认会查询出所有表中的数据，这样可能就分不清到底哪些字段是哪张表中的了，所以还是建议写上要导出的名名称
+table_name  = 'problem'
+```
 
 
 
