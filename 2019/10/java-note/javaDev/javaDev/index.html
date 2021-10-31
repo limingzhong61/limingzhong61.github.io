@@ -45,7 +45,7 @@
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
     localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
+    path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: '复制',
@@ -64,7 +64,7 @@
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="[TOC]CGLIB什么是CGLIBCGLIB是一个强大的、高性能的代码生成库。其被广泛应用于AOP框架（Spring、dynaop）中，用以提供方法拦截操作。Hibernate作为一个比较受欢迎的ORM框架，同样使用CGLIB来代理单端（多对一和一对一）关联（延迟提取集合使用的另一种机制）。CGLIB作为一个开源项目，其代码托管在github，地址为：https://github.com/cgl">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-03-04T07:55:50.401Z">
+<meta property="og:updated_time" content="2021-10-23T02:19:04.193Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javaDev">
 <meta name="twitter:description" content="[TOC]CGLIB什么是CGLIBCGLIB是一个强大的、高性能的代码生成库。其被广泛应用于AOP框架（Spring、dynaop）中，用以提供方法拦截操作。Hibernate作为一个比较受欢迎的ORM框架，同样使用CGLIB来代理单端（多对一和一对一）关联（延迟提取集合使用的另一种机制）。CGLIB作为一个开源项目，其代码托管在github，地址为：https://github.com/cgl">
@@ -209,7 +209,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">32</span></a>
 
   </li>
       
@@ -231,7 +231,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
 
   </li>
       
@@ -253,7 +253,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">48</span></a>
 
   </li>
   </ul>
@@ -323,7 +323,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-04 15:55:50" itemprop="dateModified" datetime="2021-03-04T15:55:50+08:00">2021-03-04</time>
+                <time title="修改时间：2021-10-23 10:19:04" itemprop="dateModified" datetime="2021-10-23T10:19:04+08:00">2021-10-23</time>
               </span>
             
           
@@ -361,6 +361,11 @@
         <p>[TOC]</p><h1 id="CGLIB"><a href="#CGLIB" class="headerlink" title="CGLIB"></a>CGLIB</h1><h2 id="什么是CGLIB"><a href="#什么是CGLIB" class="headerlink" title="什么是CGLIB"></a>什么是CGLIB</h2><p>CGLIB是一个强大的、高性能的代码生成库。其被广泛应用于AOP框架（Spring、dynaop）中，用以提供方法拦截操作。Hibernate作为一个比较受欢迎的ORM框架，同样使用CGLIB来代理单端（多对一和一对一）关联（延迟提取集合使用的另一种机制）。CGLIB作为一个开源项目，其代码托管在github，地址为：<a href="https://github.com/cglib/cglib" target="_blank" rel="noopener">https://github.com/cglib/cglib</a></p><a id="more"></a>
 
 <h2 id="为什么使用CGLIB"><a href="#为什么使用CGLIB" class="headerlink" title="为什么使用CGLIB"></a>为什么使用CGLIB</h2><p>CGLIB代理主要通过对字节码的操作，为对象引入间接级别，以控制对象的访问。我们知道Java中有一个动态代理也是做这个事情的，那我们为什么不直接使用Java动态代理，而要使用CGLIB呢？答案是CGLIB相比于JDK动态代理更加强大，JDK动态代理虽然简单易用，但是其有一个致命缺陷是，只能对接口进行代理。如果要代理的类为一个普通类、没有接口，那么Java动态代理就没法使用了。关于Java动态代理，可以参者这里<a href="http://blog.csdn.net/danchu/article/details/70146985" target="_blank" rel="noopener">Java动态代理分析</a></p>
+<h1 id="model模型层分类"><a href="#model模型层分类" class="headerlink" title="model模型层分类"></a>model模型层分类</h1><p><strong>概念：</strong></p>
+<p><strong>VO**</strong>（View Object<strong>**）：</strong>视图对象**，用于展示层，它的作用是把某个指定页面（或组件）的所有数据封装起来。</p>
+<p><strong>DTO**</strong>（Data Transfer Object<strong>**）：</strong>数据传输对象**，这个概念来源于J2EE的设计模式，原来的目的是为了EJB的分布式应用提供粗粒度的数据实体，以减少分布式调用的次数，从而提高分布式调用的性能和降低网络负载，但在这里，我泛指用于展示层与服务层之间的数据传输对象。</p>
+<p><strong>DO**</strong>（Domain Object<strong>**）：</strong>领域对象**，就是从现实世界中抽象出来的有形或无形的业务实体。</p>
+<p><strong>PO**</strong>（Persistent Object<strong>**）：</strong>持久化对象<strong>，它跟</strong>持久层（通常是关系型数据库）的数据结构形成**一一对应的映射关系，如果持久层是关系型数据库，那么，数据表中的每个字段（或若干个）就对应PO的一个（或若干个）属性。</p>
 
     </div>
 
@@ -425,8 +430,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/10/java-note/OnJava8/OnJava8-appendix/" rel="next" title="OnJava8-appendix">
-                  <i class="fa fa-chevron-left"></i> OnJava8-appendix
+                <a href="/2019/10/java-note/OnJava8/OnJava8-4/" rel="next" title="OnJava8-4">
+                  <i class="fa fa-chevron-left"></i> OnJava8-4
                 </a>
               
             </div>
@@ -435,8 +440,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/10/v2ray/v2ray/" rel="prev" title="varay">
-                  varay <i class="fa fa-chevron-right"></i>
+                <a href="/2019/10/java-note/OnJava8/OnJava8-appendix/" rel="prev" title="OnJava8-appendix">
+                  OnJava8-appendix <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -483,7 +488,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CGLIB"><span class="nav-number">1.</span> <span class="nav-text">CGLIB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是CGLIB"><span class="nav-number">1.1.</span> <span class="nav-text">什么是CGLIB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么使用CGLIB"><span class="nav-number">1.2.</span> <span class="nav-text">为什么使用CGLIB</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CGLIB"><span class="nav-number">1.</span> <span class="nav-text">CGLIB</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是CGLIB"><span class="nav-number">1.1.</span> <span class="nav-text">什么是CGLIB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么使用CGLIB"><span class="nav-number">1.2.</span> <span class="nav-text">为什么使用CGLIB</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#model模型层分类"><span class="nav-number">2.</span> <span class="nav-text">model模型层分类</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -502,7 +507,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -515,7 +520,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -528,7 +533,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

@@ -45,7 +45,7 @@
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
     localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
+    path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: '复制',
@@ -64,28 +64,28 @@
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="[TOC]nginxhttp://nginx.org/en/docs/http/ngx_http_proxy_module.html#example1、 nginx 简介（1）  什么是 nginx 和可以做什么事情（2）  正向代理（3）  反向代理（4）  动静分离2、 Nginx 的安装（1） 在 linux 系统中安装 nginx 3、 Nginx 的常用命令和配置文件">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/nginx/nginx/image-20200101220529125.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/nginx/nginx/1577887797364.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/nginx/nginx/1577888551513.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/nginx/nginx/1577888962756.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/nginx/nginx/1578484196454.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/nginx/nginx/1578537456343.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/nginx/nginx/1578554153974.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/nginx/nginx/image28.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/nginx/nginx/image30.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/nginx/nginx/image32.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/nginx/nginx/image33.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/nginx/nginx/image34.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/nginx/nginx/image35.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/nginx/nginx/image38.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/nginx/nginx/1585268825007.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/nginx/nginx/1585268719858.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/nginx/nginx/1585268743070.png">
-<meta property="og:updated_time" content="2021-03-04T03:19:08.965Z">
+<meta property="og:image" content="https://localhost:4000/2019/11/nginx/nginx/image-20200101220529125.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/nginx/nginx/1577887797364.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/nginx/nginx/1577888551513.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/nginx/nginx/1577888962756.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/nginx/nginx/1578484196454.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/nginx/nginx/1578537456343.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/nginx/nginx/1578554153974.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/nginx/nginx/image28.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/nginx/nginx/image30.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/nginx/nginx/image32.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/nginx/nginx/image33.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/nginx/nginx/image34.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/nginx/nginx/image35.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/nginx/nginx/image38.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/nginx/nginx/1585268825007.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/nginx/nginx/1585268719858.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/nginx/nginx/1585268743070.png">
+<meta property="og:updated_time" content="2021-10-30T02:35:54.405Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nginx">
 <meta name="twitter:description" content="[TOC]nginxhttp://nginx.org/en/docs/http/ngx_http_proxy_module.html#example1、 nginx 简介（1）  什么是 nginx 和可以做什么事情（2）  正向代理（3）  反向代理（4）  动静分离2、 Nginx 的安装（1） 在 linux 系统中安装 nginx 3、 Nginx 的常用命令和配置文件">
-<meta name="twitter:image" content="https://codeofli.github.io/2019/11/nginx/nginx/image-20200101220529125.png">
+<meta name="twitter:image" content="https://localhost:4000/2019/11/nginx/nginx/image-20200101220529125.png">
   <link rel="canonical" href="https://codeofli.github.io/2019/11/nginx/nginx/">
 
 
@@ -227,7 +227,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">32</span></a>
 
   </li>
       
@@ -249,7 +249,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
 
   </li>
       
@@ -271,7 +271,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">48</span></a>
 
   </li>
   </ul>
@@ -341,7 +341,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-04 11:19:08" itemprop="dateModified" datetime="2021-03-04T11:19:08+08:00">2021-03-04</time>
+                <time title="修改时间：2021-10-30 10:35:54" itemprop="dateModified" datetime="2021-10-30T10:35:54+08:00">2021-10-30</time>
               </span>
             
           
@@ -394,42 +394,50 @@
 <h1 id="Nginx-的简介"><a href="#Nginx-的简介" class="headerlink" title="Nginx 的简介"></a><strong>Nginx 的简介</strong></h1><h3 id="什么是-nginx"><a href="#什么是-nginx" class="headerlink" title="什么是 nginx"></a>什么是 <strong>nginx</strong></h3><p>Nginx 是高性能的 HTTP 和反向代理的服务器，处理高并发能力是十分强大的，能经受高负载的考验,有报告表明能支持高达 50,000 个并发连接数。</p>
 <h3 id="2、正向代理"><a href="#2、正向代理" class="headerlink" title="2、正向代理"></a>2、正向代理</h3><p>Nginx<br>不仅可以做反向代理，实现负载均衡。还能用作正向代理来进行上网等功能。<br>正向代理：如果把局域网外的<br>Internet 想象成一个巨大的资源库，则局域网中的客户端要访<br>问 Internet ，则需要通过代理服务器来访问，这种代理服务就称为正向代理。</p>
 <p><strong>需要在==客户端配置代理服务器==进行指定网站访问</strong></p>
-<p> <img src="/2019/11/nginx/nginx/image-20200101220529125.png" alt="image-20200101220529125"></p>
+<p> <img src="//localhost:4000/2019/11/nginx/nginx/image-20200101220529125.png" alt="image-20200101220529125"></p>
 <h3 id="3、反向代理"><a href="#3、反向代理" class="headerlink" title="3、反向代理"></a>3、反向代理</h3><p><strong>暴露的是代理服务器地址，隐藏了真实服务器</strong> <strong>IP</strong> <strong>地址。</strong></p>
 <p><strong>代理服务器</strong></p>
 <p>反向代理，其实客户端对代理是无感知的，因为<strong>客户端不需要任何配置就可以访问，我们只</strong><br><strong>需要将请求发送到反向代理服务器</strong>，由反向代理服务器去选择目标服务器获取数据后，在返<br>回给客户端，此时反向代理服务器和目标服务器对外就是一个服务器，暴露的是代理服务器<br>地址，隐藏了真实服务器 IP 地址。</p>
-<p><img src="/2019/11/nginx/nginx/1577887797364.png" alt="1577887797364"></p>
+<p><img src="//localhost:4000/2019/11/nginx/nginx/1577887797364.png" alt="1577887797364"></p>
 <h3 id="4、负载均衡"><a href="#4、负载均衡" class="headerlink" title="4、负载均衡"></a>4、负载均衡</h3><p>增加服务器的数量，然后将请求分发到各个服务器上，将原先请求集中到单个服务器上的情况改为将请求分发到<strong>多个服务器上</strong>，将负载分发到不同的服务器，也就是我们所说的<strong>负载均衡</strong></p>
-<p><img src="/2019/11/nginx/nginx/1577888551513.png" alt="1577888551513"></p>
+<p><img src="//localhost:4000/2019/11/nginx/nginx/1577888551513.png" alt="1577888551513"></p>
 <h3 id="5、动静分离"><a href="#5、动静分离" class="headerlink" title="5、动静分离"></a>5、动静分离</h3><p>为了加快网站的解析速度，可以把动态页面和静态页面由不同的服务器来解析，加快解析速<br>度。降低原来单个服务器的压力。</p>
-<p><img src="/2019/11/nginx/nginx/1577888962756.png" alt="1577888962756"></p>
+<p><img src="//localhost:4000/2019/11/nginx/nginx/1577888962756.png" alt="1577888962756"></p>
 <h1 id="Nginx-的安装"><a href="#Nginx-的安装" class="headerlink" title="Nginx 的安装"></a>Nginx 的安装</h1><p><a href="https://www.runoob.com/linux/nginx-install-setup.html" target="_blank" rel="noopener">Nginx 安装配置|菜鸟教程</a></p>
-<p>进入 nginx 官网，下载</p>
-<p><a href="http://nginx.org/" target="_blank" rel="noopener">http://nginx.org/</a></p>
+<p>进入 <a href="http://nginx.org/" target="_blank" rel="noopener">nginx 官网</a>，下载</p>
+<p><a href="https://nginx.org/en/download.html" target="_blank" rel="noopener">https://nginx.org/en/download.html</a></p>
 <h2 id="1-安装-pcre"><a href="#1-安装-pcre" class="headerlink" title="1.安装 pcre"></a>1.安装 pcre</h2><p>一般放在 <code>/usr/src</code>中</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget http://downloads.sourceforge.net/project/pcre/pcre/8.37/pcre</span><br><span class="line">8.37.tar.gz</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://downloads.sourceforge.net/project/pcre/pcre/8.37/pcre-8.37.tar.gz</span><br></pre></td></tr></table></figure>
 
 <p>第二步 解压压缩文件<br>使用命令 </p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf pcre-8.37.tar.gz</span><br></pre></td></tr></table></figure>
 
 <p>3、进入安装包目录</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="symbol">root@</span>bogon src]# cd pcre<span class="number">-8.35</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd pcre<span class="number">-8.37</span></span><br></pre></td></tr></table></figure>
 
 <p>4、编译安装 </p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="symbol">root@</span>bogon pcre<span class="number">-8.35</span>]# ./configure</span><br><span class="line">[<span class="symbol">root@</span>bogon pcre<span class="number">-8.35</span>]# make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br><span class="line"><span class="built_in">make</span> &amp;&amp; <span class="built_in">make</span> install</span><br></pre></td></tr></table></figure>
+
+<p>4.1make install报错</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[cevent@hadoop213 pcre-8.37]$ make install</span><br><span class="line">make  install-am</span><br><span class="line">make[1]: Entering directory `/opt/module/pcre-8.37<span class="string">'</span></span><br><span class="line"><span class="string">make[2]: Entering directory `/opt/module/pcre-8.37'</span></span><br><span class="line"> /bin/mkdir -p <span class="string">'/usr/local/lib'</span></span><br><span class="line"> /bin/sh ./libtool   --mode=install /usr/bin/install -c   libpcre.la libpcreposix.la libpcrecpp.la <span class="string">'/usr/local/lib'</span></span><br><span class="line">libtool: install: /usr/bin/install -c .libs/libpcre.so.1.2.5 /usr/<span class="built_in">local</span>/lib/libpcre.so.1.2.5</span><br><span class="line">/usr/bin/install: cannot create regular file `/usr/<span class="built_in">local</span>/lib/libpcre.so.1.2.5<span class="string">': Permission denied  没有附权</span></span><br><span class="line"><span class="string">make[2]: *** [install-libLTLIBRARIES] 错误 1</span></span><br><span class="line"><span class="string">make[2]: Leaving directory `/opt/module/pcre-8.37'</span></span><br><span class="line">make[1]: *** [install-am] 错误 2</span><br><span class="line">make[1]: Leaving directory `/opt/module/pcre-8.37<span class="string">'</span></span><br><span class="line"><span class="string">make: *** [install] 错误 2</span></span><br></pre></td></tr></table></figure>
+
+<p>【解决】</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[cevent@hadoop213 pcre-8.37]$ sudo chown -R cevent:cevent /usr/<span class="built_in">local</span>/  修改权限，需要在usr/<span class="built_in">local</span>下创建相关目录</span><br><span class="line">[cevent@hadoop213 pcre-8.37]$ make install 安装</span><br><span class="line">make  install-am</span><br><span class="line">make[1]: Entering directory `/opt/module/pcre-8.37<span class="string">'</span></span><br><span class="line"><span class="string">make[2]: Entering directory `/opt/module/pcre-8.37'</span></span><br><span class="line"> /bin/mkdir -p <span class="string">'/usr/local/lib'</span></span><br><span class="line"> /bin/sh ./libtool   --mode=install /usr/bin/install -c   libpcre.la libpcreposix.la libpcrecpp.la <span class="string">'/usr/local/lib'</span></span><br><span class="line">libtool: install: /usr/bin/install -c .libs/libpcre.so.1.2.5 /usr/<span class="built_in">local</span>/lib/libpcre.so.1.2.5</span><br><span class="line">……</span><br><span class="line">ln -sf pcre_utf32_to_host_byte_order.3   /usr/<span class="built_in">local</span>/share/man/man3/pcre32_utf32_to_host_byte_order.3</span><br><span class="line">ln -sf pcre_version.3                    /usr/<span class="built_in">local</span>/share/man/man3/pcre32_version.3</span><br><span class="line">make[3]: Leaving directory `/opt/module/pcre-8.37<span class="string">'</span></span><br><span class="line"><span class="string">make[2]: Leaving directory `/opt/module/pcre-8.37'</span></span><br><span class="line">make[1]: Leaving directory `/opt/module/pcre-8.37<span class="string">'</span></span><br><span class="line"><span class="string">[cevent@hadoop213 pcre-8.37]$ pcre-config --version 查看版本号</span></span><br><span class="line"><span class="string">8.37</span></span><br></pre></td></tr></table></figure>
 
 <p>5、查看pcre版本</p>
-<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="symbol">root@</span>bogon pcre<span class="number">-8.35</span>]# pcre-config --version</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pcre-config --version</span><br></pre></td></tr></table></figure>
 
 <p>2 ）安装 openssl 、 zlib 、 gcc 依赖</p>
 <p>centos</p>
 <figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install make <span class="literal">zlib</span> <span class="literal">zlib</span> devel gcc c++ libtool openssl openssl devel</span><br></pre></td></tr></table></figure>
 
+<p>ubuntu</p>
+<p><a href="https://blog.csdn.net/z920954494/article/details/52132125" target="_blank" rel="noopener">https://blog.csdn.net/z920954494/article/details/52132125</a></p>
 <p>3 ）安装 nginx</p>
 <ul>
 <li>使用命令解压</li>
 </ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">tar</span> <span class="selector-tag">-xvf</span> <span class="selector-tag">nginx-1</span><span class="selector-class">.12</span><span class="selector-class">.2</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">tar</span> <span class="selector-tag">-xvf</span> <span class="selector-tag">nginx-1</span><span class="selector-class">.20</span><span class="selector-class">.2</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
 
@@ -451,9 +459,11 @@
 <h1 id="Nginx-的常用的命令"><a href="#Nginx-的常用的命令" class="headerlink" title="Nginx 的常用的命令"></a>Nginx 的常用的命令</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure>
 
 <p>首先要进入nginx 目录中 </p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd  <span class="regexp">/usr/</span>local<span class="regexp">/nginx/</span>sbin</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span>  /usr/<span class="built_in">local</span>/nginx/sbin</span><br></pre></td></tr></table></figure>
 
 <p>注意 自己安装的 为 ./nginx</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/usr/</span>local<span class="regexp">/nginx/</span>sbin<span class="regexp">/nginx</span></span><br></pre></td></tr></table></figure>
+
 <table>
 <thead>
 <tr>
@@ -520,7 +530,7 @@
 <p>（2）对外开放访问的端口</p>
 <p>3）在windows 系统中通过浏览器访问tomcat 服务器</p>
 <p>3、访问过程的分析</p>
-<p><img src="/2019/11/nginx/nginx/1578484196454.png" alt="1578484196454"></p>
+<p><img src="//localhost:4000/2019/11/nginx/nginx/1578484196454.png" alt="1578484196454"></p>
 <p>4、具体配置 </p>
 <p>第一步 在windows 系统的host 文件进行域名和ip 对应关系的配置 </p>
 <p><code>C:\Windows\System32\drivers\etc</code>目录下的<code>hosts</code>文件文末添加一行</p>
@@ -548,7 +558,7 @@
 
 <h2 id="location-指令说明"><a href="#location-指令说明" class="headerlink" title="location 指令说明"></a>location 指令说明</h2><p>该指令用于匹配 URL。</p>
 <p> 语法如下：</p>
-<p><img src="/2019/11/nginx/nginx/1578537456343.png" alt="1578537456343"></p>
+<p><img src="//localhost:4000/2019/11/nginx/nginx/1578537456343.png" alt="1578537456343"></p>
 <p>1、= ：用于不含正则表达式的 uri 前，要求请求字符串与 uri 严格匹配，如果匹配成功，就停止继续向下搜索并立即处理该请求。 </p>
 <p>2、~：用于表示 uri 包含正则表达式，并且区分大小写。 </p>
 <p>3、~*：用于表示 uri 包含正则表达式，并且不区分大小写。 </p>
@@ -576,7 +586,7 @@
 <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream server_pool&#123; </span><br><span class="line">   <span class="built_in"> server </span>192.168.5.21:80; </span><br><span class="line">   <span class="built_in"> server </span>192.168.5.22:80; fair; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h1 id="Nginx-配置实例-动静分离"><a href="#Nginx-配置实例-动静分离" class="headerlink" title="Nginx 配置实例-动静分离"></a>Nginx 配置实例-动静分离</h1><p>1 、什么是动静分离</p>
-<p><img src="/2019/11/nginx/nginx/1578554153974.png" alt="1578554153974"></p>
+<p><img src="//localhost:4000/2019/11/nginx/nginx/1578554153974.png" alt="1578554153974"></p>
 <p>Nginx 动静分离简单来说就是把动态跟静态请求分开，不能理解成只是单纯的把动态页面和静态页面物理分离。严格意义上说应该是动态请求跟静态请求分开，可以理解成使用Nginx 处理静态页面，Tomcat处理动态页面。动静分离从目前实现角度来讲大致分为两种， 一种是纯粹把静态文件独立成单独的域名，放在独立的服务器上，也是目前主流推崇的方案； 另外一种方法就是动态跟静态文件混合在一起发布，通过 nginx 来分开。 </p>
 <p>通过 location 指定不同的后缀名实现不同的请求转发。通过 expires 参数设置，可以使浏览器缓存过期时间，减少与服务器之前的请求和流量。具体 Expires 定义：是给一个资源设定一个过期时间，也就是说无需去服务端验证，直接通过浏览器自身确认是否过期即可，所以不会产生额外的流量。此种方法非常适合不经常变动的资源。（如果经常更新的文件，不建议使用 Expires 来缓存），我这里设置 3d，表示在这 3 天之内访问这个 URL，发送一个请求，比对服务器该文件最后更新时间没有变化，则不会从服务器抓取，返回状态码 304，如果有修改，则直接从服务器重新下载，返回状态码 200。</p>
 <p>2 、准备工作</p>
@@ -590,6 +600,10 @@
 
 <p><a href="https://www.bilibili.com/video/av68136734?p=14" target="_blank" rel="noopener">https://www.bilibili.com/video/av68136734?p=14</a></p>
 <h1 id="my"><a href="#my" class="headerlink" title="my"></a>my</h1><p><a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html" target="_blank" rel="noopener">ngx_http_proxy_module</a></p>
+<h1 id="Nginx出现403-forbidden"><a href="#Nginx出现403-forbidden" class="headerlink" title="Nginx出现403 forbidden"></a>Nginx出现403 forbidden</h1><p><a href="https://blog.csdn.net/qq_35843543/article/details/81561240/" target="_blank" rel="noopener">https://blog.csdn.net/qq_35843543/article/details/81561240/</a></p>
+<p>1.2将nginx.config的user改为和启动用户一致，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#user  nobody;</span><br></pre></td></tr></table></figure>
+
 <h2 id="cros"><a href="#cros" class="headerlink" title="cros"></a>cros</h2><p><a href="https://blog.csdn.net/envon123/article/details/83270277" target="_blank" rel="noopener">https://blog.csdn.net/envon123/article/details/83270277</a></p>
 <p>在相应后端服务url中（location）添加</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">add_header 'Access-Control-Allow-Origin' $http_origin;</span><br><span class="line">add_header 'Access-Control-Allow-Credentials' 'true';</span><br><span class="line">add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';</span><br><span class="line">add_header 'Access-Control-Allow-Headers' 'DNT,web-token,app-token,Authorization,Accept,Origin,Keep-Alive,User-Agent,X-Mx-ReqToken,X-Data-Type,X-Auth-Token,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Range';</span><br><span class="line">add_header 'Access-Control-Expose-Headers' 'Content-Length,Content-Range';</span><br><span class="line">if ($request_method = 'OPTIONS') &#123;</span><br><span class="line">	add_header 'Access-Control-Max-Age' 1728000;</span><br><span class="line">	add_header 'Content-Type' 'text/plain; charset=utf-8';</span><br><span class="line">	add_header 'Content-Length' 0;</span><br><span class="line">	return 204;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -615,14 +629,14 @@
 <li>将404错误页面重定向到index.html，可以解决前端history路由模式由于刷新页面访问不到服务出现404的问题</li>
 <li><code>location</code>为代理接口，可以转发代理后端的请求接口域名或者ip，即可解决接口跨域问题</li>
 </ul>
-<p><img src="/2019/11/nginx/nginx/image28.png" alt></p>
+<p><img src="//localhost:4000/2019/11/nginx/nginx/image28.png" alt></p>
 <blockquote>
-<p><img src="/2019/11/nginx/nginx/image30.png" alt></p>
+<p><img src="//localhost:4000/2019/11/nginx/nginx/image30.png" alt></p>
 <p><strong>Nginx 配置高可用的集群</strong></p>
 </blockquote>
-<p><img src="/2019/11/nginx/nginx/image32.png" alt></p>
+<p><img src="//localhost:4000/2019/11/nginx/nginx/image32.png" alt></p>
 <blockquote>
-<p><img src="/2019/11/nginx/nginx/image33.png" alt>2、配置高可用的准备工作</p>
+<p><img src="//localhost:4000/2019/11/nginx/nginx/image33.png" alt>2、配置高可用的准备工作</p>
 <p>（1）需要两台服务器 192.168.17.129 和 192.168.17.131</p>
 </blockquote>
 <ol start="2">
@@ -647,7 +661,7 @@
 <p>4、完成高可用配置（主从配置）</p>
 <p>（1）修改/etc/keepalived/keepalivec.conf 配置文件</p>
 <p>global_defs { notification_email {</p>
-<p><a href="mailto:&#97;&#99;&#x61;&#115;&#115;&#101;&#x6e;&#64;&#x66;&#105;&#x72;&#x65;&#119;&#97;&#x6c;&#108;&#x2e;&#x6c;&#111;&#x63;" target="_blank" rel="noopener">&#97;&#99;&#x61;&#115;&#115;&#101;&#x6e;&#64;&#x66;&#105;&#x72;&#x65;&#119;&#97;&#x6c;&#108;&#x2e;&#x6c;&#111;&#x63;</a> <a href="mailto:&#102;&#97;&#105;&#x6c;&#x6f;&#118;&#x65;&#x72;&#x40;&#x66;&#105;&#114;&#x65;&#x77;&#97;&#108;&#108;&#46;&#108;&#x6f;&#x63;" target="_blank" rel="noopener">&#102;&#97;&#105;&#x6c;&#x6f;&#118;&#x65;&#x72;&#x40;&#x66;&#105;&#114;&#x65;&#x77;&#97;&#108;&#108;&#46;&#108;&#x6f;&#x63;</a> <a href="mailto:&#115;&#x79;&#x73;&#x61;&#x64;&#x6d;&#x69;&#x6e;&#x40;&#102;&#105;&#114;&#101;&#119;&#x61;&#108;&#108;&#46;&#108;&#111;&#x63;" target="_blank" rel="noopener">&#115;&#x79;&#x73;&#x61;&#x64;&#x6d;&#x69;&#x6e;&#x40;&#102;&#105;&#114;&#101;&#119;&#x61;&#108;&#108;&#46;&#108;&#111;&#x63;</a></p>
+<p><a href="mailto:&#97;&#99;&#x61;&#115;&#x73;&#101;&#x6e;&#64;&#x66;&#x69;&#x72;&#x65;&#119;&#x61;&#x6c;&#108;&#46;&#x6c;&#111;&#x63;" target="_blank" rel="noopener">&#97;&#99;&#x61;&#115;&#x73;&#101;&#x6e;&#64;&#x66;&#x69;&#x72;&#x65;&#119;&#x61;&#x6c;&#108;&#46;&#x6c;&#111;&#x63;</a> <a href="mailto:&#x66;&#x61;&#105;&#108;&#x6f;&#x76;&#101;&#x72;&#x40;&#x66;&#105;&#x72;&#x65;&#119;&#97;&#x6c;&#x6c;&#x2e;&#x6c;&#x6f;&#x63;" target="_blank" rel="noopener">&#x66;&#x61;&#105;&#108;&#x6f;&#x76;&#101;&#x72;&#x40;&#x66;&#105;&#x72;&#x65;&#119;&#97;&#x6c;&#x6c;&#x2e;&#x6c;&#x6f;&#x63;</a> <a href="mailto:&#x73;&#x79;&#x73;&#97;&#100;&#x6d;&#x69;&#x6e;&#x40;&#102;&#x69;&#114;&#101;&#x77;&#97;&#x6c;&#108;&#x2e;&#x6c;&#x6f;&#x63;" target="_blank" rel="noopener">&#x73;&#x79;&#x73;&#97;&#100;&#x6d;&#x69;&#x6e;&#x40;&#102;&#x69;&#114;&#101;&#x77;&#97;&#x6c;&#108;&#x2e;&#x6c;&#x6f;&#x63;</a></p>
 <p>}</p>
 <p>notification_email_fr<a href="mailto:Alexandre.Cassen@firewall.loc" target="_blank" rel="noopener">om Alexandre.Cassen@firewall.loc</a> smtp_server 192.168.17.129</p>
 <p>smtp_connect_timeout 30 router_id LVS_DEVEL</p>
@@ -662,11 +676,11 @@
 <p>virtual_router_id 51 # 主、备机的 virtual_router_id 必须相同</p>
 <p>priority 90 # 主、备机取不同的优先级，主机值较大，备份机值较小</p>
 <p>advert_int 1</p>
-<p><img src="/2019/11/nginx/nginx/image34.png" alt></p>
-<p><img src="/2019/11/nginx/nginx/image35.png" alt></p>
+<p><img src="//localhost:4000/2019/11/nginx/nginx/image34.png" alt></p>
+<p><img src="//localhost:4000/2019/11/nginx/nginx/image35.png" alt></p>
 <p><strong>Nginx 的原理</strong></p>
 </blockquote>
-<p><img src="/2019/11/nginx/nginx/image38.png" alt></p>
+<p><img src="//localhost:4000/2019/11/nginx/nginx/image38.png" alt></p>
 <blockquote>
 <p>2、worker 如何进行工作的</p>
 <p>3、一个 master 和多个 woker 有好处</p>
@@ -694,9 +708,9 @@
 <p>原因：图片如jpg、png本身就会有压缩，所以就算开启gzip后，压缩前和压缩后大小没有多大区别，所以开启了反而会白白的浪费资源。（Tips：可以试试将一张jpg图片压缩为zip，观察大小并没有多大的变化。虽然zip和gzip算法不一样，但是可以看出压缩图片的价值并不大）</p>
 <p>2、大文件</p>
 <p>原因：会消耗大量的cpu资源，且不一定有明显的效果。</p>
-<p><img src="/2019/11/nginx/nginx/1585268825007.png" alt="1585268825007"></p>
-<p><img src="/2019/11/nginx/nginx/1585268719858.png" alt="1585268719858"></p>
-<p><img src="/2019/11/nginx/nginx/1585268743070.png" alt="1585268743070"></p>
+<p><img src="//localhost:4000/2019/11/nginx/nginx/1585268825007.png" alt="1585268825007"></p>
+<p><img src="//localhost:4000/2019/11/nginx/nginx/1585268719858.png" alt="1585268719858"></p>
+<p><img src="//localhost:4000/2019/11/nginx/nginx/1585268743070.png" alt="1585268743070"></p>
 <p>显著减少,vue只是支持gzip,开启需要服务器进行</p>
 <h1 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h1><p><a href="https://blog.csdn.net/u010648555/article/details/79418779" target="_blank" rel="noopener">https://blog.csdn.net/u010648555/article/details/79418779</a></p>
 <p>为了方便本地的开发和验证，于是Windows上安装Nginx</p>
@@ -804,6 +818,10 @@
 
             <div class="post-nav-prev post-nav-item">
               
+                <a href="/2020/10/js-note/axios/axios/" rel="prev" title="Axios">
+                  Axios <i class="fa fa-chevron-right"></i>
+                </a>
+              
             </div>
           </div>
         
@@ -848,7 +866,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx"><span class="nav-number">1.</span> <span class="nav-text">nginx</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-的简介"><span class="nav-number">2.</span> <span class="nav-text">Nginx 的简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-nginx"><span class="nav-number">2.0.1.</span> <span class="nav-text">什么是 nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、正向代理"><span class="nav-number">2.0.2.</span> <span class="nav-text">2、正向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、反向代理"><span class="nav-number">2.0.3.</span> <span class="nav-text">3、反向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、负载均衡"><span class="nav-number">2.0.4.</span> <span class="nav-text">4、负载均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、动静分离"><span class="nav-number">2.0.5.</span> <span class="nav-text">5、动静分离</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-的安装"><span class="nav-number">3.</span> <span class="nav-text">Nginx 的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装-pcre"><span class="nav-number">3.1.</span> <span class="nav-text">1.安装 pcre</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-的常用的命令"><span class="nav-number">4.</span> <span class="nav-text">Nginx 的常用的命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-的配置文件"><span class="nav-number">5.</span> <span class="nav-text">Nginx 的配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx-配置文件位置"><span class="nav-number">5.1.</span> <span class="nav-text">nginx 配置文件位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置文件中的内容"><span class="nav-number">5.2.</span> <span class="nav-text">配置文件中的内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-全局块："><span class="nav-number">5.2.1.</span> <span class="nav-text">1.全局块：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-events-块"><span class="nav-number">5.2.2.</span> <span class="nav-text">2.events 块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-http-块"><span class="nav-number">5.3.</span> <span class="nav-text">3.http 块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#http-全局块"><span class="nav-number">5.3.1.</span> <span class="nav-text">http 全局块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#server-块"><span class="nav-number">5.3.2.</span> <span class="nav-text">server 块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体事例"><span class="nav-number">5.4.</span> <span class="nav-text">具体事例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#反向代理"><span class="nav-number">6.</span> <span class="nav-text">反向代理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx-配置实例-反向代理1"><span class="nav-number">6.1.</span> <span class="nav-text">nginx 配置实例 反向代理1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx-配置实例-反向代理实例-2"><span class="nav-number">6.2.</span> <span class="nav-text">Nginx 配置实例-反向代理实例 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#location-指令说明"><span class="nav-number">6.3.</span> <span class="nav-text">location 指令说明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-配置实例-负载均衡"><span class="nav-number">7.</span> <span class="nav-text">Nginx 配置实例-负载均衡</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#负载均衡"><span class="nav-number">8.</span> <span class="nav-text">负载均衡</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-配置实例-动静分离"><span class="nav-number">9.</span> <span class="nav-text">Nginx 配置实例-动静分离</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-配置高可用的集群"><span class="nav-number">10.</span> <span class="nav-text">Nginx 配置高可用的集群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#my"><span class="nav-number">11.</span> <span class="nav-text">my</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cros"><span class="nav-number">11.1.</span> <span class="nav-text">cros</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue"><span class="nav-number">11.2.</span> <span class="nav-text">vue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署前后端分离项目"><span class="nav-number">11.3.</span> <span class="nav-text">部署前后端分离项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx配置如下"><span class="nav-number">11.3.1.</span> <span class="nav-text">Nginx配置如下</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装ssl证书"><span class="nav-number">11.4.</span> <span class="nav-text">安装ssl证书</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开启gzip"><span class="nav-number">12.</span> <span class="nav-text">开启gzip</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加入gzip配置"><span class="nav-number">12.0.1.</span> <span class="nav-text">加入gzip配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#windows"><span class="nav-number">13.</span> <span class="nav-text">windows</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#nginx"><span class="nav-number">1.</span> <span class="nav-text">nginx</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-的简介"><span class="nav-number">2.</span> <span class="nav-text">Nginx 的简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是-nginx"><span class="nav-number">2.0.1.</span> <span class="nav-text">什么是 nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、正向代理"><span class="nav-number">2.0.2.</span> <span class="nav-text">2、正向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、反向代理"><span class="nav-number">2.0.3.</span> <span class="nav-text">3、反向代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、负载均衡"><span class="nav-number">2.0.4.</span> <span class="nav-text">4、负载均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、动静分离"><span class="nav-number">2.0.5.</span> <span class="nav-text">5、动静分离</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-的安装"><span class="nav-number">3.</span> <span class="nav-text">Nginx 的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装-pcre"><span class="nav-number">3.1.</span> <span class="nav-text">1.安装 pcre</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-的常用的命令"><span class="nav-number">4.</span> <span class="nav-text">Nginx 的常用的命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-的配置文件"><span class="nav-number">5.</span> <span class="nav-text">Nginx 的配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx-配置文件位置"><span class="nav-number">5.1.</span> <span class="nav-text">nginx 配置文件位置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置文件中的内容"><span class="nav-number">5.2.</span> <span class="nav-text">配置文件中的内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-全局块："><span class="nav-number">5.2.1.</span> <span class="nav-text">1.全局块：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-events-块"><span class="nav-number">5.2.2.</span> <span class="nav-text">2.events 块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-http-块"><span class="nav-number">5.3.</span> <span class="nav-text">3.http 块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#http-全局块"><span class="nav-number">5.3.1.</span> <span class="nav-text">http 全局块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#server-块"><span class="nav-number">5.3.2.</span> <span class="nav-text">server 块</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体事例"><span class="nav-number">5.4.</span> <span class="nav-text">具体事例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#反向代理"><span class="nav-number">6.</span> <span class="nav-text">反向代理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx-配置实例-反向代理1"><span class="nav-number">6.1.</span> <span class="nav-text">nginx 配置实例 反向代理1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Nginx-配置实例-反向代理实例-2"><span class="nav-number">6.2.</span> <span class="nav-text">Nginx 配置实例-反向代理实例 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#location-指令说明"><span class="nav-number">6.3.</span> <span class="nav-text">location 指令说明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-配置实例-负载均衡"><span class="nav-number">7.</span> <span class="nav-text">Nginx 配置实例-负载均衡</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#负载均衡"><span class="nav-number">8.</span> <span class="nav-text">负载均衡</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-配置实例-动静分离"><span class="nav-number">9.</span> <span class="nav-text">Nginx 配置实例-动静分离</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx-配置高可用的集群"><span class="nav-number">10.</span> <span class="nav-text">Nginx 配置高可用的集群</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#my"><span class="nav-number">11.</span> <span class="nav-text">my</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nginx出现403-forbidden"><span class="nav-number">12.</span> <span class="nav-text">Nginx出现403 forbidden</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cros"><span class="nav-number">12.1.</span> <span class="nav-text">cros</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue"><span class="nav-number">12.2.</span> <span class="nav-text">vue</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署前后端分离项目"><span class="nav-number">12.3.</span> <span class="nav-text">部署前后端分离项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nginx配置如下"><span class="nav-number">12.3.1.</span> <span class="nav-text">Nginx配置如下</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装ssl证书"><span class="nav-number">12.4.</span> <span class="nav-text">安装ssl证书</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开启gzip"><span class="nav-number">13.</span> <span class="nav-text">开启gzip</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加入gzip配置"><span class="nav-number">13.0.1.</span> <span class="nav-text">加入gzip配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#windows"><span class="nav-number">14.</span> <span class="nav-text">windows</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -867,7 +885,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -880,7 +898,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -893,7 +911,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

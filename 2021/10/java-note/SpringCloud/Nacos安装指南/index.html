@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon128.ico?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon32.ico?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon16.ico?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+  <link rel="alternate" href="/atom.xml" title="nicolas" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Nacos安装指南1.Windows安装开发阶段采用单机安装即可。1.1.下载安装包在Nacos的GitHub页面，提供有下载链接，可以下载编译好的Nacos服务端或者源代码：GitHub主页：https://github.com/alibaba/nacosGitHub的Release下载页：https://github.com/alibaba/nacos/releases">
+<meta name="keywords" content="Nacos,Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nacos安装指南">
+<meta property="og:url" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Nacos安装指南/index.html">
+<meta property="og:site_name" content="nicolas">
+<meta property="og:description" content="Nacos安装指南1.Windows安装开发阶段采用单机安装即可。1.1.下载安装包在Nacos的GitHub页面，提供有下载链接，可以下载编译好的Nacos服务端或者源代码：GitHub主页：https://github.com/alibaba/nacosGitHub的Release下载页：https://github.com/alibaba/nacos/releases">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402161102887.png">
+<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402161130261.png">
+<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402161843337.png">
+<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402162008280.png">
+<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402162251093.png">
+<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402162350977.png">
+<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402162526774.png">
+<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402162630427.png">
+<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402162709515.png">
+<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402172334810.png">
+<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402161102887.png">
+<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402161130261.png">
+<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402163715580.png">
+<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402163858429.png">
+<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402164414827.png">
+<meta property="og:updated_time" content="2021-10-31T05:02:37.527Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Nacos安装指南">
+<meta name="twitter:description" content="Nacos安装指南1.Windows安装开发阶段采用单机安装即可。1.1.下载安装包在Nacos的GitHub页面，提供有下载链接，可以下载编译好的Nacos服务端或者源代码：GitHub主页：https://github.com/alibaba/nacosGitHub的Release下载页：https://github.com/alibaba/nacos/releases">
+<meta name="twitter:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402161102887.png">
+  <link rel="canonical" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/Nacos安装指南/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Nacos安装指南 | nicolas</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">nicolas</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Yesterday you said tomorow.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">32</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">48</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/codeOflI/codeOflI.github.io/tree/dev" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/Nacos安装指南/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Nacos安装指南
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-10-23 10:40:06" itemprop="dateCreated datePublished" datetime="2021-10-23T10:40:06+08:00">2021-10-23</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-31 13:02:37" itemprop="dateModified" datetime="2021-10-31T13:02:37+08:00">2021-10-31</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Nacos安装指南"><a href="#Nacos安装指南" class="headerlink" title="Nacos安装指南"></a>Nacos安装指南</h1><h1 id="1-Windows安装"><a href="#1-Windows安装" class="headerlink" title="1.Windows安装"></a>1.Windows安装</h1><p>开发阶段采用单机安装即可。</p><h2 id="1-1-下载安装包"><a href="#1-1-下载安装包" class="headerlink" title="1.1.下载安装包"></a>1.1.下载安装包</h2><p>在Nacos的GitHub页面，提供有下载链接，可以下载编译好的Nacos服务端或者源代码：</p><p>GitHub主页：<a href="https://github.com/alibaba/nacos" target="_blank" rel="noopener">https://github.com/alibaba/nacos</a></p><p>GitHub的Release下载页：<a href="https://github.com/alibaba/nacos/releases" target="_blank" rel="noopener">https://github.com/alibaba/nacos/releases</a></p><a id="more"></a>
+
+
+
+<p>如图：</p>
+<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402161102887.png" alt="image-20210402161102887"></p>
+<p>本课程采用1.4.1.版本的Nacos，课前资料已经准备了安装包：</p>
+<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402161130261.png" alt="image-20210402161130261"></p>
+<p>windows版本使用<code>nacos-server-1.4.1.zip</code>包即可。</p>
+<h2 id="1-2-解压"><a href="#1-2-解压" class="headerlink" title="1.2.解压"></a>1.2.解压</h2><p>将这个包解压到任意非中文目录下，如图：</p>
+<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402161843337.png" alt="image-20210402161843337"></p>
+<p>目录说明：</p>
+<ul>
+<li>bin：启动脚本</li>
+<li>conf：配置文件</li>
+</ul>
+<h2 id="1-3-端口配置"><a href="#1-3-端口配置" class="headerlink" title="1.3.端口配置"></a>1.3.端口配置</h2><p>Nacos的默认端口是8848，如果你电脑上的其它进程占用了8848端口，请先尝试关闭该进程。</p>
+<p><strong>如果无法关闭占用8848端口的进程</strong>，也可以进入nacos的conf目录，修改配置文件中的端口：</p>
+<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402162008280.png" alt="image-20210402162008280"></p>
+<p>修改其中的内容：</p>
+<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402162251093.png" alt="image-20210402162251093"></p>
+<h2 id="1-4-启动"><a href="#1-4-启动" class="headerlink" title="1.4.启动"></a>1.4.启动</h2><p>启动非常简单，进入bin目录，结构如下：</p>
+<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402162350977.png" alt="image-20210402162350977"></p>
+<p>然后执行命令即可：</p>
+<ul>
+<li><p>windows命令：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">startup<span class="selector-class">.cmd</span> -m standalone</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>执行后的效果如图：</p>
+<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402162526774.png" alt="image-20210402162526774"></p>
+<h2 id="1-5-访问"><a href="#1-5-访问" class="headerlink" title="1.5.访问"></a>1.5.访问</h2><p>在浏览器输入地址：<a href="http://127.0.0.1:8848/nacos即可：" target="_blank" rel="noopener">http://127.0.0.1:8848/nacos即可：</a></p>
+<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402162630427.png" alt="image-20210402162630427"></p>
+<p>默认的账号和密码都是nacos，进入后：</p>
+<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402162709515.png" alt="image-20210402162709515"></p>
+<h1 id="2-Linux安装"><a href="#2-Linux安装" class="headerlink" title="2.Linux安装"></a>2.Linux安装</h1><p>Linux或者Mac安装方式与Windows类似。</p>
+<h2 id="2-1-安装JDK"><a href="#2-1-安装JDK" class="headerlink" title="2.1.安装JDK"></a>2.1.安装JDK</h2><p>Nacos依赖于JDK运行，索引Linux上也需要安装JDK才行。</p>
+<p>上传jdk安装包：</p>
+<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402172334810.png" alt="image-20210402172334810"></p>
+<p>上传到某个目录，例如：<code>/usr/local/</code></p>
+<p>然后解压缩：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf jdk-8u144-linux-x64.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>然后重命名为java</p>
+<p>配置环境变量：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/<span class="built_in">local</span>/java</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$JAVA_HOME</span>/bin</span><br></pre></td></tr></table></figure>
+
+<p>设置环境变量：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /etc/profile</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-上传安装包"><a href="#2-2-上传安装包" class="headerlink" title="2.2.上传安装包"></a>2.2.上传安装包</h2><p>如图：</p>
+<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402161102887.png" alt="image-20210402161102887"></p>
+<p>也可以直接使用课前资料中的tar.gz：</p>
+<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402161130261.png" alt="image-20210402161130261"></p>
+<p>上传到Linux服务器的某个目录，例如<code>/usr/local/src</code>目录下：</p>
+<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402163715580.png" alt="image-20210402163715580"></p>
+<h2 id="2-3-解压"><a href="#2-3-解压" class="headerlink" title="2.3.解压"></a>2.3.解压</h2><p>命令解压缩安装包：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf nacos-server-1.4.1.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>然后删除安装包：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm -rf nacos-server-1.4.1.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>目录中最终样式：</p>
+<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402163858429.png" alt="image-20210402163858429"></p>
+<p>目录内部：</p>
+<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Nacos安装指南/image-20210402164414827.png" alt="image-20210402164414827"></p>
+<h2 id="2-4-端口配置"><a href="#2-4-端口配置" class="headerlink" title="2.4.端口配置"></a>2.4.端口配置</h2><p>与windows中类似</p>
+<h2 id="2-5-启动"><a href="#2-5-启动" class="headerlink" title="2.5.启动"></a>2.5.启动</h2><p>在nacos/bin目录中，输入命令启动Nacos：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh startup.sh -m standalone</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-Nacos的依赖"><a href="#3-Nacos的依赖" class="headerlink" title="3.Nacos的依赖"></a>3.Nacos的依赖</h1><p>父工程：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-alibaba-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.5.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>客户端：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- nacos客户端依赖包 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+    
+    <div>
+     
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+     
+    </div>
+    
+        
+      
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>nicolas lee</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://codeofli.github.io/2021/10/java-note/SpringCloud/Nacos安装指南/" title="Nacos安装指南">https://codeofli.github.io/2021/10/java-note/SpringCloud/Nacos安装指南/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Nacos/" rel="tag"># Nacos</a>
+            
+              <a href="/tags/Java/" rel="tag"># Java</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2021/10/java-note/SpringCloud/nacos集群搭建/" rel="next" title="Nacos集群搭建">
+                  <i class="fa fa-chevron-left"></i> Nacos集群搭建
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2021/10/java-note/SpringCloud/Elasticsearch/Elasticsearch/" rel="prev" title="Elasticsearch">
+                  Elasticsearch <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Nacos安装指南"><span class="nav-number">1.</span> <span class="nav-text">Nacos安装指南</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Windows安装"><span class="nav-number">2.</span> <span class="nav-text">1.Windows安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-下载安装包"><span class="nav-number">2.1.</span> <span class="nav-text">1.1.下载安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-解压"><span class="nav-number">2.2.</span> <span class="nav-text">1.2.解压</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-端口配置"><span class="nav-number">2.3.</span> <span class="nav-text">1.3.端口配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-启动"><span class="nav-number">2.4.</span> <span class="nav-text">1.4.启动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-访问"><span class="nav-number">2.5.</span> <span class="nav-text">1.5.访问</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Linux安装"><span class="nav-number">3.</span> <span class="nav-text">2.Linux安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-安装JDK"><span class="nav-number">3.1.</span> <span class="nav-text">2.1.安装JDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-上传安装包"><span class="nav-number">3.2.</span> <span class="nav-text">2.2.上传安装包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-解压"><span class="nav-number">3.3.</span> <span class="nav-text">2.3.解压</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-端口配置"><span class="nav-number">3.4.</span> <span class="nav-text">2.4.端口配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-启动"><span class="nav-number">3.5.</span> <span class="nav-text">2.5.启动</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Nacos的依赖"><span class="nav-number">4.</span> <span class="nav-text">3.Nacos的依赖</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/assets/img/avatar.jpg"
+      alt="nicolas lee">
+  <p class="site-author-name" itemprop="name">nicolas lee</p>
+  <div class="site-description" itemprop="description">Yesterday you said tomorow.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/codeOflI" title="GitHub &rarr; https://github.com/codeOflI" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://blog.csdn.net/qq_42835910" title="CSDN &rarr; https://blog.csdn.net/qq_42835910" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nicolas lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数"></span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

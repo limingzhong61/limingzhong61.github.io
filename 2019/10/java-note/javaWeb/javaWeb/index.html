@@ -45,7 +45,7 @@
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
     localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
+    path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: '复制',
@@ -64,14 +64,14 @@
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="[TOC]基础知识JSP:动态网页静态、动态：1.不用 和 是否有“动感”混为一谈2.是否 随着 时间、地点、用户操作  的 改变而改变  动态网页 需要使用到 服务端脚本语言（JSP）  2架构CS：Client ServerCS不足：a.如果 软件升级， 那么全部软件都需要升级b.维护麻烦：需要维护每一台 客户端软件c.每一台客户端 都需要安装 客户端软件">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/javaWeb/javaWeb/request-time.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/javaWeb/javaWeb/Servlet-hierarchy.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/javaWeb/javaWeb/Servlet-life-cycle.png">
-<meta property="og:updated_time" content="2021-03-04T08:06:22.302Z">
+<meta property="og:image" content="https://localhost:4000/2019/10/java-note/javaWeb/javaWeb/request-time.png">
+<meta property="og:image" content="https://localhost:4000/2019/10/java-note/javaWeb/javaWeb/Servlet-hierarchy.png">
+<meta property="og:image" content="https://localhost:4000/2019/10/java-note/javaWeb/javaWeb/Servlet-life-cycle.png">
+<meta property="og:updated_time" content="2021-10-23T02:19:04.195Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javaWeb">
 <meta name="twitter:description" content="[TOC]基础知识JSP:动态网页静态、动态：1.不用 和 是否有“动感”混为一谈2.是否 随着 时间、地点、用户操作  的 改变而改变  动态网页 需要使用到 服务端脚本语言（JSP）  2架构CS：Client ServerCS不足：a.如果 软件升级， 那么全部软件都需要升级b.维护麻烦：需要维护每一台 客户端软件c.每一台客户端 都需要安装 客户端软件">
-<meta name="twitter:image" content="https://codeofli.github.io/2019/10/java-note/javaWeb/javaWeb/request-time.png">
+<meta name="twitter:image" content="https://localhost:4000/2019/10/java-note/javaWeb/javaWeb/request-time.png">
   <link rel="canonical" href="https://codeofli.github.io/2019/10/java-note/javaWeb/javaWeb/">
 
 
@@ -213,7 +213,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">32</span></a>
 
   </li>
       
@@ -235,7 +235,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
 
   </li>
       
@@ -257,7 +257,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">48</span></a>
 
   </li>
   </ul>
@@ -327,7 +327,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-04 16:06:22" itemprop="dateModified" datetime="2021-03-04T16:06:22+08:00">2021-03-04</time>
+                <time title="修改时间：2021-10-23 10:19:04" itemprop="dateModified" datetime="2021-10-23T10:19:04+08:00">2021-10-23</time>
               </span>
             
           
@@ -385,7 +385,7 @@
 <h2 id="4-配置tomcat"><a href="#4-配置tomcat" class="headerlink" title="4.配置tomcat"></a>4.配置tomcat</h2><p>a.配置jdk  (必须配置JAVA_HOME)<br>java_home  classPath  path<br>b.配置catalina_home    </p>
 <p>双击bin/startup.bat启动tomacat，<br>常见错误： 可能与其他服务的端口号冲突<br>tomcat端口号默认8080 （此端口号较为常见，容易冲突），建议修改此端口 （8888）    </p>
 <p>修改端口号：    </p>
-<h2 id="5-访问tomcat"><a href="#5-访问tomcat" class="headerlink" title="5.访问tomcat"></a>5.访问tomcat</h2><p><a href="http://localhost:8888/" target="_blank" rel="noopener">http://localhost:8888/</a>    </p>
+<h2 id="5-访问tomcat"><a href="#5-访问tomcat" class="headerlink" title="5.访问tomcat"></a>5.访问tomcat</h2><p><a href="http://localhost:8888/">http://localhost:8888/</a>    </p>
 <p>常见状态码：<br>200：一切正常<br>300/301: 页面重定向 （跳转）<br>404:资源不存在<br>403：权限不足 （如果访问a目录，但是a目录设置 不可见）<br>500：服务器内部错误（代码有误）<br>其他编码：积累    </p>
 <p>jsp：在html中嵌套的java代码     </p>
 <p> 在项目/WEB-INF/web.xml中设置 默认的 初始页面    </p>
@@ -415,7 +415,7 @@
 <p>因为第一请求服务端 会有翻译 和编译的过程，因此比较慢； 后续访问 可以直接访问class,因此速度较快。但是 如果 服务端修改了代码，则再次访问时  会重新的翻译、编译。    </p>
 <h2 id="使用Eclipse开发Web项目"><a href="#使用Eclipse开发Web项目" class="headerlink" title="使用Eclipse开发Web项目"></a>使用Eclipse开发Web项目</h2><p>(JSP项目)  tomcat  </p>
 <ol start="2">
-<li>在Eclipse中创建的Web项目：<br>浏览器可以直接访问 WebContent中的文件，<br>例如<a href="http://localhost:8888/MyJspProject/index1.jsp" target="_blank" rel="noopener">http://localhost:8888/MyJspProject/index1.jsp</a><br>其中的index1.jsp就在WebContent目录中；<br>但是WEB-INF中的文件  无法通过客户端（浏览器）直接访问，只能通过请求转发来访问  </li>
+<li>在Eclipse中创建的Web项目：<br>浏览器可以直接访问 WebContent中的文件，<br>例如<a href="http://localhost:8888/MyJspProject/index1.jsp">http://localhost:8888/MyJspProject/index1.jsp</a><br>其中的index1.jsp就在WebContent目录中；<br>但是WEB-INF中的文件  无法通过客户端（浏览器）直接访问，只能通过请求转发来访问  </li>
 </ol>
 <p>注意：</p>
 <blockquote>
@@ -685,7 +685,7 @@
 </tr>
 </tbody></table>
 <h2 id="get与post请求方式的区别："><a href="#get与post请求方式的区别：" class="headerlink" title="get与post请求方式的区别："></a>get与post请求方式的区别：</h2><p>get提交方式   </p>
-<p><a href="http://localhost:8888/MyJspProject/show.jsp?uname=aa&amp;upwd=123&amp;uage=22&amp;uhobbies=%E7%AF%AE%E7%90%83" target="_blank" rel="noopener">http://localhost:8888/MyJspProject/show.jsp?uname=aa&amp;upwd=123&amp;uage=22&amp;uhobbies=%E7%AF%AE%E7%90%83</a> </p>
+<p><a href="http://localhost:8888/MyJspProject/show.jsp?uname=aa&amp;upwd=123&amp;uage=22&amp;uhobbies=%E7%AF%AE%E7%90%83">http://localhost:8888/MyJspProject/show.jsp?uname=aa&amp;upwd=123&amp;uage=22&amp;uhobbies=%E7%AF%AE%E7%90%83</a> </p>
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">连接/文件?参数名<span class="number">1</span>=参数值<span class="number">1</span> &amp; 参数名<span class="number">2</span>=参数值<span class="number">2</span> &amp; 参数名<span class="number">1</span>=参数值<span class="number">1</span></span><br></pre></td></tr></table></figure>
 
 <p>method=”get” 和 地址栏 、超链接(<code>&lt;a href=&quot;xx&quot;&gt;</code>)请求方式 默认都属于get提交方式    </p>
@@ -747,7 +747,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<p><img src="/2019/10/java-note/javaWeb/javaWeb/request-time.png" alt></p>
+<p><img src="//localhost:4000/2019/10/java-note/javaWeb/javaWeb/request-time.png" alt></p>
 <p>转发、重定向：  </p>
 <p>转发：<br>    张三（客户端）     -&gt;    【 服务窗口 A （服务端 ）    -&gt;  服务窗口B  】  </p>
 <p>重定向：<br>    张三（客户端）       -&gt;     服务窗口 A （服务端 ） -&gt;去找B  </p>
@@ -836,11 +836,11 @@
 <p>项目的根目录：WebContent 、src  </p>
 <p><code>&lt;a href=&quot;WelcomeServlet&quot;&gt;</code>所在的jsp是在 WebContent目录中，因此 发出的请求WelcomeServlet  是去请求项目的根目录。  </p>
 <p>Servlet流程：  </p>
-<p>请求 -&gt;<code>&lt;url-pattern&gt;</code> -&gt; 根据<code>&lt;servlet-mapping&gt;</code>中的<code>&lt;servlet-name&gt;</code> 去匹配  <code>&lt;servlet&gt;</code>中的<code>&lt;servlet-name&gt;</code>，然后寻找到<servlet-class>，求中将请求交由该<servlet-class>执行。  2个/:<br>jsp:/  localhost:8888<br>web.xml: /   <a href="http://localhost:8888/项目名/" target="_blank" rel="noopener">http://localhost:8888/项目名/</a>  </servlet-class></servlet-class></p>
+<p>请求 -&gt;<code>&lt;url-pattern&gt;</code> -&gt; 根据<code>&lt;servlet-mapping&gt;</code>中的<code>&lt;servlet-name&gt;</code> 去匹配  <code>&lt;servlet&gt;</code>中的<code>&lt;servlet-name&gt;</code>，然后寻找到<servlet-class>，求中将请求交由该<servlet-class>执行。  2个/:<br>jsp:/  localhost:8888<br>web.xml: /   <a href="http://localhost:8888/项目名/">http://localhost:8888/项目名/</a>  </servlet-class></servlet-class></p>
 <h2 id="编写Servlet步骤："><a href="#编写Servlet步骤：" class="headerlink" title="编写Servlet步骤："></a>编写Servlet步骤：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br></pre></td></tr></table></figure>
 
 <p>1.编写一个类继承HttpServlet  </p>
-<p><img src="/2019/10/java-note/javaWeb/javaWeb/Servlet-hierarchy.png" alt></p>
+<p><img src="//localhost:4000/2019/10/java-note/javaWeb/javaWeb/Servlet-hierarchy.png" alt></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>&#123;</span><br></pre></td></tr></table></figure>
 
 <p>2.重写相应方法(doGet()、doPost())</p>
@@ -857,9 +857,9 @@
 <p>3.项目根目录：WebContent、src（所有的构建路径）<br>例如：<br>WebContent中有一个文件index.jsp<br>src中有一个Servlet.java    </p>
 <p>如果: index.jsp中请求<code>&lt;a href=&quot;abc&quot;&gt;...&lt;/a&gt;</code>，则 寻找范围：既会在src根目录中找  也会在WebContent根目录中找  </p>
 <p>如果：index.jsp中请求<code>&lt;a href=&quot;a/abc&quot;&gt;&lt;/a&gt;</code>，寻找范围：先在src或WebContent中找a目录，然后再在a目录中找abc  </p>
-<p>web.xml中的 /:代表项目根路径<br><a href="http://localhost:8888/Servlet25Project/jsp中的/" target="_blank" rel="noopener">http://localhost:8888/Servlet25Project/jsp中的/</a>: 服务器根路径<br><a href="http://localhost:8888/" target="_blank" rel="noopener">http://localhost:8888/</a>  </p>
+<p>web.xml中的 /:代表项目根路径<br><a href="http://localhost:8888/Servlet25Project/jsp中的/">http://localhost:8888/Servlet25Project/jsp中的/</a>: 服务器根路径<br><a href="http://localhost:8888/">http://localhost:8888/</a>  </p>
 <p>构建路径、WebContent:根目录  </p>
-<h2 id="Servlet生命周期"><a href="#Servlet生命周期" class="headerlink" title="Servlet生命周期"></a>Servlet生命周期</h2><p><img src="/2019/10/java-note/javaWeb/javaWeb/Servlet-life-cycle.png" alt></p>
+<h2 id="Servlet生命周期"><a href="#Servlet生命周期" class="headerlink" title="Servlet生命周期"></a>Servlet生命周期</h2><p><img src="//localhost:4000/2019/10/java-note/javaWeb/javaWeb/Servlet-life-cycle.png" alt></p>
 <p><strong>5个阶段</strong>   </p>
 <h3 id="加载、初始化："><a href="#加载、初始化：" class="headerlink" title="加载、初始化："></a>加载、初始化：</h3><p> init()  ，该方法会在 Servlet被加载并实例化的以后 执行<br>服务  ：service() -&gt;doGet()  doPost  </p>
 <p>init():    </p>
@@ -1388,7 +1388,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1401,7 +1401,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -1414,7 +1414,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

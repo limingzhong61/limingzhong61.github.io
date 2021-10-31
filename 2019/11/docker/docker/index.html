@@ -45,7 +45,7 @@
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
     localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
+    path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: '复制',
@@ -64,15 +64,15 @@
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="[TOC]1.简介Docker是一个开源的应用容器引擎；是一个轻量级容器技术；Docker支持将软件编译成一个镜像；然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像；运行中的这个镜像称为容器，容器启动是非常快速的。2、核心概念docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145450.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145531.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303165113.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/11/docker/docker/docker%5C%E5%85%B3%E9%97%ADfirewall%E7%9A%84%E5%8F%82%E6%95%B0.png">
-<meta property="og:updated_time" content="2021-02-18T13:19:22.538Z">
+<meta property="og:image" content="https://localhost:4000/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145450.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145531.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303165113.png">
+<meta property="og:image" content="https://localhost:4000/2019/11/docker/docker/docker%5C%E5%85%B3%E9%97%ADfirewall%E7%9A%84%E5%8F%82%E6%95%B0.png">
+<meta property="og:updated_time" content="2021-10-29T11:14:13.096Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker">
 <meta name="twitter:description" content="[TOC]1.简介Docker是一个开源的应用容器引擎；是一个轻量级容器技术；Docker支持将软件编译成一个镜像；然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像；运行中的这个镜像称为容器，容器启动是非常快速的。2、核心概念docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；">
-<meta name="twitter:image" content="https://codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145450.png">
+<meta name="twitter:image" content="https://localhost:4000/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145450.png">
   <link rel="canonical" href="https://codeofli.github.io/2019/11/docker/docker/">
 
 
@@ -214,7 +214,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">32</span></a>
 
   </li>
       
@@ -236,7 +236,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
 
   </li>
       
@@ -258,7 +258,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">48</span></a>
 
   </li>
   </ul>
@@ -328,7 +328,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-18 21:19:22" itemprop="dateModified" datetime="2021-02-18T21:19:22+08:00">2021-02-18</time>
+                <time title="修改时间：2021-10-29 19:14:13" itemprop="dateModified" datetime="2021-10-29T19:14:13+08:00">2021-10-29</time>
               </span>
             
           
@@ -376,7 +376,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>[TOC]</p><h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h1><p><strong>Docker</strong>是一个开源的应用容器引擎；是一个轻量级容器技术；</p><p>Docker支持将软件编译成一个镜像；然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像；</p><p>运行中的这个镜像称为容器，容器启动是非常快速的。</p><p><img src="/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145450.png" alt="img"></p><p><img src="/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145531.png" alt="img"></p><h2 id="2、核心概念"><a href="#2、核心概念" class="headerlink" title="2、核心概念"></a>2、核心概念</h2><p>docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；</p><a id="more"></a>
+        <p>[TOC]</p><h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h1><p><strong>Docker</strong>是一个开源的应用容器引擎；是一个轻量级容器技术；</p><p>Docker支持将软件编译成一个镜像；然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像；</p><p>运行中的这个镜像称为容器，容器启动是非常快速的。</p><p><img src="//localhost:4000/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145450.png" alt="img"></p><p><img src="//localhost:4000/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145531.png" alt="img"></p><h2 id="2、核心概念"><a href="#2、核心概念" class="headerlink" title="2、核心概念"></a>2、核心概念</h2><p>docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；</p><a id="more"></a>
 
 
 
@@ -387,7 +387,7 @@
 <p>docker仓库(Registry)：用来保存各种打包好的软件镜像；</p>
 <p>docker镜像(docker)：软件打包好的镜像；放在docker仓库中；</p>
 <p>docker容器(Container)：镜像启动后的实例称为一个容器；容器是独立运行的一个或一组应用</p>
-<p><img src="/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303165113.png" alt></p>
+<p><img src="//localhost:4000/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303165113.png" alt></p>
 <p>使用Docker的步骤：</p>
 <p>1）、安装Docker</p>
 <p>2）、去Docker仓库找到这个软件对应的镜像；</p>
@@ -414,37 +414,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl start docker</span><br><span class="line">[root@localhost ~]# docker -v</span><br><span class="line">Docker version 1.12.6, build 3e8e77d/1.12.6</span><br></pre></td></tr></table></figure>
 
 <p>5、开机启动docker<br>[root@localhost ~]# systemctl enable docker<br>Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service to /usr/lib/systemd/system/docker.service.<br>6、停止docker<br>systemctl stop docker</p>
-<h2 id="4、Docker常用命令-amp-操作"><a href="#4、Docker常用命令-amp-操作" class="headerlink" title="4、Docker常用命令&amp;操作"></a>4、Docker常用命令&amp;操作</h2><h3 id="1）、镜像操作"><a href="#1）、镜像操作" class="headerlink" title="1）、镜像操作"></a>1）、镜像操作</h3><table>
-<thead>
-<tr>
-<th>操作</th>
-<th>命令</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>检索</td>
-<td>docker  search 关键字  eg：docker  search redis</td>
-<td>我们经常去docker  hub上检索镜像的详细信息，如镜像的TAG。</td>
-</tr>
-<tr>
-<td>拉取</td>
-<td>docker pull 镜像名:tag</td>
-<td>:tag是可选的，tag表示标签，多为软件的版本，默认是latest</td>
-</tr>
-<tr>
-<td>列表</td>
-<td>docker images</td>
-<td>查看所有本地镜像</td>
-</tr>
-<tr>
-<td>删除</td>
-<td>docker rm image-id</td>
-<td>删除指定的本地镜像</td>
-</tr>
-</tbody></table>
-<p><a href="https://hub.docker.com/" target="_blank" rel="noopener">https://hub.docker.com/</a></p>
-<h3 id="2）、容器操作"><a href="#2）、容器操作" class="headerlink" title="2）、容器操作"></a>2）、容器操作</h3><p>软件镜像（QQ安装程序）—-运行镜像—-产生一个容器（正在运行的软件，运行的QQ）；</p>
+<h2 id="4、Docker常用命令-amp-操作"><a href="#4、Docker常用命令-amp-操作" class="headerlink" title="4、Docker常用命令&amp;操作"></a>4、Docker常用命令&amp;操作</h2><h3 id="2）、容器操作"><a href="#2）、容器操作" class="headerlink" title="2）、容器操作"></a>2）、容器操作</h3><p>软件镜像（QQ安装程序）—-运行镜像—-产生一个容器（正在运行的软件，运行的QQ）；</p>
 <table>
 <thead>
 <tr>
@@ -497,7 +467,7 @@
 <p>步骤：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">1、搜索镜像</span><br><span class="line">[root@localhost ~]# docker search tomcat</span><br><span class="line">2、拉取镜像</span><br><span class="line">[root@localhost ~]# docker pull tomcat</span><br><span class="line">3、根据镜像启动容器</span><br><span class="line">docker run --name mytomcat -d tomcat:latest</span><br><span class="line">4、docker ps  </span><br><span class="line">查看运行中的容器</span><br><span class="line">5、 停止运行中的容器</span><br><span class="line">docker stop  容器的id</span><br><span class="line">6、查看所有的容器</span><br><span class="line">docker ps -a</span><br><span class="line">7、启动容器</span><br><span class="line">docker start 容器id</span><br><span class="line">8、删除一个容器</span><br><span class="line"> docker rm 容器id</span><br><span class="line">9、启动一个做了端口映射的tomcat</span><br><span class="line">[root@localhost ~]# docker run -d -p 8888:8080 tomcat</span><br><span class="line">-d：后台运行</span><br><span class="line">-p: 将主机的端口映射到容器的一个端口    主机端口:容器内部的端口</span><br><span class="line"></span><br><span class="line">10、为了演示简单关闭了linux的防火墙</span><br><span class="line">service firewalld status ；查看防火墙状态</span><br><span class="line">service firewalld stop：关闭防火墙</span><br><span class="line">11、查看容器的日志</span><br><span class="line">docker logs container-name/container-id</span><br><span class="line"></span><br><span class="line">更多命令参看</span><br><span class="line">https://docs.docker.com/engine/reference/commandline/docker/</span><br><span class="line">可以参考每一个镜像的文档</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2019/11/docker/docker/docker%5C%E5%85%B3%E9%97%ADfirewall%E7%9A%84%E5%8F%82%E6%95%B0.png" alt></p>
+<p><img src="//localhost:4000/2019/11/docker/docker/docker%5C%E5%85%B3%E9%97%ADfirewall%E7%9A%84%E5%8F%82%E6%95%B0.png" alt></p>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="进入容器Bash"><a href="#进入容器Bash" class="headerlink" title="进入容器Bash"></a>进入容器Bash</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it containerID bash</span><br></pre></td></tr></table></figure>
 
 <h3 id="将本地sql文件导入容器"><a href="#将本地sql文件导入容器" class="headerlink" title="将本地sql文件导入容器"></a>将本地sql文件导入容器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker cp /home/ubuntu/yoj.sql(文件路径) mysql(容器名):/home/tmp/yoj.txt(容器文件保存路径+文件名)</span><br></pre></td></tr></table></figure>
@@ -531,17 +501,18 @@
 <p>譬如我要启动一个centos容器，宿主机的/test目录挂载到容器的/soft目录，可通过以下方式指定：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -v /test:/soft centos /bin/bash</span><br><span class="line">docker run -it -v /hmoe/ubuntu:/tmp mysql02 /bin/bash</span><br></pre></td></tr></table></figure>
 
-<h1 id="mysql使用"><a href="#mysql使用" class="headerlink" title="mysql使用"></a>mysql使用</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7.27 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci</span><br></pre></td></tr></table></figure>
+<h1 id="mysql使用"><a href="#mysql使用" class="headerlink" title="mysql使用"></a>mysql使用</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo docker run -p 3306:3306 --name mysql8 -e MYSQL_ROOT_PASSWORD=root -d mysql:8.0.23 --character-set-server=utf8 --collation-server=utf8_unicode_ci</span><br></pre></td></tr></table></figure>
 
+<p>–name: 容器名</p>
 <h2 id="MySql-导入-sql文件"><a href="#MySql-导入-sql文件" class="headerlink" title="MySql 导入 *.sql文件"></a>MySql 导入 *.sql文件</h2><h3 id="1-将本地sql文件导入容器"><a href="#1-将本地sql文件导入容器" class="headerlink" title="1.将本地sql文件导入容器"></a>1.将本地sql文件导入容器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker cp /home/ubuntu/yoj.sql(文件路径) mysql(容器名):/home/tmp/yoj.txt(容器文件保存路径+文件名)</span><br></pre></td></tr></table></figure>
 
 <p>docker cp 第一个参数指定本地文件或者文件夹，第二个参数指定容器及容器内的目标文件夹 </p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker cp /home/ubuntu/yoj.sql mysql:/home</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker cp /home/ubuntu/yoj.sql mysql8:/home</span><br></pre></td></tr></table></figure>
 
 <h3 id="登入容器内MYSQL执行sql"><a href="#登入容器内MYSQL执行sql" class="headerlink" title="登入容器内MYSQL执行sql"></a>登入容器内MYSQL执行sql</h3><p>command format</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it (mysql-container-name)[xxx] (in mysql command)[mysql -uroot -p123456]</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it bteye-mysql mysql -uroot -p123456</span><br><span class="line">docker exec -it mysql mysql -uroot -proot</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it bteye-mysql mysql -uroot -p123456</span><br><span class="line">docker exec -it mysql8 mysql -uroot -p</span><br></pre></td></tr></table></figure>
 
 <p>执行sql文件 </p>
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">source</span> <span class="regexp">/home/y</span>oj.sql</span><br></pre></td></tr></table></figure>
@@ -738,7 +709,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-简介"><span class="nav-number">1.</span> <span class="nav-text">1.简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2、核心概念"><span class="nav-number">1.1.</span> <span class="nav-text">2、核心概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、安装Docker"><span class="nav-number">1.2.</span> <span class="nav-text">3、安装Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）、安装linux虚拟机"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">1）、安装linux虚拟机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）、在linux虚拟机上安装docker"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">2）、在linux虚拟机上安装docker</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、Docker常用命令-amp-操作"><span class="nav-number">1.3.</span> <span class="nav-text">4、Docker常用命令&amp;操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）、镜像操作"><span class="nav-number">1.3.1.</span> <span class="nav-text">1）、镜像操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2）、容器操作"><span class="nav-number">1.3.2.</span> <span class="nav-text">2）、容器操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进入容器Bash"><span class="nav-number">2.1.</span> <span class="nav-text">进入容器Bash</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将本地sql文件导入容器"><span class="nav-number">2.1.1.</span> <span class="nav-text">将本地sql文件导入容器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-Mysql"><span class="nav-number">3.</span> <span class="nav-text">Docker-Mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装MySQL示例"><span class="nav-number">3.1.</span> <span class="nav-text">安装MySQL示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装mysql之后进行操作"><span class="nav-number">3.1.1.</span> <span class="nav-text">安装mysql之后进行操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql使用"><span class="nav-number">4.</span> <span class="nav-text">mysql使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySql-导入-sql文件"><span class="nav-number">4.1.</span> <span class="nav-text">MySql 导入 *.sql文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-将本地sql文件导入容器"><span class="nav-number">4.1.1.</span> <span class="nav-text">1.将本地sql文件导入容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登入容器内MYSQL执行sql"><span class="nav-number">4.1.2.</span> <span class="nav-text">登入容器内MYSQL执行sql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-进入数据库容器"><span class="nav-number">4.1.3.</span> <span class="nav-text">2.进入数据库容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改-Docker-中-MySQL-容器的编码"><span class="nav-number">4.2.</span> <span class="nav-text">修改 Docker 中 MySQL 容器的编码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-进入MySQL容器"><span class="nav-number">4.2.0.1.</span> <span class="nav-text">1. 进入MySQL容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-备份当前-my-cnf-文件"><span class="nav-number">4.2.0.2.</span> <span class="nav-text">2. 备份当前 my.cnf 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-退出容器"><span class="nav-number">4.2.0.3.</span> <span class="nav-text">3. 退出容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-在服务器创建配置文件-my-cnf"><span class="nav-number">4.2.0.4.</span> <span class="nav-text">4. 在服务器创建配置文件(my.cnf)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-查看容器长ID"><span class="nav-number">4.2.0.5.</span> <span class="nav-text">5. 查看容器长ID</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-上传文件到容器"><span class="nav-number">4.2.0.6.</span> <span class="nav-text">6. 上传文件到容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-自行登录容器查看并提出容器"><span class="nav-number">4.2.0.7.</span> <span class="nav-text">7. 自行登录容器查看并提出容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-重启docker"><span class="nav-number">4.2.0.8.</span> <span class="nav-text">8. 重启docker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-查看数据库编码"><span class="nav-number">4.2.0.9.</span> <span class="nav-text">9. 查看数据库编码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备份数据库"><span class="nav-number">4.3.</span> <span class="nav-text">备份数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql使用mysqldump定时备份数据库"><span class="nav-number">4.3.1.</span> <span class="nav-text">mysql使用mysqldump定时备份数据库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装redis"><span class="nav-number">5.</span> <span class="nav-text">安装redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#连接、查看容器"><span class="nav-number">5.1.</span> <span class="nav-text">连接、查看容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#官方文档"><span class="nav-number">5.2.</span> <span class="nav-text">官方文档</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件映射"><span class="nav-number">5.2.1.</span> <span class="nav-text">配置文件映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">5.2.2.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-简介"><span class="nav-number">1.</span> <span class="nav-text">1.简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2、核心概念"><span class="nav-number">1.1.</span> <span class="nav-text">2、核心概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、安装Docker"><span class="nav-number">1.2.</span> <span class="nav-text">3、安装Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）、安装linux虚拟机"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">1）、安装linux虚拟机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）、在linux虚拟机上安装docker"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">2）、在linux虚拟机上安装docker</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、Docker常用命令-amp-操作"><span class="nav-number">1.3.</span> <span class="nav-text">4、Docker常用命令&amp;操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2）、容器操作"><span class="nav-number">1.3.1.</span> <span class="nav-text">2）、容器操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进入容器Bash"><span class="nav-number">2.1.</span> <span class="nav-text">进入容器Bash</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将本地sql文件导入容器"><span class="nav-number">2.1.1.</span> <span class="nav-text">将本地sql文件导入容器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Docker-Mysql"><span class="nav-number">3.</span> <span class="nav-text">Docker-Mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装MySQL示例"><span class="nav-number">3.1.</span> <span class="nav-text">安装MySQL示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装mysql之后进行操作"><span class="nav-number">3.1.1.</span> <span class="nav-text">安装mysql之后进行操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mysql使用"><span class="nav-number">4.</span> <span class="nav-text">mysql使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MySql-导入-sql文件"><span class="nav-number">4.1.</span> <span class="nav-text">MySql 导入 *.sql文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-将本地sql文件导入容器"><span class="nav-number">4.1.1.</span> <span class="nav-text">1.将本地sql文件导入容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登入容器内MYSQL执行sql"><span class="nav-number">4.1.2.</span> <span class="nav-text">登入容器内MYSQL执行sql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-进入数据库容器"><span class="nav-number">4.1.3.</span> <span class="nav-text">2.进入数据库容器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改-Docker-中-MySQL-容器的编码"><span class="nav-number">4.2.</span> <span class="nav-text">修改 Docker 中 MySQL 容器的编码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-进入MySQL容器"><span class="nav-number">4.2.0.1.</span> <span class="nav-text">1. 进入MySQL容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-备份当前-my-cnf-文件"><span class="nav-number">4.2.0.2.</span> <span class="nav-text">2. 备份当前 my.cnf 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-退出容器"><span class="nav-number">4.2.0.3.</span> <span class="nav-text">3. 退出容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-在服务器创建配置文件-my-cnf"><span class="nav-number">4.2.0.4.</span> <span class="nav-text">4. 在服务器创建配置文件(my.cnf)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-查看容器长ID"><span class="nav-number">4.2.0.5.</span> <span class="nav-text">5. 查看容器长ID</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-上传文件到容器"><span class="nav-number">4.2.0.6.</span> <span class="nav-text">6. 上传文件到容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-自行登录容器查看并提出容器"><span class="nav-number">4.2.0.7.</span> <span class="nav-text">7. 自行登录容器查看并提出容器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-重启docker"><span class="nav-number">4.2.0.8.</span> <span class="nav-text">8. 重启docker</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-查看数据库编码"><span class="nav-number">4.2.0.9.</span> <span class="nav-text">9. 查看数据库编码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#备份数据库"><span class="nav-number">4.3.</span> <span class="nav-text">备份数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql使用mysqldump定时备份数据库"><span class="nav-number">4.3.1.</span> <span class="nav-text">mysql使用mysqldump定时备份数据库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装redis"><span class="nav-number">5.</span> <span class="nav-text">安装redis</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#连接、查看容器"><span class="nav-number">5.1.</span> <span class="nav-text">连接、查看容器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#官方文档"><span class="nav-number">5.2.</span> <span class="nav-text">官方文档</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置文件映射"><span class="nav-number">5.2.1.</span> <span class="nav-text">配置文件映射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">5.2.2.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -757,7 +728,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -770,7 +741,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -783,7 +754,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

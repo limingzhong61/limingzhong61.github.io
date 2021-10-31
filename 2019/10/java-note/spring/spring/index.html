@@ -45,7 +45,7 @@
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
     localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
+    path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: '复制',
@@ -64,12 +64,12 @@
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="2002 Rod Johnon Spring  2003  ,IOC  AopSpring data,spring boot,spring cloud,spring framework ,spring social [TOC]IOC :控制反转Inversion of Control（DI：，Dependency Injection，依赖注入）">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/spring/spring/E:%5Cpictures%5CLanguage%5Cspring%5CspringIoc%E5%AE%B9%E5%99%A8%E5%92%8Cservlet%E5%AE%B9%E5%99%A8.png">
-<meta property="og:updated_time" content="2021-02-22T13:19:17.431Z">
+<meta property="og:image" content="https://localhost:4000/2019/10/java-note/spring/spring/E:%5Cpictures%5CLanguage%5Cspring%5CspringIoc%E5%AE%B9%E5%99%A8%E5%92%8Cservlet%E5%AE%B9%E5%99%A8.png">
+<meta property="og:updated_time" content="2021-10-23T02:19:04.201Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring">
 <meta name="twitter:description" content="2002 Rod Johnon Spring  2003  ,IOC  AopSpring data,spring boot,spring cloud,spring framework ,spring social [TOC]IOC :控制反转Inversion of Control（DI：，Dependency Injection，依赖注入）">
-<meta name="twitter:image" content="https://codeofli.github.io/2019/10/java-note/spring/spring/E:%5Cpictures%5CLanguage%5Cspring%5CspringIoc%E5%AE%B9%E5%99%A8%E5%92%8Cservlet%E5%AE%B9%E5%99%A8.png">
+<meta name="twitter:image" content="https://localhost:4000/2019/10/java-note/spring/spring/E:%5Cpictures%5CLanguage%5Cspring%5CspringIoc%E5%AE%B9%E5%99%A8%E5%92%8Cservlet%E5%AE%B9%E5%99%A8.png">
   <link rel="canonical" href="https://codeofli.github.io/2019/10/java-note/spring/spring/">
 
 
@@ -211,7 +211,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">32</span></a>
 
   </li>
       
@@ -233,7 +233,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
 
   </li>
       
@@ -255,7 +255,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">48</span></a>
 
   </li>
   </ul>
@@ -325,7 +325,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-22 21:19:17" itemprop="dateModified" datetime="2021-02-22T21:19:17+08:00">2021-02-22</time>
+                <time title="修改时间：2021-10-23 10:19:04" itemprop="dateModified" datetime="2021-10-23T10:19:04+08:00">2021-10-23</time>
               </span>
             
           
@@ -593,7 +593,7 @@ b.public void afterThrowing( ThrowableSubclass)</code></pre><h2 id="环绕通知
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">import</span> <span class="attr">resource</span>=<span class="string">"applicationContext-*.xml"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>Web项目：</p>
-<p><img src="/2019/10/java-note/spring/spring/E:%5Cpictures%5CLanguage%5Cspring%5CspringIoc%E5%AE%B9%E5%99%A8%E5%92%8Cservlet%E5%AE%B9%E5%99%A8.png" alt="1561880276559"></p>
+<p><img src="//localhost:4000/2019/10/java-note/spring/spring/E:%5Cpictures%5CLanguage%5Cspring%5CspringIoc%E5%AE%B9%E5%99%A8%E5%92%8Cservlet%E5%AE%B9%E5%99%A8.png" alt="1561880276559"></p>
 <h1 id="2-Spring整合MyBatis"><a href="#2-Spring整合MyBatis" class="headerlink" title="2.Spring整合MyBatis"></a>2.Spring整合MyBatis</h1><p>Spring - MyBatis </p>
 <p>思路：<br>    SqlSessionFactory -&gt; SqlSession -&gt;StudentMapper -&gt;CRUD<br>可以发现 ，MyBatis最终是通过SqlSessionFactory来操作数据库，<br>Spring整合MyBatis 其实就是 将MyBatis的SqlSessionFactory 交给Spring</p>
 <p>SM整合步骤：<br>1.jar<br>mybatis-spring.jar    spring-tx.jar    spring-jdbc.jar        spring-expression.jar<br>spring-context-support.jar    spring-core.jar        spring-context.jar<br>spring-beans.jar    spring-aop.jar    spring-web.jar    commons-logging.jar<br>commons-dbcp.jar    ojdbc.jar    mybatis.jar    log4j.jar    commons-pool.jar</p>
@@ -778,7 +778,7 @@ b.public void afterThrowing( ThrowableSubclass)</code></pre><h2 id="环绕通知
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -791,7 +791,7 @@ b.public void afterThrowing( ThrowableSubclass)</code></pre><h2 id="环绕通知
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -804,7 +804,7 @@ b.public void afterThrowing( ThrowableSubclass)</code></pre><h2 id="环绕通知
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

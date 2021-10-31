@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon128.ico?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon32.ico?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon16.ico?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+  <link rel="alternate" href="/atom.xml" title="nicolas" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="SpringCloud实用篇020.学习目标2.Feign远程调用先来看我们以前利用RestTemplate发起远程调用的代码：存在下面的问题：•代码可读性差，编程体验不统一•参数复杂URL难以维护Feign是一个声明式的http客户端，官方地址：https://github.com/OpenFeign/feign">
+<meta name="keywords" content="SpringCloud,Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringCloud实用篇02">
+<meta property="og:url" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/index.html">
+<meta property="og:site_name" content="nicolas">
+<meta property="og:description" content="SpringCloud实用篇020.学习目标2.Feign远程调用先来看我们以前利用RestTemplate发起远程调用的代码：存在下面的问题：•代码可读性差，编程体验不统一•参数复杂URL难以维护Feign是一个声明式的http客户端，官方地址：https://github.com/OpenFeign/feign">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714174814204.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714174918088.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714175102524.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714175415087.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210829164437154.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714185925910.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714190041542.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210829170814915.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714190542730.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714190528450.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714190640857.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210829171704131.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714214041796.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210829172053596.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714204557771.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714204656214.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714205221970.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714205623048.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714210131152.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210829223448857.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714210919458.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714211908341.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714211742956.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210830143614342.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714212312871.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210830151636748.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714214228409.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210830152420162.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714215713563.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714215832675.png">
+<meta property="og:updated_time" content="2021-10-31T05:22:03.641Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringCloud实用篇02">
+<meta name="twitter:description" content="SpringCloud实用篇020.学习目标2.Feign远程调用先来看我们以前利用RestTemplate发起远程调用的代码：存在下面的问题：•代码可读性差，编程体验不统一•参数复杂URL难以维护Feign是一个声明式的http客户端，官方地址：https://github.com/OpenFeign/feign">
+<meta name="twitter:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714174814204.png">
+  <link rel="canonical" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>SpringCloud实用篇02 | nicolas</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">nicolas</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Yesterday you said tomorow.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">32</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">48</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/codeOflI/codeOflI.github.io/tree/dev" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">SpringCloud实用篇02
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-10-20 10:40:06" itemprop="dateCreated datePublished" datetime="2021-10-20T10:40:06+08:00">2021-10-20</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-31 13:22:03" itemprop="dateModified" datetime="2021-10-31T13:22:03+08:00">2021-10-31</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="SpringCloud实用篇02"><a href="#SpringCloud实用篇02" class="headerlink" title="SpringCloud实用篇02"></a>SpringCloud实用篇02</h1><h1 id="0-学习目标"><a href="#0-学习目标" class="headerlink" title="0.学习目标"></a>0.学习目标</h1><h1 id="2-Feign远程调用"><a href="#2-Feign远程调用" class="headerlink" title="2.Feign远程调用"></a>2.Feign远程调用</h1><p>先来看我们以前利用RestTemplate发起远程调用的代码：</p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714174814204.png" alt="image-20210714174814204"></p><p>存在下面的问题：</p><p>•代码可读性差，编程体验不统一</p><p>•参数复杂URL难以维护</p><p>Feign是一个<strong>声明式的http客户端</strong>，官方地址：<a href="https://github.com/OpenFeign/feign" target="_blank" rel="noopener">https://github.com/OpenFeign/feign</a></p><a id="more"></a>
+
+
+
+
+
+<p>其作用就是帮助我们优雅的实现http请求的发送，解决上面提到的问题。</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714174918088.png" alt="image-20210714174918088"></p>
+<h2 id="2-1-Feign替代RestTemplate"><a href="#2-1-Feign替代RestTemplate" class="headerlink" title="2.1.Feign替代RestTemplate"></a>2.1.Feign替代RestTemplate</h2><p>Fegin的使用步骤如下：</p>
+<h3 id="1）引入依赖"><a href="#1）引入依赖" class="headerlink" title="1）引入依赖"></a>1）引入依赖</h3><p>我们在order-service服务的pom文件中引入feign的依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--feign客户端依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2）添加注解"><a href="#2）添加注解" class="headerlink" title="2）添加注解"></a>2）添加注解</h3><p>在order-service的启动类添加注解开启Feign的功能：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableFeignClients</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714175102524.png" alt="image-20210714175102524"></p>
+<h3 id="3）编写Feign的客户端"><a href="#3）编写Feign的客户端" class="headerlink" title="3）编写Feign的客户端"></a>3）编写Feign的客户端</h3><p>在order-service中新建一个接口，内容如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.order.client;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.itcast.order.pojo.User;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.openfeign.FeignClient;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line"></span><br><span class="line"><span class="meta">@FeignClient</span>(<span class="string">"userservice"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserClient</span> </span>&#123;</span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/user/&#123;id&#125;"</span>)</span><br><span class="line">    <span class="function">User <span class="title">findById</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Long id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个客户端主要是基于SpringMVC的注解来声明远程调用的信息，比如：</p>
+<ul>
+<li>服务名称：userservice</li>
+<li>请求方式：GET</li>
+<li>请求路径：/user/{id}</li>
+<li>请求参数：Long id</li>
+<li>返回值类型：User</li>
+</ul>
+<p>这样，Feign就可以帮助我们发送http请求，无需自己使用RestTemplate来发送了。</p>
+<h3 id="4）测试"><a href="#4）测试" class="headerlink" title="4）测试"></a>4）测试</h3><p>修改order-service中的OrderService类中的queryOrderById方法，使用Feign客户端代替RestTemplate：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714175415087.png" alt="image-20210714175415087"></p>
+<p>是不是看起来优雅多了。</p>
+<h3 id="5）总结"><a href="#5）总结" class="headerlink" title="5）总结"></a>5）总结</h3><p>使用Feign的步骤：</p>
+<p>① 引入依赖</p>
+<p>② 添加@EnableFeignClients注解</p>
+<p>③ 编写FeignClient接口</p>
+<p>④ 使用FeignClient中定义的方法代替RestTemplate</p>
+<h2 id="2-2-自定义配置"><a href="#2-2-自定义配置" class="headerlink" title="2.2.自定义配置"></a>2.2.自定义配置</h2><p>Feign可以支持很多的自定义配置，如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>作用</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>feign.Logger.Level</strong></td>
+<td>修改日志级别</td>
+<td>包含四种不同的级别：NONE、BASIC、HEADERS、FULL</td>
+</tr>
+<tr>
+<td>feign.codec.Decoder</td>
+<td>响应结果的解析器</td>
+<td>http远程调用的结果做解析，例如解析json字符串为java对象</td>
+</tr>
+<tr>
+<td>feign.codec.Encoder</td>
+<td>请求参数编码</td>
+<td>将请求参数编码，便于通过http请求发送</td>
+</tr>
+<tr>
+<td>feign. Contract</td>
+<td>支持的注解格式</td>
+<td>默认是SpringMVC的注解</td>
+</tr>
+<tr>
+<td>feign. Retryer</td>
+<td>失败重试机制</td>
+<td>请求失败的重试机制，默认是没有，不过会使用Ribbon的重试</td>
+</tr>
+</tbody></table>
+<p>一般情况下，默认值就能满足我们使用，如果要自定义时，只需要<strong>创建自定义的@Bean覆盖默认Bean即可</strong>。</p>
+<p><strong>平时建议用NONE或者BASIC</strong>，记录日志会消耗一定的性能</p>
+<p>下面以日志为例来演示如何自定义配置。</p>
+<h3 id="2-2-1-配置文件方式"><a href="#2-2-1-配置文件方式" class="headerlink" title="2.2.1.配置文件方式"></a>2.2.1.配置文件方式</h3><p>基于配置文件修改feign的日志级别可以针对单个服务：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">feign:</span>  </span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    config:</span> </span><br><span class="line"><span class="attr">      userservice:</span> <span class="comment"># 针对某个微服务的配置</span></span><br><span class="line"><span class="attr">        loggerLevel:</span> <span class="string">FULL</span> <span class="comment">#  日志级别</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以针对所有服务：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">feign:</span>  </span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    config:</span> </span><br><span class="line"><span class="attr">      default:</span> <span class="comment"># 这里用default就是全局配置，如果是写服务名称，则是针对某个微服务的配置</span></span><br><span class="line"><span class="attr">        loggerLevel:</span> <span class="string">FULL</span> <span class="comment">#  日志级别</span></span><br></pre></td></tr></table></figure>
+
+<p>而日志的级别分为四种：</p>
+<ul>
+<li>NONE：不记录任何日志信息，这是默认值。</li>
+<li>BASIC：仅记录请求的方法，URL以及响应状态码和执行时间</li>
+<li>HEADERS：在BASIC的基础上，额外记录了请求和响应的头信息</li>
+<li>FULL：记录所有请求和响应的明细，包括头信息、请求体、元数据。</li>
+</ul>
+<h3 id="2-2-2-Java代码方式"><a href="#2-2-2-Java代码方式" class="headerlink" title="2.2.2.Java代码方式"></a>2.2.2.Java代码方式</h3><p>也可以基于Java代码来修改日志级别，先声明一个类，然后声明一个Logger.Level的对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DefaultFeignConfiguration</span>  </span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> Logger.<span class="function">Level <span class="title">feignLogLevel</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Logger.Level.BASIC; <span class="comment">// 日志级别为BASIC</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果要<strong>全局生效</strong>，将其放到启动类的@EnableFeignClients这个注解中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableFeignClients</span>(defaultConfiguration = DefaultFeignConfiguration .class)</span><br></pre></td></tr></table></figure>
+
+<p>如果是<strong>局部生效</strong>，则把它放到对应的@FeignClient这个注解中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FeignClient</span>(value = <span class="string">"userservice"</span>, configuration = DefaultFeignConfiguration .class)</span><br></pre></td></tr></table></figure>
+
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210829164437154.png" alt="image-20210829164437154"></p>
+<h2 id="2-3-Feign使用优化"><a href="#2-3-Feign使用优化" class="headerlink" title="2.3.Feign使用优化"></a>2.3.Feign使用优化</h2><p>Feign底层发起http请求，依赖于其它的框架。其底层客户端实现包括：</p>
+<p>•URLConnection：<strong>默认实现</strong>，不支持连接池</p>
+<p>•Apache HttpClient ：支持连接池</p>
+<p>•OKHttp：支持连接池</p>
+<p>因此提高Feign的性能主要手段就是使用<strong>连接池</strong>代替默认的URLConnection。</p>
+<p>这里我们用Apache的HttpClient来演示。</p>
+<p>1）引入依赖</p>
+<p>在order-service的pom文件中引入Apache的HttpClient依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--httpClient的依赖 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.github.openfeign<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>feign-httpclient<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2）配置连接池</p>
+<p>在order-service的application.yml中添加配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">feign:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    config:</span></span><br><span class="line"><span class="attr">      default:</span> <span class="comment"># default全局的配置</span></span><br><span class="line"><span class="attr">        loggerLevel:</span> <span class="string">BASIC</span> <span class="comment"># 日志级别，BASIC就是基本的请求和响应信息</span></span><br><span class="line"><span class="attr">  httpclient:</span></span><br><span class="line"><span class="attr">    enabled:</span> <span class="literal">true</span> <span class="comment"># 开启feign对HttpClient的支持</span></span><br><span class="line"><span class="attr">    max-connections:</span> <span class="number">200</span> <span class="comment"># 最大的连接数</span></span><br><span class="line"><span class="attr">    max-connections-per-route:</span> <span class="number">50</span> <span class="comment"># 每个路径的最大连接数</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来，在FeignClientFactoryBean中的loadBalance方法中打断点：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714185925910.png" alt="image-20210714185925910"></p>
+<p>Debug方式启动order-service服务，可以看到这里的client，底层就是Apache HttpClient：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714190041542.png" alt="image-20210714190041542"></p>
+<p>如果上面操作完成后，未更新为Apache HttpClient，查看已经下载好对应依赖，有可能是Maven未加载对应的依赖，用maven reload一下project，重新加载对应依赖或可解决</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210829170814915.png" alt="image-20210829170814915"></p>
+<p>总结，Feign的优化：</p>
+<p>1.<strong>日志级别尽量用basic</strong></p>
+<p>2.使用HttpClient或OKHttp代替URLConnection</p>
+<p>①  引入feign-httpClient依赖</p>
+<p>②  配置文件开启httpClient功能，设置连接池参数</p>
+<h2 id="2-4-最佳实践"><a href="#2-4-最佳实践" class="headerlink" title="2.4.最佳实践"></a>2.4.最佳实践</h2><p>所谓最近实践，就是使用过程中总结的经验，<strong>最好的一种使用方式。</strong></p>
+<p>自习观察可以发现，Feign的客户端与服务提供者的controller代码非常相似：</p>
+<p>feign客户端：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714190542730.png" alt="image-20210714190542730"></p>
+<p>UserController：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714190528450.png" alt="image-20210714190528450"></p>
+<p>有没有一种办法简化这种重复的代码编写呢？</p>
+<h3 id="2-4-1-继承方式"><a href="#2-4-1-继承方式" class="headerlink" title="2.4.1.继承方式"></a>2.4.1.继承方式</h3><p><strong>抽象客服端和服务端的共同方法</strong>到一个接口中</p>
+<p>一样的代码可以通过继承来共享：</p>
+<p>1）定义一个API接口，利用定义方法，并基于SpringMVC注解做声明。</p>
+<p>2）Feign客户端和Controller都<strong>集成该接口</strong></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714190640857.png" alt="image-20210714190640857"></p>
+<p>官方不推荐使用</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210829171704131.png" alt="image-20210829171704131"></p>
+<p>优点：</p>
+<ul>
+<li>简单</li>
+<li>实现了代码共享</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li><p>服务提供方、服务消费方<strong>紧耦合</strong></p>
+</li>
+<li><p><strong>参数列表中的注解映射并不会继承</strong>，因此Controller中必须再次声明方法、参数列表、注解</p>
+</li>
+</ul>
+<h3 id="2-4-2-抽取方式"><a href="#2-4-2-抽取方式" class="headerlink" title="2.4.2.抽取方式"></a>2.4.2.抽取方式</h3><p>将Feign的Client抽取为独立模块，并且把接口有关的POJO、默认的Feign配置都放到这个模块中，提供给所有消费者使用。</p>
+<p>例如，将UserClient、User、Feign的默认配置都抽取到一个feign-api包中，所有微服务引用该依赖包，即可直接使用。</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714214041796.png" alt="image-20210714214041796"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210829172053596.png" alt="image-20210829172053596"></p>
+<h3 id="2-4-3-实现基于抽取的最佳实践"><a href="#2-4-3-实现基于抽取的最佳实践" class="headerlink" title="2.4.3.实现基于抽取的最佳实践"></a>2.4.3.实现基于抽取的最佳实践</h3><h4 id="1）抽取"><a href="#1）抽取" class="headerlink" title="1）抽取"></a>1）抽取</h4><p>首先创建一个module，命名为feign-api：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714204557771.png" alt="image-20210714204557771"></p>
+<p>项目结构：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714204656214.png" alt="image-20210714204656214"></p>
+<p>在feign-api中然后引入feign的starter依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-openfeign<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后，order-service中编写的UserClient、User、DefaultFeignConfiguration都复制到feign-api项目中</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714205221970.png" alt="image-20210714205221970"></p>
+<h4 id="2）在order-service中使用feign-api"><a href="#2）在order-service中使用feign-api" class="headerlink" title="2）在order-service中使用feign-api"></a>2）在order-service中使用feign-api</h4><p>首先，删除order-service中的UserClient、User、DefaultFeignConfiguration等类或接口。</p>
+<p>在order-service的pom文件中中引入feign-api的依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--引入feign的统一api--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.itcast.demo<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>feign-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>修改order-service中的所有与上述三个组件有关的导包部分，改成导入feign-api中的包</p>
+<h4 id="3）重启测试"><a href="#3）重启测试" class="headerlink" title="3）重启测试"></a>3）重启测试</h4><p>重启后，发现服务报错了：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714205623048.png" alt="image-20210714205623048"></p>
+<p>这是因为UserClient现在在cn.itcast.feign.clients包下，</p>
+<p>而order-service的@EnableFeignClients注解是在cn.itcast.order包下，不在同一个包，无法扫描到UserClient。</p>
+<h4 id="4）解决扫描包问题"><a href="#4）解决扫描包问题" class="headerlink" title="4）解决扫描包问题"></a>4）解决扫描包问题</h4><p>方式一：</p>
+<p>指定Feign应该扫描的包：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableFeignClients</span>(basePackages = <span class="string">"cn.itcast.feign.clients"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>方式二：</p>
+<p>指定需要加载的Client接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableFeignClients</span>(clients = &#123;UserClient.class&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>推荐用第二种</p>
+<h1 id="3-Gateway服务网关"><a href="#3-Gateway服务网关" class="headerlink" title="3.Gateway服务网关"></a>3.Gateway服务网关</h1><p>Spring Cloud Gateway 是 Spring Cloud 的一个全新项目，该项目是基于 Spring 5.0，Spring Boot 2.0 和 Project Reactor 等响应式编程和事件流技术开发的网关，它旨在为微服务架构提供一种简单有效的统一的 API 路由管理方式。</p>
+<h2 id="3-1-为什么需要网关"><a href="#3-1-为什么需要网关" class="headerlink" title="3.1.为什么需要网关"></a>3.1.为什么需要网关</h2><p>Gateway网关是我们服务的守门神，所有微服务的统一入口。</p>
+<p>网关的<strong>核心功能特性</strong>：</p>
+<ul>
+<li>请求路由</li>
+<li>权限控制</li>
+<li>限流</li>
+</ul>
+<p>架构图：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714210131152.png" alt="image-20210714210131152"></p>
+<p><strong>权限控制</strong>：网关作为微服务入口，需要<strong>校验用户是是否有请求资格</strong>，如果没有则进行拦截。</p>
+<p><strong>路由和负载均衡</strong>：一切请求都必须先经过gateway，但网关不处理业务，而是根据某种规则，把请求转发到某个微服务，这个过程叫做路由。当然路由的目标服务有多个时，还需要做负载均衡。</p>
+<p><strong>限流</strong>：当请求流量过高时，在网关中按照下流的微服务能够接受的速度来放行请求，避免服务压力过大。</p>
+<p>在SpringCloud中网关的实现包括两种：</p>
+<ul>
+<li>gateway</li>
+<li>zuul</li>
+</ul>
+<p>Zuul是基于Servlet的实现，属于阻塞式编程。而SpringCloudGateway则是基于<strong>Spring5中提供的WebFlux</strong>，属于响应式编程的实现，<strong>具备更好的性能。</strong></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210829223448857.png" alt="image-20210829223448857"></p>
+<h2 id="3-2-gateway快速入门"><a href="#3-2-gateway快速入门" class="headerlink" title="3.2.gateway快速入门"></a>3.2.gateway快速入门</h2><p>下面，我们就演示下网关的基本路由功能。基本步骤如下：</p>
+<ol>
+<li>创建SpringBoot工程gateway，引入网关依赖</li>
+<li>编写启动类</li>
+<li>编写基础配置和路由规则</li>
+<li>启动网关服务进行测试</li>
+</ol>
+<h3 id="1）创建gateway服务，引入依赖"><a href="#1）创建gateway服务，引入依赖" class="headerlink" title="1）创建gateway服务，引入依赖"></a>1）创建gateway服务，引入依赖</h3><p>创建服务：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714210919458.png" alt="image-20210714210919458"></p>
+<p>引入依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--网关gateway依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-gateway<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--nacos服务发现依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2）编写启动类"><a href="#2）编写启动类" class="headerlink" title="2）编写启动类"></a>2）编写启动类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.gateway;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GatewayApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(GatewayApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3）编写基础配置和路由规则"><a href="#3）编写基础配置和路由规则" class="headerlink" title="3）编写基础配置和路由规则"></a>3）编写基础配置和路由规则</h3><p>创建application.yml文件，内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">10010</span> <span class="comment"># 网关端口</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  application:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">gateway</span> <span class="comment"># 服务名称</span></span><br><span class="line"><span class="attr">  cloud:</span></span><br><span class="line"><span class="attr">    nacos:</span></span><br><span class="line"><span class="attr">      server-addr:</span> <span class="attr">localhost:8848</span> <span class="comment"># nacos地址</span></span><br><span class="line"><span class="attr">    gateway:</span></span><br><span class="line"><span class="attr">      routes:</span> <span class="comment"># 网关路由配置</span></span><br><span class="line"><span class="attr">        - id:</span> <span class="string">user-service</span> <span class="comment"># 路由id，自定义，只要唯一即可</span></span><br><span class="line">          <span class="comment"># uri: http://127.0.0.1:8081 # 路由的目标地址 http就是固定地址</span></span><br><span class="line"><span class="attr">          uri:</span> <span class="attr">lb://userservice</span> <span class="comment"># 路由的目标地址 lb（LoadBalance）就是负载均衡，后面跟服务名称</span></span><br><span class="line"><span class="attr">          predicates:</span> <span class="comment"># 路由断言，也就是判断请求是否符合路由规则的条件</span></span><br><span class="line"><span class="bullet">            -</span> <span class="string">Path=/user/**</span> <span class="comment"># 这个是按照路径匹配，只要以/user/开头就符合要求</span></span><br></pre></td></tr></table></figure>
+
+<p>我们将符合<code>Path</code> 规则的一切请求，都代理到 <code>uri</code>参数指定的地址。</p>
+<p>本例中，我们将 <code>/user/**</code>开头的请求，代理到<code>lb://userservice</code>，lb是负载均衡，根据服务名拉取服务列表，实现负载均衡。</p>
+<p>注意：gateway中配置rui的useservice和自己声明的服务名称<strong>一致</strong>，否则可能发生网管不能访问，但单独访问一个服务（ip）是可行的</p>
+<h3 id="4）重启测试"><a href="#4）重启测试" class="headerlink" title="4）重启测试"></a>4）重启测试</h3><p>重启网关，访问<a href="http://localhost:10010/user/1时，符合`/user/**`规则，请求转发到uri：http://userservice/user/1，得到了结果：" target="_blank" rel="noopener">http://localhost:10010/user/1时，符合`/user/**`规则，请求转发到uri：http://userservice/user/1，得到了结果：</a></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714211908341.png" alt="image-20210714211908341"></p>
+<h3 id="5）网关路由的流程图"><a href="#5）网关路由的流程图" class="headerlink" title="5）网关路由的流程图"></a>5）网关路由的流程图</h3><p>整个访问的流程如下：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714211742956.png" alt="image-20210714211742956"></p>
+<p>总结：</p>
+<p>网关搭建步骤：</p>
+<ol>
+<li><p>创建项目，引入nacos服务发现和gateway依赖</p>
+</li>
+<li><p>配置application.yml，包括服务基本信息、nacos地址、路由</p>
+</li>
+</ol>
+<p>路由配置包括：</p>
+<ol>
+<li><p>路由id：路由的唯一标示</p>
+</li>
+<li><p>路由目标（uri）：路由的目标地址，http代表固定地址，lb代表根据服务名负载均衡</p>
+</li>
+<li><p>路由断言（predicates）：判断路由的规则，</p>
+</li>
+<li><p>路由过滤器（filters）：对请求或响应做处理</p>
+</li>
+</ol>
+<p>接下来，就重点来学习路由断言和路由过滤器的详细知识</p>
+<h2 id="3-3-断言工厂"><a href="#3-3-断言工厂" class="headerlink" title="3.3.断言工厂"></a>3.3.断言工厂</h2><p>我们在配置文件中写的断言规则只是字符串，这些字符串会被Predicate Factory读取并处理，转变为路由判断的条件</p>
+<p>例如Path=/user/**是按照路径匹配，这个规则是由</p>
+<p><code>org.springframework.cloud.gateway.handler.predicate.PathRoutePredicateFactory</code>类来</p>
+<p>处理的，像这样的断言工厂在SpringCloudGateway还有十几个:</p>
+<p>官方文档有案例</p>
+<p><a href="https://docs.spring.io/spring-cloud-gateway/docs/3.0.4-SNAPSHOT/reference/html/#gateway-request-predicates-factories" target="_blank" rel="noopener">https://docs.spring.io/spring-cloud-gateway/docs/3.0.4-SNAPSHOT/reference/html/#gateway-request-predicates-factories</a></p>
+<table>
+<thead>
+<tr>
+<th><strong>名称</strong></th>
+<th><strong>说明</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>After</td>
+<td>是某个时间点后的请求</td>
+<td>-  After=2037-01-20T17:42:47.789-07:00[America/Denver]</td>
+</tr>
+<tr>
+<td>Before</td>
+<td>是某个时间点之前的请求</td>
+<td>- Before=2031-04-13T15:14:47.433+08:00[Asia/Shanghai]</td>
+</tr>
+<tr>
+<td>Between</td>
+<td>是某两个时间点之前的请求</td>
+<td>-  Between=2037-01-20T17:42:47.789-07:00[America/Denver],  2037-01-21T17:42:47.789-07:00[America/Denver]</td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>请求必须包含某些cookie</td>
+<td>- Cookie=chocolate, ch.p</td>
+</tr>
+<tr>
+<td>Header</td>
+<td>请求必须包含某些header</td>
+<td>- Header=X-Request-Id, \d+</td>
+</tr>
+<tr>
+<td>Host</td>
+<td>请求必须是访问某个host（域名）</td>
+<td>-  Host=<strong>.somehost.org,</strong>.anotherhost.org</td>
+</tr>
+<tr>
+<td>Method</td>
+<td>请求方式必须是指定方式</td>
+<td>- Method=GET,POST</td>
+</tr>
+<tr>
+<td>Path</td>
+<td>请求路径必须符合指定规则</td>
+<td>- Path=/red/{segment},/blue/**</td>
+</tr>
+<tr>
+<td>Query</td>
+<td>请求参数必须包含指定参数</td>
+<td>- Query=name, Jack或者-  Query=name</td>
+</tr>
+<tr>
+<td>RemoteAddr</td>
+<td>请求者的ip必须是指定范围</td>
+<td>- RemoteAddr=192.168.1.1/24</td>
+</tr>
+<tr>
+<td>Weight</td>
+<td>权重处理</td>
+<td></td>
+</tr>
+</tbody></table>
+<p>我们只需要掌握Path这种路由工程就可以了。</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210830143614342.png" alt="image-20210830143614342"></p>
+<h2 id="3-4-过滤器工厂"><a href="#3-4-过滤器工厂" class="headerlink" title="3.4.过滤器工厂"></a>3.4.过滤器工厂</h2><p>GatewayFilter是网关中提供的一种过滤器，可以对进入网关的请求和微服务返回的响应做处理：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714212312871.png" alt="image-20210714212312871"></p>
+<h3 id="3-4-1-路由过滤器的种类"><a href="#3-4-1-路由过滤器的种类" class="headerlink" title="3.4.1.路由过滤器的种类"></a>3.4.1.路由过滤器的种类</h3><p>Spring提供了31种不同的路由过滤器工厂。例如：</p>
+<p><a href="https://docs.spring.io/spring-cloud-gateway/docs/3.0.4-SNAPSHOT/reference/html/#gatewayfilter-factories" target="_blank" rel="noopener">https://docs.spring.io/spring-cloud-gateway/docs/3.0.4-SNAPSHOT/reference/html/#gatewayfilter-factories</a></p>
+<table>
+<thead>
+<tr>
+<th><strong>名称</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AddRequestHeader</td>
+<td>给当前请求添加一个请求头</td>
+</tr>
+<tr>
+<td>RemoveRequestHeader</td>
+<td>移除请求中的一个请求头</td>
+</tr>
+<tr>
+<td>AddResponseHeader</td>
+<td>给响应结果中添加一个响应头</td>
+</tr>
+<tr>
+<td>RemoveResponseHeader</td>
+<td>从响应结果中移除有一个响应头</td>
+</tr>
+<tr>
+<td>RequestRateLimiter</td>
+<td>限制请求的流量</td>
+</tr>
+</tbody></table>
+<h3 id="3-4-2-请求头过滤器"><a href="#3-4-2-请求头过滤器" class="headerlink" title="3.4.2.请求头过滤器"></a>3.4.2.请求头过滤器</h3><p>下面我们以AddRequestHeader 为例来讲解。</p>
+<blockquote>
+<p><strong>需求</strong>：给所有进入userservice的请求添加一个请求头：Truth=itcast is freaking awesome!</p>
+</blockquote>
+<p>只需要修改gateway服务的application.yml文件，添加路由过滤即可：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  cloud:</span></span><br><span class="line"><span class="attr">    gateway:</span></span><br><span class="line"><span class="attr">      routes:</span></span><br><span class="line"><span class="attr">      - id:</span> <span class="string">user-service</span> </span><br><span class="line"><span class="attr">        uri:</span> <span class="attr">lb://userservice</span> </span><br><span class="line"><span class="attr">        predicates:</span> </span><br><span class="line"><span class="bullet">        -</span> <span class="string">Path=/user/**</span> </span><br><span class="line"><span class="attr">        filters:</span> <span class="comment"># 过滤器</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">AddRequestHeader=Truth,</span> <span class="string">Itcast</span> <span class="string">is</span> <span class="string">freaking</span> <span class="string">awesome!</span> <span class="comment"># 添加请求头</span></span><br></pre></td></tr></table></figure>
+
+<p>当前过滤器写在userservice路由下，因此仅仅对访问userservice的请求有效。</p>
+<h3 id="3-4-3-默认过滤器"><a href="#3-4-3-默认过滤器" class="headerlink" title="3.4.3.默认过滤器"></a>3.4.3.默认过滤器</h3><p>如果要对所有的路由都生效，则可以将过滤器工厂写到default下。格式如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  cloud:</span></span><br><span class="line"><span class="attr">    gateway:</span></span><br><span class="line"><span class="attr">      routes:</span></span><br><span class="line"><span class="attr">        - id:</span> <span class="string">user-service</span> </span><br><span class="line"><span class="attr">          uri:</span> <span class="attr">lb://userservice</span> </span><br><span class="line"><span class="attr">          predicates:</span> </span><br><span class="line"><span class="bullet">          -</span> <span class="string">Path=/user/**</span></span><br><span class="line"><span class="attr">      default-filters:</span> <span class="comment"># 默认过滤项</span></span><br><span class="line"><span class="bullet">        -</span> <span class="string">AddRequestHeader=Truth,</span> <span class="string">Itcast</span> <span class="string">is</span> <span class="string">freaking</span> <span class="string">awesome!</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-4-总结"><a href="#3-4-4-总结" class="headerlink" title="3.4.4.总结"></a>3.4.4.总结</h3><p>过滤器的作用是什么？</p>
+<p>① 对路由的请求或响应做加工处理，比如添加请求头</p>
+<p>② 配置在路由下的过滤器只对当前路由的请求生效</p>
+<p><strong>defaultFilters</strong>的作用是什么？</p>
+<p>① <strong>对所有路由都生效的过滤器</strong></p>
+<h2 id="3-5-全局过滤器"><a href="#3-5-全局过滤器" class="headerlink" title="3.5.全局过滤器"></a>3.5.全局过滤器</h2><p>上一节学习的过滤器，网关提供了31种，但每一种过滤器的作用都是固定的。如果我们希望拦截请求，做自己的业务逻辑则没办法实现。</p>
+<h3 id="3-5-1-全局过滤器作用"><a href="#3-5-1-全局过滤器作用" class="headerlink" title="3.5.1.全局过滤器作用"></a>3.5.1.全局过滤器作用</h3><p>全局过滤器的作用也是处理一切进入网关的请求和微服务响应，与GatewayFilter的作用一样。区别在于GatewayFilter通过配置定义，处理逻辑是固定的；而GlobalFilter的逻辑需要自己写代码实现。</p>
+<p>定义方式是实现GlobalFilter接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">GlobalFilter</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  处理当前请求，有必要的话通过&#123;<span class="doctag">@link</span> GatewayFilterChain&#125;将请求交给下一个过滤器处理</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> exchange 请求上下文，里面可以获取Request、Response等信息</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> chain 用来把请求委托给下一个过滤器 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> &#123;<span class="doctag">@code</span> Mono&lt;Void&gt;&#125; 返回标示当前过滤器业务结束</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">Mono&lt;Void&gt; <span class="title">filter</span><span class="params">(ServerWebExchange exchange, GatewayFilterChain chain)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在filter中编写自定义逻辑，可以实现下列功能：</p>
+<ul>
+<li>登录状态判断</li>
+<li>权限校验</li>
+<li>请求限流等</li>
+</ul>
+<h3 id="3-5-2-自定义全局过滤器"><a href="#3-5-2-自定义全局过滤器" class="headerlink" title="3.5.2.自定义全局过滤器"></a>3.5.2.自定义全局过滤器</h3><p>需求：定义全局过滤器，拦截请求，判断请求的参数是否满足下面条件：</p>
+<ul>
+<li><p>参数中是否有authorization，</p>
+</li>
+<li><p>authorization参数值是否为admin</p>
+</li>
+</ul>
+<p>如果同时满足则放行，否则拦截</p>
+<p>实现：</p>
+<p>在gateway中定义一个过滤器：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.gateway.filters;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.gateway.filter.GatewayFilterChain;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.gateway.filter.GlobalFilter;</span><br><span class="line"><span class="keyword">import</span> org.springframework.core.annotation.Order;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.HttpStatus;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.server.ServerWebExchange;</span><br><span class="line"><span class="keyword">import</span> reactor.core.publisher.Mono;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Order</span>(-<span class="number">1</span>)</span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AuthorizeFilter</span> <span class="keyword">implements</span> <span class="title">GlobalFilter</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Mono&lt;Void&gt; <span class="title">filter</span><span class="params">(ServerWebExchange exchange, GatewayFilterChain chain)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1.获取请求参数</span></span><br><span class="line">        MultiValueMap&lt;String, String&gt; params = exchange.getRequest().getQueryParams();</span><br><span class="line">        <span class="comment">// 2.获取authorization参数</span></span><br><span class="line">        String auth = params.getFirst(<span class="string">"authorization"</span>);</span><br><span class="line">        <span class="comment">// 3.校验</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="string">"admin"</span>.equals(auth)) &#123;</span><br><span class="line">            <span class="comment">// 放行</span></span><br><span class="line">            <span class="keyword">return</span> chain.filter(exchange);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 4.拦截</span></span><br><span class="line">        <span class="comment">// 4.1.禁止访问，设置状态码</span></span><br><span class="line">        exchange.getResponse().setStatusCode(HttpStatus.FORBIDDEN);</span><br><span class="line">        <span class="comment">// 4.2.结束处理</span></span><br><span class="line">        <span class="keyword">return</span> exchange.getResponse().setComplete();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210830151636748.png" alt="image-20210830151636748"></p>
+<h3 id="3-5-3-过滤器执行顺序"><a href="#3-5-3-过滤器执行顺序" class="headerlink" title="3.5.3.过滤器执行顺序"></a>3.5.3.过滤器执行顺序</h3><p>请求进入网关会碰到三类过滤器：当前路由的过滤器、DefaultFilter、GlobalFilter</p>
+<p>请求路由后，会将当前路由过滤器和DefaultFilter、GlobalFilter，合并到一个过滤器链（集合）中，排序后依次执行每个过滤器：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714214228409.png" alt="image-20210714214228409"></p>
+<p>排序的规则是什么呢？</p>
+<ul>
+<li>每一个过滤器都必须指定一个int类型的order值，<strong>order值越小，优先级越高，执行顺序越靠前</strong>。</li>
+<li>GlobalFilter通过实现Ordered接口，或者添加@Order注解来指定order值，由我们自己指定</li>
+<li>路由过滤器和defaultFilter的order由Spring指定，默认是<strong>按照声明顺序从1递增。</strong></li>
+<li>当<strong>过滤器的order值一样</strong>时，会按照 <strong>defaultFilter &gt; 路由过滤器 &gt; GlobalFilter</strong>的顺序执行。</li>
+</ul>
+<p>详细内容，可以查看源码：</p>
+<p><code>org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator#getFilters()</code>方法是先加载defaultFilters，然后再加载某个route的filters，然后合并。</p>
+<p><code>org.springframework.cloud.gateway.handler.FilteringWebHandler#handle()</code>方法会加载全局过滤器，与前面的过滤器合并后根据order排序，组织过滤器链</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210830152420162.png" alt="image-20210830152420162"></p>
+<h2 id="3-6-跨域问题"><a href="#3-6-跨域问题" class="headerlink" title="3.6.跨域问题"></a>3.6.跨域问题</h2><h3 id="3-6-1-什么是跨域问题"><a href="#3-6-1-什么是跨域问题" class="headerlink" title="3.6.1.什么是跨域问题"></a>3.6.1.什么是跨域问题</h3><p>跨域：域名不一致就是跨域，主要包括：</p>
+<ul>
+<li><p><strong>域名不同</strong>： <a href="http://www.taobao.com" target="_blank" rel="noopener">www.taobao.com</a> 和 <a href="http://www.taobao.org" target="_blank" rel="noopener">www.taobao.org</a> 和 <a href="http://www.jd.com" target="_blank" rel="noopener">www.jd.com</a> 和 miaosha.jd.com</p>
+</li>
+<li><p>域名相同，端口不同：localhost:8080和localhost:8081</p>
+</li>
+</ul>
+<p>跨域问题：<strong>浏览器禁止</strong>请求的发起者与服务端发生<strong>跨域ajax请求</strong>，请求被浏览器拦截的问题</p>
+<p>解决方案：CORS，这个以前应该学习过，这里不再赘述了。不知道的小伙伴可以查看<a href="https://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">https://www.ruanyifeng.com/blog/2016/04/cors.html</a></p>
+<p><strong>CORS</strong>是一个W3C标准，全称是<strong>“跨域资源共享”（Cross-origin resource sharing）</strong>。</p>
+<p>它允许浏览器向跨源服务器，发出<a href="https://www.ruanyifeng.com/blog/2012/09/xmlhttprequest_level_2.html" target="_blank" rel="noopener"><code>XMLHttpRequest</code></a>请求，从而克服了AJAX只能<a href="https://www.ruanyifeng.com/blog/2016/04/same-origin-policy.html" target="_blank" rel="noopener">同源</a>使用的限制。</p>
+<h3 id="3-6-2-模拟跨域问题"><a href="#3-6-2-模拟跨域问题" class="headerlink" title="3.6.2.模拟跨域问题"></a>3.6.2.模拟跨域问题</h3><p>找到课前资料的页面文件：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714215713563.png" alt="image-20210714215713563"></p>
+<p>放入tomcat或者nginx这样的web服务器中，启动并访问。</p>
+<p>可以安装npm，再安装live-server，再执行</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">live-server --port <span class="number">8090</span></span><br></pre></td></tr></table></figure>
+
+<p>live-server一款npm工具，全局npm i -g live-server后，项目目录使用live-server命令行命令便可直接在浏览器中预览（默认找index.html，其他请自行带上文件名空格后跟在后面），并且自动全局监听实时更新。</p>
+<p>可以在浏览器控制台看到下面的错误：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714215832675.png" alt="image-20210714215832675"></p>
+<p>从localhost:8090访问localhost:10010，端口不同，显然是跨域的请求。</p>
+<h3 id="3-6-3-解决跨域问题"><a href="#3-6-3-解决跨域问题" class="headerlink" title="3.6.3.解决跨域问题"></a>3.6.3.解决跨域问题</h3><p>在gateway服务的application.yml文件中，添加下面的配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  cloud:</span></span><br><span class="line"><span class="attr">    gateway:</span></span><br><span class="line">      <span class="comment"># 。。。</span></span><br><span class="line"><span class="attr">      globalcors:</span> <span class="comment"># 全局的跨域处理</span></span><br><span class="line"><span class="attr">        add-to-simple-url-handler-mapping:</span> <span class="literal">true</span> <span class="comment"># 解决options请求被拦截问题</span></span><br><span class="line"><span class="attr">        corsConfigurations:</span></span><br><span class="line">          <span class="string">'[/**]'</span><span class="string">:</span> <span class="comment">#/**表示拦截一切请求</span></span><br><span class="line"><span class="attr">            allowedOrigins:</span> <span class="comment"># 允许哪些网站的跨域请求 </span></span><br><span class="line"><span class="bullet">              -</span> <span class="string">"http://localhost:8090"</span></span><br><span class="line"><span class="attr">            allowedMethods:</span> <span class="comment"># 允许的跨域ajax的请求方式</span></span><br><span class="line"><span class="bullet">              -</span> <span class="string">"GET"</span></span><br><span class="line"><span class="bullet">              -</span> <span class="string">"POST"</span></span><br><span class="line"><span class="bullet">              -</span> <span class="string">"DELETE"</span></span><br><span class="line"><span class="bullet">              -</span> <span class="string">"PUT"</span></span><br><span class="line"><span class="bullet">              -</span> <span class="string">"OPTIONS"</span></span><br><span class="line"><span class="attr">            allowedHeaders:</span> <span class="string">"*"</span> <span class="comment"># 允许在请求中携带的头信息</span></span><br><span class="line"><span class="attr">            allowCredentials:</span> <span class="literal">true</span> <span class="comment"># 是否允许携带cookie</span></span><br><span class="line"><span class="attr">            maxAge:</span> <span class="number">360000</span> <span class="comment"># 这次跨域检测的有效期</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+    
+    <div>
+     
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+     
+    </div>
+    
+        
+      
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>nicolas lee</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/" title="SpringCloud实用篇02">https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/SpringCloud/" rel="tag"># SpringCloud</a>
+            
+              <a href="/tags/Java/" rel="tag"># Java</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2021/09/java-note/SpringCloud/SpringCloud01/" rel="next" title="SpringCloud01">
+                  <i class="fa fa-chevron-left"></i> SpringCloud01
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2021/10/java-note/OnJava8/OnJava8-17文件/" rel="prev" title="OnJava8-文件">
+                  OnJava8-文件 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCloud实用篇02"><span class="nav-number">1.</span> <span class="nav-text">SpringCloud实用篇02</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0-学习目标"><span class="nav-number">2.</span> <span class="nav-text">0.学习目标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-Feign远程调用"><span class="nav-number">3.</span> <span class="nav-text">2.Feign远程调用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-Feign替代RestTemplate"><span class="nav-number">3.1.</span> <span class="nav-text">2.1.Feign替代RestTemplate</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）引入依赖"><span class="nav-number">3.1.1.</span> <span class="nav-text">1）引入依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2）添加注解"><span class="nav-number">3.1.2.</span> <span class="nav-text">2）添加注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3）编写Feign的客户端"><span class="nav-number">3.1.3.</span> <span class="nav-text">3）编写Feign的客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4）测试"><span class="nav-number">3.1.4.</span> <span class="nav-text">4）测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5）总结"><span class="nav-number">3.1.5.</span> <span class="nav-text">5）总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-自定义配置"><span class="nav-number">3.2.</span> <span class="nav-text">2.2.自定义配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-配置文件方式"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.2.1.配置文件方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2-Java代码方式"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.2.2.Java代码方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Feign使用优化"><span class="nav-number">3.3.</span> <span class="nav-text">2.3.Feign使用优化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-最佳实践"><span class="nav-number">3.4.</span> <span class="nav-text">2.4.最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-1-继承方式"><span class="nav-number">3.4.1.</span> <span class="nav-text">2.4.1.继承方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-2-抽取方式"><span class="nav-number">3.4.2.</span> <span class="nav-text">2.4.2.抽取方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-3-实现基于抽取的最佳实践"><span class="nav-number">3.4.3.</span> <span class="nav-text">2.4.3.实现基于抽取的最佳实践</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）抽取"><span class="nav-number">3.4.3.1.</span> <span class="nav-text">1）抽取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）在order-service中使用feign-api"><span class="nav-number">3.4.3.2.</span> <span class="nav-text">2）在order-service中使用feign-api</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3）重启测试"><span class="nav-number">3.4.3.3.</span> <span class="nav-text">3）重启测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4）解决扫描包问题"><span class="nav-number">3.4.3.4.</span> <span class="nav-text">4）解决扫描包问题</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Gateway服务网关"><span class="nav-number">4.</span> <span class="nav-text">3.Gateway服务网关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-为什么需要网关"><span class="nav-number">4.1.</span> <span class="nav-text">3.1.为什么需要网关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-gateway快速入门"><span class="nav-number">4.2.</span> <span class="nav-text">3.2.gateway快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）创建gateway服务，引入依赖"><span class="nav-number">4.2.1.</span> <span class="nav-text">1）创建gateway服务，引入依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2）编写启动类"><span class="nav-number">4.2.2.</span> <span class="nav-text">2）编写启动类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3）编写基础配置和路由规则"><span class="nav-number">4.2.3.</span> <span class="nav-text">3）编写基础配置和路由规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4）重启测试"><span class="nav-number">4.2.4.</span> <span class="nav-text">4）重启测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5）网关路由的流程图"><span class="nav-number">4.2.5.</span> <span class="nav-text">5）网关路由的流程图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-断言工厂"><span class="nav-number">4.3.</span> <span class="nav-text">3.3.断言工厂</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-过滤器工厂"><span class="nav-number">4.4.</span> <span class="nav-text">3.4.过滤器工厂</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-1-路由过滤器的种类"><span class="nav-number">4.4.1.</span> <span class="nav-text">3.4.1.路由过滤器的种类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-2-请求头过滤器"><span class="nav-number">4.4.2.</span> <span class="nav-text">3.4.2.请求头过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-3-默认过滤器"><span class="nav-number">4.4.3.</span> <span class="nav-text">3.4.3.默认过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-4-总结"><span class="nav-number">4.4.4.</span> <span class="nav-text">3.4.4.总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-全局过滤器"><span class="nav-number">4.5.</span> <span class="nav-text">3.5.全局过滤器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-1-全局过滤器作用"><span class="nav-number">4.5.1.</span> <span class="nav-text">3.5.1.全局过滤器作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-2-自定义全局过滤器"><span class="nav-number">4.5.2.</span> <span class="nav-text">3.5.2.自定义全局过滤器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-3-过滤器执行顺序"><span class="nav-number">4.5.3.</span> <span class="nav-text">3.5.3.过滤器执行顺序</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-跨域问题"><span class="nav-number">4.6.</span> <span class="nav-text">3.6.跨域问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-1-什么是跨域问题"><span class="nav-number">4.6.1.</span> <span class="nav-text">3.6.1.什么是跨域问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-2-模拟跨域问题"><span class="nav-number">4.6.2.</span> <span class="nav-text">3.6.2.模拟跨域问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-3-解决跨域问题"><span class="nav-number">4.6.3.</span> <span class="nav-text">3.6.3.解决跨域问题</span></a></li></ol></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/assets/img/avatar.jpg"
+      alt="nicolas lee">
+  <p class="site-author-name" itemprop="name">nicolas lee</p>
+  <div class="site-description" itemprop="description">Yesterday you said tomorow.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/codeOflI" title="GitHub &rarr; https://github.com/codeOflI" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://blog.csdn.net/qq_42835910" title="CSDN &rarr; https://blog.csdn.net/qq_42835910" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nicolas lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数"></span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

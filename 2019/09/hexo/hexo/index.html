@@ -45,7 +45,7 @@
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
     localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
+    path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: '复制',
@@ -56,18 +56,20 @@
   };
 </script>
 
-  <meta name="description" content="[TOC]hexo官方文档安装hexonpm安装hexo1npm install -g hexo-cli注意找到hexo.cmd的目录，构建环境变量如：E:\Program Files\nodejs\my_node\node_global\hexo.cmd开始构建条件 npm+git配置Deployment，在其文件夹中，找到_config.yml文件，修改repo值（在末尾）">
+  <meta name="description" content="[TOC]hexo官方文档安装hexonpm安装hexo1npm install -g hexo-clihttps://blog.csdn.net/xuezhisdc/article/details/53130328如：E:\Program Files\nodejs\my_node\node_global\hexo.cmd">
 <meta name="keywords" content="学习笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="hexo">
 <meta property="og:url" content="https://codeofli.github.io/2019/09/hexo/hexo/index.html">
 <meta property="og:site_name" content="nicolas">
-<meta property="og:description" content="[TOC]hexo官方文档安装hexonpm安装hexo1npm install -g hexo-cli注意找到hexo.cmd的目录，构建环境变量如：E:\Program Files\nodejs\my_node\node_global\hexo.cmd开始构建条件 npm+git配置Deployment，在其文件夹中，找到_config.yml文件，修改repo值（在末尾）">
+<meta property="og:description" content="[TOC]hexo官方文档安装hexonpm安装hexo1npm install -g hexo-clihttps://blog.csdn.net/xuezhisdc/article/details/53130328如：E:\Program Files\nodejs\my_node\node_global\hexo.cmd">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-03-04T07:42:59.624Z">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/8df1f2036bacbbe15edd641fb8bfbdb4.png">
+<meta property="og:updated_time" content="2021-10-31T05:23:26.001Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo">
-<meta name="twitter:description" content="[TOC]hexo官方文档安装hexonpm安装hexo1npm install -g hexo-cli注意找到hexo.cmd的目录，构建环境变量如：E:\Program Files\nodejs\my_node\node_global\hexo.cmd开始构建条件 npm+git配置Deployment，在其文件夹中，找到_config.yml文件，修改repo值（在末尾）">
+<meta name="twitter:description" content="[TOC]hexo官方文档安装hexonpm安装hexo1npm install -g hexo-clihttps://blog.csdn.net/xuezhisdc/article/details/53130328如：E:\Program Files\nodejs\my_node\node_global\hexo.cmd">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/img_convert/8df1f2036bacbbe15edd641fb8bfbdb4.png">
   <link rel="canonical" href="https://codeofli.github.io/2019/09/hexo/hexo/">
 
 
@@ -209,7 +211,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">32</span></a>
 
   </li>
       
@@ -231,7 +233,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
 
   </li>
       
@@ -253,7 +255,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">48</span></a>
 
   </li>
   </ul>
@@ -323,7 +325,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-04 15:42:59" itemprop="dateModified" datetime="2021-03-04T15:42:59+08:00">2021-03-04</time>
+                <time title="修改时间：2021-10-31 13:23:26" itemprop="dateModified" datetime="2021-10-31T13:23:26+08:00">2021-10-31</time>
               </span>
             
           
@@ -358,15 +360,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>[TOC]</p><p><a href="https://hexo.io/zh-cn/docs/setup" target="_blank" rel="noopener">hexo官方文档</a></p><h1 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h1><p>npm安装hexo</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure><p>注意找到hexo.cmd的目录，构建环境变量</p><p>如：E:\Program Files\nodejs\my_node\node_global\hexo.cmd</p><h2 id="开始构建"><a href="#开始构建" class="headerlink" title="开始构建"></a>开始构建</h2><p>条件 npm+git</p><p>配置Deployment，在其文件夹中，找到_config.yml文件，修改repo值（在末尾）</p><a id="more"></a>
+        <p>[TOC]</p><p><a href="https://hexo.io/zh-cn/docs/setup" target="_blank" rel="noopener">hexo官方文档</a></p><h1 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h1><p>npm安装hexo</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure><p><a href="https://blog.csdn.net/xuezhisdc/article/details/53130328" target="_blank" rel="noopener">https://blog.csdn.net/xuezhisdc/article/details/53130328</a></p><p>如：E:\Program Files\nodejs\my_node\node_global\hexo.cmd</p><a id="more"></a>
 
 
 
 
 
 
+<p>可查看是否完成安装，使用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo v</span><br></pre></td></tr></table></figure>
 
-
+<h2 id="开始构建"><a href="#开始构建" class="headerlink" title="开始构建"></a>开始构建</h2><p>条件 npm+git</p>
+<p>配置Deployment，在其文件夹中，找到_config.yml文件，修改repo值（在末尾）</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repository:</span> <span class="string">git@github.com:Li-MingZhong/Li-MingZhong.github.io.git(自己仓库的ssh链接)</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
 
 <p>在生成以及部署文章之前，需要安装一个扩展：</p>
@@ -374,17 +379,21 @@
 
 <p>新建一篇博客，在cmd执行命令：hexo new post “博客名”</p>
 <p>使用编辑器编好文章，那么就可以使用命令<strong>：hexo d -g，生成以及部署(即自动提交）了</strong></p>
+<p>注意：提交到Github先修改url</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># URL</span><br><span class="line">## If your site <span class="keyword">is</span> <span class="keyword">put</span> in <span class="keyword">a</span> subdirectory, <span class="keyword">set</span> url <span class="keyword">as</span> <span class="string">'http://yoursite.com/child'</span> <span class="built_in">and</span> root <span class="keyword">as</span> <span class="string">'/child/'</span></span><br><span class="line">ur<span class="variable">l:</span> http<span class="variable">s:</span>//codeofli.github.io</span><br><span class="line"># ur<span class="variable">l:</span> http://localhos<span class="variable">t:4000</span></span><br></pre></td></tr></table></figure>
+
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
 
 <p>然后提交</p>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>启动</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br><span class="line">hexo serve</span><br></pre></td></tr></table></figure>
 
-<p><strong>在 source 文件夹下的所有 md 文件或者 html 文件都会被渲染</strong></p>
+<h2 id="md解析头格式"><a href="#md解析头格式" class="headerlink" title="md解析头格式"></a>md解析头格式</h2><p><strong>在 source 文件夹下的所有 md 文件或者 html 文件都会被渲染</strong></p>
 <p>在sourece/_post目录下相应的md添加相应的头信息由hexo解析。</p>
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line"></span><br><span class="line">title: mybatis(网页显示和文章标题)</span><br><span class="line"></span><br><span class="line">p: java-note/mybatis/mybatis</span><br><span class="line">（java-note/mybatis/mybatis.md(省略了.md)在_post路径下的位置，需要创建对于文件夹）,不需要p参数也能被解析</span><br><span class="line"></span><br><span class="line">date: 2019-11-12 10:40:06 (创建时间)</span><br><span class="line"></span><br><span class="line">categories: java </span><br><span class="line"></span><br><span class="line">tags: [java,mybatis]</span><br><span class="line"></span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line"></span><br><span class="line">title: mybatis</span><br><span class="line"></span><br><span class="line">date: 2019-11-12 10:40:06</span><br><span class="line"></span><br><span class="line">categories: java</span><br><span class="line"></span><br><span class="line">tags: [java,mybatis]</span><br><span class="line"></span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>案例</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line"></span><br><span class="line">title: mybatis</span><br><span class="line"></span><br><span class="line">date: 2021-10-24 10:40:06</span><br><span class="line"></span><br><span class="line">categories: java</span><br><span class="line"></span><br><span class="line">tags: [java,mybatis]</span><br><span class="line"></span><br><span class="line">---</span><br></pre></td></tr></table></figure>
 
 <h1 id="命令-https-hexo-io-zh-cn-docs-commands"><a href="#命令-https-hexo-io-zh-cn-docs-commands" class="headerlink" title="[命令][https://hexo.io/zh-cn/docs/commands]"></a>[命令][<a href="https://hexo.io/zh-cn/docs/commands]" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/commands]</a></h1><h2 id="generate"><a href="#generate" class="headerlink" title="generate"></a>generate</h2><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo <span class="keyword">generate</span></span><br></pre></td></tr></table></figure>
 
@@ -465,7 +474,13 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo n "xxxx"</span><br></pre></td></tr></table></figure>
 
 <p>4.使用<code>![xxx](xxx/xxx.png)</code>直接插入图片即可。</p>
+<p>配置<code>typora</code>进行本地图片的粘贴及正常显示</p>
+<p>设置<code>typora</code>,图像</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/8df1f2036bacbbe15edd641fb8bfbdb4.png" alt="1587393533151"></p>
 <h3 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h3><p>1.<strong>图片名中间不能有空格</strong></p>
+<h2 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h2><p>测试时配置文件_config.yml中url使用localhost</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># URL</span><br><span class="line">## If your site <span class="keyword">is</span> <span class="keyword">put</span> in <span class="keyword">a</span> subdirectory, <span class="keyword">set</span> url <span class="keyword">as</span> <span class="string">'http://yoursite.com/child'</span> <span class="built_in">and</span> root <span class="keyword">as</span> <span class="string">'/child/'</span></span><br><span class="line"># ur<span class="variable">l:</span> http<span class="variable">s:</span>//codeofli.github.io</span><br><span class="line">ur<span class="variable">l:</span> http://localhos<span class="variable">t:4000</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="hexo设置多标签和多分类"><a href="#hexo设置多标签和多分类" class="headerlink" title="hexo设置多标签和多分类"></a>hexo设置多标签和多分类</h1><p>分类↓↓↓↓<br>categories: 一级分类-二级分类 </p>
 <p>例如 categories: java-SpringMVC<br>标签↓↓↓↓<br>tags: [标签1,标签2，…] </p>
 <p>例如 tags: [java,SpringMVC]</p>
@@ -542,8 +557,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/09/markdown/markdown/" rel="next" title="">
-                  <i class="fa fa-chevron-left"></i> 
+                <a href="/2019/03/mysql/mysql/" rel="next" title="mysql">
+                  <i class="fa fa-chevron-left"></i> mysql
                 </a>
               
             </div>
@@ -600,7 +615,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装hexo"><span class="nav-number">1.</span> <span class="nav-text">安装hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始构建"><span class="nav-number">1.1.</span> <span class="nav-text">开始构建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#命令-https-hexo-io-zh-cn-docs-commands"><span class="nav-number">3.</span> <span class="nav-text">[命令][https://hexo.io/zh-cn/docs/commands]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#generate"><span class="nav-number">3.1.</span> <span class="nav-text">generate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#new"><span class="nav-number">3.2.</span> <span class="nav-text">new</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决markdown插入图片问题"><span class="nav-number">4.</span> <span class="nav-text">解决markdown插入图片问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#图片路径问题"><span class="nav-number">4.1.</span> <span class="nav-text">图片路径问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">4.1.1.</span> <span class="nav-text">注意</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo设置多标签和多分类"><span class="nav-number">5.</span> <span class="nav-text">hexo设置多标签和多分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo-clean"><span class="nav-number">6.</span> <span class="nav-text">hexo clean</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置跳过的渲染文件"><span class="nav-number">6.1.</span> <span class="nav-text">设置跳过的渲染文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#markdwon解析错误"><span class="nav-number">6.2.</span> <span class="nav-text">markdwon解析错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next主题"><span class="nav-number">6.3.</span> <span class="nav-text">next主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-添加动态背景"><span class="nav-number">6.4.</span> <span class="nav-text">4.添加动态背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-修改标签样式"><span class="nav-number">6.5.</span> <span class="nav-text">5. 修改标签样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-文章阴影设置"><span class="nav-number">6.6.</span> <span class="nav-text">9.文章阴影设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-添加文章版权信息"><span class="nav-number">6.7.</span> <span class="nav-text">10. 添加文章版权信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-添加打赏"><span class="nav-number">6.8.</span> <span class="nav-text">12. 添加打赏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-添加页面宠物"><span class="nav-number">6.9.</span> <span class="nav-text">13. 添加页面宠物</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-增加阅读次数-时长和访客数"><span class="nav-number">6.10.</span> <span class="nav-text">18.增加阅读次数/时长和访客数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-加入网易云音乐播放器"><span class="nav-number">6.11.</span> <span class="nav-text">19.加入网易云音乐播放器</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装hexo"><span class="nav-number">1.</span> <span class="nav-text">安装hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开始构建"><span class="nav-number">1.1.</span> <span class="nav-text">开始构建</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#md解析头格式"><span class="nav-number">2.1.</span> <span class="nav-text">md解析头格式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#命令-https-hexo-io-zh-cn-docs-commands"><span class="nav-number">3.</span> <span class="nav-text">[命令][https://hexo.io/zh-cn/docs/commands]</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#generate"><span class="nav-number">3.1.</span> <span class="nav-text">generate</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#new"><span class="nav-number">3.2.</span> <span class="nav-text">new</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决markdown插入图片问题"><span class="nav-number">4.</span> <span class="nav-text">解决markdown插入图片问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#图片路径问题"><span class="nav-number">4.1.</span> <span class="nav-text">图片路径问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意"><span class="nav-number">4.1.1.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意-1"><span class="nav-number">4.2.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo设置多标签和多分类"><span class="nav-number">5.</span> <span class="nav-text">hexo设置多标签和多分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo-clean"><span class="nav-number">6.</span> <span class="nav-text">hexo clean</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置跳过的渲染文件"><span class="nav-number">6.1.</span> <span class="nav-text">设置跳过的渲染文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#markdwon解析错误"><span class="nav-number">6.2.</span> <span class="nav-text">markdwon解析错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#next主题"><span class="nav-number">6.3.</span> <span class="nav-text">next主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-添加动态背景"><span class="nav-number">6.4.</span> <span class="nav-text">4.添加动态背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-修改标签样式"><span class="nav-number">6.5.</span> <span class="nav-text">5. 修改标签样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-文章阴影设置"><span class="nav-number">6.6.</span> <span class="nav-text">9.文章阴影设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-添加文章版权信息"><span class="nav-number">6.7.</span> <span class="nav-text">10. 添加文章版权信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-添加打赏"><span class="nav-number">6.8.</span> <span class="nav-text">12. 添加打赏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-添加页面宠物"><span class="nav-number">6.9.</span> <span class="nav-text">13. 添加页面宠物</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#18-增加阅读次数-时长和访客数"><span class="nav-number">6.10.</span> <span class="nav-text">18.增加阅读次数/时长和访客数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#19-加入网易云音乐播放器"><span class="nav-number">6.11.</span> <span class="nav-text">19.加入网易云音乐播放器</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -619,7 +634,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -632,7 +647,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -645,7 +660,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

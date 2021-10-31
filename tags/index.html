@@ -45,7 +45,7 @@
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
     localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
+    path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: '复制',
@@ -209,7 +209,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">32</span></a>
 
   </li>
       
@@ -231,7 +231,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
 
   </li>
       
@@ -253,7 +253,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">48</span></a>
 
   </li>
   </ul>
@@ -321,10 +321,10 @@
       <div class="post-body">
           <div class="tag-cloud">
             <div class="tag-cloud-title">
-              目前共计 18 个标签
+              目前共计 32 个标签
             </div>
             <div class="tag-cloud-tags">
-              <a href="/tags/crawler/" style="font-size: 12px; color: #ccc">crawler</a> <a href="/tags/css/" style="font-size: 12px; color: #ccc">css</a> <a href="/tags/docker/" style="font-size: 12px; color: #ccc">docker</a> <a href="/tags/html/" style="font-size: 12px; color: #ccc">html</a> <a href="/tags/java/" style="font-size: 30px; color: #111">java</a> <a href="/tags/js/" style="font-size: 19.2px; color: #818181">js</a> <a href="/tags/linux/" style="font-size: 12px; color: #ccc">linux</a> <a href="/tags/maven/" style="font-size: 12px; color: #ccc">maven</a> <a href="/tags/mybatis/" style="font-size: 12px; color: #ccc">mybatis</a> <a href="/tags/mysql/" style="font-size: 12px; color: #ccc">mysql</a> <a href="/tags/python/" style="font-size: 22.8px; color: #5c5c5c">python</a> <a href="/tags/spring/" style="font-size: 19.2px; color: #818181">spring</a> <a href="/tags/springBoot/" style="font-size: 15.6px; color: #a7a7a7">springBoot</a> <a href="/tags/springMvc/" style="font-size: 12px; color: #ccc">springMvc</a> <a href="/tags/ssm/" style="font-size: 12px; color: #ccc">ssm</a> <a href="/tags/vue/" style="font-size: 12px; color: #ccc">vue</a> <a href="/tags/前端/" style="font-size: 19.2px; color: #818181">前端</a> <a href="/tags/学习笔记/" style="font-size: 26.4px; color: #363636">学习笔记</a>
+              <a href="/tags/Axios/" style="font-size: 12px; color: #ccc">Axios</a> <a href="/tags/Docker/" style="font-size: 15px; color: #adadad">Docker</a> <a href="/tags/Elasticsearch/" style="font-size: 12px; color: #ccc">Elasticsearch</a> <a href="/tags/Java/" style="font-size: 24px; color: #4f4f4f">Java</a> <a href="/tags/Jmeter/" style="font-size: 12px; color: #ccc">Jmeter</a> <a href="/tags/Markdown/" style="font-size: 12px; color: #ccc">Markdown</a> <a href="/tags/Nacos/" style="font-size: 15px; color: #adadad">Nacos</a> <a href="/tags/OnJava8/" style="font-size: 12px; color: #ccc">OnJava8</a> <a href="/tags/RabbitMQ/" style="font-size: 15px; color: #adadad">RabbitMQ</a> <a href="/tags/Redis/" style="font-size: 12px; color: #ccc">Redis</a> <a href="/tags/Sentinel/" style="font-size: 15px; color: #adadad">Sentinel</a> <a href="/tags/SpringCloud/" style="font-size: 15px; color: #adadad">SpringCloud</a> <a href="/tags/crawler/" style="font-size: 12px; color: #ccc">crawler</a> <a href="/tags/css/" style="font-size: 12px; color: #ccc">css</a> <a href="/tags/docker/" style="font-size: 12px; color: #ccc">docker</a> <a href="/tags/elasticsearch/" style="font-size: 12px; color: #ccc">elasticsearch</a> <a href="/tags/html/" style="font-size: 12px; color: #ccc">html</a> <a href="/tags/java/" style="font-size: 30px; color: #111">java</a> <a href="/tags/js/" style="font-size: 18px; color: #8e8e8e">js</a> <a href="/tags/linux/" style="font-size: 12px; color: #ccc">linux</a> <a href="/tags/maven/" style="font-size: 12px; color: #ccc">maven</a> <a href="/tags/mybatis/" style="font-size: 12px; color: #ccc">mybatis</a> <a href="/tags/mysql/" style="font-size: 12px; color: #ccc">mysql</a> <a href="/tags/python/" style="font-size: 21px; color: #6f6f6f">python</a> <a href="/tags/seata/" style="font-size: 12px; color: #ccc">seata</a> <a href="/tags/spring/" style="font-size: 18px; color: #8e8e8e">spring</a> <a href="/tags/springBoot/" style="font-size: 15px; color: #adadad">springBoot</a> <a href="/tags/springMvc/" style="font-size: 12px; color: #ccc">springMvc</a> <a href="/tags/ssm/" style="font-size: 12px; color: #ccc">ssm</a> <a href="/tags/vue/" style="font-size: 12px; color: #ccc">vue</a> <a href="/tags/前端/" style="font-size: 18px; color: #8e8e8e">前端</a> <a href="/tags/学习笔记/" style="font-size: 27px; color: #303030">学习笔记</a>
             </div>
           </div>
         
@@ -389,7 +389,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -402,7 +402,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -415,7 +415,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

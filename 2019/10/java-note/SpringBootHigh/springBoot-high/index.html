@@ -45,7 +45,7 @@
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
     localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
+    path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: '复制',
@@ -64,13 +64,13 @@
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="spring boot高级[TOC]一.Spring Boot与缓存1、JSR107Java Caching定义了5个核心接口，分别是CachingProvider, CacheManager, Cache, Entry 和 Expiry。•CachingProvider定义了创建、配置、获取、管理和控制多个CacheManager。一个应用可以在运行期访问多个CachingProvider。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringBootHigh/springBoot-high/.%5CspringBoot-high%5C1569337676687.png">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringBootHigh/springBoot-high/.%5CspringBoot-high%5C1569337715201.png">
-<meta property="og:updated_time" content="2021-01-06T11:58:02.301Z">
+<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringBootHigh/springBoot-high/.%5CspringBoot-high%5C1569337676687.png">
+<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringBootHigh/springBoot-high/.%5CspringBoot-high%5C1569337715201.png">
+<meta property="og:updated_time" content="2021-10-23T02:19:02.860Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springBoot高级">
 <meta name="twitter:description" content="spring boot高级[TOC]一.Spring Boot与缓存1、JSR107Java Caching定义了5个核心接口，分别是CachingProvider, CacheManager, Cache, Entry 和 Expiry。•CachingProvider定义了创建、配置、获取、管理和控制多个CacheManager。一个应用可以在运行期访问多个CachingProvider。">
-<meta name="twitter:image" content="https://codeofli.github.io/2019/10/java-note/SpringBootHigh/springBoot-high/.%5CspringBoot-high%5C1569337676687.png">
+<meta name="twitter:image" content="https://localhost:4000/2019/10/java-note/SpringBootHigh/springBoot-high/.%5CspringBoot-high%5C1569337676687.png">
   <link rel="canonical" href="https://codeofli.github.io/2019/10/java-note/SpringBootHigh/springBoot-high/">
 
 
@@ -212,7 +212,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">32</span></a>
 
   </li>
       
@@ -234,7 +234,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
 
   </li>
       
@@ -256,7 +256,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">48</span></a>
 
   </li>
   </ul>
@@ -326,7 +326,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-06 19:58:02" itemprop="dateModified" datetime="2021-01-06T19:58:02+08:00">2021-01-06</time>
+                <time title="修改时间：2021-10-23 10:19:02" itemprop="dateModified" datetime="2021-10-23T10:19:02+08:00">2021-10-23</time>
               </span>
             
           
@@ -844,8 +844,8 @@ unless = &quot;#a0==2&quot;:如果第一个参数的值是2，结果不缓存；
 
 <p><strong>2.配置信息</strong></p>
 <p>1)首先在qq邮箱开通相关的服务</p>
-<p><img src="/2019/10/java-note/SpringBootHigh/springBoot-high/.%5CspringBoot-high%5C1569337676687.png" alt="1569337676687"></p>
-<p><img src="/2019/10/java-note/SpringBootHigh/springBoot-high/.%5CspringBoot-high%5C1569337715201.png" alt="1569337715201"></p>
+<p><img src="//localhost:4000/2019/10/java-note/SpringBootHigh/springBoot-high/.%5CspringBoot-high%5C1569337676687.png" alt="1569337676687"></p>
+<p><img src="//localhost:4000/2019/10/java-note/SpringBootHigh/springBoot-high/.%5CspringBoot-high%5C1569337715201.png" alt="1569337715201"></p>
 <p><strong>拿到的授权码即为password</strong></p>
 <p>application.properties配置</p>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## QQ邮箱配置</span></span><br><span class="line"><span class="meta">spring.mail.host</span>=<span class="string">smtp.qq.com</span></span><br><span class="line"><span class="comment">#发送的QQ邮箱</span></span><br><span class="line"><span class="meta">spring.mail.username</span>=<span class="string">1162314270@qq.com</span></span><br><span class="line"><span class="comment"># 如果是qq邮箱,这个地方是授权码 ,不是密码</span></span><br><span class="line"><span class="meta">spring.mail.password</span>=<span class="string">wfqdmurtsvsgiecf</span></span><br><span class="line"><span class="meta">spring.mail.properties.mail.smtp.starttls.enable</span>=<span class="string">true</span></span><br><span class="line"><span class="meta">spring.mail.properties.mail.smtp.starttls.required</span>=<span class="string">true</span></span><br><span class="line"><span class="meta">spring.mail.properties.mail.smtp.ssl.enable</span>=<span class="string">true</span></span><br><span class="line"><span class="meta">spring.mail.default-encoding</span>=<span class="string">utf-8</span></span><br><span class="line"><span class="meta">spring.mail.properties.mail.smtp.ssl.trust</span>=<span class="string">smtp.qq.com</span></span><br><span class="line"><span class="comment">#SSL证书Socket工厂</span></span><br><span class="line"><span class="meta">spring.mail.properties.mail.smtp.socketFactory.class</span>=<span class="string">javax.net.ssl.SSLSocketFactory</span></span><br><span class="line"><span class="comment">#使用SMTPS协议465端口</span></span><br><span class="line"><span class="meta">spring.mail.properties.mail.smtp.socketFactory.port</span>=<span class="string">465</span></span><br><span class="line"><span class="meta">spring.mail.properties.mail.smtp.auth</span>=<span class="string">true</span></span><br><span class="line"><span class="comment">#503错误，我的没有这个错</span></span><br><span class="line"><span class="comment">#spring.mail.properties.mail.smtp.ssl.enable=true</span></span><br></pre></td></tr></table></figure>
@@ -981,7 +981,8 @@ public String sendRegisterEmail(String email) {
 <p>前台使用AJAX向后台传输数据时候控制台报出上述错误，再未集成Spring Security时不会出现此现象</p>
 <p>解决方法：</p>
 <p>如果前端使用的JSP</p>
-<p>可以在前端页面的<head><meta name="generator" content="Hexo 3.9.0">标签中增加两个<meta>标签</head></p>
+<p>可以在前端页面的<head><meta name="generator" content="Hexo 3.9.0">标签中增加两个<meta>标签<link rel="alternate" href="/atom.xml" title="nicolas" type="application/atom+xml">
+</head></p>
 <p>如下</p>
 <figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="xml">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"_csrf"</span> <span class="attr">content</span>=<span class="string">"$</span></span></span><span class="template-variable">&#123;_csrf.token&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>/&gt;</span></span></span><br><span class="line"><span class="xml">	<span class="comment">&lt;!-- default header name is X-CSRF-TOKEN --&gt;</span></span></span><br><span class="line"><span class="xml">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"_csrf_header"</span> <span class="attr">content</span>=<span class="string">"$</span></span></span><span class="template-variable">&#123;_csrf.headerName&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>/&gt;</span></span></span><br><span class="line"><span class="xml">	<span class="comment">&lt;!-- ... --&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
@@ -1170,7 +1171,7 @@ public String sendRegisterEmail(String email) {
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1183,7 +1184,7 @@ public String sendRegisterEmail(String email) {
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -1196,7 +1197,7 @@ public String sendRegisterEmail(String email) {
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

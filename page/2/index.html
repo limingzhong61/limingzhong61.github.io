@@ -45,7 +45,7 @@
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
     localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
+    path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: '复制',
@@ -208,7 +208,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">32</span></a>
 
   </li>
       
@@ -230,7 +230,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
 
   </li>
       
@@ -252,7 +252,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">48</span></a>
 
   </li>
   </ul>
@@ -283,7 +283,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/10/java-note/ssm-crud/ssm-crud/">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nicolas lee">
@@ -297,7 +297,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2019/10/java-note/ssm-crud/ssm-crud/" class="post-title-link" itemprop="url">ssm-crud</a>
+            <a href="/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/" class="post-title-link" itemprop="url">Sentinel规则持久化</a>
           
         </h1>
 
@@ -312,7 +312,7 @@
                 
               
 
-              <time title="创建时间：2019-10-21 15:25:49" itemprop="dateCreated datePublished" datetime="2019-10-21T15:25:49+08:00">2019-10-21</time>
+              <time title="创建时间：2021-10-23 10:40:06" itemprop="dateCreated datePublished" datetime="2021-10-23T10:40:06+08:00">2021-10-23</time>
             </span>
           
             
@@ -323,7 +323,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-26 20:49:58" itemprop="dateModified" datetime="2021-02-26T20:49:58+08:00">2021-02-26</time>
+                <time title="修改时间：2021-10-31 12:41:49" itemprop="dateModified" datetime="2021-10-31T12:41:49+08:00">2021-10-31</time>
               </span>
             
           
@@ -363,11 +363,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[TOC]</p><h1 id="web路径"><a href="#web路径" class="headerlink" title="web路径"></a>web路径</h1><p> <strong>web路径：</strong><br>    1.不<strong>以/开始的相对路径</strong>，找资源，<strong>以当前资源的路径为基准</strong>，经常容易出问题<br>    2.<strong>以/开始的开始的相对路径</strong>，找资源，<strong>以服务器为标准（http//localhost/端口号)需要加项目名</strong>;<br>    就是http//localhost/端口号/crud/…</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">	<span class="attr">pageContext.setAttribute</span>("<span class="attr">WEB_PATH</span>", <span class="attr">request.getContextPath</span>());</span></span><br><span class="line"><span class="tag">%&gt;</span></span><br><span class="line">	$&#123;WEB_PATH&#125;/static/bootstrap-3.3.7-dist/css/bootstrap.min.css</span><br><span class="line">  --&gt;</span><br></pre></td></tr></table></figure>
+          <h1 id="Sentinel-规则持久化"><a href="#Sentinel-规则持久化" class="headerlink" title="Sentinel 规则持久化"></a>Sentinel 规则持久化</h1><h2 id="一、修改order-service服务"><a href="#一、修改order-service服务" class="headerlink" title="一、修改order-service服务"></a>一、修改order-service服务</h2><p>修改OrderService，让其监听Nacos中的sentinel规则配置。</p><p>具体步骤如下：</p><h3 id="1-引入依赖"><a href="#1-引入依赖" class="headerlink" title="1.引入依赖"></a>1.引入依赖</h3><p>在order-service中引入sentinel监听nacos的依赖：</p><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.csp<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>sentinel-datasource-nacos<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
             <div class="post-button">
-              <a class="btn" href="/2019/10/java-note/ssm-crud/ssm-crud/#more" rel="contents">
+              <a class="btn" href="/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -399,7 +399,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/10/java-note/springMvc/springMvc/">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/docker/Centos7安装Docker/Centos7安装Docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nicolas lee">
@@ -413,7 +413,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2019/10/java-note/springMvc/springMvc/" class="post-title-link" itemprop="url">springMvc</a>
+            <a href="/2021/10/java-note/SpringCloud/docker/Centos7安装Docker/Centos7安装Docker/" class="post-title-link" itemprop="url">CentOS7安装Docker</a>
           
         </h1>
 
@@ -428,7 +428,7 @@
                 
               
 
-              <time title="创建时间：2019-10-20 15:24:32" itemprop="dateCreated datePublished" datetime="2019-10-20T15:24:32+08:00">2019-10-20</time>
+              <time title="创建时间：2021-10-23 10:40:06" itemprop="dateCreated datePublished" datetime="2021-10-23T10:40:06+08:00">2021-10-23</time>
             </span>
           
             
@@ -439,7 +439,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-28 23:02:28" itemprop="dateModified" datetime="2020-05-28T23:02:28+08:00">2020-05-28</time>
+                <time title="修改时间：2021-10-31 12:54:28" itemprop="dateModified" datetime="2021-10-31T12:54:28+08:00">2021-10-31</time>
               </span>
             
           
@@ -449,7 +449,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a></span>
 
                 
                 
@@ -479,11 +479,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[TOC]</p><h1 id="springmvc"><a href="#springmvc" class="headerlink" title="springmvc:"></a>springmvc:</h1><p>1.jar<br>spring-aop.jar<br>spring-bean.jar<br>spring-context.jar<br>spring-core.jar<br>spring-web.jar</p><p>spring-webmvc.jar<br>commons-logging.jar</p><p>报错NoClassDefFoundError：缺少jar</p>
+          <h1 id="0-安装Docker"><a href="#0-安装Docker" class="headerlink" title="0.安装Docker"></a>0.安装Docker</h1><p>Docker 分为 CE 和 EE 两大版本。CE 即社区版（免费，支持周期 7 个月），EE 即企业版，强调安全，付费使用，支持周期 24 个月。</p><p>Docker CE 分为 <code>stable</code> <code>test</code> 和 <code>nightly</code> 三个更新频道。</p><p>官方网站上有各种环境下的 <a href="https://docs.docker.com/install/" target="_blank" rel="noopener">安装指南</a>，这里主要介绍 Docker CE 在 CentOS上的安装。</p>
           <!--noindex-->
           
             <div class="post-button">
-              <a class="btn" href="/2019/10/java-note/springMvc/springMvc/#more" rel="contents">
+              <a class="btn" href="/2021/10/java-note/SpringCloud/docker/Centos7安装Docker/Centos7安装Docker/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -515,7 +515,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/10/java-note/spring/spring/">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/10/java-note/OnJava8/OnJava8-17文件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nicolas lee">
@@ -529,7 +529,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2019/10/java-note/spring/spring/" class="post-title-link" itemprop="url">spring</a>
+            <a href="/2021/10/java-note/OnJava8/OnJava8-17文件/" class="post-title-link" itemprop="url">OnJava8-文件</a>
           
         </h1>
 
@@ -544,7 +544,7 @@
                 
               
 
-              <time title="创建时间：2019-10-19 15:23:24" itemprop="dateCreated datePublished" datetime="2019-10-19T15:23:24+08:00">2019-10-19</time>
+              <time title="创建时间：2021-10-21 10:40:06" itemprop="dateCreated datePublished" datetime="2021-10-21T10:40:06+08:00">2021-10-21</time>
             </span>
           
             
@@ -555,7 +555,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-22 21:19:17" itemprop="dateModified" datetime="2021-02-22T21:19:17+08:00">2021-02-22</time>
+                <time title="修改时间：2021-10-31 13:19:45" itemprop="dateModified" datetime="2021-10-31T13:19:45+08:00">2021-10-31</time>
               </span>
             
           
@@ -565,7 +565,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
 
                 
                 
@@ -595,11 +595,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>2002 Rod Johnon <expoer one-on-one j2eedevelopment and design><br>Spring  2003  ,IOC  Aop<br>Spring data,spring boot,spring cloud,spring framework ,spring social </expoer></p><p>[TOC]</p><h1 id="IOC-控制反转"><a href="#IOC-控制反转" class="headerlink" title="IOC :控制反转"></a>IOC :控制反转</h1><p>Inversion of Control</p><p>（DI：，Dependency Injection，依赖注入）</p>
+          <h1 id="第十七章-文件"><a href="#第十七章-文件" class="headerlink" title="第十七章 文件"></a>第十七章 文件</h1><blockquote>
+<p>在丑陋的 Java I/O 编程方式诞生多年以后，Java终于简化了文件读写的基本操作。</p>
+</blockquote><p>这种”困难方式”的全部细节都在 <a href="./Appendix-IO-Streams.md">Appendix: I/O Streams</a>。如果你读过这个部分，就会认同 Java 设计者毫不在意他们的使用者的体验这一观念。打开并读取文件对于大多数编程语言来是非常常用的，由于 I/O 糟糕的设计以至于<br>很少有人能够在不依赖其他参考代码的情况下完成打开文件的操作。</p>
           <!--noindex-->
           
             <div class="post-button">
-              <a class="btn" href="/2019/10/java-note/spring/spring/#more" rel="contents">
+              <a class="btn" href="/2021/10/java-note/OnJava8/OnJava8-17文件/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -631,7 +633,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nicolas lee">
@@ -645,7 +647,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2019/10/python/python-crawler/python-crawler/" class="post-title-link" itemprop="url">python-crawler</a>
+            <a href="/2021/10/java-note/SpringCloud/SpringCloud实用篇02/" class="post-title-link" itemprop="url">SpringCloud实用篇02</a>
           
         </h1>
 
@@ -660,7 +662,7 @@
                 
               
 
-              <time title="创建时间：2019-10-16 21:27:10" itemprop="dateCreated datePublished" datetime="2019-10-16T21:27:10+08:00">2019-10-16</time>
+              <time title="创建时间：2021-10-20 10:40:06" itemprop="dateCreated datePublished" datetime="2021-10-20T10:40:06+08:00">2021-10-20</time>
             </span>
           
             
@@ -671,7 +673,548 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-08 22:18:55" itemprop="dateModified" datetime="2019-12-08T22:18:55+08:00">2019-12-08</time>
+                <time title="修改时间：2021-10-31 13:22:03" itemprop="dateModified" datetime="2021-10-31T13:22:03+08:00">2021-10-31</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="SpringCloud实用篇02"><a href="#SpringCloud实用篇02" class="headerlink" title="SpringCloud实用篇02"></a>SpringCloud实用篇02</h1><h1 id="0-学习目标"><a href="#0-学习目标" class="headerlink" title="0.学习目标"></a>0.学习目标</h1><h1 id="2-Feign远程调用"><a href="#2-Feign远程调用" class="headerlink" title="2.Feign远程调用"></a>2.Feign远程调用</h1><p>先来看我们以前利用RestTemplate发起远程调用的代码：</p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/SpringCloud实用篇02/image-20210714174814204.png" alt="image-20210714174814204"></p><p>存在下面的问题：</p><p>•代码可读性差，编程体验不统一</p><p>•参数复杂URL难以维护</p><p>Feign是一个<strong>声明式的http客户端</strong>，官方地址：<a href="https://github.com/OpenFeign/feign" target="_blank" rel="noopener">https://github.com/OpenFeign/feign</a></p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2021/10/java-note/SpringCloud/SpringCloud实用篇02/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    
+    <div>
+     
+    </div>
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2021/09/java-note/SpringCloud/SpringCloud01/" class="post-title-link" itemprop="url">SpringCloud01</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-09-12 10:40:06" itemprop="dateCreated datePublished" datetime="2021-09-12T10:40:06+08:00">2021-09-12</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-31 13:20:40" itemprop="dateModified" datetime="2021-10-31T13:20:40+08:00">2021-10-31</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="SpringCloud01"><a href="#SpringCloud01" class="headerlink" title="SpringCloud01"></a>SpringCloud01</h1><h1 id="1-认识微服务"><a href="#1-认识微服务" class="headerlink" title="1.认识微服务"></a>1.认识微服务</h1><p>随着互联网行业的发展，对服务的要求也越来越高，服务架构也从单体架构逐渐演变为现在流行的微服务架构。这些架构之间有怎样的差别呢？</p><h2 id="1-0-学习目标"><a href="#1-0-学习目标" class="headerlink" title="1.0.学习目标"></a>1.0.学习目标</h2><p>了解微服务架构的优缺点</p><h3 id="微服务技术栈"><a href="#微服务技术栈" class="headerlink" title="微服务技术栈"></a>微服务技术栈</h3><p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819105714890.png" alt="image-20210819105714890"></p><p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819105849852.png" alt="image-20210819105849852"></p><p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819110034400.png" alt="image-20210819110034400"></p><p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819110130382.png" alt="image-20210819110130382"></p><p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819110930997.png" alt="image-20210819110930997"></p><p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210914095159453.png" alt="image-20210914095159453"></p><h2 id="1-1-单体架构"><a href="#1-1-单体架构" class="headerlink" title="1.1.单体架构"></a>1.1.单体架构</h2><p><strong>单体架构</strong>：将业务的所有功能集中在一个项目中开发，打成一个包部署。</p><p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713202807818.png" alt="image-20210713202807818"></p><p>单体架构的优缺点如下：</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2021/09/java-note/SpringCloud/SpringCloud01/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    
+    <div>
+     
+    </div>
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2020/10/markdown/markdown/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/10/markdown/markdown/" class="post-title-link" itemprop="url">Markdown</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-10-13 22:19:09" itemprop="dateCreated datePublished" datetime="2020-10-13T22:19:09+08:00">2020-10-13</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-31 09:53:34" itemprop="dateModified" datetime="2021-10-31T09:53:34+08:00">2021-10-31</time>
+              </span>
+            
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[TOC]</p><h1 id="常用语法"><a href="#常用语法" class="headerlink" title="常用语法"></a>常用语法</h1><p><strong>展示目录(table of contents)结构</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[toc]</span><br></pre></td></tr></table></figure><p>链接 和html一样能使用相对路径</p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">对象传递和返回</span>](<span class="link">./Appendix-Passing-and-Returning-Objects.md</span>)</span><br><span class="line">[<span class="string">百度</span>](<span class="link">www.baidu.com</span>)</span><br></pre></td></tr></table></figure><p> <strong>多级标题</strong></p><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">一级标题 </span><br><span class="line"><span class="section"># + space</span></span><br><span class="line">二级 </span><br><span class="line"><span class="section">## +space </span></span><br><span class="line">三级</span><br><span class="line"><span class="section">### + ...</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2020/10/markdown/markdown/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    
+    <div>
+     
+    </div>
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2020/10/js-note/axios/axios/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2020/10/js-note/axios/axios/" class="post-title-link" itemprop="url">Axios</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-10-13 22:19:09" itemprop="dateCreated datePublished" datetime="2020-10-13T22:19:09+08:00">2020-10-13</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-31 09:14:05" itemprop="dateModified" datetime="2021-10-31T09:14:05+08:00">2021-10-31</time>
+              </span>
+            
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[TOC]</p><h2 id="axios的全局配置"><a href="#axios的全局配置" class="headerlink" title="axios的全局配置"></a>axios的全局配置</h2><p><img src="//localhost:4000/2020/10/js-note/axios/axios/imgs%5C1570541353621.png" alt="1570541353621"></p><p>常见配置选项，具体可看官网</p><p><img src="//localhost:4000/2020/10/js-note/axios/axios/imgs%5C1570541513944.png" alt="1570541513944"></p><p>封装axios</p><p><img src="//localhost:4000/2020/10/js-note/axios/axios/imgs%5C1570542920896.png" alt="1570542920896"></p><p><img src="//localhost:4000/2020/10/js-note/axios/axios/imgs%5C1570542391146.png" alt="1570542391146"></p><p><img src="//localhost:4000/2020/10/js-note/axios/axios/imgs%5C1570542483129.png" alt="1570542483129"></p><h2 id="axios使用封装接口"><a href="#axios使用封装接口" class="headerlink" title="axios使用封装接口"></a>axios使用封装接口</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">request(&#123;</span><br><span class="line">    url: <span class="string">'/p/getProblemSet/'</span>+index</span><br><span class="line">&#125;).then(</span><br><span class="line">    res =&gt;&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res);</span><br><span class="line">    &#125;</span><br><span class="line">).catch(</span><br><span class="line">    err =&gt;&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err)</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2020/10/js-note/axios/axios/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    
+    <div>
+     
+    </div>
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/11/nginx/nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/nginx/nginx/" class="post-title-link" itemprop="url">nginx</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-25 22:22:09" itemprop="dateCreated datePublished" datetime="2019-11-25T22:22:09+08:00">2019-11-25</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-30 10:35:54" itemprop="dateModified" datetime="2021-10-30T10:35:54+08:00">2021-10-30</time>
+              </span>
+            
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>[TOC]</p><h1 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h1><p><a href="http://nginx.org/en/docs/http/ngx_http_proxy_module.html#example" target="_blank" rel="noopener">http://nginx.org/en/docs/http/ngx_http_proxy_module.html#example</a></p><p>1、 nginx 简介</p><p>（1）  什么是 nginx 和可以做什么事情</p><p>（2）  正向代理</p><p>（3）  反向代理</p><p>（4）  动静分离</p><p>2、 Nginx 的安装</p><p>（1） 在 linux 系统中安装 nginx 3、 Nginx 的常用命令和配置文件</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2019/11/nginx/nginx/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    
+    <div>
+     
+    </div>
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/11/python/python/python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2019/11/python/python/python/" class="post-title-link" itemprop="url">python</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-22 21:14:50" itemprop="dateCreated datePublished" datetime="2019-11-22T21:14:50+08:00">2019-11-22</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-23 10:19:04" itemprop="dateModified" datetime="2021-10-23T10:19:04+08:00">2021-10-23</time>
               </span>
             
           
@@ -711,46 +1254,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><img src="/2019/10/python/python-crawler/python-crawler/1572765034346.png" alt="1572765034346">  </p><h1 id="requests库"><a href="#requests库" class="headerlink" title="requests库"></a>requests库</h1><h2 id="requests库的安装"><a href="#requests库的安装" class="headerlink" title="requests库的安装"></a>requests库的安装</h2><p><a href="http://www.python-requests.org" target="_blank" rel="noopener">http://www.python-requests.org</a>   </p><p>Win平台: “以管理员身份运行” cmd，执行 pip install requests   </p><h2 id="requests库的7个主要方法"><a href="#requests库的7个主要方法" class="headerlink" title="requests库的7个主要方法"></a>requests库的7个主要方法</h2><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>requests.request()</td>
-<td><strong>构造一个请求，支撑以下各方法的基础方法</strong></td>
-</tr>
-<tr>
-<td>requests.get(url, params=None, **kwargs)</td>
-<td>获取HTML网页的主要方法，对应于HTTP的GET</td>
-</tr>
-<tr>
-<td>requests.head(url, **kwargs)</td>
-<td>获取HTML网页头信息的方法，对应于HTTP的HEAD</td>
-</tr>
-<tr>
-<td>requests.post(url, data=None, json=None, **kwargs)</td>
-<td>向HTML网页提交POST请求的方法，对应于HTTP的POST</td>
-</tr>
-<tr>
-<td>requests.put(url, data=None, **kwargs)</td>
-<td>向HTML网页提交PUT请求的方法，对应于HTTP的PUT</td>
-</tr>
-<tr>
-<td>requests.patch(url, data=None, **kwargs)</td>
-<td>向HTML网页提交局部修改请求，对应于HTTP的PATCH</td>
-</tr>
-<tr>
-<td>requests.delete(url, **kwargs)</td>
-<td>向HTML页面提交删除请求，对应于HTTP的DELETE</td>
-</tr>
-</tbody></table>
+          <p>[TOC]</p><h1 id="关于pyhton"><a href="#关于pyhton" class="headerlink" title="关于pyhton"></a>关于pyhton</h1><ul>
+<li>Python语言是通用语言</li>
+<li>Python语言是脚本语言</li>
+<li>Python语言是开源语言</li>
+<li>Python语言是跨平台语言</li>
+<li>Python语言是多模型语言<br>Python语言创立者:<br>Guido van Rossum<br>2002年，Python 2.x<br>2008年，Python 3.x</li>
+</ul><p><strong>注：</strong></p><p><strong>变量命名主要采用下划线规则</strong></p>
           <!--noindex-->
           
             <div class="post-button">
-              <a class="btn" href="/2019/10/python/python-crawler/python-crawler/#more" rel="contents">
+              <a class="btn" href="/2019/11/python/python/python/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -782,7 +1296,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/10/front-end/html-css/html-css/">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/11/java-note/springBoot/springBoot/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="nicolas lee">
@@ -796,7 +1310,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
             
-            <a href="/2019/10/front-end/html-css/html-css/" class="post-title-link" itemprop="url">html-css</a>
+            <a href="/2019/11/java-note/springBoot/springBoot/" class="post-title-link" itemprop="url">springBoot</a>
           
         </h1>
 
@@ -811,7 +1325,7 @@
                 
               
 
-              <time title="创建时间：2019-10-14 22:19:09" itemprop="dateCreated datePublished" datetime="2019-10-14T22:19:09+08:00">2019-10-14</time>
+              <time title="创建时间：2019-11-17 15:27:48" itemprop="dateCreated datePublished" datetime="2019-11-17T15:27:48+08:00">2019-11-17</time>
             </span>
           
             
@@ -822,7 +1336,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2019-12-07 10:59:20" itemprop="dateModified" datetime="2019-12-07T10:59:20+08:00">2019-12-07</time>
+                <time title="修改时间：2021-10-23 10:19:04" itemprop="dateModified" datetime="2021-10-23T10:19:04+08:00">2021-10-23</time>
               </span>
             
           
@@ -832,7 +1346,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/" itemprop="url" rel="index"><span itemprop="name">前端</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
 
                 
                 
@@ -862,530 +1376,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[TOC]</p><h1 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h1><p>HTML，超文本标记语言<br>负责页面中的结构，定义出页面中的各个组成部分<br>HTML是采用纯文本的形式的编写，采用HTML标签来标识出页面中的不同部分   </p><h2 id="HTML页面的基本结构"><a href="#HTML页面的基本结构" class="headerlink" title="HTML页面的基本结构"></a>HTML页面的基本结构</h2><p>一个网页有三个部分组成：结构html、表现css、行为js</p><h3 id="结构-html"><a href="#结构-html" class="headerlink" title="结构:html"></a>结构:html</h3><p>结构是页面的整体结构，哪里是标题，哪里是段落，哪里是图片<br>结构使用HTML来编写  </p>
+          <h1 id="一、Spring-Boot-入门"><a href="#一、Spring-Boot-入门" class="headerlink" title="一、Spring Boot 入门"></a><strong>一、</strong>Spring Boot 入门</h1><h2 id="1、Spring-Boot-简介"><a href="#1、Spring-Boot-简介" class="headerlink" title="1、Spring Boot 简介"></a>1、Spring Boot 简介</h2><blockquote>
+<p>简化Spring应用开发的一个框架；<br>整个Spring技术栈的一个大整合；<br>J2EE开发的一站式解决方案；</p>
+</blockquote><h2 id="2、微服务"><a href="#2、微服务" class="headerlink" title="2、微服务"></a>2、微服务</h2><p>2014，martin fowler</p><p>微服务：架构风格（服务微化）</p><p>一个应用应该是一组小型服务；可以通过HTTP的方式进行互通；</p>
           <!--noindex-->
           
             <div class="post-button">
-              <a class="btn" href="/2019/10/front-end/html-css/html-css/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    
-    <div>
-     
-    </div>
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </article>
-  
-  
-  
-
-    
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/10/git/git/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nicolas lee">
-      <meta itemprop="description" content="Yesterday you said tomorow.">
-      <meta itemprop="image" content="/assets/img/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="nicolas">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/git/git/" class="post-title-link" itemprop="url">git</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-13 22:19:09" itemprop="dateCreated datePublished" datetime="2019-10-13T22:19:09+08:00">2019-10-13</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-02 20:45:57" itemprop="dateModified" datetime="2021-03-02T20:45:57+08:00">2021-03-02</time>
-              </span>
-            
-          
-
-          
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span></span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[TOC]</p><p>特点：</p><p>分布式版本控制系统<br>优势：<br>    SVN在开发过程中必须保证需要与SVN服务器连接才能使用，需要联网</p><p><a href="https://git-scm.com/docs/git-checkout" target="_blank" rel="noopener">git官方文档</a></p><h1 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h1><h2 id="1、设置全局信息"><a href="#1、设置全局信息" class="headerlink" title="1、设置全局信息"></a>1、设置全局信息</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">设置开发者的用户名</span><br><span class="line">	git config --global user.name nicolas</span><br><span class="line">设置开发者邮箱</span><br><span class="line">	git config --global user.email 1162314270@qq.com</span><br><span class="line">取得全部的全局信息</span><br><span class="line">	git config --list</span><br><span class="line">	git config -l</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/10/git/git/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    
-    <div>
-     
-    </div>
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </article>
-  
-  
-  
-
-    
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/10/v2ray/v2ray/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nicolas lee">
-      <meta itemprop="description" content="Yesterday you said tomorow.">
-      <meta itemprop="image" content="/assets/img/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="nicolas">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/v2ray/v2ray/" class="post-title-link" itemprop="url">varay</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-13 22:19:09" itemprop="dateCreated datePublished" datetime="2019-10-13T22:19:09+08:00">2019-10-13</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-04 15:52:21" itemprop="dateModified" datetime="2021-03-04T15:52:21+08:00">2021-03-04</time>
-              </span>
-            
-          
-
-          
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span></span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[TOC]</p><p><a href="https://github.com/v2ray/manual" target="_blank" rel="noopener">github仓库</a></p><p><a href="https://www.v2ray.com/" target="_blank" rel="noopener">v2ray.com</a></p><p><a href="[https://github.com/233boy/v2ray/wiki/V2Ray%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC](https://github.com/233boy/v2ray/wiki/V2Ray一键安装脚本)">V2Ray一键安装脚本</a></p><p>首先买个服务器</p><p>解析域名</p><p>能在国内ping到</p><p>当前服务器</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lmz<span class="selector-class">.mookeyes</span><span class="selector-class">.tk</span></span><br></pre></td></tr></table></figure><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping ow<span class="selector-class">.yestojudge</span><span class="selector-class">.cn</span></span><br></pre></td></tr></table></figure><h2 id="linux-安装脚本"><a href="#linux-安装脚本" class="headerlink" title="linux 安装脚本"></a>linux 安装脚本</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -s -L https://git.io/v2ray.sh)</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/10/v2ray/v2ray/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    
-    <div>
-     
-    </div>
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </article>
-  
-  
-  
-
-    
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/10/java-note/javaDev/javaDev/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nicolas lee">
-      <meta itemprop="description" content="Yesterday you said tomorow.">
-      <meta itemprop="image" content="/assets/img/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="nicolas">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/java-note/javaDev/javaDev/" class="post-title-link" itemprop="url">javaDev</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-13 22:19:09" itemprop="dateCreated datePublished" datetime="2019-10-13T22:19:09+08:00">2019-10-13</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-04 15:55:50" itemprop="dateModified" datetime="2021-03-04T15:55:50+08:00">2021-03-04</time>
-              </span>
-            
-          
-
-          
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span></span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[TOC]</p><h1 id="CGLIB"><a href="#CGLIB" class="headerlink" title="CGLIB"></a>CGLIB</h1><h2 id="什么是CGLIB"><a href="#什么是CGLIB" class="headerlink" title="什么是CGLIB"></a>什么是CGLIB</h2><p>CGLIB是一个强大的、高性能的代码生成库。其被广泛应用于AOP框架（Spring、dynaop）中，用以提供方法拦截操作。Hibernate作为一个比较受欢迎的ORM框架，同样使用CGLIB来代理单端（多对一和一对一）关联（延迟提取集合使用的另一种机制）。CGLIB作为一个开源项目，其代码托管在github，地址为：<a href="https://github.com/cglib/cglib" target="_blank" rel="noopener">https://github.com/cglib/cglib</a></p>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/10/java-note/javaDev/javaDev/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    
-    <div>
-     
-    </div>
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </article>
-  
-  
-  
-
-    
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/10/java-note/OnJava8/OnJava8-appendix/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nicolas lee">
-      <meta itemprop="description" content="Yesterday you said tomorow.">
-      <meta itemprop="image" content="/assets/img/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="nicolas">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/java-note/OnJava8/OnJava8-appendix/" class="post-title-link" itemprop="url">OnJava8-appendix</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-13 22:19:09" itemprop="dateCreated datePublished" datetime="2019-10-13T22:19:09+08:00">2019-10-13</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-04 15:53:24" itemprop="dateModified" datetime="2021-03-04T15:53:24+08:00">2021-03-04</time>
-              </span>
-            
-          
-
-          
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span></span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[TOC]</p><h1 id="附录-流式IO"><a href="#附录-流式IO" class="headerlink" title="附录:流式IO"></a>附录:流式IO</h1><blockquote>
-<p>Java 7 引入了一种简单明了的方式来读写文件和操作目录。大多情况下，<a href="./17-Files.md">文件</a>这一章所介绍的那些库和技术就足够你用了。但是，如果你必须面对一些特殊的需求和比较底层的操作，或者处理一些老版本的代码，那么你就必须了解本附录中的内容。</p>
-</blockquote><p>对于编程语言的设计者来说，实现良好的输入/输出（I/O）系统是一项比较艰难的任务，不同实现方案的数量就可以证明这点。其中的挑战似乎在于要涵盖所有的可能性，你不仅要覆盖到不同的 I/O 源和 I/O 接收器（如文件、控制台、网络连接等），还要实现多种与它们进行通信的方式（如顺序、随机访问、缓冲、二进制、字符、按行和按字等）。</p>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/10/java-note/OnJava8/OnJava8-appendix/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-    
-    <div>
-     
-    </div>
-    
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </article>
-  
-  
-  
-
-    
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2019/10/java-note/OnJava8/OnJava8-4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="nicolas lee">
-      <meta itemprop="description" content="Yesterday you said tomorow.">
-      <meta itemprop="image" content="/assets/img/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="nicolas">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/java-note/OnJava8/OnJava8-4/" class="post-title-link" itemprop="url">OnJava8-4</a>
-          
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2019-10-13 22:19:09" itemprop="dateCreated datePublished" datetime="2019-10-13T22:19:09+08:00">2019-10-13</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-04 15:53:48" itemprop="dateModified" datetime="2021-03-04T15:53:48+08:00">2021-03-04</time>
-              </span>
-            
-          
-
-          
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span></span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>[TOC]</p><h1 id="第二十二章-枚举"><a href="#第二十二章-枚举" class="headerlink" title="第二十二章 枚举"></a>第二十二章 枚举</h1><blockquote>
-<p>关键字 enum 可以将一组具名的值的有限集合创建为一种新的类型，而这些具名的值可以作为常规的程序组件使用。这是一种非常有用的功能</p>
-</blockquote><p>在<a href>初始化和清理 </a> 这章结束的时候，我们已经简单地介绍了枚举的概念。现在，你对 Java 已经有了更深刻的理解，因此可以更深入地学习 Java 中的枚举了。你将在本章中看到，使用 enum 可以做很多有趣的事情，同时，我们也会深入其他的 Java 特性，例如泛型和反射。在这个过程中，我们还将学习一些设计模式。</p>
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/10/java-note/OnJava8/OnJava8-4/#more" rel="contents">
+              <a class="btn" href="/2019/11/java-note/springBoot/springBoot/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1417,7 +1414,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1465,7 +1462,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1478,7 +1475,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -1491,7 +1488,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

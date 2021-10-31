@@ -45,7 +45,7 @@
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
     localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
+    path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: '复制',
@@ -57,14 +57,14 @@
 </script>
 
   <meta name="description" content="github笔记下载地址[TOC]JavaScriptJavaScript负责页面中的的行为。  它是一门运行在浏览器端的脚本语言。  JS的编写的位置1.可以编写到标签的指定属性中  12&amp;lt;button onclick=&quot;alert(&apos;hello&apos;);&quot;&amp;gt;我是按钮&amp;lt;/button&amp;gt;  &amp;lt;a href=&quot;javascript:alert(&apos;aaa&apos;);&quot;&amp;gt;超链接">
-<meta name="keywords" content="js,前端">
+<meta name="keywords" content="前端,js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="javaScript">
 <meta property="og:url" content="https://codeofli.github.io/2019/11/js-note/javaScript/javaScript/index.html">
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="github笔记下载地址[TOC]JavaScriptJavaScript负责页面中的的行为。  它是一门运行在浏览器端的脚本语言。  JS的编写的位置1.可以编写到标签的指定属性中  12&amp;lt;button onclick=&quot;alert(&apos;hello&apos;);&quot;&amp;gt;我是按钮&amp;lt;/button&amp;gt;  &amp;lt;a href=&quot;javascript:alert(&apos;aaa&apos;);&quot;&amp;gt;超链接">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-01-01T04:18:36.658Z">
+<meta property="og:updated_time" content="2021-10-23T02:19:04.228Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="javaScript">
 <meta name="twitter:description" content="github笔记下载地址[TOC]JavaScriptJavaScript负责页面中的的行为。  它是一门运行在浏览器端的脚本语言。  JS的编写的位置1.可以编写到标签的指定属性中  12&amp;lt;button onclick=&quot;alert(&apos;hello&apos;);&quot;&amp;gt;我是按钮&amp;lt;/button&amp;gt;  &amp;lt;a href=&quot;javascript:alert(&apos;aaa&apos;);&quot;&amp;gt;超链接">
@@ -209,7 +209,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">32</span></a>
 
   </li>
       
@@ -231,7 +231,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
 
   </li>
       
@@ -253,7 +253,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">48</span></a>
 
   </li>
   </ul>
@@ -323,7 +323,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-01 12:18:36" itemprop="dateModified" datetime="2020-01-01T12:18:36+08:00">2020-01-01</time>
+                <time title="修改时间：2021-10-23 10:19:04" itemprop="dateModified" datetime="2021-10-23T10:19:04+08:00">2021-10-23</time>
               </span>
             
           
@@ -780,6 +780,10 @@
 <td>Date.now()</td>
 <td>可以获取当前代码执行时的时间戳</td>
 </tr>
+<tr>
+<td>setHours()</td>
+<td>设置 Date 对象中的小时 (0 ~ 23)</td>
+</tr>
 </tbody></table>
 <h2 id="Math"><a href="#Math" class="headerlink" title="Math"></a>Math</h2><p>Math属于一个工具类，它不需要我们创建对象，它里边封装了属性运算相关的常量和方法<br>我们可以直接使用它来进行数学运算相关的操作<br>方法：<br>Math.PI<br>     常量，圆周率<br>Math.abs()<br>     绝对值运算<br>Math.ceil()<br>     向上取整<br>Math.floor()<br>     向下取整<br>Math.round()<br>     四舍五入取整<br>Math.random()<br>     生成一个01之间的随机数<br>     生成一个xy之间的随机数<br>        Math.round(Math.random()*(y-x)+x);<br>Math.pow(x,y)<br>     求x的y次幂<br>Math.sqrt()<br>     对一个数进行开方<br>Math.max()<br>     求多个数中最大值<br>Math.min()<br>     求多个数中的最小值  </p>
 <h2 id="字符串的相关的方法"><a href="#字符串的相关的方法" class="headerlink" title="字符串的相关的方法"></a>字符串的相关的方法</h2><p>使用ES6中的字符串新方法  </p>
@@ -1030,9 +1034,9 @@ var obj = eval(&quot;(&quot;+str+&quot;)&quot;);  </code></pre><p>编码  </p>
           
           <div class="post-tags">
             
-              <a href="/tags/js/" rel="tag"># js</a>
-            
               <a href="/tags/前端/" rel="tag"># 前端</a>
+            
+              <a href="/tags/js/" rel="tag"># js</a>
             
           </div>
         
@@ -1119,7 +1123,7 @@ var obj = eval(&quot;(&quot;+str+&quot;)&quot;);  </code></pre><p>编码  </p>
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1132,7 +1136,7 @@ var obj = eval(&quot;(&quot;+str+&quot;)&quot;);  </code></pre><p>编码  </p>
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -1145,7 +1149,7 @@ var obj = eval(&quot;(&quot;+str+&quot;)&quot;);  </code></pre><p>编码  </p>
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

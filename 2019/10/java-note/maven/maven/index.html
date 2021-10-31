@@ -45,7 +45,7 @@
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
     localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
+    path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: '复制',
@@ -65,7 +65,7 @@
 <meta property="og:description" content="[TOC]maven[菜鸟教程-maven][https://www.runoob.com/maven/maven-tutorial.html]Maven 翻译为”专家”、”内行”，是 Apache 下的一个纯 Java 开发的开源项目。基于项目对象模型（缩写：POM）概念，Maven利用一个中央信息片断能管理一个项目的构建、报告和文档等步骤。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2018/09/455FA277-3216-4BA5-94D3-0F650C763D6F.png">
-<meta property="og:updated_time" content="2021-03-04T08:01:38.478Z">
+<meta property="og:updated_time" content="2021-10-23T02:49:43.147Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="maven">
 <meta name="twitter:description" content="[TOC]maven[菜鸟教程-maven][https://www.runoob.com/maven/maven-tutorial.html]Maven 翻译为”专家”、”内行”，是 Apache 下的一个纯 Java 开发的开源项目。基于项目对象模型（缩写：POM）概念，Maven利用一个中央信息片断能管理一个项目的构建、报告和文档等步骤。">
@@ -211,7 +211,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">32</span></a>
 
   </li>
       
@@ -233,7 +233,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
 
   </li>
       
@@ -255,7 +255,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">48</span></a>
 
   </li>
   </ul>
@@ -325,7 +325,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-04 16:01:38" itemprop="dateModified" datetime="2021-03-04T16:01:38+08:00">2021-03-04</time>
+                <time title="修改时间：2021-10-23 10:49:43" itemprop="dateModified" datetime="2021-10-23T10:49:43+08:00">2021-10-23</time>
               </span>
             
           
@@ -378,6 +378,7 @@
 
 <p>Maven 是一个项目管理工具，可以对 Java 项目进行构建、依赖管理。</p>
 <p>Maven 也可被用于构建和管理各种项目，例如 C#，Ruby，Scala 和其他语言编写的项目。Maven 曾是 Jakarta 项目的子项目，现为由 Apache 软件基金会主持的独立 Apache 项目。</p>
+<h2 id="maven中的概念"><a href="#maven中的概念" class="headerlink" title="maven中的概念"></a>maven中的概念</h2><h3 id="POM"><a href="#POM" class="headerlink" title="POM"></a>POM</h3><p><strong>POM是项目对象模型(Project Object Model)</strong>的简称,它是Maven项目中的文件,使用XML表示,名称叫做<em>pom.xml</em>。</p>
 <h2 id="Maven-功能"><a href="#Maven-功能" class="headerlink" title="Maven 功能"></a>Maven 功能</h2><p>Maven 能够帮助开发者完成以下工作：</p>
 <ul>
 <li>构建</li>
@@ -526,6 +527,8 @@
 <p>src/main/java、 src/main/resource、src/test/java 、src/test/resource   四个目录<br>所以在配置路径时需要注意文件名是否重名，导致加载文件失败</p>
 <h1 id="Maven-的-Snapshot-版本与-Release-版本"><a href="#Maven-的-Snapshot-版本与-Release-版本" class="headerlink" title="Maven 的 Snapshot 版本与 Release 版本"></a><strong>Maven 的 Snapshot 版本与 Release 版本</strong></h1><p>1、Snapshot 版本代表不稳定、尚处于开发中的版本。</p>
 <p>2、Release 版本则代表稳定的版本。</p>
+<h1 id="安装maven注意点"><a href="#安装maven注意点" class="headerlink" title="安装maven注意点"></a>安装maven注意点</h1><p><a href="#maven配置文件">maven配置文件</a></p>
+<p><a href="##本地仓库">maven本地仓库位置</a></p>
 
     </div>
 
@@ -650,7 +653,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#maven"><span class="nav-number">1.</span> <span class="nav-text">maven</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven-功能"><span class="nav-number">1.1.</span> <span class="nav-text">Maven 功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#约定配置"><span class="nav-number">1.2.</span> <span class="nav-text">约定配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven-特点"><span class="nav-number">1.3.</span> <span class="nav-text">Maven 特点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Maven-环境配置"><span class="nav-number">2.</span> <span class="nav-text">Maven 环境配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Maven-仓库"><span class="nav-number">3.</span> <span class="nav-text">Maven 仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地仓库"><span class="nav-number">3.1.</span> <span class="nav-text">本地仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中央仓库"><span class="nav-number">3.2.</span> <span class="nav-text">中央仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-number">3.3.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven-依赖搜索顺序"><span class="nav-number">3.4.</span> <span class="nav-text">Maven 依赖搜索顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven-阿里云-Aliyun-仓库"><span class="nav-number">3.5.</span> <span class="nav-text">Maven 阿里云(Aliyun)仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步"><span class="nav-number">3.5.1.</span> <span class="nav-text">第一步:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#maven配置文件"><span class="nav-number">4.</span> <span class="nav-text">maven配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#maven使用spring单元测试"><span class="nav-number">5.</span> <span class="nav-text">maven使用spring单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#maven的pom-xml结构"><span class="nav-number">5.1.</span> <span class="nav-text">maven的pom.xml结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#maven目录结构"><span class="nav-number">6.</span> <span class="nav-text">maven目录结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#maven中classpath路径"><span class="nav-number">6.1.</span> <span class="nav-text">maven中classpath路径</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Maven-的-Snapshot-版本与-Release-版本"><span class="nav-number">7.</span> <span class="nav-text">Maven 的 Snapshot 版本与 Release 版本</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#maven"><span class="nav-number">1.</span> <span class="nav-text">maven</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#maven中的概念"><span class="nav-number">1.1.</span> <span class="nav-text">maven中的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#POM"><span class="nav-number">1.1.1.</span> <span class="nav-text">POM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven-功能"><span class="nav-number">1.2.</span> <span class="nav-text">Maven 功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#约定配置"><span class="nav-number">1.3.</span> <span class="nav-text">约定配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven-特点"><span class="nav-number">1.4.</span> <span class="nav-text">Maven 特点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Maven-环境配置"><span class="nav-number">2.</span> <span class="nav-text">Maven 环境配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Maven-仓库"><span class="nav-number">3.</span> <span class="nav-text">Maven 仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地仓库"><span class="nav-number">3.1.</span> <span class="nav-text">本地仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中央仓库"><span class="nav-number">3.2.</span> <span class="nav-text">中央仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程仓库"><span class="nav-number">3.3.</span> <span class="nav-text">远程仓库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven-依赖搜索顺序"><span class="nav-number">3.4.</span> <span class="nav-text">Maven 依赖搜索顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven-阿里云-Aliyun-仓库"><span class="nav-number">3.5.</span> <span class="nav-text">Maven 阿里云(Aliyun)仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步"><span class="nav-number">3.5.1.</span> <span class="nav-text">第一步:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#maven配置文件"><span class="nav-number">4.</span> <span class="nav-text">maven配置文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#maven使用spring单元测试"><span class="nav-number">5.</span> <span class="nav-text">maven使用spring单元测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#maven的pom-xml结构"><span class="nav-number">5.1.</span> <span class="nav-text">maven的pom.xml结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#maven目录结构"><span class="nav-number">6.</span> <span class="nav-text">maven目录结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#maven中classpath路径"><span class="nav-number">6.1.</span> <span class="nav-text">maven中classpath路径</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Maven-的-Snapshot-版本与-Release-版本"><span class="nav-number">7.</span> <span class="nav-text">Maven 的 Snapshot 版本与 Release 版本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装maven注意点"><span class="nav-number">8.</span> <span class="nav-text">安装maven注意点</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -669,7 +672,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -682,7 +685,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -695,7 +698,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>

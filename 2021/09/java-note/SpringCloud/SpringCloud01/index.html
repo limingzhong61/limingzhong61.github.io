@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon128.ico?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon32.ico?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon16.ico?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+  <link rel="alternate" href="/atom.xml" title="nicolas" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="SpringCloud011.认识微服务随着互联网行业的发展，对服务的要求也越来越高，服务架构也从单体架构逐渐演变为现在流行的微服务架构。这些架构之间有怎样的差别呢？1.0.学习目标了解微服务架构的优缺点微服务技术栈1.1.单体架构单体架构：将业务的所有功能集中在一个项目中开发，打成一个包部署。单体架构的优缺点如下：">
+<meta name="keywords" content="SpringCloud,Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringCloud01">
+<meta property="og:url" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/index.html">
+<meta property="og:site_name" content="nicolas">
+<meta property="og:description" content="SpringCloud011.认识微服务随着互联网行业的发展，对服务的要求也越来越高，服务架构也从单体架构逐渐演变为现在流行的微服务架构。这些架构之间有怎样的差别呢？1.0.学习目标了解微服务架构的优缺点微服务技术栈1.1.单体架构单体架构：将业务的所有功能集中在一个项目中开发，打成一个包部署。单体架构的优缺点如下：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819105714890.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819105849852.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819110034400.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819110130382.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819110930997.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210914095159453.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713202807818.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713203124797.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713203753373.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819112409833.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819112852009.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713204155887.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713205003790.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713210800950.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713211009593.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713211814094.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713212656887.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713212349272.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713212336185.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713212513324.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713220736408.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713212749575.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713212901725.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713213146089.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713213213075.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713213312278.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713213959569.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713214404481.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713214925388.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713220104956.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210821174319263.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713220509769.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713220605881.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713220857396.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713221339022.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713222157190.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713222656562.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713222757702.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713222841951.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713223041491.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713223150650.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210821190250298.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713224049419.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713224245731.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210821190904225.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713224517686.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/1525620483637.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/1525620787090.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/1525620835911.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/1525620835911.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/1544361421671.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/1525622652849.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/1525622699666.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/1525622754316.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713224724673.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713225653000.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210822173230846.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713230444308.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713231439607.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210822181240493.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713232522531.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713232658928.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713232916215.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713233528982.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713233727923.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210822193648606.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210828165751129.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713235133225.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713235235219.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210828171001714.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714000101516.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714000414781.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714000440143.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714000505928.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714000522913.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714000830703.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714000837140.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714000941256.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210828171712343.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714001728017.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714164426792-1630225333418.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714164742924-1630225333419.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714164856664-1630225333419.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/L0iFYNF-1630225333419.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714170845901-1630225333422.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714170449612-1630225333419.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210829110453194-1630225333422.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714171036335-1630225333422.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210829111728529-1630225333422.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714173233650-1630225333422.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714173324231-1630225333422.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714173721309-1630225333422.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714173538538-1630225333422.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714173519963-1630225333422.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714174313344-1630225333422.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714174424818-1630225333422.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714174623557-1630225333422.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210829114709139-1630225333422.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210829122807270-1630225333422.png">
+<meta property="og:updated_time" content="2021-10-31T05:20:40.375Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SpringCloud01">
+<meta name="twitter:description" content="SpringCloud011.认识微服务随着互联网行业的发展，对服务的要求也越来越高，服务架构也从单体架构逐渐演变为现在流行的微服务架构。这些架构之间有怎样的差别呢？1.0.学习目标了解微服务架构的优缺点微服务技术栈1.1.单体架构单体架构：将业务的所有功能集中在一个项目中开发，打成一个包部署。单体架构的优缺点如下：">
+<meta name="twitter:image" content="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819105714890.png">
+  <link rel="canonical" href="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>SpringCloud01 | nicolas</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">nicolas</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Yesterday you said tomorow.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">32</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">48</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/codeOflI/codeOflI.github.io/tree/dev" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">SpringCloud01
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-09-12 10:40:06" itemprop="dateCreated datePublished" datetime="2021-09-12T10:40:06+08:00">2021-09-12</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-10-31 13:20:40" itemprop="dateModified" datetime="2021-10-31T13:20:40+08:00">2021-10-31</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="SpringCloud01"><a href="#SpringCloud01" class="headerlink" title="SpringCloud01"></a>SpringCloud01</h1><h1 id="1-认识微服务"><a href="#1-认识微服务" class="headerlink" title="1.认识微服务"></a>1.认识微服务</h1><p>随着互联网行业的发展，对服务的要求也越来越高，服务架构也从单体架构逐渐演变为现在流行的微服务架构。这些架构之间有怎样的差别呢？</p><h2 id="1-0-学习目标"><a href="#1-0-学习目标" class="headerlink" title="1.0.学习目标"></a>1.0.学习目标</h2><p>了解微服务架构的优缺点</p><h3 id="微服务技术栈"><a href="#微服务技术栈" class="headerlink" title="微服务技术栈"></a>微服务技术栈</h3><p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819105714890.png" alt="image-20210819105714890"></p><p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819105849852.png" alt="image-20210819105849852"></p><p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819110034400.png" alt="image-20210819110034400"></p><p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819110130382.png" alt="image-20210819110130382"></p><p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819110930997.png" alt="image-20210819110930997"></p><p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210914095159453.png" alt="image-20210914095159453"></p><h2 id="1-1-单体架构"><a href="#1-1-单体架构" class="headerlink" title="1.1.单体架构"></a>1.1.单体架构</h2><p><strong>单体架构</strong>：将业务的所有功能集中在一个项目中开发，打成一个包部署。</p><p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713202807818.png" alt="image-20210713202807818"></p><p>单体架构的优缺点如下：</p><a id="more"></a>
+
+
+
+
+
+
+
+
+
+
+<p><strong>优点：</strong></p>
+<ul>
+<li>架构简单</li>
+<li>部署成本低</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>耦合度高（维护困难、升级困难）</li>
+</ul>
+<h2 id="1-2-分布式架构"><a href="#1-2-分布式架构" class="headerlink" title="1.2.分布式架构"></a>1.2.分布式架构</h2><p><strong>分布式架构</strong>：根据业务功能对系统做拆分，每个业务功能模块作为独立项目开发，称为一个服务。</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713203124797.png" alt="image-20210713203124797"></p>
+<p>分布式架构的优缺点：</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>降低服务耦合</li>
+<li>有利于服务升级和拓展</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>服务<strong>调用关系错综复杂</strong></li>
+</ul>
+<p>分布式架构虽然降低了服务耦合，但是服务拆分时也有很多问题需要思考：</p>
+<ul>
+<li>服务拆分的粒度如何界定？</li>
+<li>服务之间如何调用？</li>
+<li>服务的调用关系如何管理？</li>
+</ul>
+<p>人们需要制定一套行之有效的标准来约束分布式架构。</p>
+<h2 id="1-3-微服务"><a href="#1-3-微服务" class="headerlink" title="1.3.微服务"></a>1.3.微服务</h2><p>微服务的架构特征：</p>
+<ul>
+<li>单一职责：微服务拆分粒度更小，每一个服务都对应唯一的业务能力，做到单一职责</li>
+<li>自治：团队独立、技术独立、数据独立，独立部署和交付</li>
+<li>面向服务：服务提供统一标准的接口，与语言和技术无关</li>
+<li>隔离性强：服务调用做好隔离、容错、降级，避免出现级联问题</li>
+</ul>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713203753373.png" alt="image-20210713203753373"></p>
+<p>微服务的上述特性其实是在给分布式架构制定一个标准，进一步降低服务之间的耦合度，提供服务的独立性和灵活性。做到高内聚，低耦合。</p>
+<p>因此，可以认为<strong>微服务</strong>是一种经过良好架构设计的<strong>分布式架构方案</strong> 。</p>
+<p>但方案该怎么落地？选用什么样的技术栈？全球的互联网公司都在积极尝试自己的微服务落地方案。</p>
+<p>其中在Java领域最引人注目的就是SpringCloud提供的方案了。</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819112409833.png" alt="image-20210819112409833"></p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210819112852009.png" alt="image-20210819112852009"></p>
+<h2 id="1-4-SpringCloud"><a href="#1-4-SpringCloud" class="headerlink" title="1.4.SpringCloud"></a>1.4.SpringCloud</h2><p>SpringCloud是目前国内使用最广泛的微服务框架。官网地址：<a href="https://spring.io/projects/spring-cloud。" target="_blank" rel="noopener">https://spring.io/projects/spring-cloud。</a></p>
+<p>SpringCloud集成了各种微服务功能组件，并基于SpringBoot实现了这些组件的自动装配，从而提供了良好的开箱即用体验。</p>
+<p>其中常见的组件包括：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713204155887.png" alt="image-20210713204155887"></p>
+<p>另外，SpringCloud底层是依赖于SpringBoot的，并且有版本的兼容关系，如下：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713205003790.png" alt="image-20210713205003790"></p>
+<p>我们课堂学习的版本是 Hoxton.SR10，因此对应的SpringBoot版本是2.3.x版本。</p>
+<h2 id="1-5-总结"><a href="#1-5-总结" class="headerlink" title="1.5.总结"></a>1.5.总结</h2><ul>
+<li><p>单体架构：简单方便，高度耦合，扩展性差，适合小型项目。例如：学生管理系统</p>
+</li>
+<li><p>分布式架构：松耦合，扩展性好，但架构复杂，难度大。适合大型互联网项目，例如：京东、淘宝</p>
+</li>
+<li><p>微服务：一种良好的分布式架构方案</p>
+<p>①优点：拆分粒度更小、服务更独立、耦合度更低</p>
+<p>②缺点：架构非常复杂，运维、监控、部署难度提高</p>
+</li>
+<li><p>SpringCloud是微服务架构的一站式解决方案，集成了各种优秀微服务功能组件</p>
+</li>
+</ul>
+<h1 id="2-服务拆分和远程调用"><a href="#2-服务拆分和远程调用" class="headerlink" title="2.服务拆分和远程调用"></a>2.服务拆分和远程调用</h1><p>任何分布式架构都离不开服务的拆分，微服务也是一样。</p>
+<h2 id="2-1-服务拆分原则"><a href="#2-1-服务拆分原则" class="headerlink" title="2.1.服务拆分原则"></a>2.1.服务拆分原则</h2><p>这里我总结了微服务拆分时的几个原则：</p>
+<ul>
+<li>不同微服务，不要<strong>重复开发相同业务</strong></li>
+<li>微服务<strong>数据独立，不要访问其它微服务的数据库</strong></li>
+<li>微服务可以将自己的业务暴露为接口，供其它微服务调用</li>
+</ul>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713210800950.png" alt="image-20210713210800950"></p>
+<h2 id="2-2-服务拆分示例"><a href="#2-2-服务拆分示例" class="headerlink" title="2.2.服务拆分示例"></a>2.2.服务拆分示例</h2><p>以课前资料中的微服务cloud-demo为例，其结构如下：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713211009593.png" alt="image-20210713211009593"></p>
+<p>cloud-demo：父工程，管理依赖</p>
+<ul>
+<li>order-service：订单微服务，负责订单相关业务</li>
+<li>user-service：用户微服务，负责用户相关业务</li>
+</ul>
+<p>要求：</p>
+<ul>
+<li>订单微服务和用户微服务都必须有各自的数据库，相互独立</li>
+<li>订单服务和用户服务都对外暴露Restful的接口</li>
+<li>订单服务如果需要查询用户信息，只能调用用户服务的Restful接口，不能查询用户数据库</li>
+</ul>
+<h3 id="2-2-1-导入demo工程"><a href="#2-2-1-导入demo工程" class="headerlink" title="2.2.1.导入demo工程"></a>2.2.1.导入demo工程</h3><p>用IDEA导入课前资料提供的Demo：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713211814094.png" alt="image-20210713211814094"></p>
+<p>项目结构如下：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713212656887.png" alt="image-20210713212656887"></p>
+<p>导入后，会在IDEA右下角出现弹窗：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713212349272.png" alt="image-20210713212349272"></p>
+<p>点击弹窗，然后按下图选择：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713212336185.png" alt="image-20210713212336185"></p>
+<p>会出现这样的菜单：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713212513324.png" alt="image-20210713212513324"></p>
+<p>配置下项目使用的JDK：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713220736408.png" alt="image-20210713220736408"></p>
+<h2 id="2-3-实现远程调用案例"><a href="#2-3-实现远程调用案例" class="headerlink" title="2.3.实现远程调用案例"></a>2.3.实现远程调用案例</h2><p>在order-service服务中，有一个根据id查询订单的接口：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713212749575.png" alt="image-20210713212749575"></p>
+<p>根据id查询订单，返回值是Order对象，如图：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713212901725.png" alt="image-20210713212901725"></p>
+<p>其中的user为null</p>
+<p>在user-service中有一个根据id查询用户的接口：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713213146089.png" alt="image-20210713213146089"></p>
+<p>查询的结果如图：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713213213075.png" alt="image-20210713213213075"></p>
+<h3 id="2-3-1-案例需求："><a href="#2-3-1-案例需求：" class="headerlink" title="2.3.1.案例需求："></a>2.3.1.案例需求：</h3><p>修改order-service中的根据id查询订单业务，要求在查询订单的同时，根据订单中包含的userId查询出用户信息，一起返回。</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713213312278.png" alt="image-20210713213312278"></p>
+<p>因此，我们需要在order-service中 向user-service发起一个http的请求，调用<a href="http://localhost:8081/user/{userId}这个接口。" target="_blank" rel="noopener">http://localhost:8081/user/{userId}这个接口。</a></p>
+<p>大概的步骤是这样的：</p>
+<ul>
+<li>注册一个RestTemplate的实例到Spring容器</li>
+<li>修改order-service服务中的OrderService类中的queryOrderById方法，根据Order对象中的userId查询User</li>
+<li>将查询的User填充到Order对象，一起返回</li>
+</ul>
+<h3 id="2-3-2-注册RestTemplate"><a href="#2-3-2-注册RestTemplate" class="headerlink" title="2.3.2.注册RestTemplate"></a>2.3.2.注册RestTemplate</h3><p>首先，我们在order-service服务中的OrderApplication启动类中，注册RestTemplate实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.order;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.mybatis.spring.annotation.MapperScan;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.client.RestTemplate;</span><br><span class="line"></span><br><span class="line"><span class="meta">@MapperScan</span>(<span class="string">"cn.itcast.order.mapper"</span>)</span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OrderApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(OrderApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RestTemplate <span class="title">restTemplate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-3-实现远程调用"><a href="#2-3-3-实现远程调用" class="headerlink" title="2.3.3.实现远程调用"></a>2.3.3.实现远程调用</h3><p>修改order-service服务中的cn.itcast.order.service包下的OrderService类中的queryOrderById方法：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713213959569.png" alt="image-20210713213959569"></p>
+<h2 id="2-4-提供者与消费者"><a href="#2-4-提供者与消费者" class="headerlink" title="2.4.提供者与消费者"></a>2.4.提供者与消费者</h2><p>在服务调用关系中，会有两个不同的角色：</p>
+<p><strong>服务提供者</strong>：一次业务中，被其它微服务调用的服务。（提供接口给其它微服务）</p>
+<p><strong>服务消费者</strong>：一次业务中，调用其它微服务的服务。（调用其它微服务提供的接口）</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713214404481.png" alt="image-20210713214404481"></p>
+<p>但是，服务提供者与服务消费者的角色并不是绝对的，而是相对于业务而言。</p>
+<p>如果服务A调用了服务B，而服务B又调用了服务C，服务B的角色是什么？</p>
+<ul>
+<li>对于A调用B的业务而言：A是服务消费者，B是服务提供者</li>
+<li>对于B调用C的业务而言：B是服务消费者，C是服务提供者</li>
+</ul>
+<p>因此，服务B既可以是服务提供者，也可以是服务消费者。</p>
+<h1 id="3-Eureka注册中心"><a href="#3-Eureka注册中心" class="headerlink" title="3.Eureka注册中心"></a>3.Eureka注册中心</h1><p>假如我们的服务提供者user-service部署了多个实例，如图：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713214925388.png" alt="image-20210713214925388"></p>
+<p>大家思考几个问题：</p>
+<ul>
+<li>order-service在发起远程调用的时候，该如何得知user-service实例的ip地址和端口？</li>
+<li>有多个user-service实例地址，order-service调用时该如何选择？</li>
+<li>order-service如何得知某个user-service实例是否依然健康，是不是已经宕机？</li>
+</ul>
+<h2 id="3-1-Eureka的结构和作用"><a href="#3-1-Eureka的结构和作用" class="headerlink" title="3.1.Eureka的结构和作用"></a>3.1.Eureka的结构和作用</h2><p>这些问题都需要利用SpringCloud中的注册中心来解决，其中最广为人知的注册中心就是Eureka，其结构如下：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713220104956.png" alt="image-20210713220104956"></p>
+<p>回答之前的各个问题。</p>
+<p>问题1：order-service如何得知user-service实例地址？</p>
+<p>获取地址信息的流程如下：</p>
+<ul>
+<li>user-service服务实例启动后，将<strong>自己的信息注册到eureka-server（Eureka服务端</strong>）。这个叫服务注册</li>
+<li>eureka-server保存服务名称到服务实例地址列表的映射关系</li>
+<li>order-service根据服务名称，拉取实例地址列表。这个叫服务发现或服务拉取</li>
+</ul>
+<p>问题2：order-service如何从多个user-service实例中选择具体的实例？</p>
+<ul>
+<li>order-service从实例列表中利用负载均衡算法选中一个实例地址</li>
+<li>向该实例地址发起远程调用</li>
+</ul>
+<p>问题3：order-service如何得知某个user-service实例是否依然健康，是不是已经宕机？</p>
+<ul>
+<li>user-service会<strong>每隔一段时间（默认30秒）向eureka-server发起请求</strong>，报告自己状态，称为<strong>心跳</strong></li>
+<li>当超过一定时间没有发送心跳时，eureka-server会认为微服务实例故障，将该实例从服务列表中剔除</li>
+<li>order-service拉取服务时，就能将故障实例排除了</li>
+</ul>
+<blockquote>
+<p>注意：一个微服务，既可以是服务提供者，又可以是服务消费者，因此<strong>eureka将服务注册、服务发现等功能统一封装到了eureka-client端</strong></p>
+</blockquote>
+<p><strong>总结</strong></p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210821174319263.png" alt="image-20210821174319263"></p>
+<p>因此，接下来我们动手实践的步骤包括：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713220509769.png" alt="image-20210713220509769"></p>
+<h2 id="3-2-搭建eureka-server"><a href="#3-2-搭建eureka-server" class="headerlink" title="3.2.搭建eureka-server"></a>3.2.搭建eureka-server</h2><p>首先大家注册中心服务端：eureka-server，这<strong>必须是一个独立的微服务</strong></p>
+<h3 id="3-2-1-创建eureka-server服务"><a href="#3-2-1-创建eureka-server服务" class="headerlink" title="3.2.1.创建eureka-server服务"></a>3.2.1.创建eureka-server服务</h3><p>在cloud-demo父工程下，创建一个子模块：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713220605881.png" alt="image-20210713220605881"></p>
+<p>填写模块信息：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713220857396.png" alt="image-20210713220857396"></p>
+<p>然后填写服务信息：eureka-server</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713221339022.png" alt="image-20210713221339022"></p>
+<h3 id="3-2-2-引入eureka依赖"><a href="#3-2-2-引入eureka依赖" class="headerlink" title="3.2.2.引入eureka依赖"></a>3.2.2.引入eureka依赖</h3><p>引入SpringCloud为eureka提供的starter依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-server<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-3-编写启动类"><a href="#3-2-3-编写启动类" class="headerlink" title="3.2.3.编写启动类"></a>3.2.3.编写启动类</h3><p>给eureka-server服务编写一个启动类，一定要添加一个@EnableEurekaServer注解，开启eureka的注册中心功能：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.eureka;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="meta">@EnableEurekaServer</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">EurekaApplication</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        SpringApplication.run(EurekaApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-4-编写配置文件"><a href="#3-2-4-编写配置文件" class="headerlink" title="3.2.4.编写配置文件"></a>3.2.4.编写配置文件</h3><p>编写一个application.yml文件，内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">10086</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  application:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">eureka-server</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    service-url:</span> </span><br><span class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://127.0.0.1:10086/eureka</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-5-启动服务"><a href="#3-2-5-启动服务" class="headerlink" title="3.2.5.启动服务"></a>3.2.5.启动服务</h3><p>启动微服务，然后在浏览器访问：<a href="http://127.0.0.1:10086" target="_blank" rel="noopener">http://127.0.0.1:10086</a></p>
+<p>看到下面结果应该是成功了：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713222157190.png" alt="image-20210713222157190"></p>
+<h2 id="3-3-服务注册"><a href="#3-3-服务注册" class="headerlink" title="3.3.服务注册"></a>3.3.服务注册</h2><p>下面，我们将user-service注册到eureka-server中去。</p>
+<h3 id="1）引入依赖"><a href="#1）引入依赖" class="headerlink" title="1）引入依赖"></a>1）引入依赖</h3><p>在user-service的pom文件中，引入下面的eureka-client依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2）配置文件"><a href="#2）配置文件" class="headerlink" title="2）配置文件"></a>2）配置文件</h3><p>在user-service中，修改application.yml文件，添加服务名称、eureka地址：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  application:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">userservice</span>  <span class="comment"># user服务的服务名称</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    service-url:</span>  <span class="comment"># eureka的地址信息</span></span><br><span class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://127.0.0.1:10086/eureka</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3）启动多个user-service实例"><a href="#3）启动多个user-service实例" class="headerlink" title="3）启动多个user-service实例"></a>3）启动多个user-service实例</h3><p>为了演示一个服务有多个实例的场景，我们添加一个SpringBoot的启动配置，再启动一个user-service。</p>
+<p>首先，复制原来的user-service启动配置：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713222656562.png" alt="image-20210713222656562"></p>
+<p>然后，在弹出的窗口中，填写信息：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713222757702.png" alt="image-20210713222757702"></p>
+<p>现在，SpringBoot窗口会出现两个user-service启动配置：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713222841951.png" alt="image-20210713222841951"></p>
+<p>不过，第一个是8081端口，第二个是8082端口。</p>
+<p>启动两个user-service实例：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713223041491.png" alt="image-20210713223041491"></p>
+<p>查看eureka-server管理页面：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713223150650.png" alt="image-20210713223150650"></p>
+<p><strong>总结</strong></p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210821190250298.png" alt="image-20210821190250298"></p>
+<h2 id="3-4-服务发现"><a href="#3-4-服务发现" class="headerlink" title="3.4.服务发现"></a>3.4.服务发现</h2><p>下面，我们将order-service的逻辑修改：向eureka-server拉取user-service的信息，实现服务发现。</p>
+<h3 id="1）引入依赖-1"><a href="#1）引入依赖-1" class="headerlink" title="1）引入依赖"></a>1）引入依赖</h3><p>之前说过，服务发现、服务注册统一都封装在eureka-client依赖，因此这一步与服务注册时一致。</p>
+<p>在order-service的pom文件中，引入下面的eureka-client依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-netflix-eureka-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2）配置文件-1"><a href="#2）配置文件-1" class="headerlink" title="2）配置文件"></a>2）配置文件</h3><p>服务发现也需要知道eureka地址，因此第二步与服务注册一致，都是配置eureka信息：</p>
+<p>在order-service中，修改application.yml文件，添加服务名称、eureka地址：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">10086</span> <span class="comment"># 服务端口</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  application:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">eurekaserver</span> <span class="comment"># eureka的服务名称</span></span><br><span class="line"><span class="attr">eureka:</span></span><br><span class="line"><span class="attr">  client:</span></span><br><span class="line"><span class="attr">    service-url:</span>  <span class="comment"># eureka的地址信息</span></span><br><span class="line"><span class="attr">      defaultZone:</span> <span class="attr">http://127.0.0.1:10086/eureka</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3）服务拉取和负载均衡"><a href="#3）服务拉取和负载均衡" class="headerlink" title="3）服务拉取和负载均衡"></a>3）服务拉取和负载均衡</h3><p>最后，我们要去eureka-server中拉取user-service服务的实例列表，并且实现负载均衡。</p>
+<p>不过这些动作不用我们去做，只需要添加一些注解即可。</p>
+<p>在order-service的OrderApplication中，给RestTemplate这个Bean添加一个@LoadBalanced注解：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713224049419.png" alt="image-20210713224049419"></p>
+<p>修改order-service服务中的cn.itcast.order.service包下的OrderService类中的queryOrderById方法。修改访问的url路径，用服务名代替ip、端口：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713224245731.png" alt="image-20210713224245731"></p>
+<p>spring会自动帮助我们从eureka-server端，根据userservice这个服务名称，获取实例列表，而后完成负载均衡。</p>
+<p><strong>总结</strong></p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210821190904225.png" alt="image-20210821190904225"></p>
+<h1 id="4-Ribbon负载均衡"><a href="#4-Ribbon负载均衡" class="headerlink" title="4.Ribbon负载均衡"></a>4.Ribbon负载均衡</h1><p>上一节中，我们添加了<strong>@LoadBalanced注解，即可实现负载均衡功能</strong>，这是什么原理呢？</p>
+<h2 id="4-1-负载均衡原理"><a href="#4-1-负载均衡原理" class="headerlink" title="4.1.负载均衡原理"></a>4.1.负载均衡原理</h2><p>SpringCloud底层其实是利用了一个名为Ribbon的组件，来实现负载均衡功能的。</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713224517686.png" alt="image-20210713224517686"></p>
+<p>那么我们发出的请求明明是<a href="http://userservice/user/1，怎么变成了http://localhost:8081的呢？" target="_blank" rel="noopener">http://userservice/user/1，怎么变成了http://localhost:8081的呢？</a></p>
+<h2 id="4-2-源码跟踪"><a href="#4-2-源码跟踪" class="headerlink" title="4.2.源码跟踪"></a>4.2.源码跟踪</h2><p>为什么我们只输入了service名称就可以访问了呢？之前还要获取ip和端口。</p>
+<p>显然有人帮我们根据service名称，获取到了服务实例的ip和端口。它就是<code>LoadBalancerInterceptor</code>，这个类会在对RestTemplate的请求进行拦截，然后从Eureka根据服务id获取服务列表，随后利用负载均衡算法得到真实的服务地址信息，替换服务id。</p>
+<p>我们进行源码跟踪：</p>
+<h3 id="1）LoadBalancerInterceptor"><a href="#1）LoadBalancerInterceptor" class="headerlink" title="1）LoadBalancerInterceptor"></a>1）LoadBalancerInterceptor</h3><p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/1525620483637.png" alt="1525620483637"></p>
+<p>可以看到这里的intercept方法，拦截了用户的HttpRequest请求，然后做了几件事：</p>
+<ul>
+<li><code>request.getURI()</code>：获取请求uri，本例中就是 <a href="http://user-service/user/8" target="_blank" rel="noopener">http://user-service/user/8</a></li>
+<li><code>originalUri.getHost()</code>：获取uri路径的主机名，其实就是服务id，<code>user-service</code></li>
+<li><code>this.loadBalancer.execute()</code>：处理服务id，和用户请求。</li>
+</ul>
+<p>这里的<strong><code>this.loadBalancer</code>是<code>LoadBalancerClient</code>类型</strong>，我们继续跟入。</p>
+<h3 id="2）LoadBalancerClient"><a href="#2）LoadBalancerClient" class="headerlink" title="2）LoadBalancerClient"></a>2）LoadBalancerClient</h3><p>继续跟入execute方法：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/1525620787090.png" alt="1525620787090"></p>
+<p>代码是这样的：</p>
+<ul>
+<li>getLoadBalancer(serviceId)：根据服务id获取ILoadBalancer，而ILoadBalancer会拿着服务id去eureka中获取服务列表并保存起来。</li>
+<li><strong>getServer(loadBalancer)：利用内置的负载均衡算法</strong>，从服务列表中选择一个。本例中，可以看到获取了8082端口的服务</li>
+</ul>
+<p>放行后，再次访问并跟踪，发现获取的是8081：</p>
+<p> <img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/1525620835911.png" alt="1525620835911"></p>
+<p>果然实现了负载均衡。</p>
+<h3 id="3）负载均衡策略IRule"><a href="#3）负载均衡策略IRule" class="headerlink" title="3）负载均衡策略IRule"></a>3）负载均衡策略IRule</h3><p>在刚才的代码中，可以看到获取服务使通过一个<code>getServer</code>方法来做负载均衡:</p>
+<p> <img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/1525620835911.png" alt="1525620835911"></p>
+<p>我们继续跟入：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/1544361421671.png" alt="1544361421671"></p>
+<p>继续跟踪源码chooseServer方法，发现这么一段代码：</p>
+<p>BaseLoadBalancer</p>
+<p> <img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/1525622652849.png" alt="1525622652849"></p>
+<p>我们看看这个rule是谁：</p>
+<p> <img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/1525622699666.png" alt="1525622699666"></p>
+<p>这里的rule默认值是一个<code>RoundRobinRule</code>，看类的介绍：</p>
+<p> <img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/1525622754316.png" alt="1525622754316"></p>
+<p>这不就是<strong>轮询的意思</strong>嘛。</p>
+<p><code>RoundRobin</code>轮询（调度）</p>
+<p>到这里，整个负载均衡的流程我们就清楚了。</p>
+<h3 id="4）总结"><a href="#4）总结" class="headerlink" title="4）总结"></a>4）总结</h3><p>SpringCloudRibbon的底层采用了一个拦截器，拦截了RestTemplate发出的请求，对地址做了修改。用一幅图来总结一下：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713224724673.png" alt="image-20210713224724673"></p>
+<p>基本流程如下：</p>
+<ul>
+<li>拦截我们的RestTemplate请求<a href="http://userservice/user/1" target="_blank" rel="noopener">http://userservice/user/1</a></li>
+<li><strong>RibbonLoadBalancerClient</strong>会从请求url中获取服务名称，也就是user-service</li>
+<li><strong>DynamicServerListLoadBalancer</strong>根据user-service到<strong>eureka拉取服务列表</strong></li>
+<li>eureka返回列表，localhost:8081、localhost:8082</li>
+<li>IRule利用<strong>内置负载均衡规则</strong>，从列表中选择一个，例如localhost:8081</li>
+<li>RibbonLoadBalancerClient修改请求地址，用localhost:8081替代userservice，得到<a href="http://localhost:8081/user/1，发起真实请求" target="_blank" rel="noopener">http://localhost:8081/user/1，发起真实请求</a></li>
+</ul>
+<h2 id="4-3-负载均衡策略"><a href="#4-3-负载均衡策略" class="headerlink" title="4.3.负载均衡策略"></a>4.3.负载均衡策略</h2><h3 id="4-3-1-负载均衡策略"><a href="#4-3-1-负载均衡策略" class="headerlink" title="4.3.1.负载均衡策略"></a>4.3.1.负载均衡策略</h3><p>负载均衡的规则都定义在IRule接口中，而IRule有很多不同的实现类：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713225653000.png" alt="image-20210713225653000"></p>
+<p>不同规则的含义如下：</p>
+<table>
+<thead>
+<tr>
+<th><strong>内置负载均衡规则类</strong></th>
+<th><strong>规则描述</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RoundRobinRule</td>
+<td><strong>简单轮询服务列</strong>表来选择服务器。它是Ribbon默认的负载均衡规则。</td>
+</tr>
+<tr>
+<td>AvailabilityFilteringRule</td>
+<td>对以下两种服务器进行忽略：   （1）在默认情况下，这台服务器如果3次连接失败，这台服务器就会被设置为“短路”状态。短路状态将持续30秒，如果再次连接失败，短路的持续时间就会几何级地增加。  （2）并发数过高的服务器。如果一个服务器的并发连接数过高，配置了AvailabilityFilteringRule规则的客户端也会将其忽略。并发连接数的上限，可以由客户端的<clientname>.<clientconfignamespace>.ActiveConnectionsLimit属性进行配置。</clientconfignamespace></clientname></td>
+</tr>
+<tr>
+<td>WeightedResponseTimeRule</td>
+<td>为每一个服务器赋予一个权重值。服务器响应时间越长，这个服务器的权重就越小。这个规则会随机选择服务器，这个权重值会影响服务器的选择。</td>
+</tr>
+<tr>
+<td><strong>ZoneAvoidanceRule</strong></td>
+<td>以区域可用的服务器为基础进行服务器的选择。使用Zone对服务器进行分类，这个Zone可以理解为一个机房、一个机架等。而后再对Zone内的多个服务做轮询。</td>
+</tr>
+<tr>
+<td>BestAvailableRule</td>
+<td>忽略那些短路的服务器，并选择并发数较低的服务器。</td>
+</tr>
+<tr>
+<td>RandomRule</td>
+<td>随机选择一个可用的服务器。</td>
+</tr>
+<tr>
+<td>RetryRule</td>
+<td>重试机制的选择逻辑</td>
+</tr>
+</tbody></table>
+<p>默认的实现就是<strong>ZoneAvoidanceRule，是一种轮询方案</strong></p>
+<h3 id="4-3-2-自定义负载均衡策略"><a href="#4-3-2-自定义负载均衡策略" class="headerlink" title="4.3.2.自定义负载均衡策略"></a>4.3.2.自定义负载均衡策略</h3><p>通过定义IRule实现可以修改负载均衡规则，有两种方式：</p>
+<ol>
+<li>代码方式：在order-service中的OrderApplication类中，定义一个新的IRule：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> IRule <span class="title">randomRule</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> RandomRule();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个针对全体服务</p>
+<ol start="2">
+<li>配置文件方式：在order-service的application.yml文件中，添加新的配置也可以修改规则：</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">userservice:</span> <span class="comment"># 给某个微服务配置负载均衡规则，这里是userservice服务</span></span><br><span class="line"><span class="attr">  ribbon:</span></span><br><span class="line"><span class="attr">    NFLoadBalancerRuleClassName:</span> <span class="string">com.netflix.loadbalancer.RandomRule</span> <span class="comment"># 负载均衡规则</span></span><br></pre></td></tr></table></figure>
+
+<p>这个针对某一个服务userservice</p>
+<blockquote>
+<p><strong>注意</strong>，<strong>一般用默认的负载均衡规则</strong>，不做修改。</p>
+</blockquote>
+<h2 id="4-4-饥饿加载"><a href="#4-4-饥饿加载" class="headerlink" title="4.4.饥饿加载"></a>4.4.饥饿加载</h2><p>Ribbon<strong>默认是采用懒加载</strong>，即第一次访问时才会去创建LoadBalanceClient，<strong>请求时间会很长</strong>。</p>
+<p>而饥饿加载则会在项目启动时创建，降低第一次访问的耗时，通过<strong>下面配置开启饥饿加载</strong>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">ribbon:</span></span><br><span class="line"><span class="attr">  eager-load:</span></span><br><span class="line"><span class="attr">    enabled:</span> <span class="literal">true</span> <span class="comment"># 开启饥饿加载</span></span><br><span class="line"><span class="attr">    clients:</span> <span class="comment"># 指定饥饿加载的服务名称</span></span><br><span class="line"><span class="bullet">      -</span> <span class="string">userservice</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>总结</strong></p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210822173230846.png" alt="image-20210822173230846"></p>
+<h1 id="5-Nacos注册中心"><a href="#5-Nacos注册中心" class="headerlink" title="5.Nacos注册中心"></a>5.Nacos注册中心</h1><p>国内公司一般都推崇阿里巴巴的技术，比如注册中心，SpringCloudAlibaba也推出了一个名为Nacos的注册中心。</p>
+<h2 id="5-1-认识和安装Nacos"><a href="#5-1-认识和安装Nacos" class="headerlink" title="5.1.认识和安装Nacos"></a>5.1.认识和安装Nacos</h2><p><a href="https://nacos.io/" target="_blank" rel="noopener">Nacos</a>是阿里巴巴的产品，现在是<a href="https://spring.io/projects/spring-cloud" target="_blank" rel="noopener">SpringCloud</a>中的一个组件。相比<a href="https://github.com/Netflix/eureka" target="_blank" rel="noopener">Eureka</a>功能更加丰富，在国内受欢迎程度较高。</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713230444308.png" alt="image-20210713230444308"></p>
+<p>安装方式可以参考课前资料《Nacos安装指南.md》</p>
+<h2 id="5-2-服务注册到nacos"><a href="#5-2-服务注册到nacos" class="headerlink" title="5.2.服务注册到nacos"></a>5.2.服务注册到nacos</h2><p>Nacos是SpringCloudAlibaba的组件，而SpringCloudAlibaba也遵循SpringCloud中定义的服务注册、服务发现规范。因此使用Nacos和使用Eureka对于微服务来说，并没有太大区别。</p>
+<p>主要差异在于：</p>
+<ul>
+<li>依赖不同</li>
+<li>服务地址不同</li>
+</ul>
+<h3 id="1）引入依赖-2"><a href="#1）引入依赖-2" class="headerlink" title="1）引入依赖"></a>1）引入依赖</h3><p>在cloud-demo父工程的pom文件中的<code>&lt;dependencyManagement&gt;</code>中引入SpringCloudAlibaba的依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--nacos的管理依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-alibaba-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.6.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">type</span>&gt;</span>pom<span class="tag">&lt;/<span class="name">type</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">scope</span>&gt;</span>import<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后在user-service和order-service中的pom文件中引入nacos-discovery依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--nacos的配置管理依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-discovery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：不要忘了注释掉eureka的依赖。</p>
+</blockquote>
+<h3 id="2）配置nacos地址"><a href="#2）配置nacos地址" class="headerlink" title="2）配置nacos地址"></a>2）配置nacos地址</h3><p>在user-service和order-service的application.yml中添加nacos地址：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  cloud:</span></span><br><span class="line"><span class="attr">    nacos:</span></span><br><span class="line"><span class="attr">      server-addr:</span> <span class="attr">localhost:8848</span>  <span class="comment">#nacos服务地址</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：不要忘了注释掉eureka的地址</p>
+</blockquote>
+<h3 id="3）重启"><a href="#3）重启" class="headerlink" title="3）重启"></a>3）重启</h3><p>重启微服务后，登录nacos管理页面，可以看到微服务信息：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713231439607.png" alt="image-20210713231439607"></p>
+<p><strong>总结</strong></p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210822181240493.png" alt="image-20210822181240493"></p>
+<h2 id="5-3-服务分级存储模型"><a href="#5-3-服务分级存储模型" class="headerlink" title="5.3.服务分级存储模型"></a>5.3.服务分级存储模型</h2><p>一个<strong>服务</strong>可以有多个<strong>实例</strong>，例如我们的user-service，可以有:</p>
+<ul>
+<li>127.0.0.1:8081</li>
+<li>127.0.0.1:8082</li>
+<li>127.0.0.1:8083</li>
+</ul>
+<p>假如这些实例分布于全国各地的不同机房，例如：</p>
+<ul>
+<li>127.0.0.1:8081，在上海机房</li>
+<li>127.0.0.1:8082，在上海机房</li>
+<li>127.0.0.1:8083，在杭州机房</li>
+</ul>
+<p>Nacos就将<strong>同一机房内的实例</strong> 划分为一个<strong>集群</strong>。</p>
+<p>也就是说，user-service是服务，一个服务可以包含多个集群，如杭州、上海，每个集群下可以有多个实例，形成分级模型，如图：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713232522531.png" alt="image-20210713232522531"></p>
+<p>微服务互相访问时，应该<strong>尽可能访问同集群实例，因为本地访问速度更快</strong>。当本集群内不可用时，才访问其它集群。例如：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713232658928.png" alt="image-20210713232658928"></p>
+<p>杭州机房内的order-service应该优先访问同机房的user-service。</p>
+<h3 id="5-3-1-给user-service配置集群"><a href="#5-3-1-给user-service配置集群" class="headerlink" title="5.3.1.给user-service配置集群"></a>5.3.1.给user-service配置集群</h3><p>修改user-service的application.yml文件，添加集群配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  cloud:</span></span><br><span class="line"><span class="attr">    nacos:</span></span><br><span class="line"><span class="attr">      server-addr:</span> <span class="attr">localhost:8848</span></span><br><span class="line"><span class="attr">      discovery:</span></span><br><span class="line"><span class="attr">        cluster-name:</span> <span class="string">HZ</span> <span class="comment"># 集群名称</span></span><br></pre></td></tr></table></figure>
+
+<p>重启两个user-service实例后，我们可以在nacos控制台看到下面结果：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713232916215.png" alt="image-20210713232916215"></p>
+<p>我们再次复制一个user-service启动配置，添加属性：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-Dserver.port=8083 -Dspring.cloud.nacos.discovery.cluster-name=SH</span><br></pre></td></tr></table></figure>
+
+<p>配置如图所示：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713233528982.png" alt="image-20210713233528982"></p>
+<p>启动UserApplication3后再次查看nacos控制台：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713233727923.png" alt="image-20210713233727923"></p>
+<p><strong>总结</strong></p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210822193648606.png" alt="image-20210822193648606"></p>
+<h3 id="5-3-2-同集群优先的负载均衡"><a href="#5-3-2-同集群优先的负载均衡" class="headerlink" title="5.3.2.同集群优先的负载均衡"></a>5.3.2.同集群优先的负载均衡</h3><h2 id="失败https-www-bilibili-com-video-BV1LQ4y127n4-p-20"><a href="#失败https-www-bilibili-com-video-BV1LQ4y127n4-p-20" class="headerlink" title="失败https://www.bilibili.com/video/BV1LQ4y127n4?p=20"></a>失败<a href="https://www.bilibili.com/video/BV1LQ4y127n4?p=20" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1LQ4y127n4?p=20</a></h2><p>默认的<code>ZoneAvoidanceRule</code>并不能实现根据同集群优先来实现负载均衡。</p>
+<p>因此<strong>Nacos中提供了一个<code>NacosRule</code>的实现</strong>，可以优先从同集群中挑选实例。</p>
+<p>1）给order-service配置集群信息</p>
+<p>修改order-service的application.yml文件，添加集群配置：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  cloud:</span><br><span class="line">    nacos:</span><br><span class="line">      server-addr: localhost:8848</span><br><span class="line">      discovery:</span><br><span class="line">        cluster-name: HZ <span class="comment"># 集群名称</span></span><br></pre></td></tr></table></figure>
+
+<p>2）<strong>修改负载均衡规则</strong></p>
+<p>修改order-service的application.yml文件，修改负载均衡规则：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">userservice:</span></span><br><span class="line"><span class="attr">  ribbon:</span></span><br><span class="line"><span class="attr">    NFLoadBalancerRuleClassName:</span> <span class="string">com.alibaba.cloud.nacos.ribbon.NacosRule</span> <span class="comment"># 负载均衡规则</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>代码方式：在order-service中的OrderApplication类中，定义一个新的IRule：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> IRule <span class="title">randomRule</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> NacosRule();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个针对全体服务</p>
+<p><strong>成功</strong></p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210828165751129.png" alt="image-20210828165751129"></p>
+<h2 id="5-4-权重配置"><a href="#5-4-权重配置" class="headerlink" title="5.4.权重配置"></a>5.4.权重配置</h2><p>实际部署中会出现这样的场景：</p>
+<p>服务器设备性能有差异，部分实例所在机器性能较好，另一些较差，我们希望性能好的机器承担更多的用户请求。</p>
+<p>但默认情况下NacosRule是同集群内随机挑选，不会考虑机器的性能问题。</p>
+<p>因此，<strong>Nacos提供了权重配置来控制访问频率，权重越大则访问频率越高</strong>。</p>
+<p>在nacos控制台，找到user-service的实例列表，点击编辑，即可修改权重：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713235133225.png" alt="image-20210713235133225"></p>
+<p>在弹出的编辑窗口，修改权重：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210713235235219.png" alt="image-20210713235235219"></p>
+<blockquote>
+<p><strong>注意</strong>：如果<strong>权重修改为0，则该实例永远不会被访问</strong></p>
+</blockquote>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210828171001714.png" alt="image-20210828171001714"></p>
+<h2 id="5-5-环境隔离"><a href="#5-5-环境隔离" class="headerlink" title="5.5.环境隔离"></a>5.5.环境隔离</h2><p>Nacos提供了namespace来实现环境隔离功能。</p>
+<ul>
+<li>nacos中可以有多个namespace</li>
+<li>namespace下可以有group、service等</li>
+<li>不同namespace之间相互隔离，例如不同namespace的服务互相不可见</li>
+</ul>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714000101516.png" alt="image-20210714000101516"></p>
+<h3 id="5-5-1-创建namespace"><a href="#5-5-1-创建namespace" class="headerlink" title="5.5.1.创建namespace"></a>5.5.1.创建namespace</h3><p>默认情况下，所有service、data、group都在同一个namespace，名为public：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714000414781.png" alt="image-20210714000414781"></p>
+<p>我们可以点击页面新增按钮，添加一个namespace：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714000440143.png" alt="image-20210714000440143"></p>
+<p>然后，填写表单：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714000505928.png" alt="image-20210714000505928"></p>
+<p>就能在页面看到一个新的namespace：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714000522913.png" alt="image-20210714000522913"></p>
+<h3 id="5-5-2-给微服务配置namespace"><a href="#5-5-2-给微服务配置namespace" class="headerlink" title="5.5.2.给微服务配置namespace"></a>5.5.2.给微服务配置namespace</h3><p>给微服务配置namespace只能通过修改配置来实现。</p>
+<p>例如，修改order-service的application.yml文件：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  cloud:</span></span><br><span class="line"><span class="attr">    nacos:</span></span><br><span class="line"><span class="attr">      server-addr:</span> <span class="attr">localhost:8848</span> <span class="comment">#nacos服务地址</span></span><br><span class="line"><span class="attr">      discovery:</span></span><br><span class="line"><span class="attr">        cluster-name:</span> <span class="string">HZ</span> <span class="comment"># 集群名称</span></span><br><span class="line"><span class="attr">        namespace:</span> <span class="number">492</span><span class="string">a7d5d-237b-46a1-a99a-fa8e98e4b0f9</span> <span class="comment"># 命名空间，填ID</span></span><br></pre></td></tr></table></figure>
+
+<p>重启order-service后，访问控制台，可以看到下面的结果：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714000830703.png" alt="image-20210714000830703"></p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714000837140.png" alt="image-20210714000837140"></p>
+<p>此时访问order-service，因为namespace不同，会导致找不到userservice，控制台会报错：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714000941256.png" alt="image-20210714000941256"></p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210828171712343.png" alt="image-20210828171712343"></p>
+<h2 id="5-6-Nacos与Eureka的区别"><a href="#5-6-Nacos与Eureka的区别" class="headerlink" title="5.6.Nacos与Eureka的区别"></a>5.6.Nacos与Eureka的区别</h2><p>Nacos的<strong>服务实例分为两种l类型</strong>：</p>
+<ul>
+<li><p>临时实例：如果实例宕机超过一定时间，会从服务列表剔除，默认的类型。</p>
+</li>
+<li><p>非临时实例：如果<strong>实例宕机，不会从服务列表剔除</strong>，也可以叫永久实例。</p>
+</li>
+</ul>
+<p>配置一个服务实例为永久实例：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  cloud:</span></span><br><span class="line"><span class="attr">    nacos:</span></span><br><span class="line"><span class="attr">      discovery:</span></span><br><span class="line"><span class="attr">        ephemeral:</span> <span class="literal">false</span> <span class="comment"># 设置为非临时实例，是否是临时实例</span></span><br></pre></td></tr></table></figure>
+
+<p>Nacos和Eureka整体结构类似，服务注册、服务拉取、心跳等待，但是也存在一些差异：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714001728017.png" alt="image-20210714001728017"></p>
+<p><strong>总结</strong></p>
+<ul>
+<li><p>Nacos与eureka的共同点</p>
+<ul>
+<li>都支持服务注册和服务拉取</li>
+<li>都支持服务提供者心跳方式做健康检测</li>
+</ul>
+</li>
+<li><p>Nacos与Eureka的区别</p>
+<ul>
+<li>Nacos支持<strong>服务端主动检测提供者状态</strong>：临时实例采用心跳模式，非临时实例采用主动检测模式</li>
+<li>临时实例心跳不正常会被剔除，非临时实例则不会被剔除</li>
+<li>Nacos支持<strong>服务列表变更的消息推送模式</strong>，<strong>服务列表更新更及时</strong>，eureka时效性就相对而言比较差</li>
+<li>Nacos集群默认采用AP方式，当集群中存在非临时实例时，采用CP模式；Eureka采用AP方式</li>
+</ul>
+</li>
+</ul>
+<h1 id="1-Nacos配置管理"><a href="#1-Nacos配置管理" class="headerlink" title="1.Nacos配置管理"></a>1.Nacos配置管理</h1><p>Nacos除了可以做注册中心，同样可以做配置管理来使用。</p>
+<h2 id="1-1-统一配置管理"><a href="#1-1-统一配置管理" class="headerlink" title="1.1.统一配置管理"></a>1.1.统一配置管理</h2><p>当微服务部署的实例越来越多，达到数十、数百时，逐个修改微服务配置就会让人抓狂，而且很容易出错。我们需要一种统一配置管理方案，可以集中管理所有实例的配置。</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714164426792-1630225333418.png" alt="image-20210714164426792"></p>
+<p>Nacos一方面可以将配置集中管理，另一方可以在配置变更时，及时通知微服务，实现<strong>配置的热更新</strong>。</p>
+<h3 id="1-1-1-在nacos中添加配置文件"><a href="#1-1-1-在nacos中添加配置文件" class="headerlink" title="1.1.1.在nacos中添加配置文件"></a>1.1.1.在nacos中添加配置文件</h3><p>如何在nacos中管理配置呢？</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714164742924-1630225333419.png" alt="image-20210714164742924"></p>
+<p>然后在弹出的表单中，填写配置信息：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714164856664-1630225333419.png" alt="image-20210714164856664"></p>
+<blockquote>
+<p>注意：项目的核心配置，需要<strong>热更新的配置</strong>才有放到nacos管理的必要。基本不会变更的一些配置还是保存在微服务本地比较好。</p>
+</blockquote>
+<h3 id="1-1-2-从微服务拉取配置"><a href="#1-1-2-从微服务拉取配置" class="headerlink" title="1.1.2.从微服务拉取配置"></a>1.1.2.从微服务拉取配置</h3><p>微服务要拉取nacos中管理的配置，并且与本地的application.yml配置合并，才能完成项目启动。</p>
+<p>但如果尚未读取application.yml，又如何得知nacos地址呢？</p>
+<p>因此spring引入了一种新的配置文件：<strong>bootstrap.yaml文件，会在application.yml之前被读取</strong>，流程如下：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/L0iFYNF-1630225333419.png" alt="img"></p>
+<p>1）引入nacos-config依赖</p>
+<p>首先，<strong>在user-service服务中</strong>，引入nacos-config的客户端依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--nacos配置管理依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-config<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2）添加bootstrap.yaml</p>
+<p>然后，在user-service中添加一个bootstrap.yaml文件，内容如下：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  application:</span></span><br><span class="line"><span class="attr">    name:</span> <span class="string">userservice</span> <span class="comment"># 服务名称</span></span><br><span class="line"><span class="attr">  profiles:</span></span><br><span class="line"><span class="attr">    active:</span> <span class="string">dev</span> <span class="comment">#开发环境，这里是dev </span></span><br><span class="line"><span class="attr">  cloud:</span></span><br><span class="line"><span class="attr">    nacos:</span></span><br><span class="line"><span class="attr">      server-addr:</span> <span class="attr">localhost:8848</span> <span class="comment"># Nacos地址</span></span><br><span class="line"><span class="attr">      config:</span></span><br><span class="line"><span class="attr">        file-extension:</span> <span class="string">yaml</span> <span class="comment"># 文件后缀名</span></span><br></pre></td></tr></table></figure>
+
+<p>这里会根据spring.cloud.nacos.server-addr获取nacos地址，再根据</p>
+<p><code>${spring.application.name}-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}</code>作为<strong>文件id</strong>，来读取配置。</p>
+<p>本例中，就是去读取<code>userservice-dev.yaml</code>：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714170845901-1630225333422.png" alt="image-20210714170845901"></p>
+<p>服务名称-开发环境.文件后缀名</p>
+<p>3）读取nacos配置</p>
+<p>在user-service中的UserController中添加业务逻辑，读取pattern.dateformat配置：</p>
+<p>完整代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.user.web;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.itcast.user.pojo.User;</span><br><span class="line"><span class="keyword">import</span> cn.itcast.user.service.UserService;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.time.LocalDateTime;</span><br><span class="line"><span class="keyword">import</span> java.time.format.DateTimeFormatter;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/user"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;pattern.dateformat&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String dateformat;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"now"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">now</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> LocalDateTime.now().format(DateTimeFormatter.ofPattern(dateformat));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ...略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在页面访问，可以看到效果：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714170449612-1630225333419.png" alt="image-20210714170449612"></p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210829110453194-1630225333422.png" alt="image-20210829110453194"></p>
+<h2 id="1-2-配置热更新"><a href="#1-2-配置热更新" class="headerlink" title="1.2.配置热更新"></a>1.2.配置热更新</h2><p>我们最终的目的，是修改nacos中的配置后，微服务中无需重启即可让配置生效，也就是<strong>配置热更新</strong>。</p>
+<p>要实现配置热更新，可以使用两种方式：</p>
+<h3 id="1-2-1-方式一"><a href="#1-2-1-方式一" class="headerlink" title="1.2.1.方式一"></a>1.2.1.方式一</h3><p>在@Value注入的变量所在类上添加注解@RefreshScope：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714171036335-1630225333422.png" alt="image-20210714171036335"></p>
+<h3 id="1-2-2-方式二"><a href="#1-2-2-方式二" class="headerlink" title="1.2.2.方式二"></a>1.2.2.方式二</h3><p>使用<strong>@ConfigurationProperties注解代替@Value注解</strong>。</p>
+<p>注:在使用<strong>@ConfigurationProperties</strong>时<strong>不需要@RefreshScope</strong>，<strong>推荐使用这种方式</strong></p>
+<p>在user-service服务中，添加一个类，读取patterrn.dateformat属性：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.user.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.context.properties.ConfigurationProperties;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"pattern"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PatternProperties</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String dateformat;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在UserController中使用这个类代替@Value：</p>
+<p>完整代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.user.web;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.itcast.user.config.PatternProperties;</span><br><span class="line"><span class="keyword">import</span> cn.itcast.user.pojo.User;</span><br><span class="line"><span class="keyword">import</span> cn.itcast.user.service.UserService;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.time.LocalDateTime;</span><br><span class="line"><span class="keyword">import</span> java.time.format.DateTimeFormatter;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/user"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserService userService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> PatternProperties patternProperties;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"now"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">now</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> LocalDateTime.now().format(DateTimeFormatter.ofPattern(patternProperties.getDateformat()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 略</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210829111728529-1630225333422.png" alt="image-20210829111728529"></p>
+<h2 id="1-3-配置共享"><a href="#1-3-配置共享" class="headerlink" title="1.3.配置共享"></a>1.3.配置共享</h2><p>其实微服务启动时，会去nacos读取多个配置文件，例如：</p>
+<ul>
+<li><p><code>[spring.application.name]-[spring.profiles.active].yaml</code>，例如：userservice-dev.yaml</p>
+</li>
+<li><p><code>[spring.application.name].yaml</code>，例如：userservice.yaml</p>
+</li>
+</ul>
+<p>而<code>[spring.application.name].yaml</code>不包含环境，<strong>因此可以被多个环境共享。</strong></p>
+<p>下面我们通过案例来测试配置共享</p>
+<h3 id="1）添加一个环境共享配置"><a href="#1）添加一个环境共享配置" class="headerlink" title="1）添加一个环境共享配置"></a>1）添加一个环境共享配置</h3><p>我们在nacos中添加一个userservice.yaml文件：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714173233650-1630225333422.png" alt="image-20210714173233650"></p>
+<h3 id="2）在user-service中读取共享配置"><a href="#2）在user-service中读取共享配置" class="headerlink" title="2）在user-service中读取共享配置"></a>2）在user-service中读取共享配置</h3><p>在user-service服务中，修改PatternProperties类，读取新添加的属性：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714173324231-1630225333422.png" alt="image-20210714173324231"></p>
+<p>在user-service服务中，修改UserController，添加一个方法：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714173721309-1630225333422.png" alt="image-20210714173721309"></p>
+<h3 id="3）运行两个UserApplication，使用不同的profile"><a href="#3）运行两个UserApplication，使用不同的profile" class="headerlink" title="3）运行两个UserApplication，使用不同的profile"></a>3）运行两个UserApplication，使用不同的profile</h3><p>修改UserApplication2这个启动项，改变其profile值：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714173538538-1630225333422.png" alt="image-20210714173538538"></p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714173519963-1630225333422.png" alt="image-20210714173519963"></p>
+<p>这样，UserApplication(8081)使用的profile是dev，UserApplication2(8082)使用的profile是test。</p>
+<p>启动UserApplication和UserApplication2</p>
+<p>访问<a href="http://localhost:8081/user/prop，结果：" target="_blank" rel="noopener">http://localhost:8081/user/prop，结果：</a></p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714174313344-1630225333422.png" alt="image-20210714174313344"></p>
+<p>访问<a href="http://localhost:8082/user/prop，结果：" target="_blank" rel="noopener">http://localhost:8082/user/prop，结果：</a></p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714174424818-1630225333422.png" alt="image-20210714174424818"></p>
+<p>可以看出来，不管是dev，还是test环境，都读取到了envSharedValue这个属性的值。</p>
+<h3 id="4）配置共享的优先级"><a href="#4）配置共享的优先级" class="headerlink" title="4）配置共享的优先级"></a>4）配置共享的优先级</h3><p>当nacos、服务本地同时出现相同属性时，优先级有高低之分：</p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210714174623557-1630225333422.png" alt="image-20210714174623557"></p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210829114709139-1630225333422.png" alt="image-20210829114709139"></p>
+<h3 id="bug："><a href="#bug：" class="headerlink" title="bug："></a>bug：</h3><p>注：<strong>如果没能读取到nacos的共享配置</strong>，<strong>重启nacos可解决</strong></p>
+<h2 id="1-4-搭建Nacos集群"><a href="#1-4-搭建Nacos集群" class="headerlink" title="1.4.搭建Nacos集群"></a>1.4.搭建Nacos集群</h2><p>Nacos生产环境下一定要部署为集群状态，部署方式参考课前资料中的文档：</p>
+<p><strong>nacos集群搭建.md</strong></p>
+<p><a href="https://www.bilibili.com/video/BV1LQ4y127n4?p=29" target="_blank" rel="noopener">https://www.bilibili.com/video/BV1LQ4y127n4?p=29</a></p>
+<p><img src="//codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/image-20210829122807270-1630225333422.png" alt="image-20210829122807270"></p>
+<h1 id><a href="#" class="headerlink" title></a></h1>
+    </div>
+
+    
+    
+    
+    
+    <div>
+     
+      <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+     
+    </div>
+    
+        
+      
+        <div id="reward-container">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="reward-button" disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+
+  </div>
+</div>
+
+      
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>nicolas lee</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/" title="SpringCloud01">https://codeofli.github.io/2021/09/java-note/SpringCloud/SpringCloud01/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+</div>
+
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/SpringCloud/" rel="tag"># SpringCloud</a>
+            
+              <a href="/tags/Java/" rel="tag"># Java</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/10/markdown/markdown/" rel="next" title="Markdown">
+                  <i class="fa fa-chevron-left"></i> Markdown
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2021/10/java-note/SpringCloud/SpringCloud实用篇02/" rel="prev" title="SpringCloud实用篇02">
+                  SpringCloud实用篇02 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringCloud01"><span class="nav-number">1.</span> <span class="nav-text">SpringCloud01</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-认识微服务"><span class="nav-number">2.</span> <span class="nav-text">1.认识微服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-0-学习目标"><span class="nav-number">2.1.</span> <span class="nav-text">1.0.学习目标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#微服务技术栈"><span class="nav-number">2.1.1.</span> <span class="nav-text">微服务技术栈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-单体架构"><span class="nav-number">2.2.</span> <span class="nav-text">1.1.单体架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-分布式架构"><span class="nav-number">2.3.</span> <span class="nav-text">1.2.分布式架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-微服务"><span class="nav-number">2.4.</span> <span class="nav-text">1.3.微服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-SpringCloud"><span class="nav-number">2.5.</span> <span class="nav-text">1.4.SpringCloud</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-总结"><span class="nav-number">2.6.</span> <span class="nav-text">1.5.总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-服务拆分和远程调用"><span class="nav-number">3.</span> <span class="nav-text">2.服务拆分和远程调用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-服务拆分原则"><span class="nav-number">3.1.</span> <span class="nav-text">2.1.服务拆分原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-服务拆分示例"><span class="nav-number">3.2.</span> <span class="nav-text">2.2.服务拆分示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1-导入demo工程"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.2.1.导入demo工程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-实现远程调用案例"><span class="nav-number">3.3.</span> <span class="nav-text">2.3.实现远程调用案例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1-案例需求："><span class="nav-number">3.3.1.</span> <span class="nav-text">2.3.1.案例需求：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-2-注册RestTemplate"><span class="nav-number">3.3.2.</span> <span class="nav-text">2.3.2.注册RestTemplate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-3-实现远程调用"><span class="nav-number">3.3.3.</span> <span class="nav-text">2.3.3.实现远程调用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-提供者与消费者"><span class="nav-number">3.4.</span> <span class="nav-text">2.4.提供者与消费者</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Eureka注册中心"><span class="nav-number">4.</span> <span class="nav-text">3.Eureka注册中心</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-Eureka的结构和作用"><span class="nav-number">4.1.</span> <span class="nav-text">3.1.Eureka的结构和作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-搭建eureka-server"><span class="nav-number">4.2.</span> <span class="nav-text">3.2.搭建eureka-server</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-创建eureka-server服务"><span class="nav-number">4.2.1.</span> <span class="nav-text">3.2.1.创建eureka-server服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-引入eureka依赖"><span class="nav-number">4.2.2.</span> <span class="nav-text">3.2.2.引入eureka依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-编写启动类"><span class="nav-number">4.2.3.</span> <span class="nav-text">3.2.3.编写启动类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-4-编写配置文件"><span class="nav-number">4.2.4.</span> <span class="nav-text">3.2.4.编写配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-5-启动服务"><span class="nav-number">4.2.5.</span> <span class="nav-text">3.2.5.启动服务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-服务注册"><span class="nav-number">4.3.</span> <span class="nav-text">3.3.服务注册</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）引入依赖"><span class="nav-number">4.3.1.</span> <span class="nav-text">1）引入依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2）配置文件"><span class="nav-number">4.3.2.</span> <span class="nav-text">2）配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3）启动多个user-service实例"><span class="nav-number">4.3.3.</span> <span class="nav-text">3）启动多个user-service实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-服务发现"><span class="nav-number">4.4.</span> <span class="nav-text">3.4.服务发现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）引入依赖-1"><span class="nav-number">4.4.1.</span> <span class="nav-text">1）引入依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2）配置文件-1"><span class="nav-number">4.4.2.</span> <span class="nav-text">2）配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3）服务拉取和负载均衡"><span class="nav-number">4.4.3.</span> <span class="nav-text">3）服务拉取和负载均衡</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-Ribbon负载均衡"><span class="nav-number">5.</span> <span class="nav-text">4.Ribbon负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-负载均衡原理"><span class="nav-number">5.1.</span> <span class="nav-text">4.1.负载均衡原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-源码跟踪"><span class="nav-number">5.2.</span> <span class="nav-text">4.2.源码跟踪</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）LoadBalancerInterceptor"><span class="nav-number">5.2.1.</span> <span class="nav-text">1）LoadBalancerInterceptor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2）LoadBalancerClient"><span class="nav-number">5.2.2.</span> <span class="nav-text">2）LoadBalancerClient</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3）负载均衡策略IRule"><span class="nav-number">5.2.3.</span> <span class="nav-text">3）负载均衡策略IRule</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4）总结"><span class="nav-number">5.2.4.</span> <span class="nav-text">4）总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-负载均衡策略"><span class="nav-number">5.3.</span> <span class="nav-text">4.3.负载均衡策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-1-负载均衡策略"><span class="nav-number">5.3.1.</span> <span class="nav-text">4.3.1.负载均衡策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-2-自定义负载均衡策略"><span class="nav-number">5.3.2.</span> <span class="nav-text">4.3.2.自定义负载均衡策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-饥饿加载"><span class="nav-number">5.4.</span> <span class="nav-text">4.4.饥饿加载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-Nacos注册中心"><span class="nav-number">6.</span> <span class="nav-text">5.Nacos注册中心</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-认识和安装Nacos"><span class="nav-number">6.1.</span> <span class="nav-text">5.1.认识和安装Nacos</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-服务注册到nacos"><span class="nav-number">6.2.</span> <span class="nav-text">5.2.服务注册到nacos</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）引入依赖-2"><span class="nav-number">6.2.1.</span> <span class="nav-text">1）引入依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2）配置nacos地址"><span class="nav-number">6.2.2.</span> <span class="nav-text">2）配置nacos地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3）重启"><span class="nav-number">6.2.3.</span> <span class="nav-text">3）重启</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-服务分级存储模型"><span class="nav-number">6.3.</span> <span class="nav-text">5.3.服务分级存储模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-1-给user-service配置集群"><span class="nav-number">6.3.1.</span> <span class="nav-text">5.3.1.给user-service配置集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-2-同集群优先的负载均衡"><span class="nav-number">6.3.2.</span> <span class="nav-text">5.3.2.同集群优先的负载均衡</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#失败https-www-bilibili-com-video-BV1LQ4y127n4-p-20"><span class="nav-number">6.4.</span> <span class="nav-text">失败https://www.bilibili.com/video/BV1LQ4y127n4?p=20</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-权重配置"><span class="nav-number">6.5.</span> <span class="nav-text">5.4.权重配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-环境隔离"><span class="nav-number">6.6.</span> <span class="nav-text">5.5.环境隔离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-1-创建namespace"><span class="nav-number">6.6.1.</span> <span class="nav-text">5.5.1.创建namespace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-2-给微服务配置namespace"><span class="nav-number">6.6.2.</span> <span class="nav-text">5.5.2.给微服务配置namespace</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-6-Nacos与Eureka的区别"><span class="nav-number">6.7.</span> <span class="nav-text">5.6.Nacos与Eureka的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-Nacos配置管理"><span class="nav-number">7.</span> <span class="nav-text">1.Nacos配置管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-统一配置管理"><span class="nav-number">7.1.</span> <span class="nav-text">1.1.统一配置管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-在nacos中添加配置文件"><span class="nav-number">7.1.1.</span> <span class="nav-text">1.1.1.在nacos中添加配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-从微服务拉取配置"><span class="nav-number">7.1.2.</span> <span class="nav-text">1.1.2.从微服务拉取配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-配置热更新"><span class="nav-number">7.2.</span> <span class="nav-text">1.2.配置热更新</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-方式一"><span class="nav-number">7.2.1.</span> <span class="nav-text">1.2.1.方式一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-方式二"><span class="nav-number">7.2.2.</span> <span class="nav-text">1.2.2.方式二</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-配置共享"><span class="nav-number">7.3.</span> <span class="nav-text">1.3.配置共享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1）添加一个环境共享配置"><span class="nav-number">7.3.1.</span> <span class="nav-text">1）添加一个环境共享配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2）在user-service中读取共享配置"><span class="nav-number">7.3.2.</span> <span class="nav-text">2）在user-service中读取共享配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3）运行两个UserApplication，使用不同的profile"><span class="nav-number">7.3.3.</span> <span class="nav-text">3）运行两个UserApplication，使用不同的profile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4）配置共享的优先级"><span class="nav-number">7.3.4.</span> <span class="nav-text">4）配置共享的优先级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bug："><span class="nav-number">7.3.5.</span> <span class="nav-text">bug：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-搭建Nacos集群"><span class="nav-number">7.4.</span> <span class="nav-text">1.4.搭建Nacos集群</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">8.</span> <span class="nav-text"></span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/assets/img/avatar.jpg"
+      alt="nicolas lee">
+  <p class="site-author-name" itemprop="name">nicolas lee</p>
+  <div class="site-description" itemprop="description">Yesterday you said tomorow.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/codeOflI" title="GitHub &rarr; https://github.com/codeOflI" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://blog.csdn.net/qq_42835910" title="CSDN &rarr; https://blog.csdn.net/qq_42835910" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nicolas lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数"></span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>

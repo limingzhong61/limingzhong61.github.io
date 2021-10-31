@@ -45,7 +45,7 @@
       labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     },
     localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
-    path: '',
+    path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
       copy_button: '复制',
@@ -64,12 +64,12 @@
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="[TOC]springmvc:1.jarspring-aop.jarspring-bean.jarspring-context.jarspring-core.jarspring-web.jarspring-webmvc.jarcommons-logging.jar报错NoClassDefFoundError：缺少jar">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/springMvc/springMvc/E:%5Cpictures%5CLanguage%5Cspring%5C%E6%8F%90%E7%A4%BA%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90springMvc%E9%85%8D%E7%BD%AE.png">
-<meta property="og:updated_time" content="2020-05-28T15:02:28.061Z">
+<meta property="og:image" content="https://localhost:4000/2019/10/java-note/springMvc/springMvc/E:%5Cpictures%5CLanguage%5Cspring%5C%E6%8F%90%E7%A4%BA%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90springMvc%E9%85%8D%E7%BD%AE.png">
+<meta property="og:updated_time" content="2021-10-23T02:19:04.204Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="springMvc">
 <meta name="twitter:description" content="[TOC]springmvc:1.jarspring-aop.jarspring-bean.jarspring-context.jarspring-core.jarspring-web.jarspring-webmvc.jarcommons-logging.jar报错NoClassDefFoundError：缺少jar">
-<meta name="twitter:image" content="https://codeofli.github.io/2019/10/java-note/springMvc/springMvc/E:%5Cpictures%5CLanguage%5Cspring%5C%E6%8F%90%E7%A4%BA%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90springMvc%E9%85%8D%E7%BD%AE.png">
+<meta name="twitter:image" content="https://localhost:4000/2019/10/java-note/springMvc/springMvc/E:%5Cpictures%5CLanguage%5Cspring%5C%E6%8F%90%E7%A4%BA%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90springMvc%E9%85%8D%E7%BD%AE.png">
   <link rel="canonical" href="https://codeofli.github.io/2019/10/java-note/springMvc/springMvc/">
 
 
@@ -211,7 +211,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">18</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">32</span></a>
 
   </li>
       
@@ -233,7 +233,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">5</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
 
   </li>
       
@@ -255,7 +255,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">31</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">48</span></a>
 
   </li>
   </ul>
@@ -325,7 +325,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-05-28 23:02:28" itemprop="dateModified" datetime="2020-05-28T23:02:28+08:00">2020-05-28</time>
+                <time title="修改时间：2021-10-23 10:19:04" itemprop="dateModified" datetime="2021-10-23T10:19:04+08:00">2021-10-23</time>
               </span>
             
           
@@ -397,7 +397,7 @@
 
 <p><strong>指定springmvc配置文件的路径</strong>，如果要省略，必须放到 默认路径：<br>/WEB-INF/<strong>（web.xml配置中）servetname的值</strong>-servlet.xml</p>
 <p><strong>可以提示工具自动生成alt+/ ,选</strong></p>
-<p><img src="/2019/10/java-note/springMvc/springMvc/E:%5Cpictures%5CLanguage%5Cspring%5C%E6%8F%90%E7%A4%BA%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90springMvc%E9%85%8D%E7%BD%AE.png" alt="1561949336976"></p>
+<p><img src="//localhost:4000/2019/10/java-note/springMvc/springMvc/E:%5Cpictures%5CLanguage%5Cspring%5C%E6%8F%90%E7%A4%BA%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90springMvc%E9%85%8D%E7%BD%AE.png" alt="1561949336976"></p>
 <h2 id="映射是-去匹配-RequestMapping注解"><a href="#映射是-去匹配-RequestMapping注解" class="headerlink" title="映射是 去匹配@RequestMapping注解"></a>映射是 去匹配@RequestMapping注解</h2><p>可以和方法名、类名不一致<br><strong>通过method指定 请求方式（get  post  delete put）</strong><br>    @RequestMapping(value=”welcome”,method=RequestMethod.POST)//映射</p>
 <p>设置name=”xxxx”的情况：<br>params= {“name2=zs”,”age!=23”}</p>
 <p>name2:必须有name=”name2”参数</p>
@@ -531,7 +531,7 @@
 <p><strong>forward(请求转发):   redirect（重定向）: ，需要注意 此种方式，不会被视图解析器加上前缀(/views)、后缀(.jsp)</strong></p>
 <h2 id="3-处理静态资源：html-css-js-图片-视频"><a href="#3-处理静态资源：html-css-js-图片-视频" class="headerlink" title="3.处理静态资源：html css js  图片 视频"></a>3.处理静态资源：html css js  图片 视频</h2><p>可以与用户交互、因为时间/地点的不同 而结果不同的内容：动态（百度：天气  ）</p>
 <p><strong>在SpringMVC中，如果直接访问静态资源：404 。</strong>原因：之前将所有的请求 通过通配符“/” 拦截，进而交给 SPringMVC的入口DispatcherServlet去处理：找该请求映射对应的 @requestMapping</p>
-<p><a href="http://localhost:8888/SpringMVCProject/img.png" target="_blank" rel="noopener">http://localhost:8888/SpringMVCProject/img.png</a></p>
+<p><a href="http://localhost:8888/SpringMVCProject/img.png">http://localhost:8888/SpringMVCProject/img.png</a></p>
 <p>@RequsetMapping(“img.png”)<br>return sucess</p>
 <p>解决：如果是 需要mvc处理的，则交给@RequsetMapping(“img.png”)处理；如果不需要springmvc处理，则使用 tomcat默认的Servlet去处理。<br>tomcat默认的Servlet去处理：如果有 对应的请求拦截,则交给相应的Servlet去处理；<strong>如果没有对应的servlet，则直接访问。</strong><br>tomcat默认的Servlet在哪里？<strong>在tomcat配置文件\conf\web.xml中</strong></p>
 <pre><code>&lt;servlet&gt;
@@ -914,7 +914,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">31</span>
+          <span class="site-state-item-count">48</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -927,7 +927,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -940,7 +940,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">32</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
