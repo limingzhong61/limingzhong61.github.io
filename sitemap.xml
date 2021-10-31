@@ -338,13 +338,6 @@
   </url>
   
   <url>
-    <loc>https://codeofli.github.io/tags/index.html</loc>
-    
-    <lastmod>2019-11-14</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://codeofli.github.io/categories/index.html</loc>
     
     <lastmod>2019-11-14</lastmod>
@@ -352,7 +345,7 @@
   </url>
   
   <url>
-    <loc>https://codeofli.github.io/about/index-1.html</loc>
+    <loc>https://codeofli.github.io/tags/index.html</loc>
     
     <lastmod>2019-11-14</lastmod>
     
@@ -360,6 +353,13 @@
   
   <url>
     <loc>https://codeofli.github.io/about/index.html</loc>
+    
+    <lastmod>2019-11-14</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://codeofli.github.io/about/index-1.html</loc>
     
     <lastmod>2019-11-14</lastmod>
     
@@ -382,13 +382,6 @@
   </url>
   
   <url>
-    <loc>https://codeofli.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
-    <lastmod>2021-10-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://codeofli.github.io/tags/Markdown/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
@@ -396,7 +389,7 @@
   </url>
   
   <url>
-    <loc>https://codeofli.github.io/tags/mysql/</loc>
+    <loc>https://codeofli.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -410,6 +403,13 @@
   </url>
   
   <url>
+    <loc>https://codeofli.github.io/tags/mysql/</loc>
+    <lastmod>2021-10-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://codeofli.github.io/tags/linux/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
@@ -417,7 +417,21 @@
   </url>
   
   <url>
-    <loc>https://codeofli.github.io/tags/Axios/</loc>
+    <loc>https://codeofli.github.io/tags/Java/</loc>
+    <lastmod>2021-10-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeofli.github.io/tags/Nacos/</loc>
+    <lastmod>2021-10-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeofli.github.io/tags/OnJava8/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -445,7 +459,7 @@
   </url>
   
   <url>
-    <loc>https://codeofli.github.io/tags/js/</loc>
+    <loc>https://codeofli.github.io/tags/SpringCloud/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -466,13 +480,6 @@
   </url>
   
   <url>
-    <loc>https://codeofli.github.io/tags/spring/</loc>
-    <lastmod>2021-10-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://codeofli.github.io/tags/mybatis/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
@@ -480,14 +487,7 @@
   </url>
   
   <url>
-    <loc>https://codeofli.github.io/tags/ssm/</loc>
-    <lastmod>2021-10-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://codeofli.github.io/tags/crawler/</loc>
+    <loc>https://codeofli.github.io/tags/spring/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -501,7 +501,28 @@
   </url>
   
   <url>
-    <loc>https://codeofli.github.io/tags/vue/</loc>
+    <loc>https://codeofli.github.io/tags/ssm/</loc>
+    <lastmod>2021-10-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeofli.github.io/tags/Axios/</loc>
+    <lastmod>2021-10-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeofli.github.io/tags/js/</loc>
+    <lastmod>2021-10-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeofli.github.io/tags/crawler/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -515,49 +536,7 @@
   </url>
   
   <url>
-    <loc>https://codeofli.github.io/tags/Sentinel/</loc>
-    <lastmod>2021-10-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://codeofli.github.io/tags/Redis/</loc>
-    <lastmod>2021-10-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://codeofli.github.io/tags/Jmeter/</loc>
-    <lastmod>2021-10-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://codeofli.github.io/tags/Nacos/</loc>
-    <lastmod>2021-10-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://codeofli.github.io/tags/Docker/</loc>
-    <lastmod>2021-10-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://codeofli.github.io/tags/SpringCloud/</loc>
-    <lastmod>2021-10-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://codeofli.github.io/tags/Java/</loc>
+    <loc>https://codeofli.github.io/tags/vue/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -571,7 +550,7 @@
   </url>
   
   <url>
-    <loc>https://codeofli.github.io/tags/elasticsearch/</loc>
+    <loc>https://codeofli.github.io/tags/Docker/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -585,14 +564,35 @@
   </url>
   
   <url>
-    <loc>https://codeofli.github.io/tags/Elasticsearch/</loc>
+    <loc>https://codeofli.github.io/tags/Redis/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://codeofli.github.io/tags/OnJava8/</loc>
+    <loc>https://codeofli.github.io/tags/Sentinel/</loc>
+    <lastmod>2021-10-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeofli.github.io/tags/elasticsearch/</loc>
+    <lastmod>2021-10-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeofli.github.io/tags/Jmeter/</loc>
+    <lastmod>2021-10-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeofli.github.io/tags/Elasticsearch/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -608,14 +608,14 @@
   </url>
   
   <url>
-    <loc>https://codeofli.github.io/categories/%E5%89%8D%E7%AB%AF/</loc>
+    <loc>https://codeofli.github.io/categories/Java/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://codeofli.github.io/categories/js/</loc>
+    <loc>https://codeofli.github.io/categories/%E5%89%8D%E7%AB%AF/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -629,6 +629,13 @@
   </url>
   
   <url>
+    <loc>https://codeofli.github.io/categories/js/</loc>
+    <lastmod>2021-10-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://codeofli.github.io/categories/python/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
@@ -636,28 +643,14 @@
   </url>
   
   <url>
-    <loc>https://codeofli.github.io/categories/Docker/</loc>
-    <lastmod>2021-10-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://codeofli.github.io/categories/java-SpringCloud/</loc>
-    <lastmod>2021-10-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://codeofli.github.io/categories/Java/</loc>
-    <lastmod>2021-10-31</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://codeofli.github.io/categories/RabbitMQ/</loc>
+    <lastmod>2021-10-31</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeofli.github.io/categories/Docker/</loc>
     <lastmod>2021-10-31</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>

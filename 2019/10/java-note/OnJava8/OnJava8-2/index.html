@@ -64,12 +64,12 @@
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="[TOC]第十六章 代码校验 你永远不能保证你的代码是正确的，你只能证明它是错的。 测试 如果没有测试过，它就是不能工作的。 单元测试这个过程是将集成测试构建到你创建的所有代码中，并在每次构建系统时运行这些测试。这样，构建过程不仅能检查语法的错误，同时也能检查语义的错误。“单元”是指测试一小部分代码 。通常，每个类都有测试来检查它所有方法的行为。“系统”测试则是不同的，它检查的是整个程序是否满足要">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/OnJava8/OnJava8-2/../../../../../OnJava8/docs/images/image-20190409114913825-4781754.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/OnJava8/OnJava8-2/../../../../../OnJava8/docs/images/image-20190409114913825-4781754.png">
 <meta property="og:updated_time" content="2021-10-23T02:19:02.847Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OnJava8-2">
 <meta name="twitter:description" content="[TOC]第十六章 代码校验 你永远不能保证你的代码是正确的，你只能证明它是错的。 测试 如果没有测试过，它就是不能工作的。 单元测试这个过程是将集成测试构建到你创建的所有代码中，并在每次构建系统时运行这些测试。这样，构建过程不仅能检查语法的错误，同时也能检查语义的错误。“单元”是指测试一小部分代码 。通常，每个类都有测试来检查它所有方法的行为。“系统”测试则是不同的，它检查的是整个程序是否满足要">
-<meta name="twitter:image" content="https://localhost:4000/2019/10/java-note/OnJava8/OnJava8-2/../../../../../OnJava8/docs/images/image-20190409114913825-4781754.png">
+<meta name="twitter:image" content="https://codeofli.github.io/2019/10/java-note/OnJava8/OnJava8-2/../../../../../OnJava8/docs/images/image-20190409114913825-4781754.png">
   <link rel="canonical" href="https://codeofli.github.io/2019/10/java-note/OnJava8/OnJava8-2/">
 
 
@@ -233,7 +233,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">10</span></a>
 
   </li>
       
@@ -1776,7 +1776,7 @@
 <!-- The Need for RTTI -->
 
 <h2 id="为什么需要-RTTI"><a href="#为什么需要-RTTI" class="headerlink" title="为什么需要 RTTI"></a>为什么需要 RTTI</h2><p>下面看一下我们已经很熟悉的一个例子，它使用了多态的类层次结构。基类 <code>Shape</code> 是泛化的类型，从它派生出了三个具体类： <code>Circle</code> 、<code>Square</code> 和 <code>Triangle</code>（见下图所示）。</p>
-<p><img src="//localhost:4000/2019/10/java-note/OnJava8/OnJava8-2/../../../../../OnJava8/docs/images/image-20190409114913825-4781754.png" alt="多态例子Shape的类层次结构图"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/OnJava8/OnJava8-2/../../../../../OnJava8/docs/images/image-20190409114913825-4781754.png" alt="多态例子Shape的类层次结构图"></p>
 <p>这是一个典型的类层次结构图，基类位于顶部，派生类向下扩展。面向对象编程的一个基本目的是：让代码只操纵对基类(这里即 <code>Shape</code> )的引用。这样，如果你想添加一个新类(比如从 <code>Shape</code> 派生出 <code>Rhomboid</code>)来扩展程序，就不会影响原来的代码。在这个例子中，<code>Shape</code>接口中动态绑定了 <code>draw()</code> 方法，这样做的目的就是让客户端程序员可以使用泛化的 <code>Shape</code> 引用来调用 <code>draw()</code>。<code>draw()</code> 方法在所有派生类里都会被覆盖，而且由于它是动态绑定的，所以它可以使用 <code>Shape</code> 引用来调用，这就是多态。</p>
 <p>因此，我们通常会创建一个具体的对象(<code>Circle</code>、<code>Square</code> 或者 <code>Triangle</code>)，把它向上转型成 <code>Shape</code> (忽略对象的具体类型)，并且在后面的程序中使用 <code>Shape</code> 引用来调用在具体对象中被重载的方法（如 <code>draw()</code>）。</p>
 <p>代码如下：</p>
@@ -2336,7 +2336,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>

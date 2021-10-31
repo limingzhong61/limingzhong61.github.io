@@ -230,7 +230,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">10</span></a>
 
   </li>
       
@@ -584,7 +584,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[TOC]</p><h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h1><p><strong>Docker</strong>是一个开源的应用容器引擎；是一个轻量级容器技术；</p><p>Docker支持将软件编译成一个镜像；然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像；</p><p>运行中的这个镜像称为容器，容器启动是非常快速的。</p><p><img src="//localhost:4000/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145450.png" alt="img"></p><p><img src="//localhost:4000/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145531.png" alt="img"></p><h2 id="2、核心概念"><a href="#2、核心概念" class="headerlink" title="2、核心概念"></a>2、核心概念</h2><p>docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；</p>
+          <p>[TOC]</p><h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h1><p><strong>Docker</strong>是一个开源的应用容器引擎；是一个轻量级容器技术；</p><p>Docker支持将软件编译成一个镜像；然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像；</p><p>运行中的这个镜像称为容器，容器启动是非常快速的。</p><p><img src="//codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145450.png" alt="img"></p><p><img src="//codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145531.png" alt="img"></p><h2 id="2、核心概念"><a href="#2、核心概念" class="headerlink" title="2、核心概念"></a>2、核心概念</h2><p>docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；</p>
           <!--noindex-->
           
             <div class="post-button">
@@ -1138,7 +1138,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>[TOC]</p><h1 id="分布式缓存-Redis集群"><a href="#分布式缓存-Redis集群" class="headerlink" title="分布式缓存-Redis集群"></a>分布式缓存-Redis集群</h1><h2 id="单点Redis的问题"><a href="#单点Redis的问题" class="headerlink" title="单点Redis的问题"></a>单点Redis的问题</h2><p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024094652960.png" alt="image-20211024094652960"></p><p><strong>数据丢失问题</strong></p><p>Redis是内存存储，服务重启可能会丢失数据</p><p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024094825484.png" alt="image-20211024094825484"></p><p><strong>并发能力问题</strong></p><p>单节点Redis并发能力虽然不错，但也无法满足如618这样的高并发场景</p><p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024094853077.png" alt="image-20211024094853077"></p><p><strong>故障恢复问题</strong></p><p>如果Redis宕机，则服务不可用，需要一种自动的故障恢复手段</p><p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024094902649.png" alt="image-20211024094902649"></p><p><strong>存储能力问题</strong></p><p>Redis基于内存，单节点能存储的数据量难以满足海量数据需求</p>
+          <p>[TOC]</p><h1 id="分布式缓存-Redis集群"><a href="#分布式缓存-Redis集群" class="headerlink" title="分布式缓存-Redis集群"></a>分布式缓存-Redis集群</h1><h2 id="单点Redis的问题"><a href="#单点Redis的问题" class="headerlink" title="单点Redis的问题"></a>单点Redis的问题</h2><p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024094652960.png" alt="image-20211024094652960"></p><p><strong>数据丢失问题</strong></p><p>Redis是内存存储，服务重启可能会丢失数据</p><p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024094825484.png" alt="image-20211024094825484"></p><p><strong>并发能力问题</strong></p><p>单节点Redis并发能力虽然不错，但也无法满足如618这样的高并发场景</p><p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024094853077.png" alt="image-20211024094853077"></p><p><strong>故障恢复问题</strong></p><p>如果Redis宕机，则服务不可用，需要一种自动的故障恢复手段</p><p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024094902649.png" alt="image-20211024094902649"></p><p><strong>存储能力问题</strong></p><p>Redis基于内存，单节点能存储的数据量难以满足海量数据需求</p>
           <!--noindex-->
           
             <div class="post-button">
@@ -1467,7 +1467,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>

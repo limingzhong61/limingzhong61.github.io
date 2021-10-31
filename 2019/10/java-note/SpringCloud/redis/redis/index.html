@@ -64,39 +64,39 @@
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="[TOC]分布式缓存-Redis集群单点Redis的问题数据丢失问题Redis是内存存储，服务重启可能会丢失数据并发能力问题单节点Redis并发能力虽然不错，但也无法满足如618这样的高并发场景故障恢复问题如果Redis宕机，则服务不可用，需要一种自动的故障恢复手段存储能力问题Redis基于内存，单节点能存储的数据量难以满足海量数据需求">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024094652960.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024094825484.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024094853077.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024094902649.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024095059214.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024095501965.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024104850202.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024110436297.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024111842489.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210629114325516.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210629114830642.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210629114941810.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210630111505799.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210630113929868.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210630183914491.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210630201258802.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210701215534714.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210701220714104.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210701222857997.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210701223025709.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210701223131264.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210702164116027.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210702174255799.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210702181101969.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210702181215705.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210702181922809.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210702182343979.png">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210702182602145.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024094652960.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024094825484.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024094853077.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024094902649.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024095059214.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024095501965.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024104850202.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024110436297.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024111842489.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210629114325516.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210629114830642.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210629114941810.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210630111505799.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210630113929868.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210630183914491.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210630201258802.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210701215534714.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210701220714104.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210701222857997.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210701223025709.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210701223131264.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210702164116027.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210702174255799.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210702181101969.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210702181215705.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210702181922809.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210702182343979.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210702182602145.png">
 <meta property="og:updated_time" content="2021-10-31T01:09:18.887Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式缓存-Redis集群">
 <meta name="twitter:description" content="[TOC]分布式缓存-Redis集群单点Redis的问题数据丢失问题Redis是内存存储，服务重启可能会丢失数据并发能力问题单节点Redis并发能力虽然不错，但也无法满足如618这样的高并发场景故障恢复问题如果Redis宕机，则服务不可用，需要一种自动的故障恢复手段存储能力问题Redis基于内存，单节点能存储的数据量难以满足海量数据需求">
-<meta name="twitter:image" content="https://localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024094652960.png">
+<meta name="twitter:image" content="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024094652960.png">
   <link rel="canonical" href="https://codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/">
 
 
@@ -260,7 +260,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">10</span></a>
 
   </li>
       
@@ -387,7 +387,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>[TOC]</p><h1 id="分布式缓存-Redis集群"><a href="#分布式缓存-Redis集群" class="headerlink" title="分布式缓存-Redis集群"></a>分布式缓存-Redis集群</h1><h2 id="单点Redis的问题"><a href="#单点Redis的问题" class="headerlink" title="单点Redis的问题"></a>单点Redis的问题</h2><p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024094652960.png" alt="image-20211024094652960"></p><p><strong>数据丢失问题</strong></p><p>Redis是内存存储，服务重启可能会丢失数据</p><p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024094825484.png" alt="image-20211024094825484"></p><p><strong>并发能力问题</strong></p><p>单节点Redis并发能力虽然不错，但也无法满足如618这样的高并发场景</p><p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024094853077.png" alt="image-20211024094853077"></p><p><strong>故障恢复问题</strong></p><p>如果Redis宕机，则服务不可用，需要一种自动的故障恢复手段</p><p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024094902649.png" alt="image-20211024094902649"></p><p><strong>存储能力问题</strong></p><p>Redis基于内存，单节点能存储的数据量难以满足海量数据需求</p><a id="more"></a>
+        <p>[TOC]</p><h1 id="分布式缓存-Redis集群"><a href="#分布式缓存-Redis集群" class="headerlink" title="分布式缓存-Redis集群"></a>分布式缓存-Redis集群</h1><h2 id="单点Redis的问题"><a href="#单点Redis的问题" class="headerlink" title="单点Redis的问题"></a>单点Redis的问题</h2><p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024094652960.png" alt="image-20211024094652960"></p><p><strong>数据丢失问题</strong></p><p>Redis是内存存储，服务重启可能会丢失数据</p><p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024094825484.png" alt="image-20211024094825484"></p><p><strong>并发能力问题</strong></p><p>单节点Redis并发能力虽然不错，但也无法满足如618这样的高并发场景</p><p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024094853077.png" alt="image-20211024094853077"></p><p><strong>故障恢复问题</strong></p><p>如果Redis宕机，则服务不可用，需要一种自动的故障恢复手段</p><p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024094902649.png" alt="image-20211024094902649"></p><p><strong>存储能力问题</strong></p><p>Redis基于内存，单节点能存储的数据量难以满足海量数据需求</p><a id="more"></a>
 
 
 
@@ -400,10 +400,10 @@
 
 
 
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024095059214.png" alt="image-20211024095059214"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024095059214.png" alt="image-20211024095059214"></p>
 <h1 id="Redis持久化"><a href="#Redis持久化" class="headerlink" title="Redis持久化"></a>Redis持久化</h1><h2 id="RDB持久化"><a href="#RDB持久化" class="headerlink" title="RDB持久化"></a>RDB持久化</h2><p>RDB全称<strong>Redis Database Backup file（Redis数据备份文件）</strong>，也被叫做<strong>Redis数据快照</strong>。简单来说就是把内存中的所有数据都记录到磁盘中。当Redis实例故障重启后，从磁盘读取快照文件，恢复数据。</p>
 <p>快照文件称为RDB文件，默认是保存在当前运行目录。</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024095501965.png" alt="image-20211024095501965"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024095501965.png" alt="image-20211024095501965"></p>
 <p>Redis停机时会执行一次RDB。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">^C</span><br><span class="line">^C7509:signal-handler (1635042365) Received SIGINT scheduling shutdown...</span><br><span class="line">7509:M 23 Oct 2021 19:26:05.981 <span class="comment"># User requested shutdown...</span></span><br><span class="line">7509:M 23 Oct 2021 19:26:05.981 * Saving the final RDB snapshot before exiting.</span><br><span class="line">7509:M 23 Oct 2021 19:26:05.982 * DB saved on disk</span><br><span class="line">7509:M 23 Oct 2021 19:26:05.982 * Removing the pid file.</span><br><span class="line">7509:M 23 Oct 2021 19:26:05.982 <span class="comment"># Redis is now ready to exit, bye bye...</span></span><br><span class="line">[root@localhost redis-6.2.4]<span class="comment"># </span></span><br><span class="line">[root@localhost redis-6.2.4]<span class="comment"># ll</span></span><br><span class="line">total 332</span><br><span class="line">-rw-r--r--.  1 root root   104 Oct 23 19:26 dump.rdb</span><br></pre></td></tr></table></figure>
 
@@ -422,7 +422,7 @@
 <p>fork采用的是<strong>copy-on-write技</strong>术：</p>
 <p>•当主进程执行读操作时，访问共享内存；</p>
 <p>•当主进程执行写操作时，则会拷贝一份数据，执行写操作。</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024104850202.png" alt="image-20211024104850202"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024104850202.png" alt="image-20211024104850202"></p>
 <p>RDB方式bgsave的基本流程？</p>
 <p>•fork主进程得到一个子进程，共享内存空间</p>
 <p>•子进程读取内存数据并写入新的RDB文件</p>
@@ -434,7 +434,7 @@
 <p>•RDB执行间隔时间长，两次RDB之间写入数据有丢失的风险</p>
 <p>•fork子进程、压缩、写出RDB文件都比较耗时</p>
 <h2 id="AOF持久化"><a href="#AOF持久化" class="headerlink" title="AOF持久化"></a>AOF持久化</h2><p>AOF全称为<strong>Append Only File（追加文件）</strong>。Redis处理的每一个写命令都会记录在AOF文件，可以看做是命令日志文件。</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024110436297.png" alt="image-20211024110436297"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024110436297.png" alt="image-20211024110436297"></p>
 <p><strong>AOF默认是关闭的</strong>，需要修改redis.conf配置文件来开启AOF：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 是否开启AOF功能，默认是no</span></span><br><span class="line">appendonly yes</span><br><span class="line"><span class="comment"># AOF文件的名称</span></span><br><span class="line">appendfilename <span class="string">"appendonly.aof"</span></span><br></pre></td></tr></table></figure>
 
@@ -473,7 +473,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># You can set these explicitly by uncommenting the three following lines.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># save 3600 1</span></span><br><span class="line"><span class="comment"># save 300 100</span></span><br><span class="line"><span class="comment"># save 60 10000</span></span><br><span class="line"><span class="comment">#禁用rdb</span></span><br><span class="line">save <span class="string">""</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">appendonly yes</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">9588:M 23 Oct 2021 20:10:24.820 <span class="comment"># Server initialized</span></span><br><span class="line">9588:M 23 Oct 2021 20:10:24.820 <span class="comment"># WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.</span></span><br><span class="line">9588:M 23 Oct 2021 20:10:24.821 * Ready to accept connections</span><br><span class="line"><span class="comment">#启动时，没有读取备份文件</span></span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; keys *</span><br><span class="line">(empty array)</span><br><span class="line"></span><br><span class="line">[root@localhost redis-6.2.4]<span class="comment"># cat appendonly.aof </span></span><br><span class="line">*2</span><br><span class="line"><span class="variable">$6</span></span><br><span class="line">SELECT</span><br><span class="line"><span class="variable">$1</span></span><br><span class="line">0</span><br><span class="line">*3</span><br><span class="line"><span class="variable">$3</span></span><br><span class="line"><span class="built_in">set</span></span><br><span class="line"><span class="variable">$3</span></span><br><span class="line">num</span><br><span class="line"><span class="variable">$3</span></span><br><span class="line">123</span><br><span class="line">^C9588:signal-handler (1635045279) Received SIGINT scheduling shutdown...</span><br><span class="line">9588:M 23 Oct 2021 20:14:39.899 <span class="comment"># User requested shutdown...</span></span><br><span class="line">9588:M 23 Oct 2021 20:14:39.899 * Calling fsync() on the AOF file.</span><br><span class="line">9588:M 23 Oct 2021 20:14:39.899 * Removing the pid file.</span><br><span class="line">9588:M 23 Oct 2021 20:14:39.899 <span class="comment"># Redis is now ready to exit, bye bye...</span></span><br><span class="line"></span><br><span class="line">9683:M 23 Oct 2021 20:15:07.154 <span class="comment"># Server initialized</span></span><br><span class="line">9683:M 23 Oct 2021 20:15:07.154 <span class="comment"># WARNING overcommit_memory is set to 0! Background save may fail under low memory condition. To fix this issue add 'vm.overcommit_memory = 1' to /etc/sysctl.conf and then reboot or run the command 'sysctl vm.overcommit_memory=1' for this to take effect.</span></span><br><span class="line">9683:M 23 Oct 2021 20:15:07.154 * DB loaded from append only file: 0.000 seconds</span><br><span class="line">9683:M 23 Oct 2021 20:15:07.154 * Ready to accept connections</span><br><span class="line"></span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> num 666</span><br><span class="line">OK</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">[root@localhost redis-6.2.4]<span class="comment"># cat appendonly.aof </span></span><br><span class="line">*2</span><br><span class="line"><span class="variable">$6</span></span><br><span class="line">SELECT</span><br><span class="line"><span class="variable">$1</span></span><br><span class="line">0</span><br><span class="line">*3</span><br><span class="line"><span class="variable">$3</span></span><br><span class="line"><span class="built_in">set</span></span><br><span class="line"><span class="variable">$3</span></span><br><span class="line">num</span><br><span class="line"><span class="variable">$3</span></span><br><span class="line">123</span><br><span class="line">*3</span><br><span class="line"><span class="variable">$3</span></span><br><span class="line"><span class="built_in">set</span></span><br><span class="line"><span class="variable">$4</span></span><br><span class="line">name</span><br><span class="line"><span class="variable">$4</span></span><br><span class="line">jack</span><br><span class="line">*2</span><br><span class="line"><span class="variable">$6</span></span><br><span class="line">SELECT</span><br><span class="line"><span class="variable">$1</span></span><br><span class="line">0</span><br><span class="line">*3</span><br><span class="line"><span class="variable">$3</span></span><br><span class="line"><span class="built_in">set</span></span><br><span class="line"><span class="variable">$3</span></span><br><span class="line">num</span><br><span class="line"><span class="variable">$3</span></span><br></pre></td></tr></table></figure>
 
 <h4 id="bgrewriteaof命令"><a href="#bgrewriteaof命令" class="headerlink" title="bgrewriteaof命令"></a>bgrewriteaof命令</h4><p>因为是记录命令，AOF文件会比RDB文件大的多。而且AOF会记录对同一个key的多次写操作，但只有最后一次写操作才有意义。通过执行<strong>bgrewriteaof命令</strong>，可以让AOF文件执行重写功能，用最少的命令达到相同效果。</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20211024111842489.png" alt="image-20211024111842489"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20211024111842489.png" alt="image-20211024111842489"></p>
 <p>Redis也会在触发阈值时自动去重写AOF文件。阈值也可以在redis.conf中配置：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># AOF文件比上次文件 增长超过多少百分比则触发重写</span></span><br><span class="line">auto-aof-rewrite-percentage 100</span><br><span class="line"><span class="comment"># AOF文件体积最小多大以上才触发重写 </span></span><br><span class="line">auto-aof-rewrite-min-size 64mb</span><br></pre></td></tr></table></figure>
 
@@ -536,14 +536,14 @@
 <p><em>Yum</em>（全称为 <strong>Yellow dog Updater</strong>, Modified）是一个在Fedora和RedHat以及CentOS中的Shell前端软件包管理器。</p>
 <p>然后将课前资料提供的Redis安装包上传到虚拟机的任意目录：</p>
 <p>redis-6.2.4.tar.gz</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210629114325516.png" alt="image-20210629114325516"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210629114325516.png" alt="image-20210629114325516"></p>
 <p>例如，我放到了/tmp目录：</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210629114830642.png" alt="image-20210629114830642"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210629114830642.png" alt="image-20210629114830642"></p>
 <p>解压缩：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xvf redis-6.2.4.tar.gz</span><br></pre></td></tr></table></figure>
 
 <p>解压后：</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210629114941810.png" alt="image-20210629114941810"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210629114941810.png" alt="image-20210629114941810"></p>
 <p>进入redis目录：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> redis-6.2.4</span><br></pre></td></tr></table></figure>
 
@@ -564,7 +564,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># redis-cli</span></span><br><span class="line">127.0.0.1:6379&gt; ping</span><br><span class="line">PONG</span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> num 123</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get num</span><br><span class="line"><span class="string">"123"</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="2-Redis主从集群"><a href="#2-Redis主从集群" class="headerlink" title="2.Redis主从集群"></a>2.Redis主从集群</h2><h3 id="2-1-集群结构"><a href="#2-1-集群结构" class="headerlink" title="2.1.集群结构"></a>2.1.集群结构</h3><p>我们搭建的主从集群结构如图：</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210630111505799.png" alt="image-20210630111505799"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210630111505799.png" alt="image-20210630111505799"></p>
 <p>共包含三个节点，一个主节点，两个从节点。</p>
 <p>这里我们会在同一台虚拟机中开启3个redis实例，模拟主从集群，信息如下：</p>
 <table>
@@ -597,7 +597,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入/tmp目录</span></span><br><span class="line"><span class="built_in">cd</span> /tmp</span><br><span class="line"><span class="comment"># 创建目录</span></span><br><span class="line">mkdir 7001 7002 7003</span><br></pre></td></tr></table></figure>
 
 <p>如图：</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210630113929868.png" alt="image-20210630113929868"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210630113929868.png" alt="image-20210630113929868"></p>
 <p>2）恢复原始配置</p>
 <p>修改redis-6.2.4/redis.conf文件，将其中的持久化模式改为默认的RDB模式，AOF保持关闭状态。</p>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 开启RDB</span></span><br><span class="line"><span class="comment"># save ""</span></span><br><span class="line"><span class="attr">save</span> <span class="string">3600 1</span></span><br><span class="line"><span class="attr">save</span> <span class="string">300 100</span></span><br><span class="line"><span class="attr">save</span> <span class="string">60 10000</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 关闭AOF</span></span><br><span class="line"><span class="attr">appendonly</span> <span class="string">no</span></span><br></pre></td></tr></table></figure>
@@ -621,7 +621,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第1个</span></span><br><span class="line">redis-server 7001/redis.conf</span><br><span class="line"><span class="comment"># 第2个</span></span><br><span class="line">redis-server 7002/redis.conf</span><br><span class="line"><span class="comment"># 第3个</span></span><br><span class="line">redis-server 7003/redis.conf</span><br></pre></td></tr></table></figure>
 
 <p>启动后：</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210630183914491.png" alt="image-20210630183914491"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210630183914491.png" alt="image-20210630183914491"></p>
 <p>如果要一键停止，可以运行下面命令：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span> <span class="string">'%s\n'</span> 7001 7002 7003 | xargs -I&#123;&#125; -t redis-cli -p &#123;&#125; shutdown</span><br></pre></td></tr></table></figure>
 
@@ -646,7 +646,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 连接 7001</span></span><br><span class="line">redis-cli -p 7001</span><br><span class="line"><span class="comment"># 查看状态</span></span><br><span class="line">info replication</span><br></pre></td></tr></table></figure>
 
 <p>结果：</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210630201258802.png" alt="image-20210630201258802"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210630201258802.png" alt="image-20210630201258802"></p>
 <h3 id="2-5-测试"><a href="#2-5-测试" class="headerlink" title="2.5.测试"></a>2.5.测试</h3><p>执行下列操作以测试：</p>
 <ul>
 <li><p>利用redis-cli连接7001，执行<figure class="highlight plain"><figcaption><span>num 123```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 利用redis-cli连接7002，执行```get num```，再执行```set num 666</span><br></pre></td></tr></table></figure></p>
@@ -655,7 +655,7 @@
 </li>
 </ul>
 <p>如图：</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210701215534714.png" alt="image-20210701215534714"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210701215534714.png" alt="image-20210701215534714"></p>
 <p>然后我们在s1目录创建一个sentinel.conf文件，添加下面的内容：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">port 27001</span><br><span class="line">sentinel announce-ip 192.168.150.101</span><br><span class="line">sentinel monitor mymaster 192.168.150.101 7001 2</span><br><span class="line">sentinel down-after-milliseconds mymaster 5000</span><br><span class="line">sentinel failover-timeout mymaster 60000</span><br><span class="line">dir "/tmp/s1"</span><br></pre></td></tr></table></figure>
 
@@ -679,15 +679,15 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第1个</span></span><br><span class="line">redis-sentinel s1/sentinel.conf</span><br><span class="line"><span class="comment"># 第2个</span></span><br><span class="line">redis-sentinel s2/sentinel.conf</span><br><span class="line"><span class="comment"># 第3个</span></span><br><span class="line">redis-sentinel s3/sentinel.conf</span><br></pre></td></tr></table></figure>
 
 <p>启动后：</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210701220714104.png" alt="image-20210701220714104"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210701220714104.png" alt="image-20210701220714104"></p>
 <h3 id="3-4-测试"><a href="#3-4-测试" class="headerlink" title="3.4.测试"></a>3.4.测试</h3><p>尝试让master节点7001宕机，查看sentinel日志：</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210701222857997.png" alt="image-20210701222857997"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210701222857997.png" alt="image-20210701222857997"></p>
 <p>查看7003的日志：</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210701223025709.png" alt="image-20210701223025709"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210701223025709.png" alt="image-20210701223025709"></p>
 <p>查看7002的日志：</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210701223131264.png" alt="image-20210701223131264"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210701223131264.png" alt="image-20210701223131264"></p>
 <h2 id="4-搭建分片集群"><a href="#4-搭建分片集群" class="headerlink" title="4.搭建分片集群"></a>4.搭建分片集群</h2><h3 id="4-1-集群结构"><a href="#4-1-集群结构" class="headerlink" title="4.1.集群结构"></a>4.1.集群结构</h3><p>分片集群需要的节点数量较多，这里我们搭建一个最小的分片集群，包含3个master节点，每个master包含一个slave节点，结构如下：</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210702164116027.png" alt="image-20210702164116027"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210702164116027.png" alt="image-20210702164116027"></p>
 <p>这里我们会在同一台虚拟机中开启6个redis实例，模拟分片集群，信息如下：</p>
 <table>
 <thead>
@@ -747,7 +747,7 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep redis</span><br></pre></td></tr></table></figure>
 
 <p>发现服务都已经正常启动：</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210702174255799.png" alt="image-20210702174255799"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210702174255799.png" alt="image-20210702174255799"></p>
 <p>如果要关闭所有进程，可以执行命令：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep redis | awk <span class="string">'&#123;print $2&#125;'</span> | xargs <span class="built_in">kill</span></span><br></pre></td></tr></table></figure>
 
@@ -774,23 +774,23 @@
 <li><code>--replicas 1</code>或者<code>--cluster-replicas 1</code> ：指定集群中每个master的副本个数为1，此时<code>节点总数 ÷ (replicas + 1)</code> 得到的就是master的数量。因此节点列表中的前n个就是master，其它节点都是slave节点，随机分配到不同master</li>
 </ul>
 <p>运行后的样子：</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210702181101969.png" alt="image-20210702181101969"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210702181101969.png" alt="image-20210702181101969"></p>
 <p>这里输入yes，则集群开始创建：</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210702181215705.png" alt="image-20210702181215705"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210702181215705.png" alt="image-20210702181215705"></p>
 <p>通过命令可以查看集群状态：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -p 7001 cluster nodes</span><br></pre></td></tr></table></figure>
 
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210702181922809.png" alt="image-20210702181922809"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210702181922809.png" alt="image-20210702181922809"></p>
 <h3 id="4-5-测试"><a href="#4-5-测试" class="headerlink" title="4.5.测试"></a>4.5.测试</h3><p>尝试连接7001节点，存储一个数据：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 连接</span></span><br><span class="line">redis-cli -p 7001</span><br><span class="line"><span class="comment"># 存储数据</span></span><br><span class="line"><span class="built_in">set</span> num 123</span><br><span class="line"><span class="comment"># 读取数据</span></span><br><span class="line">get num</span><br><span class="line"><span class="comment"># 再次存储</span></span><br><span class="line"><span class="built_in">set</span> a 1</span><br></pre></td></tr></table></figure>
 
 <p>结果悲剧了：</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210702182343979.png" alt="image-20210702182343979"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210702182343979.png" alt="image-20210702182343979"></p>
 <p>集群操作时，需要给<code>redis-cli</code>加上<code>-c</code>参数才可以：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -c -p 7001</span><br></pre></td></tr></table></figure>
 
 <p>这次可以了：</p>
-<p><img src="//localhost:4000/2019/10/java-note/SpringCloud/redis/redis/image-20210702182602145.png" alt="image-20210702182602145"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/SpringCloud/redis/redis/image-20210702182602145.png" alt="image-20210702182602145"></p>
 
     </div>
 
@@ -945,7 +945,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>

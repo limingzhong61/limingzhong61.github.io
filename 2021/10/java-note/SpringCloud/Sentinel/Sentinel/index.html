@@ -64,120 +64,120 @@
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="微服务保护1.初识Sentinel1.1.雪崩问题及解决方案1.1.1.雪崩问题微服务中，服务间调用关系错综复杂，一个微服务往往依赖于多个其它微服务。 如图，如果服务提供者I发生了故障，当前的应用的部分业务因为依赖于服务I，因此也会被阻塞。此时，其它不依赖于服务I的业务似乎不受影响。 但是，依赖服务I的业务请求被阻塞，用户不会得到响应，则tomcat的这个线程不会释放，于是越来越多的用户请求到来，">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829099748.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829198240.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829307389.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715172710340.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715172820438.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715172946352.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173215243.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173327075.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173428073.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173555158.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715190827846.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715191134448.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715191241799.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715191757319.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715191757319.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715192010657.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715192455429.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715200537171.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715200635414.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715200804594.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715200853671.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210914113111567.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715202540786.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716101805951.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716101934499.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716102103814.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716102416266.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716102532554.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716102636030.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716103143002.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716103536346.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105227163.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105408723.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105612312.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105812789.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716110027064.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105855951.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105956401.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716110225104.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716110629796.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111012387.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111136699.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111303701.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111404717.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111526480.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111658541.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210914120217179.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716113147176.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716113426524.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114048918.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114243558.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114429361.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114522935.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114651137.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716115014663.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716115131463.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716115232426.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716115717523.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120033572.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120208509.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120319009.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120536714.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120754527.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120840501.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716121105567.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120900365.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716121201630.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120919131.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716121220305.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173215243.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173428073.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716122403502.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123705780.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123036937.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123240518.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123411217.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123831992.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123936844.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716124229894.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716124147820.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716130958518.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716145934347.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150234787.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150510956.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150605208.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150654094.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150740434.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150911004.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151107785.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716131430682.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716131522912.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151348183.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150654094.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151538785.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151722916.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151844817.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716152010750.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716152349191.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153250134.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153301069.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153348396.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153434095.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153938887.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716154012736.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210914191612696.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210914191847809.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716154155238.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716154215456.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716154255466.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829099748.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829198240.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829307389.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715172710340.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715172820438.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715172946352.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173215243.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173327075.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173428073.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173555158.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715190827846.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715191134448.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715191241799.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715191757319.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715191757319.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715192010657.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715192455429.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715200537171.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715200635414.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715200804594.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715200853671.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210914113111567.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715202540786.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716101805951.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716101934499.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716102103814.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716102416266.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716102532554.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716102636030.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716103143002.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716103536346.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105227163.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105408723.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105612312.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105812789.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716110027064.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105855951.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105956401.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716110225104.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716110629796.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111012387.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111136699.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111303701.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111404717.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111526480.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111658541.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210914120217179.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716113147176.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716113426524.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114048918.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114243558.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114429361.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114522935.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114651137.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716115014663.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716115131463.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716115232426.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716115717523.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120033572.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120208509.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120319009.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120536714.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120754527.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120840501.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716121105567.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120900365.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716121201630.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120919131.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716121220305.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173215243.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173428073.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716122403502.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123705780.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123036937.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123240518.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123411217.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123831992.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123936844.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716124229894.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716124147820.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716130958518.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716145934347.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150234787.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150510956.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150605208.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150654094.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150740434.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150911004.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151107785.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716131430682.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716131522912.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151348183.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150654094.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151538785.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151722916.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151844817.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716152010750.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716152349191.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153250134.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153301069.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153348396.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153434095.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153938887.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716154012736.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210914191612696.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210914191847809.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716154155238.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716154215456.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716154255466.png">
 <meta property="og:updated_time" content="2021-10-31T03:03:59.378Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微服务保护Sentinel">
 <meta name="twitter:description" content="微服务保护1.初识Sentinel1.1.雪崩问题及解决方案1.1.1.雪崩问题微服务中，服务间调用关系错综复杂，一个微服务往往依赖于多个其它微服务。 如图，如果服务提供者I发生了故障，当前的应用的部分业务因为依赖于服务I，因此也会被阻塞。此时，其它不依赖于服务I的业务似乎不受影响。 但是，依赖服务I的业务请求被阻塞，用户不会得到响应，则tomcat的这个线程不会释放，于是越来越多的用户请求到来，">
-<meta name="twitter:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829099748.png">
+<meta name="twitter:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829099748.png">
   <link rel="canonical" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/">
 
 
@@ -341,7 +341,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">10</span></a>
 
   </li>
       
@@ -481,36 +481,36 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="微服务保护"><a href="#微服务保护" class="headerlink" title="微服务保护"></a>微服务保护</h1><h1 id="1-初识Sentinel"><a href="#1-初识Sentinel" class="headerlink" title="1.初识Sentinel"></a>1.初识Sentinel</h1><h2 id="1-1-雪崩问题及解决方案"><a href="#1-1-雪崩问题及解决方案" class="headerlink" title="1.1.雪崩问题及解决方案"></a>1.1.雪崩问题及解决方案</h2><h3 id="1-1-1-雪崩问题"><a href="#1-1-1-雪崩问题" class="headerlink" title="1.1.1.雪崩问题"></a>1.1.1.雪崩问题</h3><p>微服务中，服务间调用关系错综复杂，一个微服务往往依赖于多个其它微服务。</p><p> <img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829099748.png" alt="img"></p><p>如图，如果服务提供者I发生了故障，当前的应用的部分业务因为依赖于服务I，因此也会被阻塞。此时，其它不依赖于服务I的业务似乎不受影响。</p><p> <img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829198240.png" alt="1533829198240"></p><p>但是，依赖服务I的业务请求被阻塞，用户不会得到响应，则tomcat的这个线程不会释放，于是越来越多的用户请求到来，越来越多的线程会阻塞：</p><a id="more"></a>
+        <h1 id="微服务保护"><a href="#微服务保护" class="headerlink" title="微服务保护"></a>微服务保护</h1><h1 id="1-初识Sentinel"><a href="#1-初识Sentinel" class="headerlink" title="1.初识Sentinel"></a>1.初识Sentinel</h1><h2 id="1-1-雪崩问题及解决方案"><a href="#1-1-雪崩问题及解决方案" class="headerlink" title="1.1.雪崩问题及解决方案"></a>1.1.雪崩问题及解决方案</h2><h3 id="1-1-1-雪崩问题"><a href="#1-1-1-雪崩问题" class="headerlink" title="1.1.1.雪崩问题"></a>1.1.1.雪崩问题</h3><p>微服务中，服务间调用关系错综复杂，一个微服务往往依赖于多个其它微服务。</p><p> <img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829099748.png" alt="img"></p><p>如图，如果服务提供者I发生了故障，当前的应用的部分业务因为依赖于服务I，因此也会被阻塞。此时，其它不依赖于服务I的业务似乎不受影响。</p><p> <img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829198240.png" alt="1533829198240"></p><p>但是，依赖服务I的业务请求被阻塞，用户不会得到响应，则tomcat的这个线程不会释放，于是越来越多的用户请求到来，越来越多的线程会阻塞：</p><a id="more"></a>
 
 
 
 
-<p> <img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829307389.png" alt="1533829307389"></p>
+<p> <img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829307389.png" alt="1533829307389"></p>
 <p>服务器支持的线程和并发数有限，请求一直阻塞，会导致服务器资源耗尽，从而导致所有其它服务都不可用，那么当前服务也就不可用了。</p>
 <p>那么，依赖于当前服务的其它服务随着时间的推移，最终也都会变的不可用，形成级联失败，雪崩就发生了：</p>
 <p>微服务调用链路中的<strong>某个服务故障</strong>，引起整个链路中的所有微服务都不可用，这就是雪崩。</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715172710340.png" alt="image-20210715172710340"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715172710340.png" alt="image-20210715172710340"></p>
 <h3 id="2解决雪崩问题"><a href="#2解决雪崩问题" class="headerlink" title="2解决雪崩问题"></a>2解决雪崩问题</h3><h4 id="1-1-2-超时处理"><a href="#1-1-2-超时处理" class="headerlink" title="1.1.2.超时处理"></a>1.1.2.超时处理</h4><p><strong>解决雪崩问题的常见方式有四种</strong>：</p>
 <p><strong>•超时处理</strong>：设定超时时间，请求超过一定时间没有响应就返回错误信息，不会无休止等待</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715172820438.png" alt="image-20210715172820438"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715172820438.png" alt="image-20210715172820438"></p>
 <h4 id="1-1-3-仓壁模式"><a href="#1-1-3-仓壁模式" class="headerlink" title="1.1.3.仓壁模式"></a>1.1.3.仓壁模式</h4><p>方案2：仓壁模式</p>
 <p>限定<strong>每个业务能使用的线程数</strong>，避免耗尽整个tomcat的资源，因此也叫<strong>线程隔离</strong>。</p>
 <p>仓壁模式来源于船舱的设计：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715172946352.png" alt="image-20210715172946352"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715172946352.png" alt="image-20210715172946352"></p>
 <p>船舱都会被隔板分离为多个独立空间，当船体破损时，只会导致部分空间进入，将故障控制在一定范围内，避免整个船体都被淹没。</p>
 <p>于此类似，我们可以限定每个业务能使用的线程数，避免耗尽整个tomcat的资源，因此也叫线程隔离。</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173215243.png" alt="image-20210715173215243"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173215243.png" alt="image-20210715173215243"></p>
 <h4 id="1-1-4-断路器"><a href="#1-1-4-断路器" class="headerlink" title="1.1.4.断路器"></a>1.1.4.断路器</h4><p>断路器模式：由<strong>断路器</strong>统计业务执行的异常比例，如果超出阈值则会<strong>熔断</strong>该业务，拦截访问该业务的一切请求。</p>
 <p><strong>比较好的一种方案</strong></p>
 <p>断路器会统计访问某个服务的请求数量，异常比例：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173327075.png" alt="image-20210715173327075"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173327075.png" alt="image-20210715173327075"></p>
 <p>当发现访问服务D的请求异常比例过高时，认为服务D有导致雪崩的风险，会拦截访问服务D的一切请求，形成熔断：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173428073.png" alt="image-20210715173428073"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173428073.png" alt="image-20210715173428073"></p>
 <h4 id="1-1-5-限流"><a href="#1-1-5-限流" class="headerlink" title="1.1.5.限流"></a>1.1.5.限流</h4><p><strong>流量控制</strong>：限制业务访问的<strong>QPS</strong>，避免服务因流量的突增而故障。</p>
 <p>这是一种预防雪崩的方式。</p>
 <p> <strong>QPS每秒查询率(Query Per Second)</strong><br>　　每秒查询率QPS是对一个特定的查询服务器在规定时间内所处理流量多少的衡量标准，在因特网上，作为域名系统服务器的机器的性能经常用每秒查询率来衡量。对应fetches/sec，即每秒的响应请求数，也即是最大吞吐能力。</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173555158.png" alt="image-20210715173555158"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173555158.png" alt="image-20210715173555158"></p>
 <h3 id="1-1-6-总结"><a href="#1-1-6-总结" class="headerlink" title="1.1.6.总结"></a>1.1.6.总结</h3><p>什么是雪崩问题？</p>
 <ul>
 <li>微服务之间相互调用，因为调用链中的一个服务故障，引起整个链路都无法访问的情况。</li>
@@ -641,11 +641,11 @@
 
 <p><a href="https://sentinelguard.io/zh-cn/docs/introduction.html" target="_blank" rel="noopener">官方文档</a></p>
 <p>3）访问</p>
-<p>访问<a href="http://localhost:8080页面，就可以看到sentinel的控制台了：">http://localhost:8080页面，就可以看到sentinel的控制台了：</a></p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715190827846.png" alt="image-20210715190827846"></p>
+<p>访问<a href="http://localhost:8080页面，就可以看到sentinel的控制台了：" target="_blank" rel="noopener">http://localhost:8080页面，就可以看到sentinel的控制台了：</a></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715190827846.png" alt="image-20210715190827846"></p>
 <p>需要输入账号和密码，默认都是：sentinel</p>
 <p>登录后，发现一片空白，什么都没有：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715191134448.png" alt="image-20210715191134448"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715191134448.png" alt="image-20210715191134448"></p>
 <p>这是因为我们还没有与微服务整合。</p>
 <h2 id="1-4-微服务整合Sentinel"><a href="#1-4-微服务整合Sentinel" class="headerlink" title="1.4.微服务整合Sentinel"></a>1.4.微服务整合Sentinel</h2><p>我们在order-service中整合sentinel，并连接sentinel的控制台，步骤如下：</p>
 <p>1）引入sentinel依赖</p>
@@ -656,14 +656,14 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line"><span class="attr">  port:</span> <span class="number">8088</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  cloud:</span> </span><br><span class="line"><span class="attr">    sentinel:</span></span><br><span class="line"><span class="attr">      transport:</span></span><br><span class="line"><span class="attr">        dashboard:</span> <span class="attr">localhost:8080</span> <span class="comment"># sentinel控制台地址</span></span><br></pre></td></tr></table></figure>
 
 <p>3）访问order-service的任意端点</p>
-<p>打开浏览器，访问<a href="http://localhost:8088/order/101，这样才能触发sentinel的监控。">http://localhost:8088/order/101，这样才能触发sentinel的监控。</a></p>
+<p>打开浏览器，访问<a href="http://localhost:8088/order/101，这样才能触发sentinel的监控。" target="_blank" rel="noopener">http://localhost:8088/order/101，这样才能触发sentinel的监控。</a></p>
 <p>然后再访问sentinel的控制台，查看效果：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715191241799.png" alt="image-20210715191241799"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715191241799.png" alt="image-20210715191241799"></p>
 <h1 id="2-流量控制"><a href="#2-流量控制" class="headerlink" title="2.流量控制"></a>2.流量控制</h1><p>雪崩问题虽然有四种方案，但是限流是避免服务因突发的流量而发生故障，是对微服务雪崩问题的预防。我们先学习这种模式。</p>
 <h2 id="2-1-簇点链路"><a href="#2-1-簇点链路" class="headerlink" title="2.1.簇点链路"></a>2.1.簇点链路</h2><p>当请求进入微服务时，首先会访问DispatcherServlet，然后进入Controller、Service、Mapper，这样的一个调用链就叫做<strong>簇点链路</strong>。簇点链路中被监控的每一个接口就是一个<strong>资源</strong>。</p>
 <p>默认情况下sentinel会监控SpringMVC的每一个端点（Endpoint，也就是controller中的方法），因此SpringMVC的每一个端点（Endpoint）就是调用链路中的一个资源。</p>
 <p>例如，我们刚才访问的order-service中的OrderController中的端点：/order/{orderId}</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715191757319.png" alt="image-20210715191757319"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715191757319.png" alt="image-20210715191757319"></p>
 <p>流控、熔断等都是针对簇点链路中的资源来设置的，因此我们可以点击对应资源后面的按钮来设置规则：</p>
 <ul>
 <li>流控：流量控制</li>
@@ -672,30 +672,30 @@
 <li>授权：请求的权限控制</li>
 </ul>
 <h2 id="2-1-快速入门"><a href="#2-1-快速入门" class="headerlink" title="2.1.快速入门"></a>2.1.快速入门</h2><h3 id="2-1-1-示例"><a href="#2-1-1-示例" class="headerlink" title="2.1.1.示例"></a>2.1.1.示例</h3><p>点击资源/order/{orderId}后面的流控按钮，就可以弹出表单。</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715191757319.png" alt="image-20210715191757319"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715191757319.png" alt="image-20210715191757319"></p>
 <p>表单中可以填写限流规则，如下：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715192010657.png" alt="image-20210715192010657"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715192010657.png" alt="image-20210715192010657"></p>
 <p>其含义是限制 /order/{orderId}这个资源的单机QPS为1，即每秒只允许1次请求，超出的请求会被拦截并报错。</p>
 <p>default默认是所以来源</p>
 <h3 id="2-1-2-练习："><a href="#2-1-2-练习：" class="headerlink" title="2.1.2.练习："></a>2.1.2.练习：</h3><p>需求：给 /order/{orderId}这个资源设置流控规则，QPS不能超过 5，然后测试。</p>
 <p>1）首先在sentinel控制台添加限流规则</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715192455429.png" alt="image-20210715192455429"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715192455429.png" alt="image-20210715192455429"></p>
 <p>2）利用jmeter测试</p>
 <p>如果没有用过jmeter，可以参考课前资料提供的文档《Jmeter快速入门.md》</p>
 <p>课前资料提供了编写好的Jmeter测试样例：</p>
 <p>sentinel测试.jmx</p>
 <p>打开jmeter，导入课前资料提供的测试样例：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715200537171.png" alt="image-20210715200537171"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715200537171.png" alt="image-20210715200537171"></p>
 <p>选择：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715200635414.png" alt="image-20210715200635414"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715200635414.png" alt="image-20210715200635414"></p>
 <p>20个用户，2秒内运行完，QPS是10，超过了5.</p>
 <p>选中<code>流控入门，QPS&lt;5</code>右键运行：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715200804594.png" alt="image-20210715200804594"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715200804594.png" alt="image-20210715200804594"></p>
 <blockquote>
 <p>注意，不要点击菜单中的执行按钮来运行。</p>
 </blockquote>
 <p>结果：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715200853671.png" alt="image-20210715200853671"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715200853671.png" alt="image-20210715200853671"></p>
 <p>可以看到，成功的请求每次只有5个</p>
 <h2 id="2-2-流控模式"><a href="#2-2-流控模式" class="headerlink" title="2.2.流控模式"></a>2.2.流控模式</h2><p>在添加限流规则时，点击高级选项，可以选择三种<strong>流控模式</strong>：</p>
 <ul>
@@ -703,11 +703,11 @@
 <li>关联：统计与当前资源相关的另一个资源，触发阈值时，对当前资源限流</li>
 <li>链路：统计从指定链路访问到本资源的请求，触发阈值时，对指定链路限流</li>
 </ul>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210914113111567.png" alt="image-20210914113111567"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210914113111567.png" alt="image-20210914113111567"></p>
 <p>快速入门测试的就是直接模式。</p>
 <h3 id="2-2-1-关联模式"><a href="#2-2-1-关联模式" class="headerlink" title="2.2.1.关联模式"></a>2.2.1.关联模式</h3><p><strong>关联模式</strong>：统计与当前资源相关的另一个资源，触发阈值时，对当前资源限流</p>
 <p><strong>配置规则</strong>：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715202540786.png" alt="image-20210715202540786"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715202540786.png" alt="image-20210715202540786"></p>
 <p><strong>语法说明</strong>：当/write资源访问量触发阈值时，就会对/read资源限流，避免影响/write资源。</p>
 <p><strong>使用场景</strong>：比如用户支付时需要修改订单状态，同时用户要查询订单。查询和修改操作会争抢数据库锁，产生竞争。业务需求是优先支付和更新订单的业务，因此当修改订单业务触发阈值时，需要对查询订单业务限流。</p>
 <p><strong>需求说明</strong>：</p>
@@ -724,23 +724,23 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/update"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">updateOrder</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"更新订单成功"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>重启服务，查看sentinel控制台的簇点链路：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716101805951.png" alt="image-20210716101805951"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716101805951.png" alt="image-20210716101805951"></p>
 <p>3）配置流控规则</p>
 <p><strong>对哪个端点限流，就对谁配置流控规则</strong>，就点击哪个端点后面的按钮。我们是对订单查询/order/query限流，因此点击它后面的按钮：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716101934499.png" alt="image-20210716101934499"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716101934499.png" alt="image-20210716101934499"></p>
 <p>在表单中填写流控规则：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716102103814.png" alt="image-20210716102103814"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716102103814.png" alt="image-20210716102103814"></p>
 <p>4）在Jmeter测试</p>
 <p>选择《流控模式-关联》：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716102416266.png" alt="image-20210716102416266"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716102416266.png" alt="image-20210716102416266"></p>
 <p>可以看到1000个用户，100秒，因此QPS为10，超过了我们设定的阈值：5</p>
 <p>查看http请求：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716102532554.png" alt="image-20210716102532554"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716102532554.png" alt="image-20210716102532554"></p>
 <p>请求的目标是/order/update，这样这个断点就会触发阈值。</p>
 <p>但限流的目标是/order/query，我们在浏览器访问，可以发现：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716102636030.png" alt="image-20210716102636030"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716102636030.png" alt="image-20210716102636030"></p>
 <p>确实被限流了。</p>
-<h4 id="5）总结"><a href="#5）总结" class="headerlink" title="5）总结"></a>5）总结</h4><p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716103143002.png" alt="image-20210716103143002"></p>
+<h4 id="5）总结"><a href="#5）总结" class="headerlink" title="5）总结"></a>5）总结</h4><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716103143002.png" alt="image-20210716103143002"></p>
 <h3 id="2-2-2-链路模式"><a href="#2-2-2-链路模式" class="headerlink" title="2.2.2.链路模式"></a>2.2.2.链路模式</h3><p><strong>链路模式</strong>：只针对从指定链路访问到本资源的请求做统计，判断是否超过阈值。</p>
 <p><strong>配置示例</strong>：</p>
 <p>例如有两条请求链路：</p>
@@ -751,7 +751,7 @@
 </li>
 </ul>
 <p>如果只希望统计从/test2进入到/common的请求，则可以这样配置：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716103536346.png" alt="image-20210716103536346"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716103536346.png" alt="image-20210716103536346"></p>
 <p><strong>实战案例</strong></p>
 <p>需求：有查询订单和创建订单业务，两者都需要查询商品。针对从查询订单进入到查询商品的请求统计，并设置限流。</p>
 <p>步骤：</p>
@@ -784,29 +784,29 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  cloud:</span></span><br><span class="line"><span class="attr">    sentinel:</span></span><br><span class="line"><span class="attr">      web-context-unify:</span> <span class="literal">false</span> <span class="comment"># 关闭context整合</span></span><br></pre></td></tr></table></figure>
 
 <p>重启服务，访问/order/query和/order/save，可以查看到sentinel的簇点链路规则中，出现了新的资源：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105227163.png" alt="image-20210716105227163"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105227163.png" alt="image-20210716105227163"></p>
 <h4 id="5）添加流控规则"><a href="#5）添加流控规则" class="headerlink" title="5）添加流控规则"></a>5）添加流控规则</h4><p>点击goods资源后面的流控按钮，在弹出的表单中填写下面信息：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105408723.png" alt="image-20210716105408723"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105408723.png" alt="image-20210716105408723"></p>
 <p>只统计从/order/query进入/goods的资源，QPS阈值为2，超出则被限流。</p>
 <h4 id="6）Jmeter测试"><a href="#6）Jmeter测试" class="headerlink" title="6）Jmeter测试"></a>6）Jmeter测试</h4><p>选择《流控模式-链路》：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105612312.png" alt="image-20210716105612312"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105612312.png" alt="image-20210716105612312"></p>
 <p>可以看到这里200个用户，50秒内发完，QPS为4，超过了我们设定的阈值2</p>
 <p>一个http请求是访问/order/save：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105812789.png" alt="image-20210716105812789"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105812789.png" alt="image-20210716105812789"></p>
 <p>运行的结果：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716110027064.png" alt="image-20210716110027064"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716110027064.png" alt="image-20210716110027064"></p>
 <p>完全不受影响。</p>
 <p>另一个是访问/order/query：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105855951.png" alt="image-20210716105855951"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105855951.png" alt="image-20210716105855951"></p>
 <p>运行结果：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105956401.png" alt="image-20210716105956401"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716105956401.png" alt="image-20210716105956401"></p>
 <p>每次只有2个通过。</p>
 <h3 id="2-2-3-总结"><a href="#2-2-3-总结" class="headerlink" title="2.2.3.总结"></a>2.2.3.总结</h3><p>流控模式有哪些？</p>
 <p>•直接：对当前资源限流</p>
 <p>•关联：高优先级资源触发阈值，对低优先级资源限流。</p>
 <p>•链路：阈值统计时，只统计从指定资源进入当前资源的请求，是对请求来源的限流</p>
 <h2 id="2-3-流控效果"><a href="#2-3-流控效果" class="headerlink" title="2.3.流控效果"></a>2.3.流控效果</h2><p>在流控的高级选项中，还有一个流控效果选项：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716110225104.png" alt="image-20210716110225104"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716110225104.png" alt="image-20210716110225104"></p>
 <p>流控效果是指请求达到流控阈值时应该采取的措施，包括三种：</p>
 <ul>
 <li><p>快速失败：达到阈值后，新的请求会被立即拒绝并抛出FlowException异常。是默认的处理方式。</p>
@@ -819,26 +819,26 @@
 <h3 id="2-3-1-warm-up"><a href="#2-3-1-warm-up" class="headerlink" title="2.3.1.warm up"></a>2.3.1.warm up</h3><p>阈值一般是一个微服务能承担的最大QPS，但是<strong>一个服务刚刚启动时</strong>，一切资源尚未初始化（<strong>冷启动</strong>），如果直接将QPS跑到最大值，可能导致服务瞬间宕机。</p>
 <p>warm up也叫<strong>预热模式</strong>，是应对服务冷启动的一种方案。请求阈值初始值是 maxThreshold / coldFactor，持续指定时长后，逐渐提高到maxThreshold值。而coldFactor的默认值是3.</p>
 <p>例如，我设置QPS的maxThreshold为10，预热时间为5秒，那么初始阈值就是 10 / 3 ，也就是3，然后在5秒后逐渐增长到10.</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716110629796.png" alt="image-20210716110629796"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716110629796.png" alt="image-20210716110629796"></p>
 <p><strong>案例</strong></p>
 <p>需求：给/order/{orderId}这个资源设置限流，最大QPS为10，利用warm up效果，预热时长为5秒</p>
-<h4 id="1）配置流控规则："><a href="#1）配置流控规则：" class="headerlink" title="1）配置流控规则："></a>1）配置流控规则：</h4><p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111012387.png" alt="image-20210716111012387"></p>
+<h4 id="1）配置流控规则："><a href="#1）配置流控规则：" class="headerlink" title="1）配置流控规则："></a>1）配置流控规则：</h4><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111012387.png" alt="image-20210716111012387"></p>
 <h4 id="2）Jmeter测试"><a href="#2）Jmeter测试" class="headerlink" title="2）Jmeter测试"></a>2）Jmeter测试</h4><p>选择《流控效果，warm up》：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111136699.png" alt="image-20210716111136699"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111136699.png" alt="image-20210716111136699"></p>
 <p>QPS为10.</p>
 <p>刚刚启动时，大部分请求失败，成功的只有3个，说明QPS被限定在3：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111303701.png" alt="image-20210716111303701"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111303701.png" alt="image-20210716111303701"></p>
 <p>随着时间推移，成功比例越来越高：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111404717.png" alt="image-20210716111404717"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111404717.png" alt="image-20210716111404717"></p>
 <p>到Sentinel控制台查看实时监控：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111526480.png" alt="image-20210716111526480"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111526480.png" alt="image-20210716111526480"></p>
 <p>一段时间后：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111658541.png" alt="image-20210716111658541"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716111658541.png" alt="image-20210716111658541"></p>
 <h3 id="2-3-2-排队等待"><a href="#2-3-2-排队等待" class="headerlink" title="2.3.2.排队等待"></a>2.3.2.排队等待</h3><p>当请求超过QPS阈值时，快速失败和warm up 会拒绝新的请求并抛出异常。</p>
 <p>而排队等待则是让所有请求进入一个队列中，然后按照阈值允许的时间间隔依次执行。后来的请求必须等待前面执行完成，如果请求预期的等待时间超出最大时长，则会被拒绝。</p>
 <p>工作原理</p>
 <p>例如：QPS = 5，意味着每200ms处理一个队列中的请求；timeout = 2000，意味着<strong>预期等待时长</strong>超过2000ms的请求会被拒绝并抛出异常。</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210914120217179.png" alt="image-20210914120217179"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210914120217179.png" alt="image-20210914120217179"></p>
 <p>那什么叫做预期等待时长呢？</p>
 <p>比如现在一下子来了12 个请求，因为每200ms执行一个请求，那么：</p>
 <ul>
@@ -846,25 +846,25 @@
 <li>第12个请求的预期等待时长 = 200 * （12-1） = 2200ms</li>
 </ul>
 <p>现在，第1秒同时接收到10个请求，但第2秒只有1个请求，此时QPS的曲线这样的：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716113147176.png" alt="image-20210716113147176"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716113147176.png" alt="image-20210716113147176"></p>
 <p>如果使用队列模式做流控，所有进入的请求都要排队，以固定的200ms的间隔执行，QPS会变的很平滑：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716113426524.png" alt="image-20210716113426524"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716113426524.png" alt="image-20210716113426524"></p>
 <p>平滑的QPS曲线，对于服务器来说是更友好的。</p>
 <p><strong>案例</strong></p>
 <p>需求：给/order/{orderId}这个资源设置限流，最大QPS为10，利用排队的流控效果，超时时长设置为5s</p>
-<h4 id="1）添加流控规则"><a href="#1）添加流控规则" class="headerlink" title="1）添加流控规则"></a>1）添加流控规则</h4><p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114048918.png" alt="image-20210716114048918"></p>
+<h4 id="1）添加流控规则"><a href="#1）添加流控规则" class="headerlink" title="1）添加流控规则"></a>1）添加流控规则</h4><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114048918.png" alt="image-20210716114048918"></p>
 <h4 id="2）Jmeter测试-1"><a href="#2）Jmeter测试-1" class="headerlink" title="2）Jmeter测试"></a>2）Jmeter测试</h4><p>选择《流控效果，队列》：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114243558.png" alt="image-20210716114243558"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114243558.png" alt="image-20210716114243558"></p>
 <p>QPS为15，已经超过了我们设定的10。</p>
 <p>如果是之前的 快速失败、warmup模式，超出的请求应该会直接报错。</p>
 <p>但是我们看看队列模式的运行结果：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114429361.png" alt="image-20210716114429361"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114429361.png" alt="image-20210716114429361"></p>
 <p>全部都通过了。</p>
 <p>再去sentinel查看实时监控的QPS曲线：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114522935.png" alt="image-20210716114522935"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114522935.png" alt="image-20210716114522935"></p>
 <p>QPS非常平滑，一致保持在10，但是超出的请求没有被拒绝，而是放入队列。因此<strong>响应时间</strong>（等待时间）会越来越长。</p>
 <p>当队列满了以后，才会有部分请求失败：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114651137.png" alt="image-20210716114651137"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716114651137.png" alt="image-20210716114651137"></p>
 <h3 id="2-3-3-总结"><a href="#2-3-3-总结" class="headerlink" title="2.3.3.总结"></a>2.3.3.总结</h3><p>流控效果有哪些？</p>
 <ul>
 <li><p>快速失败：QPS超过阈值时，拒绝新的请求</p>
@@ -876,16 +876,16 @@
 </ul>
 <h2 id="2-4-热点参数限流"><a href="#2-4-热点参数限流" class="headerlink" title="2.4.热点参数限流"></a>2.4.热点参数限流</h2><p>之前的限流是统计访问某个资源的所有请求，判断是否超过QPS阈值。而热点参数限流是<strong>分别统计参数值相同的请求</strong>，判断是否超过QPS阈值。</p>
 <h3 id="2-4-1-全局参数限流"><a href="#2-4-1-全局参数限流" class="headerlink" title="2.4.1.全局参数限流"></a>2.4.1.全局参数限流</h3><p>例如，一个根据id查询商品的接口：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716115014663.png" alt="image-20210716115014663"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716115014663.png" alt="image-20210716115014663"></p>
 <p>访问/goods/{id}的请求中，id参数值会有变化，热点参数限流会根据参数值分别统计QPS，统计结果：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716115131463.png" alt="image-20210716115131463"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716115131463.png" alt="image-20210716115131463"></p>
 <p>当id=1的请求触发阈值被限流时，id值不为1的请求不受影响。</p>
 <p>配置示例：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716115232426.png" alt="image-20210716115232426"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716115232426.png" alt="image-20210716115232426"></p>
 <p>代表的含义是：对hot这个资源的0号参数（第一个参数）做统计，每1秒<strong>相同参数值</strong>的请求数不能超过5</p>
 <h3 id="2-4-2-热点参数限流"><a href="#2-4-2-热点参数限流" class="headerlink" title="2.4.2.热点参数限流"></a>2.4.2.热点参数限流</h3><p>刚才的配置中，对查询商品这个接口的所有商品一视同仁，QPS都限定为5.</p>
 <p>而在实际开发中，可能部分商品是热点商品，例如秒杀商品，我们希望这部分商品的QPS限制与其它商品不一样，高一些。那就需要配置热点参数限流的高级选项了：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716115717523.png" alt="image-20210716115717523"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716115717523.png" alt="image-20210716115717523"></p>
 <p>结合上一个配置，这里的含义是对0号的long类型参数限流，每1秒相同参数的QPS不能超过5，有两个例外：</p>
 <p>•如果参数值是100，则每1秒允许的QPS为10</p>
 <p>•如果参数值是101，则每1秒允许的QPS为15</p>
@@ -895,36 +895,36 @@
 <p>•给103这个参数设置例外：每1秒请求量不超过10</p>
 <p><strong>注意事项</strong>：热点参数限流对<strong>默认的SpringMVC资源无效，需要利用@SentinelResource注解标记资源</strong></p>
 <h4 id="1）标记资源"><a href="#1）标记资源" class="headerlink" title="1）标记资源"></a>1）标记资源</h4><p>给order-service中的OrderController中的/order/{orderId}资源添加注解：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120033572.png" alt="image-20210716120033572"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120033572.png" alt="image-20210716120033572"></p>
 <h4 id="2）热点参数限流规则"><a href="#2）热点参数限流规则" class="headerlink" title="2）热点参数限流规则"></a>2）热点参数限流规则</h4><p>访问该接口，可以看到我们标记的hot资源出现了：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120208509.png" alt="image-20210716120208509"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120208509.png" alt="image-20210716120208509"></p>
 <p>这里不要点击hot后面的按钮，页面有BUG</p>
 <p>点击左侧菜单中<strong>热点规则</strong>菜单：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120319009.png" alt="image-20210716120319009"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120319009.png" alt="image-20210716120319009"></p>
 <p>点击新增，填写表单：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120536714.png" alt="image-20210716120536714"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120536714.png" alt="image-20210716120536714"></p>
 <h4 id="3）Jmeter测试"><a href="#3）Jmeter测试" class="headerlink" title="3）Jmeter测试"></a>3）Jmeter测试</h4><p>选择《热点参数限流 QPS1》：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120754527.png" alt="image-20210716120754527"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120754527.png" alt="image-20210716120754527"></p>
 <p>这里发起请求的QPS为5.</p>
 <p>包含3个http请求：</p>
 <p>普通参数，QPS阈值为2</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120840501.png" alt="image-20210716120840501"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120840501.png" alt="image-20210716120840501"></p>
 <p>运行结果：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716121105567.png" alt="image-20210716121105567"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716121105567.png" alt="image-20210716121105567"></p>
 <p>例外项，QPS阈值为4</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120900365.png" alt="image-20210716120900365"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120900365.png" alt="image-20210716120900365"></p>
 <p>运行结果：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716121201630.png" alt="image-20210716121201630"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716121201630.png" alt="image-20210716121201630"></p>
 <p>例外项，QPS阈值为10</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120919131.png" alt="image-20210716120919131"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716120919131.png" alt="image-20210716120919131"></p>
 <p>运行结果：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716121220305.png" alt="image-20210716121220305"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716121220305.png" alt="image-20210716121220305"></p>
 <h1 id="3-隔离和降级"><a href="#3-隔离和降级" class="headerlink" title="3.隔离和降级"></a>3.隔离和降级</h1><p>限流是一种预防措施，虽然限流可以尽量避免因高并发而引起的服务故障，但服务还会因为其它原因而故障。</p>
 <p>而要将这些故障控制在一定范围，避免雪崩，就要靠<strong>线程隔离</strong>（舱壁模式）和<strong>熔断降级</strong>手段了。</p>
 <p><strong>线程隔离</strong>之前讲到过：调用者在调用服务提供者时，给每个调用的请求分配独立线程池，出现故障时，最多消耗这个线程池内资源，避免把调用者的所有资源耗尽。</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173215243.png" alt="image-20210715173215243"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173215243.png" alt="image-20210715173215243"></p>
 <p><strong>熔断降级</strong>：是在调用方这边加入断路器，统计对服务提供者的调用，如果调用的失败比例过高，则熔断该业务，不允许访问该服务的提供者了。</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173428073.png" alt="image-20210715173428073"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210715173428073.png" alt="image-20210715173428073"></p>
 <p>可以看到，不管是线程隔离还是熔断降级，都是对<strong>客户端</strong>（调用方）的保护。需要在<strong>调用方</strong> 发起远程调用时做线程隔离、或者服务熔断。</p>
 <p>而我们的微服务远程调用都是基于Feign来完成的，因此我们需要将Feign与Sentinel整合，在Feign里面实现线程隔离和服务熔断。</p>
 <h2 id="3-1-FeignClient整合Sentinel"><a href="#3-1-FeignClient整合Sentinel" class="headerlink" title="3.1.FeignClient整合Sentinel"></a>3.1.FeignClient整合Sentinel</h2><p>SpringCloud中，微服务调用都是通过Feign来实现的，因此做客户端保护必须整合Feign和Sentinel。</p>
@@ -937,7 +937,7 @@
 <p>②方式二：FallbackFactory，可以对远程调用的异常做处理，我们选择这种</p>
 <p>这里我们演示方式二的失败降级处理。</p>
 <p><strong>步骤一</strong>：在feing-api项目中定义类，实现FallbackFactory：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716122403502.png" alt="image-20210716122403502"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716122403502.png" alt="image-20210716122403502"></p>
 <p>代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.feign.clients.fallback;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.itcast.feign.clients.UserClient;</span><br><span class="line"><span class="keyword">import</span> cn.itcast.feign.pojo.User;</span><br><span class="line"><span class="keyword">import</span> feign.hystrix.FallbackFactory;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserClientFallbackFactory</span> <span class="keyword">implements</span> <span class="title">FallbackFactory</span>&lt;<span class="title">UserClient</span>&gt; </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> UserClient <span class="title">create</span><span class="params">(Throwable throwable)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> UserClient() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> User <span class="title">findById</span><span class="params">(Long id)</span> </span>&#123;</span><br><span class="line">                log.error(<span class="string">"查询用户异常"</span>, throwable);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">new</span> User();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -948,7 +948,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cn.itcast.feign.clients.fallback.UserClientFallbackFactory;</span><br><span class="line"><span class="keyword">import</span> cn.itcast.feign.pojo.User;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cloud.openfeign.FeignClient;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line"></span><br><span class="line"><span class="meta">@FeignClient</span>(value = <span class="string">"userservice"</span>, fallbackFactory = UserClientFallbackFactory.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">UserClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/user/&#123;id&#125;"</span>)</span><br><span class="line">    <span class="function">User <span class="title">findById</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Long id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>重启后，访问一次订单查询业务，然后查看sentinel控制台，可以看到新的簇点链路：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123705780.png" alt="image-20210716123705780"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123705780.png" alt="image-20210716123705780"></p>
 <h3 id="3-1-3-总结"><a href="#3-1-3-总结" class="headerlink" title="3.1.3.总结"></a>3.1.3.总结</h3><p>Sentinel支持的雪崩解决方案：</p>
 <ul>
 <li>线程隔离（仓壁模式）</li>
@@ -968,14 +968,14 @@
 </li>
 </ul>
 <p>如图：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123036937.png" alt="image-20210716123036937"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123036937.png" alt="image-20210716123036937"></p>
 <p><strong>线程池隔离</strong>：给每个服务调用业务分配一个线程池，<strong>利用线程池本身实现隔离效果</strong></p>
 <p><strong>信号量隔离</strong>：不创建线程池，而是计数器模式，记录业务使用的线程数量，达到信号量上限时，禁止新的请求。</p>
 <p>两者的优缺点：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123240518.png" alt="image-20210716123240518"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123240518.png" alt="image-20210716123240518"></p>
 <h3 id="3-2-2-sentinel的线程隔离"><a href="#3-2-2-sentinel的线程隔离" class="headerlink" title="3.2.2.sentinel的线程隔离"></a>3.2.2.sentinel的线程隔离</h3><p><strong>用法说明</strong>：</p>
 <p>在添加限流规则时，可以选择两种阈值类型：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123411217.png" alt="image-20210716123411217"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123411217.png" alt="image-20210716123411217"></p>
 <ul>
 <li><p>QPS：就是每秒的请求数，在快速入门中已经演示过</p>
 </li>
@@ -984,14 +984,14 @@
 </ul>
 <p><strong>案例需求</strong>：给 order-service服务中的UserClient的查询用户接口设置流控规则，线程数不能超过 2。然后利用jemeter测试。</p>
 <h4 id="1）配置隔离规则"><a href="#1）配置隔离规则" class="headerlink" title="1）配置隔离规则"></a>1）配置隔离规则</h4><p>选择feign接口后面的流控按钮：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123831992.png" alt="image-20210716123831992"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123831992.png" alt="image-20210716123831992"></p>
 <p>填写表单：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123936844.png" alt="image-20210716123936844"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716123936844.png" alt="image-20210716123936844"></p>
 <h4 id="2）Jmeter测试-2"><a href="#2）Jmeter测试-2" class="headerlink" title="2）Jmeter测试"></a>2）Jmeter测试</h4><p>选择《阈值类型-线程数&lt;2》：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716124229894.png" alt="image-20210716124229894"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716124229894.png" alt="image-20210716124229894"></p>
 <p>一次发生10个请求，有较大概率并发线程数超过2，而超出的请求会走之前定义的失败降级逻辑。</p>
 <p>查看运行结果：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716124147820.png" alt="image-20210716124147820"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716124147820.png" alt="image-20210716124147820"></p>
 <p>发现虽然结果都是通过了，不过部分请求得到的响应是降级返回的null信息。</p>
 <h3 id="3-2-3-总结"><a href="#3-2-3-总结" class="headerlink" title="3.2.3.总结"></a>3.2.3.总结</h3><p>线程隔离的两种手段是？</p>
 <ul>
@@ -1010,7 +1010,7 @@
 </ul>
 <h2 id="3-3-熔断降级"><a href="#3-3-熔断降级" class="headerlink" title="3.3.熔断降级"></a>3.3.熔断降级</h2><p>熔断降级是解决雪崩问题的重要手段。其思路是由<strong>断路器</strong>统计服务调用的异常比例、慢请求比例，如果超出阈值则会<strong>熔断</strong>该服务。即拦截访问该服务的一切请求；而当服务恢复时，断路器会放行访问该服务的请求。</p>
 <p>断路器控制熔断和放行是通过状态机来完成的：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716130958518.png" alt="image-20210716130958518"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716130958518.png" alt="image-20210716130958518"></p>
 <p>状态机包括三个状态：</p>
 <ul>
 <li>closed：关闭状态，断路器放行所有请求，并开始统计异常比例、慢请求比例。超过阈值则切换到open状态</li>
@@ -1024,49 +1024,49 @@
 <p><strong>断路器熔断策略有三种：慢调用、异常比例、异常数</strong></p>
 <h3 id="3-3-1-慢调用"><a href="#3-3-1-慢调用" class="headerlink" title="3.3.1.慢调用"></a>3.3.1.慢调用</h3><p><strong>慢调用</strong>：业务的响应时长（RT，Response Time）大于指定时长的请求认定为慢调用请求。在指定时间内，如果请求数量超过设定的最小数量，慢调用比例大于设定的阈值，则触发熔断。</p>
 <p>例如：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716145934347.png" alt="image-20210716145934347"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716145934347.png" alt="image-20210716145934347"></p>
 <p>解读：RT超过500ms的调用是慢调用，统计最近10000ms内的请求，如果请求量超过10次，并且慢调用比例不低于0.5，则触发熔断，熔断时长为5秒。然后进入half-open状态，放行一次请求做测试。</p>
 <p><strong>案例</strong></p>
 <p>需求：给 UserClient的查询用户接口设置降级规则，慢调用的RT阈值为50ms，统计时间为1秒，最小请求数量为5，失败阈值比例为0.4，熔断时长为5</p>
 <h4 id="1）设置慢调用"><a href="#1）设置慢调用" class="headerlink" title="1）设置慢调用"></a>1）设置慢调用</h4><p>修改user-service中的/user/{id}这个接口的业务。通过休眠模拟一个延迟时间：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150234787.png" alt="image-20210716150234787"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150234787.png" alt="image-20210716150234787"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 路径： /user/110</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> id 用户id</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 用户</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@GetMapping</span>(<span class="string">"/&#123;id&#125;"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">queryById</span><span class="params">(@PathVariable(<span class="string">"id"</span>)</span> Long id,</span></span><br><span class="line"><span class="function">                      @<span class="title">RequestHeader</span><span class="params">(value = <span class="string">"Truth"</span>, required = <span class="keyword">false</span>)</span> String truth) <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (id == <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">// 休眠，触发熔断</span></span><br><span class="line">        Thread.sleep(<span class="number">60</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (id == <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"故意出错，触发熔断"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> userService.queryById(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>此时，orderId=101的订单，关联的是id为1的用户，调用时长为60ms：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150510956.png" alt="image-20210716150510956"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150510956.png" alt="image-20210716150510956"></p>
 <p>orderId=102的订单，关联的是id为2的用户，调用时长为非常短；</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150605208.png" alt="image-20210716150605208"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150605208.png" alt="image-20210716150605208"></p>
 <h4 id="2）设置熔断规则"><a href="#2）设置熔断规则" class="headerlink" title="2）设置熔断规则"></a>2）设置熔断规则</h4><p>下面，给feign接口设置降级规则：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150654094.png" alt="image-20210716150654094"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150654094.png" alt="image-20210716150654094"></p>
 <p>规则：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150740434.png" alt="image-20210716150740434"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150740434.png" alt="image-20210716150740434"></p>
 <p>超过50ms的请求都会被认为是慢请求</p>
-<h4 id="3）测试"><a href="#3）测试" class="headerlink" title="3）测试"></a>3）测试</h4><p>在浏览器访问：<a href="http://localhost:8088/order/101，快速**刷新5次**，可以发现：">http://localhost:8088/order/101，快速**刷新5次**，可以发现：</a></p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150911004.png" alt="image-20210716150911004"></p>
+<h4 id="3）测试"><a href="#3）测试" class="headerlink" title="3）测试"></a>3）测试</h4><p>在浏览器访问：<a href="http://localhost:8088/order/101，快速**刷新5次**，可以发现：" target="_blank" rel="noopener">http://localhost:8088/order/101，快速**刷新5次**，可以发现：</a></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150911004.png" alt="image-20210716150911004"></p>
 <p>触发了熔断，请求时长缩短至5ms，快速失败了，并且走降级逻辑，返回的null</p>
-<p>在浏览器访问：<a href="http://localhost:8088/order/102，竟然也被熔断了：">http://localhost:8088/order/102，竟然也被熔断了：</a></p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151107785.png" alt="image-20210716151107785"></p>
+<p>在浏览器访问：<a href="http://localhost:8088/order/102，竟然也被熔断了：" target="_blank" rel="noopener">http://localhost:8088/order/102，竟然也被熔断了：</a></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151107785.png" alt="image-20210716151107785"></p>
 <h3 id="3-3-2-异常比例、异常数"><a href="#3-3-2-异常比例、异常数" class="headerlink" title="3.3.2.异常比例、异常数"></a>3.3.2.异常比例、异常数</h3><p><strong>异常比例或异常数</strong>：统计指定时间内的调用，如果调用次数超过指定请求数，并且出现异常的比例达到设定的比例阈值（或超过指定异常数），则触发熔断。</p>
 <p>例如，一个异常比例设置：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716131430682.png" alt="image-20210716131430682"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716131430682.png" alt="image-20210716131430682"></p>
 <p>解读：统计最近1000ms内的请求，如果请求量超过10次，并且异常比例不低于0.4，则触发熔断。</p>
 <p>一个异常数设置：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716131522912.png" alt="image-20210716131522912"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716131522912.png" alt="image-20210716131522912"></p>
 <p>解读：统计最近1000ms内的请求，如果请求量超过10次，并且异常比例不低于2次，则触发熔断。</p>
 <p><strong>案例</strong></p>
 <p>需求：给 UserClient的查询用户接口设置降级规则，统计时间为1秒，最小请求数量为5，失败阈值比例为0.4，熔断时长为5s</p>
 <h4 id="1）设置异常请求"><a href="#1）设置异常请求" class="headerlink" title="1）设置异常请求"></a>1）设置异常请求</h4><p>首先，修改user-service中的/user/{id}这个接口的业务。手动抛出异常，以触发异常比例的熔断：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151348183.png" alt="image-20210716151348183"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151348183.png" alt="image-20210716151348183"></p>
 <p>也就是说，id 为 2时，就会触发异常</p>
 <h4 id="2）设置熔断规则-1"><a href="#2）设置熔断规则-1" class="headerlink" title="2）设置熔断规则"></a>2）设置熔断规则</h4><p>下面，给feign接口设置降级规则：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150654094.png" alt="image-20210716150654094"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716150654094.png" alt="image-20210716150654094"></p>
 <p>规则：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151538785.png" alt="image-20210716151538785"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151538785.png" alt="image-20210716151538785"></p>
 <p>在5次请求中，只要异常比例超过0.4，也就是有2次以上的异常，就会触发熔断。</p>
-<h4 id="3）测试-1"><a href="#3）测试-1" class="headerlink" title="3）测试"></a>3）测试</h4><p>在浏览器快速访问：<a href="http://localhost:8088/order/102，快速刷新5次，触发熔断：">http://localhost:8088/order/102，快速刷新5次，触发熔断：</a></p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151722916.png" alt="image-20210716151722916"></p>
+<h4 id="3）测试-1"><a href="#3）测试-1" class="headerlink" title="3）测试"></a>3）测试</h4><p>在浏览器快速访问：<a href="http://localhost:8088/order/102，快速刷新5次，触发熔断：" target="_blank" rel="noopener">http://localhost:8088/order/102，快速刷新5次，触发熔断：</a></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151722916.png" alt="image-20210716151722916"></p>
 <p>此时，我们去访问本来应该正常的103：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151844817.png" alt="image-20210716151844817"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716151844817.png" alt="image-20210716151844817"></p>
 <h1 id="4-授权规则"><a href="#4-授权规则" class="headerlink" title="4.授权规则"></a>4.授权规则</h1><p>授权规则可以对请求方来源做判断和控制。</p>
 <h2 id="4-1-授权规则"><a href="#4-1-授权规则" class="headerlink" title="4.1.授权规则"></a>4.1.授权规则</h2><h3 id="4-1-1-基本规则"><a href="#4-1-1-基本规则" class="headerlink" title="4.1.1.基本规则"></a>4.1.1.基本规则</h3><p>授权规则可以对调用方的来源做控制，有白名单和黑名单两种方式。</p>
 <ul>
@@ -1076,7 +1076,7 @@
 </li>
 </ul>
 <p>点击左侧菜单的授权，可以看到授权规则：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716152010750.png" alt="image-20210716152010750"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716152010750.png" alt="image-20210716152010750"></p>
 <ul>
 <li><p>资源名：就是受保护的资源，例如/order/{orderId}</p>
 </li>
@@ -1088,7 +1088,7 @@
 </li>
 </ul>
 <p>比如：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716152349191.png" alt="image-20210716152349191"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716152349191.png" alt="image-20210716152349191"></p>
 <p>我们允许请求从gateway到order-service，不允许浏览器访问order-service，那么白名单中就要填写<strong>网关的来源名称（origin）</strong>。</p>
 <h3 id="4-1-2-如何获取origin"><a href="#4-1-2-如何获取origin" class="headerlink" title="4.1.2.如何获取origin"></a>4.1.2.如何获取origin</h3><p>Sentinel是通过RequestOriginParser这个接口的parseOrigin来获取请求的来源的。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">RequestOriginParser</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 从请求request对象中获取origin，获取方式自定义</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">String <span class="title">parseOrigin</span><span class="params">(HttpServletRequest request)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1107,13 +1107,13 @@
 
 <p>这样，从gateway路由的所有请求都会带上origin头，值为gateway。而从其它地方到达微服务的请求则没有这个头。</p>
 <h3 id="4-1-4-配置授权规则"><a href="#4-1-4-配置授权规则" class="headerlink" title="4.1.4.配置授权规则"></a>4.1.4.配置授权规则</h3><p>接下来，我们添加一个授权规则，放行origin值为gateway的请求。</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153250134.png" alt="image-20210716153250134"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153250134.png" alt="image-20210716153250134"></p>
 <p>配置如下：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153301069.png" alt="image-20210716153301069"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153301069.png" alt="image-20210716153301069"></p>
 <p>现在，我们直接跳过网关，访问order-service服务：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153348396.png" alt="image-20210716153348396"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153348396.png" alt="image-20210716153348396"></p>
 <p>通过网关访问：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153434095.png" alt="image-20210716153434095"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153434095.png" alt="image-20210716153434095"></p>
 <h2 id="4-2-自定义异常结果"><a href="#4-2-自定义异常结果" class="headerlink" title="4.2.自定义异常结果"></a>4.2.自定义异常结果</h2><p>默认情况下，发生限流、降级、授权拦截时，都会抛出异常到调用方。异常结果都是flow limmiting（限流）。这样不够友好，无法得知是限流还是降级还是授权拦截。</p>
 <h3 id="4-2-1-异常类型"><a href="#4-2-1-异常类型" class="headerlink" title="4.2.1.异常类型"></a>4.2.1.异常类型</h3><p>而如果要自定义异常时的返回结果，需要实现BlockExceptionHandler接口：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">BlockExceptionHandler</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 处理请求被限流、降级、授权拦截时抛出的异常：BlockException</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">handle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, BlockException e)</span> <span class="keyword">throws</span> Exception</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1158,10 +1158,10 @@
 
 <p>重启测试，在不同场景下，会返回不同的异常消息.</p>
 <p>限流：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153938887.png" alt="image-20210716153938887"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716153938887.png" alt="image-20210716153938887"></p>
 <p>授权拦截时：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716154012736.png" alt="image-20210716154012736"></p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210914191612696.png" alt="image-20210914191612696"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716154012736.png" alt="image-20210716154012736"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210914191612696.png" alt="image-20210914191612696"></p>
 <h1 id="5-规则持久化"><a href="#5-规则持久化" class="headerlink" title="5.规则持久化"></a>5.规则持久化</h1><p>现在，sentinel的所有规则都是内存存储，重启后所有规则都会丢失。在生产环境下，我们必须确保这些规则的持久化，避免丢失。</p>
 <h2 id="5-1-规则管理模式"><a href="#5-1-规则管理模式" class="headerlink" title="5.1.规则管理模式"></a>5.1.规则管理模式</h2><p>规则是否能持久化，取决于规则管理模式，sentinel支持三种规则管理模式：</p>
 <ul>
@@ -1169,13 +1169,13 @@
 <li>pull模式</li>
 <li>push模式，推荐使用</li>
 </ul>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210914191847809.png" alt="image-20210914191847809"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210914191847809.png" alt="image-20210914191847809"></p>
 <h3 id="5-1-1-pull模式"><a href="#5-1-1-pull模式" class="headerlink" title="5.1.1.pull模式"></a>5.1.1.pull模式</h3><p>pull模式：控制台将配置的规则推送到Sentinel客户端，而客户端会将配置规则保存在本地文件或数据库中。以后会定时去本地文件或数据库中查询，更新本地规则。</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716154155238.png" alt="image-20210716154155238"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716154155238.png" alt="image-20210716154155238"></p>
 <h3 id="5-1-2-push模式"><a href="#5-1-2-push模式" class="headerlink" title="5.1.2.push模式"></a>5.1.2.push模式</h3><p>push模式：控制台将配置规则推送到远程配置中心，例如Nacos。Sentinel客户端监听Nacos，获取配置变更的推送消息，完成本地配置更新。</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716154215456.png" alt="image-20210716154215456"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716154215456.png" alt="image-20210716154215456"></p>
 <h2 id="5-2-实现push模式"><a href="#5-2-实现push模式" class="headerlink" title="5.2.实现push模式"></a>5.2.实现push模式</h2><p>详细步骤可以参考课前资料的《sentinel规则持久化》：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716154255466.png" alt="image-20210716154255466"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/image-20210716154255466.png" alt="image-20210716154255466"></p>
 
     </div>
 
@@ -1332,7 +1332,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>

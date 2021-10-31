@@ -57,26 +57,26 @@
 </script>
 
   <meta name="description" content="Nacos集群搭建1.集群结构图官方给出的Nacos集群图：SLB，Server Load Balancer，服务器负载均衡其中包含3个nacos节点，然后一个负载均衡器代理3个Nacos。这里负载均衡器可以使用nginx。我们计划的集群结构：三个nacos节点的地址：   节点 ip port    nacos1 192.168.150.1 8845   nacos2 192.168.150.1">
-<meta name="keywords" content="java,Nacos">
+<meta name="keywords" content="Nacos,java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Nacos集群搭建">
 <meta property="og:url" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/index.html">
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="Nacos集群搭建1.集群结构图官方给出的Nacos集群图：SLB，Server Load Balancer，服务器负载均衡其中包含3个nacos节点，然后一个负载均衡器代理3个Nacos。这里负载均衡器可以使用nginx。我们计划的集群结构：三个nacos节点的地址：   节点 ip port    nacos1 192.168.150.1 8845   nacos2 192.168.150.1">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409210621117.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409211355037.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409212119411.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210402161843337.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409212459292.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409213335538.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210410103253355.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210410103322874.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409210621117.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409211355037.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409212119411.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210402161843337.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409212459292.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409213335538.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210410103253355.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210410103322874.png">
 <meta property="og:updated_time" content="2021-10-31T05:03:50.140Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nacos集群搭建">
 <meta name="twitter:description" content="Nacos集群搭建1.集群结构图官方给出的Nacos集群图：SLB，Server Load Balancer，服务器负载均衡其中包含3个nacos节点，然后一个负载均衡器代理3个Nacos。这里负载均衡器可以使用nginx。我们计划的集群结构：三个nacos节点的地址：   节点 ip port    nacos1 192.168.150.1 8845   nacos2 192.168.150.1">
-<meta name="twitter:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409210621117.png">
+<meta name="twitter:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409210621117.png">
   <link rel="canonical" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/">
 
 
@@ -240,7 +240,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">10</span></a>
 
   </li>
       
@@ -380,7 +380,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Nacos集群搭建"><a href="#Nacos集群搭建" class="headerlink" title="Nacos集群搭建"></a>Nacos集群搭建</h1><h1 id="1-集群结构图"><a href="#1-集群结构图" class="headerlink" title="1.集群结构图"></a>1.集群结构图</h1><p>官方给出的Nacos集群图：</p><p><img src="//localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409210621117.png" alt="image-20210409210621117"></p><p>SLB，Server Load Balancer，服务器负载均衡</p><p>其中包含3个nacos节点，然后一个负载均衡器代理3个Nacos。这里负载均衡器可以使用nginx。</p><p>我们计划的集群结构：</p><p><img src="//localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409211355037.png" alt="image-20210409211355037"></p><p>三个nacos节点的地址：</p><table>
+        <h1 id="Nacos集群搭建"><a href="#Nacos集群搭建" class="headerlink" title="Nacos集群搭建"></a>Nacos集群搭建</h1><h1 id="1-集群结构图"><a href="#1-集群结构图" class="headerlink" title="1.集群结构图"></a>1.集群结构图</h1><p>官方给出的Nacos集群图：</p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409210621117.png" alt="image-20210409210621117"></p><p>SLB，Server Load Balancer，服务器负载均衡</p><p>其中包含3个nacos节点，然后一个负载均衡器代理3个Nacos。这里负载均衡器可以使用nginx。</p><p>我们计划的集群结构：</p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409211355037.png" alt="image-20210409211355037"></p><p>三个nacos节点的地址：</p><table>
 <thead>
 <tr>
 <th>节点</th>
@@ -427,16 +427,16 @@
 
 <h2 id="2-2-下载nacos"><a href="#2-2-下载nacos" class="headerlink" title="2.2.下载nacos"></a>2.2.下载nacos</h2><p>nacos在GitHub上有下载地址：<a href="https://github.com/alibaba/nacos/tags，可以选择任意版本下载。" target="_blank" rel="noopener">https://github.com/alibaba/nacos/tags，可以选择任意版本下载。</a></p>
 <p>本例中才用1.4.1版本：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409212119411.png" alt="image-20210409212119411"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409212119411.png" alt="image-20210409212119411"></p>
 <h2 id="2-3-配置Nacos"><a href="#2-3-配置Nacos" class="headerlink" title="2.3.配置Nacos"></a>2.3.配置Nacos</h2><p>将这个包解压到任意非中文目录下，如图：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210402161843337.png" alt="image-20210402161843337"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210402161843337.png" alt="image-20210402161843337"></p>
 <p>目录说明：</p>
 <ul>
 <li>bin：启动脚本</li>
 <li>conf：配置文件</li>
 </ul>
 <p>进入nacos的conf目录，修改配置文件cluster.conf.example，重命名为cluster.conf：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409212459292.png" alt="image-20210409212459292"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409212459292.png" alt="image-20210409212459292"></p>
 <p>然后添加内容：</p>
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">8845</span></span><br><span class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="number">.8846</span></span><br><span class="line"><span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="number">.8847</span></span><br></pre></td></tr></table></figure>
 
@@ -444,7 +444,7 @@
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">spring.datasource.platform</span>=<span class="string">mysql</span></span><br><span class="line"></span><br><span class="line"><span class="meta">db.num</span>=<span class="string">1</span></span><br><span class="line"></span><br><span class="line"><span class="meta">db.url.0</span>=<span class="string">jdbc:mysql://127.0.0.1:3306/nacos?characterEncoding=utf8&amp;connectTimeout=1000&amp;socketTimeout=3000&amp;autoReconnect=true&amp;useUnicode=true&amp;useSSL=false&amp;serverTimezone=UTC</span></span><br><span class="line"><span class="meta">db.user.0</span>=<span class="string">root</span></span><br><span class="line"><span class="meta">db.password.0</span>=<span class="string">123</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="2-4-启动"><a href="#2-4-启动" class="headerlink" title="2.4.启动"></a>2.4.启动</h2><p>将nacos文件夹复制三份，分别命名为：nacos1、nacos2、nacos3</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409213335538.png" alt="image-20210409213335538"> </p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409213335538.png" alt="image-20210409213335538"> </p>
 <p>然后分别修改三个文件夹中的application.properties，</p>
 <p>nacos1:</p>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">server.port</span>=<span class="string">8845</span></span><br></pre></td></tr></table></figure>
@@ -459,13 +459,13 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">startup</span><span class="selector-class">.cmd</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="2-5-nginx反向代理"><a href="#2-5-nginx反向代理" class="headerlink" title="2.5.nginx反向代理"></a>2.5.nginx反向代理</h2><p>找到课前资料提供的nginx安装包： </p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210410103253355.png" alt="image-20210410103253355"> </p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210410103253355.png" alt="image-20210410103253355"> </p>
 <p>解压到任意非中文目录下：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210410103322874.png" alt="image-20210410103322874"> </p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210410103322874.png" alt="image-20210410103322874"> </p>
 <p>修改conf/nginx.conf文件，配置如下：</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> nacos-cluster &#123;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:8845</span>;</span><br><span class="line">	<span class="attribute">server</span> <span class="number">127.0.0.1:8846</span>;</span><br><span class="line">	<span class="attribute">server</span> <span class="number">127.0.0.1:8847</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span>       <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span>  localhost;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> /nacos &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://nacos-cluster;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>而后在浏览器访问：<a href="http://localhost/nacos即可。">http://localhost/nacos即可。</a></p>
+<p>而后在浏览器访问：<a href="http://localhost/nacos即可。" target="_blank" rel="noopener">http://localhost/nacos即可。</a></p>
 <p>代码中application.yml文件配置如下：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  cloud:</span></span><br><span class="line"><span class="attr">    nacos:</span></span><br><span class="line"><span class="attr">      server-addr:</span> <span class="attr">localhost:80</span> <span class="comment"># Nacos地址</span></span><br></pre></td></tr></table></figure>
 
@@ -529,9 +529,9 @@
           
           <div class="post-tags">
             
-              <a href="/tags/java/" rel="tag"># java</a>
-            
               <a href="/tags/Nacos/" rel="tag"># Nacos</a>
+            
+              <a href="/tags/java/" rel="tag"># java</a>
             
           </div>
         
@@ -631,7 +631,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>

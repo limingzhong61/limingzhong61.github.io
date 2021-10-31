@@ -64,12 +64,12 @@
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="[TOC]web路径 web路径：    1.不以/开始的相对路径，找资源，以当前资源的路径为基准，经常容易出问题    2.以/开始的开始的相对路径，找资源，以服务器为标准（http//localhost/端口号)需要加项目名;    就是http//localhost/端口号/crud/…12345&amp;lt;%	pageContext.setAttribute(&quot;WEB_PATH&quot;, reque">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/ssm-crud/ssm-crud/E:%5Cpictures%5CLanguage%5Cssm%5Cssm%E6%95%B4%E5%90%88%5Cssm%E6%80%BB%E7%BB%93.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/ssm-crud/ssm-crud/E:%5Cpictures%5CLanguage%5Cssm%5Cssm%E6%95%B4%E5%90%88%5Cssm%E6%80%BB%E7%BB%93.png">
 <meta property="og:updated_time" content="2021-10-23T02:19:04.206Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ssm-crud">
 <meta name="twitter:description" content="[TOC]web路径 web路径：    1.不以/开始的相对路径，找资源，以当前资源的路径为基准，经常容易出问题    2.以/开始的开始的相对路径，找资源，以服务器为标准（http//localhost/端口号)需要加项目名;    就是http//localhost/端口号/crud/…12345&amp;lt;%	pageContext.setAttribute(&quot;WEB_PATH&quot;, reque">
-<meta name="twitter:image" content="https://localhost:4000/2019/10/java-note/ssm-crud/ssm-crud/E:%5Cpictures%5CLanguage%5Cssm%5Cssm%E6%95%B4%E5%90%88%5Cssm%E6%80%BB%E7%BB%93.png">
+<meta name="twitter:image" content="https://codeofli.github.io/2019/10/java-note/ssm-crud/ssm-crud/E:%5Cpictures%5CLanguage%5Cssm%5Cssm%E6%95%B4%E5%90%88%5Cssm%E6%80%BB%E7%BB%93.png">
   <link rel="canonical" href="https://codeofli.github.io/2019/10/java-note/ssm-crud/ssm-crud/">
 
 
@@ -233,7 +233,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">10</span></a>
 
   </li>
       
@@ -507,7 +507,7 @@
 
 <h1 id="sprigMVC自带HttpputFormContentFilter"><a href="#sprigMVC自带HttpputFormContentFilter" class="headerlink" title="sprigMVC自带HttpputFormContentFilter"></a>sprigMVC自带HttpputFormContentFilter</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">           * 解决方案</span></span><br><span class="line"><span class="comment">           * 要能支持直接发送PUT之类的请求，还要封装请求体中的数据</span></span><br><span class="line"><span class="comment">     * 1、配置上HttpputFormContentFilter；</span></span><br><span class="line"><span class="comment">     * 2、作用：将请求体中的数据解析包装成一个map。</span></span><br><span class="line"><span class="comment">     * 3、request被重新包装，request.getParameter()被重写，就会从自己封装的map中取数据</span></span><br><span class="line"><span class="comment">     * 员工更新方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> employee</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="meta">@PutMapping</span>(<span class="string">"/emp/&#123;empId&#125;"</span>)</span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Msg <span class="title">saveEmp</span><span class="params">(Employee employee,HttpServletRequest request)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"requestScope中的值："</span>+request.getParameter(<span class="string">"email"</span>));</span><br><span class="line">    System.out.println(employee);</span><br><span class="line">    employeeService.updateEmp(employee);</span><br><span class="line">    <span class="keyword">return</span> Msg.success();</span><br><span class="line">&#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="//localhost:4000/2019/10/java-note/ssm-crud/ssm-crud/E:%5Cpictures%5CLanguage%5Cssm%5Cssm%E6%95%B4%E5%90%88%5Cssm%E6%80%BB%E7%BB%93.png" alt></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/ssm-crud/ssm-crud/E:%5Cpictures%5CLanguage%5Cssm%5Cssm%E6%95%B4%E5%90%88%5Cssm%E6%80%BB%E7%BB%93.png" alt></p>
 
     </div>
 
@@ -664,7 +664,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>

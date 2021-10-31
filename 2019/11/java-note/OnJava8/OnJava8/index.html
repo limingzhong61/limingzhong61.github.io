@@ -64,14 +64,14 @@
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="简介OnJava8，thinkingInJava源作者作，被称为thinking in java 5. “我的语言极限，即是我的世界的极限。” ——路德维希·维特根斯坦（Wittgenstein） 就我个人而言，把一切事物都抽象成对象不仅是一项不必要的负担，同时还会招致许多设计朝着不好的方向发展。尽管如此，“对象”的概念依然有其闪光点。固执地要求所有东西都是一个对象（特别是一直到最底层级别）是一种">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://localhost:4000/2019/11/java-note/OnJava8/OnJava8/simple-collection-taxonomy.png">
-<meta property="og:image" content="https://localhost:4000/2019/11/java-note/OnJava8/OnJava8/collection.png">
-<meta property="og:image" content="https://localhost:4000/2019/11/java-note/OnJava8/OnJava8/map.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/java-note/OnJava8/OnJava8/simple-collection-taxonomy.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/java-note/OnJava8/OnJava8/collection.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/java-note/OnJava8/OnJava8/map.png">
 <meta property="og:updated_time" content="2021-10-23T02:19:02.855Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OnJava8">
 <meta name="twitter:description" content="简介OnJava8，thinkingInJava源作者作，被称为thinking in java 5. “我的语言极限，即是我的世界的极限。” ——路德维希·维特根斯坦（Wittgenstein） 就我个人而言，把一切事物都抽象成对象不仅是一项不必要的负担，同时还会招致许多设计朝着不好的方向发展。尽管如此，“对象”的概念依然有其闪光点。固执地要求所有东西都是一个对象（特别是一直到最底层级别）是一种">
-<meta name="twitter:image" content="https://localhost:4000/2019/11/java-note/OnJava8/OnJava8/simple-collection-taxonomy.png">
+<meta name="twitter:image" content="https://codeofli.github.io/2019/11/java-note/OnJava8/OnJava8/simple-collection-taxonomy.png">
   <link rel="canonical" href="https://codeofli.github.io/2019/11/java-note/OnJava8/OnJava8/">
 
 
@@ -235,7 +235,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">10</span></a>
 
   </li>
       
@@ -1590,7 +1590,7 @@
 </ol>
 <p>浏览一下Java集合的简图（不包含抽象类或遗留组件）会很有帮助。这里仅包括在一般情况下会碰到的接口和类。（译者注：下图为原著PDF中的截图，可能由于未知原因存在问题。这里可参考译者绘制版[^8]）</p>
 <p>[^8]: 下面是译者绘制的 Java 集合框架简图，黄色为接口，绿色为抽象类，蓝色为具体类。虚线箭头表示实现关系，实线箭头表示继承关系。</p>
-<p><img src="//localhost:4000/2019/11/java-note/OnJava8/OnJava8/simple-collection-taxonomy.png" alt="simple collection taxonomy"></p>
+<p><img src="//codeofli.github.io/2019/11/java-note/OnJava8/OnJava8/simple-collection-taxonomy.png" alt="simple collection taxonomy"></p>
 <h3 id="简单集合分类"><a href="#简单集合分类" class="headerlink" title="简单集合分类"></a>简单集合分类</h3><p>可以看到，实际上只有四个基本的集合组件： <strong>Map</strong> ， <strong>List</strong> ， <strong>Set</strong> 和 <strong>Queue</strong> ，它们各有两到三个实现版本（<strong>Queue</strong> 的 <strong>java.util.concurrent</strong> 实现未包含在此图中）。最常使用的集合用黑色粗线线框表示。</p>
 <p>虚线框表示接口，实线框表示普通的（具体的）类。带有空心箭头的虚线表示特定的类实现了一个接口。实心箭头表示某个类可以生成箭头指向的类的对象。例如，任何 <strong>Collection</strong> 都可以生成 <strong>Iterator</strong> ， <strong>List</strong> 可以生成 <strong>ListIterator</strong> （也能生成普通的 <strong>Iterator</strong> ，因为 <strong>List</strong> 继承自 <strong>Collection</strong> ）。</p>
 <p>下面的示例展示了各种不同的类在方法上的差异。实际代码来自<a href>泛型</a>章节，在这里只是调用它来产生输出。程序的输出还展示了在每个类或接口中所实现的接口：</p>
@@ -1600,7 +1600,7 @@
 <p>请注意，标记接口 <strong>java.util.RandomAccess</strong> 附加到了 <strong>ArrayList</strong> 上，但不附加到 <strong>LinkedList</strong> 上。这为根据特定 <strong>List</strong> 动态改变其行为的算法提供了信息。</p>
 <p>从面向对象的继承层次结构来看，这种组织结构确实有些奇怪。但是，当了解了 <strong>java.util</strong> 中更多的有关集合的内容后（特别是在<a href>附录：集合主题</a>中的内容），就会发现出了继承结构有点奇怪外，还有更多的问题。集合类库一直以来都是设计难题——解决这些问题涉及到要去满足经常彼此之间互为牵制的各方面需求。所以要做好准备，在各处做出妥协。</p>
 <p>尽管存在这些问题，但 Java 集合仍是在日常工作中使用的基本工具，它可以使程序更简洁、更强大、更有效。你可能需要一段时间才能熟悉集合类库的某些方面，但我想你很快就会找到自己的路子，来获得和使用这个类库中的类。</p>
-<p><img src="//localhost:4000/2019/11/java-note/OnJava8/OnJava8/collection.png" alt="collection"><br><img src="//localhost:4000/2019/11/java-note/OnJava8/OnJava8/map.png" alt="map"></p>
+<p><img src="//codeofli.github.io/2019/11/java-note/OnJava8/OnJava8/collection.png" alt="collection"><br><img src="//codeofli.github.io/2019/11/java-note/OnJava8/OnJava8/map.png" alt="map"></p>
 <p>8 下面是译者绘制的 Java 集合框架简图，黄色为接口，绿色为抽象类，蓝色为具体类。虚线箭头表示实现关系，实线箭头表示继承关系。</p>
 <!-- Functional Programming -->
 
@@ -2778,7 +2778,7 @@ The capChars randomly-generated Iterator of capitalletters starts as a stream, t
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>

@@ -64,25 +64,25 @@
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="Sentinel 规则持久化一、修改order-service服务修改OrderService，让其监听Nacos中的sentinel规则配置。具体步骤如下：1.引入依赖在order-service中引入sentinel监听nacos的依赖：1234&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;com.alibaba.csp&amp;lt;/groupId&amp;gt;    &amp;lt">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201340086.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201412878.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201607831.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201726280.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201912078.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202047575.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202322301.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202334536.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202433356.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202449881.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202501928.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202701492.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210914194510204.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210914194616961.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201340086.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201412878.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201607831.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201726280.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201912078.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202047575.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202322301.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202334536.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202433356.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202449881.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202501928.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202701492.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210914194510204.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210914194616961.png">
 <meta property="og:updated_time" content="2021-10-31T04:41:49.069Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sentinel规则持久化">
 <meta name="twitter:description" content="Sentinel 规则持久化一、修改order-service服务修改OrderService，让其监听Nacos中的sentinel规则配置。具体步骤如下：1.引入依赖在order-service中引入sentinel监听nacos的依赖：1234&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;com.alibaba.csp&amp;lt;/groupId&amp;gt;    &amp;lt">
-<meta name="twitter:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201340086.png">
+<meta name="twitter:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201340086.png">
   <link rel="canonical" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/">
 
 
@@ -246,7 +246,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">10</span></a>
 
   </li>
       
@@ -396,36 +396,36 @@
 
 <h2 id="二、修改sentinel-dashboard源码"><a href="#二、修改sentinel-dashboard源码" class="headerlink" title="二、修改sentinel-dashboard源码"></a>二、修改sentinel-dashboard源码</h2><p>SentinelDashboard默认不支持nacos的持久化，需要修改源码。</p>
 <h3 id="1-解压"><a href="#1-解压" class="headerlink" title="1. 解压"></a>1. 解压</h3><p>解压课前资料中的sentinel源码包：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201340086.png" alt="image-20210618201340086"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201340086.png" alt="image-20210618201340086"></p>
 <p>然后并用IDEA打开这个项目，结构如下：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201412878.png" alt="image-20210618201412878"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201412878.png" alt="image-20210618201412878"></p>
 <h3 id="2-修改nacos依赖"><a href="#2-修改nacos依赖" class="headerlink" title="2. 修改nacos依赖"></a>2. 修改nacos依赖</h3><p>在sentinel-dashboard源码的pom文件中，nacos的依赖默认的scope是test，只能在测试时使用，这里要去除：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201607831.png" alt="image-20210618201607831"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201607831.png" alt="image-20210618201607831"></p>
 <p>将sentinel-datasource-nacos依赖的scope去掉：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.csp<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>sentinel-datasource-nacos<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="3-添加nacos支持"><a href="#3-添加nacos支持" class="headerlink" title="3. 添加nacos支持"></a>3. 添加nacos支持</h3><p>在sentinel-dashboard的test包下，已经编写了对nacos的支持，我们需要将其拷贝到main下。</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201726280.png" alt="image-20210618201726280"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201726280.png" alt="image-20210618201726280"></p>
 <h3 id="4-修改nacos地址"><a href="#4-修改nacos地址" class="headerlink" title="4. 修改nacos地址"></a>4. 修改nacos地址</h3><p>然后，还需要修改测试代码中的NacosConfig类：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201912078.png" alt="image-20210618201912078"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618201912078.png" alt="image-20210618201912078"></p>
 <p>修改其中的nacos地址，让其读取application.properties中的配置：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202047575.png" alt="image-20210618202047575"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202047575.png" alt="image-20210618202047575"></p>
 <p>在sentinel-dashboard的application.properties中添加nacos地址配置：</p>
 <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">nacos.addr</span>=<span class="string">localhost:8848</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="5-配置nacos数据源"><a href="#5-配置nacos数据源" class="headerlink" title="5. 配置nacos数据源"></a>5. 配置nacos数据源</h3><p>另外，还需要修改com.alibaba.csp.sentinel.dashboard.controller.v2包下的FlowControllerV2类：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202322301.png" alt="image-20210618202322301"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202322301.png" alt="image-20210618202322301"></p>
 <p>让我们添加的Nacos数据源生效：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202334536.png" alt="image-20210618202334536"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202334536.png" alt="image-20210618202334536"></p>
 <h3 id="6-修改前端页面"><a href="#6-修改前端页面" class="headerlink" title="6. 修改前端页面"></a>6. 修改前端页面</h3><p>接下来，还要修改前端页面，添加一个支持nacos的菜单。</p>
 <p>修改src/main/webapp/resources/app/scripts/directives/sidebar/目录下的sidebar.html文件：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202433356.png" alt="image-20210618202433356"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202433356.png" alt="image-20210618202433356"></p>
 <p>将其中的这部分注释打开：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202449881.png" alt="image-20210618202449881"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202449881.png" alt="image-20210618202449881"></p>
 <p>修改其中的文本：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202501928.png" alt="image-20210618202501928"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202501928.png" alt="image-20210618202501928"></p>
 <h3 id="7-重新编译、打包项目"><a href="#7-重新编译、打包项目" class="headerlink" title="7. 重新编译、打包项目"></a>7. 重新编译、打包项目</h3><p>运行IDEA中的maven插件，编译和打包修改好的Sentinel-Dashboard：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202701492.png" alt="image-20210618202701492"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210618202701492.png" alt="image-20210618202701492"></p>
 <p><strong>在资料中有配置好了的，sentinel-dashboard.jar</strong>，直接使用亦可</p>
 <h3 id="8-启动"><a href="#8-启动" class="headerlink" title="8.启动"></a>8.启动</h3><p>启动方式跟官方一样：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar sentinel-dashboard.jar</span><br></pre></td></tr></table></figure>
@@ -433,10 +433,10 @@
 <p>如果要修改nacos地址，需要添加参数：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar -Dnacos.addr=localhost:8848 sentinel-dashboard.jar</span><br></pre></td></tr></table></figure>
 
-<p>进入<a href="http://localhost:8080/发现有-NACOS就成功了">http://localhost:8080/发现有-NACOS就成功了</a></p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210914194510204.png" alt="image-20210914194510204"></p>
+<p>进入<a href="http://localhost:8080/发现有-NACOS就成功了" target="_blank" rel="noopener">http://localhost:8080/发现有-NACOS就成功了</a></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210914194510204.png" alt="image-20210914194510204"></p>
 <p>nacos页面中也有配置管理</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210914194616961.png" alt="image-20210914194616961"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/sentinel规则持久化/sentinel规则持久化/image-20210914194616961.png" alt="image-20210914194616961"></p>
 
     </div>
 
@@ -593,7 +593,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>

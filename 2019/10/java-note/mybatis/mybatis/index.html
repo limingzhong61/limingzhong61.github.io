@@ -64,12 +64,12 @@
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="[TOC]入门mybatis约定：输入参数parameterType 和 输出参数resultType ，在形式上都只能有一个如果输入参数 ：是简单类型（8个基本类型+String） 是可以使用任何占位符,#{xxxx}           如果是对象类型，则必须是对象的属性 #{属性名}输出参数：  如果返回值类型是一个 对象（如Student），则无论返回一个、还是多个，        再re">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://localhost:4000/2019/10/java-note/mybatis/mybatis/E:%5Cpictures%5CLanguage%5Cmybatis%5C%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%981.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/mybatis/mybatis/E:%5Cpictures%5CLanguage%5Cmybatis%5C%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%981.png">
 <meta property="og:updated_time" content="2021-10-23T02:19:04.200Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis">
 <meta name="twitter:description" content="[TOC]入门mybatis约定：输入参数parameterType 和 输出参数resultType ，在形式上都只能有一个如果输入参数 ：是简单类型（8个基本类型+String） 是可以使用任何占位符,#{xxxx}           如果是对象类型，则必须是对象的属性 #{属性名}输出参数：  如果返回值类型是一个 对象（如Student），则无论返回一个、还是多个，        再re">
-<meta name="twitter:image" content="https://localhost:4000/2019/10/java-note/mybatis/mybatis/E:%5Cpictures%5CLanguage%5Cmybatis%5C%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%981.png">
+<meta name="twitter:image" content="https://codeofli.github.io/2019/10/java-note/mybatis/mybatis/E:%5Cpictures%5CLanguage%5Cmybatis%5C%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%981.png">
   <link rel="canonical" href="https://codeofli.github.io/2019/10/java-note/mybatis/mybatis/">
 
 
@@ -233,7 +233,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">10</span></a>
 
   </li>
       
@@ -584,7 +584,7 @@
 <h1 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h1><h2 id="一级缓存-："><a href="#一级缓存-：" class="headerlink" title="一级缓存 ："></a>一级缓存 ：</h2><p>同一个SqlSession对象</p>
 <p>​      MyBatis默认开启一级缓存，如果用同样的SqlSession对象查询相同的数据，<br>​    则只会在第一次 查询时 向数据库发送SQL语句，并将查询的结果 放入到</p>
 <p>SQLSESSION中（作为缓存存在）；<br>    后续再次查询该同样的对象时，<br>    则直接从缓存中查询该对象即可（即省略了数据库的访问）    </p>
-<p><img src="//localhost:4000/2019/10/java-note/mybatis/mybatis/E:%5Cpictures%5CLanguage%5Cmybatis%5C%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%981.png" alt="1561619500501"></p>
+<p><img src="//codeofli.github.io/2019/10/java-note/mybatis/mybatis/E:%5Cpictures%5CLanguage%5Cmybatis%5C%E4%B8%80%E7%BA%A7%E7%BC%93%E5%AD%981.png" alt="1561619500501"></p>
 <h2 id="二级缓存"><a href="#二级缓存" class="headerlink" title="二级缓存"></a>二级缓存</h2><p>​    MyBatis默认情况没有开启二级缓存，需要手工打开。<br>​    a.conf.xml</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 开启二级缓存 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">setting</span> <span class="attr">name</span>=<span class="string">"cacheEnabled"</span> <span class="attr">value</span>=<span class="string">"true"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -797,7 +797,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>

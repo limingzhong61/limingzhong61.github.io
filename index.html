@@ -230,7 +230,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">10</span></a>
 
   </li>
       
@@ -482,7 +482,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h1><h1 id="1-初识MQ"><a href="#1-初识MQ" class="headerlink" title="1.初识MQ"></a>1.初识MQ</h1><h2 id="1-1-同步和异步通讯"><a href="#1-1-同步和异步通讯" class="headerlink" title="1.1.同步和异步通讯"></a>1.1.同步和异步通讯</h2><p>微服务间通讯有同步和异步两种方式：</p><p>同步通讯：就像打电话，需要实时响应。</p><p>异步通讯：就像发邮件，不需要马上回复。</p><p><img src="//localhost:4000/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ/image-20210717161939695.png" alt="image-20210717161939695"></p><p>两种方式各有优劣，打电话可以立即得到响应，但是你却不能跟多个人同时通话。发送邮件可以同时与多个人收发邮件，但是往往响应会有延迟。</p><h3 id="1-1-1-同步通讯"><a href="#1-1-1-同步通讯" class="headerlink" title="1.1.1.同步通讯"></a>1.1.1.同步通讯</h3>
+          <h1 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h1><h1 id="1-初识MQ"><a href="#1-初识MQ" class="headerlink" title="1.初识MQ"></a>1.初识MQ</h1><h2 id="1-1-同步和异步通讯"><a href="#1-1-同步和异步通讯" class="headerlink" title="1.1.同步和异步通讯"></a>1.1.同步和异步通讯</h2><p>微服务间通讯有同步和异步两种方式：</p><p>同步通讯：就像打电话，需要实时响应。</p><p>异步通讯：就像发邮件，不需要马上回复。</p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ/image-20210717161939695.png" alt="image-20210717161939695"></p><p>两种方式各有优劣，打电话可以立即得到响应，但是你却不能跟多个人同时通话。发送邮件可以同时与多个人收发邮件，但是往往响应会有延迟。</p><h3 id="1-1-1-同步通讯"><a href="#1-1-1-同步通讯" class="headerlink" title="1.1.1.同步通讯"></a>1.1.1.同步通讯</h3>
           <!--noindex-->
           
             <div class="post-button">
@@ -598,7 +598,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="RabbitMQ部署指南"><a href="#RabbitMQ部署指南" class="headerlink" title="RabbitMQ部署指南"></a>RabbitMQ部署指南</h1><h1 id="1-单机部署"><a href="#1-单机部署" class="headerlink" title="1.单机部署"></a>1.单机部署</h1><p>我们在Centos7虚拟机中使用Docker来安装。</p><h2 id="1-1-下载镜像"><a href="#1-1-下载镜像" class="headerlink" title="1.1.下载镜像"></a>1.1.下载镜像</h2><p>方式一：在线拉取</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull rabbitmq:3-management</span><br></pre></td></tr></table></figure><p>方式二：从本地加载</p><p>在课前资料已经提供了镜像包：</p><p><img src="//localhost:4000/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/image-20210423191210349.png" alt="image-20210423191210349"> </p><p>上传到虚拟机中后，使用命令加载镜像即可：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i mq.tar</span><br></pre></td></tr></table></figure>
+          <h1 id="RabbitMQ部署指南"><a href="#RabbitMQ部署指南" class="headerlink" title="RabbitMQ部署指南"></a>RabbitMQ部署指南</h1><h1 id="1-单机部署"><a href="#1-单机部署" class="headerlink" title="1.单机部署"></a>1.单机部署</h1><p>我们在Centos7虚拟机中使用Docker来安装。</p><h2 id="1-1-下载镜像"><a href="#1-1-下载镜像" class="headerlink" title="1.1.下载镜像"></a>1.1.下载镜像</h2><p>方式一：在线拉取</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull rabbitmq:3-management</span><br></pre></td></tr></table></figure><p>方式二：从本地加载</p><p>在课前资料已经提供了镜像包：</p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/image-20210423191210349.png" alt="image-20210423191210349"> </p><p>上传到虚拟机中后，使用命令加载镜像即可：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i mq.tar</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
             <div class="post-button">
@@ -714,13 +714,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="分布式事务seata"><a href="#分布式事务seata" class="headerlink" title="分布式事务seata"></a>分布式事务seata</h1><h2 id="事务的ACID原则"><a href="#事务的ACID原则" class="headerlink" title="事务的ACID原则"></a>事务的ACID原则</h2><p><img src="//localhost:4000/2021/10/java-note/SpringCloud/seata/seate/image-20211021104413170.png" alt="image-20211021104413170"></p><h2 id="演示分布式事务问题"><a href="#演示分布式事务问题" class="headerlink" title="演示分布式事务问题"></a>演示分布式事务问题</h2><ol>
+          <h1 id="分布式事务seata"><a href="#分布式事务seata" class="headerlink" title="分布式事务seata"></a>分布式事务seata</h1><h2 id="事务的ACID原则"><a href="#事务的ACID原则" class="headerlink" title="事务的ACID原则"></a>事务的ACID原则</h2><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/seata/seate/image-20211021104413170.png" alt="image-20211021104413170"></p><h2 id="演示分布式事务问题"><a href="#演示分布式事务问题" class="headerlink" title="演示分布式事务问题"></a>演示分布式事务问题</h2><ol>
 <li><p>创建数据库，名为seata_demo，然后导入课前资料提供的SQL文件：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">seata-demo</span><span class="selector-class">.sql</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>导入课前资料提供的微服务:</p>
 <p>seata-demo（文件夹）</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/seata/seate/image-20211021105841040.png" alt="image-20211021105841040"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/seata/seate/image-20211021105841040.png" alt="image-20211021105841040"></p>
 </li>
 <li><p>启动nacos、所有微服务</p>
 </li>
@@ -1205,7 +1205,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Nacos集群搭建"><a href="#Nacos集群搭建" class="headerlink" title="Nacos集群搭建"></a>Nacos集群搭建</h1><h1 id="1-集群结构图"><a href="#1-集群结构图" class="headerlink" title="1.集群结构图"></a>1.集群结构图</h1><p>官方给出的Nacos集群图：</p><p><img src="//localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409210621117.png" alt="image-20210409210621117"></p><p>SLB，Server Load Balancer，服务器负载均衡</p><p>其中包含3个nacos节点，然后一个负载均衡器代理3个Nacos。这里负载均衡器可以使用nginx。</p><p>我们计划的集群结构：</p><p><img src="//localhost:4000/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409211355037.png" alt="image-20210409211355037"></p><p>三个nacos节点的地址：</p><table>
+          <h1 id="Nacos集群搭建"><a href="#Nacos集群搭建" class="headerlink" title="Nacos集群搭建"></a>Nacos集群搭建</h1><h1 id="1-集群结构图"><a href="#1-集群结构图" class="headerlink" title="1.集群结构图"></a>1.集群结构图</h1><p>官方给出的Nacos集群图：</p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409210621117.png" alt="image-20210409210621117"></p><p>SLB，Server Load Balancer，服务器负载均衡</p><p>其中包含3个nacos节点，然后一个负载均衡器代理3个Nacos。这里负载均衡器可以使用nginx。</p><p>我们计划的集群结构：</p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/nacos集群搭建/image-20210409211355037.png" alt="image-20210409211355037"></p><p>三个nacos节点的地址：</p><table>
 <thead>
 <tr>
 <th>节点</th>
@@ -1344,7 +1344,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="微服务保护"><a href="#微服务保护" class="headerlink" title="微服务保护"></a>微服务保护</h1><h1 id="1-初识Sentinel"><a href="#1-初识Sentinel" class="headerlink" title="1.初识Sentinel"></a>1.初识Sentinel</h1><h2 id="1-1-雪崩问题及解决方案"><a href="#1-1-雪崩问题及解决方案" class="headerlink" title="1.1.雪崩问题及解决方案"></a>1.1.雪崩问题及解决方案</h2><h3 id="1-1-1-雪崩问题"><a href="#1-1-1-雪崩问题" class="headerlink" title="1.1.1.雪崩问题"></a>1.1.1.雪崩问题</h3><p>微服务中，服务间调用关系错综复杂，一个微服务往往依赖于多个其它微服务。</p><p> <img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829099748.png" alt="img"></p><p>如图，如果服务提供者I发生了故障，当前的应用的部分业务因为依赖于服务I，因此也会被阻塞。此时，其它不依赖于服务I的业务似乎不受影响。</p><p> <img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829198240.png" alt="1533829198240"></p><p>但是，依赖服务I的业务请求被阻塞，用户不会得到响应，则tomcat的这个线程不会释放，于是越来越多的用户请求到来，越来越多的线程会阻塞：</p>
+          <h1 id="微服务保护"><a href="#微服务保护" class="headerlink" title="微服务保护"></a>微服务保护</h1><h1 id="1-初识Sentinel"><a href="#1-初识Sentinel" class="headerlink" title="1.初识Sentinel"></a>1.初识Sentinel</h1><h2 id="1-1-雪崩问题及解决方案"><a href="#1-1-雪崩问题及解决方案" class="headerlink" title="1.1.雪崩问题及解决方案"></a>1.1.雪崩问题及解决方案</h2><h3 id="1-1-1-雪崩问题"><a href="#1-1-1-雪崩问题" class="headerlink" title="1.1.1.雪崩问题"></a>1.1.1.雪崩问题</h3><p>微服务中，服务间调用关系错综复杂，一个微服务往往依赖于多个其它微服务。</p><p> <img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829099748.png" alt="img"></p><p>如图，如果服务提供者I发生了故障，当前的应用的部分业务因为依赖于服务I，因此也会被阻塞。此时，其它不依赖于服务I的业务似乎不受影响。</p><p> <img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Sentinel/1533829198240.png" alt="1533829198240"></p><p>但是，依赖服务I的业务请求被阻塞，用户不会得到响应，则tomcat的这个线程不会释放，于是越来越多的用户请求到来，越来越多的线程会阻塞：</p>
           <!--noindex-->
           
             <div class="post-button">
@@ -1460,7 +1460,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Jmeter快速入门"><a href="#Jmeter快速入门" class="headerlink" title="Jmeter快速入门"></a>Jmeter快速入门</h1><h1 id="1-安装Jmeter"><a href="#1-安装Jmeter" class="headerlink" title="1.安装Jmeter"></a>1.安装Jmeter</h1><p>Jmeter依赖于JDK，所以必须确保当前计算机上已经安装了JDK，并且配置了环境变量。</p><h2 id="1-1-下载"><a href="#1-1-下载" class="headerlink" title="1.1.下载"></a>1.1.下载</h2><p>可以Apache Jmeter官网下载，地址：<a href="http://jmeter.apache.org/download_jmeter.cgi" target="_blank" rel="noopener">http://jmeter.apache.org/download_jmeter.cgi</a></p><p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715193149837.png" alt="image-20210715193149837"></p><p>当然，我们课前资料也提供了下载好的安装包：</p>
+          <h1 id="Jmeter快速入门"><a href="#Jmeter快速入门" class="headerlink" title="Jmeter快速入门"></a>Jmeter快速入门</h1><h1 id="1-安装Jmeter"><a href="#1-安装Jmeter" class="headerlink" title="1.安装Jmeter"></a>1.安装Jmeter</h1><p>Jmeter依赖于JDK，所以必须确保当前计算机上已经安装了JDK，并且配置了环境变量。</p><h2 id="1-1-下载"><a href="#1-1-下载" class="headerlink" title="1.1.下载"></a>1.1.下载</h2><p>可以Apache Jmeter官网下载，地址：<a href="http://jmeter.apache.org/download_jmeter.cgi" target="_blank" rel="noopener">http://jmeter.apache.org/download_jmeter.cgi</a></p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715193149837.png" alt="image-20210715193149837"></p><p>当然，我们课前资料也提供了下载好的安装包：</p>
           <!--noindex-->
           
             <div class="post-button">
@@ -1557,7 +1557,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>

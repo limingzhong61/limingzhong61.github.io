@@ -64,29 +64,29 @@
 <meta property="og:site_name" content="nicolas">
 <meta property="og:description" content="安装elasticsearch1.部署单点es1.1.创建网络因为我们还需要部署kibana容器，因此需要让es和kibana容器互联。这里先创建一个网络：1docker network create es-net1.2.加载镜像这里我们采用elasticsearch的7.12.1版本的镜像，这个镜像体积非常大，接近1G。不建议大家自己pull。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210510165308064.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506101053676.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210109105135812.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506102630393.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506110249144.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506110704293.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506112225508.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20201115230900504.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602220751081.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602220824668.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602220846137.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602220941101.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221115763.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210109181106866.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221409524.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221520629.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221542745.png">
-<meta property="og:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221914483.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210510165308064.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506101053676.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210109105135812.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506102630393.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506110249144.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506110704293.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506112225508.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20201115230900504.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602220751081.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602220824668.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602220846137.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602220941101.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221115763.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210109181106866.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221409524.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221520629.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221542745.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221914483.png">
 <meta property="og:updated_time" content="2021-10-31T05:06:17.313Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="安装elasticsearch">
 <meta name="twitter:description" content="安装elasticsearch1.部署单点es1.1.创建网络因为我们还需要部署kibana容器，因此需要让es和kibana容器互联。这里先创建一个网络：1docker network create es-net1.2.加载镜像这里我们采用elasticsearch的7.12.1版本的镜像，这个镜像体积非常大，接近1G。不建议大家自己pull。">
-<meta name="twitter:image" content="https://localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210510165308064.png">
+<meta name="twitter:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210510165308064.png">
   <link rel="canonical" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/">
 
 
@@ -250,7 +250,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">11</span></a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">10</span></a>
 
   </li>
       
@@ -395,7 +395,7 @@
 
 
 <p>课前资料提供了镜像的tar包：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210510165308064.png" alt="image-20210510165308064"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210510165308064.png" alt="image-20210510165308064"></p>
 <p>大家将其上传到虚拟机中，然后运行命令加载即可：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入数据</span></span><br><span class="line">docker load -i es.tar</span><br></pre></td></tr></table></figure>
 
@@ -417,7 +417,7 @@
 <li><code>-p 9200:9200</code>：端口映射配置</li>
 </ul>
 <p>在浏览器中输入：<a href="http://192.168.150.101:9200" target="_blank" rel="noopener">http://192.168.150.101:9200</a> 即可看到elasticsearch的响应结果：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506101053676.png" alt="image-20210506101053676"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506101053676.png" alt="image-20210506101053676"></p>
 <h1 id="2-部署kibana"><a href="#2-部署kibana" class="headerlink" title="2.部署kibana"></a>2.部署kibana</h1><p>kibana可以给我们提供一个elasticsearch的可视化界面，便于我们学习。</p>
 <h2 id="2-1-部署"><a href="#2-1-部署" class="headerlink" title="2.1.部署"></a>2.1.部署</h2><p>运行docker命令，部署kibana</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">--name kibana \</span><br><span class="line">-e ELASTICSEARCH_HOSTS=http://es:9200 \</span><br><span class="line">--network=es-net \</span><br><span class="line">-p 5601:5601  \</span><br><span class="line">kibana:7.12.1</span><br></pre></td></tr></table></figure>
@@ -431,10 +431,10 @@
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f kibana</span><br></pre></td></tr></table></figure>
 
 <p>查看运行日志，当查看到下面的日志，说明成功：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210109105135812.png" alt="image-20210109105135812"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210109105135812.png" alt="image-20210109105135812"></p>
 <p>此时，在浏览器输入地址访问：<a href="http://192.168.150.101:5601，即可看到结果" target="_blank" rel="noopener">http://192.168.150.101:5601，即可看到结果</a></p>
 <h2 id="2-2-DevTools"><a href="#2-2-DevTools" class="headerlink" title="2.2.DevTools"></a>2.2.DevTools</h2><p>kibana中提供了一个DevTools界面：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506102630393.png" alt="image-20210506102630393"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506102630393.png" alt="image-20210506102630393"></p>
 <p>这个界面中可以编写DSL来操作elasticsearch。并且对DSL语句有自动补全功能。</p>
 <h1 id="3-安装IK分词器"><a href="#3-安装IK分词器" class="headerlink" title="3.安装IK分词器"></a>3.安装IK分词器</h1><h2 id="3-1-在线安装ik插件（较慢）"><a href="#3-1-在线安装ik插件（较慢）" class="headerlink" title="3.1.在线安装ik插件（较慢）"></a>3.1.在线安装ik插件（较慢）</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 进入容器内部</span></span><br><span class="line">docker exec -it elasticsearch /bin/bash</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 在线下载并安装</span></span><br><span class="line">./bin/elasticsearch-plugin  install https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.12.1/elasticsearch-analysis-ik-7.12.1.zip</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">退出</span></span><br><span class="line">exit</span><br><span class="line"><span class="meta">#</span><span class="bash">重启容器</span></span><br><span class="line">docker restart elasticsearch</span><br></pre></td></tr></table></figure>
 
@@ -446,9 +446,9 @@
 
 <p>说明plugins目录被挂载到了：<code>/var/lib/docker/volumes/es-plugins/_data</code>这个目录中。</p>
 <h3 id="2）解压缩分词器安装包"><a href="#2）解压缩分词器安装包" class="headerlink" title="2）解压缩分词器安装包"></a>2）解压缩分词器安装包</h3><p>下面我们需要把课前资料中的ik分词器解压缩，重命名为ik</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506110249144.png" alt="image-20210506110249144"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506110249144.png" alt="image-20210506110249144"></p>
 <h3 id="3）上传到es容器的插件数据卷中"><a href="#3）上传到es容器的插件数据卷中" class="headerlink" title="3）上传到es容器的插件数据卷中"></a>3）上传到es容器的插件数据卷中</h3><p>也就是<code>/var/lib/docker/volumes/es-plugins/_data</code>：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506110704293.png" alt="image-20210506110704293"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506110704293.png" alt="image-20210506110704293"></p>
 <h3 id="4）重启容器"><a href="#4）重启容器" class="headerlink" title="4）重启容器"></a>4）重启容器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 4、重启容器</span></span><br><span class="line">docker restart es</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看es日志</span></span><br><span class="line">docker logs -f es</span><br></pre></td></tr></table></figure>
@@ -468,7 +468,7 @@
 <h2 id="3-3-扩展词词典"><a href="#3-3-扩展词词典" class="headerlink" title="3.3 扩展词词典"></a>3.3 扩展词词典</h2><p>随着互联网的发展，“造词运动”也越发的频繁。出现了很多新的词语，在原有的词汇列表中并不存在。比如：“奥力给”，“传智播客” 等。</p>
 <p>所以我们的词汇也需要不断的更新，IK分词器提供了扩展词汇的功能。</p>
 <p>1）打开IK分词器config目录：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506112225508.png" alt="image-20210506112225508"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210506112225508.png" alt="image-20210506112225508"></p>
 <p>2）在IKAnalyzer.cfg.xml配置文件内容添加：</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">comment</span>&gt;</span>IK Analyzer 扩展配置<span class="tag">&lt;/<span class="name">comment</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--用户可以在这里配置自己的扩展字典 *** 添加扩展词典--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"ext_dict"</span>&gt;</span>ext.dic<span class="tag">&lt;/<span class="name">entry</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -478,7 +478,7 @@
 <p>4）重启elasticsearch </p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker restart es</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看 日志</span></span><br><span class="line">docker logs -f elasticsearch</span><br></pre></td></tr></table></figure>
 
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20201115230900504.png" alt="image-20201115230900504"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20201115230900504.png" alt="image-20201115230900504"></p>
 <p>日志中已经成功加载ext.dic配置文件</p>
 <p>5）测试效果：</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET /_analyze</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"analyzer"</span>: <span class="string">"ik_max_word"</span>,</span><br><span class="line">  <span class="attr">"text"</span>: <span class="string">"传智播客Java就业超过90%,奥力给！"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -529,31 +529,31 @@
 <h2 id="4-2-集群状态监控"><a href="#4-2-集群状态监控" class="headerlink" title="4.2.集群状态监控"></a>4.2.集群状态监控</h2><p>kibana可以监控es集群，不过新版本需要依赖es的x-pack 功能，配置比较复杂。</p>
 <p>这里推荐使用<strong>cerebro</strong>来监控es集群状态，官方网址：<a href="https://github.com/lmenezes/cerebro" target="_blank" rel="noopener">https://github.com/lmenezes/cerebro</a></p>
 <p>课前资料已经提供了安装包：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602220751081.png" alt="image-20210602220751081"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602220751081.png" alt="image-20210602220751081"></p>
 <p>解压即可使用，非常方便。</p>
 <p>解压好的目录如下：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602220824668.png" alt="image-20210602220824668"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602220824668.png" alt="image-20210602220824668"></p>
 <p>进入对应的bin目录：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602220846137.png" alt="image-20210602220846137"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602220846137.png" alt="image-20210602220846137"></p>
 <p>双击其中的cerebro.bat文件即可启动服务。</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602220941101.png" alt="image-20210602220941101"></p>
-<p>访问<a href="http://localhost:9000">http://localhost:9000</a> 即可进入管理界面：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221115763.png" alt="image-20210602221115763"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602220941101.png" alt="image-20210602220941101"></p>
+<p>访问<a href="http://localhost:9000" target="_blank" rel="noopener">http://localhost:9000</a> 即可进入管理界面：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221115763.png" alt="image-20210602221115763"></p>
 <p>输入你的elasticsearch的任意节点的地址和端口，点击connect即可：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210109181106866.png" alt="image-20210109181106866"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210109181106866.png" alt="image-20210109181106866"></p>
 <p>绿色的条，代表集群处于绿色（健康状态）。</p>
 <p>实星是主节点，空星是候选节点</p>
 <h2 id="4-3-创建索引库"><a href="#4-3-创建索引库" class="headerlink" title="4.3.创建索引库"></a>4.3.创建索引库</h2><h3 id="1）利用kibana的DevTools创建索引库"><a href="#1）利用kibana的DevTools创建索引库" class="headerlink" title="1）利用kibana的DevTools创建索引库"></a>1）利用kibana的DevTools创建索引库</h3><p>在DevTools中输入指令：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">PUT /itcast</span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">"settings"</span>: &#123;</span><br><span class="line">    "number_of_shards": 3, // 分片数量</span><br><span class="line">    "number_of_replicas": 1 // 副本数量</span><br><span class="line">  &#125;,</span><br><span class="line">  "mappings": &#123;</span><br><span class="line">    "properties": &#123;</span><br><span class="line">      // mapping映射定义 ...</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h3 id="2）利用cerebro创建索引库"><a href="#2）利用cerebro创建索引库" class="headerlink" title="2）利用cerebro创建索引库"></a>2）利用cerebro创建索引库</h3><p>利用cerebro还可以创建索引库：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221409524.png" alt="image-20210602221409524"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221409524.png" alt="image-20210602221409524"></p>
 <p>填写索引库信息：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221520629.png" alt="image-20210602221520629"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221520629.png" alt="image-20210602221520629"></p>
 <p>点击右下角的create按钮：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221542745.png" alt="image-20210602221542745"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221542745.png" alt="image-20210602221542745"></p>
 <h2 id="4-4-查看分片效果"><a href="#4-4-查看分片效果" class="headerlink" title="4.4.查看分片效果"></a>4.4.查看分片效果</h2><p>回到首页，即可查看索引库分片效果：</p>
-<p><img src="//localhost:4000/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221914483.png" alt="image-20210602221914483"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/image-20210602221914483.png" alt="image-20210602221914483"></p>
 
     </div>
 
@@ -708,7 +708,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
