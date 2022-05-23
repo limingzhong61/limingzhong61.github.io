@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>python-crawler | nicolas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="requests库requests库的安装http://www.python-requests.org   Win平台: “以管理员身份运行” cmd，执行 pip install requests   requests库的7个主要方法   方法 说明    requests.request() 构造一个请求，支撑以下各方法的基础方法   requests.get(url, params=No">
+<meta name="keywords" content="python,crawler">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python-crawler">
+<meta property="og:url" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/index.html">
+<meta property="og:site_name" content="nicolas">
+<meta property="og:description" content="requests库requests库的安装http://www.python-requests.org   Win平台: “以管理员身份运行” cmd，执行 pip install requests   requests库的7个主要方法   方法 说明    requests.request() 构造一个请求，支撑以下各方法的基础方法   requests.get(url, params=No">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572765034346.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572765660053.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572769291542.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572769583876.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572782147476.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572792704763.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572792910480.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572793042916.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572875687746.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572875843651.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572935046844.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572935138873.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572953898604.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1573003671238.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1573007510817.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1573007534350.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1573007565476.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1573007584490.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1573007612566.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1573007638061.png">
+<meta property="og:updated_time" content="2021-10-23T02:19:04.268Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python-crawler">
+<meta name="twitter:description" content="requests库requests库的安装http://www.python-requests.org   Win平台: “以管理员身份运行” cmd，执行 pip install requests   requests库的7个主要方法   方法 说明    requests.request() 构造一个请求，支撑以下各方法的基础方法   requests.get(url, params=No">
+<meta name="twitter:image" content="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572765034346.png">
+  
+    <link rel="alternate" href="/atom.xml" title="nicolas" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">nicolas</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Yesterday you said tomorow.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://codeofli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-python/python-crawler/python-crawler" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/python/python-crawler/python-crawler/" class="article-date">
+  <time datetime="2019-10-16T13:27:10.000Z" itemprop="datePublished">2019-10-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/python/">python</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python-crawler
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572765034346.png" alt="1572765034346">  </p><h1 id="requests库"><a href="#requests库" class="headerlink" title="requests库"></a>requests库</h1><h2 id="requests库的安装"><a href="#requests库的安装" class="headerlink" title="requests库的安装"></a>requests库的安装</h2><p><a href="http://www.python-requests.org" target="_blank" rel="noopener">http://www.python-requests.org</a>   </p><p>Win平台: “以管理员身份运行” cmd，执行 pip install requests   </p><h2 id="requests库的7个主要方法"><a href="#requests库的7个主要方法" class="headerlink" title="requests库的7个主要方法"></a>requests库的7个主要方法</h2><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>requests.request()</td>
+<td><strong>构造一个请求，支撑以下各方法的基础方法</strong></td>
+</tr>
+<tr>
+<td>requests.get(url, params=None, **kwargs)</td>
+<td>获取HTML网页的主要方法，对应于HTTP的GET</td>
+</tr>
+<tr>
+<td>requests.head(url, **kwargs)</td>
+<td>获取HTML网页头信息的方法，对应于HTTP的HEAD</td>
+</tr>
+<tr>
+<td>requests.post(url, data=None, json=None, **kwargs)</td>
+<td>向HTML网页提交POST请求的方法，对应于HTTP的POST</td>
+</tr>
+<tr>
+<td>requests.put(url, data=None, **kwargs)</td>
+<td>向HTML网页提交PUT请求的方法，对应于HTTP的PUT</td>
+</tr>
+<tr>
+<td>requests.patch(url, data=None, **kwargs)</td>
+<td>向HTML网页提交局部修改请求，对应于HTTP的PATCH</td>
+</tr>
+<tr>
+<td>requests.delete(url, **kwargs)</td>
+<td>向HTML页面提交删除请求，对应于HTTP的DELETE</td>
+</tr>
+</tbody></table><a id="more"></a>
+
+
+
+<p><strong>requests库的get方法：</strong>  </p>
+<p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572765660053.png" alt="1572765660053">  </p>
+<p><strong>requests.get(url, params=None, kwargs)</strong><br>∙ url : 拟获取页面的url链接<br>∙ params : url中的额外参数，字典或字节流格式，可选<br>∙ kwargs: 12个控制访问的参数   </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(url, params=None, **kwargs)</span>:</span>  </span><br><span class="line">    <span class="string">r"""Sends a GET request.  </span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string">    :param url: URL for the new :class:`Request` object.  </span></span><br><span class="line"><span class="string">    :param params: (optional) Dictionary or bytes to be sent in the query string for the :class:`Request`.  </span></span><br><span class="line"><span class="string">    :param \*\*kwargs: Optional arguments that ``request`` takes.  </span></span><br><span class="line"><span class="string">    :return: :class:`Response &lt;Response&gt;` object  </span></span><br><span class="line"><span class="string">    :rtype: requests.Response  </span></span><br><span class="line"><span class="string">    """</span>  </span><br><span class="line">  </span><br><span class="line">    kwargs.setdefault(<span class="string">'allow_redirects'</span>, <span class="literal">True</span>)  </span><br><span class="line">    <span class="keyword">return</span> request(<span class="string">'get'</span>, url, params=params, **kwargs)</span><br></pre></td></tr></table></figure>
+
+<h3 id="主要方法解析"><a href="#主要方法解析" class="headerlink" title="主要方法解析"></a>主要方法解析</h3><p><strong>requests.request(method, url, kwargs)</strong><br>∙ method : 请求方式，对应get/put/post等7种<br>∙ url : 拟获取页面的url链接<br>∙ kwargs: 控制访问的参数，共13个   </p>
+<p><strong>method : 请求方式</strong>  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">r = requests.request(<span class="string">'GET'</span>, url, **kwargs)  </span><br><span class="line">r = requests.request(<span class="string">'HEAD'</span>, url, **kwargs)  </span><br><span class="line">r = requests.request(<span class="string">'POST'</span>, url, **kwargs)  </span><br><span class="line">r = requests.request(<span class="string">'PUT'</span>, url, **kwargs)  </span><br><span class="line">r = requests.request(<span class="string">'PATCH'</span>, url, **kwargs)  </span><br><span class="line">r = requests.request(<span class="string">'delete'</span>, url, **kwargs)  </span><br><span class="line">r = requests.request(<span class="string">'OPTIONS'</span>, url, **kwargs)</span><br></pre></td></tr></table></figure>
+
+<p><strong>\</strong>kwargs: 控制访问的参数，均为可选项**<br>params : 字典或字节序列，作为参数增加到url中<br>data : 字典、字节序列或文件对象，作为Request的内容   </p>
+<table>
+<thead>
+<tr>
+<th>json</th>
+<th>: JSON格式的数据，作为Request的内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>headers : 字典， HTTP定制头   </p>
+<table>
+<thead>
+<tr>
+<th>cookies : 字典或CookieJar， Request中的cookie</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>auth</td>
+<td>: 元组，支持HTTP认证功能</td>
+</tr>
+</tbody></table>
+<p>files : 字典类型，传输文件   </p>
+<p>timeout : 设定超时时间，秒为单位   </p>
+<p>proxies : 字典类型，设定访问代理服务器，可以增加登录认证   </p>
+<p>allow_redirects : True/False，默认为True，重定向开关<br>stream : True/False，默认为True，获取内容立即下载开关<br>verify : True/False，默认为True，认证SSL证书开关<br>cert : 本地SSL证书路径   </p>
+<h2 id="Response对象"><a href="#Response对象" class="headerlink" title="Response对象"></a>Response对象</h2><p>Response对象包含服务器返回的所有信息，<strong>也包含请求的Request信息</strong>   </p>
+<p><strong>Response 对象的属性</strong>  </p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r.status_code</td>
+<td>HTTP请求的返回状态， 200表示连接成功， 404表示失败</td>
+</tr>
+<tr>
+<td>r.text</td>
+<td>HTTP响应内容的字符串形式，即， url对应的页面内容</td>
+</tr>
+<tr>
+<td>r.encoding</td>
+<td>从HTTP header中猜测的响应内容编码方式</td>
+</tr>
+<tr>
+<td>r.apparent_encoding</td>
+<td>从内容中分析出的响应内容编码方式（备选编码方式）</td>
+</tr>
+<tr>
+<td>r.content</td>
+<td>HTTP响应内容的二进制形式</td>
+</tr>
+</tbody></table>
+<p><strong>Response的编码</strong>  </p>
+<table>
+<thead>
+<tr>
+<th>r.encoding</th>
+<th>从HTTP header中猜测的响应内容编码方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>r.apparent_encoding</strong></td>
+<td><strong>从内容中分析出的响应内容编码方式（备选编码方式）</strong></td>
+</tr>
+</tbody></table>
+<p>r.encoding：如果header中不存在charset，则认为编码为ISO‐8859‐1<br>r.text根据r.encoding显示网页内容<br>r.apparent_encoding ：根据网页内容分析出的编码方式<br>可以看作是r.encoding的备选   </p>
+<h2 id="request库的异常"><a href="#request库的异常" class="headerlink" title="request库的异常"></a>request库的异常</h2><table>
+<thead>
+<tr>
+<th>异常</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>requests.ConnectionError</td>
+<td>网络连接错误异常，如DNS查询失败、拒绝连接等</td>
+</tr>
+<tr>
+<td>requests.HTTPError</td>
+<td>HTTP错误异常</td>
+</tr>
+<tr>
+<td>requests.URLRequired</td>
+<td>URL缺失异常</td>
+</tr>
+<tr>
+<td>requests.TooManyRedirects</td>
+<td>超过最大重定向次数，产生重定向异常</td>
+</tr>
+<tr>
+<td>requests.ConnectTimeout</td>
+<td>连接远程服务器超时异常</td>
+</tr>
+<tr>
+<td>requests.Timeout</td>
+<td>请求URL超时，产生超时异常</td>
+</tr>
+<tr>
+<td><strong>r.raise_for_status()</strong></td>
+<td><strong>如果不是200，产生异常 requests.HTTPError</strong></td>
+</tr>
+</tbody></table>
+<p><strong>r.raise_for_status()在方法内部判断r.status_code是否等于200</strong>，不需要<br>增加额外的if语句，该语句便于利用try‐except进行异常处理   </p>
+<h2 id="爬取网页通用的代码-块-框架"><a href="#爬取网页通用的代码-块-框架" class="headerlink" title="爬取网页通用的代码(块)框架"></a>爬取网页通用的代码(块)框架</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests  </span><br><span class="line">  </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">getHTMLText</span><span class="params">(url)</span>:</span>  </span><br><span class="line">    <span class="keyword">try</span>:  </span><br><span class="line">        r = requests.get(url)  </span><br><span class="line">        r.raise_for_status()  </span><br><span class="line">        r.encoding = r.apparent_encoding  </span><br><span class="line">        <span class="keyword">return</span> r.text  </span><br><span class="line">    <span class="keyword">except</span>:  </span><br><span class="line">        <span class="keyword">return</span> <span class="string">'processing exception'</span>  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:  </span><br><span class="line">    url = <span class="string">'https://www.baidu.com/'</span>  </span><br><span class="line">    print(getHTMLText(url))  </span><br><span class="line">  </span><br><span class="line">response = requests.get(<span class="string">'https://www.baidu.com/'</span>)  </span><br><span class="line">print(type(response))</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h2><p>HTTP， Hypertext Transfer Protocol，超文本传输协议<br>HTTP是一个基于“请求与响应”模式的、无状态的应用层协议<br>HTTP协议采用URL作为定位网络资源的标识， URL格式如下：<br><code>http://host[:port][path]</code><br>host: 合法的Internet主机域名或IP地址<br>port: 端口号，缺省端口为80<br>path: 请求资源的路径   </p>
+<p>HTTP URL的理解：<br>URL是通过HTTP协议存取资源的Internet路径，<strong>一个URL对应一个数据资源</strong>   </p>
+<h3 id="http协议对资源的操作"><a href="#http协议对资源的操作" class="headerlink" title="http协议对资源的操作"></a>http协议对资源的操作</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>请求获取URL位置的资源</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>请求获取URL位置资源的响应消息报告，即获得该资源的头部信息</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>请求向URL位置的资源后附加新的数据</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>请求向URL位置存储一个资源，覆盖原URL位置的资源</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>请求局部更新URL位置的资源，即改变该处资源的部分内容</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>请求删除URL位置存储的资源</td>
+</tr>
+</tbody></table>
+<h3 id="理解patch和put的区别"><a href="#理解patch和put的区别" class="headerlink" title="理解patch和put的区别"></a>理解patch和put的区别</h3><p>假设URL位置有一组数据UserInfo，包括UserID、 UserName等20个字段<br>需求：用户修改了UserName，其他不变<br>• 采用PATCH，仅向URL提交UserName的局部更新请求<br>• 采用PUT，必须将所有20个字段一并提交到URL，未提交字段被删除<br>PATCH的最主要好处：节省网络带宽   </p>
+<h3 id="http协议与requests库"><a href="#http协议与requests库" class="headerlink" title="http协议与requests库"></a>http协议与requests库</h3><table>
+<thead>
+<tr>
+<th>TTP协议方法</th>
+<th>Requests库方法</th>
+<th>功能一致性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GET</td>
+<td>requests.get()</td>
+<td>一致</td>
+</tr>
+<tr>
+<td>HEAD</td>
+<td>requests.head()</td>
+<td>一致</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>requests.post()</td>
+<td>一致</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>requests.put()</td>
+<td>一致</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>requests.patch()</td>
+<td>一致</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>requests.delete()</td>
+<td>一致</td>
+</tr>
+</tbody></table>
+<h2 id="Requests库网络爬取实战"><a href="#Requests库网络爬取实战" class="headerlink" title="Requests库网络爬取实战"></a>Requests库网络爬取实战</h2><p>实例2：亚马逊商品页面的爬取  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests  </span><br><span class="line">url = <span class="string">'https://item.jd.com/2967929.html'</span>  </span><br><span class="line">kv = &#123;<span class="string">'user-agent'</span>:<span class="string">'Mozilla/5.0'</span>&#125;  </span><br><span class="line"><span class="keyword">try</span>:  </span><br><span class="line">    r = requests.get(url,headers=kv)  </span><br><span class="line">    r.raise_for_status()  </span><br><span class="line">    r.encoding = r.apparent_encoding  </span><br><span class="line">    print(r.status_code)  </span><br><span class="line"><span class="keyword">except</span>:  </span><br><span class="line">    <span class="string">'processing exception'</span></span><br></pre></td></tr></table></figure>
+
+<p>实例3：百度/360搜索关键字提交  </p>
+<p>百度的关键词接口：<br><a href="http://www.baidu.com/s?wd=keyword" target="_blank" rel="noopener">http://www.baidu.com/s?wd=keyword</a>   </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># https://item.jd.com/2967929.html  </span></span><br><span class="line"><span class="keyword">import</span> requests  </span><br><span class="line">url = <span class="string">'http://www.baidu.com/s'</span>  </span><br><span class="line">kv = &#123;<span class="string">'wd'</span>:<span class="string">'python'</span>&#125;  </span><br><span class="line"><span class="keyword">try</span>:  </span><br><span class="line">    r = requests.get(url,params=kv)  </span><br><span class="line">    r.raise_for_status()  </span><br><span class="line">    r.encoding = r.apparent_encoding  </span><br><span class="line">    print(len(r.text))  </span><br><span class="line">    print(r.status_code)  </span><br><span class="line"><span class="keyword">except</span>:  </span><br><span class="line">    <span class="string">'processing exception'</span></span><br></pre></td></tr></table></figure>
+
+<p>实例4：网络图片的爬取和存储  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests,os  </span><br><span class="line">url = <span class="string">'http://image.nationalgeographic.com.cn/2017/0211/20170211061910157.jpg'</span>  </span><br><span class="line">root = <span class="string">'E://img//'</span>  </span><br><span class="line">path = root + url.split(<span class="string">'/'</span>)[<span class="number">-1</span>]  </span><br><span class="line"><span class="keyword">try</span>:  </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(root):  </span><br><span class="line">        os.mkdir(root)  </span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> os.path.exists(path):  </span><br><span class="line">        r = requests.get(url)  </span><br><span class="line">        r.raise_for_status()  </span><br><span class="line">        <span class="keyword">with</span> open(path,<span class="string">'wb'</span>) <span class="keyword">as</span> f:  </span><br><span class="line">            f.write(r.content)  </span><br><span class="line">            f.close()  </span><br><span class="line">            print(<span class="string">'save file successfully'</span>)  </span><br><span class="line">    <span class="keyword">else</span>:  </span><br><span class="line">        print(<span class="string">'file exist'</span>)  </span><br><span class="line"><span class="keyword">except</span>:  </span><br><span class="line">    <span class="string">'processing exception'</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="网络爬虫的相关问题"><a href="#网络爬虫的相关问题" class="headerlink" title="网络爬虫的相关问题"></a>网络爬虫的相关问题</h1><p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572769291542.png" alt="1572769291542">  </p>
+<h2 id="网络爬虫的限制"><a href="#网络爬虫的限制" class="headerlink" title="网络爬虫的限制"></a>网络爬虫的限制</h2><p>来源审查：判断User‐Agent进行限制<br>检查来访HTTP协议头的User‐Agent域，只响应浏览器或友好爬虫的访问<br>• 发布公告： Robots协议<br>告知所有爬虫网站的爬取策略，要求爬虫遵守   </p>
+<h2 id="Robots协议"><a href="#Robots协议" class="headerlink" title="Robots协议"></a>Robots协议</h2><p>Robots Exclusion Standard，网络爬虫排除标准   </p>
+<p>作用：<br>网站告知网络爬虫哪些页面可以抓取，哪些不行<br>形式：<br>在网站根目录下的robots.txt文件   </p>
+<p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572769583876.png" alt="1572769583876">  </p>
+<p><a href="http://www.baidu.com/robots.txt" target="_blank" rel="noopener">http://www.baidu.com/robots.txt</a><br><a href="http://news.sina.com.cn/robots.txt" target="_blank" rel="noopener">http://news.sina.com.cn/robots.txt</a><br><a href="http://www.qq.com/robots.txt" target="_blank" rel="noopener">http://www.qq.com/robots.txt</a><br><a href="http://news.qq.com/robots.txt" target="_blank" rel="noopener">http://news.qq.com/robots.txt</a><br><a href="http://www.moe.edu.cn/robots.txt" target="_blank" rel="noopener">http://www.moe.edu.cn/robots.txt</a> （无robots协议）   </p>
+<h3 id="Robots协议使用"><a href="#Robots协议使用" class="headerlink" title="Robots协议使用"></a>Robots协议使用</h3><p>网络爬虫：<br>自动或人工识别robots.txt，再进行内容爬取<br>约束性：<br>Robots协议是建议但非约束性，网络爬虫可以不遵守，但存在法律风险   </p>
+<p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572782147476.png" alt="1572782147476">  </p>
+<h1 id="beautifulSoup库"><a href="#beautifulSoup库" class="headerlink" title="beautifulSoup库"></a>beautifulSoup库</h1><p><a href="https://www.crummy.com/software/BeautifulSoup/" target="_blank" rel="noopener">https://www.crummy.com/software/BeautifulSoup/</a>   </p>
+<p><a href="https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/" target="_blank" rel="noopener">https://beautifulsoup.readthedocs.io/zh_CN/v4.4.0/</a>  </p>
+<p><a href="http://www.crummy.com/software/BeautifulSoup/" target="_blank" rel="noopener">Beautiful Soup</a> 是一个可以从<strong>HTML或XML文件中提取数据</strong>的Python库.  </p>
+<p>安装  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install beautifulsoup4</span><br></pre></td></tr></table></figure>
+
+<p>使用  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup  </span><br><span class="line">html_doc = <span class="string">"""  </span></span><br><span class="line"><span class="string">&lt;html&gt;&lt;head&gt;&lt;title&gt;The Dormouse's story&lt;/title&gt;&lt;/head&gt;  </span></span><br><span class="line"><span class="string">&lt;body&gt;  </span></span><br><span class="line"><span class="string">&lt;p class="title"&gt;&lt;b&gt;The Dormouse's story&lt;/b&gt;&lt;/p&gt;  </span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string">&lt;p class="story"&gt;Once upon a time there were three little sisters; and their names were  </span></span><br><span class="line"><span class="string">&lt;a href="http://example.com/elsie" class="sister" id="link1"&gt;Elsie&lt;/a&gt;,  </span></span><br><span class="line"><span class="string">&lt;a href="http://example.com/lacie" class="sister" id="link2"&gt;Lacie&lt;/a&gt; and  </span></span><br><span class="line"><span class="string">&lt;a href="http://example.com/tillie" class="sister" id="link3"&gt;Tillie&lt;/a&gt;;  </span></span><br><span class="line"><span class="string">and they lived at the bottom of a well.&lt;/p&gt;  </span></span><br><span class="line"><span class="string">  </span></span><br><span class="line"><span class="string">&lt;p class="story"&gt;...&lt;/p&gt;  </span></span><br><span class="line"><span class="string">"""</span>  </span><br><span class="line">soup = BeautifulSoup(html_doc, <span class="string">'html.parser'</span>)  </span><br><span class="line">print(soup.prettify())</span><br></pre></td></tr></table></figure>
+
+<h2 id="Beautiful-Soup库解析器"><a href="#Beautiful-Soup库解析器" class="headerlink" title="Beautiful Soup库解析器"></a>Beautiful Soup库解析器</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">soup = BeautifulSoup(<span class="string">'&lt;html&gt;data&lt;/html&gt;'</span>， <span class="string">'html.parser'</span>)</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>解析器</th>
+<th>使用方法</th>
+<th>条件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bs4的HTML解析器</td>
+<td>BeautifulSoup(mk,’html.parser’)</td>
+<td>安装bs4库</td>
+</tr>
+<tr>
+<td>lxml的LXML解析器</td>
+<td>BeautifulSoup(mk,’lxml’)</td>
+<td>pip install lxml</td>
+</tr>
+<tr>
+<td>lxml的XML解析器</td>
+<td>BeautifulSoup(mk,’xml’)</td>
+<td>pip install lxml</td>
+</tr>
+<tr>
+<td>html5lib的解析器</td>
+<td>BeautifulSoup(mk,’html5lib’)</td>
+<td>pip install html5lib</td>
+</tr>
+</tbody></table>
+<p>BeautifulSoup类的基本元素  </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span> … <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>基本元素</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tag</td>
+<td>标签，最基本的信息组织单元，分别用&lt;&gt;和&lt;/&gt;标明开头和结尾</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>标签的名字， <p>…</p>的名字是’p’，格式： <tag>.name</tag></td>
+</tr>
+<tr>
+<td>Attributes</td>
+<td>标签的属性，字典形式组织，格式： <tag>.attrs</tag></td>
+</tr>
+<tr>
+<td>NavigableString</td>
+<td>标签内非属性字符串， &lt;&gt;…&lt;/&gt;中字符串，格式： <tag>.string</tag></td>
+</tr>
+<tr>
+<td>Comment</td>
+<td>标签内字符串的注释部分，一种特殊的Comment类型</td>
+</tr>
+</tbody></table>
+<p>Tag 标签  </p>
+<table>
+<thead>
+<tr>
+<th>基本元素</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Tag</td>
+<td>标签，最基本的信息组织单元，分别用&lt;&gt;和&lt;/&gt;标明开头和结尾</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>标签的名字， <p>…</p>的名字是’p’，格式： <tag>.name</tag></td>
+</tr>
+<tr>
+<td>Attributes</td>
+<td>标签的属性，字典形式组织，格式： <tag>.attrs</tag></td>
+</tr>
+<tr>
+<td>NavigableString</td>
+<td>标签内非属性字符串， &lt;&gt;…&lt;/&gt;中字符串，格式： <tag>.string</tag></td>
+</tr>
+<tr>
+<td>Comment</td>
+<td>标签内字符串的注释部分，一种特殊的Comment类型</td>
+</tr>
+</tbody></table>
+<p>任何存在于HTML语法中的标签都可以用soup.&lt;tag&gt;访问获得<br>当HTML文档中存在多个相同&lt;tag&gt;对应内容时， soup.&lt;tag&gt;返回第一个   </p>
+<h2 id="基于bs4库的HTML内容遍历方法"><a href="#基于bs4库的HTML内容遍历方法" class="headerlink" title="基于bs4库的HTML内容遍历方法"></a>基于bs4库的HTML内容遍历方法</h2><p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572792704763.png" alt="1572792704763">  </p>
+<h3 id="标签树的下行遍历"><a href="#标签树的下行遍历" class="headerlink" title="标签树的下行遍历"></a>标签树的下行遍历</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.contents</td>
+<td>子节点的列表，将<tag>所有儿子节点存入列表</tag></td>
+</tr>
+<tr>
+<td>.children</td>
+<td>子节点的迭代类型，与.contents类似，用于循环遍历儿子节点</td>
+</tr>
+<tr>
+<td>.descendants</td>
+<td>子孙节点的迭代类型，包含所有子孙节点，用于循环遍历</td>
+</tr>
+</tbody></table>
+<p><strong>BeautifulSoup类型是标签树的根节点</strong>  </p>
+<p>标签树的下行遍历  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> child <span class="keyword">in</span> soup.body.children:  </span><br><span class="line">	print(child) 遍历儿子节点  </span><br><span class="line"><span class="keyword">for</span> child <span class="keyword">in</span> soup.body.descendants:  </span><br><span class="line">	print(child) 遍历子孙节点</span><br></pre></td></tr></table></figure>
+
+<p>标签树的上行遍历  </p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.parent</td>
+<td>节点的父亲标签</td>
+</tr>
+<tr>
+<td>.parents</td>
+<td>节点先辈标签的迭代类型，用于循环遍历先辈节点</td>
+</tr>
+</tbody></table>
+<p>标签树的上行遍历  </p>
+<p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572792910480.png" alt="1572792910480">  </p>
+<p>遍历所有先辈节点，包括soup本身，所以要区别判断   </p>
+<h3 id="标签树的平行遍历"><a href="#标签树的平行遍历" class="headerlink" title="标签树的平行遍历"></a>标签树的平行遍历</h3><table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.next_sibling</td>
+<td>返回按照HTML文本顺序的下一个平行节点标签</td>
+</tr>
+<tr>
+<td>.previous_sibling</td>
+<td>返回按照HTML文本顺序的上一个平行节点标签</td>
+</tr>
+<tr>
+<td>.next_siblings</td>
+<td>迭代类型，返回按照HTML文本顺序的后续所有平行节点标签</td>
+</tr>
+<tr>
+<td>.previous_siblings</td>
+<td>迭代类型，返回按照HTML文本顺序的前续所有平行节点标签</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">标签树的平行遍历  </span><br><span class="line"><span class="keyword">for</span> sibling <span class="keyword">in</span> soup.a.next_sibling:  </span><br><span class="line">print(sibling)  </span><br><span class="line"><span class="keyword">for</span> sibling <span class="keyword">in</span> soup.a.previous_sibling:  </span><br><span class="line">print(sibling)  </span><br><span class="line">遍历后续节点  </span><br><span class="line">遍历前续节点</span><br></pre></td></tr></table></figure>
+
+<p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572793042916.png" alt="1572793042916">  </p>
+<h1 id="信息标记和提取方法"><a href="#信息标记和提取方法" class="headerlink" title="信息标记和提取方法"></a>信息标记和提取方法</h1><h2 id="信息标记"><a href="#信息标记" class="headerlink" title="信息标记"></a>信息标记</h2><p>标记后的信息可形成信息组织结构，增加了信息维度<br>标记的结构与信息一样具有重要价值<br>标记后的信息可用于通信、存储或展示<br>标记后的信息更利于程序理解和运用   </p>
+<h2 id="信息标记的三种信息"><a href="#信息标记的三种信息" class="headerlink" title="信息标记的三种信息"></a>信息标记的三种信息</h2><p>xml，json，yaml  </p>
+<h3 id="html的信息标记"><a href="#html的信息标记" class="headerlink" title="html的信息标记"></a>html的信息标记</h3><p>HTML是WWW(World Wide Web)的信息组织方式   </p>
+<p>HTML通过预定义的&lt;&gt;…&lt;/&gt;标签形式组织不同类型的信息   </p>
+<p><strong>xml</strong>  </p>
+<p>eXtensible Markup Language   </p>
+<p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572875687746.png" alt="1572875687746">  </p>
+<p>空元素的缩写形式   </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">“china.jpg”</span> <span class="attr">size</span>=<span class="string">“10”</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>注释书写形式   </p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">!‐‐</span> <span class="attr">This</span> <span class="attr">is</span> <span class="attr">a</span> <span class="attr">comment</span>, <span class="attr">very</span> <span class="attr">useful</span> ‐‐&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>json</strong>  </p>
+<p>JavsScript Object Notation<br>有类型的键值对 key:value   </p>
+<p>yaml  </p>
+<p>YAML Ain’t Markup Language<br>无类型键值对 key:value   </p>
+<p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572875843651.png" alt="1572875843651">  </p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">缩进表达所属关系</span>  </span><br><span class="line"><span class="string">name</span> <span class="string">:</span>  </span><br><span class="line">    <span class="string">newName</span> <span class="string">:</span> <span class="string">北京理工大学</span>  </span><br><span class="line">    <span class="string">oldName</span> <span class="string">:</span> <span class="string">延安自然科学院</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">‐</span> <span class="string">表达并列关系</span>  </span><br><span class="line"><span class="string">name</span> <span class="string">:</span>  </span><br><span class="line"><span class="string">‐北京理工大学</span>  </span><br><span class="line"><span class="string">‐延安自然科学院</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">| 表达整块数据 # 表示注释  </span></span><br><span class="line"><span class="string"></span><span class="attr">text:</span> <span class="string">| #学校介绍  </span></span><br><span class="line"><span class="string">北京理工大学创立于1940年，前身是延安自然科学院， 是中国共产党创办的第一所理工科大学，毛泽东同志亲  </span></span><br><span class="line"><span class="string">自题写校名，李富春、徐特立、李强等老一辈无产阶级革命家先后担任学校主要领导。学校是新中国成立以来  </span></span><br><span class="line"><span class="string">国家历批次重点建设的高校，首批进入国家“211工程”和“985工程”建设行列；在全球具有广泛影响力的英  </span></span><br><span class="line"><span class="string">国QS“世界大学500强”中，位列入选的中国大陆高校第15位。学校现隶属于工业和信息化部。</span></span><br></pre></td></tr></table></figure>
+
+<p>XML<br>JSON<br>YAML<br>最早的通用信息标记语言，可扩展性好，但繁琐<br>信息有类型，适合程序处理(js)，较XML简洁<br>信息无类型，文本信息比例最高，可读性好   </p>
+<p>XML<br>JSON<br>YAML<br>Internet上的信息交互与传递<br>移动应用云端和节点的信息通信，无注释<br>各类系统的配置文件，有注释易读  </p>
+<h2 id="信息提取"><a href="#信息提取" class="headerlink" title="信息提取"></a>信息提取</h2><p>融合方法：结合形式解析与搜索方法，提取关键信息<br>XML JSON YAML 搜索<br>需要标记解析器及文本查找函数   </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup  </span><br><span class="line"><span class="keyword">import</span> requests  </span><br><span class="line">  </span><br><span class="line">r =requests.get(<span class="string">'http://python123.io/ws/demo.html'</span>)  </span><br><span class="line">demo = r.text  </span><br><span class="line">soup = BeautifulSoup(demo, <span class="string">'html.parser'</span>)  </span><br><span class="line"><span class="keyword">for</span> link <span class="keyword">in</span> soup(<span class="string">'a'</span>):  </span><br><span class="line">    print(link)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>&lt;&gt;.find_all(name, attrs, recursive, string, **kwargs)</strong><br>∙ name : 对标签名称的检索字符串<br>返回一个列表类型，存储查找的结果   </p>
+<p>attrs: 对标签属性值的检索字符串，可标注属性检索   </p>
+<p>recursive: 是否对子孙全部检索，默认True   </p>
+<p>string: &lt;&gt;…&lt;/&gt;中字符串区域的检索字符串   </p>
+<p><strong>&lt;tag&gt;(..) 等价于 &lt;tag&gt;.find_all(..)</strong><br><strong>soup(..) 等价于 soup.find_all(..)</strong>  </p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&lt;&gt;.find()</td>
+<td>搜索且只返回一个结果，同.find_all()参数</td>
+</tr>
+<tr>
+<td>&lt;&gt;.find_parents()</td>
+<td>在先辈节点中搜索，返回列表类型，同.find_all()参数</td>
+</tr>
+<tr>
+<td>&lt;&gt;.find_parent()</td>
+<td>在先辈节点中返回一个结果，同.find()参数</td>
+</tr>
+<tr>
+<td>&lt;&gt;.find_next_siblings()</td>
+<td>在后续平行节点中搜索，返回列表类型，同.find_all()参数</td>
+</tr>
+<tr>
+<td>&lt;&gt;.find_next_sibling()</td>
+<td>在后续平行节点中返回一个结果，同.find()参数</td>
+</tr>
+<tr>
+<td>&lt;&gt;.find_previous_siblings()</td>
+<td>在前序平行节点中搜索，返回列表类型，同.find_all()参数</td>
+</tr>
+<tr>
+<td>&lt;&gt;.find_previous_sibling()</td>
+<td>在前序平行节点中返回一个结果，同.find()参数</td>
+</tr>
+</tbody></table>
+<h1 id="中国大学定向排名实例"><a href="#中国大学定向排名实例" class="headerlink" title="中国大学定向排名实例"></a>中国大学定向排名实例</h1><p><a href="http://www.zuihaodaxue.cn/zuihaodaxuepaiming2016.html" target="_blank" rel="noopener">http://www.zuihaodaxue.cn/zuihaodaxuepaiming2016.html</a>   </p>
+<p>技术路线： requests‐bs4<br>定向爬虫：仅对输入URL进行爬取，不扩展爬取   </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"># CrawUnivRankingB.py  </span><br><span class="line"><span class="keyword">import</span> requests  </span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup  </span><br><span class="line"><span class="keyword">import</span> bs4  </span><br><span class="line">  </span><br><span class="line">def getHTMLText(url):  </span><br><span class="line">    <span class="keyword">try</span>:  </span><br><span class="line">        r = requests.get(url, timeout=<span class="number">30</span>)  </span><br><span class="line">        r.raise_for_status()  </span><br><span class="line">        r.encoding = r.apparent_encoding  </span><br><span class="line">        <span class="keyword">return</span> r.text  </span><br><span class="line">    except:  </span><br><span class="line">        <span class="keyword">return</span> <span class="string">""</span>  </span><br><span class="line">  </span><br><span class="line">def fillUnivList(ulist, html):  </span><br><span class="line">    soup = BeautifulSoup(html, <span class="string">"html.parser"</span>)  </span><br><span class="line">    <span class="keyword">for</span> tr <span class="keyword">in</span> soup.find(<span class="string">'tbody'</span>).children:  </span><br><span class="line">        <span class="keyword">if</span> isinstance(tr, bs4.element.Tag):  </span><br><span class="line">            tds = tr(<span class="string">'td'</span>)  </span><br><span class="line">            ulist.append([tds[<span class="number">0</span>].string, tds[<span class="number">1</span>].string, tds[<span class="number">3</span>].string])  </span><br><span class="line">  </span><br><span class="line">def printUnivList(ulist, num):  </span><br><span class="line">    tplt = <span class="string">"&#123;0:^10&#125;\t&#123;1:&#123;3&#125;^10&#125;\t&#123;2:^10&#125;"</span>  </span><br><span class="line">    print(tplt.format(<span class="string">"排名"</span>, <span class="string">"学校名称"</span>, <span class="string">"总分"</span>, chr(<span class="number">12288</span>)))  </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(num):  </span><br><span class="line">        u = ulist[i]  </span><br><span class="line">        print(tplt.format(u[<span class="number">0</span>], u[<span class="number">1</span>], u[<span class="number">2</span>], chr(<span class="number">12288</span>)))  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">def main():  </span><br><span class="line">    uinfo = []  </span><br><span class="line">    url = <span class="string">'http://www.zuihaodaxue.cn/zuihaodaxuepaiming2016.html'</span>  </span><br><span class="line">    html = getHTMLText(url)  </span><br><span class="line">    fillUnivList(uinfo, html)  </span><br><span class="line">    printUnivList(uinfo, 20)  # 20 univs  </span><br><span class="line">  </span><br><span class="line">main()</span><br></pre></td></tr></table></figure>
+
+<p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572935046844.png" alt="1572935046844">  </p>
+<p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572935138873.png" alt="1572935138873">  </p>
+<p>当中文字符宽度不够时，采用西文字符填充；中西文字符占用宽度不同<br><strong>采用中文字符的空格填充 chr(12288)</strong>   </p>
+<h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><p><strong>regular expression, regex, RE</strong>   </p>
+<p>正则表达式是用来简洁表达一组字符串的表达式   </p>
+<p>正则表达式在文本处理中十分常用：<br>表达文本类型的特征（病毒、入侵等）<br>同时查找或替换一组字符串<br>匹配字符串的全部或部分<br>……<br>最主要应用在字符串匹配中   </p>
+<p>正则表达式语法由字符和操作符构成   </p>
+<h2 id="正则表达式常用操作符"><a href="#正则表达式常用操作符" class="headerlink" title="正则表达式常用操作符"></a>正则表达式常用操作符</h2><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>说明</th>
+<th>实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.</td>
+<td>表示任何单个字符</td>
+<td></td>
+</tr>
+<tr>
+<td>[ ]</td>
+<td>字符集，对单个字符给出取值范围</td>
+<td>[abc]表示a、 b、 c， [a‐z]表示a到z单个字符</td>
+</tr>
+<tr>
+<td>[^ ]</td>
+<td>非字符集，对单个字符给出排除范围</td>
+<td>[^abc]表示非a或b或c的单个字符</td>
+</tr>
+<tr>
+<td>*</td>
+<td>前一个字符0次或无限次扩展</td>
+<td>abc* 表示 ab、 abc、 abcc、 abccc等</td>
+</tr>
+<tr>
+<td>+</td>
+<td>前一个字符1次或无限次扩展</td>
+<td>abc+ 表示 abc、 abcc、 abccc等</td>
+</tr>
+<tr>
+<td>?</td>
+<td>前一个字符0次或1次扩展</td>
+<td>abc? 表示 ab、 abc</td>
+</tr>
+<tr>
+<td>|</td>
+<td>左右表达式任意一个</td>
+<td>abc|def 表示 abc、 def</td>
+</tr>
+<tr>
+<td>{m}</td>
+<td>扩展前一个字符m次</td>
+<td>ab{2}c表示abbc</td>
+</tr>
+<tr>
+<td>{m,n}</td>
+<td>扩展前一个字符m至n次（含n）</td>
+<td>ab{1,2}c表示abc、 abbc</td>
+</tr>
+<tr>
+<td>^</td>
+<td>匹配字符串开头</td>
+<td>^abc表示abc且在一个字符串的开头</td>
+</tr>
+<tr>
+<td>$</td>
+<td>匹配字符串结尾</td>
+<td>abc$表示abc且在一个字符串的结尾</td>
+</tr>
+<tr>
+<td>( )</td>
+<td>分组标记，内部只能使用 | 操作符</td>
+<td>(abc)表示abc， (abc|def)表示abc、 def</td>
+</tr>
+<tr>
+<td>\d</td>
+<td>数字，等价于[0‐9]</td>
+<td></td>
+</tr>
+<tr>
+<td>\w</td>
+<td>单词字符，等价于[A‐Za‐z0‐9_]</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="经典正则表达式"><a href="#经典正则表达式" class="headerlink" title="经典正则表达式"></a>经典正则表达式</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">^[A‐Za‐z]+$ 由<span class="number">26</span>个字母组成的字符串  </span><br><span class="line">^[A‐Za‐z0‐<span class="number">9</span>]+$ 由<span class="number">26</span>个字母和数字组成的字符串  </span><br><span class="line">^‐?\d+$ 整数形式的字符串  </span><br><span class="line">^[<span class="number">0</span>‐<span class="number">9</span>]*[<span class="number">1</span>‐<span class="number">9</span>][<span class="number">0</span>‐<span class="number">9</span>]*$ 正整数形式的字符串  </span><br><span class="line">[<span class="number">1</span>‐<span class="number">9</span>]\d&#123;<span class="number">5</span>&#125; 中国境内邮政编码， <span class="number">6</span>位  </span><br><span class="line">[\u4e00‐\u9fa5] 匹配中文字符  </span><br><span class="line">\d&#123;<span class="number">3</span>&#125;‐\d&#123;<span class="number">8</span>&#125;|\d&#123;<span class="number">4</span>&#125;‐\d&#123;<span class="number">7</span>&#125; 国内电话号码， <span class="number">010</span>‐<span class="number">68913536</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>ip地址正则</strong><br>P地址字符串形式的正则表达式（ IP地址分4段，每段0‐255）  </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  </span><br><span class="line">精确写法 0‐99： [1‐9]?\d  </span><br><span class="line"><span class="number">100</span>‐<span class="number">199</span>: <span class="number">1</span>\d&#123;<span class="number">2</span>&#125;  </span><br><span class="line"><span class="number">200</span>‐<span class="number">249</span>: <span class="number">2</span>[<span class="number">0</span>‐<span class="number">4</span>]\d  </span><br><span class="line"><span class="number">250</span>‐<span class="number">255</span>: <span class="number">25</span>[<span class="number">0</span>‐<span class="number">5</span>]  </span><br><span class="line">(([1‐9]?\d|1\d&#123;2&#125;|2[0‐4]\d|25[0‐5]).)&#123;3&#125;([1‐9]?\d|1\d&#123;2&#125;|2[0‐4]\d|25[0‐5])</span><br></pre></td></tr></table></figure>
+
+<h2 id="re库"><a href="#re库" class="headerlink" title="re库"></a>re库</h2><p>Re库是Python的标准库，主要用于字符串匹配   </p>
+<h3 id="正则表达式的表示类型"><a href="#正则表达式的表示类型" class="headerlink" title="正则表达式的表示类型"></a>正则表达式的表示类型</h3><p>raw string类型（原生字符串类型）<br>库采用类型表示正则表达式，表示为：  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">例如： <span class="string">r'[1‐9]\d&#123;5&#125;'</span> <span class="string">r'\d&#123;3&#125;‐\d&#123;8&#125;|\d&#123;4&#125;‐\d&#123;7&#125;'</span></span><br></pre></td></tr></table></figure>
+
+<p>raw string是不包含对转义符再次转义的字符串   </p>
+<p>re库也可以采用string类型表示正则表达式，但更繁琐<br>例如：<br>‘[1‐9]\d{5}’<br>‘\d{3}‐\d{8}|\d{4}‐\d{7}’<br><strong>建议：当正则表达式包含转义符时，使用raw string</strong>   </p>
+<h3 id="Re库的主要功能函数"><a href="#Re库的主要功能函数" class="headerlink" title="Re库的主要功能函数"></a>Re库的主要功能函数</h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>re.search()</td>
+<td>在一个字符串中搜索匹配正则表达式的第一个位置，返回match对象</td>
+</tr>
+<tr>
+<td>re.match()</td>
+<td>从一个字符串的开始位置起匹配正则表达式，返回match对象</td>
+</tr>
+<tr>
+<td>re.findall()</td>
+<td>搜索字符串，以列表类型返回全部能匹配的子串</td>
+</tr>
+<tr>
+<td>re.split()</td>
+<td>将一个字符串按照正则表达式匹配结果进行分割，返回列表类型</td>
+</tr>
+<tr>
+<td>re.finditer()</td>
+<td>搜索字符串，返回一个匹配结果的迭代类型，每个迭代元素是match对象</td>
+</tr>
+<tr>
+<td>re.sub()</td>
+<td>在一个字符串中替换所有匹配正则表达式的子串，返回替换后的字符串</td>
+</tr>
+</tbody></table>
+<p><strong>re.search(pattern, string, flags=0)</strong><br>∙ pattern : 正则表达式的字符串或原生字符串表示<br>∙ string : 待匹配字符串<br>∙ flags : 正则表达式使用时的控制标记<br>在一个字符串中搜索匹配正则表达式的第一个位置<br>返回match对象  </p>
+<table>
+<thead>
+<tr>
+<th>常用标记</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>re.I re.IGNORECASE</td>
+<td>忽略正则表达式的大小写， [A‐Z]能够匹配小写字符</td>
+</tr>
+<tr>
+<td>re.M re.MULTILINE</td>
+<td>正则表达式中的^操作符能够将给定字符串的每行当作匹配开始</td>
+</tr>
+<tr>
+<td>re.S re.DOTALL</td>
+<td>正则表达式中的.操作符能够匹配所有字符，默认匹配除换行外的所有字符</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re  </span><br><span class="line">match = re.search(<span class="string">r'[1-9]\d&#123;5&#125;'</span>,<span class="string">'bit 100001'</span>)  </span><br><span class="line"><span class="keyword">if</span> match:  </span><br><span class="line">    print(match.group(<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+
+<p><strong>re.match(pattern, string, flags=0)</strong><br>∙ pattern : 正则表达式的字符串或原生字符串表示<br>∙ string : 待匹配字符串<br>∙ flags : 正则表达式使用时的控制标记<br>从一个字符串的开始位置起匹配正则表达式<br>返回match对象   </p>
+<p><strong>re.findall(pattern, string, flags=0)</strong><br>∙ pattern : 正则表达式的字符串或原生字符串表示<br>∙ string : 待匹配字符串<br>∙ flags : 正则表达式使用时的控制标记<br>搜索字符串，以列表类型返回全部能匹配的子串   </p>
+<p><strong>re.split(pattern, string, maxsplit=0, flags=0)</strong><br>∙ pattern : 正则表达式的字符串或原生字符串表示<br>∙ string : 待匹配字符串<br>∙ maxsplit: 最大分割数，剩余部分作为最后一个元素输出<br>∙ flags : 正则表达式使用时的控制标记<br>将一个字符串按照正则表达式匹配结果进行分割<br>返回列表类型   </p>
+<p><strong>re.finditer(pattern, string, flags=0)</strong><br>∙ pattern : 正则表达式的字符串或原生字符串表示<br>∙ string : 待匹配字符串<br>∙ flags : 正则表达式使用时的控制标记<br>搜索字符串，返回一个匹配结果的迭代类型，每个迭代<br>元素是match对象   </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> refor m <span class="keyword">in</span> re.finditer(<span class="string">r'[1-9]\d&#123;5&#125;'</span>,<span class="string">'bit100001 lmz312552'</span>):    <span class="keyword">if</span> m:          print(m.group(<span class="number">0</span>))</span><br></pre></td></tr></table></figure>
+
+<p><strong>re.sub(pattern, repl, string, count=0, flags=0)</strong><br>在一个字符串中替换所有匹配正则表达式的子串<br>返回替换后的字符串   </p>
+<dl><dt>∙ pattern 正则表达式的字符串或原生字符串表示<br>: ∙ repl : 替换匹配字符串的字符串∙ string : 待匹配字符串∙ count<br>∙ flags : 匹配的最大替换次数</dt><dd>正则表达式使用时的控制标记   </dd></dl><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> resub = re.sub(<span class="string">r'[1-9]\d&#123;5&#125;'</span>, <span class="string">'bitzip'</span>, <span class="string">'bit100001 lmz312552'</span>)print(sub)</span><br></pre></td></tr></table></figure>
+
+<h3 id="正则表达式对象"><a href="#正则表达式对象" class="headerlink" title="正则表达式对象"></a>正则表达式对象</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rst = re.search(<span class="string">r'[1‐9]\d&#123;5&#125;'</span>, <span class="string">'BIT 100081'</span>)  </span><br><span class="line">pat = re.compile(<span class="string">r'[1‐9]\d&#123;5&#125;'</span>)  </span><br><span class="line">rst = pat.search(<span class="string">'BIT 100081'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>面向对象用法：编译后的多次操作<br>函数式用法：一次性操作   </p>
+<p>regex = re.compile(pattern, flags=0)<br>∙ pattern : 正则表达式的字符串或原生字符串表示<br>∙ flags : 正则表达式使用时的控制标记  </p>
+<p><strong>regex = re.compile(r’[1‐9]\d{5}’)</strong><br><strong>将正则表达式的字符串形式编译成正则表达式对象</strong>   </p>
+<h3 id="re库的match对象"><a href="#re库的match对象" class="headerlink" title="re库的match对象"></a>re库的match对象</h3><p>Match对象是一次匹配的结果，包含匹配的很多信息   </p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.string</td>
+<td>待匹配的文本</td>
+</tr>
+<tr>
+<td>.re</td>
+<td>匹配时使用的patter对象（正则表达式）</td>
+</tr>
+<tr>
+<td>.pos</td>
+<td>正则表达式搜索文本的开始位置</td>
+</tr>
+<tr>
+<td>.endpos</td>
+<td>正则表达式搜索文本的结束位置</td>
+</tr>
+</tbody></table>
+<p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1572953898604.png" alt="1572953898604">  </p>
+<h3 id="re库的贪婪匹配和最小匹配"><a href="#re库的贪婪匹配和最小匹配" class="headerlink" title="re库的贪婪匹配和最小匹配"></a>re库的贪婪匹配和最小匹配</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">match = re.search(<span class="string">r'PY.*N'</span>, <span class="string">'PYANBNCNDN'</span>)  </span><br><span class="line">print(match.group(<span class="number">0</span>))  </span><br><span class="line"><span class="string">'PYANBNCNDN'</span></span><br></pre></td></tr></table></figure>
+
+<p>Re库默认采用<strong>贪婪匹配，即输出匹配最长的子串</strong>   </p>
+<table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>*?</td>
+<td>前一个字符0次或无限次扩展，最小匹配</td>
+</tr>
+<tr>
+<td>+?</td>
+<td>前一个字符1次或无限次扩展，最小匹配</td>
+</tr>
+<tr>
+<td>??</td>
+<td>前一个字符0次或1次扩展，最小匹配</td>
+</tr>
+<tr>
+<td>{m,n}?</td>
+<td>扩展前一个字符m至n次（含n），最小匹配</td>
+</tr>
+</tbody></table>
+<p>*<em>只要长度输出可能不同的，都可以通过在操作符后增加?变成最小匹配 *</em>  </p>
+<h1 id="Scrapy"><a href="#Scrapy" class="headerlink" title="Scrapy"></a>Scrapy</h1><p>Scrapy是一个快速功能强大的网络爬虫框架   </p>
+<p>爬虫框架是实现爬虫功能的一个软件结构和功能组件集合。<br>爬虫框架是一个半成品，能够帮助用户实现专业网络爬虫。   </p>
+<p><strong>scrapy的安装</strong>  </p>
+<p>Win平台: “以管理员身份运行” cmd执行   </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install scrapy</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install scrapy</span><br></pre></td></tr></table></figure>
+
+<p>安装后小测：执行   </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy</span><br></pre></td></tr></table></figure>
+
+<h2 id="Scrapy结构"><a href="#Scrapy结构" class="headerlink" title="Scrapy结构"></a>Scrapy结构</h2><p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1573003671238.png" alt="1573003671238">  </p>
+<p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1573007510817.png" alt="1573007510817">  </p>
+<p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1573007534350.png" alt="1573007534350">  </p>
+<p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1573007565476.png" alt="1573007565476">  </p>
+<p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1573007584490.png" alt="1573007584490">  </p>
+<p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1573007612566.png" alt="1573007612566">  </p>
+<p><img src="//codeofli.github.io/2019/10/python/python-crawler/python-crawler/1573007638061.png" alt="1573007638061">  </p>
+<p><strong>Engine</strong><br>(1) 控制所有模块之间的数据流<br>(2) 根据条件触发事件<br>不需要用户修改   </p>
+<p><strong>Downloader</strong><br>根据请求下载网页<br>不需要用户修改   </p>
+<p><strong>Scheduler</strong><br>对所有爬取请求进行调度管理<br>不需要用户修改   </p>
+<p><strong>Downloader Middleware</strong><br>目的：实施Engine、 Scheduler和Downloader<br>之间进行用户可配置的控制<br>功能：修改、丢弃、新增请求或响应<br>用户可以编写配置代码   </p>
+<p><strong>Spider</strong><br>(1) 解析Downloader返回的响应（ Response）<br>(2) 产生爬取项（ scraped item）<br>(3) 产生额外的爬取请求（ Request）<br>需要用户编写配置代码   </p>
+<p><strong>Item Pipelines</strong><br>(1) 以流水线方式处理Spider产生的爬取项<br>(2) 由一组操作顺序组成，类似流水线，每个操<br>作是一个Item Pipeline类型<br>(3) 可能操作包括：清理、检验和查重爬取项中<br>的HTML数据、将数据存储到数据库<br>需要用户编写配置代码   </p>
+<p><strong>Spider Middleware</strong><br>目的：对请求和爬取项的再处理<br>功能：修改、丢弃、新增请求或爬取项<br>用户可以编写配置代码   </p>
+<h2 id="requests和scrapy"><a href="#requests和scrapy" class="headerlink" title="requests和scrapy"></a>requests和scrapy</h2><p>相同点：<br>两者都可以进行页面请求和爬取， Python爬虫的两个重要技术路线<br>两者可用性都好，文档丰富，入门简单<br>两者都没有处理js、提交表单、应对验证码等功能（可扩展）   </p>
+<table>
+<thead>
+<tr>
+<th>requests</th>
+<th>scrapy</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>页面级爬虫</td>
+<td>网站级爬虫</td>
+</tr>
+<tr>
+<td>功能库</td>
+<td>框架</td>
+</tr>
+<tr>
+<td>并发性考虑不足，性能较差</td>
+<td>并发性好，性能较高</td>
+</tr>
+<tr>
+<td>重点在于页面下载</td>
+<td>重点在于爬虫结构</td>
+</tr>
+<tr>
+<td>定制灵活</td>
+<td>一般定制灵活，深度定制困难</td>
+</tr>
+<tr>
+<td>上手十分简单</td>
+<td>入门稍难</td>
+</tr>
+</tbody></table>
+<h2 id="scrapy常用命令"><a href="#scrapy常用命令" class="headerlink" title="scrapy常用命令"></a>scrapy常用命令</h2><p>Scrapy是为持续运行设计的专业爬虫框架，提供操作的Scrapy命令行<br>Win下，启动cmd控制台   </p>
+<p>为什么Scrapy采用命令行创建和运行爬虫？<br>命令行（不是图形界面）更容易自动化，适合脚本控制<br>本质上， Scrapy是给程序员用的，功能（而不是界面）更重要   </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy &lt;command&gt; [options] [args]</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>格式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>startproject</td>
+<td>创建一个新工程</td>
+<td>scrapy startproject <name> [dir]</name></td>
+</tr>
+<tr>
+<td>genspider</td>
+<td>创建一个爬虫</td>
+<td>scrapy genspider [options] <name> <domain></domain></name></td>
+</tr>
+<tr>
+<td>settings</td>
+<td>获得爬虫配置信息</td>
+<td>scrapy settings [options]</td>
+</tr>
+<tr>
+<td>crawl</td>
+<td>运行一个爬虫</td>
+<td>scrapy crawl <spider></spider></td>
+</tr>
+<tr>
+<td>list</td>
+<td>列出工程中所有爬虫</td>
+<td>scrapy list</td>
+</tr>
+<tr>
+<td>shell</td>
+<td>启动URL调试命令行</td>
+<td>scrapy shell [url]</td>
+</tr>
+</tbody></table>
+<h2 id="产生的步骤"><a href="#产生的步骤" class="headerlink" title="产生的步骤"></a>产生的步骤</h2><p>应用Scrapy爬虫框架主要是编写配置型代码  </p>
+<h3 id="步骤1：建立一个Scrapy爬虫工程"><a href="#步骤1：建立一个Scrapy爬虫工程" class="headerlink" title="步骤1：建立一个Scrapy爬虫工程"></a>步骤1：建立一个Scrapy爬虫工程</h3><p>选取一个目录（ D:\pycodes\），然后执行如下命令：   </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy startproject python123demo</span><br></pre></td></tr></table></figure>
+
+<h3 id="生成的工程目录"><a href="#生成的工程目录" class="headerlink" title="生成的工程目录"></a>生成的工程目录</h3><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">python123demo/ 		外层目录  </span><br><span class="line">	scrapy<span class="selector-class">.cfg</span> 		部署Scrapy爬虫的配置文件  </span><br><span class="line">	python123demo/	Scrapy框架的用户自定义Python代码  </span><br><span class="line">		__init__<span class="selector-class">.py</span>		初始化脚本	  </span><br><span class="line">		items<span class="selector-class">.py</span> 		Items代码模板（继承类）  </span><br><span class="line">		middlewares<span class="selector-class">.py</span>	Middlewares代码模板（继承类）  </span><br><span class="line">		pipelines<span class="selector-class">.py</span>	Pipelines代码模板（继承类）  </span><br><span class="line">		settings<span class="selector-class">.py</span>		Scrapy爬虫的配置文件  </span><br><span class="line">		spiders/		Spiders代码模板目录（继承类）  </span><br><span class="line">目录结构 __pycache__/	 缓存目录，无需修改</span><br></pre></td></tr></table></figure>
+
+<p><strong>内层目录结构</strong>  </p>
+<p>用户自定义的spider代码增加在此处   </p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spiders/	Spiders代码模板目录（继承类）  </span><br><span class="line">    <span class="module-access"><span class="module"><span class="identifier">__init__</span>.</span></span>py		初始文件，无需修改  </span><br><span class="line">    __pycache__/	缓存目录，无需修改</span><br></pre></td></tr></table></figure>
+
+<h3 id="步骤2：在工程中产生一个Scrapy爬虫"><a href="#步骤2：在工程中产生一个Scrapy爬虫" class="headerlink" title="步骤2：在工程中产生一个Scrapy爬虫"></a>步骤2：在工程中产生一个Scrapy爬虫</h3><p>进入工程目录（ D:\pycodes\python123demo），然后执行如下命令：  </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">You can start your first spider with:  </span><br><span class="line">    cd python123demo  </span><br><span class="line">    scrapy genspider example example.com</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">E:\Codes\Python\reptile\python123demo&gt;scrapy genspider demo python123.io</span><br></pre></td></tr></table></figure>
+
+<p>该命令作用：<br>(1) 生成一个名称为demo的spider<br>(2) 在spiders目录下增加代码文件demo.py  </p>
+<p>该命令仅用于生成demo.py，该文件也可以手工生成   </p>
+<p><strong>demo.py文件</strong>  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-  </span></span><br><span class="line"><span class="keyword">import</span> scrapy  </span><br><span class="line">  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DemoSpider</span><span class="params">(scrapy.Spider)</span>:</span>  </span><br><span class="line">    name = <span class="string">'demo'</span>  </span><br><span class="line">    allowed_domains = [<span class="string">'python123.io'</span>]  </span><br><span class="line">    start_urls = [<span class="string">'http://python123.io/'</span>]  </span><br><span class="line"><span class="comment">#parse()用于处理响应，解析内容形成字典，发现新的URL爬取请求   </span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span>  </span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="步骤3：配置产生的spider爬虫"><a href="#步骤3：配置产生的spider爬虫" class="headerlink" title="步骤3：配置产生的spider爬虫"></a>步骤3：配置产生的spider爬虫</h3><p>配置：（ 1）初始URL地址  </p>
+<p> （ 2）获取页面后的解析方式   </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-  </span></span><br><span class="line"><span class="keyword">import</span> scrapy  </span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DemoSpider</span><span class="params">(scrapy.Spider)</span>:</span>  </span><br><span class="line">    name = <span class="string">'demo'</span>  </span><br><span class="line">    <span class="comment"># allowed_domains = ['python123.io'] 可选  </span></span><br><span class="line">    start_urls = [<span class="string">'http://python123.io/ws/demo.html'</span>]  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span>  </span><br><span class="line">        fname = response.url.split(<span class="string">'/'</span>)[<span class="number">-1</span>]  </span><br><span class="line">        <span class="keyword">with</span> open(fname,<span class="string">"wb"</span>) <span class="keyword">as</span> f:  </span><br><span class="line">            f.write(response.body)  </span><br><span class="line">        self.log(<span class="string">'Saved file %s.'</span> % fname)</span><br></pre></td></tr></table></figure>
+
+<h3 id="步骤4：运行爬虫，获取网页"><a href="#步骤4：运行爬虫，获取网页" class="headerlink" title="步骤4：运行爬虫，获取网页"></a>步骤4：运行爬虫，获取网页</h3><p>在命令行下，执行如下命令：   </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy crawl demo</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>完整版代码：</strong>  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-  </span></span><br><span class="line"><span class="keyword">import</span> scrapy  </span><br><span class="line">  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DemoSpider</span><span class="params">(scrapy.Spider)</span>:</span>  </span><br><span class="line">    name = <span class="string">'demo'</span>  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">start_requests</span><span class="params">(self)</span>:</span>  </span><br><span class="line">        urls = [  </span><br><span class="line">            <span class="string">'http://python123.io/ws/demo.html'</span>  </span><br><span class="line">        ]  </span><br><span class="line">        <span class="keyword">for</span> url <span class="keyword">in</span> urls:  </span><br><span class="line">            <span class="keyword">yield</span> scrapy.Request(url=url,callback=self.parse)  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parse</span><span class="params">(self, response)</span>:</span>  </span><br><span class="line">        fname = response.url.split(<span class="string">'/'</span>)[<span class="number">-1</span>]  </span><br><span class="line">        <span class="keyword">with</span> open(fname,<span class="string">"wb"</span>) <span class="keyword">as</span> f:  </span><br><span class="line">            f.write(response.body)  </span><br><span class="line">        self.log(<span class="string">'Saved file %s.'</span> % fname)</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="Request类"><a href="#Request类" class="headerlink" title="Request类"></a>Request类</h3><p><strong>class scrapy.http.Request()</strong><br>Request对象表示一个HTTP请求<br>由Spider生成，由Downloader执行   </p>
+<table>
+<thead>
+<tr>
+<th>属性或方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.url</td>
+<td>Request对应的请求URL地址</td>
+</tr>
+<tr>
+<td>.method</td>
+<td>对应的请求方法， ‘GET’ ‘POST’等</td>
+</tr>
+<tr>
+<td>.headers</td>
+<td>字典类型风格的请求头</td>
+</tr>
+<tr>
+<td>.body</td>
+<td>请求内容主体，字符串类型</td>
+</tr>
+<tr>
+<td>.meta</td>
+<td>用户添加的扩展信息，在Scrapy内部模块间传递信息使用</td>
+</tr>
+<tr>
+<td>.copy()</td>
+<td>复制该请求</td>
+</tr>
+</tbody></table>
+<h3 id="Response类"><a href="#Response类" class="headerlink" title="Response类"></a>Response类</h3><p>class scrapy.http.Response()<br>Response对象表示一个HTTP响应<br>由Downloader生成，由Spider处理   </p>
+<table>
+<thead>
+<tr>
+<th>属性或方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.url</td>
+<td>Response对应的URL地址</td>
+</tr>
+<tr>
+<td>.status</td>
+<td>HTTP状态码，默认是200</td>
+</tr>
+<tr>
+<td>.headers</td>
+<td>Response对应的头部信息</td>
+</tr>
+<tr>
+<td>.body</td>
+<td>Response对应的内容信息，字符串类型</td>
+</tr>
+<tr>
+<td>.flags</td>
+<td>一组标记</td>
+</tr>
+<tr>
+<td>.request</td>
+<td>产生Response类型对应的Request对象</td>
+</tr>
+<tr>
+<td>.copy()</td>
+<td>复制该响应</td>
+</tr>
+</tbody></table>
+<h3 id="Item类"><a href="#Item类" class="headerlink" title="Item类"></a>Item类</h3><p>class scrapy.item.Item()<br>Item对象表示一个从HTML页面中提取的信息内容<br>由Spider生成，由Item Pipeline处理<br>Item类似字典类型，可以按照字典类型操作   </p>
+<h2 id="scrapy基本使用"><a href="#scrapy基本使用" class="headerlink" title="scrapy基本使用"></a>scrapy基本使用</h2><h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><p>步骤1：创建一个工程和Spider模板<br>步骤2：编写Spider<br>步骤3：编写Item Pipeline<br>步骤4：优化配置策略  </p>
+<h3 id="Scrapy爬虫支持多种HTML信息提取方法："><a href="#Scrapy爬虫支持多种HTML信息提取方法：" class="headerlink" title="Scrapy爬虫支持多种HTML信息提取方法："></a>Scrapy爬虫支持多种HTML信息提取方法：</h3><p>• Beautiful Soup<br>• lxml<br>• re<br>• XPath Selector<br>• CSS Selector   </p>
+<p>CSS Selector  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;HTML&gt;.css(<span class="string">'a::attr(href)'</span>).extract()</span><br></pre></td></tr></table></figure>
+
+<p>CSS Selector由W3C组织维护并规范<br>标签名称 标签属性   </p>
+<h2 id="配置并发连接选项"><a href="#配置并发连接选项" class="headerlink" title="配置并发连接选项"></a>配置并发连接选项</h2><p> <strong>settings.py文件</strong>  </p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CONCURRENT_REQUESTS</td>
+<td>Downloader最大并发请求下载数量，默认32</td>
+</tr>
+<tr>
+<td>CONCURRENT_ITEMS</td>
+<td>Item Pipeline最大并发ITEM处理数量，默认100</td>
+</tr>
+<tr>
+<td>CONCURRENT_REQUESTS_PER_DOMAIN</td>
+<td>每个目标域名最大的并发请求数量，默认8</td>
+</tr>
+<tr>
+<td>CONCURRENT_REQUESTS_PER_IP</td>
+<td>每个目标IP最大的并发请求数量，默认0，非0有效</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://codeofli.github.io/2019/10/python/python-crawler/python-crawler/" data-id="cl3iuqtvv001r8kcb8akhksbu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/crawler/">crawler</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/10/java-note/spring/spring/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          spring
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/front-end/html-css/html-css/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">html-css</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Elasticsearch/">Elasticsearch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/">RabbitMQ</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/elasticsearch/">elasticsearch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/note/">note</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Axios/">Axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elasticsearch/">Elasticsearch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nacos/">Nacos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RabbitMQ/">RabbitMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentinel/">Sentinel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringCloud/">SpringCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crawler/">crawler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/seata/">seata</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springBoot/">springBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMvc/">springMvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssm/">ssm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Axios/" style="font-size: 10px;">Axios</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/Nacos/" style="font-size: 12.5px;">Nacos</a> <a href="/tags/RabbitMQ/" style="font-size: 12.5px;">RabbitMQ</a> <a href="/tags/Sentinel/" style="font-size: 12.5px;">Sentinel</a> <a href="/tags/SpringCloud/" style="font-size: 10px;">SpringCloud</a> <a href="/tags/crawler/" style="font-size: 10px;">crawler</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/js/" style="font-size: 15px;">js</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/python/" style="font-size: 17.5px;">python</a> <a href="/tags/seata/" style="font-size: 10px;">seata</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springBoot/" style="font-size: 12.5px;">springBoot</a> <a href="/tags/springMvc/" style="font-size: 10px;">springMvc</a> <a href="/tags/ssm/" style="font-size: 10px;">ssm</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/学习笔记/" style="font-size: 17.5px;">学习笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/10/docker/Docker实用篇/">Docker实用篇</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ/">RabbitMQ</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/">RabbitMQ部署指南</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/Seata/Seate/">分布式事务seata</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/Elasticsearch/Elasticsearch/">Elasticsearch</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 nicolas lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Jmeter快速入门 | nicolas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Jmeter快速入门1.安装JmeterJmeter依赖于JDK，所以必须确保当前计算机上已经安装了JDK，并且配置了环境变量。1.1.下载可以Apache Jmeter官网下载，地址：http://jmeter.apache.org/download_jmeter.cgi当然，我们课前资料也提供了下载好的安装包：">
+<meta name="keywords" content="java,Jmeter">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Jmeter快速入门">
+<meta property="og:url" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/index.html">
+<meta property="og:site_name" content="nicolas">
+<meta property="og:description" content="Jmeter快速入门1.安装JmeterJmeter依赖于JDK，所以必须确保当前计算机上已经安装了JDK，并且配置了环境变量。1.1.下载可以Apache Jmeter官网下载，地址：http://jmeter.apache.org/download_jmeter.cgi当然，我们课前资料也提供了下载好的安装包：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715193149837.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715193334367.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715193414601.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715193730096.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715193838719.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715193914039.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715194137982.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715194413178.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715195053807.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715195144130.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715195410764.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715195844978.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715200155537.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715200243194.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715200336526.png">
+<meta property="og:updated_time" content="2022-03-02T01:21:40.950Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Jmeter快速入门">
+<meta name="twitter:description" content="Jmeter快速入门1.安装JmeterJmeter依赖于JDK，所以必须确保当前计算机上已经安装了JDK，并且配置了环境变量。1.1.下载可以Apache Jmeter官网下载，地址：http://jmeter.apache.org/download_jmeter.cgi当然，我们课前资料也提供了下载好的安装包：">
+<meta name="twitter:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715193149837.png">
+  
+    <link rel="alternate" href="/atom.xml" title="nicolas" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">nicolas</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Yesterday you said tomorow.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://codeofli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/" class="article-date">
+  <time datetime="2021-10-23T02:40:06.000Z" itemprop="datePublished">2021-10-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Jmeter快速入门
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Jmeter快速入门"><a href="#Jmeter快速入门" class="headerlink" title="Jmeter快速入门"></a>Jmeter快速入门</h1><h1 id="1-安装Jmeter"><a href="#1-安装Jmeter" class="headerlink" title="1.安装Jmeter"></a>1.安装Jmeter</h1><p>Jmeter依赖于JDK，所以必须确保当前计算机上已经安装了JDK，并且配置了环境变量。</p><h2 id="1-1-下载"><a href="#1-1-下载" class="headerlink" title="1.1.下载"></a>1.1.下载</h2><p>可以Apache Jmeter官网下载，地址：<a href="http://jmeter.apache.org/download_jmeter.cgi" target="_blank" rel="noopener">http://jmeter.apache.org/download_jmeter.cgi</a></p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715193149837.png" alt="image-20210715193149837"></p><p>当然，我们课前资料也提供了下载好的安装包：</p><a id="more"></a>
+
+
+
+<p>apache-jmeter-5.4.1.zip</p>
+<h2 id="1-2-解压"><a href="#1-2-解压" class="headerlink" title="1.2.解压"></a>1.2.解压</h2><p>因为下载的是zip包，解压缩即可使用，目录结构如下：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715193334367.png" alt="image-20210715193334367"></p>
+<p>其中的bin目录就是执行的脚本，其中包含启动脚本：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715193414601.png" alt="image-20210715193414601"></p>
+<h3 id="1-3-运行"><a href="#1-3-运行" class="headerlink" title="1.3.运行"></a>1.3.运行</h3><p>双击即可运行，但是有两点注意：</p>
+<ul>
+<li>启动速度比较慢，要耐心等待</li>
+<li>启动后黑窗口不能关闭，否则Jmeter也跟着关闭了</li>
+</ul>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715193730096.png" alt="image-20210715193730096"></p>
+<h1 id="2-快速入门"><a href="#2-快速入门" class="headerlink" title="2.快速入门"></a>2.快速入门</h1><h2 id="2-1-设置中文语言"><a href="#2-1-设置中文语言" class="headerlink" title="2.1.设置中文语言"></a>2.1.设置中文语言</h2><p>默认Jmeter的语言是英文，需要设置：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715193838719.png" alt="image-20210715193838719"></p>
+<p>效果：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715193914039.png" alt="image-20210715193914039"></p>
+<blockquote>
+<p><strong>注意</strong>：上面的配置只能保证本次运行是中文，如果要永久中文，需要修改Jmeter的配置文件</p>
+</blockquote>
+<p>打开jmeter文件夹，在bin目录中找到 <strong>jmeter.properties</strong>，添加下面配置：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">language</span>=<span class="string">zh_CN</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715194137982.png" alt="image-20210715194137982"></p>
+<blockquote>
+<p>注意：前面不要出现#，#代表注释，另外这里是下划线，不是中划线</p>
+</blockquote>
+<h2 id="2-2-基本用法"><a href="#2-2-基本用法" class="headerlink" title="2.2.基本用法"></a>2.2.基本用法</h2><p>在测试计划上点鼠标右键，选择添加 &gt; 线程（用户） &gt; 线程组：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715194413178.png" alt="image-20210715194413178"></p>
+<p>在新增的线程组中，填写线程信息：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715195053807.png" alt="image-20210715195053807"></p>
+<p>给线程组点鼠标右键，添加http取样器：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715195144130.png" alt="image-20210715195144130"></p>
+<p>编写取样器内容：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715195410764.png" alt="image-20210715195410764"></p>
+<p>添加监听报告：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715195844978.png" alt="image-20210715195844978"></p>
+<p>添加监听结果树：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715200155537.png" alt="image-20210715200155537"></p>
+<p>汇总报告结果：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715200243194.png" alt="image-20210715200243194"></p>
+<p>结果树：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/image-20210715200336526.png" alt="image-20210715200336526"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Jmeter快速入门/Jmeter快速入门/" data-id="cl3iuqumd004l8kcbl7hqin7b" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/10/java-note/SpringCloud/微服务保护Sentinel/sentinel规则持久化/sentinel规则持久化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Sentinel规则持久化
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/10/markdown/markdown/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Markdown</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Elasticsearch/">Elasticsearch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/">RabbitMQ</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/elasticsearch/">elasticsearch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/note/">note</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Axios/">Axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elasticsearch/">Elasticsearch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nacos/">Nacos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RabbitMQ/">RabbitMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentinel/">Sentinel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringCloud/">SpringCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crawler/">crawler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/seata/">seata</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springBoot/">springBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMvc/">springMvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssm/">ssm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Axios/" style="font-size: 10px;">Axios</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/Nacos/" style="font-size: 12.5px;">Nacos</a> <a href="/tags/RabbitMQ/" style="font-size: 12.5px;">RabbitMQ</a> <a href="/tags/Sentinel/" style="font-size: 12.5px;">Sentinel</a> <a href="/tags/SpringCloud/" style="font-size: 10px;">SpringCloud</a> <a href="/tags/crawler/" style="font-size: 10px;">crawler</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/js/" style="font-size: 15px;">js</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/python/" style="font-size: 17.5px;">python</a> <a href="/tags/seata/" style="font-size: 10px;">seata</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springBoot/" style="font-size: 12.5px;">springBoot</a> <a href="/tags/springMvc/" style="font-size: 10px;">springMvc</a> <a href="/tags/ssm/" style="font-size: 10px;">ssm</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/学习笔记/" style="font-size: 17.5px;">学习笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/10/docker/Docker实用篇/">Docker实用篇</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ/">RabbitMQ</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/">RabbitMQ部署指南</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/Seata/Seate/">分布式事务seata</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/Elasticsearch/Elasticsearch/">Elasticsearch</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 nicolas lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

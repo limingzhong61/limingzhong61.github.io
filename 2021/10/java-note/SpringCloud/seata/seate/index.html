@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>分布式事务seata | nicolas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="分布式事务seata事务的ACID原则演示分布式事务问题 创建数据库，名为seata_demo，然后导入课前资料提供的SQL文件： 1seata-demo.sql  导入课前资料提供的微服务: seata-demo（文件夹）   启动nacos、所有微服务  测试下单功能，发出Post请求: 12curl --location --request POST &apos;http://localhost:80">
+<meta name="keywords" content="Java,seata">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式事务seata">
+<meta property="og:url" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/index.html">
+<meta property="og:site_name" content="nicolas">
+<meta property="og:description" content="分布式事务seata事务的ACID原则演示分布式事务问题 创建数据库，名为seata_demo，然后导入课前资料提供的SQL文件： 1seata-demo.sql  导入课前资料提供的微服务: seata-demo（文件夹）   启动nacos、所有微服务  测试下单功能，发出Post请求: 12curl --location --request POST &apos;http://localhost:80">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021104413170.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021105841040.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021124118539.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021124208030.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021124800252.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021124940177.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021125054217.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021125301465.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021130501293.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021153718032.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023101642737.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023103311730.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023141217696.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023142634138.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023142659710.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023142708852.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023143110867.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023143607998.png">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-d5c096c722332efdc187f5af5a0f923e_720w.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-e047504a8f3ff8d968d04b720fdd0f9c_720w.jpg">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023144005710.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023144454904.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023144624139.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023145853386.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023150122051.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023151258461.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023151758187.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023153412933.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023154042887.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023155018491.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023155248424.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023155724065.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023164102558.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023164300355.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023164249986.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023164335739.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023164828531.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210622202515014.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210622202622874.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021160716787.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210622203609227.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210622204145159.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210622205427318.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210622205901450.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021163723045.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210624151150840.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210624151221747.png">
+<meta property="og:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210624151507072.png">
+<meta property="og:updated_time" content="2022-03-02T01:21:40.533Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="分布式事务seata">
+<meta name="twitter:description" content="分布式事务seata事务的ACID原则演示分布式事务问题 创建数据库，名为seata_demo，然后导入课前资料提供的SQL文件： 1seata-demo.sql  导入课前资料提供的微服务: seata-demo（文件夹）   启动nacos、所有微服务  测试下单功能，发出Post请求: 12curl --location --request POST &apos;http://localhost:80">
+<meta name="twitter:image" content="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021104413170.png">
+  
+    <link rel="alternate" href="/atom.xml" title="nicolas" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">nicolas</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Yesterday you said tomorow.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://codeofli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-java-note/SpringCloud/Seata/Seate" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/java-note/SpringCloud/Seata/Seate/" class="article-date">
+  <time datetime="2021-10-24T02:40:06.000Z" itemprop="datePublished">2021-10-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      分布式事务seata
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="分布式事务seata"><a href="#分布式事务seata" class="headerlink" title="分布式事务seata"></a>分布式事务seata</h1><h2 id="事务的ACID原则"><a href="#事务的ACID原则" class="headerlink" title="事务的ACID原则"></a>事务的ACID原则</h2><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021104413170.png" alt="image-20211021104413170"></p><h2 id="演示分布式事务问题"><a href="#演示分布式事务问题" class="headerlink" title="演示分布式事务问题"></a>演示分布式事务问题</h2><ol>
+<li><p>创建数据库，名为seata_demo，然后导入课前资料提供的SQL文件：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">seata-demo</span><span class="selector-class">.sql</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>导入课前资料提供的微服务:</p>
+<p>seata-demo（文件夹）</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021105841040.png" alt="image-20211021105841040"></p>
+</li>
+<li><p>启动nacos、所有微服务</p>
+</li>
+<li><p>测试下单功能，发出Post请求:</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl --location --</span><br><span class="line">request POST 'http://localhost:<span class="number">8082</span>/order?userId=user<span class="number">20210303204201</span>2&amp;commodityCode=<span class="number">10020200303204</span>1&amp;count=2&amp;money=200'</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol><a id="more"></a>
+
+<h2 id="分布式服务的事务问题"><a href="#分布式服务的事务问题" class="headerlink" title="分布式服务的事务问题"></a>分布式服务的事务问题</h2><p>在分布式系统下，一个业务跨越多个服务或数据源，每个服务都是一个分支事务，要保证所有分支事务最终状态一致，这样的事务就是分布式事务。</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021124118539.png" alt="image-20211021124118539"></p>
+<p>学习目标</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021124208030.png" alt="image-20211021124208030"></p>
+<h1 id="1理论基础"><a href="#1理论基础" class="headerlink" title="1理论基础"></a>1理论基础</h1><h2 id="CAP定理"><a href="#CAP定理" class="headerlink" title="CAP定理"></a>CAP定理</h2><p>1998年，加州大学的计算机科学家 Eric Brewer 提出，分布式系统有三个指标：</p>
+<ul>
+<li>Consistency（一致性）</li>
+<li>Availability（可用性）</li>
+<li>Partition tolerance （分区容错性）</li>
+</ul>
+<p>Eric Brewer 说，分布式系统无法同时满足这三个指标。<br>这个结论就叫做 CAP 定理。</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021124800252.png" alt="image-20211021124800252"></p>
+<h3 id="CAP定理-Consistency"><a href="#CAP定理-Consistency" class="headerlink" title="CAP定理- Consistency"></a>CAP定理- Consistency</h3><p>Consistency（一致性）：用户访问分布式系统中的任意节点，得到的数据必须一致</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021124940177.png" alt="image-20211021124940177"></p>
+<h3 id="CAP定理-Availability"><a href="#CAP定理-Availability" class="headerlink" title="CAP定理- Availability"></a>CAP定理- Availability</h3><p>Availability （可用性）：用户访问集群中的任意健康节点，必须能得到响应，而不是超时或拒绝</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021125054217.png" alt="image-20211021125054217"></p>
+<h3 id="CAP定理-Partition-tolerance"><a href="#CAP定理-Partition-tolerance" class="headerlink" title="CAP定理-Partition tolerance"></a>CAP定理-Partition tolerance</h3><p>Partition（分区）：因为网络故障或其它原因导致分布式系统中的部分节点与其它节点失去连接，形成独立分区。<br>Tolerance（容错）：在集群出现分区时，整个系统也要持续对外提供服务</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021125301465.png" alt="image-20211021125301465"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>简述CAP定理内容？</p>
+<ul>
+<li>分布式系统节点通过网络连接，一定会出现分区问题（P）<br>当分区出现时，系统的一致性（C）和可用性（A）就无法同时满足</li>
+</ul>
+<p>思考：elasticsearch集群是CP还是AP？</p>
+<ul>
+<li>ES集群出现分区时，故障节点会被剔除集群，数据分片会重新分配到其它节点，保证数据一致。因此是低可用性，高一致性，<strong>属于CP</strong></li>
+</ul>
+<h2 id="BASE理论"><a href="#BASE理论" class="headerlink" title="BASE理论"></a>BASE理论</h2><p>BASE理论是对CAP的一种解决思路，包含三个思想：</p>
+<ul>
+<li><strong>Basically Available （基本可用）</strong>：分布式系统在出现故障时，允许损失部分可用性，即保证核心可用。</li>
+<li>Soft State（软状态）：在一定时间内，允许出现中间状态，比如临时的不一致状态。</li>
+<li>Eventually Consistent（最终一致性）：虽然无法保证强一致性，但是在软状态结束后，最终达到数据一致。</li>
+</ul>
+<p>而分布式事务最大的问题是各个子事务的一致性问题，因此可以借鉴CAP定理和BASE理论：</p>
+<ul>
+<li>AP模式：各子事务分别执行和提交，允许出现结果不一致，然后采用弥补措施恢复数据即可，实现<strong>最终一致。</strong></li>
+<li>CP模式：各个子事务执行后互相等待，同时提交，同时回滚，达成<strong>强一致</strong>。但事务等待过程中，处于弱可用状态。</li>
+</ul>
+<h2 id="分布式事务模型"><a href="#分布式事务模型" class="headerlink" title="分布式事务模型"></a>分布式事务模型</h2><p>解决分布式事务，各个子系统之间必须能感知到彼此的事务状态，才能保证状态一致，因此需要一个事务协调者来协调每一个事务的参与者（子系统事务）。<br>这里的子系统事务，称为<strong>分支事务</strong>；有关联的各个分支事务在一起称为<strong>全局事务</strong></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021130501293.png" alt="image-20211021130501293"></p>
+<p>总结</p>
+<p>简述BASE理论三个思想：</p>
+<ul>
+<li>基本可用</li>
+<li>软状态</li>
+<li>最终一致</li>
+</ul>
+<p>解决分布式事务的思想和模型：</p>
+<ul>
+<li><p>全局事务：整个分布式事务</p>
+</li>
+<li><p>分支事务：分布式事务中包含的每个子系统的事务</p>
+</li>
+<li><p>最终一致思想：各分支事务分别执行并提交，如果有不一致的情况，再想办法恢复数据</p>
+</li>
+<li><p>强一致思想：各分支事务执行完业务不要提交，等待彼此结果。而后统一提交或回滚</p>
+</li>
+</ul>
+<h1 id="2初识Seata"><a href="#2初识Seata" class="headerlink" title="2初识Seata"></a>2初识Seata</h1><p>Seata是 2019 年 1 月份蚂蚁金服和阿里巴巴共同开源的分布式事务解决方案。致力于提供高性能和简单易用的分布式事务服务，为用户打造一站式的分布式解决方案。<br>官网地址：<a href="http://seata.io/，其中的文档、播客中提供了大量的使用说明、源码分析。" target="_blank" rel="noopener">http://seata.io/，其中的文档、播客中提供了大量的使用说明、源码分析。</a></p>
+<h2 id="Seata架构"><a href="#Seata架构" class="headerlink" title="Seata架构"></a>Seata架构</h2><p>Seata事务管理中有三个重要的角色：</p>
+<ul>
+<li><strong>TC (Transaction Coordinator) - 事务协调者</strong>：维护全局和分支事务的状态，协调全局事务提交或回滚。</li>
+<li><strong>TM (Transaction Manager) - 事务管理器</strong>：定义全局事务的范围、开始全局事务、提交或回滚全局事务。</li>
+<li><strong>RM (Resource Manager) - 资源管理器</strong>：管理分支事务处理的资源，与TC交谈以注册分支事务和报告分支事务的状态，并驱动分支事务提交或回滚。</li>
+</ul>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021153718032.png" alt="image-20211021153718032"></p>
+<h3 id="初识Seata"><a href="#初识Seata" class="headerlink" title="初识Seata"></a>初识Seata</h3><p>Seata提供了四种不同的分布式事务解决方案：</p>
+<ul>
+<li>XA模式：强一致性分阶段事务模式，牺牲了一定的可用性，无业务侵入</li>
+<li>TCC模式：最终一致的分阶段事务模式，有业务侵入<br>AT模式：最终一致的分阶段事务模式，无业务侵入，也是Seata的默认模式<br>SAGA模式：长事务模式，有业务侵入</li>
+</ul>
+<h2 id="部署TC服务"><a href="#部署TC服务" class="headerlink" title="部署TC服务"></a>部署TC服务</h2><p>参考课前资料提供的文档《 seata的部署和集成》：</p>
+<h1 id="3动手实践"><a href="#3动手实践" class="headerlink" title="3动手实践"></a>3动手实践</h1><h2 id="XA模式"><a href="#XA模式" class="headerlink" title="XA模式"></a>XA模式</h2><h3 id="XA模式原理"><a href="#XA模式原理" class="headerlink" title="XA模式原理"></a>XA模式原理</h3><p>XA 规范 是 X/Open 组织定义的分布式事务处理（DTP，Distributed Transaction Processing）标准，XA 规范 描述了全局的TM与局部的RM之间的接口，几乎所有主流的数据库都对 XA 规范 提供了支持。</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023101642737.png" alt="image-20211023101642737"></p>
+<h3 id="seata的XA模式"><a href="#seata的XA模式" class="headerlink" title="seata的XA模式"></a>seata的XA模式</h3><p>seata的XA模式做了一些调整，但大体相似：</p>
+<p>TM (Transaction Manager) - 事务管理器RM一阶段的工作：</p>
+<ol>
+<li>注册分支事务到TC</li>
+<li>执行分支业务sql但不提交</li>
+<li>报告执行状态到TC</li>
+</ol>
+<p>TC(<strong>TC (Transaction Coordinator) - 事务协调者</strong>)二阶段的工作：</p>
+<ul>
+<li>TC检测各分支事务执行状态<br>a. 如果都成功，通知所有RM提交事务<br>b. 如果有失败，通知所有RM回滚事务</li>
+</ul>
+<p>RM二阶段的工作：</p>
+<ul>
+<li>接收TC指令，提交或回滚事务</li>
+</ul>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023103311730.png" alt="image-20211023103311730"></p>
+<p>XA模式的优点是什么？</p>
+<ul>
+<li>事务的<strong>强一致性，满足ACID原则</strong>。</li>
+<li><strong>常用数据库都支持，实现简单</strong>，并且没有代码侵入 </li>
+</ul>
+<p>XA模式的缺点是什么？ </p>
+<ul>
+<li>因为一阶段需要锁定数据库资源，等待二阶段结束才释放，<strong>性能较差</strong> </li>
+<li>依赖<strong>关系型数据库</strong>实现事务</li>
+</ul>
+<h3 id="实现XA模式"><a href="#实现XA模式" class="headerlink" title="实现XA模式"></a>实现XA模式</h3><p>Seata的starter已经完成了XA模式的自动装配，实现非常简单，步骤如下：</p>
+<ol>
+<li><p>修改application.yml文件（每个参与事务的微服务），开启XA模式：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">seata:</span></span><br><span class="line">	<span class="attr">data-source-proxy-mode:</span> <span class="string">XA</span> <span class="comment">#开启数据源代理的XA模式</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>2.给发起全局事务的入口方法添加@GlobalTransactional注解，本例中是OrderServiceImpl中的create方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="meta">@GlobalTransactional</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Long <span class="title">create</span><span class="params">(Order order)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建订单</span></span><br><span class="line">    orderMapper.insert(order);</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// 扣用户余额</span></span><br><span class="line">        accountClient.deduct(order.getUserId(), order.getMoney());</span><br><span class="line">        <span class="comment">// 扣库存</span></span><br><span class="line">        storageClient.deduct(order.getCommodityCode(), order.getCount());</span><br><span class="line"></span><br><span class="line">    &#125; <span class="keyword">catch</span> (FeignException e) &#123;</span><br><span class="line">        log.error(<span class="string">"下单失败，原因:&#123;&#125;"</span>, e.contentUTF8(), e);</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(e.contentUTF8(), e);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> order.getId();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.重启服务并测试</p>
+<p>postman上测试</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023141217696.png" alt="image-20211023141217696"></p>
+<p>count=10时，数据库数据均未修改</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023142634138.png" alt="image-20211023142634138"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023142659710.png" alt="image-20211023142659710"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023142708852.png" alt="image-20211023142708852"></p>
+<h2 id="AT模式"><a href="#AT模式" class="headerlink" title="AT模式"></a>AT模式</h2><h3 id="AT模式原理"><a href="#AT模式原理" class="headerlink" title="AT模式原理"></a>AT模式原理</h3><p>AT模式同样是分阶段提交的事务模型，不过缺弥补了XA模型中资源锁定周期过长的缺陷。</p>
+<p>阶段一RM的工作：</p>
+<ul>
+<li>注册分支事务</li>
+<li><strong>记录undo-log（数据快照）</strong></li>
+<li>执行业务sql并<strong>提交</strong></li>
+<li>报告事务状态</li>
+</ul>
+<p>阶段二<strong>提交时R</strong>M的工作：</p>
+<ul>
+<li>删除undo-log即可</li>
+</ul>
+<p>阶段二<strong>回滚时</strong>RM的工作：</p>
+<ul>
+<li>根据undo-log恢复数据到更新前</li>
+</ul>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023143110867.png" alt="image-20211023143110867"></p>
+<p>例如，一个分支业务的SQL是这样的：update tb_account set money = money - 10 where id = 1</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023143607998.png" alt="image-20211023143607998"></p>
+<h4 id="简述AT模式与XA模式最大的区别是什么？"><a href="#简述AT模式与XA模式最大的区别是什么？" class="headerlink" title="简述AT模式与XA模式最大的区别是什么？"></a>简述AT模式与XA模式最大的区别是什么？</h4><ul>
+<li>XA模式一阶段<strong>不提交事务，锁定资源</strong>；AT模式一阶段<strong>直接提交，不锁定资源</strong>。</li>
+<li>XA模式依赖数据库机制实现回滚；AT模式利用<strong>数据快照实现数据回滚。</strong></li>
+<li><strong>XA模式强一致</strong>；<strong>AT模式最终一致</strong></li>
+</ul>
+<h3 id="AT模式的脏写问题"><a href="#AT模式的脏写问题" class="headerlink" title="AT模式的脏写问题"></a>AT模式的脏写问题</h3><p><strong>脏写</strong></p>
+<p>脏写，意思是说有两个事务，事务 A 和事务 B 同时在更新一条数据，事务 A 先把它更新为 A 值，事务 B 紧接着就把它更新为 B 值。如图：</p>
+<p><img src="https://pic3.zhimg.com/80/v2-d5c096c722332efdc187f5af5a0f923e_720w.jpg" alt="img"></p>
+<p>可以看到，此时事务 B 是后更新那行数据的值，所以此时那行数据的值是 B。而且此时事务 A 更新之后会记录一条 undo log 日志。因为事务 A 是先更新的，它在更新之前，这行数据的值为 <code>NULL</code>。所以此时事务 A 的 undo log 日志大概就是：更新之前这行数据的值为 NULL，主键为 XX</p>
+<p>那么此时事务 B 更新完数据的值为 B，此时事务 A 突然回滚了，就会用它的 undo log 日志去回滚。此时事务 A 一回滚，直接就会把那行数据的值更新回 NULL 值。如图：</p>
+<p><img src="https://pic1.zhimg.com/80/v2-e047504a8f3ff8d968d04b720fdd0f9c_720w.jpg" alt="img"></p>
+<p>然后就尴尬了，事务 B 一看，为什么我更新的 B 值没了？就因为你事务 A 反悔了把数据值回滚成 NULL 了，结果我更新的 B 值也不见 了。所以对于事务 B 看到的场景而言，就是自己<strong>明明更新了，结果值却没了</strong>，<strong>这就是脏写。</strong></p>
+<p>所谓脏写，就是我刚才明明写了一个数据值，结果过了一会却没了。而它的本质就是事务 B 去修改了事务 A 修改过的值，但是此时事务 A 还没提交，所以事务 A 随时会回滚，导致事务 B 修改的值也没了，这就是脏写的定义。</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023144005710.png" alt="image-20211023144005710"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023144454904.png" alt="image-20211023144454904"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023144624139.png" alt="image-20211023144624139"></p>
+<p>AT模式的优点：</p>
+<ul>
+<li>一阶段完成直接提交事务，释放数据库资源，性能比较好</li>
+<li>利用全局锁实现读写隔离</li>
+<li>没有代码侵入，框架自动完成回滚和提交</li>
+</ul>
+<p>AT模式的缺点：</p>
+<ul>
+<li>两阶段之间属于软状态，属于最终一致</li>
+<li>框架的快照功能会影响性能，但比XA模式要好很多</li>
+</ul>
+<h3 id="实现AT模式"><a href="#实现AT模式" class="headerlink" title="实现AT模式"></a>实现AT模式</h3><p>AT模式中的快照生成、回滚等动作都是由框架自动完成，没有任何代码侵入，因此实现非常简单。<br>1.导入课前资料提供的Sql文件：<code>seata-at.sql</code>，其中lock_table导入到TC服务关联的数据库，undo_log表导入到微服务关联的数据库：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seata-<span class="keyword">at</span>.sql</span><br></pre></td></tr></table></figure>
+
+<p>lock_table导入到TC服务关联的数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="comment">-- Table structure for lock_table</span></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> <span class="string">`lock_table`</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`lock_table`</span>  (</span><br><span class="line">  <span class="string">`row_key`</span> <span class="built_in">varchar</span>(<span class="number">128</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`xid`</span> <span class="built_in">varchar</span>(<span class="number">96</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`transaction_id`</span> <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`branch_id`</span> <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`resource_id`</span> <span class="built_in">varchar</span>(<span class="number">256</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`table_name`</span> <span class="built_in">varchar</span>(<span class="number">32</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`pk`</span> <span class="built_in">varchar</span>(<span class="number">36</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`gmt_create`</span> datetime <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`gmt_modified`</span> datetime <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`row_key`</span>) <span class="keyword">USING</span> BTREE,</span><br><span class="line">  <span class="keyword">INDEX</span> <span class="string">`idx_branch_id`</span>(<span class="string">`branch_id`</span>) <span class="keyword">USING</span> BTREE</span><br><span class="line">) <span class="keyword">ENGINE</span> = <span class="keyword">InnoDB</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> = utf8 <span class="keyword">COLLATE</span> = utf8_general_ci ROW_FORMAT = <span class="keyword">Compact</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023145853386.png" alt="image-20211023145853386"></p>
+<p>undo_log表导入到微服务关联的数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="comment">-- Table structure for undo_log</span></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> <span class="string">`undo_log`</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`undo_log`</span>  (</span><br><span class="line">  <span class="string">`branch_id`</span> <span class="built_in">bigint</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'branch transaction id'</span>,</span><br><span class="line">  <span class="string">`xid`</span> <span class="built_in">varchar</span>(<span class="number">100</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'global transaction id'</span>,</span><br><span class="line">  <span class="string">`context`</span> <span class="built_in">varchar</span>(<span class="number">128</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'undo_log context,such as serialization'</span>,</span><br><span class="line">  <span class="string">`rollback_info`</span> longblob <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'rollback info'</span>,</span><br><span class="line">  <span class="string">`log_status`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'0:normal status,1:defense status'</span>,</span><br><span class="line">  <span class="string">`log_created`</span> datetime(<span class="number">6</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'create datetime'</span>,</span><br><span class="line">  <span class="string">`log_modified`</span> datetime(<span class="number">6</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'modify datetime'</span>,</span><br><span class="line">  <span class="keyword">UNIQUE</span> <span class="keyword">INDEX</span> <span class="string">`ux_undo_log`</span>(<span class="string">`xid`</span>, <span class="string">`branch_id`</span>) <span class="keyword">USING</span> BTREE</span><br><span class="line">) <span class="keyword">ENGINE</span> = <span class="keyword">InnoDB</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> = utf8 <span class="keyword">COLLATE</span> = utf8_general_ci <span class="keyword">COMMENT</span> = <span class="string">'AT transaction mode undo table'</span> ROW_FORMAT = <span class="keyword">Compact</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="comment">-- Records of undo_log</span></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023150122051.png" alt="image-20211023150122051"></p>
+<p>2.修改application.yml文件，将事务模式修改为AT模式即可：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">seata:</span></span><br><span class="line"><span class="attr">  data-source-proxy-mode:</span> <span class="string">AT#开启数据源代理的AT模式</span></span><br></pre></td></tr></table></figure>
+
+<p>3.重启服务并测试</p>
+<p>测试内容同XA</p>
+<h2 id="TCC模式"><a href="#TCC模式" class="headerlink" title="TCC模式"></a>TCC模式</h2><h3 id="TCC模式原理"><a href="#TCC模式原理" class="headerlink" title="TCC模式原理"></a>TCC模式原理</h3><p>TCC模式与AT模式非常相似，每阶段都是独立事务，不同的是TCC通过人工编码来实现数据恢复。需要实现三个方法：</p>
+<ul>
+<li>Try：资源的检测和预留； </li>
+<li>Confirm：完成资源操作业务；要求 Try 成功 Confirm 一定要能成功。</li>
+<li>Cancel：预留资源释放，可以理解为try的反向操作。</li>
+</ul>
+<p>举例，一个扣减用户余额的业务。假设账户A原来余额是100，需要余额扣减30元。</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023151258461.png" alt="image-20211023151258461"></p>
+<h4 id="TCc的工作模型图"><a href="#TCc的工作模型图" class="headerlink" title="TCc的工作模型图:"></a>TCc的工作模型图:</h4><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023151758187.png" alt="image-20211023151758187"></p>
+<p>TCC模式的每个阶段是做什么的？</p>
+<ul>
+<li>Try：资源检查和预留</li>
+<li>Confirm：业务执行和提交</li>
+<li>Cancel：预留资源的释放</li>
+</ul>
+<p>TCC的优点是什么？</p>
+<ul>
+<li>一阶段完成直接提交事务，释放数据库资源，性能好</li>
+<li>相比AT模型，无需生成快照，无需使用全局锁，性能最强</li>
+<li>不依赖数据库事务，而是依赖补偿操作，可以用于非事务型数据库</li>
+</ul>
+<p>TCC的缺点是什么？</p>
+<ul>
+<li><strong>有代码侵入</strong>，<strong>需要人为编写try、Confirm和Cancel接口</strong>，太麻烦</li>
+<li>软状态，事务是最终一致</li>
+<li>需要考虑Confirm和Cancel的失败情况，做好幂等处理</li>
+</ul>
+<h3 id="案例实现"><a href="#案例实现" class="headerlink" title="案例实现"></a>案例实现</h3><p><strong>改造account-service服务，利用TCC实现分布式事务</strong></p>
+<p>需求如下：</p>
+<ul>
+<li>修改account-service，编写try、confirm、cancel逻辑<br>try业务：添加冻结金额，扣减可用金额<br>confirm业务：删除冻结金额<br>cancel业务：删除冻结金额，恢复可用金额<br>保证confirm、cancel接口的<strong>幂等性</strong><br>允许<strong>空回滚</strong><br>拒绝<strong>业务悬挂</strong></li>
+</ul>
+<h4 id="TCC的空回滚和业务悬挂"><a href="#TCC的空回滚和业务悬挂" class="headerlink" title="TCC的空回滚和业务悬挂"></a>TCC的空回滚和业务悬挂</h4><p>当某分支事务的try阶段阻塞时，可能导致全局事务超时而触发二阶段的cancel操作。在未执行try操作时先执行了cancel操作，这时cancel不能做回滚，就是<strong>空回滚</strong>。</p>
+<p>对于已经空回滚的业务，如果以后继续执行try，就永远不可能confirm或cancel，这就是<strong>业务悬挂</strong>。应当阻止执行空回滚后的try操作，避免悬挂</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023153412933.png" alt="image-20211023153412933"></p>
+<h4 id="业务分析"><a href="#业务分析" class="headerlink" title="业务分析"></a>业务分析</h4><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023154042887.png" alt="image-20211023154042887"></p>
+<h4 id="声明TCC接口"><a href="#声明TCC接口" class="headerlink" title="声明TCC接口"></a>声明TCC接口</h4><p>TCC的Try、Confirm、Cancel方法都需要在接口中基于注解来声明，语法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@LocalTCC</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TCCService</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Try逻辑，<span class="doctag">@TwoPhaseBusinessAction</span>中的name属性要与当前方法名一致，用于指定Try逻辑对应的方法</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@TwoPhaseBusinessAction</span>(name = <span class="string">"prepare"</span>, commitMethod = <span class="string">"confirm"</span>, rollbackMethod = <span class="string">"cancel"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">prepare</span><span class="params">(@BusinessActionContextParameter(paramName = <span class="string">"param"</span>)</span> String param)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 二阶段confirm确认方法、可以另命名，但要保证与commitMethod一致       *      * <span class="doctag">@param</span> context 上下文,可以传递try方法的参数      * <span class="doctag">@return</span> boolean 执行是否成功</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">confirm</span><span class="params">(BusinessActionContext context)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 二阶段回滚方法，要保证与rollbackMethod一致</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">cancel</span><span class="params">(BusinessActionContext context)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-编写AccountTCCService接口"><a href="#1-编写AccountTCCService接口" class="headerlink" title="1.编写AccountTCCService接口"></a>1.编写AccountTCCService接口</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.account.service;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> io.seata.rm.tcc.api.BusinessActionContext;</span><br><span class="line"><span class="keyword">import</span> io.seata.rm.tcc.api.BusinessActionContextParameter;</span><br><span class="line"><span class="keyword">import</span> io.seata.rm.tcc.api.LocalTCC;</span><br><span class="line"><span class="keyword">import</span> io.seata.rm.tcc.api.TwoPhaseBusinessAction;</span><br><span class="line"></span><br><span class="line"><span class="meta">@LocalTCC</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AccountTCCService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@TwoPhaseBusinessAction</span>(name = <span class="string">"deduct"</span>, commitMethod = <span class="string">"confirm"</span>, rollbackMethod = <span class="string">"cancel"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">deduct</span><span class="params">(@BusinessActionContextParameter(paramName = <span class="string">"userId"</span>)</span> String userId,</span></span><br><span class="line"><span class="function">                @<span class="title">BusinessActionContextParameter</span><span class="params">(paramName = <span class="string">"money"</span>)</span><span class="keyword">int</span> money)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">confirm</span><span class="params">(BusinessActionContext ctx)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">cancel</span><span class="params">(BusinessActionContext ctx)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-创建account-freeze-tbl表"><a href="#2-创建account-freeze-tbl表" class="headerlink" title="2.创建account_freeze_tbl表"></a>2.创建account_freeze_tbl表</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> Navicat Premium Data Transfer</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> Source Server         : local</span></span><br><span class="line"><span class="comment"> Source Server Type    : MySQL</span></span><br><span class="line"><span class="comment"> Source Server Version : 50622</span></span><br><span class="line"><span class="comment"> Source Host           : localhost:3306</span></span><br><span class="line"><span class="comment"> Source Schema         : seata_demo</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> Target Server Type    : MySQL</span></span><br><span class="line"><span class="comment"> Target Server Version : 50622</span></span><br><span class="line"><span class="comment"> File Encoding         : 65001</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> Date: 23/06/2021 16:23:20</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SET</span> <span class="keyword">NAMES</span> utf8mb4;</span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="comment">-- Table structure for account_freeze_tbl</span></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> <span class="string">`account_freeze_tbl`</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`account_freeze_tbl`</span>  (</span><br><span class="line">  <span class="string">`xid`</span> <span class="built_in">varchar</span>(<span class="number">128</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`user_id`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8 <span class="keyword">COLLATE</span> utf8_general_ci <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</span><br><span class="line">  <span class="string">`freeze_money`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">UNSIGNED</span> <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>,</span><br><span class="line">  <span class="string">`state`</span> <span class="built_in">int</span>(<span class="number">1</span>) <span class="literal">NULL</span> <span class="keyword">DEFAULT</span> <span class="literal">NULL</span> <span class="keyword">COMMENT</span> <span class="string">'事务状态，0:try，1:confirm，2:cancel'</span>,</span><br><span class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`xid`</span>) <span class="keyword">USING</span> BTREE</span><br><span class="line">) <span class="keyword">ENGINE</span> = <span class="keyword">InnoDB</span> <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> = utf8 <span class="keyword">COLLATE</span> = utf8_general_ci ROW_FORMAT = <span class="keyword">COMPACT</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"><span class="comment">-- Records of account_freeze_tbl</span></span><br><span class="line"><span class="comment">-- ----------------------------</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">SET</span> FOREIGN_KEY_CHECKS = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023155018491.png" alt="image-20211023155018491"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023155248424.png" alt="image-20211023155248424"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.annotation.IdType;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.annotation.TableId;</span><br><span class="line"><span class="keyword">import</span> com.baomidou.mybatisplus.annotation.TableName;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@TableName</span>(<span class="string">"account_freeze_tbl"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountFreeze</span> </span>&#123;</span><br><span class="line">    <span class="meta">@TableId</span>(type = IdType.INPUT)</span><br><span class="line">    <span class="keyword">private</span> String xid;</span><br><span class="line">    <span class="keyword">private</span> String userId;</span><br><span class="line">    <span class="keyword">private</span> Integer freezeMoney;</span><br><span class="line">    <span class="keyword">private</span> Integer state;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">State</span> </span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> TRY = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> CONFIRM = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> <span class="keyword">int</span> CANCEL = <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为money是unsigned int ，所以不用检查是否为负数（余额判断）</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023155724065.png" alt="image-20211023155724065"></p>
+<h4 id="3-编写接口实现"><a href="#3-编写接口实现" class="headerlink" title="3.编写接口实现"></a>3.编写接口实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cn.itcast.account.service.impl;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> cn.itcast.account.entity.AccountFreeze;</span><br><span class="line"><span class="keyword">import</span> cn.itcast.account.mapper.AccountFreezeMapper;</span><br><span class="line"><span class="keyword">import</span> cn.itcast.account.mapper.AccountMapper;</span><br><span class="line"><span class="keyword">import</span> cn.itcast.account.service.AccountTCCService;</span><br><span class="line"><span class="keyword">import</span> io.seata.core.context.RootContext;</span><br><span class="line"><span class="keyword">import</span> io.seata.rm.tcc.api.BusinessActionContext;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"><span class="keyword">import</span> org.springframework.transaction.annotation.Transactional;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AccountTCCServiceImpl</span> <span class="keyword">implements</span> <span class="title">AccountTCCService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AccountMapper accountMapper;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> AccountFreezeMapper freezeMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deduct</span><span class="params">(String userId, <span class="keyword">int</span> money)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 0.获取事务id</span></span><br><span class="line">        String xid = RootContext.getXID();</span><br><span class="line">        <span class="comment">// 1.扣减可用余额</span></span><br><span class="line">        accountMapper.deduct(userId, money);</span><br><span class="line">        <span class="comment">// 2.记录冻结金额，事务状态</span></span><br><span class="line">        AccountFreeze freeze = <span class="keyword">new</span> AccountFreeze();</span><br><span class="line">        freeze.setUserId(userId);</span><br><span class="line">        freeze.setFreezeMoney(money);</span><br><span class="line">        freeze.setState(AccountFreeze.State.TRY);</span><br><span class="line">        freeze.setXid(xid);</span><br><span class="line">        freezeMapper.insert(freeze);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除操作，执行多次没区别，天生幂等，没必要判断  </span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">confirm</span><span class="params">(BusinessActionContext ctx)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 1.获取事务id</span></span><br><span class="line">        String xid = ctx.getXid();</span><br><span class="line">        <span class="comment">// 2.根据id删除冻结记录</span></span><br><span class="line">        <span class="keyword">int</span> count = freezeMapper.deleteById(xid);</span><br><span class="line">        <span class="keyword">return</span> count == <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">cancel</span><span class="params">(BusinessActionContext ctx)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 0.查询冻结记录</span></span><br><span class="line">        String xid = ctx.getXid();</span><br><span class="line">        String userId = ctx.getActionContext(<span class="string">"userId"</span>).toString();</span><br><span class="line">        AccountFreeze freeze = freezeMapper.selectById(xid);</span><br><span class="line">        <span class="comment">// 1.空回滚的判断，判断freeze是否为null，为null证明try没执行,需要空回滚</span></span><br><span class="line">        <span class="keyword">if</span>(freeze == <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="comment">// 证明try没有执行，需要空回滚</span></span><br><span class="line">            freeze = <span class="keyword">new</span> AccountFreeze();</span><br><span class="line">            freeze.setUserId(userId);</span><br><span class="line">            freeze.setFreezeMoney(<span class="number">0</span>);</span><br><span class="line">            freeze.setState(AccountFreeze.State.CANCEL);</span><br><span class="line">            freeze.setXid(xid);</span><br><span class="line">            freezeMapper.insert(freeze);</span><br><span class="line">            <span class="keyword">return</span>  <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//2.幂等判断</span></span><br><span class="line">        <span class="keyword">if</span>(freeze.getState() == AccountFreeze.State.CANCEL)&#123;</span><br><span class="line">            <span class="comment">// 已经处理过一次CANCEL了，无需重复处理</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 1.恢复可用余额</span></span><br><span class="line">        accountMapper.refund(freeze.getUserId(), freeze.getFreezeMoney());</span><br><span class="line">        <span class="comment">// 2.将冻结金额清零，状态改为CANCEL</span></span><br><span class="line">        freeze.setFreezeMoney(<span class="number">0</span>);</span><br><span class="line">        freeze.setState(AccountFreeze.State.CANCEL);</span><br><span class="line">        <span class="keyword">int</span> count = freezeMapper.updateById(freeze);</span><br><span class="line">        <span class="keyword">return</span> count == <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改web中AccountService为AccountTCCService</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> AccountService accountService;</span><br><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> AccountTCCService accountService;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-重启服务测试"><a href="#4-重启服务测试" class="headerlink" title="4.重启服务测试"></a>4.重启服务测试</h4><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023164102558.png" alt="image-20211023164102558"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023164300355.png" alt="image-20211023164300355"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023164249986.png" alt="image-20211023164249986"></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023164335739.png" alt="image-20211023164335739"></p>
+<h2 id="Saga模式"><a href="#Saga模式" class="headerlink" title="Saga模式"></a>Saga模式</h2><p>Saga模式是SEATA提供的长事务解决方案。也分为两个阶段：</p>
+<p>•一阶段：直接提交本地事务</p>
+<p>•二阶段：成功则什么都不做；失败则通过编写补偿业务来回滚</p>
+<p>Saga模式优点：</p>
+<p>•事务参与者可以基于事件驱动实现异步调用，吞吐高</p>
+<p>•一阶段直接提交事务，无锁，性能好</p>
+<p>•不用编写TCC中的三个阶段，实现简单</p>
+<p>缺点：</p>
+<p>•软状态持续时间不确定，时效性差</p>
+<p>•没有锁，没有事务隔离，会有脏写</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211023164828531.png" alt="image-20211023164828531"></p>
+<p>四种模式对比</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>XA</strong></th>
+<th><strong>AT</strong></th>
+<th><strong>TCC</strong></th>
+<th><strong>SAGA</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>一致性</strong></td>
+<td>强一致</td>
+<td>弱一致</td>
+<td>弱一致</td>
+<td>最终一致</td>
+</tr>
+<tr>
+<td><strong>隔离性</strong></td>
+<td>完全隔离</td>
+<td>基于全局锁隔离</td>
+<td>基于资源预留隔离</td>
+<td>无隔离</td>
+</tr>
+<tr>
+<td><strong>代码侵入</strong></td>
+<td>无</td>
+<td>无</td>
+<td>有，要编写三个接口</td>
+<td>有，要编写状态机和补偿业务</td>
+</tr>
+<tr>
+<td><strong>性能</strong></td>
+<td>差</td>
+<td>好</td>
+<td>非常好</td>
+<td>非常好</td>
+</tr>
+<tr>
+<td><strong>场景</strong></td>
+<td>对一致性、隔离性有高要求的业务</td>
+<td>基于关系型数据库的大多数分布式事务场景都可以</td>
+<td>•对性能要求较高的事务。  •有非关系型数据库要参与的事务。</td>
+<td>•业务流程长、业务流程多  •参与者包含其它公司或遗留系统服务，无法提供  TCC  模式要求的三个接口</td>
+</tr>
+</tbody></table>
+<h1 id="seata的部署和集成"><a href="#seata的部署和集成" class="headerlink" title="seata的部署和集成"></a>seata的部署和集成</h1><h2 id="一、部署Seata的tc-server"><a href="#一、部署Seata的tc-server" class="headerlink" title="一、部署Seata的tc-server"></a>一、部署Seata的tc-server</h2><h3 id="1-下载"><a href="#1-下载" class="headerlink" title="1.下载"></a>1.下载</h3><p>首先我们要下载seata-server包，地址在<a href="http://seata.io/zh-cn/blog/download.html" target="_blank" rel="noopener">http</a><a href="http://seata.io/zh-cn/blog/download.html" target="_blank" rel="noopener">://seata.io/zh-cn/blog/download</a><a href="http://seata.io/zh-cn/blog/download.html" target="_blank" rel="noopener">.</a><a href="http://seata.io/zh-cn/blog/download.html" target="_blank" rel="noopener">html</a> </p>
+<p>当然，课前资料也准备好了：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">seata-server-1</span><span class="selector-class">.4</span><span class="selector-class">.2</span><span class="selector-class">.zip</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-解压"><a href="#2-解压" class="headerlink" title="2.解压"></a>2.解压</h3><p>在非中文目录解压缩这个zip包，其目录结构如下：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210622202515014.png" alt="image-20210622202515014"></p>
+<h3 id="3-修改配置"><a href="#3-修改配置" class="headerlink" title="3.修改配置"></a>3.修改配置</h3><p>修改conf目录下的registry.conf文件：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210622202622874.png" alt="image-20210622202622874"></p>
+<p>内容如下：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">registry</span> <span class="string">&#123;</span></span><br><span class="line"><span class="comment">  # 注册中心类型 file 、nacos 、eureka、redis、zk、consul、etcd3、sofa</span></span><br><span class="line"><span class="comment">  # tc服务的注册中心类，这里选择nacos，也可以是eureka、zookeeper等</span></span><br><span class="line">  <span class="attr">type</span> = <span class="string">"nacos"</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">nacos</span> <span class="string">&#123;</span></span><br><span class="line"><span class="comment">    # seata tc 服务注册到 nacos的服务名称，可以自定义</span></span><br><span class="line">    <span class="attr">application</span> = <span class="string">"seata-tc-server"</span></span><br><span class="line">    <span class="attr">serverAddr</span> = <span class="string">"127.0.0.1:8848"</span></span><br><span class="line">    <span class="attr">group</span> = <span class="string">"DEFAULT_GROUP"</span></span><br><span class="line">    <span class="attr">namespace</span> = <span class="string">""</span></span><br><span class="line">    <span class="attr">cluster</span> = <span class="string">"SH"</span></span><br><span class="line">    <span class="attr">username</span> = <span class="string">"nacos"</span></span><br><span class="line">    <span class="attr">password</span> = <span class="string">"nacos"</span></span><br><span class="line">  <span class="attr">&#125;</span></span><br><span class="line"><span class="attr">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">config</span> <span class="string">&#123;</span></span><br><span class="line"><span class="comment">  # 配置中心 file、nacos 、apollo、zk、consul、etcd3</span></span><br><span class="line"><span class="comment">  # 读取tc服务端的配置文件的方式，这里是从nacos配置中心读取，这样如果tc是集群，可以共享配置</span></span><br><span class="line">  <span class="attr">type</span> = <span class="string">"nacos"</span></span><br><span class="line"><span class="comment">  # 配置nacos地址等信息</span></span><br><span class="line">  <span class="attr">nacos</span> <span class="string">&#123;</span></span><br><span class="line">    <span class="attr">serverAddr</span> = <span class="string">"127.0.0.1:8848"</span></span><br><span class="line">    <span class="attr">namespace</span> = <span class="string">""</span></span><br><span class="line">    <span class="attr">group</span> = <span class="string">"SEATA_GROUP"</span></span><br><span class="line">    <span class="attr">username</span> = <span class="string">"nacos"</span></span><br><span class="line">    <span class="attr">password</span> = <span class="string">"nacos"</span></span><br><span class="line">    <span class="attr">dataId</span> = <span class="string">"seataServer.properties"</span></span><br><span class="line">  <span class="attr">&#125;</span></span><br><span class="line"><span class="attr">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021160716787.png" alt="image-20211021160716787"></p>
+<h3 id="4-在nacos添加配置"><a href="#4-在nacos添加配置" class="headerlink" title="4.在nacos添加配置"></a>4.在nacos添加配置</h3><p>特别注意，为了让tc服务的集群可以共享配置，我们选择了nacos作为统一配置中心。因此服务端配置文件seataServer.properties文件需要在nacos中配好。</p>
+<p>格式如下：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210622203609227.png" alt="image-20210622203609227"></p>
+<p>配置内容如下：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据存储方式，db代表数据库</span></span><br><span class="line"><span class="meta">store.mode</span>=<span class="string">db</span></span><br><span class="line"><span class="meta">store.db.datasource</span>=<span class="string">druid</span></span><br><span class="line"><span class="meta">store.db.dbType</span>=<span class="string">mysql</span></span><br><span class="line"><span class="meta">store.db.driverClassName</span>=<span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="meta">store.db.url</span>=<span class="string">jdbc:mysql://127.0.0.1:3306/seata?useUnicode=true&amp;rewriteBatchedStatements=true&amp;serverTimezone=UTC</span></span><br><span class="line"><span class="meta">store.db.user</span>=<span class="string">root</span></span><br><span class="line"><span class="meta">store.db.password</span>=<span class="string">root</span></span><br><span class="line"><span class="meta">store.db.minConn</span>=<span class="string">5</span></span><br><span class="line"><span class="meta">store.db.maxConn</span>=<span class="string">30</span></span><br><span class="line"><span class="meta">store.db.globalTable</span>=<span class="string">global_table</span></span><br><span class="line"><span class="meta">store.db.branchTable</span>=<span class="string">branch_table</span></span><br><span class="line"><span class="meta">store.db.queryLimit</span>=<span class="string">100</span></span><br><span class="line"><span class="meta">store.db.lockTable</span>=<span class="string">lock_table</span></span><br><span class="line"><span class="meta">store.db.maxWait</span>=<span class="string">5000</span></span><br><span class="line"><span class="comment"># 事务、日志等配置</span></span><br><span class="line"><span class="meta">server.recovery.committingRetryPeriod</span>=<span class="string">1000</span></span><br><span class="line"><span class="meta">server.recovery.asynCommittingRetryPeriod</span>=<span class="string">1000</span></span><br><span class="line"><span class="meta">server.recovery.rollbackingRetryPeriod</span>=<span class="string">1000</span></span><br><span class="line"><span class="meta">server.recovery.timeoutRetryPeriod</span>=<span class="string">1000</span></span><br><span class="line"><span class="meta">server.maxCommitRetryTimeout</span>=<span class="string">-1</span></span><br><span class="line"><span class="meta">server.maxRollbackRetryTimeout</span>=<span class="string">-1</span></span><br><span class="line"><span class="meta">server.rollbackRetryTimeoutUnlockEnable</span>=<span class="string">false</span></span><br><span class="line"><span class="meta">server.undo.logSaveDays</span>=<span class="string">7</span></span><br><span class="line"><span class="meta">server.undo.logDeletePeriod</span>=<span class="string">86400000</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 客户端与服务端传输方式</span></span><br><span class="line"><span class="meta">transport.serialization</span>=<span class="string">seata</span></span><br><span class="line"><span class="meta">transport.compressor</span>=<span class="string">none</span></span><br><span class="line"><span class="comment"># 关闭metrics功能，提高性能</span></span><br><span class="line"><span class="meta">metrics.enabled</span>=<span class="string">false</span></span><br><span class="line"><span class="meta">metrics.registryType</span>=<span class="string">compact</span></span><br><span class="line"><span class="meta">metrics.exporterList</span>=<span class="string">prometheus</span></span><br><span class="line"><span class="meta">metrics.exporterPrometheusPort</span>=<span class="string">9898</span></span><br></pre></td></tr></table></figure>
+
+<p>==其中的数据库地址、用户名、密码都需要修改成你自己的数据库信息。==</p>
+<h3 id="5-创建数据库表"><a href="#5-创建数据库表" class="headerlink" title="5.创建数据库表"></a>5.创建数据库表</h3><p>特别注意：tc服务在管理分布式事务时，需要记录事务相关数据到数据库中，你需要提前创建好这些表。</p>
+<p>新建一个名为seata的数据库，运行课前资料提供的sql文件：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210622204145159.png" alt="image-20210622204145159"></p>
+<p>这些表主要记录全局事务、分支事务、全局锁信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">SET NAMES utf8mb4;</span><br><span class="line">SET FOREIGN_KEY_CHECKS = 0;</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- 分支事务表</span><br><span class="line">-- ----------------------------</span><br><span class="line">DROP TABLE IF EXISTS `branch_table`;</span><br><span class="line">CREATE TABLE `branch_table`  (</span><br><span class="line">  `branch_id` bigint(20) NOT NULL,</span><br><span class="line">  `xid` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,</span><br><span class="line">  `transaction_id` bigint(20) NULL DEFAULT NULL,</span><br><span class="line">  `resource_group_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,</span><br><span class="line">  `resource_id` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,</span><br><span class="line">  `branch_type` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,</span><br><span class="line">  `status` tinyint(4) NULL DEFAULT NULL,</span><br><span class="line">  `client_id` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,</span><br><span class="line">  `application_data` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,</span><br><span class="line">  `gmt_create` datetime(6) NULL DEFAULT NULL,</span><br><span class="line">  `gmt_modified` datetime(6) NULL DEFAULT NULL,</span><br><span class="line">  PRIMARY KEY (`branch_id`) USING BTREE,</span><br><span class="line">  INDEX `idx_xid`(`xid`) USING BTREE</span><br><span class="line">) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;</span><br><span class="line"></span><br><span class="line">-- ----------------------------</span><br><span class="line">-- 全局事务表</span><br><span class="line">-- ----------------------------</span><br><span class="line">DROP TABLE IF EXISTS `global_table`;</span><br><span class="line">CREATE TABLE `global_table`  (</span><br><span class="line">  `xid` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,</span><br><span class="line">  `transaction_id` bigint(20) NULL DEFAULT NULL,</span><br><span class="line">  `status` tinyint(4) NOT NULL,</span><br><span class="line">  `application_id` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,</span><br><span class="line">  `transaction_service_group` varchar(32) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,</span><br><span class="line">  `transaction_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,</span><br><span class="line">  `timeout` int(11) NULL DEFAULT NULL,</span><br><span class="line">  `begin_time` bigint(20) NULL DEFAULT NULL,</span><br><span class="line">  `application_data` varchar(2000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,</span><br><span class="line">  `gmt_create` datetime NULL DEFAULT NULL,</span><br><span class="line">  `gmt_modified` datetime NULL DEFAULT NULL,</span><br><span class="line">  PRIMARY KEY (`xid`) USING BTREE,</span><br><span class="line">  INDEX `idx_gmt_modified_status`(`gmt_modified`, `status`) USING BTREE,</span><br><span class="line">  INDEX `idx_transaction_id`(`transaction_id`) USING BTREE</span><br><span class="line">) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;</span><br><span class="line"></span><br><span class="line">SET FOREIGN_KEY_CHECKS = 1;</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-启动TC服务"><a href="#6-启动TC服务" class="headerlink" title="6.启动TC服务"></a>6.启动TC服务</h3><p>进入bin目录，运行其中的seata-server.bat即可：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210622205427318.png" alt="image-20210622205427318"></p>
+<p>启动成功后，seata-server应该已经注册到nacos注册中心了。</p>
+<p>打开浏览器，访问nacos地址：<a href="http://localhost:8848，然后进入服务列表页面，可以看到seata-tc-server的信息：" target="_blank" rel="noopener">http://localhost:8848，然后进入服务列表页面，可以看到seata-tc-server的信息：</a></p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210622205901450.png" alt="image-20210622205901450"></p>
+<h2 id="二、微服务集成seata"><a href="#二、微服务集成seata" class="headerlink" title="二、微服务集成seata"></a>二、微服务集成seata</h2><h3 id="1-引入依赖"><a href="#1-引入依赖" class="headerlink" title="1.引入依赖"></a>1.引入依赖</h3><p>首先，我们需要在微服务(pom.xml)中引入seata依赖：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-seata<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">exclusions</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--版本较低，1.3.0，因此排除--&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">exclusion</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>seata-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.seata<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">exclusion</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">exclusions</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--seata starter 采用1.4.2版本--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.seata<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>seata-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>$&#123;seata.version&#125;<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-修改配置文件"><a href="#2-修改配置文件" class="headerlink" title="2.修改配置文件"></a>2.修改配置文件</h3><p>需要修改application.yml文件，添加一些配置：</p>
+<p>然后，配置application.yml，让微服务通过注册中心找到seata-tc-server：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">seata:</span></span><br><span class="line"><span class="attr">  registry:</span> </span><br><span class="line">    <span class="comment"># TC服务注册中心的配置，微服务根据这些信息去注册中心获取tc服务地址</span></span><br><span class="line">    <span class="comment"># 参考tc服务自己的registry.conf中的配置</span></span><br><span class="line"><span class="attr">    type:</span> <span class="string">nacos</span></span><br><span class="line"><span class="attr">    nacos:</span> <span class="comment"># tc</span></span><br><span class="line"><span class="attr">      server-addr:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:8848</span></span><br><span class="line"><span class="attr">      namespace:</span> <span class="string">""</span></span><br><span class="line"><span class="attr">      group:</span> <span class="string">DEFAULT_GROUP</span></span><br><span class="line"><span class="attr">      application:</span> <span class="string">seata-tc-server</span> <span class="comment"># tc服务在nacos中的服务名称</span></span><br><span class="line"><span class="attr">      cluster:</span> <span class="string">SH</span></span><br><span class="line"><span class="attr">  tx-service-group:</span> <span class="string">seata-demo</span> <span class="comment"># 事务组，根据这个获取tc服务的cluster名称</span></span><br><span class="line"><span class="attr">  service:</span></span><br><span class="line"><span class="attr">    vgroup-mapping:</span> <span class="comment"># 事务组与TC服务cluster的映射关系</span></span><br><span class="line"><span class="attr">      seata-demo:</span> <span class="string">SH</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021163723045.png" alt="image-20211021163723045"></p>
+<h2 id="三、TC服务的高可用和异地容灾"><a href="#三、TC服务的高可用和异地容灾" class="headerlink" title="三、TC服务的高可用和异地容灾"></a>三、TC服务的高可用和异地容灾</h2><h3 id="1-模拟异地容灾的TC集群3"><a href="#1-模拟异地容灾的TC集群3" class="headerlink" title="1.模拟异地容灾的TC集群3"></a>1.模拟异地容灾的TC集群3</h3><p>计划启动两台seata的tc服务节点：</p>
+<table>
+<thead>
+<tr>
+<th>节点名称</th>
+<th>ip地址</th>
+<th>端口号</th>
+<th>集群名称</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>seata</td>
+<td>127.0.0.1</td>
+<td>8091</td>
+<td>SH</td>
+</tr>
+<tr>
+<td>seata2</td>
+<td>127.0.0.1</td>
+<td>8092</td>
+<td>HZ</td>
+</tr>
+</tbody></table>
+<p>之前我们已经启动了一台seata服务，端口是8091，集群名为SH。</p>
+<p>现在，将seata目录复制一份，起名为seata2</p>
+<p>修改seata2/conf/registry.conf内容如下：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">registry</span> &#123;</span><br><span class="line">  <span class="comment"># tc服务的注册中心类，这里选择nacos，也可以是eureka、zookeeper等</span></span><br><span class="line">  <span class="attribute">type</span> = <span class="string">"nacos"</span></span><br><span class="line"></span><br><span class="line">  nacos &#123;</span><br><span class="line">    <span class="comment"># seata tc 服务注册到 nacos的服务名称，可以自定义</span></span><br><span class="line">    <span class="attribute">application</span> = <span class="string">"seata-tc-server"</span></span><br><span class="line">    serverAddr = <span class="string">"127.0.0.1:8848"</span></span><br><span class="line">    group = <span class="string">"DEFAULT_GROUP"</span></span><br><span class="line">    namespace = <span class="string">""</span></span><br><span class="line">    cluster = <span class="string">"HZ"</span></span><br><span class="line">    username = <span class="string">"nacos"</span></span><br><span class="line">    password = <span class="string">"nacos"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">config &#123;</span><br><span class="line">  <span class="comment"># 读取tc服务端的配置文件的方式，这里是从nacos配置中心读取，这样如果tc是集群，可以共享配置</span></span><br><span class="line">  <span class="attribute">type</span> = <span class="string">"nacos"</span></span><br><span class="line">  <span class="comment"># 配置nacos地址等信息</span></span><br><span class="line">  nacos &#123;</span><br><span class="line">    <span class="attribute">serverAddr</span> = <span class="string">"127.0.0.1:8848"</span></span><br><span class="line">    namespace = <span class="string">""</span></span><br><span class="line">    group = <span class="string">"SEATA_GROUP"</span></span><br><span class="line">    username = <span class="string">"nacos"</span></span><br><span class="line">    password = <span class="string">"nacos"</span></span><br><span class="line">    dataId = <span class="string">"seataServer.properties"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>进入seata2/bin目录，然后运行命令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seata-server.bat -p <span class="number">8092</span></span><br></pre></td></tr></table></figure>
+
+<p>打开nacos控制台，查看服务列表：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210624151150840.png" alt="image-20210624151150840"></p>
+<p>点进详情查看：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210624151221747.png" alt="image-20210624151221747"></p>
+<h3 id="2-将事务组映射配置到nacos"><a href="#2-将事务组映射配置到nacos" class="headerlink" title="2.将事务组映射配置到nacos"></a>2.将事务组映射配置到nacos</h3><p>接下来，我们需要将tx-service-group与cluster的映射关系都配置到nacos配置中心。</p>
+<p>新建一个配置：</p>
+<p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20210624151507072.png" alt="image-20210624151507072"></p>
+<p>配置的内容如下：</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 事务组映射关系</span></span><br><span class="line"><span class="meta">service.vgroupMapping.seata-demo</span>=<span class="string">SH</span></span><br><span class="line"></span><br><span class="line"><span class="meta">service.enableDegrade</span>=<span class="string">false</span></span><br><span class="line"><span class="meta">service.disableGlobalTransaction</span>=<span class="string">false</span></span><br><span class="line"><span class="comment"># 与TC服务的通信配置</span></span><br><span class="line"><span class="meta">transport.type</span>=<span class="string">TCP</span></span><br><span class="line"><span class="meta">transport.server</span>=<span class="string">NIO</span></span><br><span class="line"><span class="meta">transport.heartbeat</span>=<span class="string">true</span></span><br><span class="line"><span class="meta">transport.enableClientBatchSendRequest</span>=<span class="string">false</span></span><br><span class="line"><span class="meta">transport.threadFactory.bossThreadPrefix</span>=<span class="string">NettyBoss</span></span><br><span class="line"><span class="meta">transport.threadFactory.workerThreadPrefix</span>=<span class="string">NettyServerNIOWorker</span></span><br><span class="line"><span class="meta">transport.threadFactory.serverExecutorThreadPrefix</span>=<span class="string">NettyServerBizHandler</span></span><br><span class="line"><span class="meta">transport.threadFactory.shareBossWorker</span>=<span class="string">false</span></span><br><span class="line"><span class="meta">transport.threadFactory.clientSelectorThreadPrefix</span>=<span class="string">NettyClientSelector</span></span><br><span class="line"><span class="meta">transport.threadFactory.clientSelectorThreadSize</span>=<span class="string">1</span></span><br><span class="line"><span class="meta">transport.threadFactory.clientWorkerThreadPrefix</span>=<span class="string">NettyClientWorkerThread</span></span><br><span class="line"><span class="meta">transport.threadFactory.bossThreadSize</span>=<span class="string">1</span></span><br><span class="line"><span class="meta">transport.threadFactory.workerThreadSize</span>=<span class="string">default</span></span><br><span class="line"><span class="meta">transport.shutdown.wait</span>=<span class="string">3</span></span><br><span class="line"><span class="comment"># RM配置</span></span><br><span class="line"><span class="meta">client.rm.asyncCommitBufferLimit</span>=<span class="string">10000</span></span><br><span class="line"><span class="meta">client.rm.lock.retryInterval</span>=<span class="string">10</span></span><br><span class="line"><span class="meta">client.rm.lock.retryTimes</span>=<span class="string">30</span></span><br><span class="line"><span class="meta">client.rm.lock.retryPolicyBranchRollbackOnConflict</span>=<span class="string">true</span></span><br><span class="line"><span class="meta">client.rm.reportRetryCount</span>=<span class="string">5</span></span><br><span class="line"><span class="meta">client.rm.tableMetaCheckEnable</span>=<span class="string">false</span></span><br><span class="line"><span class="meta">client.rm.tableMetaCheckerInterval</span>=<span class="string">60000</span></span><br><span class="line"><span class="meta">client.rm.sqlParserType</span>=<span class="string">druid</span></span><br><span class="line"><span class="meta">client.rm.reportSuccessEnable</span>=<span class="string">false</span></span><br><span class="line"><span class="meta">client.rm.sagaBranchRegisterEnable</span>=<span class="string">false</span></span><br><span class="line"><span class="comment"># TM配置</span></span><br><span class="line"><span class="meta">client.tm.commitRetryCount</span>=<span class="string">5</span></span><br><span class="line"><span class="meta">client.tm.rollbackRetryCount</span>=<span class="string">5</span></span><br><span class="line"><span class="meta">client.tm.defaultGlobalTransactionTimeout</span>=<span class="string">60000</span></span><br><span class="line"><span class="meta">client.tm.degradeCheck</span>=<span class="string">false</span></span><br><span class="line"><span class="meta">client.tm.degradeCheckAllowTimes</span>=<span class="string">10</span></span><br><span class="line"><span class="meta">client.tm.degradeCheckPeriod</span>=<span class="string">2000</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># undo日志配置</span></span><br><span class="line"><span class="meta">client.undo.dataValidation</span>=<span class="string">true</span></span><br><span class="line"><span class="meta">client.undo.logSerialization</span>=<span class="string">jackson</span></span><br><span class="line"><span class="meta">client.undo.onlyCareUpdateColumns</span>=<span class="string">true</span></span><br><span class="line"><span class="meta">client.undo.logTable</span>=<span class="string">undo_log</span></span><br><span class="line"><span class="meta">client.undo.compress.enable</span>=<span class="string">true</span></span><br><span class="line"><span class="meta">client.undo.compress.type</span>=<span class="string">zip</span></span><br><span class="line"><span class="meta">client.undo.compress.threshold</span>=<span class="string">64k</span></span><br><span class="line"><span class="meta">client.log.exceptionRate</span>=<span class="string">100</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-微服务读取nacos配置"><a href="#3-微服务读取nacos配置" class="headerlink" title="3.微服务读取nacos配置"></a>3.微服务读取nacos配置</h3><p>接下来，需要修改每一个微服务的application.yml文件，让微服务读取nacos中的client.properties文件：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">seata:</span></span><br><span class="line"><span class="attr">  config:</span></span><br><span class="line"><span class="attr">    type:</span> <span class="string">nacos</span></span><br><span class="line"><span class="attr">    nacos:</span></span><br><span class="line"><span class="attr">      server-addr:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span><span class="string">:8848</span></span><br><span class="line"><span class="attr">      username:</span> <span class="string">nacos</span></span><br><span class="line"><span class="attr">      password:</span> <span class="string">nacos</span></span><br><span class="line"><span class="attr">      group:</span> <span class="string">SEATA_GROUP</span></span><br><span class="line"><span class="attr">      data-id:</span> <span class="string">client.properties</span></span><br></pre></td></tr></table></figure>
+
+<p>重启微服务，现在微服务到底是连接tc的SH集群，还是tc的HZ集群，都统一由nacos的client.properties来决定了。</p>
+<h1 id><a href="#" class="headerlink" title></a></h1>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/" data-id="cl3iuquit00448kcbxvzmsqbu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seata/">seata</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          RabbitMQ部署指南
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/10/java-note/SpringCloud/Elasticsearch/Elasticsearch/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Elasticsearch</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Elasticsearch/">Elasticsearch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/">RabbitMQ</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/elasticsearch/">elasticsearch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/note/">note</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Axios/">Axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elasticsearch/">Elasticsearch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nacos/">Nacos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RabbitMQ/">RabbitMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentinel/">Sentinel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringCloud/">SpringCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crawler/">crawler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/seata/">seata</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springBoot/">springBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMvc/">springMvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssm/">ssm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Axios/" style="font-size: 10px;">Axios</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/Nacos/" style="font-size: 12.5px;">Nacos</a> <a href="/tags/RabbitMQ/" style="font-size: 12.5px;">RabbitMQ</a> <a href="/tags/Sentinel/" style="font-size: 12.5px;">Sentinel</a> <a href="/tags/SpringCloud/" style="font-size: 10px;">SpringCloud</a> <a href="/tags/crawler/" style="font-size: 10px;">crawler</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/js/" style="font-size: 15px;">js</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/python/" style="font-size: 17.5px;">python</a> <a href="/tags/seata/" style="font-size: 10px;">seata</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springBoot/" style="font-size: 12.5px;">springBoot</a> <a href="/tags/springMvc/" style="font-size: 10px;">springMvc</a> <a href="/tags/ssm/" style="font-size: 10px;">ssm</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/学习笔记/" style="font-size: 17.5px;">学习笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/10/docker/Docker实用篇/">Docker实用篇</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ/">RabbitMQ</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/">RabbitMQ部署指南</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/Seata/Seate/">分布式事务seata</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/Elasticsearch/Elasticsearch/">Elasticsearch</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 nicolas lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

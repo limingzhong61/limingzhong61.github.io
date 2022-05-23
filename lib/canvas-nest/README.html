@@ -1,0 +1,35 @@
+<h1 align="center"><a href="https://github.com/hustcc/canvas-nest.js">canvas-nest.js</a> for <a href="https://github.com/theme-next">NexT</a></h1>
+
+<h1 align="center">Installation</h1>
+
+<h2>If you want to use the CDN instead of clone this repo, please jump to the Step 3.</h2>
+
+<h2 align="center">Step 1 &rarr; Go to NexT dir</h2>
+
+<p>Change dir to <strong>NexT</strong> directory. There must be <code>layout</code>, <code>source</code>, <code>languages</code> and other directories:</p>
+<pre><code class="sh">$ <span class="built_in">cd</span> themes/next
+$ ls
+bower.json  _config.yml  docs  gulpfile.coffee  languages  layout  LICENSE.md  package.json  README.md  scripts  <span class="built_in">source</span>  <span class="built_in">test</span></code></pre>
+<h2 align="center">Step 2 &rarr; Get module</h2>
+
+<p>Install module to <code>source/lib</code> directory:</p>
+<pre><code class="sh">$ git <span class="built_in">clone</span> https://github.com/theme-next/theme-next-canvas-nest <span class="built_in">source</span>/lib/canvas-nest</code></pre>
+<h2 align="center">Step 3 &rarr; Set it up</h2>
+
+<p>Enable module in <strong>NexT</strong> <code>_config.yml</code> file:</p>
+<pre><code class="yml"><span class="attr">canvas_nest:</span>
+<span class="attr">  enable:</span> <span class="literal">true</span>
+<span class="attr">  onmobile:</span> <span class="literal">true</span> <span class="comment"># display on mobile or not</span>
+<span class="attr">  color:</span> <span class="string">'0,0,255'</span> <span class="comment"># RGB values, use ',' to separate</span>
+<span class="attr">  opacity:</span> <span class="number">0.5</span> <span class="comment"># the opacity of line: 0~1</span>
+<span class="attr">  zIndex:</span> <span class="bullet">-1</span> <span class="comment"># z-index property of the background</span>
+<span class="attr">  count:</span> <span class="number">99</span> <span class="comment"># the number of lines</span></code></pre>
+<p><strong>And, if you wants to use the CDN, then need to set:</strong></p>
+<pre><code class="yml"><span class="attr">vendors:</span>
+  <span class="string">...</span>
+<span class="attr">  canvas_nest:</span> <span class="string">//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@latest/canvas-nest.min.js</span>
+<span class="attr">  canvas_nest_nomobile:</span> <span class="string">//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@latest/canvas-nest-nomobile.min.js</span></code></pre>
+<h1 align="center">Update</h1>
+
+<pre><code class="sh">$ <span class="built_in">cd</span> themes/next/<span class="built_in">source</span>/lib/canvas-nest
+$ git pull</code></pre>

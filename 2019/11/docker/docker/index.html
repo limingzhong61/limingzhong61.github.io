@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>docker | nicolas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="[TOC]1.简介Docker是一个开源的应用容器引擎；是一个轻量级容器技术；Docker支持将软件编译成一个镜像；然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像；运行中的这个镜像称为容器，容器启动是非常快速的。2、核心概念docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker">
+<meta property="og:url" content="https://codeofli.github.io/2019/11/docker/docker/index.html">
+<meta property="og:site_name" content="nicolas">
+<meta property="og:description" content="[TOC]1.简介Docker是一个开源的应用容器引擎；是一个轻量级容器技术；Docker支持将软件编译成一个镜像；然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像；运行中的这个镜像称为容器，容器启动是非常快速的。2、核心概念docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145450.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145531.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303165113.png">
+<meta property="og:image" content="https://codeofli.github.io/2019/11/docker/docker/docker%5C%E5%85%B3%E9%97%ADfirewall%E7%9A%84%E5%8F%82%E6%95%B0.png">
+<meta property="og:updated_time" content="2022-03-02T01:21:40.164Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="docker">
+<meta name="twitter:description" content="[TOC]1.简介Docker是一个开源的应用容器引擎；是一个轻量级容器技术；Docker支持将软件编译成一个镜像；然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像；运行中的这个镜像称为容器，容器启动是非常快速的。2、核心概念docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；">
+<meta name="twitter:image" content="https://codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145450.png">
+  
+    <link rel="alternate" href="/atom.xml" title="nicolas" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">nicolas</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Yesterday you said tomorow.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://codeofli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-docker/docker" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/docker/docker/" class="article-date">
+  <time datetime="2019-11-12T07:39:56.000Z" itemprop="datePublished">2019-11-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/note/">note</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      docker
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p><h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1.简介"></a>1.简介</h1><p><strong>Docker</strong>是一个开源的应用容器引擎；是一个轻量级容器技术；</p><p>Docker支持将软件编译成一个镜像；然后在镜像中各种软件做好配置，将镜像发布出去，其他使用者可以直接使用这个镜像；</p><p>运行中的这个镜像称为容器，容器启动是非常快速的。</p><p><img src="//codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145450.png" alt="img"></p><p><img src="//codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303145531.png" alt="img"></p><h2 id="2、核心概念"><a href="#2、核心概念" class="headerlink" title="2、核心概念"></a>2、核心概念</h2><p>docker主机(Host)：安装了Docker程序的机器（Docker直接安装在操作系统之上）；</p><a id="more"></a>
+
+
+
+
+
+
+<p>docker客户端(Client)：连接docker主机进行操作；</p>
+<p>docker仓库(Registry)：用来保存各种打包好的软件镜像；</p>
+<p>docker镜像(docker)：软件打包好的镜像；放在docker仓库中；</p>
+<p>docker容器(Container)：镜像启动后的实例称为一个容器；容器是独立运行的一个或一组应用</p>
+<p><img src="//codeofli.github.io/2019/11/docker/docker/%E6%90%9C%E7%8B%97%E6%88%AA%E5%9B%BE20180303165113.png" alt></p>
+<p>使用Docker的步骤：</p>
+<p>1）、安装Docker</p>
+<p>2）、去Docker仓库找到这个软件对应的镜像；</p>
+<p>3）、使用Docker运行这个镜像，这个镜像就会生成一个Docker容器；</p>
+<p>4）、对容器的启动停止就是对软件的启动停止；</p>
+<h2 id="3、安装Docker"><a href="#3、安装Docker" class="headerlink" title="3、安装Docker"></a>3、安装Docker</h2><h4 id="1）、安装linux虚拟机"><a href="#1）、安装linux虚拟机" class="headerlink" title="1）、安装linux虚拟机"></a>1）、安装linux虚拟机</h4><p>​    1）、VMWare、VirtualBox（安装）；</p>
+<p>​    2）、导入虚拟机文件centos7-atguigu.ova；</p>
+<p>​    3）、双击启动linux虚拟机;使用  root/ 123456登陆</p>
+<p>​    4）、使用客户端连接linux服务器进行命令操作；</p>
+<p>​    5）、设置虚拟机网络；</p>
+<p>​        桥接网络===选好网卡====接入网线；</p>
+<p>​    6）、设置好网络以后使用命令重启虚拟机的网络</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service network restart</span><br></pre></td></tr></table></figure>
+
+<p>​    7）、查看linux的ip地址</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip addr</span><br></pre></td></tr></table></figure>
+
+<p>​    8）、使用客户端连接linux；</p>
+<h4 id="2）、在linux虚拟机上安装docker"><a href="#2）、在linux虚拟机上安装docker" class="headerlink" title="2）、在linux虚拟机上安装docker"></a>2）、在linux虚拟机上安装docker</h4><p>步骤：(安装不成功可以到菜鸟教程安装)</p>
+<p>1、检查内核版本，必须是3.10及以上<br>uname -r<br>2、安装docker<br>yum install docker</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install docker.io</span><br></pre></td></tr></table></figure>
+
+<p>3、输入y确认安装<br>4、启动docker</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# systemctl start docker</span><br><span class="line">[root@localhost ~]# docker -v</span><br><span class="line">Docker version 1.12.6, build 3e8e77d/1.12.6</span><br></pre></td></tr></table></figure>
+
+<p>5、开机启动docker<br>[root@localhost ~]# systemctl enable docker<br>Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service to /usr/lib/systemd/system/docker.service.<br>6、停止docker<br>systemctl stop docker</p>
+<h2 id="4、Docker常用命令-amp-操作"><a href="#4、Docker常用命令-amp-操作" class="headerlink" title="4、Docker常用命令&amp;操作"></a>4、Docker常用命令&amp;操作</h2><h3 id="2）、容器操作"><a href="#2）、容器操作" class="headerlink" title="2）、容器操作"></a>2）、容器操作</h3><p>软件镜像（QQ安装程序）—-运行镜像—-产生一个容器（正在运行的软件，运行的QQ）；</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>命令</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>运行</td>
+<td>docker run –name container-name -d image-name<br>eg:docker run –name myredis –d redis<br>–</td>
+<td>–name：自定义容器名<br>-d：后台运行<br>image-name:指定镜像模板</td>
+</tr>
+<tr>
+<td>列表</td>
+<td>docker ps（查看运行中的容器）；</td>
+<td>加上-a；可以查看所有容器</td>
+</tr>
+<tr>
+<td>启动</td>
+<td>docker start container-name/container-id</td>
+<td>启动容器</td>
+</tr>
+<tr>
+<td>停止</td>
+<td>docker stop container-name/container-id</td>
+<td>停止当前你运行的容器</td>
+</tr>
+<tr>
+<td>删除</td>
+<td>docker rm container-id</td>
+<td>删除指定容器</td>
+</tr>
+<tr>
+<td>端口映射</td>
+<td>-p 6379:6379<br>eg:docker run -d -p 6379:6379 –name myredisdocker.io/redis</td>
+<td>-p:主机端口(映射到)容器内部的端口</td>
+</tr>
+<tr>
+<td>容器日志</td>
+<td>docker logs container-name/container-id</td>
+<td></td>
+</tr>
+<tr>
+<td>更多命令</td>
+<td><a href="https://docs.docker.com/engine/reference/commandline/docker/" target="_blank" rel="noopener">https://docs.docker.com/engine/reference/commandline/docker/</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>步骤：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">1、搜索镜像</span><br><span class="line">[root@localhost ~]# docker search tomcat</span><br><span class="line">2、拉取镜像</span><br><span class="line">[root@localhost ~]# docker pull tomcat</span><br><span class="line">3、根据镜像启动容器</span><br><span class="line">docker run --name mytomcat -d tomcat:latest</span><br><span class="line">4、docker ps  </span><br><span class="line">查看运行中的容器</span><br><span class="line">5、 停止运行中的容器</span><br><span class="line">docker stop  容器的id</span><br><span class="line">6、查看所有的容器</span><br><span class="line">docker ps -a</span><br><span class="line">7、启动容器</span><br><span class="line">docker start 容器id</span><br><span class="line">8、删除一个容器</span><br><span class="line"> docker rm 容器id</span><br><span class="line">9、启动一个做了端口映射的tomcat</span><br><span class="line">[root@localhost ~]# docker run -d -p 8888:8080 tomcat</span><br><span class="line">-d：后台运行</span><br><span class="line">-p: 将主机的端口映射到容器的一个端口    主机端口:容器内部的端口</span><br><span class="line"></span><br><span class="line">10、为了演示简单关闭了linux的防火墙</span><br><span class="line">service firewalld status ；查看防火墙状态</span><br><span class="line">service firewalld stop：关闭防火墙</span><br><span class="line">11、查看容器的日志</span><br><span class="line">docker logs container-name/container-id</span><br><span class="line"></span><br><span class="line">更多命令参看</span><br><span class="line">https://docs.docker.com/engine/reference/commandline/docker/</span><br><span class="line">可以参考每一个镜像的文档</span><br></pre></td></tr></table></figure>
+
+<p><img src="//codeofli.github.io/2019/11/docker/docker/docker%5C%E5%85%B3%E9%97%ADfirewall%E7%9A%84%E5%8F%82%E6%95%B0.png" alt></p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><h2 id="进入容器Bash"><a href="#进入容器Bash" class="headerlink" title="进入容器Bash"></a>进入容器Bash</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it containerID bash</span><br></pre></td></tr></table></figure>
+
+<h3 id="将本地sql文件导入容器"><a href="#将本地sql文件导入容器" class="headerlink" title="将本地sql文件导入容器"></a>将本地sql文件导入容器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker cp /home/ubuntu/yoj.sql(文件路径) mysql(容器名):/home/tmp/yoj.txt(容器文件保存路径+文件名)</span><br></pre></td></tr></table></figure>
+
+<p>docker cp 第一个参数指定本地文件或者文件夹，第二个参数指定容器及容器内的目标文件夹 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker cp /home/ubuntu/yoj.sql mysql:/home</span><br></pre></td></tr></table></figure>
+
+<h1 id="Docker-Mysql"><a href="#Docker-Mysql" class="headerlink" title="Docker-Mysql"></a>Docker-Mysql</h1><h2 id="安装MySQL示例"><a href="#安装MySQL示例" class="headerlink" title="安装MySQL示例"></a>安装MySQL示例</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql</span><br><span class="line"><span class="meta">#</span><span class="bash">mysql 版本最好在5.7左右，不然navicat连不上</span></span><br><span class="line">[root@MiWiFi-R3A-srv ~]# docker pull mysql:5.7.27</span><br></pre></td></tr></table></figure>
+
+<p>错误的启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# docker run --name mysql01 -d mysql</span><br><span class="line">42f09819908bb72dd99ae19e792e0a5d03c48638421fa64cce5f8ba0f40f5846</span><br><span class="line"></span><br><span class="line">mysql退出了</span><br><span class="line">[root@localhost ~]# docker ps -a</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                           PORTS               NAMES</span><br><span class="line">42f09819908b        mysql               "docker-entrypoint.sh"   34 seconds ago      Exited (1) 33 seconds ago                            mysql01</span><br><span class="line">538bde63e500        tomcat              "catalina.sh run"        About an hour ago   Exited (143) About an hour ago                       compassionate_</span><br><span class="line">goldstine</span><br><span class="line">c4f1ac60b3fc        tomcat              "catalina.sh run"        About an hour ago   Exited (143) About an hour ago                       lonely_fermi</span><br><span class="line">81ec743a5271        tomcat              "catalina.sh run"        About an hour ago   Exited (143) About an hour ago                       sick_ramanujan</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//错误日志</span><br><span class="line">[root@localhost ~]# docker logs 42f09819908b</span><br><span class="line">error: database is uninitialized and password option is not specified </span><br><span class="line">  You need to specify one of MYSQL_ROOT_PASSWORD, MYSQL_ALLOW_EMPTY_PASSWORD and MYSQL_RANDOM_ROOT_PASSWORD；这个三个参数必须指定一个</span><br></pre></td></tr></table></figure>
+
+<p>正确的启动</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# docker run --name mysql01 -e MYSQL_ROOT_PASSWORD=123456 -d mysql</span><br><span class="line">nicolas@iZuf6i77uwsb2oiszspgvkZ:/home/admin$ sudo docker run --name mysql01 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7.27</span><br><span class="line">b874c56bec49fb43024b3805ab51e9097da779f2f572c22c695305dedd684c5f</span><br><span class="line">[root@localhost ~]# docker ps</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES</span><br><span class="line">b874c56bec49        mysql               "docker-entrypoint.sh"   4 seconds ago       Up 3 seconds        3306/tcp            mysql01</span><br></pre></td></tr></table></figure>
+
+<p>做了端口映射</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# docker run -p 3306:3306 --name mysql02 -e MYSQL_ROOT_PASSWORD=123456 -d mysql</span><br><span class="line">nicolas@iZuf6i77uwsb2oiszspgvkZ:/home/admin$ sudo docker run -p 3306:3306 --name mysql01 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7.27</span><br><span class="line"></span><br><span class="line">ad10e4bc5c6a0f61cbad43898de71d366117d120e39db651844c0e73863b9434</span><br><span class="line">[root@localhost ~]# docker ps</span><br><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES</span><br><span class="line">ad10e4bc5c6a        mysql               "docker-entrypoint.sh"   4 seconds ago       Up 2 seconds        0.0.0.0:3306-&gt;3306/tcp   mysql02</span><br></pre></td></tr></table></figure>
+
+<p>几个其他的高级操作</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mysql03 -v /conf/mysql:/etc/mysql/conf.d -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag</span><br><span class="line">把主机的/conf/mysql文件夹挂载到 mysqldocker容器的/etc/mysql/conf.d文件夹里面</span><br><span class="line">改mysql的配置文件就只需要把mysql配置文件放在自定义的文件夹下（/conf/mysql）</span><br><span class="line"></span><br><span class="line">docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci</span><br><span class="line">指定mysql的一些配置参数</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">创建mysql容器+character-set</span></span><br><span class="line">docker run -p 3306:3306 --name mysql03 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7.27 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci</span><br><span class="line"></span><br><span class="line">docker run -d -p 3307:3306 -e MYSQL_ROOT_PASSWORD=db123456 --name mysql -e TZ=Asia/Shanghai mysql:5.7</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">-e TZ=Asia/Shanghai     时区修改为中国时区</span><br><span class="line"></span><br><span class="line">-p 3306：3306：将容器的3306端口映射到主机的3306端口</span><br><span class="line"></span><br><span class="line">-v $ PWD / conf / my.cnf：/etc/mysql/my.cnf：将主机当前目录下的conf / my.cnf挂载到容器的/etc/mysql/my.cnf</span><br><span class="line"></span><br><span class="line">-v $ PWD / logs：/ logs：将主机当前目录下的日志目录挂载到容器的/ logs</span><br><span class="line"></span><br><span class="line">-v $ PWD / data：/ mysql_data：将主机当前目录下的数据目录挂载到容器的/ mysql_data</span><br><span class="line"></span><br><span class="line">-e MYSQL_ROOT_PASSWORD = 123456：初始化 root用户的密码</span><br></pre></td></tr></table></figure>
+
+<p><strong>修改时区和字符集</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=123456 -e TZ=Asia/Shanghai -d mysql:5.7.27 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci</span><br></pre></td></tr></table></figure>
+
+<h3 id="安装mysql之后进行操作"><a href="#安装mysql之后进行操作" class="headerlink" title="安装mysql之后进行操作"></a>安装mysql之后进行操作</h3><p>3.进入容器bash并进入mysql命令行：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-5-ubuntu:/etc/apt$ sudo docker exec -it mysql02 bash</span><br></pre></td></tr></table></figure>
+
+<p>Docker容器启动的时候，如果要挂载宿主机的一个目录，可以用-v参数指定。</p>
+<p>譬如我要启动一个centos容器，宿主机的/test目录挂载到容器的/soft目录，可通过以下方式指定：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -v /test:/soft centos /bin/bash</span><br><span class="line">docker run -it -v /hmoe/ubuntu:/tmp mysql02 /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h1 id="mysql使用"><a href="#mysql使用" class="headerlink" title="mysql使用"></a>mysql使用</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">sudo docker run -p 3306:3306 --name mysql8 -e MYSQL_ROOT_PASSWORD=root -d mysql:8.0.23 --character-set-server=utf8 --collation-server=utf8_unicode_ci</span><br></pre></td></tr></table></figure>
+
+<p>–name: 容器名</p>
+<h2 id="MySql-导入-sql文件"><a href="#MySql-导入-sql文件" class="headerlink" title="MySql 导入 *.sql文件"></a>MySql 导入 *.sql文件</h2><h3 id="1-将本地sql文件导入容器"><a href="#1-将本地sql文件导入容器" class="headerlink" title="1.将本地sql文件导入容器"></a>1.将本地sql文件导入容器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker cp /home/ubuntu/yoj.sql(文件路径) mysql(容器名):/home/tmp/yoj.txt(容器文件保存路径+文件名)</span><br></pre></td></tr></table></figure>
+
+<p>docker cp 第一个参数指定本地文件或者文件夹，第二个参数指定容器及容器内的目标文件夹 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker cp /home/ubuntu/yoj.sql mysql8:/home</span><br></pre></td></tr></table></figure>
+
+<h3 id="登入容器内MYSQL执行sql"><a href="#登入容器内MYSQL执行sql" class="headerlink" title="登入容器内MYSQL执行sql"></a>登入容器内MYSQL执行sql</h3><p>command format</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it (mysql-container-name)[xxx] (in mysql command)[mysql -uroot -p123456]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it bteye-mysql mysql -uroot -p123456</span><br><span class="line">docker exec -it mysql8 mysql -uroot -p</span><br></pre></td></tr></table></figure>
+
+<p>执行sql文件 </p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">source</span> <span class="regexp">/home/y</span>oj.sql</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-进入数据库容器"><a href="#2-进入数据库容器" class="headerlink" title="2.进入数据库容器"></a>2.进入数据库容器</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it containerID bash</span><br></pre></td></tr></table></figure>
+
+<p>数据库导入</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql -h localhost -u root -p（进入mysql下面）</span><br><span class="line">create database abc;(创建数据库)</span><br><span class="line">show databases;(就可看到所有已经存在的数据库，以及刚刚创建的数据库abc)</span><br><span class="line">use abc;(进入abc数据库下面)</span><br><span class="line">show tables;(产看abc数据库下面的所有表,空的)</span><br><span class="line">source /var/test.sql（导入数据库表）</span><br><span class="line">show tables;(查看abc数据库下面的所有表,就可以看到表了)</span><br><span class="line">desc pollution;(查看表结构设计)</span><br><span class="line">select * from pollution;</span><br><span class="line">exit(或者ctrl + c)退出mysql</span><br></pre></td></tr></table></figure>
+
+<h2 id="修改-Docker-中-MySQL-容器的编码"><a href="#修改-Docker-中-MySQL-容器的编码" class="headerlink" title="修改 Docker 中 MySQL 容器的编码"></a>修改 Docker 中 MySQL 容器的编码</h2><p><a href="https://blog.csdn.net/m0_37639542/article/details/72852875" target="_blank" rel="noopener">https://blog.csdn.net/m0_37639542/article/details/72852875</a></p>
+<p>1.查看字符集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SHOW VARIABLES LIKE &apos;character_set_%&apos;;//查看数据库字符集</span><br></pre></td></tr></table></figure>
+
+<p>更新之后记得重启mysql服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service mysql restart</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-进入MySQL容器"><a href="#1-进入MySQL容器" class="headerlink" title="1. 进入MySQL容器"></a>1. 进入MySQL容器</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it my-space-mysql /bin/bash</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-备份当前-my-cnf-文件"><a href="#2-备份当前-my-cnf-文件" class="headerlink" title="2. 备份当前 my.cnf 文件"></a>2. 备份当前 my.cnf 文件</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv /etc/mysql/my.cnf /etc/mysql/my.cnf.bak</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-退出容器"><a href="#3-退出容器" class="headerlink" title="3. 退出容器"></a>3. 退出容器</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="4-在服务器创建配置文件-my-cnf"><a href="#4-在服务器创建配置文件-my-cnf" class="headerlink" title="4. 在服务器创建配置文件(my.cnf)"></a>4. 在服务器创建配置文件(my.cnf)</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysqld]</span><br><span class="line">character-set-server=utf8</span><br><span class="line">collation-server=utf8_general_ci</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-查看容器长ID"><a href="#5-查看容器长ID" class="headerlink" title="5. 查看容器长ID"></a>5. 查看容器长ID</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect -f <span class="string">'&#123;&#123;.ID&#125;&#125;'</span> my-space-mysql</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>my-space-mysql</code>是容器的名称</li>
+</ul>
+<h4 id="6-上传文件到容器"><a href="#6-上传文件到容器" class="headerlink" title="6. 上传文件到容器"></a>6. 上传文件到容器</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp my.cnf &lt;容器长ID&gt;:/etc/mysql</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-自行登录容器查看并提出容器"><a href="#7-自行登录容器查看并提出容器" class="headerlink" title="7. 自行登录容器查看并提出容器"></a>7. 自行登录容器查看并提出容器</h4><h4 id="8-重启docker"><a href="#8-重启docker" class="headerlink" title="8. 重启docker"></a>8. 重启docker</h4><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker stop my-space-mysql</span><br><span class="line">docker start my-space-mysql</span><br></pre></td></tr></table></figure>
+
+<h4 id="9-查看数据库编码"><a href="#9-查看数据库编码" class="headerlink" title="9. 查看数据库编码"></a>9. 查看数据库编码</h4><ul>
+<li>进入数据库执行</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">status</span><br></pre></td></tr></table></figure>
+
+<h2 id="备份数据库"><a href="#备份数据库" class="headerlink" title="备份数据库"></a>备份数据库</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker exec -it  mysql mysqldump -uroot -p123456 yoj &gt; /home/ubuntu/sql_bak/yoj_db.sql</span><br></pre></td></tr></table></figure>
+
+<h3 id="mysql使用mysqldump定时备份数据库"><a href="#mysql使用mysqldump定时备份数据库" class="headerlink" title="mysql使用mysqldump定时备份数据库"></a>mysql使用mysqldump定时备份数据库</h3><p><a href="https://www.jianshu.com/p/be1e581acb8e" target="_blank" rel="noopener">https://www.jianshu.com/p/be1e581acb8e</a></p>
+<p>3、数据库备份脚本<br>功能：mysql 每天定时备份， 并删除7天以前的备份<br>mysql_dumps.sh：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">docker_name = mysql57</span><br><span class="line">data_dir=<span class="string">"/path/to/save/data/"</span></span><br><span class="line">sudo docker <span class="built_in">exec</span> -it <span class="variable">$&#123;docker_name&#125;</span> mysqldump -uroot -ppasswd --all-databases &gt; <span class="string">"<span class="variable">$data_dir</span>/data_`date +%Y%m%d`.sql"</span></span><br><span class="line"><span class="comment">#if [ $? -ne 0 ];then</span></span><br><span class="line">    <span class="comment"># 任务失败，发送邮件</span></span><br><span class="line"><span class="comment">#    echo -e "邮件正文" | mail -s '标题' 123456@gmail.com</span></span><br><span class="line"><span class="comment">#    exit -1</span></span><br><span class="line"><span class="comment">#fi</span></span><br><span class="line">find <span class="variable">$data_dir</span> -mtime +7 -name <span class="string">'data_[1-9].sql'</span> -<span class="built_in">exec</span> rm -rf &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<p>my_version</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">data_dir=<span class="string">"/path/to/save/data/"</span></span><br><span class="line">sudo docker <span class="built_in">exec</span> mysql mysqldump -uroot -ppasswd --all-databases &gt; <span class="string">"<span class="variable">$data_dir</span>/data_`date +%Y%m%d`.sql"</span></span><br><span class="line">find <span class="variable">$data_dir</span> -mtime +7 -name <span class="string">'data_[1-9].sql'</span> -<span class="built_in">exec</span> rm -rf &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<p>4、通过linux cron设置定时任务<br>crontab -e：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 2 * * * sh /home/ubuntu/sql_bak/mysql_dumps.sh &gt; /home/ubuntu/sql_bak/mysql_dumps.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<p>设置每分钟测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">* * * * * sh /home/ubuntu/sql_bak/mysql_dumps.sh &gt; /home/ubuntu/sql_bak/mysql_dumps.log 2&gt;&amp;1</span><br></pre></td></tr></table></figure>
+
+<h1 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">runoob@runoob:~$ mkdir -p ~/redis ~/redis/data</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -p <span class="number">6379</span>:<span class="number">6379</span> -v $PWD/data:/data  -d redis redis-server --appendonly yes</span><br></pre></td></tr></table></figure>
+
+<p>命令说明：</p>
+<p><strong>-p 6379:6379 :</strong> 将容器的6379端口映射到主机的6379端口</p>
+<p><strong>-v $PWD/data:/data :</strong> 将主机中当前目录下的data挂载到容器的/data</p>
+<p><strong>redis-server –appendonly yes :</strong> 在容器执行redis-server启动命令，并打开redis持久化配置</p>
+<h2 id="连接、查看容器"><a href="#连接、查看容器" class="headerlink" title="连接、查看容器"></a>连接、查看容器</h2><p>使用redis镜像执行redis-cli命令连接到刚启动的容器,主机IP为172.17.0.1</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">runoob@</span>runoob:~/redis$ docker exec -it <span class="number">43f</span>7a65ec7f8 redis-cli</span><br><span class="line"><span class="number">172.17</span><span class="number">.0</span><span class="number">.1</span>:<span class="number">6379</span>&gt; info</span><br><span class="line"># Server</span><br><span class="line">redis_version:<span class="number">3.2</span><span class="number">.0</span></span><br><span class="line">redis_git_sha1:<span class="number">00000000</span></span><br><span class="line">redis_git_dirty:<span class="number">0</span></span><br><span class="line">redis_build_id:f449541256e7d446</span><br><span class="line">redis_mode:standalone</span><br><span class="line">os:Linux <span class="number">4.2</span><span class="number">.0</span><span class="number">-16</span>-generic x86_64</span><br><span class="line">arch_bits:<span class="number">64</span></span><br><span class="line">multiplexing_api:epoll</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it 239fadb88042 redis-cli</span><br></pre></td></tr></table></figure>
+
+<h2 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h2><h3 id="配置文件映射"><a href="#配置文件映射" class="headerlink" title="配置文件映射"></a>配置文件映射</h3><p>Alternatively, you can specify something along the same lines with docker run options.</p>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="keyword">run</span> -v /myredis/<span class="keyword">conf</span>/redis.<span class="keyword">conf</span>:/usr/<span class="keyword">local</span>/etc/redis/redis.<span class="keyword">conf</span> --name myredis redis redis-server /usr/<span class="keyword">local</span>/etc/redis/redis.<span class="keyword">conf</span></span><br></pre></td></tr></table></figure>
+
+<p>Where <code>/myredis/conf/</code> is a local directory containing your <code>redis.conf</code>file. Using this method means that there is no need for you to have a Dockerfile for your redis container.</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --privileged=true -p 6379:6379 --restart always -v /root/docker/redis/conf/redis.conf:/etc/redis/redis.conf -v /root/docker/redis/data:/data --name myredis redis redis-server /etc/redis/redis.conf --appendonly yes</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-<span class="function"><span class="title">d</span>                                -&gt;</span> 以守护进程的方式启动容器</span><br><span class="line">-<span class="function"><span class="title">p</span> 6379:6379                      -&gt;</span> 绑定宿主机端口</span><br><span class="line">--<span class="function"><span class="title">name</span> myredis                    -&gt;</span> 指定容器名称</span><br><span class="line">--<span class="function"><span class="title">restart</span> always                  -&gt;</span> 开机启动</span><br><span class="line">--<span class="function"><span class="title">privileged</span>=<span class="literal">true</span>                 -&gt;</span> 提升容器内权限</span><br><span class="line">-<span class="function"><span class="title">v</span> /root/docker/redis/conf:/etc/redis/redis.conf    -&gt;</span> 映射配置文件</span><br><span class="line">-<span class="function"><span class="title">v</span> /root/docker/redis/<span class="keyword">data</span>:/<span class="keyword">data</span>   -&gt;</span> 映射数据目录</span><br><span class="line">--<span class="function"><span class="title">appendonly</span> yes                   -&gt;</span> 开启数据持久化</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://codeofli.github.io/2019/11/docker/docker/" data-id="cl3iuqtmy00048kcbsxpra49w" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/python/PythonMongoDb/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          pythonMongoDb
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/11/linux/linux/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">linux</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Elasticsearch/">Elasticsearch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/">RabbitMQ</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/elasticsearch/">elasticsearch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/note/">note</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Axios/">Axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elasticsearch/">Elasticsearch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nacos/">Nacos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RabbitMQ/">RabbitMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentinel/">Sentinel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringCloud/">SpringCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crawler/">crawler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/seata/">seata</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springBoot/">springBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMvc/">springMvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssm/">ssm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Axios/" style="font-size: 10px;">Axios</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/Nacos/" style="font-size: 12.5px;">Nacos</a> <a href="/tags/RabbitMQ/" style="font-size: 12.5px;">RabbitMQ</a> <a href="/tags/Sentinel/" style="font-size: 12.5px;">Sentinel</a> <a href="/tags/SpringCloud/" style="font-size: 10px;">SpringCloud</a> <a href="/tags/crawler/" style="font-size: 10px;">crawler</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/js/" style="font-size: 15px;">js</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/python/" style="font-size: 17.5px;">python</a> <a href="/tags/seata/" style="font-size: 10px;">seata</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springBoot/" style="font-size: 12.5px;">springBoot</a> <a href="/tags/springMvc/" style="font-size: 10px;">springMvc</a> <a href="/tags/ssm/" style="font-size: 10px;">ssm</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/学习笔记/" style="font-size: 17.5px;">学习笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/10/docker/Docker实用篇/">Docker实用篇</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ/">RabbitMQ</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/">RabbitMQ部署指南</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/Seata/Seate/">分布式事务seata</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/Elasticsearch/Elasticsearch/">Elasticsearch</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 nicolas lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

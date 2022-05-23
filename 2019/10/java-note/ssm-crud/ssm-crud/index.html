@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>ssm-crud | nicolas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="[TOC]web路径 web路径：    1.不以/开始的相对路径，找资源，以当前资源的路径为基准，经常容易出问题    2.以/开始的开始的相对路径，找资源，以服务器为标准（http//localhost/端口号)需要加项目名;    就是http//localhost/端口号/crud/…12345&amp;lt;%	pageContext.setAttribute(&quot;WEB_PATH&quot;, reque">
+<meta name="keywords" content="java,ssm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ssm-crud">
+<meta property="og:url" content="https://codeofli.github.io/2019/10/java-note/ssm-crud/ssm-crud/index.html">
+<meta property="og:site_name" content="nicolas">
+<meta property="og:description" content="[TOC]web路径 web路径：    1.不以/开始的相对路径，找资源，以当前资源的路径为基准，经常容易出问题    2.以/开始的开始的相对路径，找资源，以服务器为标准（http//localhost/端口号)需要加项目名;    就是http//localhost/端口号/crud/…12345&amp;lt;%	pageContext.setAttribute(&quot;WEB_PATH&quot;, reque">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://codeofli.github.io/2019/10/java-note/ssm-crud/ssm-crud/E:%5Cpictures%5CLanguage%5Cssm%5Cssm%E6%95%B4%E5%90%88%5Cssm%E6%80%BB%E7%BB%93.png">
+<meta property="og:updated_time" content="2021-10-23T02:19:04.206Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ssm-crud">
+<meta name="twitter:description" content="[TOC]web路径 web路径：    1.不以/开始的相对路径，找资源，以当前资源的路径为基准，经常容易出问题    2.以/开始的开始的相对路径，找资源，以服务器为标准（http//localhost/端口号)需要加项目名;    就是http//localhost/端口号/crud/…12345&amp;lt;%	pageContext.setAttribute(&quot;WEB_PATH&quot;, reque">
+<meta name="twitter:image" content="https://codeofli.github.io/2019/10/java-note/ssm-crud/ssm-crud/E:%5Cpictures%5CLanguage%5Cssm%5Cssm%E6%95%B4%E5%90%88%5Cssm%E6%80%BB%E7%BB%93.png">
+  
+    <link rel="alternate" href="/atom.xml" title="nicolas" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">nicolas</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Yesterday you said tomorow.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://codeofli.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-java-note/ssm-crud/ssm-crud" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/java-note/ssm-crud/ssm-crud/" class="article-date">
+  <time datetime="2019-10-21T07:25:49.000Z" itemprop="datePublished">2019-10-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/java/">java</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ssm-crud
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>[TOC]</p><h1 id="web路径"><a href="#web路径" class="headerlink" title="web路径"></a>web路径</h1><p> <strong>web路径：</strong><br>    1.不<strong>以/开始的相对路径</strong>，找资源，<strong>以当前资源的路径为基准</strong>，经常容易出问题<br>    2.<strong>以/开始的开始的相对路径</strong>，找资源，<strong>以服务器为标准（http//localhost/端口号)需要加项目名</strong>;<br>    就是http//localhost/端口号/crud/…</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">%</span></span></span><br><span class="line"><span class="tag">	<span class="attr">pageContext.setAttribute</span>("<span class="attr">WEB_PATH</span>", <span class="attr">request.getContextPath</span>());</span></span><br><span class="line"><span class="tag">%&gt;</span></span><br><span class="line">	$&#123;WEB_PATH&#125;/static/bootstrap-3.3.7-dist/css/bootstrap.min.css</span><br><span class="line">  --&gt;</span><br></pre></td></tr></table></figure><a id="more"></a>
+
+
+
+<p>注：pageContext.setAttribute需要jsp_api.jar</p>
+<h1 id="maven配置文件"><a href="#maven配置文件" class="headerlink" title="maven配置文件"></a>maven配置文件</h1><p>D:\apache-maven-3.6.1\conf\settings.xml</p>
+<p>设置镜像阿里mirrors</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mirrors</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">mirror</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span>&gt;</span>alimaven<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>aliyun maven<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://maven.aliyun.com/nexus/content/groups/public<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mirrorOf</span>&gt;</span>central<span class="tag">&lt;/<span class="name">mirrorOf</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">mirror</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">mirrors</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>配置maven的jdk</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">profile</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">id</span>&gt;</span>jdk18<span class="tag">&lt;/<span class="name">id</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="tag">&lt;<span class="name">activation</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">activaByDefault</span>&gt;</span>true<span class="tag">&lt;/<span class="name">activaByDefault</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">jdk</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">jdk</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">activation</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">	  <span class="tag">&lt;<span class="name">maven.compiler.source</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.source</span>&gt;</span></span><br><span class="line">	  <span class="tag">&lt;<span class="name">maven.compiler.target</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.target</span>&gt;</span></span><br><span class="line">	  <span class="tag">&lt;<span class="name">maven.compiler.compilerVersion</span>&gt;</span>1.8<span class="tag">&lt;/<span class="name">maven.compiler.compilerVersion</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">profile</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="maven使用spring单元测试"><a href="#maven使用spring单元测试" class="headerlink" title="maven使用spring单元测试"></a>maven使用spring单元测试</h1><p>test写在src/test/mapper/目录下</p>
+<p>推荐Spring的项目就可以使用spring的单元测试，可以依赖注入我们需要的组件</p>
+<p> 1.导入springTest模块(meven导包)<br> 2.@ContextConfiguration指定spring配置文件内容,@RunWith(SpringJUnit4ClassRunner.class)<br> 3.直接autoWrited要使用的组件即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">**</span><br><span class="line"> * 测试dao工作层</span><br><span class="line"> * <span class="meta">@author</span> test</span><br><span class="line"> */</span><br><span class="line"><span class="meta">@RunWith</span>(SpringJUnit4ClassRunner.class)</span><br><span class="line"><span class="meta">@ContextConfiguration</span>(locations = &#123;<span class="string">"classpath:applicationContext.xml"</span>&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MapperTest</span> </span>&#123;</span><br></pre></td></tr></table></figure>
+
+<h2 id="mybatis不在同一目录下"><a href="#mybatis不在同一目录下" class="headerlink" title="mybatis不在同一目录下"></a>mybatis不在同一目录下</h2><p>如果需要mapper和mapper.xml文件不在一个文件夹里还能映射成功的话，需要在spring配置文件中，<strong>分别将mapper和mapper.xml的包添加扫描；</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ============配置和mybatis的整合============== --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"sqlSessionFactory"</span></span></span><br><span class="line"><span class="tag">		<span class="attr">class</span>=<span class="string">"org.mybatis.spring.SqlSessionFactoryBean"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"configLocation"</span></span></span><br><span class="line"><span class="tag">			<span class="attr">value</span>=<span class="string">"classpath:mybatis-config.xml"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"dataSource"</span> <span class="attr">ref</span>=<span class="string">"pooledDataSource"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 指定mybatis的mapper文件位置 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"mapperLocations"</span></span></span><br><span class="line"><span class="tag">			<span class="attr">value</span>=<span class="string">"classpath:mapper/*.xml"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">&lt;!-- 配置扫描器，将mapper接口实现加入ioc容器 --&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 批量生成mapper代理对象 批量产生的mapper对象在SpringIOC容器中的id值默认就是接口mapper名(首字母小写） --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.mybatis.spring.mapper.MapperScannerConfigurer"</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"basePackage"</span> <span class="attr">value</span>=<span class="string">"com.atguigu.crud.dao"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"sqlSessionFactoryBeanName"</span> <span class="attr">value</span>=<span class="string">"sqlSessionFactory"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="maven中classpath路径"><a href="#maven中classpath路径" class="headerlink" title="maven中classpath路径"></a>maven中classpath路径</h1><p>在Maven工程中，classpath的路径指java resources路径下的目录，即</p>
+<p>src/main/java、 src/main/resource、src/test/java 、src/test/resource   四个目录</p>
+<p>所以在配置路径时需要注意文件名是否重名，导致加载文件失败</p>
+<h1 id="数据校验"><a href="#数据校验" class="headerlink" title="数据校验"></a>数据校验</h1><h2 id="jsr303数据校验"><a href="#jsr303数据校验" class="headerlink" title="jsr303数据校验"></a>jsr303数据校验</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--jsr303数据检验支持 （Hibernate Validator Engine Relocation Artifact） --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- jrs303数据校验支持：tomcat7以上的服务器，</span></span><br><span class="line"><span class="comment">tomcat7以下的服务器：el表达式，不是最新的。额外给服务器的lib包中替换新的标准的el</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hibernate<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hibernate-validator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>5.4.1.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>JSR303<br>Hibernate Validator </p>
+<p><strong>JSR 303提供的标准注解如表所示。</strong></p>
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Null</td>
+<td>被注释的元素必须为 null。</td>
+</tr>
+<tr>
+<td>@NotNull</td>
+<td>被注释的元素必须不为 null。</td>
+</tr>
+<tr>
+<td>@AssertTrue</td>
+<td>被注释的元素必须为 true。</td>
+</tr>
+<tr>
+<td>@AssertFalse</td>
+<td>被注释的元素必须为 false。</td>
+</tr>
+<tr>
+<td>@Min(value)</td>
+<td>被注释的元素必须是一个数字，其值必须大于或等于value。</td>
+</tr>
+<tr>
+<td>@Max(value)</td>
+<td>被注释的元素必须是一个数字，其值必须小于或等于value。</td>
+</tr>
+<tr>
+<td>@DecimalMin(value)</td>
+<td>被注释的元素必须是一个数字，其值必须大于或等于value。</td>
+</tr>
+<tr>
+<td>@DecimalMax(value)</td>
+<td>被注释的元素必须是一个数字，其值必须小于或等于value。</td>
+</tr>
+<tr>
+<td>@Size(max,   min)</td>
+<td>被注释的元素的取值范围必须是介于min和max之间。</td>
+</tr>
+<tr>
+<td>@Digits   (integer, fraction)</td>
+<td>被注释的元素必须是一个数字，其值必须在可接受的范围内。</td>
+</tr>
+<tr>
+<td>@Past</td>
+<td>被注释的元素必须是一个过去的日期。</td>
+</tr>
+<tr>
+<td>@Future</td>
+<td>被注释的元素必须是一个将来的日期。</td>
+</tr>
+<tr>
+<td>@Pattern(value)</td>
+<td>被注释的元素必须符合指定的正则表达式。</td>
+</tr>
+</tbody></table>
+<p>表JSR 303注解</p>
+<p>Hibernate Validator 是JSR 303的扩展。Hibernate Validator 提供了 JSR 303中所有内置的注解，以及自身扩展的4个注解，如表所示。</p>
+<table>
+<thead>
+<tr>
+<th>注解</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Email</td>
+<td>被注释的元素值必须是合法的电子邮箱地址。</td>
+</tr>
+<tr>
+<td>@Length</td>
+<td>被注释的字符串的长度必须在指定的范围内。</td>
+</tr>
+<tr>
+<td>@NotEmpty</td>
+<td>被注释的字符串的必须非空。</td>
+</tr>
+<tr>
+<td>@Range</td>
+<td>被注释的元素必须在合适的范围内。</td>
+</tr>
+</tbody></table>
+<p><strong>表  Hibernate Validator扩展注解</strong></p>
+<p>使用Hibernate Validator步骤：</p>
+<p>a.jar（注意各个jar之间可能存在版本不兼容）<br>hibernate-validator-5.0.0.CR2.jar     classmate-0.8.0.jar     jboss-logging-3.1.1.GA.jar<br>validation-api-1.1.0.CR1.jar     hibernate-validator-annotation-processor-5.0.0.CR2.jar</p>
+<p>b配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">mvc:annotation-driven</span> &gt;</span><span class="tag">&lt;/<span class="name">mvc:annotation-driven</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>此时mvc:annotation-driven的作用：要实现Hibernate Validator/JSR303 校验（或者其他各种校验），必须实现SpringMVC提供的一个接口：ValidatorFactory</p>
+<p>LocalValidatorFactoryBean是ValidatorFactory的一个实现类。<br>&lt;mvc:annotation-driven &gt;会在<strong>springmvc容器中 自动加载一个LocalValidatorFactoryBean类，因此可以直接实现数据校验。</strong></p>
+<p>c.直接使用注解</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">```</span><br><span class="line"><span class="meta">@Past</span><span class="comment">//当前时间以前</span></span><br><span class="line"><span class="keyword">private</span> Date birthday ;</span><br><span class="line">```</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在校验的Controller中 ，给<strong>校验的对象前增加 @Valid</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">testDateTimeFormat</span><span class="params">(@Valid Student student, BindingResult result ,Map&lt;String,Object&gt; map)</span> </span>&#123;</span><br><span class="line">    &#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="mybatis分页插件PageHleper"><a href="#mybatis分页插件PageHleper" class="headerlink" title="mybatis分页插件PageHleper"></a>mybatis分页插件PageHleper</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 导入jackson包</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@author</span> lmz</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@date</span> 2019年7月15日-上午8:59:36</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> pageNumber</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@RequestMapping</span>(<span class="string">"/emps"</span>)</span><br><span class="line">	<span class="meta">@ResponseBody</span> <span class="comment">// 告诉SpringMVC，此时的返回 不是一个 View页面，而是一个 ajax调用的返回值（Json数组）</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> Msg <span class="title">getEmpsWithJson</span><span class="params">(@RequestParam(value = <span class="string">"pageNumber"</span>, defaultValue = <span class="string">"1"</span>)</span> Integer pageNumber) </span>&#123;</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 引入分页插件PageHleper</span></span><br><span class="line">		<span class="comment">// 在查询之前调用即可</span></span><br><span class="line">		PageHelper.startPage(pageNumber, <span class="number">5</span>);</span><br><span class="line">		<span class="comment">// startPage之后紧跟着的查询就是分页查询</span></span><br><span class="line">		List&lt;Employee&gt; emps = employeeService.getAll();</span><br><span class="line">		<span class="comment">// 用PageInfo对结果进行包装</span></span><br><span class="line">		<span class="comment">// 将pagaInfo交给页面就可以了，封装了详细的分页信息，包括有我们的查询数据</span></span><br><span class="line">		<span class="comment">// 传入连续显示的页数</span></span><br><span class="line">		PageInfo&lt;Employee&gt; page = <span class="keyword">new</span> PageInfo&lt;Employee&gt;(emps, <span class="number">5</span>);</span><br><span class="line">		<span class="keyword">return</span> Msg.success().add(<span class="string">"pageInfo"</span>, page);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在mybatis中配置合理化参数，超过页数，返回最后一页</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- com.github.pagehelper为PageHelper类所在包名 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">plugin</span> <span class="attr">interceptor</span>=<span class="string">"com.github.pagehelper.PageInterceptor"</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- 使用下面的方式配置参数，后面会有所有的参数介绍 --&gt;</span></span><br><span class="line">			<span class="comment">&lt;!-- 分页参数合理化 --&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"reasonable"</span> <span class="attr">value</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="sprigMVC自带HttpputFormContentFilter"><a href="#sprigMVC自带HttpputFormContentFilter" class="headerlink" title="sprigMVC自带HttpputFormContentFilter"></a>sprigMVC自带HttpputFormContentFilter</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">           * 解决方案</span></span><br><span class="line"><span class="comment">           * 要能支持直接发送PUT之类的请求，还要封装请求体中的数据</span></span><br><span class="line"><span class="comment">     * 1、配置上HttpputFormContentFilter；</span></span><br><span class="line"><span class="comment">     * 2、作用：将请求体中的数据解析包装成一个map。</span></span><br><span class="line"><span class="comment">     * 3、request被重新包装，request.getParameter()被重写，就会从自己封装的map中取数据</span></span><br><span class="line"><span class="comment">     * 员工更新方法</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> employee</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"><span class="meta">@PutMapping</span>(<span class="string">"/emp/&#123;empId&#125;"</span>)</span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Msg <span class="title">saveEmp</span><span class="params">(Employee employee,HttpServletRequest request)</span></span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"requestScope中的值："</span>+request.getParameter(<span class="string">"email"</span>));</span><br><span class="line">    System.out.println(employee);</span><br><span class="line">    employeeService.updateEmp(employee);</span><br><span class="line">    <span class="keyword">return</span> Msg.success();</span><br><span class="line">&#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="//codeofli.github.io/2019/10/java-note/ssm-crud/ssm-crud/E:%5Cpictures%5CLanguage%5Cssm%5Cssm%E6%95%B4%E5%90%88%5Cssm%E6%80%BB%E7%BB%93.png" alt></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://codeofli.github.io/2019/10/java-note/ssm-crud/ssm-crud/" data-id="cl3iuqtvs001g8kcbzm4bm1jz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssm/">ssm</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/11/python/pythonSpider/pythonSpider/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          pythonSpider
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/java-note/springMvc/springMvc/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">springMvc</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Elasticsearch/">Elasticsearch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/">RabbitMQ</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/elasticsearch/">elasticsearch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/note/">note</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Axios/">Axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elasticsearch/">Elasticsearch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nacos/">Nacos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RabbitMQ/">RabbitMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentinel/">Sentinel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringCloud/">SpringCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crawler/">crawler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/seata/">seata</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springBoot/">springBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMvc/">springMvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssm/">ssm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Axios/" style="font-size: 10px;">Axios</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/Nacos/" style="font-size: 12.5px;">Nacos</a> <a href="/tags/RabbitMQ/" style="font-size: 12.5px;">RabbitMQ</a> <a href="/tags/Sentinel/" style="font-size: 12.5px;">Sentinel</a> <a href="/tags/SpringCloud/" style="font-size: 10px;">SpringCloud</a> <a href="/tags/crawler/" style="font-size: 10px;">crawler</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/js/" style="font-size: 15px;">js</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/python/" style="font-size: 17.5px;">python</a> <a href="/tags/seata/" style="font-size: 10px;">seata</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springBoot/" style="font-size: 12.5px;">springBoot</a> <a href="/tags/springMvc/" style="font-size: 10px;">springMvc</a> <a href="/tags/ssm/" style="font-size: 10px;">ssm</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/学习笔记/" style="font-size: 17.5px;">学习笔记</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/10/docker/Docker实用篇/">Docker实用篇</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ/">RabbitMQ</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/">RabbitMQ部署指南</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/Seata/Seate/">分布式事务seata</a>
+          </li>
+        
+          <li>
+            <a href="/2021/10/java-note/SpringCloud/Elasticsearch/Elasticsearch/">Elasticsearch</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2022 nicolas lee<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
