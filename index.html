@@ -1,12 +1,61 @@
 <!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="utf-8">
-  
 
-  
-  <title>nicolas</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicon128.ico?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon32.ico?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon16.ico?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+  <link rel="alternate" href="/atom.xml" title="nicolas" type="application/atom+xml">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
   <meta name="description" content="Yesterday you said tomorow.">
 <meta name="keywords" content="前端,后端,java,js,vue,springBoot">
 <meta property="og:type" content="website">
@@ -18,229 +67,654 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nicolas">
 <meta name="twitter:description" content="Yesterday you said tomorow.">
+  <link rel="canonical" href="https://codeofli.github.io/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: true,
+    isPost: false,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>nicolas</title>
   
-    <link rel="alternate" href="/atom.xml" title="nicolas" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
 </head>
-</html>
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">nicolas</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Yesterday you said tomorow.</a>
-        </h2>
-      
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">nicolas</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://codeofli.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-docker/Docker实用篇" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/10/docker/Docker实用篇/" class="article-date">
-  <time datetime="2021-10-26T02:40:06.000Z" itemprop="datePublished">2021-10-26</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Docker/">Docker</a>
+        <p class="site-subtitle">Yesterday you said tomorow.</p>
+      
   </div>
 
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
   </div>
-  <div class="article-inner">
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
     
+      
+      
+        
+      
+        
+      
+        
+      
     
-      <header class="article-header">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+      
+      
+        
+      
+        
+      
+        
+          
+        
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">29</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+      
+      
+        
+      
+        
+          
+        
+      
+        
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">10</span></a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">40</span></a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/codeOflI/LearningNotes" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div class="posts-expand">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/docker/Docker实用篇/">Docker实用篇</a>
-    </h1>
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/10/docker/Docker实用篇/">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2021/10/docker/Docker实用篇/" class="post-title-link" itemprop="url">Docker实用篇</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-10-26 10:40:06" itemprop="dateCreated datePublished" datetime="2021-10-26T10:40:06+08:00">2021-10-26</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-03-02 09:21:40" itemprop="dateModified" datetime="2022-03-02T09:21:40+08:00">2022-03-02</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
       </header>
+
     
-    <div class="article-entry" itemprop="articleBody">
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h1 id="Docker实用篇"><a href="#Docker实用篇" class="headerlink" title="Docker实用篇"></a>Docker实用篇</h1><h1 id="1-初识Docker"><a href="#1-初识Docker" class="headerlink" title="1.初识Docker"></a>1.初识Docker</h1><h2 id="1-1-什么是Docker"><a href="#1-1-什么是Docker" class="headerlink" title="1.1.什么是Docker"></a>1.1.什么是Docker</h2><p>微服务虽然具备各种各样的优势，但服务的拆分通用给部署带来了很大的麻烦。</p><ul>
+          <h1 id="Docker实用篇"><a href="#Docker实用篇" class="headerlink" title="Docker实用篇"></a>Docker实用篇</h1><h1 id="1-初识Docker"><a href="#1-初识Docker" class="headerlink" title="1.初识Docker"></a>1.初识Docker</h1><h2 id="1-1-什么是Docker"><a href="#1-1-什么是Docker" class="headerlink" title="1.1.什么是Docker"></a>1.1.什么是Docker</h2><p>微服务虽然具备各种各样的优势，但服务的拆分通用给部署带来了很大的麻烦。</p><ul>
 <li>分布式系统中，依赖的组件非常多，不同组件之间部署时往往会产生一些冲突。</li>
 <li>在数百上千台服务中重复部署，环境不一定一致，会遇到各种问题</li>
 </ul><h3 id="1-1-1-应用部署的环境问题"><a href="#1-1-1-应用部署的环境问题" class="headerlink" title="1.1.1.应用部署的环境问题"></a>1.1.1.应用部署的环境问题</h3><p>大型项目组件较多，运行环境也较为复杂，部署时会碰到一些问题：</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/10/docker/Docker实用篇/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://codeofli.github.io/2021/10/docker/Docker实用篇/" data-id="cl3iuqtn500098kcbsv8epzel" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java-note/SpringCloud/RabbitMQ/RabbitMQ" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ/" class="article-date">
-  <time datetime="2021-10-25T02:40:06.000Z" itemprop="datePublished">2021-10-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/RabbitMQ/">RabbitMQ</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ/">RabbitMQ</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h1><h1 id="1-初识MQ"><a href="#1-初识MQ" class="headerlink" title="1.初识MQ"></a>1.初识MQ</h1><h2 id="1-1-同步和异步通讯"><a href="#1-1-同步和异步通讯" class="headerlink" title="1.1.同步和异步通讯"></a>1.1.同步和异步通讯</h2><p>微服务间通讯有同步和异步两种方式：</p><p>同步通讯：就像打电话，需要实时响应。</p><p>异步通讯：就像发邮件，不需要马上回复。</p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ/image-20210717161939695.png" alt="image-20210717161939695"></p><p>两种方式各有优劣，打电话可以立即得到响应，但是你却不能跟多个人同时通话。发送邮件可以同时与多个人收发邮件，但是往往响应会有延迟。</p><h3 id="1-1-1-同步通讯"><a href="#1-1-1-同步通讯" class="headerlink" title="1.1.1.同步通讯"></a>1.1.1.同步通讯</h3>
-        
-          <p class="article-more-link">
-            <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ/#more">Read More</a>
-          </p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2021/10/docker/Docker实用篇/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://codeofli.github.io/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ/" data-id="cl3iuquiv00458kcbszxbpx3i" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RabbitMQ/">RabbitMQ</a></li></ul>
 
-    </footer>
-  </div>
+    
+    
+    
+    
+    <div>
+     
+    </div>
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
   
-</article>
-
-
   
-    <article id="post-java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/" class="article-date">
-  <time datetime="2021-10-25T02:40:06.000Z" itemprop="datePublished">2021-10-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/RabbitMQ/">RabbitMQ</a>
-  </div>
+  
 
-  </div>
-  <div class="article-inner">
     
-    
-      <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/">RabbitMQ部署指南</a>
-    </h1>
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ/">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ/" class="post-title-link" itemprop="url">RabbitMQ</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-10-25 10:40:06" itemprop="dateCreated datePublished" datetime="2021-10-25T10:40:06+08:00">2021-10-25</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-03-02 09:21:40" itemprop="dateModified" datetime="2022-03-02T09:21:40+08:00">2022-03-02</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/RabbitMQ/" itemprop="url" rel="index"><span itemprop="name">RabbitMQ</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
       </header>
+
     
-    <div class="article-entry" itemprop="articleBody">
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h1 id="RabbitMQ部署指南"><a href="#RabbitMQ部署指南" class="headerlink" title="RabbitMQ部署指南"></a>RabbitMQ部署指南</h1><h1 id="1-单机部署"><a href="#1-单机部署" class="headerlink" title="1.单机部署"></a>1.单机部署</h1><p>我们在Centos7虚拟机中使用Docker来安装。</p><h2 id="1-1-下载镜像"><a href="#1-1-下载镜像" class="headerlink" title="1.1.下载镜像"></a>1.1.下载镜像</h2><p>方式一：在线拉取</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull rabbitmq:3-management</span><br></pre></td></tr></table></figure><p>方式二：从本地加载</p><p>在课前资料已经提供了镜像包：</p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/image-20210423191210349.png" alt="image-20210423191210349"> </p><p>上传到虚拟机中后，使用命令加载镜像即可：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i mq.tar</span><br></pre></td></tr></table></figure>
-        
-          <p class="article-more-link">
-            <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/#more">Read More</a>
-          </p>
+          <h1 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h1><h1 id="1-初识MQ"><a href="#1-初识MQ" class="headerlink" title="1.初识MQ"></a>1.初识MQ</h1><h2 id="1-1-同步和异步通讯"><a href="#1-1-同步和异步通讯" class="headerlink" title="1.1.同步和异步通讯"></a>1.1.同步和异步通讯</h2><p>微服务间通讯有同步和异步两种方式：</p><p>同步通讯：就像打电话，需要实时响应。</p><p>异步通讯：就像发邮件，不需要马上回复。</p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ/image-20210717161939695.png" alt="image-20210717161939695"></p><p>两种方式各有优劣，打电话可以立即得到响应，但是你却不能跟多个人同时通话。发送邮件可以同时与多个人收发邮件，但是往往响应会有延迟。</p><h3 id="1-1-1-同步通讯"><a href="#1-1-1-同步通讯" class="headerlink" title="1.1.1.同步通讯"></a>1.1.1.同步通讯</h3>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://codeofli.github.io/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/" data-id="cl3iuqumb004i8kcbi1d8wdlc" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RabbitMQ/">RabbitMQ</a></li></ul>
 
-    </footer>
-  </div>
+    
+    
+    
+    
+    <div>
+     
+    </div>
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
   
-</article>
-
-
   
-    <article id="post-java-note/SpringCloud/Seata/Seate" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/10/java-note/SpringCloud/Seata/Seate/" class="article-date">
-  <time datetime="2021-10-24T02:40:06.000Z" itemprop="datePublished">2021-10-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a>
-  </div>
+  
 
-  </div>
-  <div class="article-inner">
     
-    
-      <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/java-note/SpringCloud/Seata/Seate/">分布式事务seata</a>
-    </h1>
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/" class="post-title-link" itemprop="url">RabbitMQ部署指南</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-10-25 10:40:06" itemprop="dateCreated datePublished" datetime="2021-10-25T10:40:06+08:00">2021-10-25</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-03-02 09:21:40" itemprop="dateModified" datetime="2022-03-02T09:21:40+08:00">2022-03-02</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/RabbitMQ/" itemprop="url" rel="index"><span itemprop="name">RabbitMQ</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="RabbitMQ部署指南"><a href="#RabbitMQ部署指南" class="headerlink" title="RabbitMQ部署指南"></a>RabbitMQ部署指南</h1><h1 id="1-单机部署"><a href="#1-单机部署" class="headerlink" title="1.单机部署"></a>1.单机部署</h1><p>我们在Centos7虚拟机中使用Docker来安装。</p><h2 id="1-1-下载镜像"><a href="#1-1-下载镜像" class="headerlink" title="1.1.下载镜像"></a>1.1.下载镜像</h2><p>方式一：在线拉取</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull rabbitmq:3-management</span><br></pre></td></tr></table></figure><p>方式二：从本地加载</p><p>在课前资料已经提供了镜像包：</p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/image-20210423191210349.png" alt="image-20210423191210349"> </p><p>上传到虚拟机中后，使用命令加载镜像即可：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i mq.tar</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    
+    <div>
+     
+    </div>
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
   
 
-      </header>
     
-    <div class="article-entry" itemprop="articleBody">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2021/10/java-note/SpringCloud/Seata/Seate/" class="post-title-link" itemprop="url">分布式事务seata</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-10-24 10:40:06" itemprop="dateCreated datePublished" datetime="2021-10-24T10:40:06+08:00">2021-10-24</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-03-02 09:21:40" itemprop="dateModified" datetime="2022-03-02T09:21:40+08:00">2022-03-02</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h1 id="分布式事务seata"><a href="#分布式事务seata" class="headerlink" title="分布式事务seata"></a>分布式事务seata</h1><h2 id="事务的ACID原则"><a href="#事务的ACID原则" class="headerlink" title="事务的ACID原则"></a>事务的ACID原则</h2><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021104413170.png" alt="image-20211021104413170"></p><h2 id="演示分布式事务问题"><a href="#演示分布式事务问题" class="headerlink" title="演示分布式事务问题"></a>演示分布式事务问题</h2><ol>
+          <h1 id="分布式事务seata"><a href="#分布式事务seata" class="headerlink" title="分布式事务seata"></a>分布式事务seata</h1><h2 id="事务的ACID原则"><a href="#事务的ACID原则" class="headerlink" title="事务的ACID原则"></a>事务的ACID原则</h2><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/image-20211021104413170.png" alt="image-20211021104413170"></p><h2 id="演示分布式事务问题"><a href="#演示分布式事务问题" class="headerlink" title="演示分布式事务问题"></a>演示分布式事务问题</h2><ol>
 <li><p>创建数据库，名为seata_demo，然后导入课前资料提供的SQL文件：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">seata-demo</span><span class="selector-class">.sql</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -255,53 +729,238 @@
 
 </li>
 </ol>
-        
-          <p class="article-more-link">
-            <a href="/2021/10/java-note/SpringCloud/Seata/Seate/#more">Read More</a>
-          </p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2021/10/java-note/SpringCloud/Seata/Seate/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://codeofli.github.io/2021/10/java-note/SpringCloud/Seata/Seate/" data-id="cl3iuquit00448kcbxvzmsqbu" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/seata/">seata</a></li></ul>
 
-    </footer>
-  </div>
+    
+    
+    
+    
+    <div>
+     
+    </div>
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
   
-</article>
-
-
   
-    <article id="post-java-note/SpringCloud/Elasticsearch/Elasticsearch" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/10/java-note/SpringCloud/Elasticsearch/Elasticsearch/" class="article-date">
-  <time datetime="2021-10-24T02:40:06.000Z" itemprop="datePublished">2021-10-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Elasticsearch/">Elasticsearch</a>
-  </div>
+  
 
-  </div>
-  <div class="article-inner">
     
-    
-      <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/java-note/SpringCloud/Elasticsearch/Elasticsearch/">Elasticsearch</a>
-    </h1>
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/" class="post-title-link" itemprop="url">安装elasticsearch</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-10-24 10:40:06" itemprop="dateCreated datePublished" datetime="2021-10-24T10:40:06+08:00">2021-10-24</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-03-02 09:21:40" itemprop="dateModified" datetime="2022-03-02T09:21:40+08:00">2022-03-02</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/elasticsearch/" itemprop="url" rel="index"><span itemprop="name">elasticsearch</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="安装elasticsearch"><a href="#安装elasticsearch" class="headerlink" title="安装elasticsearch"></a>安装elasticsearch</h1><h1 id="1-部署单点es"><a href="#1-部署单点es" class="headerlink" title="1.部署单点es"></a>1.部署单点es</h1><h2 id="1-1-创建网络"><a href="#1-1-创建网络" class="headerlink" title="1.1.创建网络"></a>1.1.创建网络</h2><p>因为我们还需要部署kibana容器，因此需要让es和kibana容器互联。这里先创建一个网络：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create es-net</span><br></pre></td></tr></table></figure><h2 id="1-2-加载镜像"><a href="#1-2-加载镜像" class="headerlink" title="1.2.加载镜像"></a>1.2.加载镜像</h2><p>这里我们采用elasticsearch的7.12.1版本的镜像，这个镜像体积非常大，接近1G。不建议大家自己pull。</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    
+    <div>
+     
+    </div>
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
   
 
-      </header>
     
-    <div class="article-entry" itemprop="articleBody">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/Elasticsearch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2021/10/java-note/SpringCloud/Elasticsearch/Elasticsearch/" class="post-title-link" itemprop="url">Elasticsearch</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-10-24 10:40:06" itemprop="dateCreated datePublished" datetime="2021-10-24T10:40:06+08:00">2021-10-24</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-03-02 09:21:40" itemprop="dateModified" datetime="2022-03-02T09:21:40+08:00">2022-03-02</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Elasticsearch/" itemprop="url" rel="index"><span itemprop="name">Elasticsearch</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h1 id="分布式搜索引擎elasticsearch"><a href="#分布式搜索引擎elasticsearch" class="headerlink" title="分布式搜索引擎elasticsearch"></a>分布式搜索引擎elasticsearch</h1><p>– elasticsearch基础</p><h1 id="1-初识elasticsearch"><a href="#1-初识elasticsearch" class="headerlink" title="1.初识elasticsearch"></a>1.初识elasticsearch</h1><h2 id="1-1-了解ES"><a href="#1-1-了解ES" class="headerlink" title="1.1.了解ES"></a>1.1.了解ES</h2><h3 id="1-1-1-elasticsearch的作用"><a href="#1-1-1-elasticsearch的作用" class="headerlink" title="1.1.1.elasticsearch的作用"></a>1.1.1.elasticsearch的作用</h3><p>elasticsearch是一款非常强大的开源搜索引擎，具备非常多强大功能，可以帮助我们从海量数据中快速找到需要的内容</p><p>例如：</p><ul>
+          <h1 id="分布式搜索引擎elasticsearch"><a href="#分布式搜索引擎elasticsearch" class="headerlink" title="分布式搜索引擎elasticsearch"></a>分布式搜索引擎elasticsearch</h1><p>– elasticsearch基础</p><h1 id="1-初识elasticsearch"><a href="#1-初识elasticsearch" class="headerlink" title="1.初识elasticsearch"></a>1.初识elasticsearch</h1><h2 id="1-1-了解ES"><a href="#1-1-了解ES" class="headerlink" title="1.1.了解ES"></a>1.1.了解ES</h2><h3 id="1-1-1-elasticsearch的作用"><a href="#1-1-1-elasticsearch的作用" class="headerlink" title="1.1.1.elasticsearch的作用"></a>1.1.1.elasticsearch的作用</h3><p>elasticsearch是一款非常强大的开源搜索引擎，具备非常多强大功能，可以帮助我们从海量数据中快速找到需要的内容</p><p>例如：</p><ul>
 <li><p>在GitHub搜索代码</p>
 <p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/Elasticsearch/image-20210720193623245.png" alt="image-20210720193623245"></p>
 </li>
@@ -315,194 +974,238 @@
 <p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/Elasticsearch/image-20210720193648044.png" alt="image-20210720193648044"></p>
 </li>
 </ul>
-        
-          <p class="article-more-link">
-            <a href="/2021/10/java-note/SpringCloud/Elasticsearch/Elasticsearch/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/Elasticsearch/" data-id="cl3iuqum8004e8kcbumrsxrlp" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Elasticsearch/">Elasticsearch</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/" class="article-date">
-  <time datetime="2021-10-24T02:40:06.000Z" itemprop="datePublished">2021-10-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/elasticsearch/">elasticsearch</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/">安装elasticsearch</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="安装elasticsearch"><a href="#安装elasticsearch" class="headerlink" title="安装elasticsearch"></a>安装elasticsearch</h1><h1 id="1-部署单点es"><a href="#1-部署单点es" class="headerlink" title="1.部署单点es"></a>1.部署单点es</h1><h2 id="1-1-创建网络"><a href="#1-1-创建网络" class="headerlink" title="1.1.创建网络"></a>1.1.创建网络</h2><p>因为我们还需要部署kibana容器，因此需要让es和kibana容器互联。这里先创建一个网络：</p><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker network create es-net</span><br></pre></td></tr></table></figure><h2 id="1-2-加载镜像"><a href="#1-2-加载镜像" class="headerlink" title="1.2.加载镜像"></a>1.2.加载镜像</h2><p>这里我们采用elasticsearch的7.12.1版本的镜像，这个镜像体积非常大，接近1G。不建议大家自己pull。</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/#more">Read More</a>
-          </p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2021/10/java-note/SpringCloud/Elasticsearch/Elasticsearch/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://codeofli.github.io/2021/10/java-note/SpringCloud/Elasticsearch/安装elasticsearch/安装elasticsearch/" data-id="cl3iuquma004f8kcbcko9ivln" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/elasticsearch/">elasticsearch</a></li></ul>
 
-    </footer>
-  </div>
+    
+    
+    
+    
+    <div>
+     
+    </div>
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
   
-</article>
-
-
   
-    <article id="post-docker/Centos7安装Docker/Centos7安装Docker" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/10/docker/Centos7安装Docker/Centos7安装Docker/" class="article-date">
-  <time datetime="2021-10-23T02:40:06.000Z" itemprop="datePublished">2021-10-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Docker/">Docker</a>
-  </div>
+  
 
-  </div>
-  <div class="article-inner">
     
-    
-      <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/docker/Centos7安装Docker/Centos7安装Docker/">CentOS7安装Docker</a>
-    </h1>
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/10/docker/Centos7安装Docker/Centos7安装Docker/">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2021/10/docker/Centos7安装Docker/Centos7安装Docker/" class="post-title-link" itemprop="url">CentOS7安装Docker</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-10-23 10:40:06" itemprop="dateCreated datePublished" datetime="2021-10-23T10:40:06+08:00">2021-10-23</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-03-02 09:21:40" itemprop="dateModified" datetime="2022-03-02T09:21:40+08:00">2022-03-02</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Docker/" itemprop="url" rel="index"><span itemprop="name">Docker</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
       </header>
+
     
-    <div class="article-entry" itemprop="articleBody">
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h1 id="0-安装Docker"><a href="#0-安装Docker" class="headerlink" title="0.安装Docker"></a>0.安装Docker</h1><p>Docker 分为 CE 和 EE 两大版本。CE 即社区版（免费，支持周期 7 个月），EE 即企业版，强调安全，付费使用，支持周期 24 个月。</p><p>Docker CE 分为 <code>stable</code> <code>test</code> 和 <code>nightly</code> 三个更新频道。</p><p>官方网站上有各种环境下的 <a href="https://docs.docker.com/install/" target="_blank" rel="noopener">安装指南</a>，这里主要介绍 Docker CE 在 CentOS上的安装。</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/10/docker/Centos7安装Docker/Centos7安装Docker/#more">Read More</a>
-          </p>
+          <h1 id="0-安装Docker"><a href="#0-安装Docker" class="headerlink" title="0.安装Docker"></a>0.安装Docker</h1><p>Docker 分为 CE 和 EE 两大版本。CE 即社区版（免费，支持周期 7 个月），EE 即企业版，强调安全，付费使用，支持周期 24 个月。</p><p>Docker CE 分为 <code>stable</code> <code>test</code> 和 <code>nightly</code> 三个更新频道。</p><p>官方网站上有各种环境下的 <a href="https://docs.docker.com/install/" target="_blank" rel="noopener">安装指南</a>，这里主要介绍 Docker CE 在 CentOS上的安装。</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2021/10/docker/Centos7安装Docker/Centos7安装Docker/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://codeofli.github.io/2021/10/docker/Centos7安装Docker/Centos7安装Docker/" data-id="cl3iuqtvg000w8kcbqmfk460o" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Docker/">Docker</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-java-note/SpringCloud/Nacos/Nacos安装指南" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/10/java-note/SpringCloud/Nacos/Nacos安装指南/" class="article-date">
-  <time datetime="2021-10-23T02:40:06.000Z" itemprop="datePublished">2021-10-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
     
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/java-note/SpringCloud/Nacos/Nacos安装指南/">Nacos安装指南</a>
-    </h1>
-  
-
-      </header>
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Nacos安装指南"><a href="#Nacos安装指南" class="headerlink" title="Nacos安装指南"></a>Nacos安装指南</h1><h1 id="1-Windows安装"><a href="#1-Windows安装" class="headerlink" title="1.Windows安装"></a>1.Windows安装</h1><p>开发阶段采用单机安装即可。</p><h2 id="1-1-下载安装包"><a href="#1-1-下载安装包" class="headerlink" title="1.1.下载安装包"></a>1.1.下载安装包</h2><p>在Nacos的GitHub页面，提供有下载链接，可以下载编译好的Nacos服务端或者源代码：</p><p>GitHub主页：<a href="https://github.com/alibaba/nacos" target="_blank" rel="noopener">https://github.com/alibaba/nacos</a></p><p>GitHub的Release下载页：<a href="https://github.com/alibaba/nacos/releases" target="_blank" rel="noopener">https://github.com/alibaba/nacos/releases</a></p>
-        
-          <p class="article-more-link">
-            <a href="/2021/10/java-note/SpringCloud/Nacos/Nacos安装指南/#more">Read More</a>
-          </p>
-        
-      
+    
+    <div>
+     
     </div>
-    <footer class="article-footer">
-      <a data-url="https://codeofli.github.io/2021/10/java-note/SpringCloud/Nacos/Nacos安装指南/" data-id="cl3iuqudm003j8kcb5oimklww" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nacos/">Nacos</a></li></ul>
-
-    </footer>
-  </div>
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
   
-</article>
-
-
   
-    <article id="post-java-note/SpringCloud/Nacos/Nacos集群搭建" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/10/java-note/SpringCloud/Nacos/Nacos集群搭建/" class="article-date">
-  <time datetime="2021-10-23T02:40:06.000Z" itemprop="datePublished">2021-10-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">java</a>
-  </div>
+  
 
-  </div>
-  <div class="article-inner">
     
-    
-      <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/java-note/SpringCloud/Nacos/Nacos集群搭建/">Nacos集群搭建</a>
-    </h1>
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/Nacos/Nacos集群搭建/">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2021/10/java-note/SpringCloud/Nacos/Nacos集群搭建/" class="post-title-link" itemprop="url">Nacos集群搭建</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-10-23 10:40:06" itemprop="dateCreated datePublished" datetime="2021-10-23T10:40:06+08:00">2021-10-23</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-03-02 09:21:40" itemprop="dateModified" datetime="2022-03-02T09:21:40+08:00">2022-03-02</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
       </header>
+
     
-    <div class="article-entry" itemprop="articleBody">
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h1 id="Nacos集群搭建"><a href="#Nacos集群搭建" class="headerlink" title="Nacos集群搭建"></a>Nacos集群搭建</h1><h1 id="1-集群结构图"><a href="#1-集群结构图" class="headerlink" title="1.集群结构图"></a>1.集群结构图</h1><p>官方给出的Nacos集群图：</p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Nacos/Nacos集群搭建/image-20210409210621117.png" alt="image-20210409210621117"></p><p>SLB，Server Load Balancer，服务器负载均衡</p><p>其中包含3个nacos节点，然后一个负载均衡器代理3个Nacos。这里负载均衡器可以使用nginx。</p><p>我们计划的集群结构：</p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Nacos/Nacos集群搭建/image-20210409211355037.png" alt="image-20210409211355037"></p><p>三个nacos节点的地址：</p><table>
+          <h1 id="Nacos集群搭建"><a href="#Nacos集群搭建" class="headerlink" title="Nacos集群搭建"></a>Nacos集群搭建</h1><h1 id="1-集群结构图"><a href="#1-集群结构图" class="headerlink" title="1.集群结构图"></a>1.集群结构图</h1><p>官方给出的Nacos集群图：</p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Nacos/Nacos集群搭建/image-20210409210621117.png" alt="image-20210409210621117"></p><p>SLB，Server Load Balancer，服务器负载均衡</p><p>其中包含3个nacos节点，然后一个负载均衡器代理3个Nacos。这里负载均衡器可以使用nginx。</p><p>我们计划的集群结构：</p><p><img src="//codeofli.github.io/2021/10/java-note/SpringCloud/Nacos/Nacos集群搭建/image-20210409211355037.png" alt="image-20210409211355037"></p><p>三个nacos节点的地址：</p><table>
 <thead>
 <tr>
 <th>节点</th>
@@ -526,187 +1229,499 @@
 <td>8847</td>
 </tr>
 </tbody></table>
-        
-          <p class="article-more-link">
-            <a href="/2021/10/java-note/SpringCloud/Nacos/Nacos集群搭建/#more">Read More</a>
-          </p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2021/10/java-note/SpringCloud/Nacos/Nacos集群搭建/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://codeofli.github.io/2021/10/java-note/SpringCloud/Nacos/Nacos集群搭建/" data-id="cl3iuqudo003n8kcbyhbxlhi0" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Nacos/">Nacos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
 
-    </footer>
-  </div>
+    
+    
+    
+    
+    <div>
+     
+    </div>
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
   
-</article>
-
-
   
-    <article id="post-java-note/SpringCloud/微服务保护Sentinel/Sentinel" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2021/10/java-note/SpringCloud/微服务保护Sentinel/Sentinel/" class="article-date">
-  <time datetime="2021-10-23T02:40:06.000Z" itemprop="datePublished">2021-10-23</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/java/">java</a>
-  </div>
+  
 
-  </div>
-  <div class="article-inner">
     
-    
-      <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/10/java-note/SpringCloud/微服务保护Sentinel/Sentinel/">微服务保护Sentinel</a>
-    </h1>
   
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/Nacos/Nacos安装指南/">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2021/10/java-note/SpringCloud/Nacos/Nacos安装指南/" class="post-title-link" itemprop="url">Nacos安装指南</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-10-23 10:40:06" itemprop="dateCreated datePublished" datetime="2021-10-23T10:40:06+08:00">2021-10-23</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-03-02 09:21:40" itemprop="dateModified" datetime="2022-03-02T09:21:40+08:00">2022-03-02</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
       </header>
+
     
-    <div class="article-entry" itemprop="articleBody">
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
-        <h1 id="微服务保护"><a href="#微服务保护" class="headerlink" title="微服务保护"></a>微服务保护</h1><h1 id="1-初识Sentinel"><a href="#1-初识Sentinel" class="headerlink" title="1.初识Sentinel"></a>1.初识Sentinel</h1><h2 id="1-1-雪崩问题及解决方案"><a href="#1-1-雪崩问题及解决方案" class="headerlink" title="1.1.雪崩问题及解决方案"></a>1.1.雪崩问题及解决方案</h2><h3 id="1-1-1-雪崩问题"><a href="#1-1-1-雪崩问题" class="headerlink" title="1.1.1.雪崩问题"></a>1.1.1.雪崩问题</h3><p>微服务中，服务间调用关系错综复杂，一个微服务往往依赖于多个其它微服务。</p><p> <img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Sentinel/1533829099748.png" alt="img"></p><p>如图，如果服务提供者I发生了故障，当前的应用的部分业务因为依赖于服务I，因此也会被阻塞。此时，其它不依赖于服务I的业务似乎不受影响。</p><p> <img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Sentinel/1533829198240.png" alt="1533829198240"></p><p>但是，依赖服务I的业务请求被阻塞，用户不会得到响应，则tomcat的这个线程不会释放，于是越来越多的用户请求到来，越来越多的线程会阻塞：</p>
-        
-          <p class="article-more-link">
-            <a href="/2021/10/java-note/SpringCloud/微服务保护Sentinel/Sentinel/#more">Read More</a>
-          </p>
+          <h1 id="Nacos安装指南"><a href="#Nacos安装指南" class="headerlink" title="Nacos安装指南"></a>Nacos安装指南</h1><h1 id="1-Windows安装"><a href="#1-Windows安装" class="headerlink" title="1.Windows安装"></a>1.Windows安装</h1><p>开发阶段采用单机安装即可。</p><h2 id="1-1-下载安装包"><a href="#1-1-下载安装包" class="headerlink" title="1.1.下载安装包"></a>1.1.下载安装包</h2><p>在Nacos的GitHub页面，提供有下载链接，可以下载编译好的Nacos服务端或者源代码：</p><p>GitHub主页：<a href="https://github.com/alibaba/nacos" target="_blank" rel="noopener">https://github.com/alibaba/nacos</a></p><p>GitHub的Release下载页：<a href="https://github.com/alibaba/nacos/releases" target="_blank" rel="noopener">https://github.com/alibaba/nacos/releases</a></p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2021/10/java-note/SpringCloud/Nacos/Nacos安装指南/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
-    <footer class="article-footer">
-      <a data-url="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Sentinel/" data-id="cl3iuqudp003q8kcb79ogzgwp" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Sentinel/">Sentinel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
-
-  <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+    
+    
+    
+    <div>
+     
+    </div>
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Sentinel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="nicolas lee">
+      <meta itemprop="description" content="Yesterday you said tomorow.">
+      <meta itemprop="image" content="/assets/img/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="nicolas">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2021/10/java-note/SpringCloud/微服务保护Sentinel/Sentinel/" class="post-title-link" itemprop="url">微服务保护Sentinel</a>
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-10-23 10:40:06" itemprop="dateCreated datePublished" datetime="2021-10-23T10:40:06+08:00">2021-10-23</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-03-02 09:21:40" itemprop="dateModified" datetime="2022-03-02T09:21:40+08:00">2022-03-02</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="微服务保护"><a href="#微服务保护" class="headerlink" title="微服务保护"></a>微服务保护</h1><h1 id="1-初识Sentinel"><a href="#1-初识Sentinel" class="headerlink" title="1.初识Sentinel"></a>1.初识Sentinel</h1><h2 id="1-1-雪崩问题及解决方案"><a href="#1-1-雪崩问题及解决方案" class="headerlink" title="1.1.雪崩问题及解决方案"></a>1.1.雪崩问题及解决方案</h2><h3 id="1-1-1-雪崩问题"><a href="#1-1-1-雪崩问题" class="headerlink" title="1.1.1.雪崩问题"></a>1.1.1.雪崩问题</h3><p>微服务中，服务间调用关系错综复杂，一个微服务往往依赖于多个其它微服务。</p><p> <img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Sentinel/1533829099748.png" alt="img"></p><p>如图，如果服务提供者I发生了故障，当前的应用的部分业务因为依赖于服务I，因此也会被阻塞。此时，其它不依赖于服务I的业务似乎不受影响。</p><p> <img src="//codeofli.github.io/2021/10/java-note/SpringCloud/微服务保护Sentinel/Sentinel/1533829198240.png" alt="1533829198240"></p><p>但是，依赖服务I的业务请求被阻塞，用户不会得到响应，则tomcat的这个线程不会释放，于是越来越多的用户请求到来，越来越多的线程会阻塞：</p>
+          <!--noindex-->
+          
+            <div class="post-button">
+              <a class="btn" href="/2021/10/java-note/SpringCloud/微服务保护Sentinel/Sentinel/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+    
+    <div>
+     
+    </div>
+    
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </article>
+  
+  
+  
+
+    
+  </div>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
-</section>
-        
-          <aside id="sidebar">
+
+
+          </div>
+          
+
+        </div>
+          
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Elasticsearch/">Elasticsearch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/RabbitMQ/">RabbitMQ</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/elasticsearch/">elasticsearch</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/java/">java</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/note/">note</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a></li></ul>
-    </div>
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
   </div>
 
+  <aside class="sidebar">
+    <div class="sidebar-inner">
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Axios/">Axios</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Elasticsearch/">Elasticsearch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jmeter/">Jmeter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nacos/">Nacos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RabbitMQ/">RabbitMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentinel/">Sentinel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SpringCloud/">SpringCloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/crawler/">crawler</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/elasticsearch/">elasticsearch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mybatis/">mybatis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/seata/">seata</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springBoot/">springBoot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/springMvc/">springMvc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssm/">ssm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vue/">vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/学习笔记/">学习笔记</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Axios/" style="font-size: 10px;">Axios</a> <a href="/tags/Docker/" style="font-size: 12.5px;">Docker</a> <a href="/tags/Elasticsearch/" style="font-size: 10px;">Elasticsearch</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Jmeter/" style="font-size: 10px;">Jmeter</a> <a href="/tags/Nacos/" style="font-size: 12.5px;">Nacos</a> <a href="/tags/RabbitMQ/" style="font-size: 12.5px;">RabbitMQ</a> <a href="/tags/Sentinel/" style="font-size: 12.5px;">Sentinel</a> <a href="/tags/SpringCloud/" style="font-size: 10px;">SpringCloud</a> <a href="/tags/crawler/" style="font-size: 10px;">crawler</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/elasticsearch/" style="font-size: 10px;">elasticsearch</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/js/" style="font-size: 15px;">js</a> <a href="/tags/linux/" style="font-size: 10px;">linux</a> <a href="/tags/maven/" style="font-size: 10px;">maven</a> <a href="/tags/mybatis/" style="font-size: 10px;">mybatis</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/python/" style="font-size: 17.5px;">python</a> <a href="/tags/seata/" style="font-size: 10px;">seata</a> <a href="/tags/spring/" style="font-size: 15px;">spring</a> <a href="/tags/springBoot/" style="font-size: 12.5px;">springBoot</a> <a href="/tags/springMvc/" style="font-size: 10px;">springMvc</a> <a href="/tags/ssm/" style="font-size: 10px;">ssm</a> <a href="/tags/vue/" style="font-size: 10px;">vue</a> <a href="/tags/前端/" style="font-size: 15px;">前端</a> <a href="/tags/学习笔记/" style="font-size: 17.5px;">学习笔记</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/10/">十月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/09/">九月 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">十月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">九月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">三月 2019</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2021/10/docker/Docker实用篇/">Docker实用篇</a>
-          </li>
-        
-          <li>
-            <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ/">RabbitMQ</a>
-          </li>
-        
-          <li>
-            <a href="/2021/10/java-note/SpringCloud/RabbitMQ/RabbitMQ部署指南/RabbitMQ部署指南/">RabbitMQ部署指南</a>
-          </li>
-        
-          <li>
-            <a href="/2021/10/java-note/SpringCloud/Seata/Seate/">分布式事务seata</a>
-          </li>
-        
-          <li>
-            <a href="/2021/10/java-note/SpringCloud/Elasticsearch/Elasticsearch/">Elasticsearch</a>
-          </li>
-        
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
       </ul>
-    </div>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/assets/img/avatar.jpg"
+      alt="nicolas lee">
+  <p class="site-author-name" itemprop="name">nicolas lee</p>
+  <div class="site-description" itemprop="description">Yesterday you said tomorow.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+  <div class="feed-link motion-element">
+    <a href="/atom.xml" rel="alternate">
+      <i class="fa fa-rss"></i>RSS
+    </a>
+  </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/codeOflI" title="GitHub &rarr; https://github.com/codeOflI" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://blog.csdn.net/qq_42835910" title="CSDN &rarr; https://blog.csdn.net/qq_42835910" rel="noopener" target="_blank"><i class="fa fa-fw fa-crosshairs"></i>CSDN</a>
+      </span>
+    
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    
+  
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
   </div>
 
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 – <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">nicolas lee</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    
+    <span title="站点总字数"></span>
+</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
   
-</aside>
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2022 nicolas lee<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
+    </footer>
   </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
+
   
-    <a href="/" class="mobile-nav-link">Home</a>
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
   
-    <a href="/archives" class="mobile-nav-link">Archives</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
-</nav>
-    
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  
 
+  
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
-
-
-  </div>
 </body>
 </html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
