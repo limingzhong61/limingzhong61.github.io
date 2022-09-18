@@ -9,7 +9,7 @@
     "version": "3.9.0"
   },
   "dependencies": {
-    "hexo": "^3.9.0",
+    "hexo": "^6.3.0",
     "hexo-asset-image": "git+https://github.com/CodeFalling/hexo-asset-image.git",
     "hexo-deployer-git": "^2.0.0",
     "hexo-generator-archive": "^0.1.5",
